@@ -1,0 +1,118 @@
+Master Project Specification: Global Security Solutions
+Project Goal: Build a high-performance, SEO-first website for "Global Security Solutions" using Next.js (App Router) and Supabase. The site must replicate the provided legacy HTML design but use modern architecture to manage 40+ programmatic SEO pages.
+
+1. Technical Framework & Stack
+Core Framework: Next.js 14+ (App Router) with TypeScript for superior SEO and indexing.
+
+Styling: Tailwind CSS (Mobile-first responsive design).
+
+Database: Supabase for persistent Lead Capture.
+
+Animations: AOS (Animate On Scroll) to match legacy design.
+
+Repository: globalsecuritysolutions.co.za.
+
+2. Database Schema (Supabase)
+Include this instruction so the AI writes the correct backend code:
+
+"The Supabase database has a table named leads. Use this SQL schema for the connection:"
+
+SQL
+
+CREATE TABLE leads (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  service_interest TEXT,
+  location TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+3. Programmatic SEO & Content
+Do not create static files for every page. Use dynamic routing:
+
+Service Routes (/services/[slug]): Generates 12 pages including CCTV, Alarms, and Electric Fencing.
+
+Location Routes (/areas/[location]-security-services): Generates 24 pages for suburbs like Durbanville and Blouberg.
+
+Dynamic Injection: Insert the location or service name into <h1>, <title>, and <meta description>.
+
+4. Business Identity & Contact
+Owner: Kyle Cass (kyle@globalsecuritysolutions.co.za).
+
+COO: Rashaad Steyn (rashaad@globalsecuritysolutions.co.za).
+
+General Emails: sales@globalsecuritysolutions.co.za | admin@globalsecuritysolutions.co.za.
+
+WhatsApp: 062 955 8559.
+
+Trust Bar Brands: Hikvision, IDS, Paradox, and AJAX.
+
+---
+Additional Detailed Specifications:
+
+1. Supabase Database Setup
+Before you run your master prompt, go to the SQL Editor in your Supabase dashboard and run this code to create your leads table:
+
+SQL
+
+-- Create the Leads Table for Global Security Solutions
+CREATE TABLE leads (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  client_name TEXT NOT NULL,
+  email_address TEXT NOT NULL,
+  phone_number TEXT,
+  service_requested TEXT,
+  suburb_location TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+2. Location Data Object (JSON)
+Copy this into a file named locationData.json in your project folder. This tells the AI exactly what text to put on each of the 24 suburb pages:
+
+JSON
+
+[
+  {
+    "suburb": "Durbanville",
+    "slug": "durbanville-security-services",
+    "h1": "Expert Security System Installation in Durbanville",
+    "description": "Global Security Solutions provides premium alarm and CCTV installations for homes and businesses in Durbanville."
+  },
+  {
+    "suburb": "Blouberg",
+    "slug": "blouberg-security-services",
+    "h1": "Top-Rated Security Services in Blouberg",
+    "description": "Secure your Blouberg property with our advanced electric fencing and smart home automation solutions."
+  },
+  {
+    "suburb": "Somerset West",
+    "slug": "somerset-west-security-services",
+    "h1": "Professional Security Systems Somerset West",
+    "description": "From access control to perimeter security, we serve the entire Somerset West area with 24/7 reliability."
+  }
+]
+(You will add all 24 locations following this same pattern for your programmatic SEO strategy.)
+
+3. Key Projects to Feature
+When the AI builds your Projects Page, ensure it includes these specific high-value jobs to build trust with your Cape Town clients:
+
+Chere Botha School: Access control installation using Hikvision hardware.
+
+35 on Rose: Large-scale security upgrade project for an HOA.
+
+Salus and Demos: Recent residential access control installations.
+
+4. Updated Contact Records
+Your website will now display your new professional communication channels:
+
+Owner: Kyle Cass | kyle@globalsecuritysolutions.co.za.
+
+COO: Rashaad Steyn | rashaad@globalsecuritysolutions.co.za.
+
+Support: admin@globalsecuritysolutions.co.za.
+
+Sales: sales@globalsecuritysolutions.co.za.
+
+5. SEO Metadata (JSON)
+Use the file `seoData.json` to populate the `title` and `meta description` tags for all static and dynamic pages. This file contains the exact copy to use for superior ranking. Match the page names in the JSON to the routes in your application.
