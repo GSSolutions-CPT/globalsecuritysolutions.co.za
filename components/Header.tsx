@@ -55,15 +55,16 @@ export function Header() {
 
 
             {/* Main Header */}
-            <div className="container mx-auto px-4 py-4">
+            {/* Main Header */}
+            <div className="container mx-auto px-4 py-2">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="flex items-center">
                         <Image
                             src="/nav-logo.png"
                             alt="Global Security Solutions"
-                            width={400}
-                            height={130}
-                            className="h-32 w-auto object-contain"
+                            width={300}
+                            height={100}
+                            className="h-24 w-auto object-contain"
                             priority
                         />
                     </Link>
