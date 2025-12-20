@@ -17,7 +17,19 @@ export function Header() {
         }
     }
 
-    const navItems = [
+    interface SubItem {
+        href: string;
+        label: string;
+        highlight?: boolean;
+    }
+
+    interface NavItem {
+        href?: string;
+        label: string;
+        dropdown?: SubItem[];
+    }
+
+    const navItems: NavItem[] = [
         { href: '/', label: 'Home' },
         { href: '/about', label: 'About Us' },
         { href: '/services', label: 'Services' },

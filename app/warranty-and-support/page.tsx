@@ -1,6 +1,6 @@
 import React from 'react'
 import { Metadata } from 'next'
-import { ShieldCheck, Tool, PhoneCall } from 'lucide-react'
+import { ShieldCheck, Wrench, PhoneCall } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
 import seoData from '@/app/data/seoData.json'
 
@@ -34,7 +34,7 @@ export default function WarrantyPage() {
                     </div>
                     <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
                         <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Tool className="w-8 h-8 text-green-600" />
+                            <Wrench className="w-8 h-8 text-green-600" />
                         </div>
                         <h3 className="text-xl font-bold mb-3">Manufacturer Warranty</h3>
                         <p className="text-slate-600">All hardware comes with full manufacturer warranties, ranging from 1 to 5 years depending on the brand.</p>
