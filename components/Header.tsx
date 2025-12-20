@@ -20,43 +20,21 @@ export function Header() {
     const navItems = [
         { href: '/', label: 'Home' },
         { href: '/about', label: 'About Us' },
+        { href: '/services', label: 'Services' },
+        { href: '/services#sectors', label: 'Solutions by Sector' },
+        { href: '/contact', label: 'Contact Us' },
         {
-            label: 'Services',
+            label: 'More',
             dropdown: [
-                { href: '/services/residential-security', label: 'Residential Security' },
-                { href: '/services/commercial-security', label: 'Commercial Security' },
-                { href: '/services/industrial-security', label: 'Industrial & Farm' },
-                { href: '/services/alarm-system-installation', label: 'Alarm Systems' },
-                { href: '/services/cctv-surveillance-systems', label: 'CCTV Surveillance' },
-                { href: '/services/access-control-solutions', label: 'Access Control' },
-                { href: '/services/electric-fence-installations', label: 'Electric Fencing' },
-                { href: '/services/gate-and-garage-automation', label: 'Gate Automation' },
-                { href: '/services', label: 'View All Services', highlight: true },
-            ]
-        },
-        {
-            label: 'Areas We Serve',
-            dropdown: [
-                // Categorized roughly based on list for now, pointing to specific popular suburbs or areas page
-                { href: '/areas/durbanville-security-services', label: 'Northern Suburbs (Durbanville)' },
-                { href: '/areas/milnerton-security-services', label: 'West Coast (Milnerton/Blouberg)' },
-                { href: '/areas/camps-bay-security-services', label: 'Atlantic Seaboard' },
-                { href: '/areas/somerset-west-security-services', label: 'Somerset West / Helderberg' },
-                { href: '/areas', label: 'View All Areas', highlight: true },
-            ]
-        },
-        {
-            label: 'Resources',
-            dropdown: [
-                { href: '/projects', label: 'Project Gallery' },
                 { href: '/load-shedding-security-solutions', label: 'Load Shedding Solutions' },
-                { href: '/ai-security-advisor', label: 'AI Security Advisor' },
                 { href: '/free-security-audit', label: 'Free Security Audit' },
+                { href: '/ai-security-advisor', label: 'AI Security Advisor' },
+                { href: '/areas', label: 'Areas We Serve' },
+                { href: '/projects', label: 'Project Gallery' },
                 { href: '/blog', label: 'Security Blog' },
                 { href: '/faq', label: 'FAQ' },
             ]
         },
-        { href: '/contact', label: 'Contact' },
     ]
 
     return (

@@ -4,23 +4,25 @@ import { Shield, CheckCircle2, Star, ArrowRight, Video, Lock, Zap, Smartphone, K
 import { ServiceCard } from '@/components/ServiceCard'
 import { ContactForm } from '@/components/ContactForm'
 import { BrandCarousel } from '@/components/BrandCarousel'
+import { ServiceCarousel } from '@/components/ServiceCarousel'
+import { SectorCarousel } from '@/components/SectorCarousel'
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
 
       {/* SECTION 1: HERO HEADER */}
-      <section className="relative bg-slate-900 text-white py-20 lg:py-32 overflow-hidden">
-        {/* Background Image Placeholder - In real app, use next/image with a real photo */}
+      <section className="relative bg-slate-900 text-white py-20 lg:py-32 overflow-hidden min-h-[600px] flex items-center">
+        {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-bg.png"
-            alt="Global Security Solutions Technician"
+            src="/hero-bg.jpg"
+            alt="Security Technician overlooking Cape Town"
             fill
-            className="object-cover opacity-50"
+            className="object-cover object-right"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/80 to-blue-900/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -69,43 +71,19 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <ServiceCard
-              title="Alarm Systems"
-              description="Smart, wireless, and wired alarm systems to detect intruders instantly."
-              icon={Shield}
-              href="/services/alarm-system-installation"
-            />
-            <ServiceCard
-              title="CCTV Surveillance"
-              description="High-definition cameras with remote viewing on your smartphone."
-              icon={Video}
-              href="/services/cctv-surveillance-systems"
-            />
-            <ServiceCard
-              title="Electric Fencing"
-              description="Certified electric fence installations for perimeter protection."
-              icon={Zap} // Using Zap for electricity
-              href="/services/electric-fence-installations"
-            />
-            <ServiceCard
-              title="Access Control"
-              description="Biometric and keycard systems to manage who enters your property."
-              icon={Key}
-              href="/services/access-control-solutions"
-            />
-            <ServiceCard
-              title="Gate Automation"
-              description="Reliable gate and garage motors for convenient and safe access."
-              icon={Settings}
-              href="/services/gate-and-garage-automation"
-            />
-            <ServiceCard
-              title="Smart Home"
-              description="Integrate your security with your smart home ecosystem."
-              icon={Smartphone}
-              href="/services/smart-home-automation"
-            />
+          <div className="mb-20">
+            <ServiceCarousel />
+          </div>
+
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Solutions by Sector</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+              Specialized security strategies tailored for your specific environment.
+            </p>
+          </div>
+
+          <div className="mb-12">
+            <SectorCarousel />
           </div>
 
           <div className="text-center">

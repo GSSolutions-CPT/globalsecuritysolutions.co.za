@@ -46,7 +46,7 @@ export default function ServicesIndexPage() {
                     ))}
                 </div>
 
-                <div className="mt-16">
+                <div className="mt-16" id="sectors">
                     <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Solutions by Sector</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {seoData.sectorSolutions.map((service) => (

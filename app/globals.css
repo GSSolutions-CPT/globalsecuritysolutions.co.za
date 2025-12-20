@@ -28,6 +28,7 @@
   --radius-sm: calc(var(--radius) - 4px);
 
   --animate-scroll: scroll 40s linear infinite;
+  --animate-scroll-slow: scroll 60s linear infinite;
 }
 
 @keyframes scroll {
