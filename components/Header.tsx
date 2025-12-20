@@ -81,7 +81,7 @@ export function Header() {
                     <Link href="/" className="flex items-center relative z-50">
                         {/* Placeholder to reserve width */}
                         <div className="w-[120px] h-10"></div>
-                        <Image
+                        <Image</Image>
                             src="/nav-logo.png?v=transparent"
                             alt="Global Security Solutions"
                             width={300}
