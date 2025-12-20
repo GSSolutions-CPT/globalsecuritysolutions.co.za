@@ -40,26 +40,20 @@ export function Header() {
     return (
         <header className="bg-white shadow-md sticky top-0 z-50">
             {/* Top Bar */}
-            <div className="bg-blue-900 text-white py-2 text-sm hidden md:block">
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex space-x-6">
-                        <a href="mailto:sales@globalsecuritysolutions.co.za" className="flex items-center hover:text-blue-200">
-                            <Mail className="w-4 h-4 mr-2" /> sales@globalsecuritysolutions.co.za
-                        </a>
-                        <a href="https://wa.me/27629558559" className="flex items-center hover:text-blue-200">
-                            <Phone className="w-4 h-4 mr-2" /> 062 955 8559
-                        </a>
-                    </div>
-                    <div className="font-semibold">Professional Security Installations Cape Town</div>
-                </div>
-            </div>
+
 
             {/* Main Header */}
             <div className="container mx-auto px-4 py-4">
                 <div className="flex justify-between items-center">
-                    <Link href="/" className="flex items-center space-x-2 text-blue-900">
-                        <Image src="/logo.png" alt="Global Security Solutions Logo" width={50} height={50} className="w-12 h-12 object-contain" />
-                        <span className="text-xl md:text-2xl font-bold tracking-tight">Global Security Solutions</span>
+                    <Link href="/" className="flex items-center">
+                        <Image
+                            src="/nav-logo.png"
+                            alt="Global Security Solutions"
+                            width={400}
+                            height={130}
+                            className="h-32 w-auto object-contain"
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Nav */}

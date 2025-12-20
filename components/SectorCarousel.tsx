@@ -30,7 +30,7 @@ export function SectorCarousel() {
                         <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
                             <Link
                                 href={`/services/${slug}`}
-                                className="block h-full bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all group"
+                                className="block h-full bg-white p-6 rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:shadow-xl hover:-translate-y-1 transition-all group"
                             >
                                 <div className="w-12 h-12 bg-indigo-50 rounded-lg shadow-sm flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors">
                                     <Icon className="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors" />
