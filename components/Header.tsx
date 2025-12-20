@@ -1,13 +1,35 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 
 export function Header() {
     const [isOpen, setIsOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+    const [isVisible, setIsVisible] = useState(true)
+    const [lastScrollY, setLastScrollY] = useState(0)
+
+    useEffect(() => {
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                if (window.scrollY > lastScrollY && window.scrollY > 100) { // if scroll down
+                    setIsVisible(false)
+                } else { // if scroll up
+                    setIsVisible(true)
+                }
+                setLastScrollY(window.scrollY)
+            }
+        }
+
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', controlNavbar)
+            return () => {
+                window.removeEventListener('scroll', controlNavbar)
+            }
+        }
+    }, [lastScrollY])
 
     const toggleDropdown = (name: string) => {
         if (activeDropdown === name) {
@@ -50,11 +72,9 @@ export function Header() {
     ]
 
     return (
-        <header className="bg-white shadow-md sticky top-0 z-50">
-            {/* Top Bar */}
+        <header className={`bg-white shadow-md sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+            {/* Top Bar removed as per previous request */}
 
-
-            {/* Main Header */}
             {/* Main Header */}
             <div className="container mx-auto px-4 py-2">
                 <div className="flex justify-between items-center">
@@ -64,7 +84,7 @@ export function Header() {
                             alt="Global Security Solutions"
                             width={300}
                             height={100}
-                            className="h-24 w-auto object-contain"
+                            className="h-14 w-auto object-contain"
                             priority
                         />
                     </Link>
