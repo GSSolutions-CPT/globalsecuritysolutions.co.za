@@ -76,7 +76,7 @@ export function Header() {
             {/* Top Bar removed as per previous request */}
 
             {/* Main Header */}
-            <div className="container mx-auto px-2 py-2">
+            <div className="container mx-auto px-5 py-5">
                 <div className="flex justify-between items-center">
                     <Link href="/" className="flex items-center relative z-50">
                         {/* Placeholder to reserve width */}
@@ -86,7 +86,7 @@ export function Header() {
                             alt="Global Security Solutions"
                             width={300}
                             height={100}
-                            className="absolute top-[-10px] left-0 h-40 w-auto object-contain max-w-none"
+                            className="absolute top-[-10px] left-0 h-16 w-auto object-contain max-w-none"
                             priority
                         />
                     </Link>
