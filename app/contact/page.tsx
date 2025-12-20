@@ -10,67 +10,72 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <div className="bg-slate-50 min-h-screen py-12 md:py-20">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-slate-900 mb-4">Contact Us</h1>
-                    <p className="text-slate-600 max-w-2xl mx-auto">
+        <div className="bg-slate-50 min-h-screen py-24 relative overflow-hidden">
+            {/* Decorative background element */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+            <div className="container relative mx-auto px-4">
+                <div className="text-center mb-16">
+                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Contact Us</h1>
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         Ready to secure your property? Get in touch with our expert team for a free quote and personalized security advice.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     {/* Contact Info */}
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 h-fit">
-                        <h2 className="text-2xl font-bold text-slate-900 mb-6">Get In Touch</h2>
+                    <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 h-fit transition-all hover:shadow-xl">
+                        <h2 className="text-2xl font-bold text-slate-900 mb-8">Get In Touch</h2>
                         <div className="space-y-8">
-                            <div className="flex items-start">
-                                <div className="bg-blue-100 p-3 rounded-full mr-4">
-                                    <Phone className="w-6 h-6 text-blue-600" />
+                            <div className="flex items-start group">
+                                <div className="bg-blue-50 p-3 rounded-xl mr-5 group-hover:bg-blue-600 transition-colors duration-300">
+                                    <Phone className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-900">Phone & WhatsApp</h3>
-                                    <p className="text-slate-600 mb-1">Speak directly to an expert.</p>
-                                    <a href="https://wa.me/27629558559" className="text-xl font-bold text-blue-600 hover:text-blue-800">062 955 8559</a>
+                                    <h3 className="font-bold text-slate-900 text-lg">Phone & WhatsApp</h3>
+                                    <p className="text-slate-500 mb-1">Speak directly to an expert.</p>
+                                    <a href="https://wa.me/27629558559" className="text-xl font-bold text-blue-600 hover:text-blue-800 transition-colors">062 955 8559</a>
                                 </div>
                             </div>
 
-                            <div className="flex items-start">
-                                <div className="bg-blue-100 p-3 rounded-full mr-4">
-                                    <Mail className="w-6 h-6 text-blue-600" />
+                            <div className="flex items-start group">
+                                <div className="bg-blue-50 p-3 rounded-xl mr-5 group-hover:bg-blue-600 transition-colors duration-300">
+                                    <Mail className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-900">Email Us</h3>
-                                    <p className="text-slate-600 mb-1">Sales & Queries</p>
-                                    <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-blue-600 hover:text-blue-800 font-medium block">sales@globalsecuritysolutions.co.za</a>
-                                    <a href="mailto:admin@globalsecuritysolutions.co.za" className="text-blue-600 hover:text-blue-800 font-medium block">admin@globalsecuritysolutions.co.za</a>
+                                    <h3 className="font-bold text-slate-900 text-lg">Email Us</h3>
+                                    <p className="text-slate-500 mb-1">Sales & Queries</p>
+                                    <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-blue-600 hover:text-blue-800 font-medium block transition-colors">sales@globalsecuritysolutions.co.za</a>
+                                    <a href="mailto:admin@globalsecuritysolutions.co.za" className="text-blue-600 hover:text-blue-800 font-medium block transition-colors">admin@globalsecuritysolutions.co.za</a>
                                 </div>
                             </div>
 
-                            <div className="flex items-start">
-                                <div className="bg-blue-100 p-3 rounded-full mr-4">
-                                    <MapPin className="w-6 h-6 text-blue-600" />
+                            <div className="flex items-start group">
+                                <div className="bg-blue-50 p-3 rounded-xl mr-5 group-hover:bg-blue-600 transition-colors duration-300">
+                                    <MapPin className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-900">Service Areas</h3>
-                                    <p className="text-slate-600">
+                                    <h3 className="font-bold text-slate-900 text-lg">Service Areas</h3>
+                                    <p className="text-slate-600 leading-relaxed">
                                         We proudly serve the entire Western Cape, including Durbanville, Blouberg, Somerset West, Stellenbosch, and surrounding areas.
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="pt-6 border-t border-slate-100">
-                                <h3 className="font-bold text-slate-900 mb-2">Key Contacts</h3>
-                                <ul className="text-slate-600 space-y-1">
-                                    <li><strong>Kyle Cass:</strong> Owner</li>
-                                    <li><strong>Rashaad Steyn:</strong> COO</li>
+                            <div className="pt-8 border-t border-slate-100">
+                                <h3 className="font-bold text-slate-900 mb-3">Key Contacts</h3>
+                                <ul className="text-slate-600 space-y-2">
+                                    <li className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span><strong>Kyle Cass:</strong> <span className="ml-1 text-slate-500">Owner</span></li>
+                                    <li className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span><strong>Rashaad Steyn:</strong> <span className="ml-1 text-slate-500">COO</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     {/* Form */}
-                    <ContactForm />
+                    <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                        <ContactForm />
+                    </div>
                 </div>
             </div>
         </div>

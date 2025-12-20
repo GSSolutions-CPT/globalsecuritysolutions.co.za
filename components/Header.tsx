@@ -55,7 +55,7 @@ export function Header() {
         { href: '/', label: 'Home' },
         { href: '/about', label: 'About Us' },
         { href: '/services', label: 'Services' },
-        { href: '/services#sectors', label: 'Solutions by Sector' },
+        { href: '/sectors', label: 'Solutions by Sector' },
         { href: '/contact', label: 'Contact Us' },
         {
             label: 'More',
