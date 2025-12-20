@@ -82,7 +82,7 @@ export function Header() {
                         {/* Placeholder to reserve width */}
                         <div className="w-[120px] h-10"></div>
                         <Image
-                            src="/nav-logo.png"
+                            src="/nav-logo.png?v=transparent"
                             alt="Global Security Solutions"
                             width={300}
                             height={100}
