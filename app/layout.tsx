@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AOSInit } from "@/components/AOSInit";
+import { JsonLd } from "@/components/JsonLd";
 import { cn } from "@/utils/cn";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
+        <JsonLd />
         <AOSInit />
         <Header />
         <main className="flex-grow min-h-screen">
