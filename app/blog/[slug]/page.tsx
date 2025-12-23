@@ -57,6 +57,17 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                     </button>
                 </div>
 
+                {/* Cover Image */}
+                {post.coverImage && (
+                    <div className="mb-10 rounded-2xl overflow-hidden shadow-lg">
+                        <img
+                            src={post.coverImage}
+                            alt={post.title}
+                            className="w-full h-auto object-cover max-h-[500px]"
+                        />
+                    </div>
+                )}
+
                 {/* Content */}
                 <article className="prose prose-lg max-w-none text-slate-700 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
                     {post.content.map((block, index) => {

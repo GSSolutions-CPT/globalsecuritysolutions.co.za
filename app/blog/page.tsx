@@ -20,8 +20,12 @@ export default function BlogPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogData.map(post => (
                         <Link key={post.slug} href={`/blog/${post.slug}`} className="group bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            {/* Placeholder for image - in real app would use Next/Image */}
                             <div className="h-48 bg-slate-200 relative overflow-hidden">
+                                <img
+                                    src={post.coverImage || '/blog/placeholder.jpg'}
+                                    alt={post.title}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Article</span>
