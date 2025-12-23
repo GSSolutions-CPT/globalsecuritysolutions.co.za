@@ -50,6 +50,25 @@ export default function SectorsIndexPage() {
                         </Link>
                     ))}
                 </div>
+
+                {/* SEO Content Block */}
+                <div className="mt-24 max-w-4xl mx-auto text-center">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Tailored Security for Every Environment</h2>
+                    <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Security is not a "one size fits all" solution. The needs of a residential estate differ vastly from those of a high-risk industrial warehouse or a retail store.
+                        That's why <strong>Global Security Solutions</strong> approaches every project with a fresh perspective, conducting a thorough risk assessment based on your specific sector's unique vulnerabilities.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                        <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+                            <h3 className="font-bold text-indigo-900 mb-2">Residential Risks</h3>
+                            <p className="text-slate-700 text-sm">Focus on perimeter early warning (beams/fencing) and family safety (panic buttons/safe zones).</p>
+                        </div>
+                        <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+                            <h3 className="font-bold text-indigo-900 mb-2">Commercial Risks</h3>
+                            <p className="text-slate-700 text-sm">Focus on access control, staff attendance tracking, and high-definition surveillance for liability protection.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
