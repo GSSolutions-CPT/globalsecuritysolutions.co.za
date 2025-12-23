@@ -15,6 +15,18 @@ export default function AdminBlogPage() {
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
 
+    // AI State
+    const [aiApiKey, setAiApiKey] = useState('')
+    const [aiTopic, setAiTopic] = useState('')
+    const [isGenerating, setIsGenerating] = useState(false)
+    const [showAiPanel, setShowAiPanel] = useState(false)
+
+    // Load API Key from local storage on mount
+    useState(() => {
+        const savedKey = localStorage.getItem('openai_api_key')
+        if (savedKey) setAiApiKey(savedKey)
+    })
+
     // Post Data
     const [title, setTitle] = useState('')
     const [slug, setSlug] = useState('')
@@ -35,6 +47,85 @@ export default function AdminBlogPage() {
             setIsAuthenticated(true)
         } else {
             setError('Incorrect Password')
+        }
+    }
+
+    const handleAiGenerate = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!aiApiKey) {
+            setError('Please enter an OpenAI API Key')
+            return
+        }
+        setIsGenerating(true)
+        setError('')
+
+        // Save key for future
+        localStorage.setItem('openai_api_key', aiApiKey)
+
+        try {
+            const systemPrompt = `
+Role: You are the Senior SEO Content Strategist for Global Security Solutions (GSS). Your mission is to write "People-First" blog posts that rank #1 in Cape Town by demonstrating real-world experience and solving local security problems.
+
+Core Identity:
+Business: Global Security Solutions (GSS).
+Owner: Kyle Cass (Expert Security Installer).
+Location: Durbanville, Cape Town (Servicing the entire Western Cape).
+Goal: Dominate local search results for security installation, maintenance, and repairs.
+
+Writing Rules for #1 Ranking:
+1. Title: Catchy, SEO-optimized title with exactly 1 or 2 emojis (e.g., 🛡️ 🔍).
+2. Introduction: Start with a "Local Hook." Mention a specific Cape Town challenge (e.g., salt-air corrosion, load-shedding, or South-Easter winds affecting sensors).
+3. The "Experience" Factor (Crucial): Every post must include a section called "Kyle’s Field Note." Describe a fictional but realistic scenario from a job site in areas like Bellville, Somerset West, or Durbanville to prove real-world experience.
+4. Expertise: Use simple language but mention specific technical brands we use (e.g., Paradox, Hikvision) to show authority.
+5. Structure: Use H2 and H3 subheadings. Use bullet points for checklists.
+6. Local Keywords: Naturally weave in suburbs: Durbanville, Bellville, Brackenfell, Stellenbosch, and Cape Town.
+7. Trustworthiness: Always provide a clear, helpful conclusion and the standard CTA.
+
+Standard Contact Info (CTA):
+Website: https://globalsecuritysolutions.co.za
+WhatsApp: 0629558559
+Email: Kyle@globalsecuritysolutions.co.za
+
+Output Format:
+Return a JSON object ONLY: { "title": "string", "excerpt": "string", "content": "markdown string" }
+`
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${aiApiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o', // or gpt-3.5-turbo
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: `Write a blog post about: ${aiTopic}` }
+                    ],
+                    response_format: { type: "json_object" }
+                })
+            })
+
+            const data = await response.json()
+            if (data.error) throw new Error(data.error.message)
+
+            const result = JSON.parse(data.choices[0].message.content)
+
+            setTitle(result.title)
+            // Auto-generate slug from new title
+            const newSlug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+            setSlug(newSlug)
+            setExcerpt(result.excerpt)
+            setContent(result.content) // We will keep it as markdown text for the editor
+
+            setSuccess('AI Content Generated Successfully! Please review and publish.')
+            setShowAiPanel(false)
+
+        } catch (err: any) {
+            console.error(err)
+            setError(err.message || 'AI Generation Failed')
+        } finally {
+            setIsGenerating(false)
         }
     }
 
@@ -130,10 +221,64 @@ export default function AdminBlogPage() {
     return (
         <div className="min-h-screen bg-slate-50 py-12 px-4">
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+
+                {/* Header */}
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold text-slate-900">Create New Post</h1>
-                    <a href="/blog" target="_blank" className="text-blue-600 hover:underline">View Live Blog &rarr;</a>
+                    <div className="flex space-x-4">
+                        <button
+                            type="button"
+                            onClick={() => setShowAiPanel(!showAiPanel)}
+                            className="text-purple-600 font-bold flex items-center hover:bg-purple-50 px-3 py-2 rounded-lg transition-colors"
+                        >
+                            <Loader2 className={`w-5 h-5 mr-2 ${isGenerating ? 'animate-spin' : ''}`} />
+                            {showAiPanel ? 'Close AI' : 'Use AI Writer'}
+                        </button>
+                        <a href="/blog" target="_blank" className="text-blue-600 hover:underline flex items-center">
+                            View Blog &rarr;
+                        </a>
+                    </div>
                 </div>
+
+                {/* AI Panel */}
+                {showAiPanel && (
+                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-6 mb-8">
+                        <h2 className="text-xl font-bold text-purple-900 mb-4 flex items-center">
+                            🤖 SEO Content Strategist
+                        </h2>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-bold text-purple-800 mb-2">Topic / Keyword</label>
+                                <input
+                                    type="text"
+                                    value={aiTopic}
+                                    onChange={e => setAiTopic(e.target.value)}
+                                    className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                    placeholder="e.g. Best CCTV for windy areas"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-purple-800 mb-2">OpenAI API Key</label>
+                                <input
+                                    type="password"
+                                    value={aiApiKey}
+                                    onChange={e => setAiApiKey(e.target.value)}
+                                    className="w-full p-3 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                    placeholder="sk-..."
+                                />
+                                <p className="text-xs text-purple-600 mt-1">Key is saved locally in your browser only.</p>
+                            </div>
+                            <button
+                                onClick={handleAiGenerate}
+                                disabled={isGenerating || !aiTopic}
+                                className={`w-full py-3 rounded-lg text-white font-bold transition-all ${isGenerating ? 'bg-purple-400' : 'bg-purple-600 hover:bg-purple-700'
+                                    }`}
+                            >
+                                {isGenerating ? 'Generating awesome content...' : 'Generate SEO Post 🚀'}
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Basic Info */}
