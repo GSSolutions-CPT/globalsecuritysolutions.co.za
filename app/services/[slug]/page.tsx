@@ -83,24 +83,43 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                             </div>
 
                             <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">Key Features & Benefits</h3>
-                            <ul className="space-y-4">
+                            <ul className="space-y-4 mb-10">
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 mt-0.5 shrink-0" />
-                                    <span><strong>Remote Mobile Control:</strong> Manage your security from your phone, anywhere in the world.</span>
+                                    <span><strong>Remote Mobile Control:</strong> Manage your {service.page.toLowerCase()} directly from your smartphone, anywhere in the world.</span>
                                 </li>
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 mt-0.5 shrink-0" />
-                                    <span><strong>Proactive Alerts:</strong> Instant notifications on your smartphone if any breach is detected.</span>
+                                    <span><strong>Proactive Alerts:</strong> Instant notifications sent to you and our control room if any breach is detected.</span>
                                 </li>
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 mt-0.5 shrink-0" />
-                                    <span><strong>Load Shedding Backup:</strong> Systems linked to battery backups to stay online during power cuts.</span>
+                                    <span><strong>Load Shedding Backup:</strong> Our systems are linked to battery backups to stay online during power cuts.</span>
                                 </li>
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 mt-0.5 shrink-0" />
-                                    <span><strong>Certified Installation:</strong> Fully compliant with insurance and safety regulations.</span>
+                                    <span><strong>Certified Installation:</strong> Fully compliant with insurance and safety regulations in South Africa.</span>
                                 </li>
                             </ul>
+
+                            {/* SEO Content Block: FAQ */}
+                            <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-10">
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h3>
+                                <div className="space-y-6">
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-sm mb-1">How long does installation take?</h4>
+                                        <p className="text-slate-600 text-sm">Most residential installations are completed within 1-2 days. Larger commercial projects may take longer depending on complexity.</p>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-sm mb-1">Do you offer warranties?</h4>
+                                        <p className="text-slate-600 text-sm">Yes, we provide a 1-year workmanship guarantee and full manufacturer warranties on all hardware (Hikvision, IDS, Paradox, etc.).</p>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-800 text-sm mb-1">Can I view my cameras on my phone?</h4>
+                                        <p className="text-slate-600 text-sm">Absolutely. All our modern CCTV and alarm systems can be linked to a mobile app for remote viewing and control.</p>
+                                    </div>
+                                </div>
+                            </div>
 
                             <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">Brands We Use</h3>
                             <p className="text-slate-600 mb-6">

@@ -84,11 +84,33 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                             </p>
                         </div>
 
-                        <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                        <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 mb-8">
                             <h3 className="text-xl font-bold text-blue-900 mb-2">Why Choose Us in {location.suburb}?</h3>
                             <p className="text-blue-800">
                                 We have a dedicated team servicing the {location.suburb} area, ensuring fast turnaround times for installations and repairs.
+                                Our local presence means we understand the specific crime trends in your neighborhood and can advise on the best perimeter protection strategies.
                             </p>
+                        </div>
+
+                        {/* SEO Content Block: Area Specifics */}
+                        <div>
+                            <h3 className="text-2xl font-bold text-slate-900 mb-4">Security Services in {location.suburb}</h3>
+                            <p className="text-slate-700 leading-relaxed mb-6">
+                                Whether you live in a freestanding home, a complex, or manage a business premises in <strong>{location.suburb}</strong>, security is a top priority.
+                                Criminals often target properties with visible vulnerabilities such as low walls, dark corners, or outdated alarm systems.
+                            </p>
+                            <p className="text-slate-700 leading-relaxed mb-6">
+                                Global Security Solutions offers a comprehensive audit of your property. We don't just sell products; we design a layered security solution that fits your lifestyle and budget.
+                            </p>
+                            <h4 className="text-lg font-bold text-slate-900 mb-2">Our Local Services Include:</h4>
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-700 mb-8">
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> CCTV Camera Installation</li>
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Wireless Alarm Systems</li>
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Electric Fencing COC</li>
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Gate Motor Repairs</li>
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Intercom Systems</li>
+                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Battery Backups</li>
+                            </ul>
                         </div>
                     </div>
 
