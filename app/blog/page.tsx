@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import blogData from '@/app/data/blogData.json'
+import { Calendar, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
     title: 'Security Blog | Global Security Solutions',
@@ -6,25 +9,41 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-    const posts = [
-        { title: "Top 5 Security Tips for Cape Town Residents", date: "Dec 12, 2024", slug: "top-5-tips" },
-        { title: "Understanding the New Electric Fencing Regulations", date: "Nov 28, 2024", slug: "electric-fencing-regs" },
-        { title: "CCTV: Why Remote Viewing is a Game Changer", date: "Nov 15, 2024", slug: "cctv-remote-viewing" },
-    ]
-
     return (
         <div className="min-h-screen bg-slate-50 py-20">
             <div className="container mx-auto px-4">
-                <h1 className="text-4xl font-bold text-slate-900 mb-12 text-center">Security Insights</h1>
+                <h1 className="text-4xl font-bold text-slate-900 mb-4 text-center">Security Insights</h1>
+                <p className="text-center text-slate-600 max-w-2xl mx-auto mb-16">
+                    Expert advice, industry news, and practical tips to keep your property safe.
+                </p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {posts.map(post => (
-                        <article key={post.slug} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div className="h-48 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-slate-400">Image Placeholder</div>
-                            <div className="text-sm text-blue-600 font-semibold mb-2">{post.date}</div>
-                            <h2 className="text-xl font-bold text-slate-900 mb-3 hover:text-blue-600 cursor-pointer">{post.title}</h2>
-                            <p className="text-slate-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore...</p>
-                            <span className="text-blue-600 font-semibold cursor-pointer">Read More &rarr;</span>
-                        </article>
+                    {blogData.map(post => (
+                        <Link key={post.slug} href={`/blog/${post.slug}`} className="group bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            {/* Placeholder for image - in real app would use Next/Image */}
+                            <div className="h-48 bg-slate-200 relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
+                                <div className="absolute bottom-0 left-0 p-4">
+                                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Article</span>
+                                </div>
+                            </div>
+
+                            <div className="p-6">
+                                <div className="flex items-center text-slate-400 text-sm mb-3">
+                                    <Calendar className="w-4 h-4 mr-2" />
+                                    {post.date}
+                                </div>
+                                <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                    {post.title}
+                                </h2>
+                                <p className="text-slate-600 mb-4 line-clamp-3 text-sm leading-relaxed">
+                                    {post.excerpt}
+                                </p>
+                                <span className="text-blue-600 font-bold text-sm flex items-center group-hover:underline">
+                                    Read Full Article <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>

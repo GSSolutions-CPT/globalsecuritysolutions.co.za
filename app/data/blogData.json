@@ -1,0 +1,93 @@
+[
+    {
+        "slug": "top-5-security-tips-cape-town",
+        "title": "Top 5 Security Tips for Cape Town Residents",
+        "date": "Dec 12, 2024",
+        "coverImage": "/blog/security-tips.jpg",
+        "excerpt": "Crime trends in Cape Town are changing. Here are the top 5 things you can do today to secure your home, from lighting to perimeter beams.",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "Living in Cape Town requires a proactive approach to security. It's not just about having an alarm; it's about layering your defenses to deter criminals before they even reach your door."
+            },
+            {
+                "type": "heading",
+                "text": "1. Light Up Your Perimeter"
+            },
+            {
+                "type": "paragraph",
+                "text": "Criminals hate light. Installing motion-sensor floodlights around your property is one of the most cost-effective deterrents available. Ensure there are no dark corners for intruders to hide in."
+            },
+            {
+                "type": "heading",
+                "text": "2. Test Your Battery Backup"
+            },
+            {
+                "type": "paragraph",
+                "text": "With frequent load shedding, your alarm battery takes a beating. If it's older than 18 months, it likely won't last through a 4-hour outage. Test it regularly or upgrade to Lithium-Ion."
+            },
+            {
+                "type": "heading",
+                "text": "3. Cut Back Vegetation"
+            },
+            {
+                "type": "paragraph",
+                "text": "Overgrown bushes near your electric fence or driveway provide perfect cover for ambush. Keep your garden neat and ensure your perimeter fence is free of foliage that causes false alarms."
+            },
+            {
+                "type": "heading",
+                "text": "4. Be Visible"
+            },
+            {
+                "type": "paragraph",
+                "text": "Make sure your alarm company board is visible and your house number is clear. In an emergency, every second counts for the response vehicle to find you."
+            },
+            {
+                "type": "heading",
+                "text": "5. Get to Know Your Neighbors"
+            },
+            {
+                "type": "paragraph",
+                "text": "A strong neighborhood watch is better than any tech. Join your local WhatsApp group and look out for each other."
+            }
+        ]
+    },
+    {
+        "slug": "understanding-electric-fencing-laws",
+        "title": "Understanding Regulations for Electric Fencing in South Africa",
+        "date": "Nov 28, 2024",
+        "coverImage": "/blog/electric-fence.jpg",
+        "excerpt": "Did you know that non-compliant electric fencing can void your insurance? Learn about the COC requirements and safety laws.",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "Electric fencing is a popular deterrent in South Africa, but it strictly regulated by the Department of Labour. Installing a non-compliant fence is not only illegal but can leave you liable for injuries."
+            },
+            {
+                "type": "heading",
+                "text": "What is a COC?"
+            },
+            {
+                "type": "paragraph",
+                "text": "A Certificate of Compliance (COC) acts as a guarantee that your electric fence installation complies with the Occupational Health and Safety Act. Without this document, your insurance company may reject a burglary claim."
+            },
+            {
+                "type": "heading",
+                "text": "Key Legal Requirements"
+            },
+            {
+                "type": "list",
+                "items": [
+                    "Fences must be marked with yellow warning signs every 10 meters.",
+                    "The fence must not be electrified within 1.5m of the ground unless it's behind a physical barrier.",
+                    "Energizers must be installed in a safe, accessible location.",
+                    "Earth spikes must be installed at specific intervals."
+                ]
+            },
+            {
+                "type": "paragraph",
+                "text": "At Global Security Solutions, we issue a COC with every new installation, ensuring you are fully covered."
+            }
+        ]
+    }
+]
