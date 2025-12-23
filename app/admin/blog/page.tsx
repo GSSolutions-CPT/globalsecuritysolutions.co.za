@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '@/utils/supabase/client'
 import { v4 as uuidv4 } from 'uuid'
 import { Image as ImageIcon, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
@@ -21,11 +21,11 @@ export default function AdminBlogPage() {
     const [isGenerating, setIsGenerating] = useState(false)
     const [showAiPanel, setShowAiPanel] = useState(false)
 
-    // Load API Key from local storage on mount
-    useState(() => {
+    // Load API Key from local storage on mount (Client-side only)
+    useEffect(() => {
         const savedKey = localStorage.getItem('openai_api_key')
         if (savedKey) setAiApiKey(savedKey)
-    })
+    }, [])
 
     // Post Data
     const [title, setTitle] = useState('')
