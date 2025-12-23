@@ -11,6 +11,10 @@ export default function FAQPage() {
         { q: "What brands do you install?", a: "We specialize in Hikvision, IDS, Paradox, and AJAX systems, among others." },
         { q: "Do you provide COC for electric fencing?", a: "Absolutely. All our electric fence installations come with a Certificate of Compliance." },
         { q: "How long does an installation take?", a: "Most residential installations are completed within 1-2 days, depending on complexity." },
+        { q: "Will my alarm work during load shedding?", a: "Yes, provided your battery backup is healthy. We can also install expanded battery packs or solar solutions to last through stage 6." },
+        { q: "Can I view CCTV on my phone?", a: "Yes, all our IP and HD-TVI camera systems can be linked to a mobile app for 24/7 remote viewing from anywhere." },
+        { q: "Do you do repairs on existing systems?", a: "Yes, we repair and upgrade existing alarms, electric fences, and gate motors, even if we didn't install them originally." },
+        { q: "Are your installations insurance compliant?", a: "Yes, our installations meet SAIDSA standards and we provide the necessary certification for your insurance provider." },
     ]
 
     return (

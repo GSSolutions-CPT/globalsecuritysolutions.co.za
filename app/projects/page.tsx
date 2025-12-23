@@ -43,6 +43,19 @@ export default function ProjectsPage() {
                         </div>
                     ))}
                 </div>
+
+                {/* SEO Content: Installation Standards */}
+                <div className="mt-20 max-w-4xl mx-auto text-center">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Installation Standards</h2>
+                    <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Every project in our gallery represents our commitment to excellence. We don't just "install and leave."
+                        We ensure neat cabling, strategic camera positioning for maximum coverage, and full system integration.
+                        Whether it's a small residential alarm or a massive commercial estate, our <strong>quality control standards</strong> remain the same.
+                    </p>
+                    <Link href="/contact" className="text-blue-600 font-bold hover:underline text-lg">
+                        Start Your Project Today &rarr;
+                    </Link>
+                </div>
             </div>
         </div>
     )

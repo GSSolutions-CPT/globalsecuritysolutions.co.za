@@ -59,6 +59,28 @@ export default function FreeAuditPage() {
                         <ContactForm />
                     </div>
                 </div>
+
+                {/* SEO Content: How It Works */}
+                <div className="mt-20 border-t border-slate-200 pt-16">
+                    <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">How The Audit Process Works</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div className="p-6">
+                            <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                            <h3 className="text-xl font-bold mb-2">Book Your Slot</h3>
+                            <p className="text-slate-600">Fill in the form or call us. We'll schedule a time that suits you.</p>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                            <h3 className="text-xl font-bold mb-2">On-Site Assessment</h3>
+                            <p className="text-slate-600">Our technician walks through your property, identifying risks and measuring perimeters.</p>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                            <h3 className="text-xl font-bold mb-2">Detailed Proposal</h3>
+                            <p className="text-slate-600">You receive a comprehensive quote and security plan, with no obligation to buy.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
