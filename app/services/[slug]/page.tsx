@@ -58,8 +58,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     <div className="lg:col-span-2 space-y-8">
                         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 prose max-w-none">
                             <h1 className="text-3xl font-bold text-slate-900 mb-2">{service.page} Cape Town</h1>
-                            <p className="text-slate-500 mb-8 border-b border-slate-100 pb-8">
-                                Professional {service.page} installations and repairs in the Western Cape.
+                            <p className="text-slate-500 mb-8 border-b border-slate-100 pb-8 text-lg">
+                                {/* @ts-ignore */}
+                                {service.longDescription || `Professional ${service.page} installations and repairs in the Western Cape.`}
                             </p>
 
                             {/* The Problem */}
