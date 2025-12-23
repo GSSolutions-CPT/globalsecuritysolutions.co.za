@@ -3,15 +3,35 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
 import type { Metadata } from 'next'
+import { supabase } from '@/utils/supabase/client'
 
 // Helper to find post
-const getPost = (slug: string) => {
+const getPost = async (slug: string) => {
+    // 1. Try Supabase
+    const { data: dbPost } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('slug', slug)
+        .single()
+
+    if (dbPost) {
+        return {
+            title: dbPost.title,
+            slug: dbPost.slug,
+            date: new Date(dbPost.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' }),
+            excerpt: dbPost.excerpt,
+            coverImage: dbPost.cover_image_url,
+            content: dbPost.content // Assuming JSON/Array structure match
+        }
+    }
+
+    // 2. Fallback to Local
     return blogData.find(p => p.slug === slug)
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const params = await props.params
-    const post = getPost(params.slug)
+    const post = await getPost(params.slug)
     if (!post) return {}
 
     return {
@@ -21,13 +41,14 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
             title: post.title,
             description: post.excerpt,
             type: 'article',
+            images: post.coverImage ? [post.coverImage] : []
         }
     }
 }
 
 export default async function BlogPost(props: { params: Promise<{ slug: string }> }) {
     const params = await props.params
-    const post = getPost(params.slug)
+    const post = await getPost(params.slug)
 
     if (!post) {
         notFound()
@@ -70,7 +91,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
                 {/* Content */}
                 <article className="prose prose-lg max-w-none text-slate-700 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
-                    {post.content.map((block, index) => {
+                    {post.content.map((block: any, index: number) => {
                         if (block.type === 'heading') {
                             return <h2 key={index} className="text-2xl font-bold text-slate-900 mt-8 mb-4">{block.text}</h2>
                         }

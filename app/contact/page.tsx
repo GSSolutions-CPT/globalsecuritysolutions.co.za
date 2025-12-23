@@ -78,6 +78,33 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Map Section */}
+            <div className="mt-20 w-full h-[450px] bg-slate-200 relative">
+                <iframe
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src="https://maps.google.com/maps?q=Global+Security+Solutions,+66+Robyn+Rd,+Durbanville,+Cape+Town,+7550&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    className="filter grayscale hover:grayscale-0 transition-all duration-500"
+                ></iframe>
+                {/* Overlay card for context */}
+                <div className="absolute bottom-6 left-6 bg-white p-6 rounded-xl shadow-lg border border-slate-100 hidden md:block max-w-xs">
+                    <h3 className="font-bold text-slate-900 mb-1">Visit Our HQ</h3>
+                    <p className="text-sm text-slate-600 mb-3">66 Robyn Rd, Langeberg Ridge, Cape Town, 7550</p>
+                    <a
+                        href="https://www.google.com/maps/dir//66+Robyn+Rd,+Langeberg+Ridge,+Cape+Town,+7550"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 text-sm font-bold hover:underline"
+                    >
+                        Get Directions &rarr;
+                    </a>
+                </div>
+            </div>
         </div>
     )
 }

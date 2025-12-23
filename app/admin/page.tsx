@@ -8,6 +8,7 @@ import { Image as ImageIcon, Loader2, CheckCircle, AlertCircle, FileText, Briefc
 export default function AdminPage() {
     // Auth State
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [activeTab, setActiveTab] = useState<'blog' | 'projects'>('blog')
 
@@ -33,19 +34,47 @@ export default function AdminPage() {
     const [projDesc, setProjDesc] = useState('')
     const [projImage, setProjImage] = useState<File | null>(null)
 
-    // Load API Key
+    // Load API Key & Check Session
     useEffect(() => {
         const savedKey = localStorage.getItem('openai_api_key')
         if (savedKey) setAiApiKey(savedKey)
+
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setIsAuthenticated(!!session)
+        })
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setIsAuthenticated(!!session)
+        })
+
+        return () => subscription.unsubscribe()
     }, [])
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (password === 'admin123') setIsAuthenticated(true)
-        else setError('Incorrect Password')
+        setLoading(true); setError('')
+
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
+
+        if (error) {
+            setError(error.message)
+            setLoading(false)
+        } else {
+            // State update handled by onAuthStateChange
+            setLoading(false)
+        }
     }
 
-    // --- BLOG FUNCTIONS ---
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+    }
+
+    // ... (rest of blog/project functions remain unchanged)
     const handleBlogTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const t = e.target.value
         setBlogTitle(t)
@@ -151,11 +180,20 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
                 <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-                    <h1 className="text-2xl font-bold text-slate-900 mb-6 text-center">GSS Admin Dashboard</h1>
+                    <h1 className="text-2xl font-bold text-slate-900 mb-6 text-center">Admin Login</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full p-3 border rounded-lg" placeholder="Enter Admin Code" />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-                        <button type="submit" className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700">Login</button>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Email</label>
+                            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full p-3 border rounded-lg" placeholder="admin@example.com" required />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Password</label>
+                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full p-3 border rounded-lg" placeholder="••••••••" required />
+                        </div>
+                        {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">{error}</p>}
+                        <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50">
+                            {loading ? 'Logging in...' : 'Sign In'}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -166,7 +204,7 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
         <div className="min-h-screen bg-slate-50 py-12 px-4">
             <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 {/* Tabs */}
-                <div className="flex border-b border-slate-200">
+                <div className="flex border-b border-slate-200 relative">
                     <button
                         onClick={() => { setActiveTab('blog'); setSuccess(''); setError('') }}
                         className={`flex-1 py-4 text-center font-bold flex items-center justify-center space-x-2 transition-colors ${activeTab === 'blog' ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50'}`}
@@ -178,6 +216,10 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
                         className={`flex-1 py-4 text-center font-bold flex items-center justify-center space-x-2 transition-colors ${activeTab === 'projects' ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50'}`}
                     >
                         <Briefcase className="w-5 h-5" /> <span>Manage Projects</span>
+                    </button>
+
+                    <button onClick={handleLogout} className="absolute right-0 top-0 h-full px-6 text-xs font-bold text-red-500 hover:bg-red-50 transition-colors uppercase tracking-wider border-l border-slate-100">
+                        Sign Out
                     </button>
                 </div>
 

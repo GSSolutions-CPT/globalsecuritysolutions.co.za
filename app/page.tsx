@@ -214,9 +214,24 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="bg-blue-800 min-h-[300px] relative">
-                <div className="absolute inset-0 flex items-center justify-center text-blue-400 font-bold text-2xl">
-                  Project Image Placeholder
+              <div className="bg-blue-800 relative h-full min-h-[300px] flex items-center justify-center p-4">
+                <div className="grid grid-cols-2 gap-4 h-full w-full">
+                  <div className="relative h-full min-h-[250px] rounded-lg overflow-hidden border-2 border-blue-400/30">
+                    <Image
+                      src="/projects/chere-botha-1.png"
+                      alt="Chere Botha Installation 1"
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="relative h-full min-h-[250px] rounded-lg overflow-hidden border-2 border-blue-400/30">
+                    <Image
+                      src="/projects/chere-botha-2.png"
+                      alt="Chere Botha Installation 2"
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
