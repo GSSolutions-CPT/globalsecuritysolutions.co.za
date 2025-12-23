@@ -1,18 +1,27 @@
 export function JsonLd() {
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": "SecurityService",
         "name": "Global Security Solutions",
         "image": "https://globalsecuritysolutions.co.za/nav-logo-final.png",
         "telephone": "062 955 8559",
         "email": "sales@globalsecuritysolutions.co.za",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Cape Town",
+            "streetAddress": "66 Robyn Rd",
+            "addressLocality": "Durbanville",
             "addressRegion": "Western Cape",
+            "postalCode": "7550",
             "addressCountry": "ZA"
         },
         "url": "https://globalsecuritysolutions.co.za",
+        "sameAs": [
+            "https://www.facebook.com/globalsecuritysolutions.co.za",
+            "https://www.instagram.com/globalsecuritysolutions.co.za/",
+            "https://www.linkedin.com/company/global-security-solutions-cape-town",
+            "https://www.threads.net/@globalsecuritysolutions.co.za",
+            "https://gmb.globalsecuritysolutions.co.za"
+        ],
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": [
