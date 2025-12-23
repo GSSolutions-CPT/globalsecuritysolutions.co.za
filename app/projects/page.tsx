@@ -1,8 +1,11 @@
-import type { Metadata } from 'next'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import Link from 'next/link'
-
+import { supabase } from '@/utils/supabase/client'
 import seoData from '@/app/data/seoData.json'
+import type { Metadata } from 'next'
+
+// Revalidate every minute
+export const revalidate = 60
 
 const pageData = seoData.trustAndSupportPages.find(p => p.page === "Project Gallery")
 
@@ -11,15 +14,29 @@ export const metadata: Metadata = {
     description: pageData?.description || 'View our recent security installations in Cape Town.',
 }
 
-export default function ProjectsPage() {
-    const projects = [
-        { title: "Chere Botha School", category: "Commercial", desc: "Access Control & Hikvision Installation" },
-        { title: "35 on Rose", category: "HOA / Estate", desc: "Large-scale Security Upgrade" },
-        { title: "Salus and Demos", category: "Residential", desc: "Premium Access Control System" },
-        { title: "Durbanville Estate", category: "Residential", desc: "Electric Fencing & Alarms" },
-        { title: "Blouberg Office Park", category: "Commercial", desc: "CCTV Surveillance Network" },
-        { title: "Stellenbosch Farm", category: "Agricultural", desc: "Perimeter Beams & Monitoring" },
+async function getProjects() {
+    const { data } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+    return data || []
+}
+
+export default async function ProjectsPage() {
+    const dbProjects = await getProjects()
+
+    // Static fallback projects for demo
+    const staticProjects = [
+        { title: "Chere Botha School", category: "Commercial", desc: "Access Control & Hikvision Installation", image_url: null },
+        { title: "35 on Rose", category: "HOA / Estate", desc: "Large-scale Security Upgrade", image_url: null },
+        { title: "Salus and Demos", category: "Residential", desc: "Premium Access Control System", image_url: null },
+        { title: "Durbanville Estate", category: "Residential", desc: "Electric Fencing & Alarms", image_url: null },
+        { title: "Blouberg Office Park", category: "Commercial", desc: "CCTV Surveillance Network", image_url: null },
+        { title: "Stellenbosch Farm", category: "Agricultural", desc: "Perimeter Beams & Monitoring", image_url: null },
     ]
+
+    const allProjects = [...dbProjects, ...staticProjects]
 
     return (
         <div className="min-h-screen bg-slate-50 py-12 md:py-20">
@@ -30,15 +47,25 @@ export default function ProjectsPage() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((p, i) => (
-                        <div key={i} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-                            <div className="aspect-video bg-slate-200 relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium">Project Image</div>
+                    {allProjects.map((p, i) => (
+                        <div key={i} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 h-full flex flex-col">
+                            <div className="aspect-video bg-slate-200 relative overflow-hidden">
+                                {p.image_url ? (
+                                    <img
+                                        src={p.image_url}
+                                        alt={p.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium">
+                                        Project Image
+                                    </div>
+                                )}
                                 <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">{p.category}</div>
                             </div>
-                            <div className="p-6">
+                            <div className="p-6 flex-grow">
                                 <h3 className="text-xl font-bold text-slate-900 mb-2">{p.title}</h3>
-                                <p className="text-slate-600">{p.desc}</p>
+                                <p className="text-slate-600 text-sm leading-relaxed">{p.desc || p.description}</p>
                             </div>
                         </div>
                     ))}
