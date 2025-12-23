@@ -67,7 +67,11 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                     <div className="lg:col-span-2 space-y-8">
                         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 prose max-w-none">
                             <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                                {location.description}
+                                <strong>{location.description}</strong>
+                            </p>
+                            <p className="text-slate-600 mb-6">
+                                {/* @ts-ignore */}
+                                {location.localContent}
                             </p>
                             <p>
                                 At <strong>Global Security Solutions</strong>, we understand the specific security challenges faced by residents and businesses in <strong>{location.suburb}</strong>.
