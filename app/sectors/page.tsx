@@ -24,6 +24,8 @@ const getSectorIcon = (sector: string) => {
             return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
         case 'Farms & Agricultural':
             return <Image src="/icons/farm-security-v2.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+        case 'Schools & Education':
+            return <Image src="/icons/education-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
         case 'Retail & Shopping Malls':
             // Reuse Commercial for Retail if no specific retail icon
             return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
@@ -43,6 +45,7 @@ export default function SectorsPage() {
         "Commercial & Industrial",
         "HOA & Estates",
         "Farms & Agricultural",
+        "Schools & Education",
         "Retail & Shopping Malls"
     ]
 
@@ -65,7 +68,8 @@ export default function SectorsPage() {
                             item.title.includes(sector) ||
                             (sector.includes('Commercial') && item.page.includes('Commercial')) ||
                             (sector.includes('Farms') && item.page.includes('Farm')) ||
-                            (sector.includes('Estates') && item.page.includes('Estate'))
+                            (sector.includes('Estates') && item.page.includes('Estate')) ||
+                            (sector.includes('Schools') && item.page.includes('Schools'))
                         )
 
                         return (
