@@ -1,8 +1,10 @@
 import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { ArrowLeft, Calendar, Share2, Check, Copy } from 'lucide-react'
+import { ShareButton } from '@/components/ShareButton'
+import { ScrollProgress } from '@/components/ScrollProgress'
+import { useState } from 'react'
 import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 
@@ -57,6 +59,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
     return (
         <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+            <ScrollProgress />
             {/* Header */}
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="mb-8">
@@ -74,9 +77,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                         <span className="mx-3">•</span>
                         <span>Global Security Solutions</span>
                     </div>
-                    <button className="flex items-center text-blue-600 hover:text-blue-800 font-semibold">
-                        <Share2 className="w-5 h-5 mr-2" /> Share
-                    </button>
+                    <ShareButton title={post.title} />
                 </div>
 
                 {/* Cover Image */}
@@ -91,7 +92,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                 )}
 
                 {/* Content */}
-                <article className="prose prose-lg max-w-none text-slate-700 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
+                <article className="prose prose-lg prose-apex max-w-none text-slate-700 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
                     {post.content.map((block: any, index: number) => {
                         if (block.type === 'heading') {
                             return <h2 key={index} className="text-2xl font-bold text-slate-900 mt-8 mb-4">{block.text}</h2>

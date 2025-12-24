@@ -148,4 +148,8 @@
   .btn-tactile {
     @apply active:scale-95 transition-all duration-150;
   }
+  
+  .prose-apex blockquote {
+    @apply border-l-4 border-blue-600 bg-blue-50 py-4 px-6 rounded-r-lg italic text-slate-800 my-8 shadow-sm not-italic;
+  }
 }
