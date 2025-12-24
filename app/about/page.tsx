@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import seoData from '@/app/data/seoData.json'
 import { Shield, Users, CheckCircle } from 'lucide-react'
+import { Counter } from '@/components/Counter'
 
 export const metadata: Metadata = {
     title: seoData.coreWebsitePages.find(p => p.page === 'About Us')?.title,
@@ -36,7 +37,7 @@ export default function AboutPage() {
                     <div className="bg-white p-10 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 border border-slate-100">
                         <div className="flex items-start space-x-6 mb-8 group">
                             <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
-                                <Shield className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
+                                <Shield className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900 mb-2">Certified Experts</h3>
@@ -45,7 +46,7 @@ export default function AboutPage() {
                         </div>
                         <div className="flex items-start space-x-6 mb-8 group">
                             <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
-                                <Users className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
+                                <Users className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900 mb-2">Owner Managed</h3>
@@ -64,6 +65,13 @@ export default function AboutPage() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-y border-slate-200 py-12">
+                    <Counter end={15} label="Years Experience" />
+                    <Counter end={500} label="Projects Completed" />
+                    <Counter end={50} label="Five Star Reviews" />
+                    <Counter end={24} label="Hour Support" />
                 </div>
 
                 <div className="bg-slate-900 rounded-3xl p-12 md:p-16 text-white relative overflow-hidden shadow-2xl">
