@@ -52,10 +52,12 @@ export default async function BlogIndexPage() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {posts.map((post: any) => (
+                    {posts.map((post: any, i: number) => (
                         <Link
                             key={post.id}
                             href={`/blog/${post.slug || '#'}`}
+                            data-aos="fade-up"
+                            data-aos-delay={i * 100}
                             className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-50 relative"
                         >
                             {/* Dog Ear Accent on top of image? Maybe just a corner badge */}
@@ -68,6 +70,7 @@ export default async function BlogIndexPage() {
                                         src={post.featured_image}
                                         alt={post.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                 ) : (
@@ -85,8 +88,8 @@ export default async function BlogIndexPage() {
                                 </div>
                                 <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">{post.title}</h2>
                                 <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
-                                <span className="mt-auto text-blue-600 font-bold text-sm flex items-center group-hover:gap-2 transition-all">
-                                    Read Article <ArrowRight className="w-4 h-4 ml-2" />
+                                <span className="mt-auto text-blue-600 font-bold text-sm flex items-center transition-all">
+                                    Read Article <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                                 </span>
                             </div>
                         </Link>

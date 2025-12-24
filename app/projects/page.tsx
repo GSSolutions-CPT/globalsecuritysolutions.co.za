@@ -67,6 +67,8 @@ export default async function ProjectsPage() {
                         <Link
                             key={project.id || i}
                             href={`/projects/${project.id || '#'}`}
+                            data-aos="fade-up"
+                            data-aos-delay={i * 100}
                             className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-50 relative"
                         >
                             {/* Accent */}
@@ -79,6 +81,7 @@ export default async function ProjectsPage() {
                                         src={project.image_url}
                                         alt={project.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                 ) : (
@@ -93,8 +96,8 @@ export default async function ProjectsPage() {
                                 <h2 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{project.title}</h2>
                                 <p className="text-blue-600 font-semibold text-sm mb-4 uppercase tracking-wide">{project.category || 'Security Installation'}</p>
                                 <p className="text-slate-600 mb-6 leading-relaxed flex-grow">{project.desc || project.description}</p>
-                                <span className="mt-auto text-slate-900 font-bold text-sm flex items-center group-hover:gap-2 transition-all">
-                                    View Project Case Study <ArrowRight className="w-4 h-4 ml-2" />
+                                <span className="mt-auto text-slate-900 font-bold text-sm flex items-center transition-all">
+                                    View Project Case Study <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                                 </span>
                             </div>
                         </Link>
