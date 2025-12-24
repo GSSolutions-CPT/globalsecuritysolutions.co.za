@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, Calendar, Share2, Check, Copy } from 'lucide-react'
 import { ShareButton } from '@/components/ShareButton'
 import { ScrollProgress } from '@/components/ScrollProgress'
-import { useState } from 'react'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 
