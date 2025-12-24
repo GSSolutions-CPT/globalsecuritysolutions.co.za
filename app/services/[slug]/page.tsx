@@ -2,6 +2,7 @@ import seoData from '@/app/data/seoData.json'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowLeft, CheckCircle2 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -57,7 +58,23 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     {/* Main Content */}
                     <div className="lg:col-span-2 space-y-8">
                         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 prose max-w-none">
-                            <h1 className="text-3xl font-bold text-slate-900 mb-2">{service.page} Cape Town</h1>
+                            <div className="flex items-center gap-4 mb-4">
+                                {/* @ts-ignore */}
+                                {service.iconPath && (
+                                    <div className="w-16 h-16 bg-blue-50 rounded-lg p-3 flex-shrink-0">
+                                        <Image
+                                            /* @ts-ignore */
+                                            src={service.iconPath}
+                                            /* @ts-ignore */
+                                            alt={`${service.page} icon`}
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+                                )}
+                                <h1 className="text-3xl font-bold text-slate-900 m-0">{service.page} Cape Town</h1>
+                            </div>
                             <p className="text-slate-500 mb-8 border-b border-slate-100 pb-8 text-lg">
                                 {/* @ts-ignore */}
                                 {service.longDescription || `Professional ${service.page} installations and repairs in the Western Cape.`}

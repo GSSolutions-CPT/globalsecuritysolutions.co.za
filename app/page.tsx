@@ -190,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: SOCIAL PROOF */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">What Our Clients Say</h2>
 
@@ -214,24 +214,14 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="bg-blue-800 relative h-full min-h-[300px] flex items-center justify-center p-4">
-                <div className="grid grid-cols-2 gap-4 h-full w-full">
-                  <div className="relative h-full min-h-[250px] rounded-lg overflow-hidden border-2 border-blue-400/30">
-                    <Image
-                      src="/projects/chere-botha-1.png"
-                      alt="Chere Botha Installation 1"
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="relative h-full min-h-[250px] rounded-lg overflow-hidden border-2 border-blue-400/30">
-                    <Image
-                      src="/projects/chere-botha-2.png"
-                      alt="Chere Botha Installation 2"
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
+              <div className="bg-blue-800 relative h-full min-h-[400px] flex items-center justify-center p-4">
+                <div className="relative h-full w-full rounded-lg overflow-hidden">
+                  <Image
+                    src="/projects/chere-botha-1.png"
+                    alt="Chere Botha Installation"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
@@ -240,7 +230,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: CTA / PRE-FOOTER */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

@@ -36,73 +36,85 @@
             "page": "Alarm System Installation",
             "title": "Alarm System Installation Cape Town | Global Security Solutions",
             "description": "Stop intruders in their tracks with 24/7 monitored alarm systems. We install wireless and wired solutions from AJAX, IDS, and Paradox for ultimate peace of mind.",
-            "longDescription": "An alarm system is the heartbeat of your property's security. We don't just stick sensors on doors; we design a comprehensive trap-zone strategy. Using top-tier brands like AJAX and Paradox, our systems are fully app-controllable, allowing you to arm, disarm, and check status from anywhere. Whether you need a simple wired upgrade or a fully wireless smart-home integration, our certified technicians ensure zero false alarms and maximum reliability."
+            "longDescription": "An alarm system is the heartbeat of your property's security. We don't just stick sensors on doors; we design a comprehensive trap-zone strategy. Using top-tier brands like AJAX and Paradox, our systems are fully app-controllable, allowing you to arm, disarm, and check status from anywhere. Whether you need a simple wired upgrade or a fully wireless smart-home integration, our certified technicians ensure zero false alarms and maximum reliability.",
+            "iconPath": "/icons/alarm-system-installation.png"
         },
         {
             "page": "CCTV Surveillance Systems",
             "title": "CCTV Surveillance Cape Town | Camera System Installation",
             "description": "Watch over your property from anywhere in the world. Our high-definition CCTV systems offer crystal-clear night vision and instant mobile alerts.",
-            "longDescription": "Modern CCTV is about more than just recording crime; it's about prevention. We install AI-powered cameras capable of distinguishing between humans, vehicles, and pets, drastically reducing false alerts. From 4K residential dome cameras to long-range PTZ units for commercial perimeters, our Hikvision and Dahua systems give you crystal clear vision day or night, directly to your smartphone."
+            "longDescription": "Modern CCTV is about more than just recording crime; it's about prevention. We install AI-powered cameras capable of distinguishing between humans, vehicles, and pets, drastically reducing false alerts. From 4K residential dome cameras to long-range PTZ units for commercial perimeters, our Hikvision and Dahua systems give you crystal clear vision day or night, directly to your smartphone.",
+            "iconPath": "/icons/cctv-surveillance-systems.png"
         },
         {
             "page": "Access Control Solutions",
             "title": "Access Control Systems Cape Town | Global Security Solutions",
             "description": "Take control of who enters your space. From biometric scanners to keyless entry, we provide secure, seamless access management for homes and businesses.",
-            "longDescription": "Managing entry points is critical for business efficiency and home safety. We deploy biometric fingerprint readers, facial recognition terminals, and RFID card systems that integrate seamlessly with your payroll or time-attendance software. For residential estates, we offer heavy-duty magnetic locks and intercom integration to ensure only authorized guests gain entry."
+            "longDescription": "Managing entry points is critical for business efficiency and home safety. We deploy biometric fingerprint readers, facial recognition terminals, and RFID card systems that integrate seamlessly with your payroll or time-attendance software. For residential estates, we offer heavy-duty magnetic locks and intercom integration to ensure only authorized guests gain entry.",
+            "iconPath": "/icons/access-control-solutions.png"
         },
         {
             "page": "Intercom System Installers",
             "title": "Intercom System Installers Cape Town | Global Security Solutions",
             "description": "Never miss a visitor again. See, hear, and speak to guests at your gate with our modern video intercom systems. Secure, convenient, and reliable.",
-            "longDescription": "The first experience a visitor has at your property should be secure but welcoming. Our diverse range of video intercoms from Hikvision and Commax allows you to visually verify guests before opening the gate. With mobile-app forwarding, you can answer your gate bell from your office or even while on vacation, creating the illusion of occupancy at all times."
+            "longDescription": "The first experience a visitor has at your property should be secure but welcoming. Our diverse range of video intercoms from Hikvision and Commax allows you to visually verify guests before opening the gate. With mobile-app forwarding, you can answer your gate bell from your office or even while on vacation, creating the illusion of occupancy at all times.",
+            "iconPath": "/icons/intercom-system-installers.png"
         },
         {
             "page": "Electric Fence Installations",
             "title": "Electric Fence Installations Cape Town | Professional Setup",
             "description": "Your first line of defense. Our certified electric fencing provides a powerful deterrent against intruders, keeping your perimeter secure around the clock.",
-            "longDescription": "A robust electric fence is the ultimate psychological and physical deterrent. We are certified Nemtek installers, ensuring every inch of your perimeter is compliant with South African safety laws (COC provided). We use multi-zone energizers, heavy-duty suppression monitoring, and anti-climb brackets to ensure your boundary is impenetrable and fully monitored."
+            "longDescription": "A robust electric fence is the ultimate psychological and physical deterrent. We are certified Nemtek installers, ensuring every inch of your perimeter is compliant with South African safety laws (COC provided). We use multi-zone energizers, heavy-duty suppression monitoring, and anti-climb brackets to ensure your boundary is impenetrable and fully monitored.",
+            "iconPath": "/icons/electric-fence-installations.png"
         },
         {
             "page": "Perimeter Security Enhancement",
             "title": "Perimeter Security Cape Town | Outdoor Beam Installation",
             "description": "Detect threats before they reach your door. We install advanced outdoor beams and motion sensors to create an invisible safety shield around your property.",
-            "longDescription": "True security means catching the intruder before they touch a window. Our perimeter solutions utilize dual-technology outdoor beams and passive infrared (PIR) sensors that ignore swaying trees and small animals but trigger instantly upon human detection. These systems can trigger floodlights, sirens, or silent alerts to your phone, giving you precious time to react."
+            "longDescription": "True security means catching the intruder before they touch a window. Our perimeter solutions utilize dual-technology outdoor beams and passive infrared (PIR) sensors that ignore swaying trees and small animals but trigger instantly upon human detection. These systems can trigger floodlights, sirens, or silent alerts to your phone, giving you precious time to react.",
+            "iconPath": "/icons/perimeter-security-enhancement.png"
         },
         {
             "page": "Gate and Garage Automation",
             "title": "Gate and Garage Automation Cape Town | Motor Repairs",
             "description": "Experience the luxury of automatic access. We install and repair high-speed motors for gates and garage doors, ensuring safety and convenience every time you arrive.",
-            "longDescription": "A slow gate is a security risk. We install high-speed, battery-backed motors from Centurion Systems that open and close in seconds to prevent 'tailgating' or hijacking. Our installations include anti-lift brackets and theft-deterrent cages to protect the motor itself. We also specialize in heavy-duty commercial gate motors for high-traffic business parks."
+            "longDescription": "A slow gate is a security risk. We install high-speed, battery-backed motors from Centurion Systems that open and close in seconds to prevent 'tailgating' or hijacking. Our installations include anti-lift brackets and theft-deterrent cages to protect the motor itself. We also specialize in heavy-duty commercial gate motors for high-traffic business parks.",
+            "iconPath": "/icons/gate-and-garage-automation.png"
         },
         {
             "page": "Vehicle Security Systems",
             "title": "Vehicle Security Systems Cape Town | Asset Protection",
             "description": "Protect your fleet and personal vehicles with cutting-edge tracking and alarm systems. Real-time monitoring ensures your assets are always safe.",
-            "longDescription": "From fleet management to personal vehicle tracking, our GPS and GSM-based systems allow you to monitor location, speed, and driver behavior in real-time. We also verify locks and install slam-lock systems for delivery vehicles, ensuring your mobile assets are as secure as your physical premises."
+            "longDescription": "From fleet management to personal vehicle tracking, our GPS and GSM-based systems allow you to monitor location, speed, and driver behavior in real-time. We also verify locks and install slam-lock systems for delivery vehicles, ensuring your mobile assets are as secure as your physical premises.",
+            "iconPath": "/icons/vehicle-security-systems.png"
         },
         {
             "page": "Smart Home Automation",
             "title": "Smart Home Security Cape Town | App-Controlled Systems",
             "description": "Turn your house into a smart fortress. Control lights, alarms, and cameras from a single app. Seamless security integration for the modern lifestyle.",
-            "longDescription": "Security meets convenience. We integrate your alarm, cameras, and gate control into a single ecosystem (like Home Assistant or proprietary smart apps). Imagine your lights automatically turning on when the alarm triggers, or your gate opening via voice command. We make your home not just safer, but smarter and more responsive to your lifestyle."
+            "longDescription": "Security meets convenience. We integrate your alarm, cameras, and gate control into a single ecosystem (like Home Assistant or proprietary smart apps). Imagine your lights automatically turning on when the alarm triggers, or your gate opening via voice command. We make your home not just safer, but smarter and more responsive to your lifestyle.",
+            "iconPath": "/icons/smart-home-automation.png"
         },
         {
             "page": "Security System Integration",
             "title": "Security System Integration Cape Town | Linked Security",
             "description": "Unified security for maximum efficiency. We link your CCTV, beams, and alarms into one cohesive system, giving you complete control at your fingertips.",
-            "longDescription": "Siloed security systems are inefficient. We practice 'Converged Security', where your CCTV talks to your alarm, and your alarm talks to your access control. This means when a beam is breached, a PTZ camera automatically globs onto that location and records high-res footage. This level of synergy provides superior forensic evidence and real-time situational awareness."
+            "longDescription": "Siloed security systems are inefficient. We practice 'Converged Security', where your CCTV talks to your alarm, and your alarm talks to your access control. This means when a beam is breached, a PTZ camera automatically globs onto that location and records high-res footage. This level of synergy provides superior forensic evidence and real-time situational awareness.",
+            "iconPath": "/icons/security-system-integration.png"
         },
         {
             "page": "Security Repairs and Upgrades",
             "title": "Security Repairs Cape Town | System Upgrades & Maintenance",
             "description": "Is your system outdated or faulty? Our expert technicians provide fast repairs and modern upgrades to ensure your security is never compromised.",
-            "longDescription": "An outdated system is a liability. We specialize in 'system takeovers'—repairing and upgrading old wired alarm systems with modern wireless expanders. Whether it's a corroded circuit board, a faulty gate motor, or simply replacing old lead-acid batteries with Lithium-Iron, we breathe new life into existing infrastructure to save you the cost of a full replacement."
+            "longDescription": "An outdated system is a liability. We specialize in 'system takeovers'—repairing and upgrading old wired alarm systems with modern wireless expanders. Whether it's a corroded circuit board, a faulty gate motor, or simply replacing old lead-acid batteries with Lithium-Iron, we breathe new life into existing infrastructure to save you the cost of a full replacement.",
+            "iconPath": "/icons/security-repairs-and-upgrades.png"
         },
         {
             "page": "Security Maintenance Contracts",
             "title": "Security Maintenance Cape Town | Service Contracts",
             "description": "Prevent failures before they happen. Our maintenance plans ensure your batteries are charged, sensors are clean, and your security is always ready.",
-            "longDescription": "Security systems degrade over time due to weather, insects, and battery aging. Our service level agreements (SLAs) provide peace of mind for business owners and body corporates. We conduct monthly or quarterly site visits to clean camera lenses, test battery load capacity, tension electric fences, and verify simplified transmission signals to the control room."
+            "longDescription": "Security systems degrade over time due to weather, insects, and battery aging. Our service level agreements (SLAs) provide peace of mind for business owners and body corporates. We conduct monthly or quarterly site visits to clean camera lenses, test battery load capacity, tension electric fences, and verify simplified transmission signals to the control room.",
+            "iconPath": "/icons/security-maintenance-contracts.png"
         }
     ],
     "sectorSolutions": [

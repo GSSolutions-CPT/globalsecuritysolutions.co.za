@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import seoData from '@/app/data/seoData.json'
-import { ArrowRight, Shield } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export const metadata = {
     title: 'All Security Services | Global Security Solutions',
@@ -38,8 +39,18 @@ export default function ServicesIndexPage() {
                             className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-600 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full"
                         >
                             <div className="flex items-center mb-6">
-                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors duration-300">
-                                    <Shield className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                                <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors duration-300 p-3">
+                                    {service.iconPath ? (
+                                        <Image
+                                            src={service.iconPath}
+                                            alt={`${service.page} icon`}
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    ) : (
+                                        <div className="w-10 h-10 bg-blue-200 rounded-full" />
+                                    )}
                                 </div>
                                 <h2 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{service.page}</h2>
                             </div>

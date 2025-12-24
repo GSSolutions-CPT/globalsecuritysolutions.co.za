@@ -39,7 +39,7 @@ export default async function BlogPage() {
     const posts = await getPosts()
 
     return (
-        <div className="min-h-screen bg-slate-50 py-20">
+        <div className="min-h-screen bg-slate-50 py-24">
             <div className="container mx-auto px-4">
                 <h1 className="text-4xl font-bold text-slate-900 mb-4 text-center">Security Insights</h1>
                 <p className="text-center text-slate-600 max-w-2xl mx-auto mb-16">
