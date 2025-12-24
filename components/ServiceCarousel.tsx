@@ -17,45 +17,41 @@ export function ServiceCarousel() {
                         <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
                             <Link
                                 href={`/services/${slug}`}
-                                className="block h-full bg-white p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.1)] hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                                className="block h-full bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center"
                             >
-                                {/* Decorative Gradient Blobs */}
-                                <div className="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full transition-transform duration-500 group-hover:scale-150" />
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-[4rem] -mr-4 -mt-4 transition-all duration-500 group-hover:bg-blue-600 group-hover:w-full group-hover:h-full group-hover:rounded-none group-hover:opacity-100" />
+                                {/* THE "APEX" BLUE DOG-EAR ACCENT */}
+                                {/* This creates the blue shape at the top-left specific to the reference image */}
+                                <div className="absolute top-0 left-0 w-24 h-24 bg-blue-600 rounded-br-[4rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
 
-                                {/* Hover Background Reveal - Subtle Blue Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+                                {/* Inner White Curve to refine the dog-ear shape if needed, or just let it be distinct */}
+                                <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-blue-400/30 blur-sm z-20" />
 
-                                <div className="relative z-10 flex flex-col items-center text-center h-full">
-                                    {/* Icon Container */}
-                                    <div className="w-20 h-20 bg-white rounded-2xl border border-slate-100 shadow-md flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-lg transition-all duration-500 relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="relative z-10 flex flex-col items-center h-full">
+                                    {/* Frameless Icon - Large & Clean */}
+                                    <div className="w-24 h-24 mb-6 relative transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
                                         {service.iconPath ? (
-                                            <div className="w-10 h-10 relative z-10">
-                                                <Image
-                                                    src={service.iconPath}
-                                                    alt={`${service.page} icon`}
-                                                    fill
-                                                    className="object-contain transition-transform duration-500 group-hover:rotate-3"
-                                                />
-                                            </div>
+                                            <Image
+                                                src={service.iconPath}
+                                                alt={`${service.page} icon`}
+                                                fill
+                                                className="object-contain drop-shadow-md"
+                                            />
                                         ) : (
-                                            <div className="w-10 h-10 bg-blue-200 rounded-full z-10" />
+                                            <div className="w-full h-full bg-blue-100 rounded-full" />
                                         )}
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-white transition-colors duration-300">
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">
                                         {service.page}
                                     </h3>
 
-                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3 group-hover:text-blue-100 transition-colors duration-300">
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3">
                                         {service.description}
                                     </p>
 
-                                    {/* Button-like link */}
-                                    <span className="mt-auto inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-slate-50 text-blue-700 font-bold text-sm group-hover:bg-white group-hover:text-blue-700 transition-all duration-300 shadow-sm">
-                                        Learn More
-                                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                    {/* Minimalist Action */}
+                                    <span className="mt-auto text-blue-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
+                                        View Details <ArrowRight className="w-4 h-4 ml-1" />
                                     </span>
                                 </div>
                             </Link>
