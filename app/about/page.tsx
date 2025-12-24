@@ -33,7 +33,7 @@ export default function AboutPage() {
                             Founded on the principles of integrity and customer service, Global Security Solutions deals directly with top brands like Hikvision, IDS, Paradox, and AJAX to ensure you get the best equipment on the market.
                         </p>
                     </div>
-                    <div className="bg-white p-10 rounded-[2rem] shadow-xl border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div className="bg-white p-10 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 border border-slate-100">
                         <div className="flex items-start space-x-6 mb-8 group">
                             <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
                                 <Shield className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
@@ -72,15 +72,15 @@ export default function AboutPage() {
                     <div className="relative z-10 text-center max-w-4xl mx-auto">
                         <h2 className="text-3xl md:text-4xl font-bold mb-12 tracking-tight">Why We Are Different</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-colors">
+                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
                                 <h3 className="text-xl font-bold mb-4 text-blue-400">Quality First</h3>
                                 <p className="text-slate-300 leading-relaxed">We never compromise on the quality of hardware or cabling. Your security depends on it.</p>
                             </div>
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-colors">
+                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
                                 <h3 className="text-xl font-bold mb-4 text-blue-400">Rapid Response</h3>
                                 <p className="text-slate-300 leading-relaxed">Our team is agile and responsive, ensuring your installation or repair happens on time.</p>
                             </div>
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-colors">
+                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
                                 <h3 className="text-xl font-bold mb-4 text-blue-400">Customer Education</h3>
                                 <p className="text-slate-300 leading-relaxed">We take the time to teach you how to use your new system effectively.</p>
                             </div>

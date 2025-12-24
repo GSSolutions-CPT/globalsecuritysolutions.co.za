@@ -50,7 +50,7 @@ export default function Home() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-1"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-blue-500/25 hover:scale-105"
               >
                 Get a Free Quote
                 <ArrowRight className="ml-2 h-5 w-5" />

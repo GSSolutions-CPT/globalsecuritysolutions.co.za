@@ -76,7 +76,7 @@ export default function SectorsPage() {
                             <Link
                                 key={index}
                                 href={`/services#${slug}`}
-                                className="group relative bg-white rounded-[2.5rem] p-8 shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col items-center text-center"
+                                className="bg-white p-8 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group border border-slate-50"
                             >
                                 {/* Blue Dog Ear */}
                                 <div className="absolute top-0 left-0 w-16 h-16 bg-blue-600 rounded-br-[3rem] z-0 transition-transform group-hover:scale-110" />
