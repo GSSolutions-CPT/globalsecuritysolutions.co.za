@@ -91,13 +91,13 @@ export function Footer() {
                 </div>
 
                 {/* Brands Trust Bar */}
-                <div className="border-t border-slate-800 pt-6 pb-4">
-                    <p className="text-center text-slate-500 text-[10px] mb-3 font-medium uppercase tracking-widest">Trusted By Leading Brands</p>
+                <div className="border-t border-slate-800 pt-4 pb-2">
+                    <p className="text-center text-slate-500 text-[10px] mb-2 font-medium uppercase tracking-widest">Trusted By Leading Brands</p>
                     <BrandCarousel variant="footer" />
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-slate-800 pt-4 mt-4 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px]">
+                <div className="border-t border-slate-800 pt-2 mt-2 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px]">
                     <p>&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
                     <div className="flex space-x-4 mt-3 md:mt-0">
                         <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>

@@ -211,7 +211,7 @@ interface BrandCarouselProps {
 
 export function BrandCarousel({ variant = 'default' }: BrandCarouselProps) {
     const containerClasses = variant === 'footer'
-        ? "w-full overflow-hidden bg-transparent py-8 border-t border-slate-800"
+        ? "w-full overflow-hidden bg-transparent py-4 border-t border-slate-800"
         : "w-full overflow-hidden bg-white py-10"
 
     // Helper to get image classes based on variant and whether a custom footer source exists
