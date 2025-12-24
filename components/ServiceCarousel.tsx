@@ -17,30 +17,41 @@ export function ServiceCarousel() {
                         <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
                             <Link
                                 href={`/services/${slug}`}
-                                className="block h-full bg-white p-6 rounded-xl border-2 border-slate-200 hover:border-blue-600 hover:shadow-xl hover:-translate-y-1 transition-all group"
+                                className="block h-full bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
                             >
-                                <div className="w-16 h-16 bg-blue-50 rounded-lg shadow-sm flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors p-3">
-                                    {service.iconPath ? (
-                                        <Image
-                                            src={service.iconPath}
-                                            alt={`${service.page} icon`}
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-contain"
-                                        />
-                                    ) : (
-                                        <div className="w-10 h-10 bg-blue-200 rounded-full" />
-                                    )}
+                                {/* Decorative Corner Accent */}
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-[4rem] -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+
+                                <div className="relative z-10 flex flex-col items-center text-center">
+                                    {/* Icon Container */}
+                                    <div className="w-20 h-20 bg-white rounded-2xl border-2 border-blue-100 shadow-sm flex items-center justify-center mb-6 group-hover:border-blue-600 group-hover:bg-blue-600 transition-all duration-300">
+                                        {service.iconPath ? (
+                                            <div className="w-10 h-10 relative">
+                                                <Image
+                                                    src={service.iconPath}
+                                                    alt={`${service.page} icon`}
+                                                    fill
+                                                    className="object-contain brightness-100 group-hover:brightness-0 group-hover:invert transition-all"
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="w-10 h-10 bg-blue-200 rounded-full" />
+                                        )}
+                                    </div>
+
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                                        {service.page}
+                                    </h3>
+
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3">
+                                        {service.description}
+                                    </p>
+
+                                    {/* Button-like link */}
+                                    <span className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-blue-50 text-blue-700 font-bold text-sm group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                        Learn More
+                                    </span>
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-                                    {service.page}
-                                </h3>
-                                <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                                    {service.description}
-                                </p>
-                                <span className="text-blue-600 font-bold text-sm flex items-center">
-                                    Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
                             </Link>
                         </li>
                     )
