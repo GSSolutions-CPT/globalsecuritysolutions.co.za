@@ -208,7 +208,7 @@ export default function Home() {
                 <div>
                   <Link
                     href="/projects"
-                    className="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition-colors inline-block"
+                    className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-colors inline-block"
                   >
                     View Case Study
                   </Link>
