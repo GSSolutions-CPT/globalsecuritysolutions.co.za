@@ -48,8 +48,8 @@ export default async function ProjectsPage() {
                     <Link href="/" className="inline-flex items-center text-blue-400 hover:text-white mb-6 transition-colors">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
                     </Link>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Recent Projects</h1>
-                    <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">Our Recent Projects</h1>
+                    <p className="text-xl text-blue-200 max-w-2xl mx-auto text-balance">
                         See our quality workmanship and recent installations across Cape Town.
                     </p>
                 </div>
@@ -73,7 +73,7 @@ export default async function ProjectsPage() {
                             <div className="absolute top-0 left-0 w-24 h-24 bg-blue-600 rounded-br-[4rem] z-20 shadow-lg -translate-x-2 -translate-y-2" />
                             <div className="absolute top-6 left-6 z-30 text-white font-bold text-xs uppercase tracking-wider">Project</div>
 
-                            <div className="relative h-64 w-full overflow-hidden">
+                            <div className="relative aspect-video w-full overflow-hidden">
                                 {project.image_url ? (
                                     <Image
                                         src={project.image_url}
