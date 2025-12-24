@@ -36,37 +36,43 @@ export default function ServicesIndexPage() {
                         <Link
                             key={service.page}
                             href={`/services/${toSlug(service.page)}`}
-                            className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group flex flex-col items-center text-center relative overflow-hidden"
+                            className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.1)] hover:-translate-y-2 transition-all duration-500 group flex flex-col items-center text-center relative overflow-hidden h-full"
                         >
-                            {/* Decorative Corner Accent */}
-                            <div className="absolute top-0 left-0 w-24 h-24 bg-blue-50 rounded-br-[4rem] -ml-8 -mt-8 transition-transform group-hover:scale-110" />
+                            {/* Decorative Gradient Blobs */}
+                            <div className="absolute -top-12 -left-12 w-32 h-32 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full transition-transform duration-500 group-hover:scale-150" />
+                            <div className="absolute top-0 left-0 w-24 h-24 bg-blue-500/5 rounded-br-[4rem] -ml-4 -mt-4 transition-all duration-500 group-hover:bg-blue-600 group-hover:w-full group-hover:h-full group-hover:rounded-none group-hover:opacity-100" />
+
+                            {/* Hover Background Reveal - Subtle Blue Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
 
                             <div className="relative z-10 flex flex-col items-center w-full h-full">
-                                <div className="w-24 h-24 bg-white rounded-2xl border-2 border-blue-100 shadow-sm flex items-center justify-center mb-6 group-hover:border-blue-600 group-hover:bg-blue-600 transition-all duration-300">
+                                <div className="w-24 h-24 bg-white rounded-2xl border border-slate-100 shadow-md flex items-center justify-center mb-8 group-hover:scale-110 group-hover:shadow-lg transition-all duration-500 relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     {service.iconPath ? (
-                                        <div className="w-12 h-12 relative">
+                                        <div className="w-12 h-12 relative z-10">
                                             <Image
                                                 src={service.iconPath}
                                                 alt={`${service.page} icon`}
                                                 fill
-                                                className="object-contain brightness-100 group-hover:brightness-0 group-hover:invert transition-all"
+                                                className="object-contain transition-transform duration-500 group-hover:rotate-3"
                                             />
                                         </div>
                                     ) : (
-                                        <div className="w-10 h-10 bg-blue-200 rounded-full" />
+                                        <div className="w-10 h-10 bg-blue-200 rounded-full z-10" />
                                     )}
                                 </div>
 
-                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-white transition-colors duration-300">
                                     {service.page}
                                 </h2>
 
-                                <p className="text-slate-600 text-sm mb-8 leading-relaxed flex-grow">
+                                <p className="text-slate-600 text-sm mb-8 leading-relaxed flex-grow group-hover:text-blue-100 transition-colors duration-300">
                                     {service.description}
                                 </p>
 
-                                <span className="mt-auto inline-flex items-center justify-center px-8 py-3 rounded-full bg-blue-600 text-white font-bold text-sm shadow-md group-hover:bg-blue-700 transition-all">
+                                <span className="mt-auto inline-flex items-center justify-center px-8 py-3 rounded-full bg-slate-50 text-blue-700 font-bold text-sm shadow-sm group-hover:bg-white group-hover:text-blue-700 transition-all duration-300">
                                     View Service
+                                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </span>
                             </div>
                         </Link>
