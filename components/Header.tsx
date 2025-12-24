@@ -104,7 +104,7 @@ export function Header() {
                                 ) : (
                                     <Link
                                         href={item.href!}
-                                        className={`font-medium transition-colors ${pathname === item.href ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-900'}`}
+                                        className={`font-medium transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${pathname === item.href ? 'text-blue-600 font-bold after:scale-x-100' : 'text-gray-700 hover:text-blue-900'}`}
                                     >
                                         {item.label}
                                     </Link>
@@ -130,7 +130,7 @@ export function Header() {
                         ))}
                         <Link
                             href="/contact"
-                            className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition-colors font-bold shadow-sm"
+                            className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
                             Get a Quote
                         </Link>
@@ -190,7 +190,7 @@ export function Header() {
                         <div className="pt-4">
                             <Link
                                 href="/contact"
-                                className="block w-full bg-red-600 text-white px-5 py-3 rounded-md hover:bg-red-700 text-center font-bold"
+                                className="block w-full bg-red-600 text-white px-5 py-3 rounded-md hover:bg-red-700 text-center font-bold active:scale-95 duration-200"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Get a Quote

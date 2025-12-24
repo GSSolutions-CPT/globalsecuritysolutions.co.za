@@ -143,3 +143,9 @@
     @apply bg-blue-700;
   }
 }
+
+@layer components {
+  .btn-tactile {
+    @apply active:scale-95 transition-all duration-150;
+  }
+}
