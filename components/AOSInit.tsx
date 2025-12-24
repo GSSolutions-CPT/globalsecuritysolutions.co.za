@@ -6,12 +6,14 @@ import 'aos/dist/aos.css'
 
 export const AOSInit = () => {
     useEffect(() => {
-        AOS.init({
-            easing: 'ease-out-cubic',
-            once: true,
-            offset: 50,
-            duration: 1000,
-        })
+        setTimeout(() => {
+            AOS.init({
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50,
+                duration: 1000,
+            })
+        }, 100)
     }, [])
 
     return null
