@@ -16,7 +16,7 @@ const iconMap: Record<string, React.ReactNode> = {
     Building2: <Image src="/icons/commercial-security.png" alt="Commercial Security" width={64} height={64} className="w-16 h-16 object-contain" />,
     Factory: <Image src="/icons/industrial-security.png" alt="Industrial Security" width={64} height={64} className="w-16 h-16 object-contain" />,
     Users2: <Image src="/icons/estate-security.png" alt="Estate Security" width={64} height={64} className="w-16 h-16 object-contain" />,
-    Tractor: <Image src="/icons/farm-security.png" alt="Farm Security" width={64} height={64} className="w-16 h-16 object-contain" />,
+    Tractor: <Image src="/icons/farm-security-v2.png" alt="Farm Security" width={64} height={64} className="w-16 h-16 object-contain" />,
     ShieldAlert: <ShieldAlert className="w-8 h-8" />,
     ScanFace: <ScanFace className="w-8 h-8" />,
     Eye: <Eye className="w-8 h-8" />,

@@ -23,7 +23,7 @@ const getSectorIcon = (sector: string) => {
         case 'HOA & Estates':
             return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
         case 'Farms & Agricultural':
-            return <Image src="/icons/farm-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+            return <Image src="/icons/farm-security-v2.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
         case 'Retail & Shopping Malls':
             // Reuse Commercial for Retail if no specific retail icon
             return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
