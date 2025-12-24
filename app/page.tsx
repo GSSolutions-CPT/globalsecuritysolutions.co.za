@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
 
       {/* SECTION 1: HERO HEADER */}
-      <section className="relative bg-slate-900 text-white py-20 lg:py-32 overflow-hidden min-h-[600px] flex items-center">
+      <section className="relative bg-slate-900 text-white py-24 lg:py-32 overflow-hidden min-h-[600px] flex items-center">
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -102,7 +102,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mb-12">
+          <div className="mb-24">
             <SectorCarousel />
           </div>
 
@@ -172,7 +172,7 @@ export default function Home() {
             </div>
 
             {/* Image / Feature block */}
-            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+            <div className="bg-slate-800 p-8 rounded-[2rem] border border-slate-700">
               <h3 className="text-2xl font-bold mb-6 border-b border-slate-600 pb-4">Our Guarantee</h3>
               <p className="mb-6 text-slate-300">
                 "We believe in doing it right the first time. That's why we offer comprehensive warranties on all hardware and a 12-month workmanship guarantee."
@@ -197,7 +197,7 @@ export default function Home() {
           <TestimonialCarousel />
 
           {/* Featured Project Teaser */}
-          <div className="bg-blue-600 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-blue-600 rounded-[2.5rem] overflow-hidden shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="p-12 text-white flex flex-col justify-center">
                 <span className="text-blue-200 font-bold uppercase tracking-widest mb-2">Featured Project</span>

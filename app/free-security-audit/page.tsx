@@ -26,7 +26,7 @@ export default function FreeAuditPage() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div className="space-y-6">
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
                             <h2 className="text-2xl font-bold text-slate-900 mb-4">What Our Audit Covers</h2>
                             <ul className="space-y-4">
                                 <li className="flex items-start">

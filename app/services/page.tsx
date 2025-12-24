@@ -85,7 +85,7 @@ export default function ServicesIndexPage() {
                             At Global Security Solutions, we believe in a multi-layered approach. By combining <strong>early warning systems</strong> (like outdoor beams and electric fencing) with <strong>active monitoring</strong> (CCTV and alarms), you create a formidable barrier that deters crime before it happens.
                         </p>
                     </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200">
                         <h3 className="text-xl font-bold text-slate-900 mb-6">Common Questions</h3>
                         <div className="space-y-6">
                             <div>

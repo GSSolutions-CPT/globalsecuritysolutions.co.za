@@ -25,21 +25,21 @@ export default function LoadSheddingPage() {
 
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Battery className="w-8 h-8 text-yellow-600" />
                         </div>
                         <h3 className="text-xl font-bold mb-3">Battery Backups</h3>
                         <p className="text-slate-600">High-capacity batteries for alarms and electric fences to last through 4-hour stages.</p>
                     </div>
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Sun className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-xl font-bold mb-3">Solar Power</h3>
                         <p className="text-slate-600">Solar panels specifically for electric gates and perimeter security, independent of the grid.</p>
                     </div>
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Zap className="w-8 h-8 text-green-600" />
                         </div>

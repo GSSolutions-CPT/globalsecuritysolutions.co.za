@@ -24,7 +24,7 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     {/* Contact Info */}
-                    <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 h-fit transition-all hover:shadow-xl">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 h-fit transition-all hover:shadow-xl">
                         <h2 className="text-2xl font-bold text-slate-900 mb-8">Get In Touch</h2>
                         <div className="space-y-8">
                             <div className="flex items-start group">
@@ -73,7 +73,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Form */}
-                    <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100">
                         <ContactForm />
                     </div>
                 </div>

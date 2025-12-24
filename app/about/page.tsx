@@ -33,7 +33,7 @@ export default function AboutPage() {
                             Founded on the principles of integrity and customer service, Global Security Solutions deals directly with top brands like Hikvision, IDS, Paradox, and AJAX to ensure you get the best equipment on the market.
                         </p>
                     </div>
-                    <div className="bg-white p-10 rounded-2xl shadow-xl border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div className="bg-white p-10 rounded-[2rem] shadow-xl border border-slate-100 hover:-translate-y-1 transition-transform duration-300">
                         <div className="flex items-start space-x-6 mb-8 group">
                             <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
                                 <Shield className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />

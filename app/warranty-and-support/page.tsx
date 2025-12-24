@@ -25,21 +25,21 @@ export default function WarrantyPage() {
 
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <ShieldCheck className="w-8 h-8 text-blue-600" />
                         </div>
                         <h3 className="text-xl font-bold mb-3">1-Year Installation Warranty</h3>
                         <p className="text-slate-600">We guarantee our workmanship. If any installation fault occurs within 12 months, we fix it for free.</p>
                     </div>
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Wrench className="w-8 h-8 text-green-600" />
                         </div>
                         <h3 className="text-xl font-bold mb-3">Manufacturer Warranty</h3>
                         <p className="text-slate-600">All hardware comes with full manufacturer warranties, ranging from 1 to 5 years depending on the brand.</p>
                     </div>
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
+                    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <PhoneCall className="w-8 h-8 text-red-600" />
                         </div>
