@@ -2,6 +2,7 @@ import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 
@@ -58,9 +59,9 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
         <div className="min-h-screen bg-slate-50 pt-32 pb-20">
             {/* Header */}
             <div className="container mx-auto px-4 max-w-4xl">
-                <Link href="/blog" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 transition-colors">
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Blog
-                </Link>
+                <div className="mb-8">
+                    <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: post.title, href: '#' }]} />
+                </div>
 
                 <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
                     {post.title}

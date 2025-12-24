@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import type { Metadata } from 'next'
 
 // Helper to normalize string to slug
@@ -47,9 +48,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         <div className="flex flex-col min-h-screen bg-slate-50">
             <div className="bg-slate-900 text-white py-12">
                 <div className="container mx-auto px-4">
-                    <Link href="/services" className="text-slate-400 hover:text-white flex items-center mb-4 text-sm font-semibold">
-                        <ArrowLeft className="w-4 h-4 mr-1" /> Back to Services
-                    </Link>
+                    <div className="mb-4">
+                        <Breadcrumbs items={[{ label: 'Services', href: '/services' }, { label: service.page, href: '#' }]} />
+                    </div>
                 </div>
             </div>
 

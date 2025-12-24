@@ -179,7 +179,7 @@ export function Header() {
                                 ) : (
                                     <Link
                                         href={item.href!}
-                                        className="block text-gray-700 hover:text-blue-900 font-medium py-2 border-b border-gray-50"
+                                        className={`block font-medium py-2 border-b border-gray-50 ${pathname === item.href || (pathname?.startsWith(item.href!) && item.href !== '/') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-900'}`}
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {item.label}

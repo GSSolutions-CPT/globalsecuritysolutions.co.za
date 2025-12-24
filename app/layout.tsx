@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { AOSInit } from "@/components/AOSInit";
 import { JsonLd } from "@/components/JsonLd";
 import { cn } from "@/utils/cn";
@@ -66,6 +67,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );
