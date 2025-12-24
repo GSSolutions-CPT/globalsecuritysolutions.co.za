@@ -1,11 +1,6 @@
 import Link from 'next/link'
 import seoData from '@/app/data/seoData.json'
-import { ArrowRight, Shield } from 'lucide-react'
-
-export const metadata = {
-    title: 'Security Solutions by Sector | Global Security Solutions',
-    description: 'Tailored security solutions for residential, commercial, industrial, and retail sectors in Cape Town.',
-}
+import { Building2, ArrowRight } from "lucide-react";
 
 // Helper to normalize string to slug
 const toSlug = (text: string) => {
@@ -15,6 +10,13 @@ const toSlug = (text: string) => {
         .replace(/\s+/g, '-')
         .trim()
 }
+
+export const metadata = {
+    title: 'Security Solutions by Sector | Global Security Solutions',
+    description: 'Tailored security solutions for residential, commercial, industrial, and retail sectors in Cape Town.',
+}
+
+
 
 export default function SectorsIndexPage() {
     return (
@@ -30,23 +32,33 @@ export default function SectorsIndexPage() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {seoData.sectorSolutions.map((service) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {seoData.sectorSolutions.map((sector) => (
                         <Link
-                            key={service.page}
-                            href={`/services/${toSlug(service.page)}`}
-                            className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-600 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full"
+                            key={sector.page}
+                            href={`/sectors/${toSlug(sector.page)}`}
+                            className="bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center flex flex-col items-center h-full border border-slate-50"
                         >
-                            <div className="flex items-center mb-6">
-                                <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mr-4 group-hover:bg-indigo-600 transition-colors duration-300">
-                                    <Shield className="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors" />
+                            {/* APEX DOG-EAR ACCENT */}
+                            <div className="absolute top-0 left-0 w-24 h-24 bg-indigo-600 rounded-br-[4rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
+
+                            <div className="relative z-10 flex flex-col items-center h-full w-full">
+                                <div className="w-24 h-24 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                    <Building2 className="w-12 h-12" />
                                 </div>
-                                <h2 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{service.page}</h2>
+
+                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
+                                    {sector.page}
+                                </h2>
+
+                                <p className="text-slate-600 text-sm mb-8 leading-relaxed flex-grow">
+                                    {sector.description}
+                                </p>
+
+                                <span className="mt-auto text-indigo-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
+                                    View Details <ArrowRight className="w-4 h-4 ml-1" />
+                                </span>
                             </div>
-                            <p className="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">{service.description}</p>
-                            <span className="text-indigo-600 font-bold text-sm flex items-center mt-auto uppercase tracking-wide">
-                                View Solution <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </span>
                         </Link>
                     ))}
                 </div>

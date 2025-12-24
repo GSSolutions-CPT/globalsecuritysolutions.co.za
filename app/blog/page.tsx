@@ -1,16 +1,17 @@
 import Link from 'next/link'
-import blogData from '@/app/data/blogData.json'
-import { Calendar, ArrowRight } from 'lucide-react'
+import { Calendar, ArrowRight, User } from 'lucide-react'
 import { supabase } from '@/utils/supabase/client'
+import Image from "next/image";
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Security Blog | Global Security Solutions',
     description: 'Read the latest news and tips on home and business security in Cape Town.',
 }
 
 export const revalidate = 60
 
-async function getPosts() {
+export default async function BlogIndexPage() {
     // 1. Fetch from Supabase
     const { data: dbPosts } = await supabase
         .from('posts')
@@ -19,61 +20,67 @@ async function getPosts() {
 
     // 2. Format DB posts to match schema
     const formattedDbPosts = (dbPosts || []).map((p: any) => ({
+        id: p.id,
         slug: p.slug,
         title: p.title,
-        date: new Date(p.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' }),
+        created_at: p.created_at,
         excerpt: p.excerpt,
-        coverImage: p.cover_image_url || '/blog/placeholder.jpg',
-        content: p.content // Passed through but not used in index
+        featured_image: p.cover_image_url || null,
+        author: p.author
     }))
 
-    // 3. Merge with local data (DB posts first)
-    // Filter out duplicates if any slugs collide
-    const existingSlugs = new Set(formattedDbPosts.map((p: any) => p.slug))
-    const uniqueLocalPosts = blogData.filter(p => !existingSlugs.has(p.slug))
-
-    return [...formattedDbPosts, ...uniqueLocalPosts]
-}
-
-export default async function BlogPage() {
-    const posts = await getPosts()
+    const posts = formattedDbPosts
 
     return (
-        <div className="min-h-screen bg-slate-50 py-24">
-            <div className="container mx-auto px-4">
-                <h1 className="text-4xl font-bold text-slate-900 mb-4 text-center">Security Insights</h1>
-                <p className="text-center text-slate-600 max-w-2xl mx-auto mb-16">
-                    Expert advice, industry news, and practical tips to keep your property safe.
-                </p>
+        <div className="bg-slate-50 min-h-screen pb-20">
+            {/* Header */}
+            <div className="bg-slate-900 py-24 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Security Insights & News</h1>
+                    <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                        Expert advice, industry updates, and tips to keep your property safe.
+                    </p>
+                </div>
+            </div>
 
+            <div className="container mx-auto px-4 -mt-12 relative z-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post: any) => (
-                        <Link key={post.slug} href={`/blog/${post.slug}`} className="group bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div className="h-48 bg-slate-200 relative overflow-hidden">
-                                <img
-                                    src={post.coverImage}
-                                    alt={post.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
-                                <div className="absolute bottom-0 left-0 p-4">
-                                    <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Article</span>
-                                </div>
+                        <Link
+                            key={post.id}
+                            href={`/blog/${post.slug || '#'}`}
+                            className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-50 relative"
+                        >
+                            {/* Dog Ear Accent on top of image? Maybe just a corner badge */}
+                            <div className="absolute top-0 left-0 w-20 h-20 bg-blue-600 rounded-br-[3.5rem] z-20 shadow-lg -translate-x-2 -translate-y-2" />
+                            <div className="absolute top-5 left-5 z-30 text-white font-bold text-xs uppercase tracking-wider">News</div>
+
+                            <div className="relative h-56 w-full overflow-hidden">
+                                {post.featured_image ? (
+                                    <Image
+                                        src={post.featured_image}
+                                        alt={post.title}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
+                                        No Image
+                                    </div>
+                                )}
+                                <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/0 transition-colors" />
                             </div>
 
-                            <div className="p-6">
-                                <div className="flex items-center text-slate-400 text-sm mb-3">
-                                    <Calendar className="w-4 h-4 mr-2" />
-                                    {post.date}
+                            <div className="p-8 flex flex-col flex-grow">
+                                <div className="flex items-center text-sm text-slate-500 mb-4 space-x-4">
+                                    <span className="flex items-center"><Calendar className="w-4 h-4 mr-1 text-blue-500" /> {new Date(post.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                    <span className="flex items-center"><User className="w-4 h-4 mr-1 text-blue-500" /> {post.author || 'Admin'}</span>
                                 </div>
-                                <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                                    {post.title}
-                                </h2>
-                                <p className="text-slate-600 mb-4 line-clamp-3 text-sm leading-relaxed">
-                                    {post.excerpt}
-                                </p>
-                                <span className="text-blue-600 font-bold text-sm flex items-center group-hover:underline">
-                                    Read Full Article <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">{post.title}</h2>
+                                <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
+                                <span className="mt-auto text-blue-600 font-bold text-sm flex items-center group-hover:gap-2 transition-all">
+                                    Read Article <ArrowRight className="w-4 h-4 ml-2" />
                                 </span>
                             </div>
                         </Link>

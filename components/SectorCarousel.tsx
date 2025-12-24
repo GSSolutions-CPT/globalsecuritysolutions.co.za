@@ -1,16 +1,13 @@
-'use client'
+import Link from "next/link";
+import { Building2, ArrowRight, Shield, Building } from "lucide-react";
+import seoData from "@/app/data/seoData.json";
 
-import Link from 'next/link'
-import { ArrowRight, Home, Building2, Factory, Tractor, Users2, Building } from 'lucide-react'
-import seoData from '@/app/data/seoData.json'
+const toSlug = (str: string) => str.toLowerCase().replace(/ /g, '-');
 
-// Mapping icon names to Lucide icons 
+// Mapping icon names to Lucide icons
 const getIcon = (pageName: string) => {
-    if (pageName.includes('Residential')) return Home
+    if (pageName.includes('Residential')) return Shield
     if (pageName.includes('Commercial')) return Building2
-    if (pageName.includes('Industrial')) return Factory
-    if (pageName.includes('Farm')) return Tractor
-    if (pageName.includes('Estate')) return Users2
     return Building
 }
 
@@ -29,21 +26,29 @@ export function SectorCarousel() {
                     return (
                         <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
                             <Link
-                                href={`/services/${slug}`}
-                                className="block h-full bg-white p-6 rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:shadow-xl hover:-translate-y-1 transition-all group"
+                                href={`/sectors/${slug}`}
+                                className="block h-full bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center flex flex-col items-center border border-slate-50"
                             >
-                                <div className="w-12 h-12 bg-indigo-50 rounded-lg shadow-sm flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors">
-                                    <Icon className="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors" />
+                                {/* APEX DOG-EAR ACCENT */}
+                                <div className="absolute top-0 left-0 w-20 h-20 bg-indigo-600 rounded-br-[3.5rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
+
+                                <div className="relative z-10 flex flex-col items-center h-full w-full">
+                                    <div className="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+                                        <Icon className="w-10 h-10" />
+                                    </div>
+
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                                        {service.page}
+                                    </h3>
+
+                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3">
+                                        {service.description}
+                                    </p>
+
+                                    <span className="mt-auto text-indigo-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
+                                        View Sector <ArrowRight className="w-4 h-4 ml-1" />
+                                    </span>
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                                    {service.page}
-                                </h3>
-                                <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                                    {service.description}
-                                </p>
-                                <span className="text-indigo-600 font-bold text-sm flex items-center">
-                                    View Sector <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </span>
                             </Link>
                         </li>
                     )
