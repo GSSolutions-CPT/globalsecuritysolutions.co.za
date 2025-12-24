@@ -14,7 +14,7 @@ export default function AboutPage() {
             <section className="bg-slate-900 text-white py-24 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="container relative mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">About Global Security Solutions</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">About Global Security Solutions</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
                         Your trusted security partners in the Western Cape. We are dedicated to protecting what matters most to you.
                     </p>

@@ -121,4 +121,8 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Premium Text Selection */
+  ::selection {
+    @apply bg-blue-600 text-white;
+  }
 }

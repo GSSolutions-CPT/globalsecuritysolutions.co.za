@@ -25,7 +25,7 @@ export default function ServicesIndexPage() {
 
             <div className="container relative mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Our Security Services</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Our Security Services</h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         Comprehensive security solutions for residential, commercial, and industrial properties.
                     </p>

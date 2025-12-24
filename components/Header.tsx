@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 
@@ -10,6 +11,7 @@ export function Header() {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
     const [isVisible, setIsVisible] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0)
+    const pathname = usePathname()
 
     useEffect(() => {
         const controlNavbar = () => {
@@ -96,11 +98,14 @@ export function Header() {
                         {navItems.map((item, idx) => (
                             <div key={idx} className="relative group">
                                 {item.dropdown ? (
-                                    <button className="flex items-center text-gray-700 hover:text-blue-900 font-medium transition-colors py-2">
+                                    <button className={`flex items-center font-medium transition-colors py-2 ${pathname?.startsWith(item.href || '/NON-EXISTENT') && item.href !== '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-900'}`}>
                                         {item.label} <ChevronDown className="w-4 h-4 ml-1" />
                                     </button>
                                 ) : (
-                                    <Link href={item.href!} className="text-gray-700 hover:text-blue-900 font-medium transition-colors">
+                                    <Link
+                                        href={item.href!}
+                                        className={`font-medium transition-colors ${pathname === item.href ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-900'}`}
+                                    >
                                         {item.label}
                                     </Link>
                                 )}

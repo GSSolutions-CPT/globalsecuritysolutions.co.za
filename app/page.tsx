@@ -31,7 +31,7 @@ export default function Home() {
         <div className="container relative z-10 px-4 md:px-6">
           <div className="max-w-3xl">
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight drop-shadow-lg"
+              className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight drop-shadow-lg"
               data-aos="fade-up"
             >
               Secure Your World with <span className="text-blue-400 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">Confidence</span>
