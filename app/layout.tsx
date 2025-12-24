@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: 'Global Security Solutions',
     images: [
       {
-        url: '/nav-logo-final.png', // Fallback image (ideally a proper OG image 1200x630)
+        url: 'https://globalsecuritysolutions.co.za/nav-logo-final.png', // Default OG Image
         width: 1200,
         height: 630,
         alt: 'Global Security Solutions',

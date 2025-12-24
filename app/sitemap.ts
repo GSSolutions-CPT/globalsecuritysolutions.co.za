@@ -28,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/warranty-and-support',
         '/services',
         '/sectors',
+        '/ai-security-advisor',
+        '/areas',
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
