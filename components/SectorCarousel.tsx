@@ -1,14 +1,23 @@
 import Link from "next/link";
-import { Building2, ArrowRight, Shield, Building } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import seoData from "@/app/data/seoData.json";
 
-const toSlug = (str: string) => str.toLowerCase().replace(/ /g, '-');
-
-// Mapping icon names to Lucide icons
-const getIcon = (pageName: string) => {
-    if (pageName.includes('Residential')) return Shield
-    if (pageName.includes('Commercial')) return Building2
-    return Building
+const getSectorIcon = (sector: string) => {
+    switch (sector) {
+        case 'Residential Security':
+            return <Image src="/icons/residential-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+        case 'Commercial Security':
+            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+        case 'Industrial Security':
+            return <Image src="/icons/industrial-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+        case 'Estate Security Management':
+            return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+        case 'Farm Security Systems':
+            return <Image src="/icons/farm-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+        default:
+            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-16 h-16 object-contain" />
+    }
 }
 
 export function SectorCarousel() {
@@ -19,7 +28,6 @@ export function SectorCarousel() {
             {/* Duplicating the list 4 times to ensure enough content for smooth scrolling since there are only 5 items */}
             <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-slow hover:[animation-play-state:paused]">
                 {[...sectors, ...sectors, ...sectors, ...sectors].map((service, index) => {
-                    const Icon = getIcon(service.page)
                     // Simplified toSlug logic
                     const slug = service.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
 
@@ -33,8 +41,8 @@ export function SectorCarousel() {
                                 <div className="absolute top-0 left-0 w-20 h-20 bg-indigo-600 rounded-br-[3.5rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
 
                                 <div className="relative z-10 flex flex-col items-center h-full w-full">
-                                    <div className="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                                        <Icon className="w-10 h-10" />
+                                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+                                        {getSectorIcon(service.page)}
                                     </div>
 
                                     <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">

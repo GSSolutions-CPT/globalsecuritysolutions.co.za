@@ -1,8 +1,8 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import seoData from '@/app/data/seoData.json'
-import { Building2, ArrowRight } from "lucide-react";
+import { ArrowRight } from 'lucide-react'
+import seoData from '../data/seoData.json'
 
-// Helper to normalize string to slug
 const toSlug = (text: string) => {
     return text
         .toLowerCase()
@@ -11,56 +11,90 @@ const toSlug = (text: string) => {
         .trim()
 }
 
-export const metadata = {
-    title: 'Security Solutions by Sector | Global Security Solutions',
-    description: 'Tailored security solutions for residential, commercial, industrial, and retail sectors in Cape Town.',
+const getSectorIcon = (sector: string) => {
+    switch (sector) {
+        case 'Residential Security':
+            return <Image src="/icons/residential-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+        case 'Commercial & Industrial':
+            return <div className="flex gap-2 justify-center mb-6">
+                <Image src="/icons/commercial-security.png" alt="Commercial" width={64} height={64} className="w-16 h-16 object-contain" />
+                <Image src="/icons/industrial-security.png" alt="Industrial" width={64} height={64} className="w-16 h-16 object-contain" />
+            </div>
+        case 'HOA & Estates':
+            return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+        case 'Farms & Agricultural':
+            return <Image src="/icons/farm-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+        case 'Retail & Shopping Malls':
+            // Reuse Commercial for Retail if no specific retail icon
+            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+        default:
+            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+    }
 }
 
+export const metadata = {
+    title: 'Security Sectors | Global Security Solutions',
+    description: 'Specialized security solutions for residential, commercial, industrial, agricultural, and estate sectors in Cape Town.',
+}
 
+export default function SectorsPage() {
+    const sectors = [
+        "Residential Security",
+        "Commercial & Industrial",
+        "HOA & Estates",
+        "Farms & Agricultural",
+        "Retail & Shopping Malls"
+    ]
 
-export default function SectorsIndexPage() {
     return (
-        <div className="min-h-screen bg-slate-50 py-24 relative overflow-hidden">
-            {/* Decorative background */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
-            <div className="container relative mx-auto px-4">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Solutions by Sector</h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                        Specialized security strategies designed for the unique challenges of your industry.
+        <div className="min-h-screen bg-slate-50 py-20">
+            <div className="container mx-auto px-4">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Sectors We Serve</h1>
+                    <p className="text-xl text-slate-600">
+                        Tailored security strategies for every environment, from private homes to large-scale industrial operations.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {seoData.sectorSolutions.map((sector) => (
-                        <Link
-                            key={sector.page}
-                            href={`/sectors/${toSlug(sector.page)}`}
-                            className="bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center flex flex-col items-center h-full border border-slate-50"
-                        >
-                            {/* APEX DOG-EAR ACCENT */}
-                            <div className="absolute top-0 left-0 w-24 h-24 bg-indigo-600 rounded-br-[4rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {sectors.map((sector, index) => {
+                        const slug = toSlug(sector)
+                        // Find matching SEO data for description
+                        const seoItem = seoData.sectorSolutions.find(item =>
+                            item.page === sector ||
+                            item.title.includes(sector) ||
+                            (sector.includes('Commercial') && item.page.includes('Commercial')) ||
+                            (sector.includes('Farms') && item.page.includes('Farm')) ||
+                            (sector.includes('Estates') && item.page.includes('Estate'))
+                        )
 
-                            <div className="relative z-10 flex flex-col items-center h-full w-full">
-                                <div className="w-24 h-24 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-sm">
-                                    <Building2 className="w-12 h-12" />
+                        return (
+                            <Link
+                                key={index}
+                                href={`/services#${slug}`}
+                                className="group relative bg-white rounded-[2.5rem] p-8 shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col items-center text-center"
+                            >
+                                {/* Blue Dog Ear */}
+                                <div className="absolute top-0 left-0 w-16 h-16 bg-blue-600 rounded-br-[3rem] z-0 transition-transform group-hover:scale-110" />
+
+                                <div className="relative z-10 w-full flex flex-col items-center">
+                                    {getSectorIcon(sector)}
+
+                                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                                        {sector}
+                                    </h3>
+
+                                    <p className="text-slate-600 mb-6 text-sm leading-relaxed">
+                                        {seoItem ? seoItem.description.substring(0, 100) + '...' : 'Specialized protection for this sector.'}
+                                    </p>
+
+                                    <span className="inline-flex items-center text-blue-600 font-bold uppercase tracking-wider text-xs bg-blue-50 px-4 py-2 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                        View Solutions <ArrowRight className="w-4 h-4 ml-2" />
+                                    </span>
                                 </div>
-
-                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
-                                    {sector.page}
-                                </h2>
-
-                                <p className="text-slate-600 text-sm mb-8 leading-relaxed flex-grow">
-                                    {sector.description}
-                                </p>
-
-                                <span className="mt-auto text-indigo-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
-                                    View Details <ArrowRight className="w-4 h-4 ml-1" />
-                                </span>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        )
+                    })}
                 </div>
 
                 {/* SEO Content Block */}
