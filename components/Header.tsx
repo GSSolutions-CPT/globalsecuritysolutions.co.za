@@ -74,7 +74,7 @@ export function Header() {
     ]
 
     return (
-        <header className={`bg-white shadow-md sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <header className={`bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             {/* Top Bar removed as per previous request */}
 
             {/* Main Header */}

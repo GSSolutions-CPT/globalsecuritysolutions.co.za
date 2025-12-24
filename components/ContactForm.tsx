@@ -56,16 +56,22 @@ export function ContactForm() {
             <h3 className="text-2xl font-bold mb-6 text-slate-800">Get a Free Security Strategy Session</h3>
 
             {success && (
-                <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-lg mb-6 flex items-start">
-                    <CheckCircle className="w-5 h-5 mr-3 mt-0.5 shrink-0" />
-                    <p>Thank you! Your request has been received. One of our security experts will contact you shortly.</p>
+                <div className="bg-green-50 border-l-4 border-green-500 text-green-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
+                    <CheckCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-green-600" />
+                    <div>
+                        <h4 className="font-bold mb-1">Request Received!</h4>
+                        <p className="text-green-700">Thank you! One of our security experts will contact you shortly to confirm your session.</p>
+                    </div>
                 </div>
             )}
 
             {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6 flex items-start">
-                    <AlertCircle className="w-5 h-5 mr-3 mt-0.5 shrink-0" />
-                    <p>{error}</p>
+                <div className="bg-red-50 border-l-4 border-red-500 text-red-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
+                    <AlertCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-red-600" />
+                    <div>
+                        <h4 className="font-bold mb-1">Submission Error</h4>
+                        <p>{error}</p>
+                    </div>
                 </div>
             )}
 
