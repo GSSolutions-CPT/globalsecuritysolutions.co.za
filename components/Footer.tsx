@@ -13,20 +13,6 @@ export function Footer() {
             <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
 
             <div className="container mx-auto px-4 relative z-10">
-                {/* Pre-Footer CTA */}
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between shadow-2xl mb-20 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-                    <div className="relative z-10 mb-8 md:mb-0 text-center md:text-left">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to secure your property?</h2>
-                        <p className="text-blue-100 text-lg max-w-xl">Get a free, no-obligation security audit from Cape Town's trusted experts.</p>
-                    </div>
-                    <div className="relative z-10">
-                        <Link href="/contact" className="bg-white text-blue-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg btn-tactile inline-block">
-                            Get a Free Quote
-                        </Link>
-                    </div>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
                     {/* Company Info */}
@@ -42,7 +28,7 @@ export function Footer() {
                             <a href="#" className="bg-slate-800 p-3 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 transition-all group">
                                 <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform" />
                             </a>
-                            <a href="#" className="bg-slate-800 p-3 rounded-full text-slate-400 hover:text-white hover:bg-pink-600 transition-all group">
+                            <a href="https://www.instagram.com/globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="bg-slate-800 p-3 rounded-full text-slate-400 hover:text-white hover:bg-pink-600 transition-all group">
                                 <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                             </a>
                         </div>
