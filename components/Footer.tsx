@@ -17,9 +17,8 @@ export function Footer() {
 
                     {/* Company Info */}
                     <div>
-                        <div className="flex items-center space-x-3 mb-6">
-                            <Image src="/logo.png" alt="Global Security Solutions Logo" width={50} height={50} className="w-12 h-12 object-contain" />
-                            <span className="text-xl font-bold tracking-tight leading-none">Global Security<br />Solutions</span>
+                        <div className="mb-6">
+                            <Image src="/nav-logo-final.png" alt="Global Security Solutions" width={240} height={80} className="h-20 w-auto object-contain" />
                         </div>
                         <p className="text-slate-400 mb-8 leading-relaxed">
                             Your trusted partner for high-performance security systems in Cape Town. We specialize in alarms, CCTV, and electric fencing for homes and businesses.
