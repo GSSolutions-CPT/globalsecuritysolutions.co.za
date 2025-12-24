@@ -119,27 +119,28 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: WHY US - Dark Mode Stats */}
-      <section className="py-24 bg-slate-900 text-white relative">
+      {/* SECTION 4: WHY US - Dark Mode Stats */}
+      <section className="py-6 bg-slate-900 text-white relative">
         <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center mb-16">
-            <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mb-8">
+            <div className="p-4">
               <div className="text-5xl font-bold text-blue-400 mb-2">10+</div>
               <div className="text-xl font-semibold mb-2">Years Experience</div>
               <div className="text-slate-400">Serving Cape Town with pride.</div>
             </div>
-            <div className="p-6 border-y md:border-y-0 md:border-x border-slate-800">
+            <div className="p-4 border-y md:border-y-0 md:border-x border-slate-800">
               <div className="text-5xl font-bold text-blue-400 mb-2">500+</div>
               <div className="text-xl font-semibold mb-2">Installations</div>
               <div className="text-slate-400">Homes & businesses secured.</div>
             </div>
-            <div className="p-6">
+            <div className="p-4">
               <div className="text-5xl font-bold text-blue-400 mb-2">24/7</div>
               <div className="text-xl font-semibold mb-2">Support</div>
               <div className="text-slate-400">Always there when you need us.</div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Cape Town Chooses Global Security Solutions.</h2>
               <p className="text-slate-300 text-lg mb-8">
