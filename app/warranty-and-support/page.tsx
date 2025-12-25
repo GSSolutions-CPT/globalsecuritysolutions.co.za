@@ -18,7 +18,7 @@ export default function WarrantyPage() {
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Warranty & Support</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                        Our commitment to your security doesn't end after installation.
+                        Our commitment to your security doesn&apos;t end after installation.
                     </p>
                 </div>
             </div>

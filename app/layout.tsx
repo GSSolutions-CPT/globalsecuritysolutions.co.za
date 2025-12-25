@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AOSInit } from "@/components/AOSInit";
 import { JsonLd } from "@/components/JsonLd";
 import { cn } from "@/utils/cn";
@@ -67,6 +68,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
         <ScrollToTop />
       </body>
     </html>

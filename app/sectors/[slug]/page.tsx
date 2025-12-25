@@ -2,7 +2,7 @@ import seoData from '@/app/data/seoData.json'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight } from 'lucide-react'
+import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight, Building, Home, Factory, Tractor, School, LayoutDashboard } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -16,43 +16,41 @@ const toSlug = (text: string) => {
         .trim()
 }
 
-// Find service by slug
-const getService = (slug: string) => {
-    return seoData.primaryServicePages.find(s => toSlug(s.page) === slug) ||
-        seoData.sectorSolutions.find(s => toSlug(s.page) === slug)
+// Find sector by slug
+const getSector = (slug: string) => {
+    return seoData.sectorSolutions.find(s => toSlug(s.page) === slug)
 }
 
-interface ServiceData {
+interface SectorData {
     page: string
     title: string
     description: string
     longDescription?: string
     iconPath?: string
-    features?: string[]
-    brands?: string[]
     heroImage?: string
+    brands?: string[]
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const params = await props.params
-    const service = getService(params.slug)
-    if (!service) return {}
+    const sector = getSector(params.slug)
+    if (!sector) return {}
 
     return {
-        title: service.title,
-        description: service.description,
+        title: sector.title,
+        description: sector.description,
     }
 }
 
-export default async function ServicePage(props: { params: Promise<{ slug: string }> }) {
+export default async function SectorPage(props: { params: Promise<{ slug: string }> }) {
     const params = await props.params
-    const rawService = getService(params.slug)
+    const rawSector = getSector(params.slug)
 
-    if (!rawService) {
+    if (!rawSector) {
         notFound()
     }
 
-    const service = rawService as ServiceData
+    const sector = rawSector as SectorData
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
@@ -60,32 +58,32 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             {/* Hero Section */}
             <section className="relative bg-slate-950 text-white py-20 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-blue-900/20 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-blue-900/40 z-10" />
                     <Image
-                        src={service.heroImage || "/hero-bg.jpg"}
-                        alt={service.title}
+                        src={sector.heroImage || "/hero-bg.jpg"}
+                        alt={sector.title}
                         fill
-                        className="object-cover opacity-30"
+                        className="object-cover opacity-40"
                         priority
                     />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4">
                     <div className="mb-8">
-                        <Breadcrumbs items={[{ label: 'Services', href: '/services' }, { label: service.page, href: '#' }]} />
+                        <Breadcrumbs items={[{ label: 'Sectors', href: '/sectors' }, { label: sector.page, href: '#' }]} />
                     </div>
 
                     <div className="max-w-4xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm">
                             <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                            Professional Installation
+                            Sector Specialist
                         </div>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
-                            {service.page} <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">in Cape Town</span>
+                            {sector.page} <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Solutions</span>
                         </h1>
                         <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
-                            {service.description}
+                            {sector.description}
                         </p>
                     </div>
                 </div>
@@ -102,21 +100,19 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                             <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
-                                {service.iconPath && (
-                                    <div className="w-20 h-20 bg-blue-50 rounded-2xl p-4 flex-shrink-0 border border-blue-100">
-                                        <Image
-                                            src={service.iconPath}
-                                            alt={`${service.page} icon`}
-                                            width={80}
-                                            height={80}
-                                            className="w-full h-full object-contain"
-                                        />
-                                    </div>
-                                )}
+                                <div className="w-20 h-20 bg-blue-50 rounded-2xl p-4 flex-shrink-0 border border-blue-100 flex items-center justify-center text-blue-600">
+                                    {sector.page.includes('Residential') ? <Home className="w-10 h-10" /> :
+                                        sector.page.includes('Commercial') ? <Building className="w-10 h-10" /> :
+                                            sector.page.includes('Industrial') ? <Factory className="w-10 h-10" /> :
+                                                sector.page.includes('Farm') ? <Tractor className="w-10 h-10" /> :
+                                                    sector.page.includes('School') ? <School className="w-10 h-10" /> :
+                                                        sector.page.includes('Estate') ? <LayoutDashboard className="w-10 h-10" /> :
+                                                            <Building className="w-10 h-10" />}
+                                </div>
                                 <div>
-                                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Secure Your Property Today</h2>
+                                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Tailored for {sector.page}</h2>
                                     <p className="text-slate-600 text-lg leading-relaxed">
-                                        {service.longDescription || `Global Security Solutions is Cape Town's premier provider of ${service.page}. We combine cutting-edge technology with expert workmanship to ensure your property is never left vulnerable.`}
+                                        {sector.longDescription || `Global Security Solutions understands the unique challenges of ${sector.page}. We provide customized security architectures that integrate seamlessly with your operations.`}
                                     </p>
                                 </div>
                             </div>
@@ -127,19 +123,19 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                             <div className="bg-red-50 p-8 rounded-3xl border border-red-100">
                                 <div className="flex items-center gap-3 mb-4 text-red-700">
                                     <ShieldAlert className="w-6 h-6" />
-                                    <h3 className="text-lg font-bold">The Risk</h3>
+                                    <h3 className="text-lg font-bold">Sector Risks</h3>
                                 </div>
                                 <p className="text-slate-700 leading-relaxed">
-                                    Without reliable <strong>{service.page}</strong>, your property has blind spots. Criminals target easy access points and outdated systems, putting your assets and family at risk.
+                                    Security threats in the <strong>{sector.page}</strong> sector are evolving. Criminals target vulnerabilities specific to this environment, from perimeter breaches to specialized asset theft.
                                 </p>
                             </div>
                             <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
                                 <div className="flex items-center gap-3 mb-4 text-emerald-700">
                                     <BadgeCheck className="w-6 h-6" />
-                                    <h3 className="text-lg font-bold">The Solution</h3>
+                                    <h3 className="text-lg font-bold">Our Strategy</h3>
                                 </div>
                                 <p className="text-slate-700 leading-relaxed">
-                                    Our intelligent <strong>{service.page}</strong> acts as a proactive shield. We don&apos;t just record crime; we deter it with visible, high-tech barriers and instant alerts.
+                                    We implement a threat-specific defense strategy. By combining physical barriers with intelligent monitoring, we create a secure environment optimized for {sector.page} operations.
                                 </p>
                             </div>
                         </div>
@@ -148,14 +144,14 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         <div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center">
                                 <span className="bg-blue-600 w-2 h-8 rounded-full mr-4"></span>
-                                Key Features
+                                Why Choose Us
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 {[
-                                    { icon: Smartphone, title: "Mobile Control", text: "Arm, disarm, and view live feeds from your phone." },
-                                    { icon: Zap, title: "Load Shedding Ready", text: "Systems stay online with robust battery backups." },
-                                    { icon: Clock, title: "24/7 Monitoring", text: "Instant alerts to you and armed response." },
-                                    { icon: CheckCircle2, title: "Certified Installers", text: "Fully accredited and insured installation team." }
+                                    { icon: Smartphone, title: "Remote Management", text: "Control multiple sites from a single dashboard." },
+                                    { icon: Zap, title: "Power Redundancy", text: "Systems designed to withstand load shedding." },
+                                    { icon: Clock, title: "Proactive Monitoring", text: "Early warning cues prevent incidents." },
+                                    { icon: CheckCircle2, title: "Compliance Ready", text: "Installations meet all insurance and safety regulations." }
                                 ].map((feature, i) => (
                                     <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                                         <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-blue-600">
@@ -174,13 +170,13 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         <div className="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden">
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div>
-                                    <h3 className="text-xl font-bold mb-2">Trusted Brands Only</h3>
+                                    <h3 className="text-xl font-bold mb-2">Sector-Specific Hardware</h3>
                                     <p className="text-slate-400 text-sm max-w-md">
-                                        We refuse to install generic, unreliable hardware. For {toSlug(service.page).replace(/-/g, ' ')}, we use only:
+                                        We use equipment proven to perform in this specific environment. For {toSlug(sector.page).replace(/-/g, ' ')}, we trust:
                                     </p>
                                 </div>
                                 <div className="flex gap-4 flex-wrap justify-center">
-                                    {(service.brands || ['Hikvision', 'Paradox', 'Ajax', 'IDS']).map((brand) => (
+                                    {(sector.brands || ['Hikvision', 'Paradox', 'Nemtek', 'Centurion']).map((brand) => (
                                         <span key={brand} className="px-4 py-2 bg-white/10 rounded-lg text-sm font-bold backdrop-blur-sm border border-white/10">
                                             {brand}
                                         </span>
@@ -189,23 +185,12 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                             </div>
                         </div>
 
-                        {/* FAQ Section */}
-                        <div className="bg-slate-50 border-t border-slate-200 pt-12">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
-                            <div className="space-y-4">
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">How long does installation take?</h4>
-                                    <p className="text-slate-600">Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves.</p>
-                                </div>
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">Is there a warranty?</h4>
-                                    <p className="text-slate-600">Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years).</p>
-                                </div>
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">Can I upgrade my existing system?</h4>
-                                    <p className="text-slate-600">Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion.</p>
-                                </div>
-                            </div>
+                        {/* CTA Section */}
+                        <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 rounded-3xl text-white text-center">
+                            <h3 className="text-2xl font-bold mb-4">Secure Your Environment Today</h3>
+                            <p className="text-blue-100 mb-6 max-w-xl mx-auto">
+                                Don&apos;t wait for an incident. Contact our {sector.page} specialists for a comprehensive risk assessment.
+                            </p>
                         </div>
 
                     </div>
@@ -214,21 +199,20 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     <div className="lg:col-span-1">
                         <div className="sticky top-24 space-y-8">
                             <div className="bg-white p-6 rounded-[2rem] border border-blue-100 shadow-lg shadow-blue-500/5">
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Get a Free Quote</h3>
-                                <p className="text-slate-500 text-sm mb-6">Fill in your details and we&apos;ll call you back shortly.</p>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">Get a Free Assessment</h3>
+                                <p className="text-slate-500 text-sm mb-6">Expert security advice for your specific sector.</p>
                                 <ContactForm />
                             </div>
 
-                            {/* Other Services Links */}
+                            {/* Other Sectors Links */}
                             <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
-                                <h4 className="font-bold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Services</h4>
+                                <h4 className="font-bold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Sectors</h4>
                                 <ul className="space-y-3">
-                                    {seoData.primaryServicePages
-                                        .filter(s => s.page !== service.page)
-                                        .slice(0, 5)
+                                    {seoData.sectorSolutions
+                                        .filter(s => s.page !== sector.page)
                                         .map(s => (
                                             <li key={s.page}>
-                                                <Link href={`/services/${toSlug(s.page)}`} className="text-slate-600 hover:text-blue-600 text-sm flex items-center group transition-colors">
+                                                <Link href={`/sectors/${toSlug(s.page)}`} className="text-slate-600 hover:text-blue-600 text-sm flex items-center group transition-colors">
                                                     <ArrowRight className="w-4 h-4 mr-2 text-slate-300 group-hover:text-blue-600 transition-colors" />
                                                     {s.page}
                                                 </Link>

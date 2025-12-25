@@ -11,6 +11,16 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
+interface BlogPost {
+    id: string
+    slug: string
+    title: string
+    created_at: string
+    excerpt: string | null
+    featured_image: string | null
+    author: string | null
+}
+
 export default async function BlogIndexPage() {
     // 1. Fetch from Supabase
     const { data: dbPosts } = await supabase
@@ -19,7 +29,7 @@ export default async function BlogIndexPage() {
         .order('created_at', { ascending: false })
 
     // 2. Format DB posts to match schema
-    const formattedDbPosts = (dbPosts || []).map((p: any) => ({
+    const formattedDbPosts: BlogPost[] = (dbPosts || []).map((p) => ({
         id: p.id,
         slug: p.slug,
         title: p.title,
@@ -52,7 +62,7 @@ export default async function BlogIndexPage() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {posts.map((post: any, i: number) => (
+                    {posts.map((post: BlogPost, i: number) => (
                         <Link
                             key={post.id}
                             href={`/blog/${post.slug || '#'}`}

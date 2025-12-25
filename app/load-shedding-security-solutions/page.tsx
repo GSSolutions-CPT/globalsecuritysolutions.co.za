@@ -18,7 +18,7 @@ export default function LoadSheddingPage() {
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Load Shedding Security Solutions</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                        Don't let power outages compromise your safety. We keep your systems running 24/7.
+                        Don&apos;t let power outages compromise your safety. We keep your systems running 24/7.
                     </p>
                 </div>
             </div>

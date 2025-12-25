@@ -80,7 +80,7 @@ export function TestimonialGrid() {
                             <Star key={i} className="w-5 h-5 fill-current" />
                         ))}
                     </div>
-                    <p className="text-slate-600 mb-6 italic min-h-[80px]">"{review.text}"</p>
+                    <p className="text-slate-600 mb-6 italic min-h-[80px]">&quot;{review.text}&quot;</p>
                     <div>
                         <p className="font-bold text-slate-900">- {review.name}</p>
                         <p className="text-sm text-slate-400">{review.location}</p>

@@ -84,7 +84,7 @@ export function TestimonialCarousel() {
                                         <Star key={i} className="w-5 h-5 fill-current" />
                                     ))}
                                 </div>
-                                <p className="text-slate-600 mb-8 italic text-lg leading-relaxed text-center">"{review.text}"</p>
+                                <p className="text-slate-600 mb-8 italic text-lg leading-relaxed text-center">&quot;{review.text}&quot;</p>
                             </div>
 
                             <div className="mt-auto border-t border-slate-100 pt-6 text-center">

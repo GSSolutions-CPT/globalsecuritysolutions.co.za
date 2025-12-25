@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Shield, Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react'
 import { BrandCarousel } from './BrandCarousel'
 
 export function Footer() {
@@ -24,11 +24,14 @@ export function Footer() {
                             Your trusted partner for high-performance security systems in Cape Town. We specialize in alarms, CCTV, and electric fencing.
                         </p>
                         <div className="flex space-x-3">
-                            <a href="#" className="bg-slate-800 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-blue-600 transition-all group">
-                                <Facebook className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                            <a href="https://www.facebook.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                                <Facebook className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
-                            <a href="https://www.instagram.com/globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="bg-slate-800 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-pink-600 transition-all group">
-                                <Instagram className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                            <a href="https://www.instagram.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                                <Instagram className="w-5 h-5 text-slate-400 group-hover:text-white" />
+                            </a>
+                            <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                                <Linkedin className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
                         </div>
                     </div>

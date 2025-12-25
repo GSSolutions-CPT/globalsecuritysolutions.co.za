@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import seoData from '@/app/data/seoData.json'
-import { Shield, Users, CheckCircle } from 'lucide-react'
+import { Shield, Zap, Award, BookOpen, ArrowRight } from 'lucide-react'
 import { Counter } from '@/components/Counter'
 
 export const metadata: Metadata = {
@@ -10,89 +12,167 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-slate-50 font-sans">
             {/* Hero Section */}
-            <section className="bg-slate-900 text-white py-12 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
-                <div className="container relative mx-auto px-4 text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">About Global Security Solutions</h1>
-                    <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                        Your trusted security partners in the Western Cape. We are dedicated to protecting what matters most to you.
-                    </p>
+            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    {/* Reusing hero-bg.jpg if available, else fallback to gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950/40 z-10" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Security Operations Center"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
+                </div>
+
+                <div className="container relative z-20 mx-auto px-4 pt-20">
+                    <div className="max-w-3xl">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
+                            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                            Est. 2015
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+                            More Than Just <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Installers</span>
+                        </h1>
+                        <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+                            We are your strategic partners in safety. Founded on Cape Town soil, we understand the local landscape and the unique challenges our clients face.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-12">
+            {/* Main Content */}
+            <div className="container mx-auto px-4 py-20">
+
+                {/* Mission & Vision Split */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20 md:mb-32">
                     <div className="prose prose-lg text-slate-600">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">Our Mission</h2>
-                        <p className="leading-relaxed mb-6">
+                        <p className="leading-relaxed mb-6 text-lg">
                             To provide high-performance security solutions that combine reliability, advanced technology, and expert workmanship.
                             We believe that every home and business deserves a security system that just works, 24/7.
                         </p>
-                        <p className="leading-relaxed">
-                            Founded on the principles of integrity and customer service, Global Security Solutions deals directly with top brands like Hikvision, IDS, Paradox, and AJAX to ensure you get the best equipment on the market.
+                        <p className="leading-relaxed mb-6">
+                            Global Security Solutions was born out of a frustration with sub-par workmanship and &quot;ghost&quot; installers who vanish after the job is done.
+                            We set out to change the narrative by building a company rooted in accountability and long-term relationships.
                         </p>
+                        <div className="flex flex-col sm:flex-row gap-4 mt-8 not-prose">
+                            <Link href="/contact" className="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors">
+                                Get Protected
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                            </Link>
+                        </div>
                     </div>
-                    <div className="bg-white p-10 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 border border-slate-100">
-                        <div className="flex items-start space-x-6 mb-8 group">
-                            <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
-                                <Shield className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
+
+                    {/* Leadership Card */}
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-blue-100 rounded-[2.5rem] rotate-3 opacity-50 transform translate-x-4"></div>
+                        <div className="relative bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
+                            <div className="flex items-center space-x-4 mb-8">
+                                <div className="p-3 bg-blue-50 rounded-xl">
+                                    <Shield className="w-8 h-8 text-blue-600" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-slate-900">Leadership Team</h3>
                             </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Certified Experts</h3>
-                                <p className="text-slate-600">Professional, accredited installation teams.</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start space-x-6 mb-8 group">
-                            <div className="bg-blue-50 p-4 rounded-xl group-hover:bg-blue-600 transition-colors duration-300">
-                                <Users className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Owner Managed</h3>
-                                <p className="text-slate-600">Direct hands-on supervision for every project.</p>
-                            </div>
-                        </div>
-                        <div className="space-y-3 pt-6 border-t border-slate-100">
-                            <p className="font-semibold text-slate-900 uppercase tracking-wide text-sm">Leadership Team</p>
-                            <div className="flex items-center">
-                                <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                                <span className="font-medium text-slate-700">Kyle Cass (Owner)</span>
-                            </div>
-                            <div className="flex items-center">
-                                <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                                <span className="font-medium text-slate-700">Rashaad Steyn (COO)</span>
+
+                            <div className="space-y-6">
+                                <div className="flex items-start group p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                                    <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 flex-shrink-0 shadow-md transform group-hover:scale-110 transition-transform">KC</div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-lg">Kyle Cass</h4>
+                                        <p className="text-blue-600 font-medium text-sm mb-1">Owner & Founder</p>
+                                        <p className="text-slate-500 text-sm">Hands-on supervision ensuring every project meets our rigorous standards.</p>
+                                    </div>
+                                </div>
+
+                                <div className="w-full h-px bg-slate-100"></div>
+
+                                <div className="flex items-start group p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                                    <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 flex-shrink-0 shadow-md transform group-hover:scale-110 transition-transform">RS</div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-lg">Rashaad Steyn</h4>
+                                        <p className="text-blue-600 font-medium text-sm mb-1">Chief Operating Officer</p>
+                                        <p className="text-slate-500 text-sm">Overseeing operational excellence and strategic growth.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-y border-slate-200 py-8">
-                    <Counter end={15} label="Years Experience" />
-                    <Counter end={500} label="Projects Completed" />
-                    <Counter end={50} label="Five Star Reviews" />
-                    <Counter end={24} label="Hour Support" />
+                {/* Stats Section */}
+                <div className="bg-slate-900 rounded-3xl p-8 md:p-12 mb-20 text-white shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid-pattern.svg')] opacity-5" />
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 relative z-10 border-b md:border-b-0 md:border-r border-slate-800/50">
+                        <div className="text-center p-4">
+                            <Counter end={10} label="Years Experience" />
+                        </div>
+                        <div className="text-center p-4">
+                            <Counter end={500} label="Projects Completed" />
+                        </div>
+                        <div className="text-center p-4">
+                            <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">100%</div>
+                            <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">Quality Guarantee</div>
+                        </div>
+                        <div className="text-center p-4">
+                            <Counter end={24} label="Hour Support" />
+                        </div>
+                    </div>
                 </div>
 
-                <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
+                {/* Values Grid */}
+                <div className="mb-20">
+                    <div className="text-center mb-16">
+                        <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Core Values</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900">Why We Are Different</h2>
+                    </div>
 
-                    <div className="relative z-10 text-center max-w-4xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-12 tracking-tight">Why We Are Different</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
-                                <h3 className="text-xl font-bold mb-4 text-blue-400">Quality First</h3>
-                                <p className="text-slate-300 leading-relaxed">We never compromise on the quality of hardware or cabling. Your security depends on it.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors">
+                                <Award className="w-7 h-7 text-indigo-600 group-hover:text-white transition-colors" />
                             </div>
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
-                                <h3 className="text-xl font-bold mb-4 text-blue-400">Rapid Response</h3>
-                                <p className="text-slate-300 leading-relaxed">Our team is agile and responsive, ensuring your installation or repair happens on time.</p>
-                            </div>
-                            <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-all duration-300 hover:-translate-y-1">
-                                <h3 className="text-xl font-bold mb-4 text-blue-400">Customer Education</h3>
-                                <p className="text-slate-300 leading-relaxed">We take the time to teach you how to use your new system effectively.</p>
-                            </div>
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">Quality First</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                We refuse to cut corners. From using solid copper cabling to premium brackets, we use materials that last.
+                            </p>
                         </div>
+
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
+                                <Zap className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">Rapid Response</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                Security issues can&apos;t wait. Our agile team ensures installations and critical repairs happen when you need them tailored.
+                            </p>
+                        </div>
+
+                        <div className="group bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 transition-colors">
+                                <BookOpen className="w-7 h-7 text-emerald-600 group-hover:text-white transition-colors" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">Education Focused</h3>
+                            <p className="text-slate-600 leading-relaxed">
+                                A system is only as good as its user. We take the time to train you thoroughly on how to use your security effectively.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom CTA */}
+                <div className="bg-blue-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+                    <div className="relative z-10 max-w-2xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-6">Ready to work with a team that cares?</h2>
+                        <p className="text-blue-100 mb-8 text-lg">Contact us today for a free consultation and let&apos;s discuss your security strategy.</p>
+                        <Link href="/contact" className="inline-flex items-center bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-colors shadow-lg">
+                            Get in Touch
+                            <ArrowRight className="ml-2 w-5 h-5" />
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -70,7 +70,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                 <strong>{location.description}</strong>
                             </p>
                             <p className="text-slate-600 mb-6">
-                                {/* @ts-ignore */}
+
                                 {location.localContent}
                             </p>
                             <p>
@@ -104,7 +104,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                 Criminals often target properties with visible vulnerabilities such as low walls, dark corners, or outdated alarm systems.
                             </p>
                             <p className="text-slate-700 leading-relaxed mb-6">
-                                Global Security Solutions offers a comprehensive audit of your property. We don't just sell products; we design a layered security solution that fits your lifestyle and budget.
+                                Global Security Solutions offers a comprehensive audit of your property. We don&apos;t just sell products; we design a layered security solution that fits your lifestyle and budget.
                             </p>
                             <h4 className="text-lg font-bold text-slate-900 mb-2">Our Local Services Include:</h4>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-700 mb-8">

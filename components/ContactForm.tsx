@@ -43,9 +43,10 @@ export function ContactForm() {
 
             setSuccess(true)
             form.reset()
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Submission error:', err)
-            setError(err.message || 'Something went wrong. Please try again.')
+            const errorMsg = err instanceof Error ? err.message : 'Something went wrong'
+            setError(errorMsg || 'Something went wrong. Please try again.')
         } finally {
             setLoading(false)
         }
@@ -81,14 +82,29 @@ export function ContactForm() {
                         <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">Name</label>
                         <div className="relative">
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input name="name" id="name" required className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all" placeholder="John Doe" />
+                            <input
+                                name="name"
+                                id="name"
+                                required
+                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all"
+                                placeholder="John Doe"
+                                suppressHydrationWarning
+                            />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
                         <div className="relative">
                             <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input name="phone" id="phone" required type="tel" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all" placeholder="082 123 4567" />
+                            <input
+                                name="phone"
+                                id="phone"
+                                required
+                                type="tel"
+                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all"
+                                placeholder="082 123 4567"
+                                suppressHydrationWarning
+                            />
                         </div>
                     </div>
                 </div>
@@ -97,7 +113,15 @@ export function ContactForm() {
                     <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">Email</label>
                     <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input name="email" id="email" required type="email" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="john@example.com" />
+                        <input
+                            name="email"
+                            id="email"
+                            required
+                            type="email"
+                            className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                            placeholder="john@example.com"
+                            suppressHydrationWarning
+                        />
                     </div>
                 </div>
 
@@ -106,14 +130,25 @@ export function ContactForm() {
                         <label htmlFor="suburb" className="block text-sm font-medium text-slate-700 mb-1">Suburb / Area</label>
                         <div className="relative">
                             <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input name="suburb" id="suburb" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="e.g. Durbanville" />
+                            <input
+                                name="suburb"
+                                id="suburb"
+                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                placeholder="e.g. Durbanville"
+                                suppressHydrationWarning
+                            />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="service" className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
                         <div className="relative">
                             <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <select name="service" id="service" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none">
+                            <select
+                                name="service"
+                                id="service"
+                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none"
+                                suppressHydrationWarning
+                            >
                                 <option value="General Inquiry">General Inquiry</option>
                                 <option value="Alarm Installation">Alarm Installation</option>
                                 <option value="CCTV Systems">CCTV Systems</option>
@@ -129,6 +164,7 @@ export function ContactForm() {
                     type="submit"
                     disabled={loading}
                     className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-md hover:shadow-lg transition-all flex justify-center items-center"
+                    suppressHydrationWarning
                 >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get My Free Quote'}
                 </button>

@@ -3,14 +3,24 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/utils/supabase/client'
 import { v4 as uuidv4 } from 'uuid'
-import { Image as ImageIcon, Loader2, CheckCircle, AlertCircle, FileText, Briefcase } from 'lucide-react'
+import { Image as ImageIcon, Loader2, CheckCircle, AlertCircle, FileText, Briefcase, Users } from 'lucide-react'
+
+interface Lead {
+    id: string
+    client_name: string
+    email_address: string
+    phone_number: string
+    service_requested: string
+    suburb_location: string
+    created_at: string
+}
 
 export default function AdminPage() {
     // Auth State
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [activeTab, setActiveTab] = useState<'blog' | 'projects'>('blog')
+    const [activeTab, setActiveTab] = useState<'blog' | 'projects' | 'leads'>('blog')
 
     // Common State
     const [loading, setLoading] = useState(false)
@@ -33,6 +43,28 @@ export default function AdminPage() {
     const [projCategory, setProjCategory] = useState('Residential')
     const [projDesc, setProjDesc] = useState('')
     const [projImage, setProjImage] = useState<File | null>(null)
+
+    // LEADS State
+    const [leads, setLeads] = useState<Lead[]>([])
+
+    // Fetch Leads
+    const fetchLeads = async () => {
+        setLoading(true)
+        const { data } = await supabase
+            .from('leads')
+            .select('*')
+            .order('created_at', { ascending: false })
+
+        if (data) setLeads(data)
+        setLoading(false)
+    }
+
+    // Effect to fetch leads when tab changes
+    useEffect(() => {
+        if (activeTab === 'leads' && isAuthenticated) {
+            fetchLeads()
+        }
+    }, [activeTab, isAuthenticated])
 
     // Load API Key & Check Session
     useEffect(() => {
@@ -122,8 +154,10 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
             setBlogContent(result.content)
             setSuccess('AI Content Generated! Please review and publish.')
             setShowAiPanel(false)
-        } catch (err: any) {
-            console.error(err); setError(err.message || 'AI Generation Failed')
+        } catch (err: unknown) {
+            console.error(err);
+            const msg = err instanceof Error ? err.message : 'AI Generation Failed'
+            setError(msg)
         } finally { setIsGenerating(false) }
     }
 
@@ -152,7 +186,10 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
             if (dbErr) throw new Error(dbErr.message)
 
             setSuccess('Blog Post Published!'); setBlogTitle(''); setBlogSlug(''); setBlogExcerpt(''); setBlogContent(''); setBlogImage(null)
-        } catch (err: any) { setError(err.message) } finally { setLoading(false) }
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : 'An error occurred'
+            setError(msg)
+        } finally { setLoading(false) }
     }
 
     // --- PROJECT FUNCTIONS ---
@@ -173,7 +210,10 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
             if (dbErr) throw new Error(dbErr.message)
 
             setSuccess('Project Added to Gallery!'); setProjTitle(''); setProjDesc(''); setProjImage(null)
-        } catch (err: any) { setError(err.message) } finally { setLoading(false) }
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : 'An error occurred'
+            setError(msg)
+        } finally { setLoading(false) }
     }
 
     if (!isAuthenticated) {
@@ -216,6 +256,12 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
                         className={`flex-1 py-4 text-center font-bold flex items-center justify-center space-x-2 transition-colors ${activeTab === 'projects' ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50'}`}
                     >
                         <Briefcase className="w-5 h-5" /> <span>Manage Projects</span>
+                    </button>
+                    <button
+                        onClick={() => { setActiveTab('leads'); setSuccess(''); setError('') }}
+                        className={`flex-1 py-4 text-center font-bold flex items-center justify-center space-x-2 transition-colors ${activeTab === 'leads' ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50'}`}
+                    >
+                        <Users className="w-5 h-5" /> <span>View Leads</span>
                     </button>
 
                     <button onClick={handleLogout} className="absolute right-0 top-0 h-full px-6 text-xs font-bold text-red-500 hover:bg-red-50 transition-colors uppercase tracking-wider border-l border-slate-100">
@@ -262,7 +308,7 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
                                 </button>
                             </form>
                         </>
-                    ) : (
+                    ) : activeTab === 'projects' ? (
                         <>
                             <h2 className="text-2xl font-bold text-slate-900 mb-8">Add Project to Gallery</h2>
                             <form onSubmit={handleProjectSubmit} className="space-y-6">
@@ -281,6 +327,44 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
                                     {loading ? 'Uploading...' : 'Add Project'}
                                 </button>
                             </form>
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex justify-between items-center mb-8">
+                                <h2 className="text-2xl font-bold text-slate-900">Recent Leads</h2>
+                                <button onClick={() => fetchLeads()} className="text-sm font-bold text-blue-600 hover:underline">Refresh List</button>
+                            </div>
+
+                            {loading ? (
+                                <div className="text-center py-12 text-slate-500"><Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />Loading leads...</div>
+                            ) : leads.length === 0 ? (
+                                <div className="text-center py-12 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-slate-500">
+                                    No leads found yet.
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {leads.map((lead) => (
+                                        <div key={lead.id} className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                                                <div>
+                                                    <h3 className="text-lg font-bold text-slate-900">{lead.client_name}</h3>
+                                                    <div className="flex flex-col sm:flex-row sm:space-x-4 text-sm text-slate-500 mt-1">
+                                                        <span className="flex items-center"><ImageIcon className="w-4 h-4 mr-1" /> {lead.email_address}</span>
+                                                        <span className="flex items-center mt-1 sm:mt-0"><Briefcase className="w-4 h-4 mr-1" /> {lead.phone_number}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide self-start">
+                                                    {lead.service_requested || 'General Inquiry'}
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 pt-4 border-t border-slate-50 flex justify-between items-center text-xs text-slate-400">
+                                                <span>{lead.suburb_location}</span>
+                                                <span>{new Date(lead.created_at).toLocaleDateString()}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </>
                     )}
 

@@ -7,7 +7,7 @@ import { advisorSteps, getRecommendation, AdvisorOption, Recommendation } from '
 import {
     ShieldAlert, ScanFace, Eye, Flame,
     Wallet, Briefcase, Gem,
-    ArrowRight, CheckCircle2, Loader2, RefreshCcw, ChevronRight
+    ArrowRight, CheckCircle2, Loader2
 } from 'lucide-react'
 
 // Icon mapping helper
@@ -118,7 +118,7 @@ export default function AIAdvisorPage() {
                         </span>
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Security Strategy Report</h2>
                         <p className="text-slate-600 text-xl max-w-3xl mx-auto">
-                            We've analyzed your requirements and generated a tailored security profile.
+                            We&apos;ve analyzed your requirements and generated a tailored security profile.
                         </p>
                     </div>
 

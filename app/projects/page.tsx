@@ -1,4 +1,4 @@
-import { ArrowLeft, Loader2 } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { supabase } from "@/utils/supabase/client";
@@ -29,15 +29,9 @@ export default async function ProjectsPage() {
     const projects = await getProjects() || []
 
     // Placeholder projects if DB is empty for demo/UI reskin verification
-    const allProjects = projects.length > 0 ? projects : [
-        // ... (keep logic simple, maybe no placeholders or just minimal)
-        { title: "Chere Botha School", category: "Commercial", desc: "Access Control & Hikvision Installation", image_url: null },
-        { title: "35 on Rose", category: "HOA / Estate", desc: "Large-scale Security Upgrade", image_url: null },
-        { title: "Salus and Demos", category: "Residential", desc: "Premium Access Control System", image_url: null },
-        { title: "Durbanville Estate", category: "Residential", desc: "Electric Fencing & Alarms", image_url: null },
-        { title: "Blouberg Office Park", category: "Commercial", desc: "CCTV Surveillance Network", image_url: null },
-        { title: "Stellenbosch Farm", category: "Agricultural", desc: "Perimeter Beams & Monitoring", image_url: null },
-    ]
+    // const allProjects = projects.length > 0 ? projects : [ ... ]
+    // ... (keep logic simple, maybe no placeholders or just minimal)
+
 
     return (
         <div className="bg-slate-50 min-h-screen pb-20">
@@ -63,7 +57,7 @@ export default async function ProjectsPage() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project: any, i: number) => (
+                    {projects.map((project: { id: string, image_url: string | null, title: string, category: string, desc: string, description: string }, i: number) => (
                         <Link
                             key={project.id || i}
                             href={`/projects/${project.id || '#'}`}
@@ -108,9 +102,9 @@ export default async function ProjectsPage() {
                 <div className="mt-12 max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Installation Standards</h2>
                     <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Every project in our gallery represents our commitment to excellence. We don't just "install and leave."
+                        Every project in our gallery represents our commitment to excellence. We don&apos;t just &quot;install and leave.&quot;
                         We ensure neat cabling, strategic camera positioning for maximum coverage, and full system integration.
-                        Whether it's a small residential alarm or a massive commercial estate, our <strong>quality control standards</strong> remain the same.
+                        Whether it&apos;s a small residential alarm or a massive commercial estate, our <strong>quality control standards</strong> remain the same.
                     </p>
                     <Link href="/contact" className="text-blue-600 font-bold hover:underline text-lg">
                         Start Your Project Today &rarr;

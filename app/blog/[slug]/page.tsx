@@ -1,7 +1,7 @@
 import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Calendar, Share2, Check, Copy } from 'lucide-react'
+import { Calendar } from 'lucide-react'
 import { ShareButton } from '@/components/ShareButton'
 import { ScrollProgress } from '@/components/ScrollProgress'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -93,14 +93,14 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
                 {/* Content */}
                 <article className="prose prose-lg prose-apex max-w-none text-slate-700 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
-                    {post.content.map((block: any, index: number) => {
+                    {post.content.map((block: { type: string, text?: string, items?: string[] }, index: number) => {
                         if (block.type === 'heading') {
                             return <h2 key={index} className="text-2xl font-bold text-slate-900 mt-8 mb-4">{block.text}</h2>
                         }
                         if (block.type === 'list') {
                             return (
                                 <ul key={index} className="list-disc pl-5 space-y-2 mb-6">
-                                    {/* @ts-ignore - simplistic type check for example */}
+
                                     {block.items?.map((item: string, i: number) => (
                                         <li key={i}>{item}</li>
                                     ))}

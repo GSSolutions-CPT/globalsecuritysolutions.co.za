@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, ShieldCheck } from 'lucide-react'
-import { cn } from '@/utils/cn'
+
 
 interface ServiceCardProps {
     title: string

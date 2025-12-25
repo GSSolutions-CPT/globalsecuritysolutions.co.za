@@ -75,8 +75,8 @@ export default function SectorsPage() {
                         return (
                             <Link
                                 key={index}
-                                href={`/services#${slug}`}
-                                className="bg-white p-8 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group border border-slate-50"
+                                href={`/sectors/${slug}`}
+                                className="bg-white p-8 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group border border-slate-50 relative overflow-hidden"
                             >
                                 {/* Blue Dog Ear */}
                                 <div className="absolute top-0 left-0 w-16 h-16 bg-blue-600 rounded-br-[3rem] z-0 transition-transform group-hover:scale-110" />
@@ -105,8 +105,8 @@ export default function SectorsPage() {
                 <div className="mt-12 max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Tailored Security for Every Environment</h2>
                     <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Security is not a "one size fits all" solution. The needs of a residential estate differ vastly from those of a high-risk industrial warehouse or a retail store.
-                        That's why <strong>Global Security Solutions</strong> approaches every project with a fresh perspective, conducting a thorough risk assessment based on your specific sector's unique vulnerabilities.
+                        Security is not a &quot;one size fits all&quot; solution. The needs of a residential estate differ vastly from those of a high-risk industrial warehouse or a retail store.
+                        That&apos;s why <strong>Global Security Solutions</strong> approaches every project with a fresh perspective, conducting a thorough risk assessment based on your specific sector&apos;s unique vulnerabilities.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                         <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">

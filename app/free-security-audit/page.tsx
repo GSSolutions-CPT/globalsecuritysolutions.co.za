@@ -67,7 +67,7 @@ export default function FreeAuditPage() {
                         <div className="p-6">
                             <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
                             <h3 className="text-xl font-bold mb-2">Book Your Slot</h3>
-                            <p className="text-slate-600">Fill in the form or call us. We'll schedule a time that suits you.</p>
+                            <p className="text-slate-600">Fill in the form or call us. We&apos;ll schedule a time that suits you.</p>
                         </div>
                         <div className="p-6">
                             <div className="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
