@@ -34,7 +34,7 @@ export default async function BlogIndexPage() {
     return (
         <div className="bg-slate-50 min-h-screen pb-20">
             {/* Header */}
-            <div className="bg-slate-900 py-24 relative overflow-hidden">
+            <div className="bg-slate-900 py-12 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">Security Insights & News</h1>
@@ -51,7 +51,7 @@ export default async function BlogIndexPage() {
                     </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {posts.map((post: any, i: number) => (
                         <Link
                             key={post.id}

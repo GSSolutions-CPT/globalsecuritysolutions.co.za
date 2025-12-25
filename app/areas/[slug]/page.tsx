@@ -61,8 +61,8 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-24">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="container mx-auto px-4 py-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}
                     <div className="lg:col-span-2 space-y-8">
                         <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 prose max-w-none">

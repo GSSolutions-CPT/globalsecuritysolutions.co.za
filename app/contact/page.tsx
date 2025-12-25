@@ -10,19 +10,19 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
     return (
-        <div className="bg-slate-50 min-h-screen py-24 relative overflow-hidden">
+        <div className="bg-slate-50 min-h-screen py-12 relative overflow-hidden">
             {/* Decorative background element */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
             <div className="container relative mx-auto px-4">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Contact Us</h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         Ready to secure your property? Get in touch with our expert team for a free quote and personalized security advice.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     {/* Contact Info */}
                     <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 h-fit transition-all hover:shadow-xl">
                         <h2 className="text-2xl font-bold text-slate-900 mb-8">Get In Touch</h2>
@@ -80,7 +80,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map Section */}
-            <div className="mt-20 w-full h-[450px] bg-slate-200 relative">
+            <div className="mt-12 w-full h-[450px] bg-slate-200 relative">
                 <iframe
                     width="100%"
                     height="100%"

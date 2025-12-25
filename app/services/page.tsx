@@ -19,12 +19,12 @@ const toSlug = (text: string) => {
 
 export default function ServicesIndexPage() {
     return (
-        <div className="min-h-screen bg-slate-50 py-24 relative overflow-hidden">
+        <div className="min-h-screen bg-slate-50 py-12 relative overflow-hidden">
             {/* Decorative background */}
             <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl opacity-60 -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
             <div className="container relative mx-auto px-4">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Our Security Services</h1>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         Comprehensive security solutions for residential, commercial, and industrial properties.
@@ -74,7 +74,7 @@ export default function ServicesIndexPage() {
                 </div>
 
                 {/* SEO Content Block */}
-                <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div className="prose prose-lg text-slate-600">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6">Why Professional Security Matters</h2>
                         <p>

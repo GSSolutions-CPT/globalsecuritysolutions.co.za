@@ -18,9 +18,9 @@ export default function FAQPage() {
     ]
 
     return (
-        <div className="min-h-screen bg-slate-50 py-24">
+        <div className="min-h-screen bg-slate-50 py-12">
             <div className="container mx-auto px-4 max-w-3xl">
-                <h1 className="text-4xl font-bold text-slate-900 mb-12 text-center">Frequently Asked Questions</h1>
+                <h1 className="text-4xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h1>
                 <div className="space-y-6">
                     {faqs.map((item, i) => (
                         <div key={i} className="bg-white p-6 rounded-[1.5rem] shadow-sm border border-slate-100">

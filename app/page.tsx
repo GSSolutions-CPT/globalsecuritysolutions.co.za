@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
 
       {/* SECTION 1: HERO HEADER */}
-      <section className="relative bg-slate-900 text-white py-24 lg:py-32 overflow-hidden min-h-[600px] flex items-center">
+      <section className="relative bg-slate-900 text-white py-12 lg:py-20 overflow-hidden min-h-[500px] flex items-center">
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -75,12 +75,12 @@ export default function Home() {
       </section>
 
       {/* Services Overview */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-12 bg-white relative overflow-hidden">
         {/* Decorative background element */}
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
 
         <div className="container relative px-4 md:px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
               Comprehensive <span className="text-blue-600">Security Solutions</span>
             </h2>
@@ -89,11 +89,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mb-24">
+          <div className="mb-12">
             <ServiceCarousel />
           </div>
 
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
               Solutions by <span className="text-indigo-600">Sector</span>
             </h2>
@@ -102,7 +102,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mb-24">
+          <div className="mb-12">
             <SectorCarousel />
           </div>
 
@@ -191,9 +191,9 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: SOCIAL PROOF */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-12 bg-slate-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">What Our Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-8">What Our Clients Say</h2>
 
           <TestimonialCarousel />
 
@@ -231,7 +231,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: CTA / PRE-FOOTER */}
-      <section id="contact" className="py-24 bg-white">
+      <section id="contact" className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

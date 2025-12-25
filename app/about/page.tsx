@@ -12,7 +12,7 @@ export default function AboutPage() {
     return (
         <div className="min-h-screen bg-slate-50">
             {/* Hero Section */}
-            <section className="bg-slate-900 text-white py-24 relative overflow-hidden">
+            <section className="bg-slate-900 text-white py-12 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="container relative mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">About Global Security Solutions</h1>
@@ -22,8 +22,8 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 py-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-24">
+            <div className="container mx-auto px-4 py-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-12">
                     <div className="prose prose-lg text-slate-600">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">Our Mission</h2>
                         <p className="leading-relaxed mb-6">
@@ -67,14 +67,14 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-y border-slate-200 py-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-y border-slate-200 py-8">
                     <Counter end={15} label="Years Experience" />
                     <Counter end={500} label="Projects Completed" />
                     <Counter end={50} label="Five Star Reviews" />
                     <Counter end={24} label="Hour Support" />
                 </div>
 
-                <div className="bg-slate-900 rounded-3xl p-12 md:p-16 text-white relative overflow-hidden shadow-2xl">
+                <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
                     <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2" />
 
                     <div className="relative z-10 text-center max-w-4xl mx-auto">

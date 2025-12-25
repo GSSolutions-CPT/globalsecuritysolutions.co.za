@@ -9,10 +9,10 @@ export const metadata = {
 
 export default function AreasIndexPage() {
     return (
-        <div className="min-h-screen bg-slate-50 py-24">
+        <div className="min-h-screen bg-slate-50 py-12">
             <div className="container mx-auto px-4">
                 <h1 className="text-4xl font-bold text-slate-900 mb-8 text-center">Areas We Service</h1>
-                <p className="text-center text-slate-600 max-w-2xl mx-auto mb-16">
+                <p className="text-center text-slate-600 max-w-2xl mx-auto mb-10">
                     Global Security Solutions is proud to serve Durbanville, Blouberg, and the greater Western Cape area.
                 </p>
 
