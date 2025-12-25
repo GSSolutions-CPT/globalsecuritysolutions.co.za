@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function LoadSheddingPage() {
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
-            <div className="bg-slate-900 text-white py-16">
+            <div className="bg-slate-900 text-white py-12">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Load Shedding Security Solutions</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -24,7 +24,7 @@ export default function LoadSheddingPage() {
             </div>
 
             <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
                     <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Battery className="w-8 h-8 text-yellow-600" />

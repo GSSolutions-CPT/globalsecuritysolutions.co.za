@@ -23,7 +23,7 @@ export default function BrandsPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
-      <div className="bg-slate-900 text-white py-16">
+      <div className="bg-slate-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Brands We Trust & Install</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -33,7 +33,7 @@ export default function BrandsPage() {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {brands.map((brand) => (
             <div key={brand.name} className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition-all">
               <div className="flex items-center mb-4">
@@ -53,7 +53,7 @@ export default function BrandsPage() {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-8 text-center mb-12">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-8 text-center mb-8">
             <h2 className="text-2xl font-bold text-blue-900 mb-4">Certified Installers</h2>
             <p className="text-blue-800 mb-0">
               Our team is fully trained and certified to install and maintain all the brands we supply.

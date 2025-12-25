@@ -50,9 +50,9 @@ export default function SectorsPage() {
     ]
 
     return (
-        <div className="min-h-screen bg-slate-50 py-20">
+        <div className="min-h-screen bg-slate-50 py-12">
             <div className="container mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-10">
                     <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Sectors We Serve</h1>
                     <p className="text-xl text-slate-600">
                         Tailored security strategies for every environment, from private homes to large-scale industrial operations.
@@ -102,7 +102,7 @@ export default function SectorsPage() {
                 </div>
 
                 {/* SEO Content Block */}
-                <div className="mt-24 max-w-4xl mx-auto text-center">
+                <div className="mt-12 max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold text-slate-900 mb-6">Tailored Security for Every Environment</h2>
                     <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                         Security is not a "one size fits all" solution. The needs of a residential estate differ vastly from those of a high-risk industrial warehouse or a retail store.

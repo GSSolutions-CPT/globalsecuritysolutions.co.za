@@ -110,7 +110,7 @@ export default function AIAdvisorPage() {
     // 3. RESULT SCREEN
     if (result) {
         return (
-            <div className="min-h-screen bg-slate-50 py-20 px-4">
+            <div className="min-h-screen bg-slate-50 py-12 px-4">
                 <div className="container mx-auto max-w-5xl">
                     <div className="text-center mb-12">
                         <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-sm font-bold tracking-wide mb-4">

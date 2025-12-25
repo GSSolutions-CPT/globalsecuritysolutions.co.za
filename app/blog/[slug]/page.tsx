@@ -58,7 +58,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+        <div className="min-h-screen bg-slate-50 pt-24 pb-12">
             <ScrollProgress />
             {/* Header */}
             <div className="container mx-auto px-4 max-w-4xl">

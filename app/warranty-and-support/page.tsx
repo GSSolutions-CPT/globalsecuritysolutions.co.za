@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function WarrantyPage() {
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
-            <div className="bg-slate-900 text-white py-16">
+            <div className="bg-slate-900 text-white py-12">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Warranty & Support</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -24,7 +24,7 @@ export default function WarrantyPage() {
             </div>
 
             <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
                     <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center">
                         <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                             <ShieldCheck className="w-8 h-8 text-blue-600" />
@@ -48,7 +48,7 @@ export default function WarrantyPage() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-md border border-slate-100 overflow-hidden mb-16">
+                <div className="bg-white rounded-xl shadow-md border border-slate-100 overflow-hidden mb-10">
                     <div className="p-8 md:p-12">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6">Maintenance Contracts</h2>
                         <p className="text-slate-600 mb-6 text-lg">

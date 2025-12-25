@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function FreeAuditPage() {
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
-            <div className="bg-slate-900 text-white py-16">
+            <div className="bg-slate-900 text-white py-12">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Free Security Audit</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ export default function FreeAuditPage() {
                 </div>
 
                 {/* SEO Content: How It Works */}
-                <div className="mt-20 border-t border-slate-200 pt-16">
+                <div className="mt-12 border-t border-slate-200 pt-16">
                     <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">How The Audit Process Works</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div className="p-6">
