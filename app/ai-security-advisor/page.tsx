@@ -7,7 +7,7 @@ import { advisorSteps, getRecommendation, AdvisorOption, Recommendation } from '
 import {
     ShieldAlert, ScanFace, Eye, Flame,
     Wallet, Briefcase, Gem,
-    ArrowRight, CheckCircle2, Loader2
+    ArrowRight, CheckCircle2, Loader2, Camera, Slash
 } from 'lucide-react'
 
 // Icon mapping helper
@@ -24,6 +24,8 @@ const iconMap: Record<string, React.ReactNode> = {
     Wallet: <Wallet className="w-8 h-8" />,
     Briefcase: <Briefcase className="w-8 h-8" />,
     Gem: <Gem className="w-8 h-8" />,
+    Camera: <Camera className="w-8 h-8" />,
+    Slash: <Slash className="w-8 h-8" />,
 }
 
 export default function AIAdvisorPage() {
@@ -230,7 +232,70 @@ export default function AIAdvisorPage() {
         )
     }
 
-    // 4. WIZARD STEPS
+    // 4. UPLOAD SCREEN (Custom Handling)
+    if (currentStep.id === 'upload') {
+        return (
+            <div className="min-h-screen bg-slate-50 flex flex-col">
+                {/* Header */}
+                <div className="bg-white border-b border-slate-200 py-6 px-4">
+                    <div className="container mx-auto max-w-3xl flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Step {currentStepIndex + 1} of {totalSteps}</span>
+                        </div>
+                        <button onClick={handleReset} className="text-slate-400 hover:text-slate-600 text-sm font-medium">Exit</button>
+                    </div>
+                    {/* Progress Bar */}
+                    <div className="w-full h-1 bg-slate-100 mt-6 absolute bottom-0 left-0">
+                        <div
+                            className="h-full bg-blue-600 transition-all duration-500 ease-out"
+                            style={{ width: `${((currentStepIndex + 1) / totalSteps) * 100}%` }}
+                        />
+                    </div>
+                </div>
+
+                <div className="flex-grow flex items-center justify-center px-4 py-12">
+                    <div className="max-w-xl w-full text-center">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-8 animate-fade-in-up">
+                            {currentStep.question}
+                        </h2>
+
+                        <div className="bg-white p-8 rounded-[2rem] border-2 border-dashed border-slate-300 hover:border-blue-500 transition-colors mb-8 cursor-pointer relative group">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                onChange={(e) => {
+                                    if (e.target.files?.[0]) {
+                                        // Simulator upload delay
+                                        handleOptionSelect('uploaded')
+                                    }
+                                }}
+                            />
+                            <div className="flex flex-col items-center pointer-events-none">
+                                <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
+                                    <Image src="/icons/residential-security.png" alt="Upload" width={40} height={40} className="opacity-0 absolute" />
+                                    {/* Using a Lucide icon here would be better but keeping consistency with import approach if needed, 
+                                        but let's just use the Camera icon from lucide since we imported it in steps logic but need it here visually */}
+                                    <Camera className="w-10 h-10" />
+                                </div>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1">Click to Upload Photo</h3>
+                                <p className="text-slate-500 text-sm">JPG or PNG (Max 5MB)</p>
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={() => handleOptionSelect('skip')}
+                            className="text-slate-400 hover:text-slate-600 font-medium text-sm"
+                        >
+                            Skip this step
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    // 5. STANDARD WIZARD STEPS
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
             {/* Header / Progress */}

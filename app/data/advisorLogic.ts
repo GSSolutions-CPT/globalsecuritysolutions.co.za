@@ -48,6 +48,14 @@ export const advisorSteps: AdvisorStep[] = [
         ]
     },
     {
+        id: 'upload',
+        question: "Would you like to analyze a photo of your property?",
+        options: [
+            { id: 'yes_upload', label: "Yes, Upload Photo", value: 'upload', icon: 'Camera' },
+            { id: 'skip_upload', label: "Skip for now", value: 'skip', icon: 'Slash' },
+        ]
+    },
+    {
         id: 'budget',
         question: "What is your approximate budget range?",
         options: [

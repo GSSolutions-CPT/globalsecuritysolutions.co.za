@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Target, Zap } from 'lucide-react'
 import seoData from '../data/seoData.json'
+import { ContactForm } from '@/components/ContactForm'
 
 const toSlug = (text: string) => {
     return text
@@ -14,23 +15,19 @@ const toSlug = (text: string) => {
 const getSectorIcon = (sector: string) => {
     switch (sector) {
         case 'Residential Security':
-            return <Image src="/icons/residential-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
-        case 'Commercial & Industrial':
-            return <div className="flex gap-2 justify-center mb-6">
-                <Image src="/icons/commercial-security.png" alt="Commercial" width={64} height={64} className="w-16 h-16 object-contain" />
-                <Image src="/icons/industrial-security.png" alt="Industrial" width={64} height={64} className="w-16 h-16 object-contain" />
-            </div>
-        case 'HOA & Estates':
-            return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
-        case 'Farms & Agricultural':
-            return <Image src="/icons/farm-security-v2.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+            return <Image src="/icons/residential-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
+        case 'Commercial Security':
+            return <Image src="/icons/commercial-security.png" alt="Commercial" width={64} height={64} className="w-16 h-16 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
+        case 'Industrial Security':
+            return <Image src="/icons/industrial-security.png" alt="Industrial" width={64} height={64} className="w-16 h-16 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
+        case 'Estate Security Management':
+            return <Image src="/icons/estate-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
+        case 'Farm Security Systems':
+            return <Image src="/icons/farm-security-v2.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
         case 'Schools & Education':
-            return <Image src="/icons/education-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
-        case 'Retail & Shopping Malls':
-            // Reuse Commercial for Retail if no specific retail icon
-            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+            return <Image src="/icons/education-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
         default:
-            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6" />
+            return <Image src="/icons/commercial-security.png" alt={sector} width={80} height={80} className="w-20 h-20 object-contain mb-6 group-hover:scale-110 transition-transform duration-300" />
     }
 }
 
@@ -42,82 +39,130 @@ export const metadata = {
 export default function SectorsPage() {
     const sectors = [
         "Residential Security",
-        "Commercial & Industrial",
-        "HOA & Estates",
-        "Farms & Agricultural",
-        "Schools & Education",
-        "Retail & Shopping Malls"
+        "Commercial Security",
+        "Industrial Security",
+        "Farm Security Systems",
+        "Estate Security Management",
+        "Schools & Education"
     ]
 
     return (
-        <div className="min-h-screen bg-slate-50 py-12">
-            <div className="container mx-auto px-4">
-                <div className="text-center max-w-3xl mx-auto mb-10">
-                    <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Sectors We Serve</h1>
-                    <p className="text-xl text-slate-600">
-                        Tailored security strategies for every environment, from private homes to large-scale industrial operations.
-                    </p>
+        <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+
+            {/* Hero Section */}
+            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
+                    {/* Abstract background pattern or image */}
+                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {sectors.map((sector, index) => {
-                        const slug = toSlug(sector)
-                        // Find matching SEO data for description
-                        const seoItem = seoData.sectorSolutions.find(item =>
-                            item.page === sector ||
-                            item.title.includes(sector) ||
-                            (sector.includes('Commercial') && item.page.includes('Commercial')) ||
-                            (sector.includes('Farms') && item.page.includes('Farm')) ||
-                            (sector.includes('Estates') && item.page.includes('Estate')) ||
-                            (sector.includes('Schools') && item.page.includes('Schools'))
-                        )
+                <div className="container relative z-20 mx-auto px-4 text-center">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm">
+                        <ShieldCheck className="w-4 h-4" />
+                        <span>Industry Specific Solutions</span>
+                    </div>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
+                        Security Tailored to <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Your Environment</span>
+                    </h1>
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+                        We understand that a farm requires different protection than a retail store.
+                        Our sector-specific approach ensures you get the exact defense architecture your property needs.
+                    </p>
+                </div>
+            </section>
 
-                        return (
-                            <Link
-                                key={index}
-                                href={`/sectors/${slug}`}
-                                className="bg-white p-8 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group border border-slate-50 relative overflow-hidden"
-                            >
-                                {/* Blue Dog Ear */}
-                                <div className="absolute top-0 left-0 w-16 h-16 bg-blue-600 rounded-br-[3rem] z-0 transition-transform group-hover:scale-110" />
+            {/* Main Content Area */}
+            <div className="relative z-30 -mt-20">
+                <div className="container mx-auto px-4">
 
-                                <div className="relative z-10 w-full flex flex-col items-center">
-                                    {getSectorIcon(sector)}
+                    {/* Sector Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+                        {sectors.map((sector, index) => {
+                            const slug = toSlug(sector)
+                            const seoItem = seoData.sectorSolutions.find(item =>
+                                item.page === sector ||
+                                item.title.includes(sector) ||
+                                (sector.includes('Commercial') && item.page.includes('Commercial')) ||
+                                (sector.includes('Farms') && item.page.includes('Farm')) ||
+                                (sector.includes('Estates') && item.page.includes('Estate')) ||
+                                (sector.includes('Schools') && item.page.includes('Schools'))
+                            )
 
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                                        {sector}
-                                    </h3>
+                            return (
+                                <Link
+                                    key={index}
+                                    href={`/sectors/${slug}`}
+                                    className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group border border-slate-100 relative overflow-hidden"
+                                >
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150 duration-500" />
 
-                                    <p className="text-slate-600 mb-6 text-sm leading-relaxed">
-                                        {seoItem ? seoItem.description.substring(0, 100) + '...' : 'Specialized protection for this sector.'}
-                                    </p>
+                                    <div className="relative z-10 w-full flex flex-col items-center">
+                                        {getSectorIcon(sector)}
 
-                                    <span className="inline-flex items-center text-blue-600 font-bold uppercase tracking-wider text-xs bg-blue-50 px-4 py-2 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-all">
-                                        View Solutions <ArrowRight className="w-4 h-4 ml-2" />
-                                    </span>
+                                        <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                                            {sector}
+                                        </h3>
+
+                                        <p className="text-slate-600 mb-8 text-sm leading-relaxed line-clamp-3">
+                                            {seoItem ? seoItem.description : 'Specialized protection for this sector.'}
+                                        </p>
+
+                                        <span className="mt-auto inline-flex items-center text-blue-600 font-bold uppercase tracking-wider text-xs bg-blue-50 px-6 py-3 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                            Explore Solutions <ArrowRight className="w-4 h-4 ml-2" />
+                                        </span>
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+
+                    {/* Why Specialization Matters */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                        <div className="space-y-8">
+                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
+                                Why One Size <span className="text-blue-600">Doesn&apos;t</span> Fit All
+                            </h2>
+                            <p className="text-lg text-slate-600 leading-relaxed">
+                                Generic security companies install the same kit everywhere. We know that risk profiles differ fundamentally between sectors. Our specialized approach means:
+                            </p>
+
+                            <div className="space-y-6">
+                                <div className="flex gap-4">
+                                    <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                                        <Target className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-lg">Focused Risk Assessment</h4>
+                                        <p className="text-slate-600 text-sm">We look for sector-specific vulnerabilities that others miss.</p>
+                                    </div>
                                 </div>
-                            </Link>
-                        )
-                    })}
-                </div>
-
-                {/* SEO Content Block */}
-                <div className="mt-12 max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-6">Tailored Security for Every Environment</h2>
-                    <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                        Security is not a &quot;one size fits all&quot; solution. The needs of a residential estate differ vastly from those of a high-risk industrial warehouse or a retail store.
-                        That&apos;s why <strong>Global Security Solutions</strong> approaches every project with a fresh perspective, conducting a thorough risk assessment based on your specific sector&apos;s unique vulnerabilities.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-                            <h3 className="font-bold text-indigo-900 mb-2">Residential Risks</h3>
-                            <p className="text-slate-700 text-sm">Focus on perimeter early warning (beams/fencing) and family safety (panic buttons/safe zones).</p>
+                                <div className="flex gap-4">
+                                    <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                                        <Zap className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-lg">Optimized Hardware</h4>
+                                        <p className="text-slate-600 text-sm">Industrial sites need ruggedized gear; homes need aesthetics. We choose accordingly.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-                            <h3 className="font-bold text-indigo-900 mb-2">Commercial Risks</h3>
-                            <p className="text-slate-700 text-sm">Focus on access control, staff attendance tracking, and high-definition surveillance for liability protection.</p>
+                        <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/30 rounded-full blur-3xl" />
+                            <div className="relative z-10">
+                                <h3 className="text-2xl font-bold mb-6">Ready for an Expert Opinion?</h3>
+                                <p className="text-slate-300 mb-8">
+                                    Stop guessing with your security. Get a professional assessment tailored to your industry.
+                                </p>
+                                <div className="bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10">
+                                    <ContactForm />
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

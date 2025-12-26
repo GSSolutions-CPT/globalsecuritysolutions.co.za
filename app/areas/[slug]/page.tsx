@@ -3,7 +3,7 @@ import seoData from '@/app/data/seoData.json'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, MapPin, ShieldCheck, CheckCircle2, Siren, Cctv, Zap, KeyRound } from 'lucide-react'
 import type { Metadata } from 'next'
 
 // Helper to find location
@@ -39,9 +39,6 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     }
 }
 
-// Ensure params are correctly awaited in Next.js 15+ compatible way if needed, strict TS might complain about params type.
-// But current type { params: { slug: string } } is standard.
-
 export default async function AreaPage(props: { params: Promise<{ slug: string }> }) {
     const params = await props.params
     const location = getLocation(params.slug)
@@ -51,78 +48,140 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50">
-            <div className="bg-slate-900 text-white py-12">
-                <div className="container mx-auto px-4">
-                    <Link href="/areas" className="text-slate-400 hover:text-white flex items-center mb-4 text-sm font-semibold">
-                        <ArrowLeft className="w-4 h-4 mr-1" /> Back to Areas
-                    </Link>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{location.h1}</h1>
+        <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+
+            {/* Dynamic Hero Section */}
+            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
+                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
                 </div>
-            </div>
 
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Main Content */}
-                    <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 prose max-w-none">
-                            <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                                <strong>{location.description}</strong>
-                            </p>
-                            <p className="text-slate-600 mb-6">
+                <div className="container relative z-20 mx-auto px-4">
+                    <Link href="/areas" className="inline-flex items-center text-blue-400 hover:text-white mb-8 transition-colors text-sm font-semibold tracking-wide uppercase">
+                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Areas
+                    </Link>
 
-                                {location.localContent}
-                            </p>
-                            <p>
-                                At <strong>Global Security Solutions</strong>, we understand the specific security challenges faced by residents and businesses in <strong>{location.suburb}</strong>.
-                                Our team of certified technicians provides rapid response and expert installation of:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-2 mt-4 text-slate-700">
-                                <li><strong>Alarm Systems:</strong> Smart detection and 24/7 monitoring compatibility.</li>
-                                <li><strong>CCTV Surveillance:</strong> HD cameras with remote viewing on your phone.</li>
-                                <li><strong>Electric Fencing:</strong> COC-certified perimeter protection.</li>
-                                <li><strong>Access Control:</strong> Secure entry for homes and complexes.</li>
-                            </ul>
-                            <p className="mt-6">
-                                Protect your property in {location.suburb} today. Contact us for a free security assessment.
-                            </p>
+                    <div className="max-w-4xl">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm">
+                            <MapPin className="w-4 h-4" />
+                            <span>Serving {location.suburb} & Surrounds</span>
                         </div>
-
-                        <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 mb-8">
-                            <h3 className="text-xl font-bold text-blue-900 mb-2">Why Choose Us in {location.suburb}?</h3>
-                            <p className="text-blue-800">
-                                We have a dedicated team servicing the {location.suburb} area, ensuring fast turnaround times for installations and repairs.
-                                Our local presence means we understand the specific crime trends in your neighborhood and can advise on the best perimeter protection strategies.
-                            </p>
-                        </div>
-
-                        {/* SEO Content Block: Area Specifics */}
-                        <div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4">Security Services in {location.suburb}</h3>
-                            <p className="text-slate-700 leading-relaxed mb-6">
-                                Whether you live in a freestanding home, a complex, or manage a business premises in <strong>{location.suburb}</strong>, security is a top priority.
-                                Criminals often target properties with visible vulnerabilities such as low walls, dark corners, or outdated alarm systems.
-                            </p>
-                            <p className="text-slate-700 leading-relaxed mb-6">
-                                Global Security Solutions offers a comprehensive audit of your property. We don&apos;t just sell products; we design a layered security solution that fits your lifestyle and budget.
-                            </p>
-                            <h4 className="text-lg font-bold text-slate-900 mb-2">Our Local Services Include:</h4>
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-700 mb-8">
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> CCTV Camera Installation</li>
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Wireless Alarm Systems</li>
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Electric Fencing COC</li>
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Gate Motor Repairs</li>
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Intercom Systems</li>
-                                <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Battery Backups</li>
-                            </ul>
-                        </div>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+                            {location.h1}
+                        </h1>
+                        <p className="text-xl text-slate-400 max-w-2xl leading-relaxed">
+                            {location.description}
+                        </p>
                     </div>
+                </div>
+            </section>
 
-                    {/* Sidebar */}
-                    <div className="lg:col-span-1">
-                        <div className="sticky top-24">
-                            <ContactForm />
+            <div className="relative z-30 -mt-20 pb-20">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+
+                        {/* Main Content */}
+                        <div className="lg:col-span-2 space-y-12">
+
+                            {/* Local Insight Card */}
+                            <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16" />
+                                <div className="relative z-10">
+                                    <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                                        <ShieldCheck className="w-6 h-6 text-blue-600 mr-3" />
+                                        Security in {location.suburb}
+                                    </h2>
+                                    <p className="text-lg text-slate-600 leading-relaxed mb-6 italic border-l-4 border-blue-500 pl-6 bg-slate-50 py-4 rounded-r-xl">
+                                        &quot;{location.localContent}&quot;
+                                    </p>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        Global Security Solutions understands these unique challenges. We don&apos;t offer cookie-cutter systems; we design localized defense strategies that withstand the specific environmental and crime-trend factors of {location.suburb}.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Service Grid */}
+                            <div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-8">Our Services in {location.suburb}</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors">
+                                        <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 mr-4">
+                                            <Siren className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 mb-1">Smart Alarms</h4>
+                                            <p className="text-sm text-slate-500">Wireless detection & app control.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors">
+                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mr-4">
+                                            <Cctv className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 mb-1">CCTV Systems</h4>
+                                            <p className="text-sm text-slate-500">HD night vision & remote viewing.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors">
+                                        <div className="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 mr-4">
+                                            <Zap className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 mb-1">Electric Fencing</h4>
+                                            <p className="text-sm text-slate-500">COC certified perimeter defense.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors">
+                                        <div className="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center shrink-0 mr-4">
+                                            <KeyRound className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 mb-1">Gate Automation</h4>
+                                            <p className="text-sm text-slate-500">Fast motors & anti-theft cages.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* SEO Content Block */}
+                            <div className="prose max-w-none text-slate-600">
+                                <h3 className="text-xl font-bold text-slate-900">Why Residents Trust Us</h3>
+                                <p>
+                                    Whether you live in a freestanding home, a complex, or manage a business premises in <strong>{location.suburb}</strong>, security is non-negotiable.
+                                    Criminals often target properties with visible vulnerabilities. Our team provides rapid response installations tailored to the architectural style and risk profile of {location.suburb}.
+                                </p>
+                                <ul className="space-y-2 mt-4 not-prose">
+                                    <li className="flex items-center text-slate-700">
+                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
+                                        Local technical support teams
+                                    </li>
+                                    <li className="flex items-center text-slate-700">
+                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
+                                        Knowledge of local crime trends
+                                    </li>
+                                    <li className="flex items-center text-slate-700">
+                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
+                                        Rapid installation turnaround
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
+
+                        {/* Sidebar */}
+                        <div className="lg:col-span-1">
+                            <div className="bg-slate-900 text-white p-8 rounded-[2.5rem] sticky top-24 shadow-2xl">
+                                <div className="mb-8">
+                                    <h3 className="text-2xl font-bold mb-2">Get a Quote</h3>
+                                    <p className="text-slate-400 text-sm">
+                                        Book a technician for your {location.suburb} property today.
+                                    </p>
+                                </div>
+                                <ContactForm />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

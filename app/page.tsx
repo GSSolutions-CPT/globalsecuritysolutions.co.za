@@ -34,6 +34,7 @@ export default function Home() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm"
               data-aos="fade-down"
+              suppressHydrationWarning
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -55,6 +56,7 @@ export default function Home() {
               className="text-lg md:text-2xl mb-10 text-slate-300 font-light leading-relaxed max-w-2xl"
               data-aos="fade-up"
               data-aos-delay="100"
+              suppressHydrationWarning
             >
               We design and install advanced security ecosystems, from AI-powered CCTV to seamless access control, tailored for Cape Town&apos;s finest properties.
             </p>
@@ -63,6 +65,7 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-5"
               data-aos="fade-up"
               data-aos-delay="200"
+              suppressHydrationWarning
             >
               <Link
                 href="/contact"

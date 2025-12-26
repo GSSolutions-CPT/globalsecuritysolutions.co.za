@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, ArrowRight, User } from 'lucide-react'
+import { Calendar, ArrowRight, User, ArrowLeft, BookOpen, Clock } from 'lucide-react'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image";
 import { Metadata } from 'next';
@@ -42,63 +42,89 @@ export default async function BlogIndexPage() {
     const posts = formattedDbPosts
 
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
-            {/* Header */}
-            <div className="bg-slate-900 py-12 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">Security Insights & News</h1>
-                    <p className="text-xl text-blue-200 max-w-2xl mx-auto text-balance">
-                        Expert advice, industry updates, and tips to keep your property safe.
+        <div className="bg-slate-50 min-h-screen font-sans">
+
+            {/* Premium Hero Section */}
+            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
+                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                </div>
+
+                <div className="container relative z-20 mx-auto px-4 text-center">
+                    <Link href="/" className="inline-flex items-center text-blue-400 hover:text-white mb-8 transition-colors text-sm font-semibold tracking-wide uppercase">
+                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
+                    </Link>
+
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm mx-auto">
+                        <BookOpen className="w-4 h-4" />
+                        <span>Security Knowledge Hub</span>
+                    </div>
+
+                    <h1
+                        className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight"
+                        data-aos="fade-up"
+                        suppressHydrationWarning
+                    >
+                        Insights & News
+                    </h1>
+                    <p
+                        className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                        suppressHydrationWarning
+                    >
+                        Expert advice, crime trend updates, and practical tips to keep your Cape Town property safe and secure.
                     </p>
                 </div>
-            </div>
+            </section>
 
-            <div className="container mx-auto px-4 -mt-12 relative z-20">
+            <div className="container mx-auto px-4 -mt-20 relative z-30 pb-24">
                 {posts.length === 0 && (
-                    <div className="text-center py-12 bg-white rounded-[2.5rem] shadow-sm">
-                        <p className="text-slate-500">No articles available at the moment. Check back soon!</p>
+                    <div className="text-center py-20 bg-white rounded-[2.5rem] shadow-sm border border-slate-100">
+                        <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <BookOpen className="w-8 h-8" />
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">No Articles Yet</h3>
+                        <p className="text-slate-500">Check back soon for the latest insights.</p>
                     </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {posts.map((post: BlogPost, i: number) => (
                         <Link
                             key={post.id}
                             href={`/blog/${post.slug || '#'}`}
                             data-aos="fade-up"
                             data-aos-delay={i * 100}
-                            className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-50 relative"
+                            suppressHydrationWarning
+                            className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-100"
                         >
-                            {/* Dog Ear Accent on top of image? Maybe just a corner badge */}
-                            <div className="absolute top-0 left-0 w-20 h-20 bg-blue-600 rounded-br-[3.5rem] z-20 shadow-lg -translate-x-2 -translate-y-2" />
-                            <div className="absolute top-5 left-5 z-30 text-white font-bold text-xs uppercase tracking-wider">News</div>
-
-                            <div className="relative aspect-video w-full overflow-hidden">
+                            <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
                                 {post.featured_image ? (
                                     <Image
                                         src={post.featured_image}
                                         alt={post.title}
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
                                 ) : (
-                                    <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
-                                        No Image
+                                    <div className="w-full h-full flex items-center justify-center text-slate-300">
+                                        <BookOpen className="w-12 h-12 opacity-50" />
                                     </div>
                                 )}
-                                <div className="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/0 transition-colors" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </div>
 
                             <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-center text-sm text-slate-500 mb-4 space-x-4">
-                                    <span className="flex items-center"><Calendar className="w-4 h-4 mr-1 text-blue-500" /> {new Date(post.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                    <span className="flex items-center"><User className="w-4 h-4 mr-1 text-blue-500" /> {post.author || 'Admin'}</span>
+                                <div className="flex items-center text-xs font-semibold text-blue-600 mb-4 uppercase tracking-wider space-x-3">
+                                    <span className="flex items-center text-slate-500"><Calendar className="w-3 h-3 mr-1" /> {new Date(post.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                                    {post.author && <span className="flex items-center text-slate-500 border-l border-slate-200 pl-3"><User className="w-3 h-3 mr-1" /> {post.author}</span>}
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2">{post.title}</h2>
-                                <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
-                                <span className="mt-auto text-blue-600 font-bold text-sm flex items-center transition-all">
+                                <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">{post.title}</h2>
+                                <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-6 flex-grow">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
+                                <span className="mt-auto text-slate-900 font-bold text-sm flex items-center transition-all group-hover:text-blue-600">
                                     Read Article <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                                 </span>
                             </div>

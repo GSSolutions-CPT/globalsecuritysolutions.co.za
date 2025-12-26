@@ -1,0 +1,857 @@
+[
+    {
+        "category": "General",
+        "questions": [
+            {
+                "q": "Do you offer free quotes?",
+                "a": "Yes, we provide absolutely free, no-obligation security assessments and quotes for all new installations and major upgrades in Cape Town."
+            },
+            {
+                "q": "What areas do you service?",
+                "a": "We service the entire Cape Town metropolitan area and surrounds, including the Northern Suburbs (Durbanville, Bellville), Southern Suburbs (Claremont, Constantia), Atlantic Seaboard, and the Winelands (Stellenbosch, Paarl)."
+            },
+            {
+                "q": "Are you PSIRA registered?",
+                "a": "Yes, Global Security Solutions and our installation partners adhere to strict PSIRA (Private Security Industry Regulatory Authority) regulations to ensure your safety and legality."
+            },
+            {
+                "q": "Do you offer warranties on installations?",
+                "a": "Absolutely. All our new installations come with a standard 1-year workmanship warranty, and all hardware carries its respective manufacturer warranty (typically 1-3 years)."
+            },
+            {
+                "q": "Can you take over my existing alarm system?",
+                "a": "Yes, we specialize in 'system takeovers'. We can often repair, upgrade, or link your existing older system to modern monitoring services without a full replacement."
+            },
+            {
+                "q": "Do you offer financing?",
+                "a": "We generally require a deposit for hardware with the balance due on completion. For large commercial projects, we can discuss phased implementation plans."
+            },
+            {
+                "q": "How long does a typical installation take?",
+                "a": "A standard home alarm or CCTV installation usually takes 1-2 days. Larger commercial or electric fencing projects may take 3-5 days depending on complexity."
+            },
+            {
+                "q": "Are your technicians vetted?",
+                "a": "Yes, safety is our priority. All our technicians undergo background checks and are trained to work neatly and respectfully in your home or business."
+            },
+            {
+                "q": "Do you provide 24/7 technical support?",
+                "a": "We offer emergency technical support for critical failures. For non-critical issues, we have a dedicated support line available during business hours."
+            },
+            {
+                "q": "How do I pay?",
+                "a": "We accept EFT (Electronic Funds Transfer). Banking details are provided on your invoice. We do not generally accept cash for safety reasons."
+            }
+        ]
+    },
+    {
+        "category": "Alarm System Installation",
+        "questions": [
+            {
+                "q": "What is the difference between wired and wireless alarms?",
+                "a": "Wired systems use physical cables connecting sensors to the panel, making them battery-free (sensor-side) and very reliable but harder to install in finished homes. Wireless systems are quick to install and neat but require battery changes in sensors every 2-3 years."
+            },
+            {
+                "q": "Can I control my alarm from my phone?",
+                "a": "Yes. We install smart communication modules (like HYYP, Olarm, or AJAX apps) that allow you to arm, disarm, and view system status from your smartphone anywhere in the world."
+            },
+            {
+                "q": "What happens to the alarm during load shedding?",
+                "a": "Your alarm panel has a backup battery. We ensure this battery is healthy to last 4-8 hours. For higher stages of load shedding, we recommend upgrading to a Lithium-Iron battery or an external power pack."
+            },
+            {
+                "q": "Do you install pet-friendly sensors?",
+                "a": "Yes, we use 'Pet Immune' PIR sensors that are designed to ignore pets up to a certain weight (usually 15-20kg) while still verifying human movement."
+            },
+            {
+                "q": "Why is my alarm keypad beeping?",
+                "a": "Beeping usually indicates a trouble condition, such as a low battery, a communication failure, or a mains power loss. Check your keypad display for a trouble light or code."
+            },
+            {
+                "q": "Can you link my alarm to a reaction company?",
+                "a": "Yes, our systems are compatible with all major armed response companies in Cape Town (e.g., ADT, armed response) via radio or GSM linkage."
+            },
+            {
+                "q": "What is a 'partition' in an alarm system?",
+                "a": "A partition allows you to arm specific areas separately. For example, you can arm the 'Flatlet' or 'Garage' while leaving the 'Main House' disarmed."
+            },
+            {
+                "q": "How often should I test my alarm?",
+                "a": "We recommend testing your alarm monthly. Call your control room to put your system on 'test', then trigger a few zones to ensure signals are being received."
+            },
+            {
+                "q": "Do you install outdoor beams?",
+                "a": "Yes, outdoor beams are the best form of early warning. We install Paradox and Optex beams that detect intruders before they damage your windows or doors."
+            },
+            {
+                "q": "What brands of alarms do you use?",
+                "a": "We primarily install and support Paradox, IDS, AJAX, and DSC systems due to their reliability and availability of spares."
+            }
+        ]
+    },
+    {
+        "category": "CCTV Surveillance Systems",
+        "questions": [
+            {
+                "q": "What is the difference between IP and Analog CCTV?",
+                "a": "Analog (HD-TVI) sends video over coax cable; it is cost-effective and good for upgrades. IP cameras send digital data over network cables, offering higher resolution (4K+), better analytics, and easier scalability."
+            },
+            {
+                "q": "How much recording time will I get?",
+                "a": "This depends on the hard drive size and number of cameras. Typically, we aim for 2-4 weeks of recording. Motion-triggered recording extends this duration significantly."
+            },
+            {
+                "q": "Can I view my cameras on my phone?",
+                "a": "Yes, all our Hikvision and Dahua systems come with a free mobile app (Hik-Connect / DMSS) for remote live viewing and playback."
+            },
+            {
+                "q": "Does CCTV work at night?",
+                "a": "Yes. Modern cameras use IR (Infrared) for black-and-white night vision or ColorVu technology for full-color night vision, even in near-total darkness."
+            },
+            {
+                "q": "Will the cameras work during power cuts?",
+                "a": "Only if connected to a UPS or inverter. We strongly recommend installing a dedicated mini-UPS for your DVR/NVR and cameras to keep them running during load shedding."
+            },
+            {
+                "q": "Does CCTV record sound?",
+                "a": "Many modern IP and some HD-TVI cameras have built-in microphones. Please specify if audio recording is a requirement for your site."
+            },
+            {
+                "q": "What is 'motion detection'?",
+                "a": "The system only records when pixel changes (movement) are detected. Advanced AI cameras can specifically filter for humans and vehicles to ignore rustling trees."
+            },
+            {
+                "q": "Can CCTV identify number plates?",
+                "a": "Standard cameras can see plates but might struggle with moving cars or headlight glare. For reliable reading, we recommend dedicated ANPR (License Plate Recognition) cameras."
+            },
+            {
+                "q": "Is it legal to have cameras overlooking the street?",
+                "a": "You may monitor the immediate perimeter of your property for security, but you must respect the privacy of neighbors. Street monitoring is generally acceptable if focused on your entrance."
+            },
+            {
+                "q": "What is the warranty on cameras?",
+                "a": "Hikvision and Dahua cameras typically come with a 3-year manufacturer warranty."
+            }
+        ]
+    },
+    {
+        "category": "Access Control Solutions",
+        "questions": [
+            {
+                "q": "Face recognition vs Fingerprint - which is better?",
+                "a": "Facial recognition is faster and touchless (hygienic), making it ideal for high-traffic or sterile areas. Fingerprint is reliable and cost-effective but requires physical contact."
+            },
+            {
+                "q": "Can I use my phone to open doors?",
+                "a": "Yes, utilizing Bluetooth (BLE) or NFC readers allows authorized users to tap their phone or use an app to unlock doors."
+            },
+            {
+                "q": "What happens if the power goes out?",
+                "a": "All access control systems must have battery backup. Maglocks are 'fail-safe' (unlock on power loss) for fire safety, while strikes can be 'fail-secure' (stay locked)."
+            },
+            {
+                "q": "Can I restrict staff access hours?",
+                "a": "Yes, our software allows Time Zones. You can restrict staff entry to 08:00-17:00 and deny access on weekends."
+            },
+            {
+                "q": "Do you install maglocks for glass doors?",
+                "a": "Yes, we have specialized brackets for frameless glass doors, inward opening doors, and fire escape doors."
+            },
+            {
+                "q": "What is a 'Tag' system?",
+                "a": "A tag (or RFID card) system uses a small keyfob. It's affordable and easy to manage—lost tags can be instantly deleted from the system."
+            },
+            {
+                "q": "Can access control track time and attendance?",
+                "a": "Yes, specifically biometric readers (ZKTeco, etc.). They can export logs compatible with payroll software like Payroll or Excel."
+            },
+            {
+                "q": "How many users can the system handle?",
+                "a": "Even basic systems handle 1,000+ users. Enterprise systems can handle tens of thousands."
+            },
+            {
+                "q": "Do I need a PC to run the system?",
+                "a": "Standalone readers don't need a PC. Networked systems for large offices usually require a server or PC for strict management."
+            },
+            {
+                "q": "Can I open the door for a delivery remotely?",
+                "a": "Yes, if connected to an IP intercom or smart controller, you can release the lock via a mobile app."
+            }
+        ]
+    },
+    {
+        "category": "Intercom System Installers",
+        "questions": [
+            {
+                "q": "Can I answer my intercom when I am not home?",
+                "a": "Yes! IP Intercoms (like Hikvision IP) route the call to your smartphone app if no one answers the indoor monitor."
+            },
+            {
+                "q": "Video vs Audio intercom?",
+                "a": "Video is far superior for security, allowing you to visually verify the visitor and spot if they are alone or acting aggressively."
+            },
+            {
+                "q": "Does the intercom need a new cable?",
+                "a": "Ideally, yes (Cat6 data cable). However, we also have Wi-Fi intercoms and 2-wire retro-fit kits that can use existing old cabling in some cases."
+            },
+            {
+                "q": "Can I open the gate from the intercom?",
+                "a": "Yes, all our intercoms have a 'Gate Release' button wired directly to your gate motor."
+            },
+            {
+                "q": "What is a GSM intercom?",
+                "a": "A GSM intercom uses a SIM card. It calls your mobile phone like a regular phone call. It's great for complexes or gates far from the house (no cabling needed)."
+            },
+            {
+                "q": "Can I have multiple screens in the house?",
+                "a": "Yes, you can have a main monitor in the kitchen and sub-monitors in the bedroom or study."
+            },
+            {
+                "q": "Is the outdoor station waterproof?",
+                "a": "Yes, they are IP65 rated against rain and dust. However, we always recommend a rain shield for longevity."
+            },
+            {
+                "q": "Can the intercom record visitors?",
+                "a": "Many IP video intercoms can take a snapshot or leave a video message if you miss a call."
+            },
+            {
+                "q": "Do you repair old Commax intercoms?",
+                "a": "We do repair them, but if the unit is very old (15+ years), parts may be discontinued, and a replacement might be more cost-effective."
+            },
+            {
+                "q": "Does it work with a keypad?",
+                "a": "We can install an intercom with a built-in keypad so you can give access codes to trusted visitors or staff."
+            }
+        ]
+    },
+    {
+        "category": "Electric Fence Installations",
+        "questions": [
+            {
+                "q": "is electric fencing dangerous to pets?",
+                "a": "It gives a painful shock but is non-lethal. Most pets learn very quickly to stay away after one accidental touch."
+            },
+            {
+                "q": "Do I need a COC (Certificate of Compliance)?",
+                "a": "Yes, by law, any new electric fence installation or major alteration requires a COC to ensure it meets safety standards."
+            },
+            {
+                "q": "How much electricity does it use?",
+                "a": "Very little. An energizer typically consumes about as much power as a 40W light bulb."
+            },
+            {
+                "q": "Will it work during load shedding?",
+                "a": "Yes, all energizers have a built-in battery backup that usually lasts 6-12 hours."
+            },
+            {
+                "q": "Can plants trigger false alarms?",
+                "a": "Yes. Vegetation touching the wires causes arcing and voltage drops. You must keep the fence line clear of creepers and branches."
+            },
+            {
+                "q": "What happens if someone cuts the wires?",
+                "a": "The fence loop is monitored. Cutting a wire breaks the circuit, triggering the siren and notifying your armed response (if linked)."
+            },
+            {
+                "q": "Can I have wall-top and free-standing fencing?",
+                "a": "Yes. Wall-top is common for residential. Free-standing (piggyback) is used for farms or high-security commercial perimeters."
+            },
+            {
+                "q": "How high should the fence be?",
+                "a": "Standard wall-top brackets range from 5-line (500mm) to 8-line (800mm). The higher, the harder to climb over."
+            },
+            {
+                "q": "What maintenance does it need?",
+                "a": "Keep vegetation trimmed. Check tensioners every 6 months to ensure wires haven't sagged. Test the battery annually."
+            },
+            {
+                "q": "Is it noisy?",
+                "a": "A well-maintained fence is silent. A clicking/snapping sound usually means arcing (leaking voltage), which needs repair."
+            }
+        ]
+    },
+    {
+        "category": "Perimeter Security Enhancement",
+        "questions": [
+            {
+                "q": "What are 'beams'?",
+                "a": "Beams are outdoor sensors that create an invisible tripwire. If broken by a person, they trigger the alarm before the intruder reaches the house."
+            },
+            {
+                "q": "Do trees block beams?",
+                "a": "Yes. Point-to-point beams need a clear line of sight. PIR beams need a clear field of view. Garden maintenance is essential for reliable beams."
+            },
+            {
+                "q": "Are wireless beams reliable?",
+                "a": "Modern wireless beams (like Paradox or Ajax) are very reliable. They save huge labor costs on trenching cables in established gardens."
+            },
+            {
+                "q": "What is the range of outdoor beams?",
+                "a": "Point-to-point beams can cover 10m to 200m+. Specialized PIRs usually cover a 12m x 90-degree fan area."
+            },
+            {
+                "q": "Do birds trigger beams?",
+                "a": "Dual-optic beams require *both* top and bottom sensors to be broken instantly. A bird usually only breaks one, preventing false alarms."
+            },
+            {
+                "q": "Can I arm beams while I am sleeping?",
+                "a": "Yes! This is their main purpose. You 'Sleep Arm' the perimeter while moving freely inside the house."
+            },
+            {
+                "q": "What are Strip Beams?",
+                "a": "Strip beams are thin vertical sensors placed in window reveals. They detect if a hand or body passes through the window opening."
+            },
+            {
+                "q": "Do beams work in the rain?",
+                "a": "Yes, quality beams are weather-sealed. However, extremely heavy storms might occasionally lower the signal strength."
+            },
+            {
+                "q": "How high are beams installed?",
+                "a": "Usually at waist or knee height (800mm) to avoid cats (too low) and being stepped over (too high)."
+            },
+            {
+                "q": "Can I link beams to floodlights?",
+                "a": "Yes, we can wire them to turn on security lights when motion is detected, acting as a double deterrent."
+            }
+        ]
+    },
+    {
+        "category": "Gate and Garage Automation",
+        "questions": [
+            {
+                "q": "Why is my gate opening slowly?",
+                "a": "It could be a low battery, tight rollers, or a worn motor. Generally, the motor slows down to preserve battery when power is low."
+            },
+            {
+                "q": "How do I stop gate motor theft?",
+                "a": "We install 'anti-theft cages'—heavy steel brackets that lock over the motor, making it extremely difficult to remove quickly."
+            },
+            {
+                "q": "Can you make my gate open faster?",
+                "a": "We can upgrade you to a high-speed motor (like the Centurion D5 Evo SMART or D10 Turbo) which opens significantly faster for security."
+            },
+            {
+                "q": "Does the motor work during load shedding?",
+                "a": "Yes, if the batteries are healthy. High-cycle sites may need additional battery packs to survive frequent stage 6 outages."
+            },
+            {
+                "q": "My remote range is poor, why?",
+                "a": "It could be a flat remote battery, interference from other devices, or a faulty receiver. We can install an external antenna to boost range."
+            },
+            {
+                "q": "What safety features do gates have?",
+                "a": "We install safety beams (IR beams) that prevent the gate from closing if a car or child is in the way."
+            },
+            {
+                "q": "Can I open my garage with the same remote?",
+                "a": "Yes, usually. We can install a receiver on your garage motor that accepts your gate remote signals."
+            },
+            {
+                "q": "Why is the gate sticking?",
+                "a": "Dirt on the rail, worn wheels, or a bent track are common causes. Regular cleaning of the track is recommended."
+            },
+            {
+                "q": "Can I use my phone to open the gate?",
+                "a": "Yes, with a GSM module or smart Wi-Fi switch, you can trigger the gate from an app."
+            },
+            {
+                "q": "What is 'Condominium Mode'?",
+                "a": "A setting where using a remote can only open the gate, not close it (it auto-closes). This prevents one resident from accidentally closing the gate on another."
+            }
+        ]
+    },
+    {
+        "category": "Vehicle Security Systems",
+        "questions": [
+            {
+                "q": "Does the tracker drain my car battery?",
+                "a": "Modern units draw negligible power. However, if a car sits for weeks, any device will eventually contribute to drain."
+            },
+            {
+                "q": "Can I see where my driver is right now?",
+                "a": "Yes, fleet systems offer real-time web or app-based maps showing live location and speed."
+            },
+            {
+                "q": "What is 'Slam Lock'?",
+                "a": "A mechanical lock for courier/delivery vans that automatically locks the door the moment it is slammed shut, preventing opportunist theft."
+            },
+            {
+                "q": "Can you stop the car remotely?",
+                "a": "Some advanced units allow remote immobilization, safely cutting the engine (usually preventing restart rather than cutting power while moving) for recovery."
+            },
+            {
+                "q": "Do you install dashcams?",
+                "a": "Yes, we install front and rear dashcams, hardwired so you don't have loose cables hanging."
+            },
+            {
+                "q": "What happens if they disconnect the battery?",
+                "a": "Tracking units have internal backup batteries that keep them pinging for hours after vehicle power is cut."
+            },
+            {
+                "q": "Is there a monthly fee?",
+                "a": "Yes, simpler trackers have low fees purely for data. Monitoring and recovery services (like Tracker or Matrix) have higher monthly subscriptions."
+            },
+            {
+                "q": "Can I get a report of trips for tax?",
+                "a": "Yes, our GPS logbooks generate SARS-compliant trip reports (Business vs Private)."
+            },
+            {
+                "q": "How long does installation take?",
+                "a": "Vehicle tracker installation is quick, usually 1 to 2 hours per vehicle."
+            },
+            {
+                "q": "Can you do installations at my office?",
+                "a": "Yes, our vehicle technicians are mobile and can fit units at your premises to minimize downtime."
+            }
+        ]
+    },
+    {
+        "category": "Smart Home Automation",
+        "questions": [
+            {
+                "q": "What can I automate?",
+                "a": "Lights, geysers, pool pumps, gate access, garage doors, blinds, and alarm arming/disarming."
+            },
+            {
+                "q": "Does it require new wiring?",
+                "a": "Not necessarily. We use smart Wi-Fi relays (like Shelly or Sonoff) that fit behind existing light switches and plugs."
+            },
+            {
+                "q": "Does it allow voice control?",
+                "a": "Yes, most of our systems integrate with Google Home, Amazon Alexa, and Apple HomeKit."
+            },
+            {
+                "q": "Can I set schedules?",
+                "a": "Yes. You can schedule outside lights to turn on at sunset or your geyser to turn off during peak tariff hours."
+            },
+            {
+                "q": "Is it secure?",
+                "a": "We use encrypted smart devices and secure Wi-Fi practices. Like any network, a strong password is key."
+            },
+            {
+                "q": "What happens if the internet goes down?",
+                "a": "Local control (physical switches) still works. Schedules saved on the device may work, but remote app control will be offline."
+            },
+            {
+                "q": "Can I link it to my alarm?",
+                "a": "Yes! Trigger all house lights to flash red when the alarm goes off—a fantastic visual deterrent."
+            },
+            {
+                "q": "Is it expensive?",
+                "a": "Modular smart home tech is very affordable. You can start with just one room or the geyser and expand later."
+            },
+            {
+                "q": "Will it work with iPhone and Android?",
+                "a": "Yes, the apps we use (e.g., eWeLink, Smart Life, Shelly) are available on both iOS and Android."
+            },
+            {
+                "q": "Can automation save electricity?",
+                "a": "Absolutely. Smart geyser timers and turning off unused appliances automatically can significantly reduce your bill."
+            }
+        ]
+    },
+    {
+        "category": "Security System Integration",
+        "questions": [
+            {
+                "q": "What is 'Integration'?",
+                "a": "Making different systems talk to each other. E.g., The electric fence triggering a specific CCTV camera to zoom in."
+            },
+            {
+                "q": "Is integrated security better?",
+                "a": "Yes, it reduces reaction time and simplifies management (one app instead of four)."
+            },
+            {
+                "q": "Can different brands work together?",
+                "a": "Often, yes, using standard protocols or dry-contact outputs. Hikvision, Paradox, and Control4 often play well together."
+            },
+            {
+                "q": "Do I need a server?",
+                "a": "For complex integration (VMS software), a server might be needed. For simple linking (Alarm -> Light), basic relays suffice."
+            },
+            {
+                "q": "Can my alarm trigger my beams?",
+                "a": "Usually it's the other way around: beams trigger the alarm. But we can set up custom logic rules."
+            },
+            {
+                "q": "Is it complicated to use?",
+                "a": "The setup is complex (for us), but the user experience is designed to be simple (one button press for you)."
+            },
+            {
+                "q": "Can you integrate older systems?",
+                "a": "Sometimes. If the old system has physical input/output terminals, we can usually make it talk to newer smart devices."
+            },
+            {
+                "q": "What about fire detection?",
+                "a": "Yes, smoke detectors can be integrated into the alarm to open all access control doors automatically for evacuation."
+            },
+            {
+                "q": "Does integration increase maintenance?",
+                "a": "Slightly, as there are more software links to check, but it generally increases system value and safety."
+            },
+            {
+                "q": "Can I monitor multiple sites?",
+                "a": "Yes, integrated CMS (Central Management Software) allows viewing multiple branches or homes from one dashboard."
+            }
+        ]
+    },
+    {
+        "category": "Security Repairs and Upgrades",
+        "questions": [
+            {
+                "q": "Do you repair systems you didn't install?",
+                "a": "Yes, we are happy to take over, repair, and maintain third-party installations."
+            },
+            {
+                "q": "Is it worth repairing a 10-year-old alarm?",
+                "a": "Often, the wiring and sensors are fine, but the panel is obsolete. We recommend a board and keypad upgrade utilizing existing wiring."
+            },
+            {
+                "q": "How fast can you come out?",
+                "a": "For emergencies (siren not stopping, gate stuck), we try to assist same-day. Standard repairs are booked within 24-48 hours."
+            },
+            {
+                "q": "Do you have spares for old remotes?",
+                "a": "We stock universal remotes and receivers that can replace almost any discontinued remote frequency."
+            },
+            {
+                "q": "Why does my electric fence keep false alarming?",
+                "a": "Usually arcing due to broken bobbins, vegetation, or a dying battery. We can diagnose this with a 'scope' test."
+            },
+            {
+                "q": "Can you add new sensors to my old wire alarm?",
+                "a": "Yes, we can add a wireless receiver to your old panel to allow for new wireless sensors."
+            },
+            {
+                "q": "What is the call-out fee?",
+                "a": "We have a standard call-out fee which covers the first hour of labor/diagnosis. Parts are charged separately."
+            },
+            {
+                "q": "Do you fix corroded circuit boards?",
+                "a": "No, reliable security requires non-corroded electronics. We replace damaged boards to ensure reliability."
+            },
+            {
+                "q": "Can you upgrade lead-acid to lithium?",
+                "a": "Yes! This is our most popular upgrade. Lithium (LiFePO4) lasts 5x longer and handles load shedding better."
+            },
+            {
+                "q": "Do repairs come with a warranty?",
+                "a": "Yes, new parts come with their warranty, and we guarantee our repair labor for 6 months."
+            }
+        ]
+    },
+    {
+        "category": "Security Maintenance Contracts",
+        "questions": [
+            {
+                "q": "Why do I need a maintenance contract?",
+                "a": "Security systems account for safety. Neglect leads to failure when you need it most. Contracts ensure proactive care."
+            },
+            {
+                "q": "What is included in a service?",
+                "a": "Cleaning cameras/sensors, testing battery load, tensioning fences, verifying siren output, and testing signal transmission."
+            },
+            {
+                "q": "How often do you visit?",
+                "a": "Typically monthly for commercial/estates, and quarterly or bi-annually for residential."
+            },
+            {
+                "q": "Does the contract cover parts?",
+                "a": "We have different tiers. 'Comprehensive' covers labor and parts (wear and tear). 'Standard' covers labor only."
+            },
+            {
+                "q": "Are contracts mandatory?",
+                "a": "No, but they are highly recommended for electric fences (compliance) and critical commercial CCTV."
+            },
+            {
+                "q": "Do contract clients get priority?",
+                "a": "Yes, SLA clients get guaranteed response times (e.g., 4-hour turnaround) for critical failures."
+            },
+            {
+                "q": "Can I cancel the contract?",
+                "a": "Yes, standard contracts usually have a 30-day notice period."
+            },
+            {
+                "q": "Do you provide a report?",
+                "a": "Yes, after every site visit, you receive a health checklist via email noting any issues found."
+            },
+            {
+                "q": "Is it cheaper than ad-hoc repairs?",
+                "a": "Over time, yes. Preventing a blown power supply or rusted fence is cheaper than replacing it."
+            },
+            {
+                "q": "Which systems need the most maintenance?",
+                "a": "Electric fencing (tension/vegetation) and outdoor cameras (spiders/dust) require the most frequent care."
+            }
+        ]
+    },
+    {
+        "category": "Residential Security",
+        "questions": [
+            {
+                "q": "How do I secure my home while sleeping?",
+                "a": "Sleep-arming. Use outdoor beams and door magnets to secure the perimeter, allowing you to move freely inside."
+            },
+            {
+                "q": "What is the first layer of home defense?",
+                "a": "The boundary. A working gate motor, intercom, and electric fence or perimeter beams are your first line of defense."
+            },
+            {
+                "q": "Are wireless alarms good for homes?",
+                "a": "Excellent. They require no drilling into walls for cables and can be taken with you if you move."
+            },
+            {
+                "q": "Do you install panic buttons?",
+                "a": "Yes, fixed panic buttons (bedside) and mobile remote panics are essential for personal safety."
+            },
+            {
+                "q": "Can I see my nanny on camera?",
+                "a": "Yes, indoor nanny cams are common. Legally, you should inform staff that cameras are present."
+            },
+            {
+                "q": "How do I protect my sliding door?",
+                "a": "We use vibration sensors or heavy-duty magnetic contacts. A 'slam-lock' gate is also a good physical barrier."
+            },
+            {
+                "q": "What if I have large dogs?",
+                "a": "We design the system around them. Outdoor beams can be mounted at specific heights, or pet-friendly PIRs used."
+            },
+            {
+                "q": "Should I light up my garden?",
+                "a": "Yes, motion-sensor lighting is a great deterrent. Criminals hate being visible."
+            },
+            {
+                "q": "Can I give a code to my domestic worker?",
+                "a": "Yes, we program a separate user code. You can track when they arrive/leave and delete the code if they resign."
+            },
+            {
+                "q": "Is complex/estate security enough?",
+                "a": "Not always. You are responsible for your internal unit. We recommend a private alarm to alert you to breaches *before* estate security arrives."
+            }
+        ]
+    },
+    {
+        "category": "Commercial Security",
+        "questions": [
+            {
+                "q": "How do we prevent staff theft?",
+                "a": "Covert cameras, inventory access control, and strict user-logging on alarms help identify internal shrinkage."
+            },
+            {
+                "q": "Can I monitor multiple branches?",
+                "a": "Yes, we can consolidate all your CCTV and Alarm feeds into a single Control Room dashboard or Headquarters view."
+            },
+            {
+                "q": "Do you do fire evacuation systems?",
+                "a": "We integrate access control with fire panels to automatically unlock turnstiles and doors in an emergency."
+            },
+            {
+                "q": "What is 'Time and Attendance'?",
+                "a": "Using biometric readers to log exactly when staff arrive and leave for payroll purposes."
+            },
+            {
+                "q": "How secure are commercial alarm codes?",
+                "a": "Codes are risky (shared). We recommend tags or biometrics so you know exactly *who* disarmed the system."
+            },
+            {
+                "q": "Can we grant temporary access?",
+                "a": "Yes, visitor management systems allow issuing temporary QR codes or PINs for contractors."
+            },
+            {
+                "q": "Do you do roller shutter door sensors?",
+                "a": "Yes, heavy-duty floor contacts are designed specifically for warehouse roller doors."
+            },
+            {
+                "q": "Can I listen to audio in the shop?",
+                "a": "Yes, audio monitoring is possible but must comply with privacy laws (staff must be informed)."
+            },
+            {
+                "q": "What about server room security?",
+                "a": "We install dual-authentication access (card + pin) and environmental monitoring (temperature sensors) for server rooms."
+            },
+            {
+                "q": "Do you offer leasing?",
+                "a": "For large commercial installs, rental finance options are available through our finance partners."
+            }
+        ]
+    },
+    {
+        "category": "Industrial Security",
+        "questions": [
+            {
+                "q": "Can cameras survive dust and heat?",
+                "a": "Yes, we use industrial-rated (IP67/IK10) cameras designed for harsh factory environments."
+            },
+            {
+                "q": "How do we secure a large perimeter?",
+                "a": "Thermal cameras and fiber-optic fence sensors are best for covering long distances without false alarms."
+            },
+            {
+                "q": "What is 'Explosion Proof' CCTV?",
+                "a": "Cameras housed in stainless steel, pressurized casings for use in volatile environments like oil refineries."
+            },
+            {
+                "q": "Can you track forklifts?",
+                "a": "Yes, we can install asset tags or driver-access control on forklifts to prevent unauthorized use."
+            },
+            {
+                "q": "Do you install turnstiles?",
+                "a": "Yes, full-height industrial turnstiles are the standard for controlling factory shift access."
+            },
+            {
+                "q": "Can we detect loitering?",
+                "a": "Yes, AI analytics can alert security if a person or vehicle remains in a 'no-stopping' zone for too long."
+            },
+            {
+                "q": "What is 'Line Crossing' protection?",
+                "a": "A virtual tripwire on the camera view. If a human crosses a safety line (e.g., near dangerous machinery), an alarm sounds."
+            },
+            {
+                "q": "How do night shifts access?",
+                "a": "Access control profiles can be set to allow specific shift workers access only during their rostered hours."
+            },
+            {
+                "q": "Do you do weighbridge integration?",
+                "a": "Yes, linking cameras to weighbridge transactional data creates a visual log of every truck weighed."
+            },
+            {
+                "q": "Is cabling safe in a factory?",
+                "a": "We use steel conduit or high-level trays to protect cables from machinery and forklifts."
+            }
+        ]
+    },
+    {
+        "category": "Farm Security Systems",
+        "questions": [
+            {
+                "q": "How do we power cameras in remote fields?",
+                "a": "Solar power. We build self-contained solar poles with batteries and wireless links for remote camera positions."
+            },
+            {
+                "q": "Can you prevent livestock theft?",
+                "a": "Thermal cameras are excellent for this. They detect body heat of poachers (or animals) in total darkness over long distances."
+            },
+            {
+                "q": "Does Wi-Fi reach the barn?",
+                "a": "Standard home Wi-Fi won't. We install Point-to-Point (P2P) wireless bridges to 'beam' internet kilometers across the farm."
+            },
+            {
+                "q": "What alarm works for farms?",
+                "a": "Wireless outdoor sensors (like Ajax MotionCam Outdoor) are great. They send a photo to your phone when triggered, verifying the threat."
+            },
+            {
+                "q": "Can we monitor the main gate?",
+                "a": "Yes, a GSM intercom allows visitors to call your cell phone from the gate, even if the gate is 2km away."
+            },
+            {
+                "q": "Do wireless beams work through bush?",
+                "a": "No, they need Line of Sight. We may need to trim lanes or use repeater stations on hills."
+            },
+            {
+                "q": "Is the equipment weather-proof?",
+                "a": "Yes, farm equipment must be rugged. We use UV-stabilized mounts and IP-rated enclosures."
+            },
+            {
+                "q": "Can I monitor tank levels?",
+                "a": "Yes, easy integration with smart sensors can alert you if water levels drop or pumps fail."
+            },
+            {
+                "q": "Do you do electric fencing for animals?",
+                "a": "We focus on security fencing (high voltage), but this effectively keeps predators out and livestock in."
+            },
+            {
+                "q": "What acts as a siren on a huge farm?",
+                "a": "We utilize 'Long Range' radio transmitters to trigger sirens at the main house or workers' cottages simultaneously."
+            }
+        ]
+    },
+    {
+        "category": "Estate Security Management",
+        "questions": [
+            {
+                "q": "What is LPR?",
+                "a": "License Plate Recognition. Cameras read plates at the gate and check them against a database of 'wanted' or 'resident' vehicles."
+            },
+            {
+                "q": "How do visitors enter?",
+                "a": "We assist with systems like 'ClickOn' or 'GloVisitor' where residents send a PIN code to their guest via WhatsApp."
+            },
+            {
+                "q": "Can you track guards?",
+                "a": "Yes, guard patrol baton systems ensure guards are actually walking their perimeter route."
+            },
+            {
+                "q": "Who maintains the electric fence?",
+                "a": "The Body Corporate usually contracts us for monthly maintenance to ensure the estate perimeter is compliant."
+            },
+            {
+                "q": "Do you monitor the control room?",
+                "a": "We build control rooms (screens, desks, software) for your on-site guarding force to operate effectively."
+            },
+            {
+                "q": "Can speed be monitored?",
+                "a": "Yes, commercial radar speed signs or LPR speed calculations can flag speeding residents."
+            },
+            {
+                "q": "Do residents need remotes?",
+                "a": "Remotes are common, but facial recognition or LPR scanning is becoming the prefered 'touchless' entry for residents."
+            },
+            {
+                "q": "What about fiber networks?",
+                "a": "Many estates use a collection fiber network for security. We are experienced in fiber splicing and media conversion."
+            },
+            {
+                "q": "Is biometric data private?",
+                "a": "Yes, strict POPI Act compliance is required. We help configure systems to store data securely."
+            },
+            {
+                "q": "How do we handle contractors?",
+                "a": "Contractor stations with fingerprint enrollment and ID scanning ensure only vetted labor enters the estate."
+            }
+        ]
+    },
+    {
+        "category": "Schools & Education",
+        "questions": [
+            {
+                "q": "How do we secure the perimeter?",
+                "a": "A high, monitored electric fence combined with sturdy palisade is the standard. It must be checked daily."
+            },
+            {
+                "q": "Can we control access to classrooms?",
+                "a": "Yes, wireless door handles (like Salto or Apexis) allow teachers access via card/tag, keeping rooms locked to students."
+            },
+            {
+                "q": "What about lockdown procedures?",
+                "a": "We can install a 'Lockdown' button in the office that triggers a distinct siren tone and mag-locks specific doors."
+            },
+            {
+                "q": "Do you monitor playgrounds?",
+                "a": "Yes, wide-angle fisheye cameras are great for covering large play areas to resolve bullying or injury disputes."
+            },
+            {
+                "q": "Is student data safe?",
+                "a": "Yes, CCTV footage is stored securely with password protection, accessible only to authorized staff (Principal/Security)."
+            },
+            {
+                "q": "Can we prevent equipment theft?",
+                "a": "Computer labs are high-risk. We install 'Smoke Cloak' (pepper/fog) cannons and heavy-duty shutters."
+            },
+            {
+                "q": "How do parents pick up kids?",
+                "a": "Traffic flow is key. Automated booms and verified pickup tags help manage the afternoon rush securely."
+            },
+            {
+                "q": "Do you screen visitors?",
+                "a": "Video intercoms at the pedestrian gate allow the receptionist to visually vet visitors before buzzing them in."
+            },
+            {
+                "q": "Are the systems rugged?",
+                "a": "Yes, we use vandal-resistant dome cameras and metal recess-mounted readers to withstand school environments."
+            },
+            {
+                "q": "Can we monitor during holidays?",
+                "a": "Yes, the system is designed to act as a full alarm with off-site monitoring during school holidays."
+            }
+        ]
+    }
+]
