@@ -1,6 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { Users, User, ShieldCheck } from 'lucide-react'
+import Image from 'next/image'
 import { ContactForm } from '@/components/ContactForm'
 import seoData from '@/app/data/seoData.json'
 
@@ -11,17 +12,28 @@ export const metadata: Metadata = {
     description: pageData?.description || 'Meet the experts behind Global Security Solutions.',
 }
 
+
 export default function TeamPage() {
     return (
         <div className="flex flex-col min-h-screen bg-slate-50">
-            <div className="bg-slate-900 text-white py-12">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Meet The Team</h1>
+            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Our Team"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
+                </div>
+                <div className="container relative z-20 mx-auto px-4 text-center">
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">Meet The Team</h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto">
                         Dedicated security professionals committed to your safety.
                     </p>
                 </div>
-            </div>
+            </section>
 
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10 max-w-4xl mx-auto">

@@ -1,6 +1,7 @@
 import { ContactForm } from '@/components/ContactForm'
 import { Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import seoData from '@/app/data/seoData.json'
 
 export const metadata: Metadata = {
@@ -16,8 +17,13 @@ export default function ContactPage() {
             <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
-                    {/* Abstract background pattern or image */}
-                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Contact Global Security Solutions"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 text-center">

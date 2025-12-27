@@ -22,32 +22,31 @@ export default function ServicesIndexPage() {
         <div className="min-h-screen bg-slate-50 font-sans">
 
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white min-h-[50vh] flex items-center overflow-hidden">
+            {/* Hero Section */}
+            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950/40 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
                     <Image
                         src="/hero-bg.jpg"
-                        alt="Security Equipment"
+                        alt="Security Services"
                         fill
                         className="object-cover opacity-20"
                         priority
                     />
                 </div>
 
-                <div className="container relative z-20 mx-auto px-4 pt-20">
-                    <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-                            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                            Complete Protection
-                        </div>
-                        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
-                            World-Class <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Services</span>
-                        </h1>
-                        <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
-                            From residential homes to industrial estates, we design systems that protect what matters most.
-                        </p>
+                <div className="container relative z-20 mx-auto px-4 text-center">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm mx-auto">
+                        <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <span>Complete Protection</span>
                     </div>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
+                        World-Class <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Services</span>
+                    </h1>
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+                        From residential homes to industrial estates, we design systems that protect what matters most.
+                    </p>
                 </div>
             </section>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import locationData from '@/app/data/locationData.json'
 import { MapPin, ArrowRight, Navigation } from 'lucide-react'
 
@@ -15,7 +16,13 @@ export default function AreasIndexPage() {
             <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
-                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Western Cape Service Areas"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 text-center">

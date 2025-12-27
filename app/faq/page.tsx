@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Plus, Minus, Search, MessageCircle, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import faqData from '@/app/data/faqData.json'
 
 // Note: Revalidating purely static JSON data isn't necessary unless using fetch, but safe to leave or remove.
@@ -42,7 +43,13 @@ export default function FAQPage() {
             <section className="relative bg-slate-950 text-white py-20 lg:py-28 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
-                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Support Center"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 text-center">
@@ -88,8 +95,8 @@ export default function FAQPage() {
                                         key={cat}
                                         onClick={() => { setActiveCategory(cat); setSearchQuery(""); setOpenIndex(null); }}
                                         className={`flex items-center whitespace-nowrap px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-left ${activeCategory === cat && !searchQuery
-                                                ? 'bg-blue-600 text-white shadow-md'
-                                                : 'text-slate-600 hover:bg-slate-50'
+                                            ? 'bg-blue-600 text-white shadow-md'
+                                            : 'text-slate-600 hover:bg-slate-50'
                                             }`}
                                     >
                                         {cat}
@@ -117,7 +124,7 @@ export default function FAQPage() {
                                 </div>
                             ) : (
                                 <div className="space-y-4">
-                                    {displayQuestions.map((item: any, i) => (
+                                    {displayQuestions.map((item: { q: string; a: string; categoryName?: string }, i) => (
                                         <div
                                             key={i}
                                             className={`border rounded-2xl transition-all duration-300 overflow-hidden ${openIndex === i ? 'border-blue-200 bg-blue-50/30' : 'border-slate-100 hover:border-blue-100'}`}

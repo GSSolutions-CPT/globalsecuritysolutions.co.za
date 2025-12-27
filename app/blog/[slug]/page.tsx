@@ -1,10 +1,10 @@
 import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Calendar, ArrowLeft, Share2, Printer, BookOpen } from 'lucide-react'
+import { Calendar, ArrowLeft, BookOpen } from 'lucide-react'
 import { ShareButton } from '@/components/ShareButton'
 import { ScrollProgress } from '@/components/ScrollProgress'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
+// import { Breadcrumbs } from '@/components/Breadcrumbs'
 import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image"

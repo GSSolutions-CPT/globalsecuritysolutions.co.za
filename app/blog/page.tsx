@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calendar, ArrowRight, User, ArrowLeft, BookOpen, Clock } from 'lucide-react'
+import { Calendar, ArrowRight, User, ArrowLeft, BookOpen } from 'lucide-react'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image";
 import { Metadata } from 'next';
@@ -48,7 +48,13 @@ export default async function BlogIndexPage() {
             <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
-                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                    <Image
+                        src="/hero-bg.jpg"
+                        alt="Security Blog"
+                        fill
+                        className="object-cover opacity-20"
+                        priority
+                    />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 text-center">
