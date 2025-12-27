@@ -23,13 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/projects',
         '/free-security-audit',
         '/load-shedding-security-solutions',
-        '/brands-we-install',
-        '/our-team',
         '/warranty-and-support',
         '/services',
         '/sectors',
         '/ai-security-advisor',
+        '/ai-security-advisor',
         '/areas',
+        '/privacy-policy',
+        '/terms-of-service',
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
@@ -47,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Dynamic Sectors
     const sectors = seoData.sectorSolutions.map((service) => ({
-        url: `${BASE_URL}/services/${toSlug(service.page)}`,
+        url: `${BASE_URL}/sectors/${toSlug(service.page)}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,

@@ -21,15 +21,15 @@ export default function Home() {
             src="/hero-bg.jpg"
             alt="Security Technician overlooking Cape Town"
             fill
-            className="object-cover object-center opacity-40"
+            className="object-cover object-center opacity-80"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/40 to-slate-900/10" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
         </div>
 
         {/* Hero Content */}
-        <div className="container relative z-10 px-4 md:px-6 pt-20">
+        <div className="container mx-auto relative z-10 px-4 md:px-6 pt-20">
           <div className="max-w-4xl">
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm"
@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Trusted By Carousel - Clean & Minimal */}
       <section className="py-12 bg-white border-b border-slate-100">
-        <div className="container px-4 text-center">
+        <div className="container mx-auto px-4 text-center">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Trusted by Cape Town&apos;s Leading Brands</p>
           <BrandCarousel />
         </div>
@@ -101,7 +101,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
-        <div className="container relative z-10 px-4 md:px-6">
+        <div className="container mx-auto relative z-10 px-4 md:px-6">
           <div className="text-center md:mb-16 mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
               Comprehensive <span className="text-blue-600">Security Solutions</span>
@@ -127,7 +127,7 @@ export default function Home() {
 
       {/* Sector Focus - Dark Theme Interstitial */}
       <section className="py-24 bg-slate-900 text-white relative isolate">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Tailored to Your <span className="text-indigo-400">Environment</span></h2>
@@ -146,7 +146,7 @@ export default function Home() {
 
       {/* Why Us - Bento Grid Style */}
       <section className="py-24 bg-white">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Why Choose Global Security?</h2>
             <p className="text-slate-500 max-w-2xl mx-auto text-lg">
@@ -193,7 +193,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="py-12 bg-blue-600">
-        <div className="container px-4">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white divide-x divide-blue-500/50">
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
@@ -227,8 +227,8 @@ export default function Home() {
           {/* Featured Case Study Card */}
           <div className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative">
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-12 lg:p-16 flex flex-col justify-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5">
+              <div className="p-12 lg:p-16 flex flex-col justify-center relative z-10 lg:col-span-2">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-6 w-fit">
                   Featured Project
                 </span>
@@ -246,12 +246,12 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="relative h-[400px] lg:h-auto bg-slate-800">
+              <div className="relative h-[400px] lg:h-auto bg-white lg:col-span-3">
                 <Image
                   src="/projects/chere-botha-1.png"
                   alt="Chere Botha Installation"
                   fill
-                  className="object-cover"
+                  className="object-contain p-4"
                 />
                 <div className="absolute inset-0 bg-gradient-to-l from-slate-900 via-transparent to-transparent lg:hidden" />
               </div>
