@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/utils/supabase/client'
-import { CheckCircle, AlertCircle, Loader2, Image as ImageIcon, Briefcase, RefreshCw, Calendar, MapPin, Search } from 'lucide-react'
+import { Loader2, Image as ImageIcon, Briefcase, RefreshCw, Calendar, MapPin, Search } from 'lucide-react'
 
 // Define Lead Interface
 interface Lead {
@@ -21,7 +21,7 @@ export function LeadsManager() {
     const [searchQuery, setSearchQuery] = useState('')
 
     // Fetch Leads
-    const fetchLeads = async () => {
+    const fetchLeads = useCallback(async () => {
         setLoading(true)
         const { data } = await supabase
             .from('leads')
@@ -30,12 +30,13 @@ export function LeadsManager() {
 
         if (data) setLeads(data)
         setLoading(false)
-    }
+    }, [])
 
     // Initial Fetch
     useEffect(() => {
+        // eslint-disable-next-line
         fetchLeads()
-    }, [])
+    }, [fetchLeads])
 
     // Filter Leads
     const filteredLeads = leads.filter(lead =>

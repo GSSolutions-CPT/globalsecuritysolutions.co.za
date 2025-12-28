@@ -28,6 +28,21 @@ export default function AdminPage() {
     // Stats State (fetched on mount)
     const [stats, setStats] = useState({ totalLeads: 0, totalPosts: 0, totalProjects: 0 })
 
+    const fetchStats = async () => {
+        // Parallel fetching for dashboard overview
+        const [{ count: leads }, { count: posts }, { count: projects }] = await Promise.all([
+            supabase.from('leads').select('*', { count: 'exact', head: true }),
+            supabase.from('posts').select('*', { count: 'exact', head: true }),
+            supabase.from('projects').select('*', { count: 'exact', head: true })
+        ])
+
+        setStats({
+            totalLeads: leads || 0,
+            totalPosts: posts || 0,
+            totalProjects: projects || 0
+        })
+    }
+
     useEffect(() => {
         // Check active session
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -44,21 +59,6 @@ export default function AdminPage() {
 
         return () => subscription.unsubscribe()
     }, [])
-
-    const fetchStats = async () => {
-        // Parallel fetching for dashboard overview
-        const [{ count: leads }, { count: posts }, { count: projects }] = await Promise.all([
-            supabase.from('leads').select('*', { count: 'exact', head: true }),
-            supabase.from('posts').select('*', { count: 'exact', head: true }),
-            supabase.from('projects').select('*', { count: 'exact', head: true })
-        ])
-
-        setStats({
-            totalLeads: leads || 0,
-            totalPosts: posts || 0,
-            totalProjects: projects || 0
-        })
-    }
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()

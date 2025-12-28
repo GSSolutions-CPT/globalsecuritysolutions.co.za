@@ -1,7 +1,6 @@
 'use client'
 
 import { LayoutDashboard, FileText, Briefcase, Users, LogOut, ShieldCheck } from 'lucide-react'
-import Image from 'next/image'
 
 type Tab = 'overview' | 'blog' | 'projects' | 'leads'
 
@@ -39,8 +38,8 @@ export function AdminSidebar({ activeTab, setActiveTab, onLogout }: AdminSidebar
                         key={item.id}
                         onClick={() => setActiveTab(item.id)}
                         className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${activeTab === item.id
-                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-bold'
-                                : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-bold'
+                            : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                             }`}
                     >
                         <item.icon className={`w-5 h-5 ${activeTab === item.id ? 'text-white' : 'text-slate-500 group-hover:text-white'}`} />
