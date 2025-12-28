@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/utils/supabase/client'
-import { v4 as uuidv4 } from 'uuid'
+// Removed uuid import
 import { Loader2, CheckCircle, AlertCircle, Wand2, ImagePlus } from 'lucide-react'
 
 export function BlogManager() {
@@ -89,7 +89,7 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
         try {
             let coverImageUrl = null
             if (blogImage) {
-                const fileName = `${uuidv4()}.${blogImage.name.split('.').pop()}`
+                const fileName = `${crypto.randomUUID()}.${blogImage.name.split('.').pop()}`
                 const { error: upErr } = await supabase.storage.from('blog-images').upload(fileName, blogImage)
                 if (upErr) throw new Error(upErr.message)
                 const { data } = supabase.storage.from('blog-images').getPublicUrl(fileName)

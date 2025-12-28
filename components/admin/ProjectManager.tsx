@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { supabase } from '@/utils/supabase/client'
-import { v4 as uuidv4 } from 'uuid'
+// Removed uuid import
 import { Loader2, CheckCircle, AlertCircle, ImagePlus, Briefcase } from 'lucide-react'
 
 export function ProjectManager() {
@@ -23,7 +23,7 @@ export function ProjectManager() {
         setLoading(true); setError(''); setSuccess('')
 
         try {
-            const fileName = `${uuidv4()}.${projImage.name.split('.').pop()}`
+            const fileName = `${crypto.randomUUID()}.${projImage.name.split('.').pop()}`
             const { error: upErr } = await supabase.storage.from('project-images').upload(fileName, projImage)
             if (upErr) throw new Error(upErr.message)
             const { data } = supabase.storage.from('project-images').getPublicUrl(fileName)
