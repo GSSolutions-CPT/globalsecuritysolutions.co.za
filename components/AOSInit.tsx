@@ -2,10 +2,12 @@
 
 import { useEffect } from 'react'
 import AOS from 'aos'
-import 'aos/dist/aos.css'
 
 export const AOSInit = () => {
     useEffect(() => {
+        // Dynamically load CSS to prevent render-blocking
+        import('aos/dist/aos.css')
+
         const timer = setTimeout(() => {
             AOS.init({
                 easing: 'ease-out-cubic',
