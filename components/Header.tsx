@@ -140,6 +140,7 @@ export function Header() {
                     <button
                         className="lg:hidden text-gray-700"
                         onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle Menu"
                     >
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>

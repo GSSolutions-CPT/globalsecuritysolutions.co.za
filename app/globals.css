@@ -2,7 +2,7 @@
 
 /* VS Code may flag @theme as unknown, but it is valid in Tailwind v4 */
 @theme {
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: var(--font-sans);
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));

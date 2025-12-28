@@ -24,13 +24,13 @@ export function Footer() {
                             Your trusted partner for high-performance security systems in Cape Town. We specialize in alarms, CCTV, and electric fencing.
                         </p>
                         <div className="flex space-x-3">
-                            <a href="https://www.facebook.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                            <a href="https://www.facebook.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Facebook Page">
                                 <Facebook className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
-                            <a href="https://www.instagram.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                            <a href="https://www.instagram.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Instagram Profile">
                                 <Instagram className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
-                            <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group">
+                            <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our LinkedIn Profile">
                                 <Linkedin className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
                         </div>
@@ -76,7 +76,7 @@ export function Footer() {
                                     <Phone className="w-3.5 h-3.5" />
                                 </div>
                                 <div>
-                                    <span className="text-slate-500 text-[10px] uppercase tracking-wider font-bold block mb-0.5">Call Us Now</span>
+                                    <span className="text-slate-400 text-[10px] uppercase tracking-wider font-bold block mb-0.5">Call Us Now</span>
                                     <a href="https://wa.me/27629558559" className="text-base font-bold text-white hover:text-blue-400 transition-colors">062 955 8559</a>
                                 </div>
                             </li>
@@ -85,7 +85,7 @@ export function Footer() {
                                     <Mail className="w-3.5 h-3.5" />
                                 </div>
                                 <div>
-                                    <span className="text-slate-500 text-[10px] uppercase tracking-wider font-bold block mb-0.5">Email Support</span>
+                                    <span className="text-slate-400 text-[10px] uppercase tracking-wider font-bold block mb-0.5">Email Support</span>
                                     <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-slate-400 hover:text-white transition-colors block">sales@globalsecuritysolutions.co.za</a>
                                 </div>
                             </li>
@@ -95,7 +95,7 @@ export function Footer() {
 
                 {/* Brands Trust Bar */}
                 <div className="border-t border-slate-800 pt-4 pb-2">
-                    <p className="text-center text-slate-500 text-[10px] mb-2 font-medium uppercase tracking-widest">Trusted By Leading Brands</p>
+                    <p className="text-center text-slate-400 text-[10px] mb-2 font-medium uppercase tracking-widest">Trusted By Leading Brands</p>
                     <BrandCarousel variant="footer" />
                 </div>
 
