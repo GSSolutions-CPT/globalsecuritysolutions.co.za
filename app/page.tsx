@@ -90,7 +90,7 @@ export default function Home() {
       {/* Trusted By Carousel - Clean & Minimal */}
       <section className="py-12 bg-white border-b border-slate-100">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-8">Trusted by Cape Town&apos;s Leading Brands</p>
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-8">Trusted by Cape Town&apos;s Leading Brands</p>
           <BrandCarousel />
         </div>
       </section>
@@ -197,19 +197,19 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white divide-x divide-blue-500/50">
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Years Experience</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Years Experience</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Installations</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Installations</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Quality Guaranteed</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Quality Guaranteed</div>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
-              <div className="text-blue-100 text-sm uppercase tracking-wider font-semibold">Support</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Support</div>
             </div>
           </div>
         </div>

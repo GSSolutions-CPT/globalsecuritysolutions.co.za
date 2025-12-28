@@ -39,7 +39,7 @@ export function Footer() {
                     {/* Quick Links */}
                     <div>
                         <h3 className="text-base font-bold mb-2 border-b-2 border-blue-600 inline-block pb-1">Quick Links</h3>
-                        <ul className="space-y-1.5 text-xs">
+                        <ul className="space-y-3 text-xs">
                             <li><Link href="/" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center"><span className="w-1 h-1 bg-blue-600 rounded-full mr-2 opacity-0 hover:opacity-100 transition-opacity"></span>Home</Link></li>
                             <li><Link href="/about" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center"><span className="w-1 h-1 bg-blue-600 rounded-full mr-2 opacity-0 hover:opacity-100 transition-opacity"></span>About Us</Link></li>
                             <li><Link href="/services" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center"><span className="w-1 h-1 bg-blue-600 rounded-full mr-2 opacity-0 hover:opacity-100 transition-opacity"></span>All Services</Link></li>
@@ -52,7 +52,7 @@ export function Footer() {
                     {/* Services */}
                     <div>
                         <h3 className="text-base font-bold mb-2 border-b-2 border-blue-600 inline-block pb-1">Our Expertise</h3>
-                        <ul className="space-y-1.5 text-xs">
+                        <ul className="space-y-3 text-xs">
                             <li><Link href="/services/alarm-system-installation" className="text-slate-400 hover:text-blue-400 transition-colors">Alarm Systems</Link></li>
                             <li><Link href="/services/cctv-surveillance-systems" className="text-slate-400 hover:text-blue-400 transition-colors">CCTV Surveillance</Link></li>
                             <li><Link href="/services/access-control-solutions" className="text-slate-400 hover:text-blue-400 transition-colors">Access Control</Link></li>

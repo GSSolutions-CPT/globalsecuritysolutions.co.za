@@ -89,7 +89,7 @@ export function TestimonialCarousel() {
 
                             <div className="mt-auto border-t border-slate-100 pt-6 text-center">
                                 <p className="font-bold text-slate-900 text-lg">{review.name}</p>
-                                <p className="text-slate-400 text-sm uppercase tracking-wider font-semibold">{review.location}</p>
+                                <p className="text-slate-500 text-sm uppercase tracking-wider font-semibold">{review.location}</p>
                             </div>
                         </div>
                     </li>
