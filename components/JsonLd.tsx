@@ -1,9 +1,13 @@
 export function JsonLd() {
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "SecurityService",
+        "@type": "LocalBusiness",
+        "additionalType": "https://schema.org/SecurityService",
         "name": "Global Security Solutions",
-        "image": "https://globalsecuritysolutions.co.za/nav-logo-final.png",
+        "image": [
+            "https://globalsecuritysolutions.co.za/nav-logo-final.png"
+        ],
+        "logo": "https://globalsecuritysolutions.co.za/nav-logo-final.png",
         "telephone": "062 955 8559",
         "email": "sales@globalsecuritysolutions.co.za",
         "address": {
@@ -47,16 +51,6 @@ export function JsonLd() {
             {
                 "@type": "City",
                 "name": "Stellenbosch"
-            }
-        ],
-        "founders": [
-            {
-                "@type": "Person",
-                "name": "Kyle Cass"
-            },
-            {
-                "@type": "Person",
-                "name": "Rashaad Steyn"
             }
         ]
     }
