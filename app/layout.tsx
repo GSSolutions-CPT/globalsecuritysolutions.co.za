@@ -40,6 +40,11 @@ export const metadata: Metadata = {
     description: "Expert security system installations in Cape Town. Alarms, CCTV, and electric fencing.",
     images: ['/nav-logo-final.png'],
   },
+  verification: {
+    other: {
+      'facebook-domain-verification': 'jgasb4fwtf14618kxlg6y54bw129dk',
+    },
+  },
   robots: {
     index: true,
     follow: true,
