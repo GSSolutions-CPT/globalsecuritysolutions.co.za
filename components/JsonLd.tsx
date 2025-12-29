@@ -145,7 +145,7 @@ export function JsonLd() {
         }
     }
 
-    let finalSchema: any = {
+    let finalSchema: Record<string, unknown> = {
         "@context": "https://schema.org",
         ...masterBusinessData
     }
@@ -155,10 +155,21 @@ export function JsonLd() {
 
     // --- 3. Route Logic ---
 
+    // Define interfaces for FAQ Data
+    interface FAQQuestion {
+        q: string;
+        a: string;
+    }
+
+    interface FAQCategory {
+        category: string;
+        questions: FAQQuestion[];
+    }
+
     // A. FAQ Page
     if (pathname === '/faq') {
-        // @ts-ignore
-        const faqEntities = faqData.flatMap(cat => cat.questions.map(q => ({
+        const categories = faqData as FAQCategory[];
+        const faqEntities = categories.flatMap(cat => cat.questions.map(q => ({
             "@type": "Question",
             "name": q.q,
             "acceptedAnswer": {
