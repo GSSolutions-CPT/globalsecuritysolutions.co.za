@@ -8,29 +8,31 @@ import faqData from '@/app/data/faqData.json'
 
 export function JsonLd() {
     const pathname = usePathname()
-    // const baseUrl = "https://globalsecuritysolutions.co.za"
 
     // --- 1. Master LocalBusiness Data (Base) ---
     const masterBusinessData = {
-        "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+        "@type": ["LocalBusiness", "HomeAndConstructionBusiness", "SecuritySystemInstaller"],
         "name": "Global Security Solutions",
-        "image": "https://globalsecuritysolutions.co.za/logo.png",
+        "image": [
+            "https://globalsecuritysolutions.co.za/logo.png",
+            "https://globalsecuritysolutions.co.za/hero-bg.jpg"
+        ],
         "url": "https://www.globalsecuritysolutions.co.za/",
         "telephone": "+27629558559",
-        "email": "Kyle@globalsecuritysolutions.co.za",
+        "email": "sales@globalsecuritysolutions.co.za",
         "description": "Global Security Solutions provides expert security system installations in Durbanville and Western Cape. Certified installers of Paradox alarms, Hikvision CCTV, electric fencing, and access control.",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Durbanville",
-            "addressLocality": "Cape Town",
+            "streetAddress": "66 Robyn Rd",
+            "addressLocality": "Durbanville",
             "addressRegion": "Western Cape",
             "postalCode": "7550",
             "addressCountry": "ZA"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "-33.8333",
-            "longitude": "18.6500"
+            "latitude": -33.8333,
+            "longitude": 18.6500
         },
         "openingHoursSpecification": [
             {
@@ -47,13 +49,19 @@ export function JsonLd() {
             }
         ],
         "sameAs": [
-            "https://www.facebook.com/gssolutions.co.za",
+            "https://www.facebook.com/globalsecuritysolutionscpt",
             "https://www.linkedin.com/company/global-security-solutions-cape-town",
             "https://www.instagram.com/globalsecuritysolutions.co.za",
-            "https://www.threads.com/@globalsecuritysolutions.co.za",
             "https://wa.me/27629558559"
         ],
-        "priceRange": "R5000.00 - R10 000 000",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+27629558559",
+            "contactType": "customer service",
+            "areaServed": "ZA",
+            "availableLanguage": "English"
+        },
+        "priceRange": "$$",
         "paymentAccepted": ["Cash", "Credit Card", "EFT"],
         "founders": [
             { "@type": "Person", "name": "Kyle Cass" },
@@ -149,6 +157,7 @@ export function JsonLd() {
 
     // A. FAQ Page
     if (pathname === '/faq') {
+        // @ts-ignore
         const faqEntities = faqData.flatMap(cat => cat.questions.map(q => ({
             "@type": "Question",
             "name": q.q,
@@ -238,14 +247,10 @@ export function JsonLd() {
                 "description": post.excerpt
             }
         }
-        // Note: For dynamic posts from Supabase not in JSON, this static generation won't catch them. 
-        // Real-time fetching in a client component isn't ideal for SEO if bots don't execute JS.
-        // But the requirement was to use URL structure.
     }
 
-    // E. Projects Pages (Generic fallback or specific if we had list)
+    // E. Projects Pages
     else if (pathname?.startsWith('/projects')) {
-        // Simple default for projects listing
         if (pathname === '/projects') {
             finalSchema = {
                 "@context": "https://schema.org",
