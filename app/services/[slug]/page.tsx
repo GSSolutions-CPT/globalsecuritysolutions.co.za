@@ -1,4 +1,5 @@
 import seoData from '@/app/data/seoData.json'
+import { masterBusinessData } from '@/utils/generateSchema'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
@@ -56,6 +57,22 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "name": service.title,
+                        "description": service.description,
+                        "provider": {
+                            ...masterBusinessData
+                        },
+                        "serviceType": service.page,
+                        "areaServed": masterBusinessData.areaServed
+                    })
+                }}
+            />
 
             {/* Hero Section */}
             <section className="relative bg-slate-950 text-white py-20 lg:py-32 overflow-hidden">
