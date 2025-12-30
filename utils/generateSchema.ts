@@ -1,6 +1,6 @@
 
 export const masterBusinessData = {
-    "@type": ["LocalBusiness", "HomeAndConstructionBusiness", "SecuritySystemInstaller"],
+    "@type": "HomeAndConstructionBusiness",
     "name": "Global Security Solutions",
     "image": [
         "https://globalsecuritysolutions.co.za/logo.png",
