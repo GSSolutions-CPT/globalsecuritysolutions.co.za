@@ -62,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
-        <GoogleAnalytics gaId="G-ZPMK3KDCMQ" />
+        <GoogleAnalytics gaId="G-LM5YX7EWWH" />
         <StructuredData />
         <AOSInit />
         <Header />
