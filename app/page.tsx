@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ShieldCheck, Zap, Settings } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
+import { MarketingBanner } from '@/components/MarketingBanner'
 import { BrandCarousel } from '@/components/BrandCarousel'
 import { ServiceCarousel } from '@/components/ServiceCarousel'
 import { SectorCarousel } from '@/components/SectorCarousel'
@@ -14,78 +15,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen font-sans">
 
       {/* SECTION 1: HERO HEADER */}
-      <section className="relative bg-slate-950 text-white min-h-[90vh] flex items-center overflow-hidden">
-        {/* Dynamic Background */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/hero-bg.jpg"
-            alt="Security Technician overlooking Cape Town"
-            fill
-            className="object-cover object-center opacity-80"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/40 to-slate-900/10" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
-        </div>
-
-        {/* Hero Content */}
-        <div className="container mx-auto relative z-10 px-4 md:px-6 pt-20">
-          <div className="max-w-4xl">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm"
-              data-aos="fade-down"
-              suppressHydrationWarning
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              Cape Town&apos;s Premium Security Installers
-            </div>
-
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight tracking-tight drop-shadow-xl"
-              data-aos="fade-up"
-              suppressHydrationWarning
-            >
-              Secure Your World with <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Absolute Confidence</span>
-            </h1>
-
-            <p
-              className="text-lg md:text-2xl mb-10 text-slate-300 font-light leading-relaxed max-w-2xl"
-              data-aos="fade-up"
-              data-aos-delay="100"
-              suppressHydrationWarning
-            >
-              We design and install advanced security ecosystems, from AI-powered CCTV to seamless access control, tailored for Cape Town&apos;s finest properties.
-            </p>
-
-            <div
-              className="flex flex-col sm:flex-row gap-5"
-              data-aos="fade-up"
-              data-aos-delay="200"
-              suppressHydrationWarning
-            >
-              <Link
-                href="/contact"
-                className="group inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] hover:-translate-y-1"
-              >
-                Get a Free Quote
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:-translate-y-1"
-              >
-                Explore Services
-              </Link>
-            </div>
-
-
-          </div>
-        </div>
-      </section>
+      <MarketingBanner />
 
       {/* Trusted By Carousel - Clean & Minimal */}
       <section className="py-12 bg-white border-b border-slate-100">
