@@ -62,6 +62,7 @@ export function Header() {
         {
             label: 'More',
             dropdown: [
+                { href: '/brands-we-install', label: 'Brands We Install' },
                 { href: '/load-shedding-security-solutions', label: 'Load Shedding Solutions' },
                 { href: '/free-security-audit', label: 'Free Security Audit' },
                 { href: '/ai-security-advisor', label: 'AI Security Advisor' },
