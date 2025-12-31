@@ -20,8 +20,8 @@ export const masterBusinessData = {
     },
     "geo": {
         "@type": "GeoCoordinates",
-        "latitude": -33.8333,
-        "longitude": 18.6500
+        "latitude": -33.833306,
+        "longitude": 18.65
     },
     "openingHoursSpecification": [
         {
