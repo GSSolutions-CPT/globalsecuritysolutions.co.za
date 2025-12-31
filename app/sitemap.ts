@@ -27,7 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/services',
         '/sectors',
         '/ai-security-advisor',
-        '/ai-security-advisor',
         '/areas',
         '/privacy-policy',
         '/terms-of-service',
