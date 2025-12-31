@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import blogData from '@/app/data/blogData.json'
 import { Calendar, ArrowRight, User, ArrowLeft, BookOpen } from 'lucide-react'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image";
@@ -39,7 +40,21 @@ export default async function BlogIndexPage() {
         author: p.author
     }))
 
-    const posts = formattedDbPosts
+    // 3. Merge with Local Data (Priority to Supabase, but include Local)
+    const localPosts: BlogPost[] = blogData.map(p => ({
+        id: p.slug,
+        slug: p.slug,
+        title: p.title,
+        created_at: new Date(p.date).toISOString(),
+        excerpt: p.excerpt,
+        featured_image: p.coverImage || null,
+        author: p.author || 'Global Security Team'
+    }))
+
+    // Combine and sort by date descending
+    const posts = [...formattedDbPosts, ...localPosts].sort((a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
 
     return (
         <div className="bg-slate-50 min-h-screen font-sans">

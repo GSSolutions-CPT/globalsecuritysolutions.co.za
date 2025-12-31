@@ -1,5 +1,63 @@
 [
     {
+        "slug": "load-shedding-security-guide-cape-town",
+        "title": "The Ultimate Load Shedding Security Guide 2026",
+        "date": "Jan 01, 2026",
+        "coverImage": "/services/heroes/alarm-system.jpg",
+        "excerpt": "Is your alarm beeping when the power goes out? Discover the essential upgrades needed to keep your Cape Town home secure during Stage 6 load shedding.",
+        "author": "Kyle Cass",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "Load shedding has become a daily reality in Cape Town, but it shouldn't compromise your safety. We've seen a sharp rise in opportunistic crimes occurring exactly when streetlights and house alarms go dark. This guide covers the essential upgrades you need to stay secure."
+            },
+            {
+                "type": "heading",
+                "text": "1. The Weakest Link: Your Alarm Battery"
+            },
+            {
+                "type": "paragraph",
+                "text": "Most older alarm systems run on Lead-Acid batteries designed for occasional outages, not daily cycling. If your keypad beeps or goes dead during a 4-hour slot, your battery is likely sulphated and useless."
+            },
+            {
+                "type": "list",
+                "items": [
+                    "Solution: Upgrade to Lithium-Iron (LiFePO4) batteries.",
+                    "Benefit: They last 4x longer and charge faster.",
+                    "Cost: Slightly higher upfront, but they save money on replacements."
+                ]
+            },
+            {
+                "type": "heading",
+                "text": "2. Electric Fence Energizers"
+            },
+            {
+                "type": "paragraph",
+                "text": "Your electric fence is your first line of defense. If the energizer battery dies, the fence is just decorative wire. We recommend installing a dedicated battery backup unit specifically for your energizer to ensure it holds a 10kV charge throughout the night."
+            },
+            {
+                "type": "heading",
+                "text": "3. Solar CCTV Cameras"
+            },
+            {
+                "type": "paragraph",
+                "text": "Blind spots are dangerous. Traditional CCTV systems shut down without power. We are now installing independent solar-powered cameras from Hikvision and Ezviz that run completely off-grid. They connect to your phone via 4G, so even if your home Wi-Fi dies, you still get alerts."
+            },
+            {
+                "type": "heading",
+                "text": "4. Gate Motors are Critical"
+            },
+            {
+                "type": "paragraph",
+                "text": "Being stuck outside your gate is a major hijacking risk. Ensure your Centurion gate motor has high-capacity backup batteries. We also install anti-theft cages, as battery theft increases during load shedding."
+            },
+            {
+                "type": "paragraph",
+                "text": "Don't wait for an incident. Contact Global Security Solutions today for a 'Load Shedding Audit' of your property."
+            }
+        ]
+    },
+    {
         "slug": "top-5-security-tips-cape-town",
         "title": "Top 5 Security Tips for Cape Town Residents",
         "date": "Dec 12, 2024",
