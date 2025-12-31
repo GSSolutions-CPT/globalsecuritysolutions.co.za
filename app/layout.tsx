@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AOSInit } from "@/components/AOSInit";
-import { getBaseSchema } from "@/utils/generateSchema";
+import StructuredData from "@/components/StructuredData";
 import { cn } from "@/utils/cn";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
@@ -61,10 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(getBaseSchema()) }}
-        />
+        <StructuredData />
         <AOSInit />
         <Header />
         <main className="flex-grow min-h-screen">
