@@ -57,6 +57,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+            {/* Service Schema */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -69,7 +70,79 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                             ...masterBusinessData
                         },
                         "serviceType": service.page,
-                        "areaServed": masterBusinessData.areaServed
+                        "areaServed": masterBusinessData.areaServed,
+                        "brand": (service.brands || ['Hikvision', 'Paradox', 'Ajax', 'IDS']).map(brand => ({
+                            "@type": "Brand",
+                            "name": brand
+                        }))
+                    })
+                }}
+            />
+
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://globalsecuritysolutions.co.za"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Services",
+                                "item": "https://globalsecuritysolutions.co.za/services"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": service.page,
+                                "item": `https://globalsecuritysolutions.co.za/services/${toSlug(service.page)}`
+                            }
+                        ]
+                    })
+                }}
+            />
+
+            {/* FAQ Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": "How long does installation take?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Is there a warranty?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years)."
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": "Can I upgrade my existing system?",
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": "Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion."
+                                }
+                            }
+                        ]
                     })
                 }}
             />
