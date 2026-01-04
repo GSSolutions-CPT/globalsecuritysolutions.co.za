@@ -85,7 +85,7 @@ export default function AboutPage() {
                                             src="/kyle_cass_headshot.jpg"
                                             alt="Kyle Cass"
                                             fill
-                                            className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
+                                            className="rounded-full object-cover object-top shadow-md group-hover:scale-105 transition-transform"
                                         />
                                     </div>
                                     <div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                                             src="/rashaad_steyn_headshot.jpg"
                                             alt="Rashaad Steyn"
                                             fill
-                                            className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
+                                            className="rounded-full object-cover object-top shadow-md group-hover:scale-105 transition-transform"
                                         />
                                     </div>
                                     <div>
