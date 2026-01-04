@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
-import { Facebook, Instagram, Linkedin, Globe, MessageCircle, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Globe, MessageCircle, Mail, Phone, ExternalLink, AtSign } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 const links = [
@@ -40,6 +40,12 @@ const links = [
         url: 'https://www.instagram.com/globalsecuritysolutions.co.za/',
         icon: Instagram,
         color: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90',
+    },
+    {
+        title: 'Follow us on Threads',
+        url: 'https://www.threads.net/@globalsecuritysolutions.co.za',
+        icon: AtSign,
+        color: 'bg-black hover:bg-zinc-800',
     },
     {
         title: 'Connect on LinkedIn',

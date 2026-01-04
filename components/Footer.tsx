@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign } from 'lucide-react'
 import { BrandCarousel } from './BrandCarousel'
 
 export function Footer() {
@@ -29,6 +29,9 @@ export function Footer() {
                             </a>
                             <a href="https://www.instagram.com/globalsecuritysolutions.co.za/" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Instagram Profile">
                                 <Instagram className="w-5 h-5 text-slate-400 group-hover:text-white" />
+                            </a>
+                            <a href="https://www.threads.net/@globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-black w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Threads Profile">
+                                <AtSign className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
                             <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our LinkedIn Profile">
                                 <Linkedin className="w-5 h-5 text-slate-400 group-hover:text-white" />
