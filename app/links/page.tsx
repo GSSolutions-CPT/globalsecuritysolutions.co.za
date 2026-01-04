@@ -31,13 +31,13 @@ const links = [
     },
     {
         title: 'Like us on Facebook',
-        url: 'https://www.facebook.com/globalsecuritysolutionscpt',
+        url: 'https://www.facebook.com/gssolutions.co.za/',
         icon: Facebook,
         color: 'bg-[#1877F2] hover:bg-[#166fe5]',
     },
     {
         title: 'Follow us on Instagram',
-        url: 'https://www.instagram.com/globalsecuritysolutionscpt',
+        url: 'https://www.instagram.com/globalsecuritysolutions.co.za/',
         icon: Instagram,
         color: 'bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90',
     },
