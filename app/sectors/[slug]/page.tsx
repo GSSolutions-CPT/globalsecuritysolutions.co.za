@@ -58,12 +58,12 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
             {/* Hero Section */}
             <section className="relative bg-slate-950 text-white py-20 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-blue-900/40 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-900/0 z-10" />
                     <Image
                         src={sector.heroImage || "/hero-bg.jpg"}
                         alt={sector.title}
                         fill
-                        className="object-cover opacity-40"
+                        className="object-cover opacity-60"
                         priority
                     />
                 </div>

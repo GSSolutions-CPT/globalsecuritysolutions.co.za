@@ -17,12 +17,12 @@ export default function AboutPage() {
             <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     {/* Reusing hero-bg.jpg if available, else fallback to gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-blue-950/40 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-950/0 z-10" />
                     <Image
                         src="/hero-bg.jpg"
                         alt="Security Operations Center"
                         fill
-                        className="object-cover opacity-20"
+                        className="object-cover opacity-60"
                         priority
                     />
                 </div>
