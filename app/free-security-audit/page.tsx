@@ -1,6 +1,6 @@
 import React from 'react'
 import { Metadata } from 'next'
-import { CheckCircle2, Bot, CalendarDays, ArrowRight, ShieldCheck, HardHat } from 'lucide-react'
+import { CheckCircle2, Bot, CalendarDays, ArrowRight, ShieldCheck, HardHat, Camera, UploadCloud, Sparkles, Star } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
 import seoData from '@/app/data/seoData.json'
 import Link from 'next/link'
@@ -113,6 +113,62 @@ export default function FreeAuditPage() {
                             </div>
                         </div>
 
+
+                    </div>
+
+                    {/* AI Audit Process Steps */}
+                    <div className="mb-24">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-blue-600 font-bold uppercase tracking-wider text-sm mb-4 block">Simple & Effective</span>
+                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">How the AI Audit Works</h2>
+                            <p className="text-xl text-slate-600">Get a comprehensive security breakdown in minutes, without a technician visiting your home.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[
+                                { step: "01", title: "Snap", desc: "Take photos of your perimeter, gates, and key entry points.", icon: Camera },
+                                { step: "02", title: "Upload", desc: "Submit them to our secure AI analyzer via the portal.", icon: UploadCloud },
+                                { step: "03", title: "Analyze", desc: "Receive a detailed threat report and quote instantly.", icon: Sparkles }
+                            ].map((s, i) => (
+                                <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative group overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-8 opacity-10 text-9xl font-black text-slate-200 leading-none -mt-4 -mr-4 group-hover:scale-110 transition-transform">{s.step}</div>
+                                    <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 relative z-10 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                                        <s.icon className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-4 relative z-10">{s.title}</h3>
+                                    <p className="text-slate-600 relative z-10">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Testimonial Section */}
+                    <div className="mb-24 bg-slate-900 rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-white sm:flex items-center gap-12">
+                        <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid-pattern.png')] opacity-10" />
+
+                        <div className="relative z-10 shrink-0 mb-8 sm:mb-0">
+                            <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white/10 overflow-hidden relative mx-auto sm:mx-0">
+                                <Image
+                                    src="/testimonial_sarah_jenkins.png"
+                                    alt="Sarah Jenkins"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="relative z-10 text-center sm:text-left">
+                            <div className="flex gap-1 justify-center sm:justify-start text-yellow-500 mb-6">
+                                {[1, 2, 3, 4, 5].map(i => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
+                            </div>
+                            <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-6 text-slate-200">
+                                &quot;I was skeptical about an AI audit, but it spotted a blind spot near my garage that two previous companies missed. The team installed a camera there the next day.&quot;
+                            </blockquote>
+                            <div>
+                                <h4 className="font-bold text-lg text-white">Sarah Jenkins</h4>
+                                <p className="text-slate-400 text-sm">Homeowner, Constantia</p>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Booking Form Section */}
