@@ -32,6 +32,7 @@ interface ServiceData {
     features?: string[]
     brands?: string[]
     heroImage?: string
+    heroAlt?: string
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -153,7 +154,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-900/0 z-10" />
                     <Image
                         src={service.heroImage || "/hero-bg.jpg"}
-                        alt={service.title}
+                        alt={service.heroAlt || service.title}
                         fill
                         className="object-cover opacity-60"
                         priority

@@ -20,7 +20,7 @@ export default function AboutPage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-950/0 z-10" />
                     <Image
                         src="/hero-bg.jpg"
-                        alt="Security Operations Center"
+                        alt="Global Security Solutions Operations and Monitoring Center Cape Town"
                         fill
                         className="object-cover opacity-60"
                         priority
@@ -83,7 +83,7 @@ export default function AboutPage() {
                                     <div className="relative w-16 h-16 mr-6 flex-shrink-0">
                                         <Image
                                             src="/kyle_cass_headshot.jpg"
-                                            alt="Kyle Cass"
+                                            alt="Kyle Cass - Owner Global Security Solutions Cape Town"
                                             fill
                                             className="rounded-full object-cover object-top shadow-md group-hover:scale-105 transition-transform"
                                         />
@@ -101,7 +101,7 @@ export default function AboutPage() {
                                     <div className="relative w-16 h-16 mr-6 flex-shrink-0">
                                         <Image
                                             src="/rashaad_steyn_headshot.jpg"
-                                            alt="Rashaad Steyn"
+                                            alt="Rashaad Steyn - COO Global Security Solutions"
                                             fill
                                             className="rounded-full object-cover object-top shadow-md group-hover:scale-105 transition-transform"
                                         />
@@ -125,11 +125,11 @@ export default function AboutPage() {
                     </div>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* We use existing brand logos here */}
-                        <Image src="/brand-hikvision.png" alt="Hikvision Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brand-ajax.png" alt="Ajax Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brand-paradox.png" alt="Paradox Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brand-nemtek.png" alt="Nemtek Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brand-centurion.png" alt="Centurion Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-hikvision.png" alt="Hikvision Certified Installer Badge Cape Town" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-ajax.png" alt="Ajax Systems Authorized Dealer Badge" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-paradox.png" alt="Paradox Security Systems Certified Partner" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-nemtek.png" alt="Nemtek Electric Fencing Certified Installer" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-centurion.png" alt="Centurion Gate Motors Accredited Installer" width={120} height={60} className="object-contain h-12 w-auto" />
                     </div>
                 </div>
 
