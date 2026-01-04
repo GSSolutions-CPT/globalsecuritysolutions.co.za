@@ -15,10 +15,10 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalsecuritysolutions.co.za'),
   title: {
-    default: "Security System Installations Cape Town | Global Security Solutions",
+    default: "Premium Security System Installations Cape Town | Global Security Solutions",
     template: "%s | Global Security Solutions",
   },
-  description: "Expert security system installations in Cape Town. We offer alarms, CCTV, and electric fencing. Get a free quote today from Global Security Solutions.",
+  description: "Cape Town's trusted security experts. We install AI-powered CCTV, smart alarms, and off-grid security systems. Get a free risk assessment today.",
   openGraph: {
     title: "Security System Installations Cape Town | Global Security Solutions",
     description: "Expert security system installations in Cape Town. We offer alarms, CCTV, and electric fencing. Get a free quote today from Global Security Solutions.",

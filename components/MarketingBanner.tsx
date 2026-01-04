@@ -27,19 +27,19 @@ export const MarketingBanner = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
-                        Cape Town's #1 Rated Installer
+                        Cape Town&apos;s #1 Rated Installer
                     </div>
 
                     {/* Main Heading */}
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tight animate-fade-in-up delay-100">
-                        Secure Your <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">World Today.</span>
+                        Premium Security <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">System Installations.</span>
                     </h1>
 
                     {/* Sub-text */}
                     <p className="text-xl md:text-2xl text-slate-300/90 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
-                        Expert installation of AI-powered CCTV, Alarm Systems, and Access Control.
-                        <span className="block mt-2 text-slate-400 text-lg">Trusted by 500+ Cape Town homeowners and businesses.</span>
+                        We secure Cape Town homes and businesses with AI-powered CCTV, smart alarms, and off-grid power solutions.
+                        <span className="block mt-2 text-slate-400 text-lg">Over 10 years of experience and 500+ satisfied clients.</span>
                     </p>
 
                     {/* CTA Buttons */}

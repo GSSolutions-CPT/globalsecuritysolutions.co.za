@@ -4,11 +4,11 @@ import dynamic from 'next/dynamic'
 import { ArrowRight, ShieldCheck, Zap, Settings } from 'lucide-react'
 import { MarketingBanner } from '@/components/MarketingBanner'
 import { BrandCarousel } from '@/components/BrandCarousel'
+import { ServiceGrid } from '@/components/ServiceGrid'
+import { SectorGrid } from '@/components/SectorGrid'
 
 // Critical LCP Optimization: Lazy load heavy interactive components below the fold
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm))
-const ServiceCarousel = dynamic(() => import('@/components/ServiceCarousel').then(mod => mod.ServiceCarousel))
-const SectorCarousel = dynamic(() => import('@/components/SectorCarousel').then(mod => mod.SectorCarousel))
 const TestimonialCarousel = dynamic(() => import('@/components/TestimonialCarousel').then(mod => mod.TestimonialCarousel))
 
 export default function Home() {
@@ -18,7 +18,31 @@ export default function Home() {
       {/* SECTION 1: HERO HEADER */}
       <MarketingBanner />
 
-      {/* Trusted By Carousel - Clean & Minimal */}
+      {/* Stats Section - Moved up for Instant Credibility */}
+      <section className="py-12 bg-blue-600 border-b border-blue-700">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white divide-x divide-blue-500/50">
+            <div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Years Experience</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Installations</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Quality Guaranteed</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
+              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Carousel */}
       <section className="py-12 bg-white border-b border-slate-100">
         <div className="container mx-auto px-4 text-center">
           <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-8">Trusted by Cape Town&apos;s Leading Brands</p>
@@ -38,13 +62,13 @@ export default function Home() {
               Comprehensive <span className="text-blue-600">Security Solutions</span>
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
-              We don&apos;t just install hardware; we architect complete security layers that integrate seamlessly into your lifestyle.
+              We specialize in end-to-end security installations. From the perimeter fence to the alarm panel, every system is integrated for maximum protection.
             </p>
           </div>
 
-          <ServiceCarousel />
+          <ServiceGrid />
 
-          <div className="mt-24 text-center">
+          <div className="mt-16 text-center">
             <Link
               href="/services"
               className="inline-flex items-center text-slate-900 font-bold hover:text-blue-600 text-lg group transition-colors"
@@ -59,19 +83,14 @@ export default function Home() {
       {/* Sector Focus - Dark Theme Interstitial */}
       <section className="py-24 bg-slate-900 text-white relative isolate">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Tailored to Your <span className="text-indigo-400">Environment</span></h2>
-              <p className="text-slate-400 text-lg leading-relaxed">
-                Security needs differ vastly between a quiet residential estate and a bustling industrial park. We specialize in sector-specific risk assessments and solutions.
-              </p>
-            </div>
-            <div className="flex gap-4 overflow-hidden mask-fade-right">
-              {/* Abstract visual representations could go here */}
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Tailored to Your <span className="text-indigo-400">Environment</span></h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+              Security needs differ vastly between a quiet residential estate and a bustling industrial park. We specialize in sector-specific risk assessments.
+            </p>
           </div>
 
-          <SectorCarousel />
+          <SectorGrid />
         </div>
       </section>
 
@@ -104,7 +123,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Certified Experts</h3>
               <p className="text-slate-600 leading-relaxed">
-                Our team is certified by leading brands like Hikvision, Ajax, Paradox, and Nemtek.
+                Our team is certified by leading brands like Hikvision, Ajax, Paradox, and Nemtek, ensuring full warranty compliance.
               </p>
             </div>
 
@@ -117,30 +136,6 @@ export default function Home() {
               <p className="text-slate-600 leading-relaxed">
                 We design with South African realities in mind. Your security stays online even when the grid goes down.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-blue-600">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white divide-x divide-blue-500/50">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
-              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Years Experience</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
-              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Installations</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">100%</div>
-              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Quality Guaranteed</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
-              <div className="text-blue-50 text-sm uppercase tracking-wider font-semibold">Support</div>
             </div>
           </div>
         </div>
