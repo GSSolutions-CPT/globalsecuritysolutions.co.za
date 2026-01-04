@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
-import { Facebook, Instagram, Linkedin, Globe, MessageCircle, Mail, Phone, ExternalLink, AtSign } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Globe, MessageCircle, Mail, Phone, ExternalLink, AtSign, MapPin } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 const links = [
@@ -52,6 +52,12 @@ const links = [
         url: 'https://www.linkedin.com/company/global-security-solutions-cape-town',
         icon: Linkedin,
         color: 'bg-[#0077b5] hover:bg-[#006fa3]',
+    },
+    {
+        title: 'Review us on Google',
+        url: 'https://g.page/r/CekZuIweXZuaEBE',
+        icon: MapPin,
+        color: 'bg-[#DB4437] hover:bg-[#c53929]',
     },
     {
         title: 'Email Sales',

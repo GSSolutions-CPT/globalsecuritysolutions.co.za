@@ -33,6 +33,9 @@ export function Footer() {
                             <a href="https://www.threads.net/@globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-black w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Threads Profile">
                                 <AtSign className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
+                            <a href="https://g.page/r/CekZuIweXZuaEBE" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-green-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Google Business Profile">
+                                <MapPin className="w-5 h-5 text-slate-400 group-hover:text-white" />
+                            </a>
                             <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our LinkedIn Profile">
                                 <Linkedin className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
