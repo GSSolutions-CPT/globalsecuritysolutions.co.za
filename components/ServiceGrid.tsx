@@ -19,7 +19,7 @@ export function ServiceGrid() {
                     <Link
                         key={`${service.page}-${index}`}
                         href={`/services/${slug}`}
-                        className="group relative flex flex-col bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                        className="group relative flex flex-col items-center text-center bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                     >
                         {/* Hover Accent */}
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
@@ -47,7 +47,8 @@ export function ServiceGrid() {
                         </p>
 
                         {/* Link CTA */}
-                        <div className="mt-auto flex items-center text-blue-600 text-sm font-bold opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                        {/* Link CTA */}
+                        <div className="mt-auto inline-flex items-center justify-center text-blue-600 text-sm font-bold opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                             Learn More <ArrowRight className="w-4 h-4 ml-1" />
                         </div>
                     </Link>

@@ -28,7 +28,7 @@ export default function AboutPage() {
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 pt-20">
-                    <div className="max-w-3xl">
+                    <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
                             <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                             Est. 2015
