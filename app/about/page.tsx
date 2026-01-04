@@ -78,28 +78,58 @@ export default function AboutPage() {
                                 <h3 className="text-2xl font-bold text-slate-900">Leadership Team</h3>
                             </div>
 
-                            <div className="space-y-6">
-                                <div className="flex items-start group p-4 rounded-2xl hover:bg-slate-50 transition-colors">
-                                    <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 flex-shrink-0 shadow-md transform group-hover:scale-110 transition-transform">KC</div>
+                            <div className="space-y-8">
+                                <div className="flex items-center group p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                                    <div className="relative w-16 h-16 mr-6 flex-shrink-0">
+                                        <Image
+                                            src="/kyle_cass_headshot.png"
+                                            alt="Kyle Cass"
+                                            fill
+                                            className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
+                                        />
+                                    </div>
                                     <div>
                                         <h4 className="font-bold text-slate-900 text-lg">Kyle Cass</h4>
-                                        <p className="text-blue-600 font-medium text-sm mb-1">Owner & Founder</p>
-                                        <p className="text-slate-500 text-sm">Hands-on supervision ensuring every project meets our rigorous standards.</p>
+                                        <p className="text-blue-600 font-medium text-sm mb-2">Owner & Founder</p>
+                                        <p className="text-slate-500 text-sm leading-snug">Hands-on supervision ensuring every project meets our rigorous standards.</p>
                                     </div>
                                 </div>
 
                                 <div className="w-full h-px bg-slate-100"></div>
 
-                                <div className="flex items-start group p-4 rounded-2xl hover:bg-slate-50 transition-colors">
-                                    <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 flex-shrink-0 shadow-md transform group-hover:scale-110 transition-transform">RS</div>
+                                <div className="flex items-center group p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                                    <div className="relative w-16 h-16 mr-6 flex-shrink-0">
+                                        <Image
+                                            src="/rashaad_steyn_headshot.png"
+                                            alt="Rashaad Steyn"
+                                            fill
+                                            className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
+                                        />
+                                    </div>
                                     <div>
                                         <h4 className="font-bold text-slate-900 text-lg">Rashaad Steyn</h4>
-                                        <p className="text-blue-600 font-medium text-sm mb-1">Chief Operating Officer</p>
-                                        <p className="text-slate-500 text-sm">Overseeing operational excellence and strategic growth.</p>
+                                        <p className="text-blue-600 font-medium text-sm mb-2">Chief Operating Officer</p>
+                                        <p className="text-slate-500 text-sm leading-snug">Overseeing operational excellence and strategic growth.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* Certifications Section */}
+                <div className="mb-20">
+                    <div className="text-center mb-12">
+                        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Accredited & Certified</h2>
+                        <p className="text-slate-500 mt-2">We are authorized installers for the world's leading security brands.</p>
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+                        {/* We use existing brand logos here */}
+                        <Image src="/brands/hikvision.png" alt="Hikvision Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brands/ajax.png" alt="Ajax Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brands/paradox.png" alt="Paradox Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brands/nemtek.png" alt="Nemtek Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brands/centurion.png" alt="Centurion Certified" width={120} height={60} className="object-contain h-12 w-auto" />
                     </div>
                 </div>
 

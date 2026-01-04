@@ -124,15 +124,35 @@ export default function ContactPage() {
                         </div>
 
                         {/* Contact Form Card */}
-                        <div className="bg-slate-900 p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-950/20 text-white relative overflow-hidden">
+                        <div className="bg-slate-900 p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-950/20 text-white relative overflow-hidden flex flex-col h-full">
                             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500" />
+                            <div className="absolute top-0 right-0 p-6 opacity-20">
+                                <MessageSquare className="w-24 h-24 text-white" />
+                            </div>
 
-                            <div className="relative z-10">
-                                <h2 className="text-3xl font-bold mb-2">Send us a Message</h2>
-                                <p className="text-slate-400 mb-8">Fill in the form below and we&apos;ll get back to you within 24 hours.</p>
+                            <div className="relative z-10 flex-grow">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <h2 className="text-3xl font-bold">Send us a Message</h2>
+                                    <span className="bg-green-500/20 border border-green-500/30 text-green-400 text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+                                        Online
+                                    </span>
+                                </div>
+                                <p className="text-slate-400 mb-8 max-w-sm">
+                                    Fill in the form below and we&apos;ll get back to you <span className="text-white font-bold decoration-blue-500 underline decoration-2 underline-offset-2">within 24 hours</span>.
+                                </p>
 
                                 <div className="bg-white/5 p-1 rounded-2xl backdrop-blur-sm border border-white/10">
                                     <ContactForm />
+                                </div>
+                            </div>
+
+                            {/* Social Footer inside Card */}
+                            <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                                <p className="text-slate-500 text-sm mb-4">Or connect with us on social media</p>
+                                <div className="flex justify-center gap-4">
+                                    <a href="https://facebook.com/globalsecuritysolutions" className="p-2 bg-white/5 rounded-full hover:bg-blue-600 transition-colors"><span className="sr-only">Facebook</span>FB</a>
+                                    <a href="https://instagram.com/globalsecuritysolutions" className="p-2 bg-white/5 rounded-full hover:bg-pink-600 transition-colors"><span className="sr-only">Instagram</span>IG</a>
+                                    <a href="https://linkedin.com" className="p-2 bg-white/5 rounded-full hover:bg-blue-700 transition-colors"><span className="sr-only">LinkedIn</span>LI</a>
                                 </div>
                             </div>
                         </div>
