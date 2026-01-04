@@ -3,6 +3,7 @@
         "slug": "load-shedding-security-guide-cape-town",
         "title": "The Ultimate Load Shedding Security Guide 2026",
         "date": "Jan 01, 2026",
+        "category": "Guides",
         "coverImage": "/blog/load-shedding-battery.png",
         "excerpt": "Is your alarm beeping when the power goes out? Discover the essential upgrades needed to keep your Cape Town home secure during Stage 6 load shedding.",
         "author": "Kyle Cass",
@@ -61,6 +62,7 @@
         "slug": "top-5-security-tips-cape-town",
         "title": "Top 5 Security Tips for Cape Town Residents",
         "date": "Dec 12, 2024",
+        "category": "Tips",
         "coverImage": "/blog/security-tips-exterior.png",
         "excerpt": "Crime trends in Cape Town are changing. Here are the top 5 things you can do today to secure your home, from lighting to perimeter beams.",
         "content": [
@@ -114,8 +116,10 @@
         "slug": "understanding-electric-fencing-laws",
         "title": "Understanding Regulations for Electric Fencing in South Africa",
         "date": "Nov 28, 2024",
+        "category": "Compliance",
         "coverImage": "/blog/electric-fence-compliant.png",
         "excerpt": "Did you know that non-compliant electric fencing can void your insurance? Learn about the COC requirements and safety laws.",
+        "author": "Rashaad Steyn",
         "content": [
             {
                 "type": "paragraph",
@@ -145,6 +149,53 @@
             {
                 "type": "paragraph",
                 "text": "At Global Security Solutions, we issue a COC with every new installation, ensuring you are fully covered."
+            }
+        ]
+    },
+    {
+        "slug": "latest-crime-trends-cape-town-2025",
+        "title": "Alert: Latest Crime Trends in Cape Town & Prevention Strategies",
+        "date": "Jan 15, 2026",
+        "category": "Crime Trends",
+        "coverImage": "/blog/crime-trends-cctv.png",
+        "excerpt": "From remote jamming to roof access, criminals are evolving. Here is what our tactical teams are seeing on the ground and how to counter it.",
+        "author": "Kyle Cass",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "As security technology improves, so do the methods used by criminals. We have noticed a distinct shift in tactics used by syndicates in the greater Cape Town area over the last 6 months."
+            },
+            {
+                "type": "heading",
+                "text": "1. Roof Access Burglaries"
+            },
+            {
+                "type": "paragraph",
+                "text": "Criminals are bypassing perimeter beams by lifting roof tiles. Standard internal PIRs often don't catch them until they are already inside. We recommend installing ceiling-void sensors to detect movement in your roof space."
+            },
+            {
+                "type": "heading",
+                "text": "2. Gate Motor Theft"
+            },
+            {
+                "type": "paragraph",
+                "text": "With load shedding, backup batteries are high-value targets. Thieves break open gate motors to steal the battery or the entire motor. An anti-theft bracket is now a mandatory requirement for insurance in many areas."
+            },
+            {
+                "type": "heading",
+                "text": "3. Remote Jamming"
+            },
+            {
+                "type": "paragraph",
+                "text": "Always physically check your car door is locked. Jammers prevent the locking signal from reaching your car. We also recommend upgrading to anti-jamming remotes for your alarm and gate."
+            },
+            {
+                "type": "heading",
+                "text": "Stay Ahead"
+            },
+            {
+                "type": "paragraph",
+                "text": "The best defense is a layered one. Don't rely on a single system. Contact us to update your threat assessment."
             }
         ]
     }

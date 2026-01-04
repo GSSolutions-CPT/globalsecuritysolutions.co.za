@@ -57,7 +57,7 @@
             },
             {
                 "q": "What happens to the alarm during load shedding?",
-                "a": "Your alarm panel has a backup battery. We ensure this battery is healthy to last 4-8 hours. For higher stages of load shedding, we recommend upgrading to a Lithium-Iron battery or an external power pack."
+                "a": "Your alarm panel has a backup battery. We ensure this battery is healthy to last 4-8 hours. For higher stages of load shedding, we recommend upgrading to a <a href='/services/alarm-systems' class='text-blue-600 hover:underline'>Lithium-Iron battery</a> or an external power pack."
             },
             {
                 "q": "Do you install pet-friendly sensors?",
@@ -94,7 +94,7 @@
         "questions": [
             {
                 "q": "What is the difference between IP and Analog CCTV?",
-                "a": "Analog (HD-TVI) sends video over coax cable; it is cost-effective and good for upgrades. IP cameras send digital data over network cables, offering higher resolution (4K+), better analytics, and easier scalability."
+                "a": "Analog (HD-TVI) sends video over coax cable; it is cost-effective and good for upgrades. <a href='/services/cctv-installations' class='text-blue-600 hover:underline'>IP cameras</a> send digital data over network cables, offering higher resolution (4K+), better analytics, and easier scalability."
             },
             {
                 "q": "How much recording time will I get?",
@@ -233,7 +233,7 @@
             },
             {
                 "q": "Do I need a COC (Certificate of Compliance)?",
-                "a": "Yes, by law, any new electric fence installation or major alteration requires a COC to ensure it meets safety standards."
+                "a": "Yes, by law, any new <a href='/services/electric-fencing' class='text-blue-600 hover:underline'>electric fence installation</a> or major alteration requires a COC to ensure it meets safety standards."
             },
             {
                 "q": "How much electricity does it use?",
