@@ -1,14 +1,15 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { ArrowRight, ShieldCheck, Zap, Settings } from 'lucide-react'
-import { ContactForm } from '@/components/ContactForm'
 import { MarketingBanner } from '@/components/MarketingBanner'
 import { BrandCarousel } from '@/components/BrandCarousel'
-import { ServiceCarousel } from '@/components/ServiceCarousel'
-import { SectorCarousel } from '@/components/SectorCarousel'
-import { TestimonialCarousel } from '@/components/TestimonialCarousel'
+
+// Critical LCP Optimization: Lazy load heavy interactive components below the fold
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm))
+const ServiceCarousel = dynamic(() => import('@/components/ServiceCarousel').then(mod => mod.ServiceCarousel))
+const SectorCarousel = dynamic(() => import('@/components/SectorCarousel').then(mod => mod.SectorCarousel))
+const TestimonialCarousel = dynamic(() => import('@/components/TestimonialCarousel').then(mod => mod.TestimonialCarousel))
 
 export default function Home() {
   return (

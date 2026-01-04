@@ -7,7 +7,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AOSInit } from "@/components/AOSInit";
 import StructuredData from "@/components/StructuredData";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { DeferredAnalytics } from "@/components/DeferredAnalytics";
 import { cn } from "@/utils/cn";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
@@ -62,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
-        <GoogleAnalytics gaId="G-LM5YX7EWWH" />
+        <DeferredAnalytics gaId="G-LM5YX7EWWH" />
         <StructuredData />
         <AOSInit />
         <Header />

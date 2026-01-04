@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+
 import { ArrowRight } from 'lucide-react'
 import seoData from '@/app/data/seoData.json'
 
