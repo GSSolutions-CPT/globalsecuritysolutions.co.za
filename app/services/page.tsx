@@ -57,11 +57,11 @@ export default function ServicesIndexPage() {
                         <Link
                             key={service.page}
                             href={`/services/${toSlug(service.page)}`}
-                            className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col h-full"
+                            className="group relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col items-center text-center h-full"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-blue-50 transition-colors" />
 
-                            <div className="w-16 h-16 mb-6 relative">
+                            <div className="w-16 h-16 mb-6 relative mx-auto">
                                 {service.iconPath ? (
                                     <Image
                                         src={service.iconPath}
