@@ -82,7 +82,7 @@ export default function AboutPage() {
                                 <div className="flex items-center group p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                                     <div className="relative w-16 h-16 mr-6 flex-shrink-0">
                                         <Image
-                                            src="/kyle_cass_headshot.png"
+                                            src="/kyle_cass_headshot.jpg"
                                             alt="Kyle Cass"
                                             fill
                                             className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
@@ -100,7 +100,7 @@ export default function AboutPage() {
                                 <div className="flex items-center group p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                                     <div className="relative w-16 h-16 mr-6 flex-shrink-0">
                                         <Image
-                                            src="/rashaad_steyn_headshot.png"
+                                            src="/rashaad_steyn_headshot.jpg"
                                             alt="Rashaad Steyn"
                                             fill
                                             className="rounded-full object-cover shadow-md group-hover:scale-105 transition-transform"
@@ -125,11 +125,11 @@ export default function AboutPage() {
                     </div>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* We use existing brand logos here */}
-                        <Image src="/brands/hikvision.png" alt="Hikvision Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brands/ajax.png" alt="Ajax Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brands/paradox.png" alt="Paradox Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brands/nemtek.png" alt="Nemtek Certified" width={120} height={60} className="object-contain h-12 w-auto" />
-                        <Image src="/brands/centurion.png" alt="Centurion Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-hikvision.png" alt="Hikvision Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-ajax.png" alt="Ajax Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-paradox.png" alt="Paradox Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-nemtek.png" alt="Nemtek Certified" width={120} height={60} className="object-contain h-12 w-auto" />
+                        <Image src="/brand-centurion.png" alt="Centurion Certified" width={120} height={60} className="object-contain h-12 w-auto" />
                     </div>
                 </div>
 
