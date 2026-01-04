@@ -38,7 +38,7 @@
             "description": "Stop intruders in their tracks with 24/7 monitored alarm systems. We install wireless and wired solutions from AJAX, IDS, and Paradox for ultimate peace of mind.",
             "longDescription": "An alarm system is the heartbeat of your property's security. We don't just stick sensors on doors; we design a comprehensive trap-zone strategy. Using top-tier brands like AJAX and Paradox, our systems are fully app-controllable, allowing you to arm, disarm, and check status from anywhere. Whether you need a simple wired upgrade or a fully wireless smart-home integration, our certified technicians ensure zero false alarms and maximum reliability.",
             "iconPath": "/icons/alarm-system-installation.png",
-            "heroImage": "/services/heroes/alarm-system.jpg",
+            "heroImage": "/services/heroes/alarm-system.png",
             "brands": [
                 "AJAX",
                 "IDS",
@@ -66,7 +66,7 @@
             "description": "Take control of who enters your space. From biometric scanners to keyless entry, we provide secure, seamless access management for homes and businesses.",
             "longDescription": "Managing entry points is critical for business efficiency and home safety. We deploy biometric fingerprint readers, facial recognition terminals, and RFID card systems that integrate seamlessly with your payroll or time-attendance software. For residential estates, we offer heavy-duty magnetic locks and intercom integration to ensure only authorized guests gain entry.",
             "iconPath": "/icons/access-control-solutions.png",
-            "heroImage": "/services/heroes/access-control.jpg",
+            "heroImage": "/services/heroes/access-control.png",
             "brands": [
                 "ZKTeco",
                 "Impro",
@@ -80,7 +80,7 @@
             "description": "Never miss a visitor again. See, hear, and speak to guests at your gate with our modern video intercom systems. Secure, convenient, and reliable.",
             "longDescription": "The first experience a visitor has at your property should be secure but welcoming. Our diverse range of video intercoms from Hikvision and Commax allows you to visually verify guests before opening the gate. With mobile-app forwarding, you can answer your gate bell from your office or even while on vacation, creating the illusion of occupancy at all times.",
             "iconPath": "/icons/intercom-system-installers.png",
-            "heroImage": "/services/heroes/intercom.jpg",
+            "heroImage": "/services/heroes/intercom.png",
             "brands": [
                 "Hikvision",
                 "Commax",
@@ -94,7 +94,7 @@
             "description": "Your first line of defense. Our certified electric fencing provides a powerful deterrent against intruders, keeping your perimeter secure around the clock.",
             "longDescription": "A robust electric fence is the ultimate psychological and physical deterrent. We are certified Nemtek installers, ensuring every inch of your perimeter is compliant with South African safety laws (COC provided). We use multi-zone energizers, heavy-duty suppression monitoring, and anti-climb brackets to ensure your boundary is impenetrable and fully monitored.",
             "iconPath": "/icons/electric-fence-installations.png",
-            "heroImage": "/services/heroes/electric-fence.jpg",
+            "heroImage": "/services/heroes/electric-fence.png",
             "brands": [
                 "Nemtek",
                 "Stafix",
@@ -108,7 +108,7 @@
             "description": "Detect threats before they reach your door. We install advanced outdoor beams and motion sensors to create an invisible safety shield around your property.",
             "longDescription": "True security means catching the intruder before they touch a window. Our perimeter solutions utilize dual-technology outdoor beams and passive infrared (PIR) sensors that ignore swaying trees and small animals but trigger instantly upon human detection. These systems can trigger floodlights, sirens, or silent alerts to your phone, giving you precious time to react.",
             "iconPath": "/icons/perimeter-security-enhancement.png",
-            "heroImage": "/services/heroes/perimeter.jpg",
+            "heroImage": "/services/heroes/perimeter.png",
             "brands": [
                 "Optex",
                 "Takex",
@@ -122,7 +122,7 @@
             "description": "Experience the luxury of automatic access. We install and repair high-speed motors for gates and garage doors, ensuring safety and convenience every time you arrive.",
             "longDescription": "A slow gate is a security risk. We install high-speed, battery-backed motors from Centurion Systems that open and close in seconds to prevent 'tailgating' or hijacking. Our installations include anti-lift brackets and theft-deterrent cages to protect the motor itself. We also specialize in heavy-duty commercial gate motors for high-traffic business parks.",
             "iconPath": "/icons/gate-and-garage-automation.png",
-            "heroImage": "/services/heroes/gate-automation.jpg",
+            "heroImage": "/services/heroes/gate-automation.png",
             "brands": [
                 "Centurion",
                 "ET Nice",
@@ -136,7 +136,7 @@
             "description": "Protect your fleet and personal vehicles with cutting-edge tracking and alarm systems. Real-time monitoring ensures your assets are always safe.",
             "longDescription": "From fleet management to personal vehicle tracking, our GPS and GSM-based systems allow you to monitor location, speed, and driver behavior in real-time. We also verify locks and install slam-lock systems for delivery vehicles, ensuring your mobile assets are as secure as your physical premises.",
             "iconPath": "/icons/vehicle-security-systems.png",
-            "heroImage": "/services/heroes/vehicle-security.jpg",
+            "heroImage": "/services/heroes/vehicle-security.png",
             "brands": [
                 "Tramigo",
                 "Sanji",
@@ -150,7 +150,7 @@
             "description": "Turn your house into a smart fortress. Control lights, alarms, and cameras from a single app. Seamless security integration for the modern lifestyle.",
             "longDescription": "Security meets convenience. We integrate your alarm, cameras, and gate control into a single ecosystem (like Home Assistant or proprietary smart apps). Imagine your lights automatically turning on when the alarm triggers, or your gate opening via voice command. We make your home not just safer, but smarter and more responsive to your lifestyle.",
             "iconPath": "/icons/smart-home-automation.png",
-            "heroImage": "/services/heroes/smart-home.jpg",
+            "heroImage": "/services/heroes/smart-home.png",
             "brands": [
                 "Sonoff",
                 "Shelly",
@@ -164,7 +164,7 @@
             "description": "Unified security for maximum efficiency. We link your CCTV, beams, and alarms into one cohesive system, giving you complete control at your fingertips.",
             "longDescription": "Siloed security systems are inefficient. We practice 'Converged Security', where your CCTV talks to your alarm, and your alarm talks to your access control. This means when a beam is breached, a PTZ camera automatically globs onto that location and records high-res footage. This level of synergy provides superior forensic evidence and real-time situational awareness.",
             "iconPath": "/icons/security-system-integration.png",
-            "heroImage": "/services/heroes/integration.jpg",
+            "heroImage": "/services/heroes/integration.png",
             "brands": [
                 "Hikvision",
                 "Milestone",
@@ -178,7 +178,7 @@
             "description": "Is your system outdated or faulty? Our expert technicians provide fast repairs and modern upgrades to ensure your security is never compromised.",
             "longDescription": "An outdated system is a liability. We specialize in 'system takeovers'—repairing and upgrading old wired alarm systems with modern wireless expanders. Whether it's a corroded circuit board, a faulty gate motor, or simply replacing old lead-acid batteries with Lithium-Iron, we breathe new life into existing infrastructure to save you the cost of a full replacement.",
             "iconPath": "/icons/security-repairs-and-upgrades.png",
-            "heroImage": "/services/heroes/repairs.jpg",
+            "heroImage": "/services/heroes/repairs.png",
             "brands": [
                 "Centurion",
                 "Nemtek",
@@ -192,7 +192,7 @@
             "description": "Prevent failures before they happen. Our maintenance plans ensure your batteries are charged, sensors are clean, and your security is always ready.",
             "longDescription": "Security systems degrade over time due to weather, insects, and battery aging. Our service level agreements (SLAs) provide peace of mind for business owners and body corporates. We conduct monthly or quarterly site visits to clean camera lenses, test battery load capacity, tension electric fences, and verify simplified transmission signals to the control room.",
             "iconPath": "/icons/security-maintenance-contracts.png",
-            "heroImage": "/services/heroes/maintenance.jpg",
+            "heroImage": "/services/heroes/maintenance.png",
             "brands": [
                 "Hikvision",
                 "Centurion",
@@ -207,7 +207,7 @@
             "title": "Residential Security Cape Town | Home Alarm Systems",
             "description": "Protecting what matters most. Personalized home security solutions including panic systems, child-safe pool protection, and intruder detection.",
             "longDescription": "Your home is your sanctuary. Our residential security strategy focuses on 'Layered Defense'. We start at the perimeter with early warning beams, reinforce the building shell with door/window contacts, and secure the interior with pet-friendly motion sensors. We also prioritize aesthetic installations that hide cabling and blend sensors into your home's decor.",
-            "heroImage": "/sectors/heroes/residential.jpg",
+            "heroImage": "/sectors/heroes/residential.png",
             "brands": [
                 "AJAX",
                 "Paradox",
@@ -220,7 +220,7 @@
             "title": "Commercial Security Cape Town | Business CCTV & Alarms",
             "description": "Secure your business assets and staff. We deploy enterprise-grade access control, time-attendance, and 24-hour surveillance for total operational safety.",
             "longDescription": "Businesses face unique threats: shrinkage, liability claims, and unauthorized access. We provide commercial-grade solutions including biometric time-and-attendance, high-resolution IP camera networks for staff monitoring, and partitioned alarm systems that allow you to secure stockrooms while keeping the office area active.",
-            "heroImage": "/sectors/heroes/commercial.jpg",
+            "heroImage": "/sectors/heroes/commercial.png",
             "brands": [
                 "Hikvision",
                 "Dahua",
@@ -233,7 +233,7 @@
             "title": "Industrial Security Cape Town | Warehouse Protection",
             "description": "Heavy-duty security for tough environments. Protect factories and warehouses with long-range thermal cameras, high-voltage fencing, and rugged access points.",
             "longDescription": "Warehouses and factories require ruggedized equipment. We install explosion-proof cameras, heavy-duty industrial turnstiles, and high-voltage perimeter fencing designed to withstand harsh environments. Our thermal imaging solutions can detect intruders in complete darkness across vast storage yards, triggering automated responses instantly.",
-            "heroImage": "/sectors/heroes/industrial.jpg",
+            "heroImage": "/sectors/heroes/industrial.png",
             "brands": [
                 "Hikvision",
                 "Nemtek",
@@ -246,7 +246,7 @@
             "title": "Farm Security Systems Western Cape | Perimeter Protection",
             "description": "Covering vast distances with smart tech. We specialize in wireless beams, solar-powered cameras, and early warning systems for farms and smallholdings.",
             "longDescription": "Rural security relies on range and power independence. We deploy point-to-point wireless bridges to link cameras kilometers away from the main house. Our solar-powered beam towers and GSM intercom systems ensure that even the most remote gate or barn is monitored 24/7 without relying on the unstable Eskom grid.",
-            "heroImage": "/sectors/heroes/farm.jpg",
+            "heroImage": "/sectors/heroes/farm.png",
             "brands": [
                 "Hikvision",
                 "Ubiquiti",
@@ -259,7 +259,7 @@
             "title": "Estate Security Management Cape Town | Complex Security",
             "description": "Complete community protection. We manage complex entrance systems, license plate recognition (LPR), and visitor management for residential estates.",
             "longDescription": "Managing security for hundreds of residents requires a systemic approach. We implement License Plate Recognition (LPR) at main gates to automatically flag suspicious vehicles against national databases. Our visitor management solutions include driver's license scanning and OTP entry codes, ensuring a seamless yet secure flow of traffic for residents and contractors.",
-            "heroImage": "/sectors/heroes/estate.jpg",
+            "heroImage": "/sectors/heroes/estate.png",
             "brands": [
                 "Hikvision",
                 "Impro",
@@ -272,7 +272,7 @@
             "title": "School Security Systems Cape Town | Campus Protection",
             "description": "Safe learning environments. Specialized security for schools and universities, including access control, perimeter fencing, and classroom safety.",
             "longDescription": "Protecting students and staff is a top priority. We design comprehensive security strategies for educational institutions, ranging from biometric access control for staff to lockdown-ready alarm systems. our high-definition CCTV networks monitor playgrounds and corridors, while safe-zone panic systems ensure immediate response during emergencies. We build trust by creating a secure perimeter that doesn't feel like a prison.",
-            "heroImage": "/sectors/heroes/schools.jpg",
+            "heroImage": "/sectors/heroes/schools.png",
             "brands": [
                 "Hikvision",
                 "Paradox",

@@ -155,7 +155,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         src={service.heroImage || "/hero-bg.jpg"}
                         alt={service.title}
                         fill
-                        className="object-cover opacity-30"
+                        className="object-cover opacity-60"
                         priority
                     />
                 </div>
