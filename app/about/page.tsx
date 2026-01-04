@@ -19,7 +19,7 @@ export default function AboutPage() {
                     {/* Reusing hero-bg.jpg if available, else fallback to gradient */}
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-950/0 z-10" />
                     <Image
-                        src="/hero-bg.jpg"
+                        src="/page-heroes/about-hero.png"
                         alt="Global Security Solutions Operations and Monitoring Center Cape Town"
                         fill
                         className="object-cover opacity-60"

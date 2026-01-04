@@ -54,10 +54,10 @@ export default function SectorsPage() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
                     <Image
-                        src="/hero-bg.jpg"
+                        src="/page-heroes/sectors-hero.png"
                         alt="Security Solutions"
                         fill
-                        className="object-cover opacity-20"
+                        className="object-cover opacity-60"
                         priority
                     />
                 </div>
