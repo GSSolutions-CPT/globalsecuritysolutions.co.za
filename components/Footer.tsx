@@ -24,10 +24,10 @@ export function Footer() {
                             Your trusted partner for high-performance security systems in Cape Town. We specialize in alarms, CCTV, and electric fencing.
                         </p>
                         <div className="flex space-x-3">
-                            <a href="https://www.facebook.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Facebook Page">
+                            <a href="https://www.facebook.com/gssolutions.co.za/" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Facebook Page">
                                 <Facebook className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
-                            <a href="https://www.instagram.com/globalsecuritysolutionscpt" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Instagram Profile">
+                            <a href="https://www.instagram.com/globalsecuritysolutions.co.za/" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our Instagram Profile">
                                 <Instagram className="w-5 h-5 text-slate-400 group-hover:text-white" />
                             </a>
                             <a href="https://www.linkedin.com/company/global-security-solutions-cape-town" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-all group" aria-label="Visit our LinkedIn Profile">
