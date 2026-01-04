@@ -149,7 +149,7 @@ export default function FreeAuditPage() {
                         <div className="relative z-10 shrink-0 mb-8 sm:mb-0">
                             <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white/10 overflow-hidden relative mx-auto sm:mx-0">
                                 <Image
-                                    src="/testimonial_sarah_jenkins.png"
+                                    src="/assets/images/testimonial_sarah_jenkins_v1.png"
                                     alt="Sarah Jenkins"
                                     fill
                                     className="object-cover"

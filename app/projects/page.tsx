@@ -17,26 +17,27 @@ export const metadata: Metadata = {
 
 
 // Static Projects Data (Overrides DB for showcase purity)
+
 const STATIC_PROJECTS = [
     {
         id: "est-01",
         title: "Sunset Ridge Estate Perimeter",
         category: "Residential Estate",
-        image_url: "/project_estate_perimeter.png",
+        image_url: "/assets/images/project_estate_perimeter_v1.png",
         description: "Complete perimeter overhaul for a 50-unit estate in Constantia. We installed an 18-zone Nemtek electric fence integrated with thermal perimeter cameras for night-time breach detection.",
     },
     {
         id: "com-02",
         title: "Century City Access Control",
         category: "Commercial Park",
-        image_url: "/project_commercial_park.png",
+        image_url: "/assets/images/project_commercial_park_v1.png",
         description: "Implemented a seamless access control solution for a high-traffic business park. Features include License Plate Recognition (LPR) cameras synced with boom gates and facial recognition for walk-in access.",
     },
     {
         id: "res-03",
         title: "Clifton Luxury Villa Integration",
         category: "High-End Residential",
-        image_url: "/project_luxury_home_alarm.png",
+        image_url: "/assets/images/project_luxury_home_alarm_v1.png",
         description: "A discreet yet impenetrable security layer for a seaside villa. We combined exterior strip beams with a Paradox Insight alarm system, allowing the owner to visually verify alarms from their phone instantly.",
     }
 ]
