@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import seoData from '@/app/data/seoData.json'
 import locationData from '@/app/data/locationData.json'
+import blogData from '@/app/data/blogData.json'
 
 const BASE_URL = 'https://globalsecuritysolutions.co.za'
 
@@ -31,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/areas',
         '/privacy-policy',
         '/terms-of-service',
+        '/links',
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
@@ -62,5 +64,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.6,
     }))
 
-    return [...staticRoutes, ...services, ...sectors, ...areas]
+    // Dynamic Blog Posts
+    const blogPosts = blogData.map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }))
+
+    return [...staticRoutes, ...services, ...sectors, ...areas, ...blogPosts]
 }
