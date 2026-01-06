@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 import { ContactForm } from '@/components/ContactForm'
 
 export const metadata: Metadata = {
@@ -192,7 +192,7 @@ export default function BrandsPage() {
                         World-Class <span className="text-blue-500">Security Brands</span>
                     </h1>
                     <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                        We are certified installers for the industry's most trusted manufacturers.
+                        We are certified installers for the industry&apos;s most trusted manufacturers.
                         We do not compromise on quality, ensuring your security system is built to last.
                     </p>
                 </div>
@@ -276,7 +276,7 @@ export default function BrandsPage() {
                             <div className="absolute inset-0 bg-blue-900/50" />
                             <div className="absolute bottom-8 left-8 right-8 text-white">
                                 <p className="text-lg font-bold border-l-4 border-yellow-400 pl-4">
-                                    "We don't just sell boxes. We design solutions using the world's best technology."
+                                    &quot;We don&apos;t just sell boxes. We design solutions using the world&apos;s best technology.&quot;
                                 </p>
                             </div>
                         </div>

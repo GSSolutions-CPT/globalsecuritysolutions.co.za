@@ -1,4 +1,5 @@
 import { ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 export const MarketingBanner = () => {
@@ -44,18 +45,18 @@ export const MarketingBanner = () => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
-                        <a
+                        <Link
                             href="/free-security-audit"
                             className="inline-flex h-14 items-center justify-center rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:scale-105 hover:shadow-blue-600/40 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                         >
                             Get Free Audit
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             href="/services"
                             className="inline-flex h-14 items-center justify-center rounded-full border border-slate-700 bg-white/5 px-8 text-base font-bold text-white transition-all hover:bg-white/10 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                         >
                             View Services
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

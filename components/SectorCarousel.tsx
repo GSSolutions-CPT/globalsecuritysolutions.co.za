@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Warehouse, Home, Building2, ShoppingBag, GraduationCap, Plane, Stethoscope, Landmark } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import seoData from "@/app/data/seoData.json";
 
 const getSectorIcon = (sector: string) => {

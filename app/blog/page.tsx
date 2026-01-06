@@ -1,8 +1,5 @@
-import Link from 'next/link'
 import blogData from '@/app/data/blogData.json'
-import { Calendar, ArrowRight, User, ArrowLeft, BookOpen } from 'lucide-react'
 import { supabase } from '@/utils/supabase/client'
-import Image from "next/image";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

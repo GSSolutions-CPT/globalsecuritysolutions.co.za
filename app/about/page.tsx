@@ -121,7 +121,7 @@ export default function AboutPage() {
                 <div className="mb-20">
                     <div className="text-center mb-12">
                         <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Accredited & Certified</h2>
-                        <p className="text-slate-500 mt-2">We are authorized installers for the world's leading security brands.</p>
+                        <p className="text-slate-500 mt-2">We are authorized installers for the world&apos;s leading security brands.</p>
                     </div>
                     <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* We use existing brand logos here */}
