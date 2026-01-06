@@ -71,8 +71,16 @@ export default function AIAdvisorPage() {
         return (
             <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center relative overflow-hidden px-4">
                 {/* Background FX */}
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/page-heroes/ai-advisor-hero.png"
+                        alt="AI Security Advisor"
+                        fill
+                        className="object-cover opacity-30"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-slate-900/80" />
+                </div>
 
                 <div className="relative z-10 text-center max-w-3xl">
                     <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-full mb-8 border border-blue-500/30">

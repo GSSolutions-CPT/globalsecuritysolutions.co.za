@@ -174,7 +174,16 @@ export default function BrandsPage() {
         <div className="flex flex-col min-h-screen bg-white">
             {/* Hero Section */}
             <section className="relative py-20 bg-slate-900 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/page-heroes/brands-hero.png"
+                        alt="World-Class Security Brands"
+                        fill
+                        className="object-cover opacity-40"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-slate-900/90" />
+                </div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-6">
                         Certified Partners
