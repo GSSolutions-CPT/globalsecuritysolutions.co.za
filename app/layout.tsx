@@ -14,6 +14,9 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalsecuritysolutions.co.za'),
+  alternates: {
+    canonical: './',
+  },
   title: {
     default: "Premium Security System Installations Cape Town | Global Security Solutions",
     template: "%s | Global Security Solutions",
