@@ -35,10 +35,10 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
                     <Image
-                        src="/hero-bg.jpg"
-                        alt="Security Blog"
+                        src="/page-heroes/blog-hero.png"
+                        alt="Security Blog & Insights"
                         fill
-                        className="object-cover opacity-20"
+                        className="object-cover opacity-60"
                         priority
                     />
                 </div>
@@ -74,8 +74,8 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat
-                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
-                                        : 'bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white'
+                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
+                                    : 'bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white'
                                     }`}
                             >
                                 {cat}
