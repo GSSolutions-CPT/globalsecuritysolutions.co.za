@@ -17,7 +17,7 @@ export default function AboutPage() {
             <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     {/* Reusing hero-bg.jpg if available, else fallback to gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-950/0 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                     <Image
                         src="/page-heroes/about-hero.png"
                         alt="Global Security Solutions Operations and Monitoring Center Cape Town"

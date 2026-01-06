@@ -149,9 +149,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             />
 
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white py-20 lg:py-32 overflow-hidden">
+            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-blue-900/0 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                     <Image
                         src={service.heroImage || "/hero-bg.jpg"}
                         alt={service.heroAlt || service.title}

@@ -79,7 +79,7 @@ export default function AIAdvisorPage() {
                         className="object-cover opacity-30"
                         priority
                     />
-                    <div className="absolute inset-0 bg-slate-900/80" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                 </div>
 
                 <div className="relative z-10 text-center max-w-3xl">

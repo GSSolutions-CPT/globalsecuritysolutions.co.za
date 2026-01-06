@@ -13,9 +13,9 @@ export default function AreasIndexPage() {
         <div className="min-h-screen bg-slate-50 font-sans">
 
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                     <Image
                         src="/page-heroes/areas-hero.png"
                         alt="Western Cape Service Areas"
