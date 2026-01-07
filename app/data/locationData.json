@@ -4,167 +4,215 @@
         "slug": "belhar-security-services",
         "h1": "Security System Installation in Belhar",
         "description": "Professional alarm and CCTV installations for homes and businesses in Belhar. Secure your property with Global Security Solutions.",
-        "localContent": "Security in Belhar requires a proactive approach. We understand the local community dynamics and focus on high-visibility deterrents. Our installations in Belhar often prioritize robust perimeter beams and affordable yet effective anti-lift gate motors to secure driveways."
+        "localContent": "Security in Belhar requires a proactive approach. We understand the local community dynamics and focus on high-visibility deterrents. Our installations in Belhar often prioritize robust perimeter beams and affordable yet effective anti-lift gate motors to secure driveways.",
+        "heroImage": "/page-heroes/belhar-security-services.png",
+        "heroAlt": "Secure suburban home in Belhar with motorized gate and perimeter beams"
     },
     {
         "suburb": "Bergvliet",
         "slug": "bergvliet-security-services",
         "h1": "Advanced Security Solutions in Bergvliet",
         "description": "Protect your Bergvliet home with smart alarms, electric fencing, and expert security maintenance.",
-        "localContent": "Bergvliet is a leafy, family-oriented suburb where aesthetic integration is key. We specialize in hidden sensor installations that don't detract from your home's look, while ensuring your perimeter—often lined with trees—is secured with foliage-tolerant beam technology."
+        "localContent": "Bergvliet is a leafy, family-oriented suburb where aesthetic integration is key. We specialize in hidden sensor installations that don't detract from your home's look, while ensuring your perimeter—often lined with trees—is secured with foliage-tolerant beam technology.",
+        "heroImage": "/page-heroes/bergvliet-security-services.png",
+        "heroAlt": "Leafy Bergvliet home with hidden security sensors and oak trees"
     },
     {
         "suburb": "Blouberg",
         "slug": "blouberg-security-services",
         "h1": "Top-Rated Security Services in Blouberg",
         "description": "Expert security system installations in Blouberg, including CCTV surveillance and perimeter protection.",
-        "localContent": "The coastal environment of Blouberg demands durable hardware. We exclusively stick to IP67-rated waterproof cameras and stainless steel brackets to prevent rust and corrosion from the salt air, ensuring your view of Table Mountain is never compromised by a faulty system."
+        "localContent": "The coastal environment of Blouberg demands durable hardware. We exclusively stick to IP67-rated waterproof cameras and stainless steel brackets to prevent rust and corrosion from the salt air, ensuring your view of Table Mountain is never compromised by a faulty system.",
+        "heroImage": "/page-heroes/blouberg-security-services.png",
+        "heroAlt": "Weather-proof CCTV camera monitoring Blouberg beachfront property"
     },
     {
         "suburb": "Bothasig",
         "slug": "bothasig-security-services",
         "h1": "Reliable Alarm Installations in Bothasig",
         "description": "Comprehensive security services for Bothasig residents, featuring intruder detection and smart home integration.",
-        "localContent": "In Bothasig, neighborhood watch collaboration is strong. Our systems can be integrated with local community radio networks, allowing for rapid response. We focus on securing accessible windows and garage entrances which are common entry points in the area."
+        "localContent": "In Bothasig, neighborhood watch collaboration is strong. Our systems can be integrated with local community radio networks, allowing for rapid response. We focus on securing accessible windows and garage entrances which are common entry points in the area.",
+        "heroImage": "/page-heroes/bothasig-security-services.png",
+        "heroAlt": "Bothasig residential street with visible alarm siren and secure home"
     },
     {
         "suburb": "Camps Bay",
         "slug": "camps-bay-security-services",
         "h1": "Premium Security Systems in Camps Bay",
         "description": "High-end security installations for Camps Bay properties, including access control and CCTV surveillance.",
-        "localContent": "Luxury properties in Camps Bay require discreet, high-end security. We install sleek, modern intercoms and flush-mounted cameras that blend into contemporary architecture. Our focus is on 'invisible security' that provides maximum protection without feeling like a fortress."
+        "localContent": "Luxury properties in Camps Bay require discreet, high-end security. We install sleek, modern intercoms and flush-mounted cameras that blend into contemporary architecture. Our focus is on 'invisible security' that provides maximum protection without feeling like a fortress.",
+        "heroImage": "/page-heroes/camps-bay-security-services.png",
+        "heroAlt": "Luxury Camps Bay villa with modern intercom and ocean view"
     },
     {
         "suburb": "Clifton",
         "slug": "clifton-security-services",
         "h1": "Exclusive Security Solutions in Clifton",
         "description": "State-of-the-art security system design and installation for luxury homes in Clifton.",
-        "localContent": "Clifton's unique topography requires specialized vertical security solutions. We are experts in securing multi-level properties built on slopes, utilizing laser beams and thermal cameras to monitor difficult-to-reach perimeters overlooking the ocean."
+        "localContent": "Clifton's unique topography requires specialized vertical security solutions. We are experts in securing multi-level properties built on slopes, utilizing laser beams and thermal cameras to monitor difficult-to-reach perimeters overlooking the ocean.",
+        "heroImage": "/page-heroes/clifton-security-services.png",
+        "heroAlt": "Cliffside Clifton mansion with laser perimeter security and sea view"
     },
     {
         "suburb": "Durbanville",
         "slug": "durbanville-security-services",
         "h1": "Expert Security System Installation in Durbanville",
         "description": "Global Security Solutions provides premium alarm and CCTV installations for homes and businesses in Durbanville.",
-        "localContent": "As our home base, we know Durbanville inside out. From the vineyards to the residential estates, we provide tailored solutions that address the specific risks of suburban living, focusing on early warning perimeter detection to keep families safe."
+        "localContent": "As our home base, we know Durbanville inside out. From the vineyards to the residential estates, we provide tailored solutions that address the specific risks of suburban living, focusing on early warning perimeter detection to keep families safe.",
+        "heroImage": "/page-heroes/durbanville-security-services.png",
+        "heroAlt": "Modern Durbanville estate home with electric fencing and vineyards"
     },
     {
         "suburb": "Fish Hoek",
         "slug": "fish-hoek-security-services",
         "h1": "Security Services and Alarm Systems in Fish Hoek",
         "description": "Affordable and reliable security installations for the Fish Hoek community, from alarms to intercoms.",
-        "localContent": "In Fish Hoek, we prioritize community-centric security. Many installations here focus on elderly friendly interfaces—simple, large-button panic remotes and easy-to-use alarm keypads that provide peace of mind without complexity."
+        "localContent": "In Fish Hoek, we prioritize community-centric security. Many installations here focus on elderly friendly interfaces—simple, large-button panic remotes and easy-to-use alarm keypads that provide peace of mind without complexity.",
+        "heroImage": "/page-heroes/fish-hoek-security-services.png",
+        "heroAlt": "Cozy Fish Hoek family home with visible alarm keypad and maintain view"
     },
     {
         "suburb": "Gordon's Bay",
         "slug": "gordons-bay-security-services",
         "h1": "Professional Security Installations in Gordon's Bay",
         "description": "Secure your Gordon's Bay property with expert electric fencing and smart alarm systems.",
-        "localContent": "Wind and weather are factors in Gordon's Bay. We tension our electric fences specifically to withstand the South-Easter gales, preventing false alarms caused by loose wires. Our outdoor sensors are always heavy-duty grade to survive the elements."
+        "localContent": "Wind and weather are factors in Gordon's Bay. We tension our electric fences specifically to withstand the South-Easter gales, preventing false alarms caused by loose wires. Our outdoor sensors are always heavy-duty grade to survive the elements.",
+        "heroImage": "/page-heroes/gordons-bay-security-services.png",
+        "heroAlt": "Gordon's Bay home with wind-resistant electric fencing and harbor view"
     },
     {
         "suburb": "Kenilworth",
         "slug": "kenilworth-security-services",
         "h1": "Smart Security Systems in Kenilworth",
         "description": "Enhance your Kenilworth property with integrated security solutions and smart home automation.",
-        "localContent": "Kenilworth combines heritage homes with modern living. We specialize in retrofitting modern wireless alarms into older buildings where chasing wires is not an option, preserving the historic charm while upgrading the security to 21st-century standards."
+        "localContent": "Kenilworth combines heritage homes with modern living. We specialize in retrofitting modern wireless alarms into older buildings where chasing wires is not an option, preserving the historic charm while upgrading the security to 21st-century standards.",
+        "heroImage": "/page-heroes/kenilworth-security-services.png",
+        "heroAlt": "Heritage home in Kenilworth with discrete wireless outdoor sensors"
     },
     {
         "suburb": "Kensington",
         "slug": "kensington-security-services",
         "h1": "Reliable Security Services in Kensington",
         "description": "Professional alarm and CCTV surveillance installations tailored for homes and businesses in Kensington.",
-        "localContent": "High-visibility security is effective in Kensington. We recommend street-facing CCTV cameras and clearly visible alarm sirens to act as a strong visual deterrent against opportunistic crime in the area."
+        "localContent": "High-visibility security is effective in Kensington. We recommend street-facing CCTV cameras and clearly visible alarm sirens to act as a strong visual deterrent against opportunistic crime in the area.",
+        "heroImage": "/page-heroes/kensington-security-services.png",
+        "heroAlt": "Kensington street with high-visibility CCTV and Table Mountain view"
     },
     {
         "suburb": "Kommetjie",
         "slug": "kommetjie-security-services",
         "h1": "Advanced Perimeter Security in Kommetjie",
         "description": "Protect your Kommetjie home with top-tier electric fencing and outdoor security solutions.",
-        "localContent": "Surrounded by nature, Kommetjie properties often deal with wildlife triggering alarms. We use 'Pet-Friendly' and 'Wildlife-Immune' outdoor beams that distinguish between a baboon or dog and a human intruder, reducing nuisance alarms significantly."
+        "localContent": "Surrounded by nature, Kommetjie properties often deal with wildlife triggering alarms. We use 'Pet-Friendly' and 'Wildlife-Immune' outdoor beams that distinguish between a baboon or dog and a human intruder, reducing nuisance alarms significantly.",
+        "heroImage": "/page-heroes/kommetjie-security-services.png",
+        "heroAlt": "Kommetjie home with outdoor beams and Slangkop lighthouse in distance"
     },
     {
         "suburb": "Kuils River",
         "slug": "kuils-river-security-services",
         "h1": "Expert Security Installations in Kuils River",
         "description": "Comprehensive alarm systems and gate automation services for residents in Kuils River.",
-        "localContent": "Kuils River is a rapidly  area with many new developments. We partner with homeowners to install scalable systems that can grow with their property, starting with essential burglar bars and alarms and expanding to full CCTV networks."
+        "localContent": "Kuils River is a rapidly  area with many new developments. We partner with homeowners to install scalable systems that can grow with their property, starting with essential burglar bars and alarms and expanding to full CCTV networks.",
+        "heroImage": "/page-heroes/kuils-river-security-services.png",
+        "heroAlt": "Secure modern home in Kuils River development with automated gate"
     },
     {
         "suburb": "Melkbosstrand",
         "slug": "melkbosstrand-security-services",
         "h1": "Coastal Security Solutions in Melkbosstrand",
         "description": "Specialized security installations for the Melkbosstrand area, including salt-resistant perimeter protection.",
-        "localContent": "Similar to Blouberg, Melkbosstrand faces corrosive sea air. However, the larger plot sizes often require wireless point-to-point links to secure outbuildings and granny flats without expensive trenching for cables."
+        "localContent": "Similar to Blouberg, Melkbosstrand faces corrosive sea air. However, the larger plot sizes often require wireless point-to-point links to secure outbuildings and granny flats without expensive trenching for cables.",
+        "heroImage": "/page-heroes/melkbosstrand-security-services.png",
+        "heroAlt": "Melkbosstrand coastal home with wireless security link on roof"
     },
     {
         "suburb": "Milnerton",
         "slug": "milnerton-security-services",
         "h1": "Comprehensive Security Services in Milnerton",
         "description": "From CCTV to access control, secure your Milnerton business or home with our expert team.",
-        "localContent": "Milnerton is a mix of commercial and residential. We provide dual-purpose solutions—robust access control for business hours and automated alarm monitoring for after-hours protection, ensuring your property is covered 24/7."
+        "localContent": "Milnerton is a mix of commercial and residential. We provide dual-purpose solutions—robust access control for business hours and automated alarm monitoring for after-hours protection, ensuring your property is covered 24/7.",
+        "heroImage": "/page-heroes/milnerton-security-services.png",
+        "heroAlt": "Milnerton property with electric fence and Lagoon view at sunset"
     },
     {
         "suburb": "Monte Vista",
         "slug": "monte-vista-security-services",
         "h1": "Trusted Alarm Installations in Monte Vista",
         "description": "Professional security system maintenance and new installations for the Monte Vista area.",
-        "localContent": "With its clear views and open streets, Monte Vista benefits from high-definition street surveillance. We often install LPR (License Plate Recognition) capable cameras for community schemes to monitor neighborhood traffic effectively."
+        "localContent": "With its clear views and open streets, Monte Vista benefits from high-definition street surveillance. We often install LPR (License Plate Recognition) capable cameras for community schemes to monitor neighborhood traffic effectively.",
+        "heroImage": "/page-heroes/monte-vista-security-services.png",
+        "heroAlt": "Monte Vista street with LPR security camera and Table Mountain view"
     },
     {
         "suburb": "Paarl",
         "slug": "paarl-security-services",
         "h1": "Security System Specialists in Paarl",
         "description": "Expert security services in Paarl, including farm security solutions and estate management.",
-        "localContent": "Paarl's intense summer heat requires equipment that doesn't overheat. We use industrial-grade housings for all outdoor electronics. For the surrounding farms, we deploy long-range wireless beams to protect livestock and equipment sheds from theft."
+        "localContent": "Paarl's intense summer heat requires equipment that doesn't overheat. We use industrial-grade housings for all outdoor electronics. For the surrounding farms, we deploy long-range wireless beams to protect livestock and equipment sheds from theft.",
+        "heroImage": "/page-heroes/paarl-security-services.png",
+        "heroAlt": "Paarl vineyard estate with industrial grade outdoor security beams"
     },
     {
         "suburb": "Parklands",
         "slug": "parklands-security-services",
         "h1": "Smart Home Security in Parklands",
         "description": "Modern security installations for Parklands, featuring mobile app control and smart integration.",
-        "localContent": "Parklands is a hub for young families and professionals. The demand here is for 'Smart Security'—app-based control, doorbell cameras, and automated gates that can be managed from a smartphone while at work or commuting."
+        "localContent": "Parklands is a hub for young families and professionals. The demand here is for 'Smart Security'—app-based control, doorbell cameras, and automated gates that can be managed from a smartphone while at work or commuting.",
+        "heroImage": "/page-heroes/parklands-security-services.png",
+        "heroAlt": "Modern Parklands complex with high-tech access control gate"
     },
     {
         "suburb": "Pinelands",
         "slug": "pinelands-security-services",
         "h1": "Professional Security Solutions in Pinelands",
         "description": "Protecting Pinelands with reliable alarm systems and expert intercom installations.",
-        "localContent": "As a 'Garden City', Pinelands properties effectively hide intruders with dense vegetation. We counter this with thermal perimeter monitoring and beam layouts designed to cut through foliage, ensuring your green garden doesn't become a security blind spot."
+        "localContent": "As a 'Garden City', Pinelands properties effectively hide intruders with dense vegetation. We counter this with thermal perimeter monitoring and beam layouts designed to cut through foliage, ensuring your green garden doesn't become a security blind spot.",
+        "heroImage": "/page-heroes/pinelands-security-services.png",
+        "heroAlt": "Pinelands thatch roof home with thermal security camera in trees"
     },
     {
         "suburb": "Plattekloof",
         "slug": "plattekloof-security-services",
         "h1": "High-Security Installations in Plattekloof",
         "description": "Premium security services for Plattekloof residents, specializing in integrated surveillance.",
-        "localContent": "Plattekloof commands a view, but also exposure. We install high-end perimeter electric fencing that is both aesthetically pleasing (using square tubing brackets) and formidable, often integrated with off-site monitoring services for rapid armed response."
+        "localContent": "Plattekloof commands a view, but also exposure. We install high-end perimeter electric fencing that is both aesthetically pleasing (using square tubing brackets) and formidable, often integrated with off-site monitoring services for rapid armed response.",
+        "heroImage": "/page-heroes/plattekloof-security-services.png",
+        "heroAlt": "Luxury Plattekloof home with premium electric fencing and city lights"
     },
     {
         "suburb": "Simon's Town",
         "slug": "simons-town-security-services",
         "h1": "Expert Security Services in Simon's Town",
         "description": "Reliable security and perimeter protection for homes and businesses in Simon's Town.",
-        "localContent": "Naval heritage implies a need for order and security. In Simon's Town, wind and salt are the enemies. We use marine-grade stainless steel for all our gate motors and camera mounts to prevent the 'rust-lock' common in this area."
+        "localContent": "Naval heritage implies a need for order and security. In Simon's Town, wind and salt are the enemies. We use marine-grade stainless steel for all our gate motors and camera mounts to prevent the 'rust-lock' common in this area.",
+        "heroImage": "/page-heroes/simons-town-security-services.png",
+        "heroAlt": "Simon's Town home with stainless steel weather resistant gate motor"
     },
     {
         "suburb": "Somerset West",
         "slug": "somerset-west-security-services",
         "h1": "Professional Security Systems Somerset West",
         "description": "From access control to perimeter security, we serve the entire Somerset West area with 24/7 reliability.",
-        "localContent": "Somerset West serves as a gateway to the Winelands. We offer specialized solutions for the larger estates found here, including solar-powered independent security nodes that keep perimeters secure even during extended rural power outages."
+        "localContent": "Somerset West serves as a gateway to the Winelands. We offer specialized solutions for the larger estates found here, including solar-powered independent security nodes that keep perimeters secure even during extended rural power outages.",
+        "heroImage": "/page-heroes/somerset-west-security-services.png",
+        "heroAlt": "Somerset West estate with security system and mountain backdrop"
     },
     {
         "suburb": "Stellenbosch",
         "slug": "stellenbosch-security-services",
         "h1": "Top-Tier Security Installations in Stellenbosch",
         "description": "Security solutions for Stellenbosch estates, farms, and homes. Expert alarm and CCTV systems.",
-        "localContent": "Stellenbosch demands a balance of high security and student/tourist friendliness. We install non-intrusive access control systems for guest houses and student accommodation that track entry/exit without creating a 'prison-like' atmosphere."
+        "localContent": "Stellenbosch demands a balance of high security and student/tourist friendliness. We install non-intrusive access control systems for guest houses and student accommodation that track entry/exit without creating a 'prison-like' atmosphere.",
+        "heroImage": "/page-heroes/stellenbosch-security-services.png",
+        "heroAlt": "Stellenbosch property with secure access control and oak trees"
     },
     {
         "suburb": "Table View",
         "slug": "table-view-security-services",
         "h1": "Reliable Security Services in Table View",
         "description": "Comprehensive alarm and gate automation services for the Table View community.",
-        "localContent": "Wind is the main challenge in Table View. We install specialized wind-resistant gate motors and reinforced fencing brackets to ensure your security system remains operational even during the strongest Cape Doctor winds."
+        "localContent": "Wind is the main challenge in Table View. We install specialized wind-resistant gate motors and reinforced fencing brackets to ensure your security system remains operational even during the strongest Cape Doctor winds.",
+        "heroImage": "/page-heroes/table-view-security-services.png",
+        "heroAlt": "Table View home with robust fencing and Table Mountain view"
     }
 ]

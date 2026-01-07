@@ -3,6 +3,7 @@ import seoData from '@/app/data/seoData.json'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowLeft, MapPin, ShieldCheck, CheckCircle2, Siren, Cctv, Zap, KeyRound } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -51,13 +52,19 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
         <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
 
             {/* Dynamic Hero Section */}
-            <section className="relative bg-slate-950 text-white py-24 lg:py-32 overflow-hidden">
+            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-slate-950 z-10" />
-                    <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20" />
+                    <Image
+                        src={location.heroImage || '/hero-bg.jpg'}
+                        alt={location.heroAlt || `Security services in ${location.suburb}`}
+                        fill
+                        className="object-cover opacity-60"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-900/60 z-10" />
                 </div>
 
-                <div className="container relative z-20 mx-auto px-4">
+                <div className="container relative z-20 mx-auto px-4 py-20 lg:py-0">
                     <Link href="/areas" className="inline-flex items-center text-blue-400 hover:text-white mb-8 transition-colors text-sm font-semibold tracking-wide uppercase">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Areas
                     </Link>
