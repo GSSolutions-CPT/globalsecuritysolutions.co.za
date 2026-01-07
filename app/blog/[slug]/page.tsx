@@ -122,7 +122,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                                 )
                             }
                             // Default to paragraph
-                            return <p key={index} className="mb-6 leading-relaxed">{block.text}</p>
+                            return <p key={index} className="mb-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: block.text || '' }} />
                         })}
                     </article>
 

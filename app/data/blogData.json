@@ -1,5 +1,112 @@
 [
     {
+        "slug": "why-is-my-electric-fence-making-a-clicking-noise",
+        "title": "Why Is My Electric Fence Making a Clicking Noise?",
+        "date": "Jan 07, 2026",
+        "category": "Troubleshooting",
+        "coverImage": "/services/heroes/electric-fence.png",
+        "excerpt": "Is your electric fence making a loud clicking noise? It could be a sign of arcing or vegetation damage. Learn how to fix it and when to call Global Security Solutions.",
+        "author": "Global Security Team",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "If you are a homeowner in <a href='/areas/durbanville-security-services' class='text-blue-600 hover:underline'>Durbanville</a> or the Northern Suburbs, you know the sound. It’s a quiet night, and suddenly you hear a loud, rhythmic click-click-click coming from your perimeter wall."
+            },
+            {
+                "type": "paragraph",
+                "text": "It is annoying, but it is also a warning sign."
+            },
+            {
+                "type": "paragraph",
+                "text": "A silent fence is a happy fence. If your system is clicking loudly, it usually means power is leaking somewhere along the line. This is often caused by \"arcing,\" which is a spark jumping from the live wire to something it shouldn't touch."
+            },
+            {
+                "type": "paragraph",
+                "text": "Here is what causes it and why you need <a href='/services/security-repairs-and-upgrades' class='text-blue-600 hover:underline'>Electric Fence Repairs</a> before it becomes a security risk."
+            },
+            {
+                "type": "heading",
+                "text": "1. Vegetation on the Line (The #1 Culprit)"
+            },
+            {
+                "type": "paragraph",
+                "text": "In the Western Cape, things grow fast—especially after the winter rains."
+            },
+            {
+                "type": "paragraph",
+                "text": "If a branch, vine, or bush touches a live wire, the electricity will arc (jump) to the plant to find a path to the ground."
+            },
+            {
+                "type": "paragraph",
+                "text": "<strong>The Sound:</strong> A sharp, snapping click.<br/><strong>The Fix:</strong> Trim back all bushes at least 10cm away from your <a href='/services/electric-fence-installations' class='text-blue-600 hover:underline'>electric fence lines</a>."
+            },
+            {
+                "type": "heading",
+                "text": "2. Cracked or Broken Insulators (Bobbins)"
+            },
+            {
+                "type": "paragraph",
+                "text": "The plastic \"bobbins\" that hold the wire are exposed to the harsh Cape Town sun and UV rays every day. Over time, plastic becomes brittle and cracks."
+            },
+            {
+                "type": "paragraph",
+                "text": "<strong>The Problem:</strong> When an insulator cracks, the electricity jumps through the crack to the metal bracket."
+            },
+            {
+                "type": "paragraph",
+                "text": "<strong>The Weather Factor:</strong> You will notice this more on misty mornings in areas like Melkbosstrand or Table View, as moisture conducts electricity better."
+            },
+            {
+                "type": "heading",
+                "text": "3. Loose Wires in the Wind"
+            },
+            {
+                "type": "paragraph",
+                "text": "The \"South Easter\" wind can wreak havoc on older fences. If your tensioners are old, the wires can sag. When the wind blows, the slack wires might touch each other or the wall, creating a short circuit."
+            },
+            {
+                "type": "heading",
+                "text": "Why You Should Not Ignore the Noise"
+            },
+            {
+                "type": "paragraph",
+                "text": "Ignoring the click isn't just about the noise pollution."
+            },
+            {
+                "type": "list",
+                "items": [
+                    "False Alarms: Eventually, the voltage drop will trigger your alarm, likely at 3 AM.",
+                    "Reduced Voltage: If the power is leaking, the shock is weaker. An intruder might be able to climb over without getting a proper shock.",
+                    "Battery Drain: Your energizer has to work harder, which kills your backup battery faster. (See our guide on <a href='/load-shedding-security-solutions' class='text-blue-600 hover:underline'>Load Shedding Security Solutions</a>)."
+                ]
+            },
+            {
+                "type": "heading",
+                "text": "Need a Professional Assessment?"
+            },
+            {
+                "type": "paragraph",
+                "text": "Electrical fencing is dangerous. If you cannot see an obvious branch on the line, do not try to fix the wiring yourself."
+            },
+            {
+                "type": "paragraph",
+                "text": "At Global Security Solutions, we specialize in Perimeter Security Enhancement. We can test your voltage, replace sun-damaged bobbins, and re-tension your lines to withstand the wind."
+            },
+            {
+                "type": "paragraph",
+                "text": "Don't wait for a false alarm."
+            },
+            {
+                "type": "paragraph",
+                "text": "👉 <a href='/free-security-audit' class='text-blue-600 hover:underline font-bold'>Book a Free Security Audit today.</a>"
+            },
+            {
+                "type": "paragraph",
+                "text": "You can also contact us for <a href='/services/security-maintenance-contracts' class='text-blue-600 hover:underline'>Maintenance Contracts</a> to ensure your fence never fails again."
+            }
+        ]
+    },
+    {
         "slug": "load-shedding-security-guide-cape-town",
         "title": "The Ultimate Load Shedding Security Guide 2026",
         "date": "Jan 01, 2026",
