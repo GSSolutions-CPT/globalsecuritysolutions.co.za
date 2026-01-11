@@ -3,13 +3,14 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { ArrowRight, ShieldCheck, Zap, Settings } from 'lucide-react'
 import { MarketingBanner } from '@/components/MarketingBanner'
-import { BrandCarousel } from '@/components/BrandCarousel'
+
 import { ServiceGrid } from '@/components/ServiceGrid'
 import { SectorGrid } from '@/components/SectorGrid'
 
 // Critical LCP Optimization: Lazy load heavy interactive components below the fold
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm))
 const TestimonialCarousel = dynamic(() => import('@/components/TestimonialCarousel').then(mod => mod.TestimonialCarousel))
+const BrandCarousel = dynamic(() => import('@/components/BrandCarousel').then(mod => mod.BrandCarousel))
 
 export default function Home() {
   return (

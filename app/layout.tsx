@@ -10,7 +10,7 @@ import StructuredData from "@/components/StructuredData";
 import { cn } from "@/utils/cn";
 import Script from "next/script";
 
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalsecuritysolutions.co.za'),

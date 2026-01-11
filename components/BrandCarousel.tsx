@@ -259,6 +259,7 @@ export function BrandCarousel({ variant = 'default' }: BrandCarouselProps) {
                             width={150}
                             height={50}
                             className={finalImageClasses}
+                            sizes="(max-width: 768px) 100px, 150px"
                             style={{ width: 'auto', height: '100%' }}
                         />
                     </div>
