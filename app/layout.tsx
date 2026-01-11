@@ -7,8 +7,8 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AOSInit } from "@/components/AOSInit";
 import StructuredData from "@/components/StructuredData";
-import { DeferredAnalytics } from "@/components/DeferredAnalytics";
 import { cn } from "@/utils/cn";
+import Script from "next/script";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -68,7 +68,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
-        <DeferredAnalytics gaId="G-LM5YX7EWWH" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LM5YX7EWWH"
+          strategy="lazyOnload"
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LM5YX7EWWH');
+          `}
+        </Script>
         <StructuredData />
         <AOSInit />
         <Header />

@@ -13,7 +13,7 @@ export const MarketingBanner = () => {
                     src="/hero-bg.jpg"
                     alt="Security Solutions Cape Town"
                     fill
-                    priority
+                    priority={true}
                     quality={90}
                     sizes="100vw"
                     className="object-cover opacity-90 transform scale-105 hover:scale-110 transition-transform duration-[20s]"

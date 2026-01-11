@@ -62,7 +62,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                         priority
                         unoptimized
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-900/60 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                 </div>
 
                 <div className="container relative z-20 mx-auto px-4 py-20 lg:py-0">
