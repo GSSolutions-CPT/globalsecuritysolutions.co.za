@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: 'Read the latest news and tips on home and business security in Cape Town.',
 }
 
-export const revalidate = 60
+export const revalidate = 0
 
 interface BlogPost {
     id: string
