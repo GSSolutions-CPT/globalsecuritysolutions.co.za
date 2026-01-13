@@ -105,9 +105,25 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                     </div>
 
                     <article className="prose prose-lg prose-slate max-w-none text-slate-700 prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-blue-600 prose-img:rounded-xl">
-                        {post.content.map((block: { type: string, text?: string, items?: string[] }, index: number) => {
+                        {post.content.map((block: { type: string, text?: string, items?: string[], src?: string, alt?: string }, index: number) => {
                             if (block.type === 'heading') {
                                 return <h2 key={index} className="flex items-center mt-10 mb-4 text-2xl"><BookOpen className="w-6 h-6 mr-3 text-blue-500" />{block.text}</h2>
+                            }
+                            if (block.type === 'image') {
+                                return (
+                                    <div key={index} className="my-8">
+                                        <div className="rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                                            <Image
+                                                src={block.src || ''}
+                                                alt={block.alt || ''}
+                                                width={800}
+                                                height={500}
+                                                className="w-full h-auto object-cover"
+                                            />
+                                        </div>
+                                        {block.alt && <p className="text-sm text-center text-slate-500 mt-2 italic">{block.alt}</p>}
+                                    </div>
+                                )
                             }
                             if (block.type === 'list') {
                                 return (
