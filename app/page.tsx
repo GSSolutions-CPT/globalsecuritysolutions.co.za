@@ -15,6 +15,9 @@ const BrandCarousel = dynamic(() => import('@/components/BrandCarousel').then(mo
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen font-sans">
+      <div className="bg-red-600 text-white text-center font-bold py-4 text-xl z-[9999] relative">
+        VERSION CHECK: JAN 14 UPDATE IS LIVE
+      </div>
 
       {/* SECTION 1: HERO HEADER */}
       <MarketingBanner />
