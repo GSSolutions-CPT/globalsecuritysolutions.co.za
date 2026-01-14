@@ -75,7 +75,7 @@ export function Footer() {
                                 <div className="bg-slate-800 p-1 rounded-lg shrink-0 text-blue-500">
                                     <MapPin className="w-3.5 h-3.5" />
                                 </div>
-                                <span className="text-slate-300 leading-tight block mt-0.5">Servicing Durbanville, Blouberg, and the greater Western Cape.</span>
+                                <span className="text-white font-bold leading-tight block mt-0.5">Servicing Durbanville, Blouberg, and the greater Western Cape.</span>
                             </li>
                             <li className="flex items-start space-x-2.5">
                                 <div className="bg-slate-800 p-1 rounded-lg shrink-0 text-blue-500">
@@ -92,7 +92,7 @@ export function Footer() {
                                 </div>
                                 <div>
                                     <span className="text-slate-300 text-[10px] uppercase tracking-wider font-bold block mb-0.5">Email Support</span>
-                                    <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-slate-300 hover:text-white transition-colors block">sales@globalsecuritysolutions.co.za</a>
+                                    <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-white font-bold hover:text-blue-400 transition-colors block">sales@globalsecuritysolutions.co.za</a>
                                 </div>
                             </li>
                         </ul>
@@ -109,7 +109,7 @@ export function Footer() {
                 <div className="border-t border-slate-800 pt-2 mt-2 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px]">
                     <p>&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
                     <div className="flex space-x-4 mt-3 md:mt-0">
-                        <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
+                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
                         <Link href="/terms-of-service" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
                         <Link href="/sitemap.xml" className="hover:text-blue-400 transition-colors">Sitemap</Link>
                     </div>
