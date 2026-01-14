@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: './',
   },
   other: {
-    'build-version': '2.0.1-images-fix',
+    'build-version': '2.0.2-BLOG-FIX-JAN14',
   },
   title: {
     default: "Premium Security System Installations Cape Town | Global Security Solutions",
