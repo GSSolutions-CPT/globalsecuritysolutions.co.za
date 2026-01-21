@@ -107,7 +107,12 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                     <article className="prose prose-lg prose-slate max-w-none text-slate-700 prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-blue-600 prose-img:rounded-xl">
                         {post.content.map((block: { type: string, text?: string, items?: string[], src?: string, alt?: string }, index: number) => {
                             if (block.type === 'heading') {
-                                return <h2 key={index} className="flex items-center mt-10 mb-4 text-2xl"><BookOpen className="w-6 h-6 mr-3 text-blue-500" />{block.text}</h2>
+                                return (
+                                    <h2 key={index} className="flex items-center mt-10 mb-4 text-2xl">
+                                        <BookOpen className="w-6 h-6 mr-3 text-blue-500" />
+                                        <span dangerouslySetInnerHTML={{ __html: block.text || '' }} />
+                                    </h2>
+                                )
                             }
                             if (block.type === 'image') {
                                 return (
@@ -131,7 +136,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                                         {block.items?.map((item: string, i: number) => (
                                             <li key={i} className="flex items-start">
                                                 <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                                                <span>{item}</span>
+                                                <span dangerouslySetInnerHTML={{ __html: item }} />
                                             </li>
                                         ))}
                                     </ul>
