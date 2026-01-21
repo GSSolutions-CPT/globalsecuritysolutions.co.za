@@ -78,33 +78,70 @@ export default async function ProjectPage({ params }: Props) {
             <div className="container mx-auto px-4 -mt-20 relative z-30 pb-24">
                 <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
                     {/* Main Images */}
-                    {/* Main Images */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-1 bg-slate-100">
-                        {/* Before Image (if exists) */}
-                        {project.before_image_url && (
-                            <div className="relative aspect-video w-full group">
-                                <Image
-                                    src={project.before_image_url}
-                                    alt={`${project.title} - Before`}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
+                    {/* Main Images / Gallery */}
+                    <div className="bg-slate-100 p-1">
+                        {/* Before Gallery */}
+                        {(project.before_gallery && project.before_gallery.length > 0) || project.before_image_url ? (
+                            <div className="mb-1">
+                                <div className="bg-slate-900 text-white text-xs font-bold px-4 py-2 uppercase tracking-widest mb-1 flex items-center">
+                                    Before Transformation
+                                </div>
+                                <div className={`grid gap-1 ${project.before_gallery && project.before_gallery.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                                    {project.before_gallery ? (
+                                        project.before_gallery.map((img: string, i: number) => (
+                                            <div key={i} className="relative aspect-video w-full">
+                                                <Image
+                                                    src={img}
+                                                    alt={`${project.title} - Before ${i + 1}`}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="relative aspect-video w-full">
+                                            <Image
+                                                src={project.before_image_url!}
+                                                alt={`${project.title} - Before`}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        )}
+                        ) : null}
 
-                        {/* After / Main Image */}
-                        {project.image_url && (
-                            <div className={`relative aspect-video w-full ${!project.before_image_url ? 'md:col-span-2' : ''}`}>
-                                <Image
-                                    src={project.image_url}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover"
-                                    priority
-                                />
+                        {/* After Gallery */}
+                        <div>
+                            <div className="bg-green-600 text-white text-xs font-bold px-4 py-2 uppercase tracking-widest mb-1 flex items-center">
+                                Completed Installation
                             </div>
-                        )}
+                            <div className={`grid gap-1 ${project.after_gallery && project.after_gallery.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                                {project.after_gallery ? (
+                                    project.after_gallery.map((img: string, i: number) => (
+                                        <div key={i} className="relative aspect-video w-full">
+                                            <Image
+                                                src={img}
+                                                alt={`${project.title} - After ${i + 1}`}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="relative aspect-video w-full">
+                                        <Image
+                                            src={project.image_url || ''}
+                                            alt={`${project.title} - After`}
+                                            fill
+                                            className="object-cover"
+                                            priority
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     {/* Content */}
