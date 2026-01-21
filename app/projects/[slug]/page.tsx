@@ -10,22 +10,22 @@ import type { Metadata } from 'next'
 export const revalidate = 60
 
 type Props = {
-    params: Promise<{ id: string }>
+    params: Promise<{ slug: string }>
 }
 
-async function getProject(id: string) {
+async function getProject(slug: string) {
     const { data } = await supabase
         .from('projects')
         .select('*')
-        .eq('id', id)
+        .eq('slug', slug)
         .single()
 
     return data
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { id } = await params
-    const project = await getProject(id)
+    const { slug } = await params
+    const project = await getProject(slug)
 
     if (!project) {
         return {
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectPage({ params }: Props) {
-    const { id } = await params
-    const project = await getProject(id)
+    const { slug } = await params
+    const project = await getProject(slug)
 
     if (!project) {
         notFound()

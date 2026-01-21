@@ -86,10 +86,10 @@ export default async function ProjectsPage() {
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project: { id: string, image_url: string | null, title: string, category: string, desc: string, description: string }, i: number) => (
+                    {projects.map((project: { id: string, slug?: string, image_url: string | null, title: string, category: string, desc: string, description: string }, i: number) => (
                         <Link
                             key={project.id || i}
-                            href={`/projects/${project.id || '#'}`}
+                            href={`/projects/${project.slug || project.id || '#'}`}
                             data-aos="fade-up"
                             data-aos-delay={i * 100}
                             suppressHydrationWarning
