@@ -78,13 +78,11 @@ export default async function ProjectPage({ params }: Props) {
             <div className="container mx-auto px-4 -mt-20 relative z-30 pb-24">
                 <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
                     {/* Main Images */}
+                    {/* Main Images */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-1 bg-slate-100">
                         {/* Before Image (if exists) */}
                         {project.before_image_url && (
                             <div className="relative aspect-video w-full group">
-                                <div className="absolute top-4 left-4 z-10 bg-black/70 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-md">
-                                    Before
-                                </div>
                                 <Image
                                     src={project.before_image_url}
                                     alt={`${project.title} - Before`}
@@ -98,11 +96,6 @@ export default async function ProjectPage({ params }: Props) {
                         {/* After / Main Image */}
                         {project.image_url && (
                             <div className={`relative aspect-video w-full ${!project.before_image_url ? 'md:col-span-2' : ''}`}>
-                                {project.before_image_url && (
-                                    <div className="absolute top-4 left-4 z-10 bg-green-600/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-md shadow-lg">
-                                        After
-                                    </div>
-                                )}
                                 <Image
                                     src={project.image_url}
                                     alt={project.title}
