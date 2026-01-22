@@ -3,6 +3,8 @@ import seoData from '@/app/data/seoData.json'
 import locationData from '@/app/data/locationData.json'
 import blogData from '@/app/data/blogData.json'
 
+import { supabase } from '@/utils/supabase/client'
+
 const BASE_URL = 'https://globalsecuritysolutions.co.za'
 
 const toSlug = (text: string) => {
@@ -13,7 +15,7 @@ const toSlug = (text: string) => {
         .trim()
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Static Routes
     const staticRoutes = [
         '',
@@ -72,5 +74,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
     }))
 
-    return [...staticRoutes, ...services, ...sectors, ...areas, ...blogPosts]
+    // Dynamic Projects from Supabase
+    const { data: projects } = await supabase
+        .from('projects')
+        .select('slug, created_at')
+
+    const projectRoutes = projects?.map((project) => ({
+        url: `${BASE_URL}/projects/${project.slug}`,
+        lastModified: new Date(project.created_at),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    })) || []
+
+    return [...staticRoutes, ...services, ...sectors, ...areas, ...blogPosts, ...projectRoutes]
 }
