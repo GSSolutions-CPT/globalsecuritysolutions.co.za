@@ -50,7 +50,7 @@ export default async function ProjectPage({ params }: Props) {
     return (
         <div className="bg-slate-50 min-h-screen font-sans">
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white min-h-[50vh] flex items-center overflow-hidden">
+            <section className="relative bg-slate-950 text-white min-h-[50vh] flex items-center overflow-hidden pb-64">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-blue-950/20 z-10" />
                     {project.image_url && (
