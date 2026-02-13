@@ -113,6 +113,14 @@ const nextConfig: NextConfig = {
       { source: '/test-1', destination: '/', permanent: true },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/portal/:path*',
+        destination: 'https://gss-hub.vercel.app/:path*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
