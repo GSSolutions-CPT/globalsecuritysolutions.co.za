@@ -130,6 +130,13 @@ export function Header() {
                             </div>
                         ))}
                         <Link
+                            href="https://gss-hub.vercel.app"
+                            target="_blank"
+                            className="bg-slate-800 text-white px-5 py-2 rounded-md hover:bg-slate-900 transition-colors font-bold shadow-sm active:scale-95 duration-200"
+                        >
+                            Client Portal
+                        </Link>
+                        <Link
                             href="/contact"
                             className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
@@ -189,7 +196,15 @@ export function Header() {
                                 )}
                             </div>
                         ))}
-                        <div className="pt-4">
+                        <div className="pt-4 space-y-3">
+                            <Link
+                                href="https://gss-hub.vercel.app"
+                                target="_blank"
+                                className="block w-full bg-slate-800 text-white px-5 py-3 rounded-md hover:bg-slate-900 text-center font-bold active:scale-95 duration-200"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Client Portal
+                            </Link>
                             <Link
                                 href="/contact"
                                 className="block w-full bg-red-600 text-white px-5 py-3 rounded-md hover:bg-red-700 text-center font-bold active:scale-95 duration-200"
