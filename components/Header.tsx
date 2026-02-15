@@ -95,17 +95,17 @@ export function Header() {
                     </Link>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden lg:flex space-x-6 items-center">
+                    <nav className="hidden lg:flex space-x-4 items-center">
                         {navItems.map((item, idx) => (
                             <div key={idx} className="relative group">
                                 {item.dropdown ? (
-                                    <button className={`flex items-center font-medium transition-colors py-2 ${pathname?.startsWith(item.href || '/NON-EXISTENT') && item.href !== '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-900'}`}>
+                                    <button className={`flex items-center text-sm font-medium transition-colors py-2 ${pathname?.startsWith(item.href || '/NON-EXISTENT') && item.href !== '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-900'}`}>
                                         {item.label} <ChevronDown className="w-4 h-4 ml-1" />
                                     </button>
                                 ) : (
                                     <Link
                                         href={item.href!}
-                                        className={`font-medium transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${pathname === item.href ? 'text-blue-600 font-bold after:scale-x-100' : 'text-gray-700 hover:text-blue-900'}`}
+                                        className={`text-sm font-medium transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${pathname === item.href ? 'text-blue-600 font-bold after:scale-x-100' : 'text-gray-700 hover:text-blue-900'}`}
                                     >
                                         {item.label}
                                     </Link>
@@ -131,13 +131,13 @@ export function Header() {
                         ))}
                         <Link
                             href="/portal"
-                            className="bg-slate-800 text-white px-5 py-2 rounded-md hover:bg-slate-900 transition-colors font-bold shadow-sm active:scale-95 duration-200"
+                            className="bg-slate-800 text-white text-sm px-4 py-2 rounded-md hover:bg-slate-900 transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
                             Sign In
                         </Link>
                         <Link
                             href="/contact"
-                            className="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition-colors font-bold shadow-sm active:scale-95 duration-200"
+                            className="bg-red-600 text-white text-sm px-4 py-2 rounded-md hover:bg-red-700 transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
                             Get a Quote
                         </Link>
