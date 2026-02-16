@@ -25,24 +25,28 @@ export function ContactForm() {
 
         const form = event.currentTarget
 
-        // Schema: client_name, email_address, phone_number, service_requested, suburb_location
+        // FIXED: Using .upsert() with onConflict: 'email' to handle returning clients.
+        // If the email already exists, their details (phone, address) get updated
+        // instead of throwing a UNIQUE constraint error.
+        // Service and message are stored in the metadata JSONB column so no data is lost.
         try {
             const { error: supabaseError } = await supabase
                 .from('clients')
-                .insert([
-                    {
+                .upsert(
+                    [{
                         name: name,
                         email: email,
                         phone: phone,
                         company: 'Website Inquiry',
                         address: suburb,
-                        // Using 'marketing_consent' or similar if available, or just storing service in notes if possible.
-                        // Since clients table schema is fixed, we might lose 'service' unless we have a notes field.
-                        // Let's assume we can put service request details in a 'notes' field if it exists, or just accept basic info for now.
-                        // Checking Clients.jsx, it doesn't show a notes field, but database might have it.
-                        // Safest is to just insert basic contact info for now to create the client.
-                    },
-                ])
+                        metadata: {
+                            service_requested: service,
+                            message: message,
+                            last_inquiry: new Date().toISOString()
+                        }
+                    }],
+                    { onConflict: 'email' }
+                )
 
             if (supabaseError) throw supabaseError
 

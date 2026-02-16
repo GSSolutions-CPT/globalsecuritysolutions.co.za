@@ -2,30 +2,34 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/utils/supabase/client'
-import { Loader2, Image as ImageIcon, Briefcase, RefreshCw, Calendar, MapPin, Search } from 'lucide-react'
+import { Loader2, Briefcase, RefreshCw, Calendar, MapPin, Search, Mail, Phone } from 'lucide-react'
 
-// Define Lead Interface
-interface Lead {
+// FIXED: Interface now matches the 'clients' table columns in Supabase.
+// The old interface referenced non-existent columns from a 'leads' table.
+interface WebsiteLead {
     id: string
-    client_name: string
-    email_address: string
-    phone_number: string
-    service_requested: string
-    suburb_location: string
+    name: string
+    email: string
+    phone: string
+    company: string
+    address: string
     created_at: string
 }
 
 export function LeadsManager() {
-    const [leads, setLeads] = useState<Lead[]>([])
+    const [leads, setLeads] = useState<WebsiteLead[]>([])
     const [loading, setLoading] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
 
-    // Fetch Leads
+    // FIXED: Fetch from 'clients' table, filtered by company = 'Website Inquiry'.
+    // This ensures only website contact form submissions appear here,
+    // not the entire CRM client base.
     const fetchLeads = useCallback(async () => {
         setLoading(true)
         const { data } = await supabase
-            .from('leads')
-            .select('*')
+            .from('clients')
+            .select('id, name, email, phone, company, address, created_at')
+            .eq('company', 'Website Inquiry')
             .order('created_at', { ascending: false })
 
         if (data) setLeads(data)
@@ -34,15 +38,14 @@ export function LeadsManager() {
 
     // Initial Fetch
     useEffect(() => {
-        // eslint-disable-next-line
         fetchLeads()
     }, [fetchLeads])
 
-    // Filter Leads
+    // Filter Leads by search query
     const filteredLeads = leads.filter(lead =>
-        lead.client_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lead.email_address?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lead.suburb_location?.toLowerCase().includes(searchQuery.toLowerCase())
+        lead.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        lead.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        lead.address?.toLowerCase().includes(searchQuery.toLowerCase())
     )
 
     return (
@@ -89,7 +92,7 @@ export function LeadsManager() {
                             <thead>
                                 <tr className="bg-slate-50 border-b border-slate-200">
                                     <th className="px-6 py-4 font-bold text-slate-600 text-xs uppercase tracking-wider">Client Details</th>
-                                    <th className="px-6 py-4 font-bold text-slate-600 text-xs uppercase tracking-wider">Service</th>
+                                    <th className="px-6 py-4 font-bold text-slate-600 text-xs uppercase tracking-wider">Contact</th>
                                     <th className="px-6 py-4 font-bold text-slate-600 text-xs uppercase tracking-wider">Location</th>
                                     <th className="px-6 py-4 font-bold text-slate-600 text-xs uppercase tracking-wider">Date</th>
                                 </tr>
@@ -98,21 +101,27 @@ export function LeadsManager() {
                                 {filteredLeads.map((lead) => (
                                     <tr key={lead.id} className="hover:bg-slate-50/50 transition-colors">
                                         <td className="px-6 py-4">
-                                            <div className="font-bold text-slate-900">{lead.client_name}</div>
-                                            <div className="flex flex-col text-sm text-slate-500 mt-1 space-y-0.5">
-                                                <span className="flex items-center text-xs"><ImageIcon className="w-3 h-3 mr-1.5 opacity-70" /> {lead.email_address}</span>
-                                                <span className="flex items-center text-xs"><Briefcase className="w-3 h-3 mr-1.5 opacity-70" /> {lead.phone_number}</span>
+                                            <div className="font-bold text-slate-900">{lead.name}</div>
+                                            <div className="text-xs text-slate-500 mt-1">
+                                                <span className="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 font-medium">
+                                                    {lead.company || 'Website Inquiry'}
+                                                </span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold border border-blue-100">
-                                                {lead.service_requested || 'General Inquiry'}
-                                            </span>
+                                            <div className="flex flex-col text-sm text-slate-600 space-y-1">
+                                                <span className="flex items-center text-xs">
+                                                    <Mail className="w-3 h-3 mr-1.5 opacity-70" /> {lead.email}
+                                                </span>
+                                                <span className="flex items-center text-xs">
+                                                    <Phone className="w-3 h-3 mr-1.5 opacity-70" /> {lead.phone || '—'}
+                                                </span>
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-slate-600">
                                             <div className="flex items-center">
                                                 <MapPin className="w-4 h-4 mr-2 text-slate-400" />
-                                                {lead.suburb_location || 'Cape Town'}
+                                                {lead.address || 'Not specified'}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-slate-600">
