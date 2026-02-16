@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/utils/supabase/client'
-import { Loader2, Image as ImageIcon, Briefcase, RefreshCw, Calendar, MapPin, Search } from 'lucide-react'
+import { Loader2, RefreshCw, Calendar, MapPin } from 'lucide-react'
 
 interface Lead {
     id: string
@@ -17,7 +17,7 @@ interface Lead {
 export function LeadsManager() {
     const [leads, setLeads] = useState<Lead[]>([])
     const [loading, setLoading] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery] = useState('')
 
     const fetchLeads = useCallback(async () => {
         setLoading(true)
@@ -25,7 +25,7 @@ export function LeadsManager() {
         const { data } = await supabase
             .from('clients')
             .select('*')
-            .like('company', 'Website Inquiry%')
+            .ilike('company', 'Website Inquiry%')
             .order('created_at', { ascending: false })
 
         if (data) setLeads(data as unknown as Lead[])
