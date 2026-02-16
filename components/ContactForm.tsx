@@ -11,9 +11,7 @@ export function ContactForm() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        setLoading(true)
-        setError(null)
-        setSuccess(false)
+        setLoading(true); setError(null); setSuccess(false)
 
         const formData = new FormData(event.currentTarget)
         const name = formData.get('name') as string
@@ -21,32 +19,26 @@ export function ContactForm() {
         const phone = formData.get('phone') as string
         const service = formData.get('service') as string
         const suburb = formData.get('suburb') as string
-        const message = formData.get('message') as string // Not in schema but good to have, maybe append to service_requested?
 
         const form = event.currentTarget
 
-        // FIXED: Using .upsert() with onConflict: 'email' to handle returning clients.
-        // If the email already exists, their details (phone, address) get updated
-        // instead of throwing a UNIQUE constraint error.
-        // Service and message are stored in the metadata JSONB column so no data is lost.
         try {
+            // FIX APPLIED: Using upsert to prevent duplicate email crashes
             const { error: supabaseError } = await supabase
                 .from('clients')
-                .upsert(
-                    [{
+                .upsert([
+                    {
                         name: name,
                         email: email,
                         phone: phone,
-                        company: 'Website Inquiry',
+                        company: 'Website Inquiry', // This tags them as a web lead
                         address: suburb,
                         metadata: {
-                            service_requested: service,
-                            message: message,
-                            last_inquiry: new Date().toISOString()
+                            last_service_interest: service,
+                            source: 'website_form'
                         }
-                    }],
-                    { onConflict: 'email' }
-                )
+                    },
+                ], { onConflict: 'email' }) // This ensures we update, not error
 
             if (supabaseError) throw supabaseError
 
@@ -55,7 +47,7 @@ export function ContactForm() {
         } catch (err: unknown) {
             console.error('Submission error:', err)
             const errorMsg = err instanceof Error ? err.message : 'Something went wrong'
-            setError(errorMsg || 'Something went wrong. Please try again.')
+            setError(errorMsg)
         } finally {
             setLoading(false)
         }
@@ -64,119 +56,47 @@ export function ContactForm() {
     return (
         <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-100">
             <h3 className="text-2xl font-bold mb-6 text-slate-800">Get a Free Security Strategy Session</h3>
-
             {success && (
                 <div className="bg-green-50 border-l-4 border-green-500 text-green-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
                     <CheckCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-green-600" />
                     <div>
                         <h4 className="font-bold mb-1">Request Received!</h4>
-                        <p className="text-green-700">Thank you! One of our security experts will contact you shortly to confirm your session.</p>
+                        <p className="text-green-700">Thank you! One of our security experts will contact you shortly.</p>
                     </div>
                 </div>
             )}
-
             {error && (
                 <div className="bg-red-50 border-l-4 border-red-500 text-red-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
                     <AlertCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-red-600" />
-                    <div>
-                        <h4 className="font-bold mb-1">Submission Error</h4>
-                        <p>{error}</p>
-                    </div>
+                    <div><h4 className="font-bold mb-1">Submission Error</h4><p>{error}</p></div>
                 </div>
             )}
-
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                        <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input
-                                name="name"
-                                id="name"
-                                required
-                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all"
-                                placeholder="John Doe"
-                                suppressHydrationWarning
-                            />
-                        </div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
+                        <div className="relative"><User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="name" required className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="John Doe" /></div>
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                        <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input
-                                name="phone"
-                                id="phone"
-                                required
-                                type="tel"
-                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:border-blue-500 outline-none transition-all"
-                                placeholder="082 123 4567"
-                                suppressHydrationWarning
-                            />
-                        </div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                        <div className="relative"><Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="phone" required type="tel" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="082 123 4567" /></div>
                     </div>
                 </div>
-
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input
-                            name="email"
-                            id="email"
-                            required
-                            type="email"
-                            className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                            placeholder="john@example.com"
-                            suppressHydrationWarning
-                        />
-                    </div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                    <div className="relative"><Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="email" required type="email" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="john@example.com" /></div>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="suburb" className="block text-sm font-medium text-slate-700 mb-1">Suburb / Area</label>
-                        <div className="relative">
-                            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input
-                                name="suburb"
-                                id="suburb"
-                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                                placeholder="e.g. Durbanville"
-                                suppressHydrationWarning
-                            />
-                        </div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Suburb / Area</label>
+                        <div className="relative"><MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="suburb" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Durbanville" /></div>
                     </div>
                     <div>
-                        <label htmlFor="service" className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
-                        <div className="relative">
-                            <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <select
-                                name="service"
-                                id="service"
-                                className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all appearance-none"
-                                suppressHydrationWarning
-                            >
-                                <option value="General Inquiry">General Inquiry</option>
-                                <option value="Alarm Installation">Alarm Installation</option>
-                                <option value="CCTV Systems">CCTV Systems</option>
-                                <option value="Electric Fencing">Electric Fencing</option>
-                                <option value="Access Control">Access Control</option>
-                                <option value="Gate Automation">Gate Automation</option>
-                            </select>
-                        </div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
+                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none"><option value="General Inquiry">General Inquiry</option><option value="Alarm Installation">Alarm Installation</option><option value="CCTV Systems">CCTV Systems</option><option value="Electric Fencing">Electric Fencing</option><option value="Access Control">Access Control</option><option value="Gate Automation">Gate Automation</option></select></div>
                     </div>
                 </div>
-
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-md hover:shadow-lg transition-all flex justify-center items-center"
-                    suppressHydrationWarning
-                >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get My Free Quote'}
-                </button>
+                <button type="submit" disabled={loading} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-md hover:shadow-lg transition-all flex justify-center items-center">{loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get My Free Quote'}</button>
             </form>
         </div>
     )
