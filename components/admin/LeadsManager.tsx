@@ -25,7 +25,7 @@ export function LeadsManager() {
         const { data } = await supabase
             .from('clients')
             .select('*')
-            .eq('company', 'Website Inquiry')
+            .like('company', 'Website Inquiry%')
             .order('created_at', { ascending: false })
 
         if (data) setLeads(data as unknown as Lead[])

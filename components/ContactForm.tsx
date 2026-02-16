@@ -31,7 +31,7 @@ export function ContactForm() {
                         name: name,
                         email: email,
                         phone: phone,
-                        company: 'Website Inquiry', // This tags them as a web lead
+                        company: `Website Inquiry - ${service || 'General'}`, // This tags them as a web lead
                         address: suburb,
                         metadata: {
                             last_service_interest: service,
