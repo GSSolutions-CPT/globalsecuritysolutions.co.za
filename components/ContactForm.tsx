@@ -35,9 +35,9 @@ export function ContactForm() {
             if (existingClient) {
                 // Client exists: SAFELY update metadata only via RPC
                 // This prevents exposing public UPDATE permissions on the clients table
-                const { error: updateError } = await supabase.rpc('update_lead_interest', { 
-                    p_email: email, 
-                    p_service: service || 'General' 
+                const { error: updateError } = await supabase.rpc('update_lead_interest', {
+                    p_email: email,
+                    p_service: service || 'General'
                 })
 
                 if (updateError) {
@@ -137,7 +137,17 @@ export function ContactForm() {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
-                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none"><option value="General Inquiry">General Inquiry</option><option value="Alarm Installation">Alarm Installation</option><option value="CCTV Systems">CCTV Systems</option><option value="Electric Fencing">Electric Fencing</option><option value="Access Control">Access Control</option><option value="Gate Automation">Gate Automation</option></select></div>
+                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Alarm Installation">Alarm Installation</option>
+                            <option value="CCTV Systems">CCTV Systems</option>
+                            <option value="Electric Fencing">Electric Fencing</option>
+                            <option value="Access Control">Access Control</option>
+                            <option value="Gate Automation">Gate Automation</option>
+                            <option value="Biometric Access Control">Biometric Access Control (High Value)</option>
+                            <option value="Solar Perimeter Beams">Solar Perimeter Beams</option>
+                            <option value="License Plate Recognition">License Plate Recognition (LPR)</option>
+                        </select></div>
                     </div>
                 </div>
                 <button type="submit" disabled={loading} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-full shadow-md hover:shadow-lg transition-all flex justify-center items-center">{loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Get My Free Quote'}</button>
