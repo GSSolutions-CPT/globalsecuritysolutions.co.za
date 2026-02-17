@@ -33,20 +33,19 @@ export function ContactForm() {
             let clientId = existingClient?.id
 
             if (existingClient) {
-                // Client exists: Log activity and update metadata only (Safe RPC)
-                console.log('Existing client found:', clientId)
-
-                const { error: updateError } = await supabase.rpc('update_lead_interest', {
-                    p_email: email,
-                    p_service: service || 'General'
+                // Client exists: SAFELY update metadata only via RPC
+                // This prevents exposing public UPDATE permissions on the clients table
+                const { error: updateError } = await supabase.rpc('update_lead_interest', { 
+                    p_email: email, 
+                    p_service: service || 'General' 
                 })
 
                 if (updateError) {
                     console.error('Failed to update lead interest:', updateError)
-                    // Non-critical error, continue to logging
+                    // Continue to log activity
                 }
             } else {
-                // 2. New Client: Insert safely
+                // 2. New Client: Insert normally
                 const { data: newClient, error: createError } = await supabase
                     .from('clients')
                     .insert([
@@ -55,9 +54,9 @@ export function ContactForm() {
                             email,
                             phone,
                             address: suburb,
-                            company: '', // Keeping company clean for actual business names
+                            company: null, // Keep clean for real business names
                             metadata: {
-                                source: 'website',
+                                source: 'website_form',
                                 service_interest: service,
                                 last_inquiry_date: new Date().toISOString()
                             }
@@ -70,7 +69,7 @@ export function ContactForm() {
                 clientId = newClient.id
             }
 
-            // 3. Log Activity (Ensures visibility on CRM Dashboard)
+            // 3. Log Activity (CRITICAL for Dashboard Visibility)
             const { error: logError } = await supabase
                 .from('activity_log')
                 .insert([
