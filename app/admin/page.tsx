@@ -7,11 +7,10 @@ import { Loader2 } from 'lucide-react'
 // Components
 import { AdminSidebar } from '@/components/admin/AdminSidebar'
 import { AdminStats } from '@/components/admin/AdminStats'
-import { LeadsManager } from '@/components/admin/LeadsManager'
 import { BlogManager } from '@/components/admin/BlogManager'
 import { ProjectManager } from '@/components/admin/ProjectManager'
 
-type Tab = 'overview' | 'blog' | 'projects' | 'leads'
+type Tab = 'overview' | 'blog' | 'projects'
 
 export default function AdminPage() {
     // Auth State
@@ -129,7 +128,6 @@ export default function AdminPage() {
 
                     {/* Content Area */}
                     {activeTab === 'overview' && <AdminStats stats={stats} />}
-                    {activeTab === 'leads' && <LeadsManager />}
                     {activeTab === 'blog' && <BlogManager />}
                     {activeTab === 'projects' && <ProjectManager />}
                 </div>

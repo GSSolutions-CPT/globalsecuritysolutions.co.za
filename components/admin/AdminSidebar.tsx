@@ -2,7 +2,7 @@
 
 import { LayoutDashboard, FileText, Briefcase, Users, LogOut, ShieldCheck } from 'lucide-react'
 
-type Tab = 'overview' | 'blog' | 'projects' | 'leads'
+type Tab = 'overview' | 'blog' | 'projects'
 
 interface AdminSidebarProps {
     activeTab: Tab
@@ -13,7 +13,7 @@ interface AdminSidebarProps {
 export function AdminSidebar({ activeTab, setActiveTab, onLogout }: AdminSidebarProps) {
     const menuItems = [
         { id: 'overview', label: 'Dashboard', icon: LayoutDashboard },
-        { id: 'leads', label: 'Leads & CRM', icon: Users },
+
         { id: 'blog', label: 'Blog Posts', icon: FileText },
         { id: 'projects', label: 'Project Gallery', icon: Briefcase },
     ] as const
