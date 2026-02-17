@@ -23,24 +23,59 @@ export function ContactForm() {
         const form = event.currentTarget
 
         try {
-            // FIX APPLIED: Using upsert to prevent duplicate email crashes
-            const { error: supabaseError } = await supabase
+            // 1. Check if client already exists
+            const { data: existingClient } = await supabase
                 .from('clients')
-                .upsert([
-                    {
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        company: `Website Inquiry - ${service || 'General'}`, // This tags them as a web lead
-                        address: suburb,
-                        metadata: {
-                            last_service_interest: service,
-                            source: 'website_form'
-                        }
-                    },
-                ], { onConflict: 'email' }) // This ensures we update, not error
+                .select('id, metadata')
+                .eq('email', email)
+                .single()
 
-            if (supabaseError) throw supabaseError
+            let clientId = existingClient?.id
+
+            if (existingClient) {
+                // Client exists: Log activity only, DO NOT overwrite data
+                console.log('Existing client found:', clientId)
+            } else {
+                // 2. New Client: Insert safely
+                const { data: newClient, error: createError } = await supabase
+                    .from('clients')
+                    .insert([
+                        {
+                            name,
+                            email,
+                            phone,
+                            address: suburb,
+                            company: '', // Keeping company clean for actual business names
+                            metadata: {
+                                source: 'website',
+                                service_interest: service,
+                                last_inquiry_date: new Date().toISOString()
+                            }
+                        }
+                    ])
+                    .select()
+                    .single()
+
+                if (createError) throw createError
+                clientId = newClient.id
+            }
+
+            // 3. Log Activity (Ensures visibility on CRM Dashboard)
+            const { error: logError } = await supabase
+                .from('activity_log')
+                .insert([
+                    {
+                        type: existingClient ? 'Lead Inquiry' : 'New Lead',
+                        description: `Website Inquiry: ${service || 'General'}`,
+                        related_entity_id: clientId,
+                        related_entity_type: 'client'
+                    }
+                ])
+
+            if (logError) {
+                console.error('Failed to log activity:', logError)
+                // We don't throw here to avoid failing the user submission if just logging fails
+            }
 
             setSuccess(true)
             form.reset()
