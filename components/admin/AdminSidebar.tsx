@@ -27,7 +27,7 @@ export function AdminSidebar({ activeTab, setActiveTab, onLogout }: AdminSidebar
                 </div>
                 <div>
                     <h1 className="font-bold text-lg leading-none">GSS Admin</h1>
-                    <span className="text-xs text-slate-400">Command Center</span>
+                    <span className="text-xs text-slate-400">Command Center v2.0</span>
                 </div>
             </div>
 
