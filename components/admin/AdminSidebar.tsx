@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutDashboard, FileText, Briefcase, Users, LogOut, ShieldCheck } from 'lucide-react'
+import { LayoutDashboard, FileText, Briefcase, LogOut, ShieldCheck } from 'lucide-react'
 
 type Tab = 'overview' | 'blog' | 'projects'
 
