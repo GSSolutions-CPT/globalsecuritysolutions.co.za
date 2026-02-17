@@ -33,8 +33,18 @@ export function ContactForm() {
             let clientId = existingClient?.id
 
             if (existingClient) {
-                // Client exists: Log activity only, DO NOT overwrite data
+                // Client exists: Log activity and update metadata only (Safe RPC)
                 console.log('Existing client found:', clientId)
+
+                const { error: updateError } = await supabase.rpc('update_lead_interest', {
+                    p_email: email,
+                    p_service: service || 'General'
+                })
+
+                if (updateError) {
+                    console.error('Failed to update lead interest:', updateError)
+                    // Non-critical error, continue to logging
+                }
             } else {
                 // 2. New Client: Insert safely
                 const { data: newClient, error: createError } = await supabase
