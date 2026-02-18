@@ -133,7 +133,7 @@ export function Header() {
                             href="/portal/login"
                             className="bg-slate-800 text-white text-sm px-4 py-2 rounded-md hover:bg-slate-900 transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
-                            Sign In
+                            Sign In Now
                         </Link>
                         <Link
                             href="/contact"
@@ -201,7 +201,7 @@ export function Header() {
                                 className="block w-full bg-slate-800 text-white px-5 py-3 rounded-md hover:bg-slate-900 text-center font-bold active:scale-95 duration-200"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Sign In
+                                Sign In Now
                             </Link>
                             <Link
                                 href="/contact"
