@@ -45,3 +45,5 @@ next-env.d.ts
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .env*.local
+
+GSSHUB/
