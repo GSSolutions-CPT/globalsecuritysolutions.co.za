@@ -137,16 +137,28 @@ export function ContactForm() {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
-                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none">
+                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" required className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white">
+                            <option value="" disabled selected>Select a Service</option>
                             <option value="General Inquiry">General Inquiry</option>
-                            <option value="Alarm Installation">Alarm Installation</option>
-                            <option value="CCTV Systems">CCTV Systems</option>
-                            <option value="Electric Fencing">Electric Fencing</option>
-                            <option value="Access Control">Access Control</option>
-                            <option value="Gate Automation">Gate Automation</option>
-                            <option value="Biometric Access Control">Biometric Access Control (High Value)</option>
-                            <option value="Solar Perimeter Beams">Solar Perimeter Beams</option>
-                            <option value="License Plate Recognition">License Plate Recognition (LPR)</option>
+                            <optgroup label="Residential Security">
+                                <option value="Smart Alarm System">Smart Alarm System</option>
+                                <option value="Home CCTV & Remote View">Home CCTV & Remote View</option>
+                                <option value="Perimeter Beams (Garden)">Perimeter Beams (Garden)</option>
+                                <option value="Video Intercom & Gate">Video Intercom & Gate</option>
+                            </optgroup>
+                            <optgroup label="Commercial & Industrial">
+                                <option value="Biometric Access Control">Biometric Access Control</option>
+                                <option value="IP Camera Network (AI)">IP Camera Network (AI)</option>
+                                <option value="Fire Detection Integration">Fire Detection Integration</option>
+                                <option value="Time & Attendance">Time & Attendance</option>
+                            </optgroup>
+                            <optgroup label="Specialized Solutions">
+                                <option value="Solar Perimeter Beams">Solar Perimeter Beams (Farm/Remote)</option>
+                                <option value="LPR (License Plate Recognition)">LPR (License Plate Recognition)</option>
+                                <option value="Off-Site Monitoring Setup">Off-Site Monitoring Setup</option>
+                                <option value="Electric Fencing">Electric Fencing</option>
+                            </optgroup>
+                            <option value="Maintenance & Repairs">Maintenance & Repairs</option>
                         </select></div>
                     </div>
                 </div>
