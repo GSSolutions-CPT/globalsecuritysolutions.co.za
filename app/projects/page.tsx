@@ -5,8 +5,8 @@ import Image from "next/image";
 import seoData from '@/app/data/seoData.json'
 import type { Metadata } from 'next'
 
-// Revalidate on every request so Admin Dashboard changes appear instantly
-export const revalidate = 0
+// Revalidate every 60 seconds to improve performance while keeping data fresh
+export const revalidate = 60
 
 const pageData = seoData.trustAndSupportPages.find(p => p.page === "Project Gallery")
 

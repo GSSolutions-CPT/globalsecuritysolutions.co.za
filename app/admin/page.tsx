@@ -29,16 +29,18 @@ export default function AdminPage() {
 
     const fetchStats = async () => {
         // Parallel fetching for dashboard overview
-        const [{ count: leads }, { count: posts }, { count: projects }] = await Promise.all([
+        const results = await Promise.all([
             supabase.from('clients').select('*', { count: 'exact', head: true }).ilike('company', 'Website Inquiry%'),
             supabase.from('posts').select('*', { count: 'exact', head: true }),
             supabase.from('projects').select('*', { count: 'exact', head: true })
         ])
 
+        const [leadsData, postsData, projectsData] = results
+
         setStats({
-            totalLeads: leads || 0,
-            totalPosts: posts || 0,
-            totalProjects: projects || 0
+            totalLeads: leadsData.count || 0,
+            totalPosts: postsData.count || 0,
+            totalProjects: projectsData.count || 0
         })
     }
 
