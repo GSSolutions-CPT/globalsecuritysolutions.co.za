@@ -33,11 +33,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         // Check active session
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session)
-            setUser(session?.user ?? null)
-            setLoading(false)
-        })
+        const initSession = async () => {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession()
+                if (error) throw error
+                setSession(session)
+                setUser(session?.user ?? null)
+            } catch (error) {
+                console.error("AuthContext: Error checking session:", error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        initSession()
 
         // Listen for changes
         const {
