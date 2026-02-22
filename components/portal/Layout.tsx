@@ -47,6 +47,18 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         }
     }
 
+    const isAuthPage = pathname === '/portal/login' || pathname === '/portal/register' || pathname.startsWith('/portal/setup-profile')
+
+    if (isAuthPage) {
+        return (
+            <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/20">
+                <main className="flex-1 animate-fade-in text-foreground">
+                    {children}
+                </main>
+            </div>
+        )
+    }
+
     return (
         <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/20">
             {/* Top Navigation Bar */}

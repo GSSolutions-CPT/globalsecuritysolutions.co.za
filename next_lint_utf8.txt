@@ -1,0 +1,8 @@
+﻿node.exe : Invalid project directory provided, no such directory: 
+C:\Users\User\OneDrive\Desktop\Website\globalsecuritysolutions.co.za\lint
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\User\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Invalid project...ions.co.za\lint:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
