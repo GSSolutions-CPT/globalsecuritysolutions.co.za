@@ -1,20 +1,20 @@
 // @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Textarea } from '@/components/portal/ui/textarea'
+import { Switch } from '@/components/portal/ui/switch'
 import { Loader2, Plus, Trash2, Upload, FileText, Calendar, Building2, ChevronLeft, CreditCard, Receipt, FileSearch } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'sonner'
-import { useCurrency } from '@/lib/use-currency'
+import { useCurrency } from '@/lib/portal/use-currency'
 import { format } from 'date-fns'
-import { Separator } from '@/components/ui/separator'
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Separator } from '@/components/portal/ui/separator'
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/portal/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/portal/ui/popover'
 
 export default function CreatePurchaseOrder() {
     const router = useRouter()
@@ -95,7 +95,7 @@ export default function CreatePurchaseOrder() {
         setFile(uploadedFile)
         setIsProcessing(true)
         try {
-            const { extractItemsFromPDF, parseTextToItems } = await import('@/lib/pdf-parser')
+            const { extractItemsFromPDF, parseTextToItems } = await import('@/lib/portal/pdf-parser')
             const { text } = await extractItemsFromPDF(uploadedFile)
             setExtractedText(text)
             const parsedItems = parseTextToItems(text)
@@ -579,4 +579,5 @@ export default function CreatePurchaseOrder() {
         </div>
     )
 }
+
 

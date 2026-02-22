@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 
 export const Separator = React.forwardRef(
   ({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
@@ -17,4 +17,5 @@ export const Separator = React.forwardRef(
   )
 );
 Separator.displayName = "Separator";
+
 

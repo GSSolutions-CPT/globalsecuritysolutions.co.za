@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Textarea } from '@/components/portal/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/portal/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Upload, FileSpreadsheet, Clipboard, Loader2 } from 'lucide-react'
 import Papa from 'papaparse'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 
 export function ImportProductsDialog({ onImportSuccess }) {
@@ -264,3 +264,4 @@ export function ImportProductsDialog({ onImportSuccess }) {
         </Dialog>
     )
 }
+

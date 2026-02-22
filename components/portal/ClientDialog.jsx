@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
 import { Loader2 } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 
 export function ClientDialog({
@@ -174,3 +174,4 @@ export function ClientDialog({
         </Dialog>
     )
 }
+

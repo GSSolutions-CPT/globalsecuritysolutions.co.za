@@ -7,15 +7,15 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { supabase } from '@/lib/supabase'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
+import { supabase } from '@/lib/portal/supabase'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/portal/ui/dialog'
+import { Button } from '@/components/portal/ui/button'
+import { Badge } from '@/components/portal/ui/badge'
+import { Card, CardContent } from '@/components/portal/ui/card'
 import { Briefcase, Calendar as CalendarIcon, Receipt, ExternalLink, Clock, MapPin, User, ChevronLeft, ChevronRight } from 'lucide-react'
-import { generateOutlookLink } from '@/lib/calendar-utils'
+import { generateOutlookLink } from '@/lib/portal/calendar-utils'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/portal/utils'
 
 const locales = {
     'en-US': enUS,

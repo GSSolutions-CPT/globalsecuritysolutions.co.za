@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/portal/ui/button'
 import { useRouter } from 'next/navigation'
 import { AlertCircle } from 'lucide-react'
 

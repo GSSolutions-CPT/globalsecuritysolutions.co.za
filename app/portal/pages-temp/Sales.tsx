@@ -1,20 +1,20 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
+import { Badge } from '@/components/portal/ui/badge'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
 import { Search, FileText, Receipt, Banknote, Calendar, Download, Trash2, CheckCircle, Package, FileSignature, AlertCircle, Share2, Wrench } from 'lucide-react'
-import InstallationDetails from '@/components/InstallationDetails'
-import { supabase } from '@/lib/supabase'
+import InstallationDetails from '@/components/portal/InstallationDetails'
+import { supabase } from '@/lib/portal/supabase'
 import { useRouter } from 'next/navigation'
-import { generateInvoicePDF, generateQuotePDF, generatePurchaseOrderPDF } from '@/lib/pdf-service'
-import { shareLink } from '@/lib/share-utils'
-import { useCurrency } from '@/lib/use-currency.jsx'
+import { generateInvoicePDF, generateQuotePDF, generatePurchaseOrderPDF } from '@/lib/portal/pdf-service'
+import { shareLink } from '@/lib/portal/share-utils'
+import { useCurrency } from '@/lib/portal/use-currency'
 import { toast } from 'sonner'
-import { useSettings } from '@/lib/use-settings.jsx'
+import { useSettings } from '@/lib/portal/use-settings'
 
 
 export default function Sales() {
@@ -927,5 +927,6 @@ export default function Sales() {
     </div>
   )
 }
+
 
 

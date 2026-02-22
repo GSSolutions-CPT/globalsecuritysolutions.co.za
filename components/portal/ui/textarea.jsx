@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 
 export const Textarea = React.forwardRef(({ className, ...props }, ref) => (
   <textarea
@@ -12,4 +12,5 @@ export const Textarea = React.forwardRef(({ className, ...props }, ref) => (
   />
 ));
 Textarea.displayName = "Textarea";
+
 

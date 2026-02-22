@@ -17,11 +17,11 @@ import {
     useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/portal/ui/card';
+import { Button } from '@/components/portal/ui/button';
+import { Badge } from '@/components/portal/ui/badge';
 import { Calendar, User, Download, GripVertical, Clock, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 
 const columns = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
 

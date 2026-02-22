@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/portal/ui/button'
 import { Eraser } from 'lucide-react'
 
 export function SignaturePad({ onSave, className = '' }) {
@@ -97,3 +97,4 @@ export function SignaturePad({ onSave, className = '' }) {
         </div>
     )
 }
+

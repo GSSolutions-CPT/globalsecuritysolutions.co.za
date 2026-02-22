@@ -1,14 +1,14 @@
 // @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { supabase } from '@/lib/supabase'
+import { Button } from '@/components/portal/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/portal/ui/tabs'
+import { Badge } from '@/components/portal/ui/badge'
+import { supabase } from '@/lib/portal/supabase'
 import { ArrowLeft, Mail, Phone, MapPin, Loader2, Building2, Image as ImageIcon, FileText } from 'lucide-react'
-import { ClientDialog } from '@/components/ClientDialog'
-import { formatCurrency } from '@/lib/utils'
+import { ClientDialog } from '@/components/portal/ClientDialog'
+import { formatCurrency } from '@/lib/portal/utils'
 
 export default function ClientDetails({ params }) {
     const { id } = params
@@ -369,4 +369,5 @@ export default function ClientDetails({ params }) {
         </div>
     )
 }
+
 

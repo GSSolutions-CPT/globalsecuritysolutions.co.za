@@ -1,13 +1,13 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Alert, AlertDescription } from '@/components/portal/ui/alert'
 import { Loader2, ShieldCheck, Lock, UserPlus, CheckCircle2 } from 'lucide-react'
 
 export default function ProfileSetup({ params }) {

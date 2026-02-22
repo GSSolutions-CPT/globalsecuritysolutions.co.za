@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 
 const TabsContext = createContext(null);
 
@@ -98,4 +98,5 @@ export const TabsContent = React.forwardRef(
   }
 );
 TabsContent.displayName = 'TabsContent';
+
 

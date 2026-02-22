@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils'; // Updated import assumption
+import { cn } from '@/lib/portal/utils'; // Updated import assumption
 
 const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
@@ -52,4 +52,5 @@ const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
 CardFooter.displayName = "CardFooter";
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
 

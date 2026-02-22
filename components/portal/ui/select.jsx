@@ -9,7 +9,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 import { ChevronDown, Check } from 'lucide-react';
 
 const SelectContext = createContext(null);
@@ -253,3 +253,4 @@ function extractLabel(children) {
   }
   return String(children);
 }
+

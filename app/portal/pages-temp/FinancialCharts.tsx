@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card';
 import {
   BarChart,
   Bar,

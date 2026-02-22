@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/portal/ui/button'
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -46,3 +46,4 @@ class ErrorBoundary extends React.Component {
 }
 
 export default ErrorBoundary
+

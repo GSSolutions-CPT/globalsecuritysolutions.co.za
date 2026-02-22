@@ -1,14 +1,14 @@
 // @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
 
 import { Search, Building2, Users, Mail, Phone, MapPin, Pencil, Trash2, ExternalLink, Plus } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
-import { shareLink } from '@/lib/share-utils'
+import { supabase } from '@/lib/portal/supabase'
+import { shareLink } from '@/lib/portal/share-utils'
 import { toast } from 'sonner'
-import { ClientDialog } from '@/components/ClientDialog'
+import { ClientDialog } from '@/components/portal/ClientDialog'
 
 import { useRouter } from 'next/navigation'
 
@@ -250,4 +250,6 @@ export default function Clients() {
     </div >
   )
 }
+
+
 

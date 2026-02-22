@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/portal/ui/button'
 import { Download, X } from 'lucide-react'
 
 export function InstallPrompt() {
@@ -61,3 +61,4 @@ export function InstallPrompt() {
         </div>
     )
 }
+

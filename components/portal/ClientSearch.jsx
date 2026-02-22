@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Check, ChevronsUpDown, Plus } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/portal/ui/button"
 import {
     Command,
     CommandEmpty,
@@ -9,12 +9,12 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "@/components/ui/command"
+} from "@/components/portal/ui/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/portal/ui/popover"
 
 export function ClientSearch({ clients = [], value, onSelect, onAddNew }) {
     const [open, setOpen] = React.useState(false)
@@ -89,3 +89,4 @@ export function ClientSearch({ clients = [], value, onSelect, onAddNew }) {
         </Popover>
     )
 }
+

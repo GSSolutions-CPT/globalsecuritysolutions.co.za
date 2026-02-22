@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
+import { Button } from '@/components/portal/ui/button'
+import { Label } from '@/components/portal/ui/label'
+import { Input } from '@/components/portal/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/portal/ui/select'
 import { Brain, Sparkles, Calculator, Wand2 } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/portal/ui/card'
 
 export function SmartEstimator({ onApply }) {
     const [open, setOpen] = useState(false)
@@ -227,3 +227,4 @@ export function SmartEstimator({ onApply }) {
         </Dialog>
     )
 }
+

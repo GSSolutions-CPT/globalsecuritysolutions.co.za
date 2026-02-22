@@ -1,25 +1,25 @@
 // @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/portal/ui/select'
+import { Switch } from '@/components/portal/ui/switch'
+import { Separator } from '@/components/portal/ui/separator'
 import { Plus, Trash2, FileText, Receipt, Package, Loader2, User, Calendar, Percent, ChevronLeft, Map, ImageIcon } from 'lucide-react'
-import SitePlanner from '@/components/SitePlanner'
-import { supabase } from '@/lib/supabase'
+import SitePlanner from '@/components/portal/SitePlanner'
+import { supabase } from '@/lib/portal/supabase'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { SmartEstimator } from '@/components/SmartEstimator'
-import { useCurrency } from '@/lib/use-currency'
-import { useSettings } from '@/lib/use-settings'
+import { SmartEstimator } from '@/components/portal/SmartEstimator'
+import { useCurrency } from '@/lib/portal/use-currency'
+import { useSettings } from '@/lib/portal/use-settings'
 import { toast } from 'sonner'
-import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
-import { ClientDialog } from '@/components/ClientDialog'
-import { ProductSearch } from '@/components/ProductSearch'
-import { ClientSearch } from '@/components/ClientSearch'
+import { Badge } from '@/components/portal/ui/badge'
+import { cn } from '@/lib/portal/utils'
+import { ClientDialog } from '@/components/portal/ClientDialog'
+import { ProductSearch } from '@/components/portal/ProductSearch'
+import { ClientSearch } from '@/components/portal/ClientSearch'
 
 export default function CreateSale() {
   const router = useRouter()
@@ -743,5 +743,6 @@ export default function CreateSale() {
     </div>
   )
 }
+
 
 

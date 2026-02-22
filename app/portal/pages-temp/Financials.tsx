@@ -1,19 +1,19 @@
 // @ts-nocheck
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Textarea } from '@/components/portal/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/portal/ui/select'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
 
 import { Plus, Banknote, TrendingUp, TrendingDown, Receipt, Pencil, Trash2, Paperclip, FileText, Calendar, Wallet, PieChart, ArrowUpRight, ArrowDownRight } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 
-const FinancialCharts = lazy(() => import('./FinancialCharts.jsx'))
+const FinancialCharts = lazy(() => import('./FinancialCharts'))
 
 export default function Financials() {
   const [expenses, setExpenses] = useState([])
@@ -652,5 +652,6 @@ export default function Financials() {
     </div >
   )
 }
+
 
 

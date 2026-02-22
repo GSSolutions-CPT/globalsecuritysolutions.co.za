@@ -1,24 +1,24 @@
 // @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Badge } from '@/components/portal/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
 import { Download, CheckCircle, Upload, MessageCircle, Phone, Mail, HelpCircle, PenTool, CreditCard, FileText, MapPin, Send, Loader2 } from 'lucide-react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/lib/portal/supabase'
 import { useSearchParams } from 'next/navigation'
-import { generateInvoicePDF, generateQuotePDF } from '@/lib/pdf-service'
-import { useCurrency } from '@/lib/use-currency.jsx'
-import { SignaturePad } from '@/components/ui/signature-pad'
+import { generateInvoicePDF, generateQuotePDF } from '@/lib/portal/pdf-service'
+import { useCurrency } from '@/lib/portal/use-currency'
+import { SignaturePad } from '@/components/portal/ui/signature-pad'
 import { toast } from 'sonner'
-import { useSettings } from '@/lib/use-settings.jsx'
+import { useSettings } from '@/lib/portal/use-settings'
 import { InstallPrompt } from '@/components/InstallPrompt'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/portal/utils'
 import { useAuth } from '@/context/AuthContext'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Textarea } from '@/components/portal/ui/textarea'
 
 export default function ClientPortal() {
   const { formatCurrency } = useCurrency()
@@ -1186,5 +1186,6 @@ export default function ClientPortal() {
     </div >
   )
 }
+
 
 

@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/portal/utils"
+import { Button } from "@/components/portal/ui/button"
 import {
     Command,
     CommandEmpty,
@@ -10,13 +10,13 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "@/components/ui/command"
+} from "@/components/portal/ui/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover"
-import { useCurrency } from "@/lib/use-currency"
+} from "@/components/portal/ui/popover"
+import { useCurrency } from "@/lib/portal/use-currency"
 
 export function ProductSearch({ products = [], value, onSelect }) {
     const [open, setOpen] = React.useState(false)
@@ -134,3 +134,5 @@ export function ProductSearch({ products = [], value, onSelect }) {
         </Popover>
     )
 }
+
+

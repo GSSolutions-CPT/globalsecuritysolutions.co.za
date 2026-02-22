@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/portal/utils';
 
 export const Input = React.forwardRef(({ className, type, ...props }, ref) => (
   <input
@@ -13,4 +13,5 @@ export const Input = React.forwardRef(({ className, type, ...props }, ref) => (
   />
 ));
 Input.displayName = "Input";
+
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { supabase } from '@/lib/supabase'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Textarea } from '@/components/portal/ui/textarea'
+import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { Upload, X, Camera, Hash, Loader2, Trash2 } from 'lucide-react'
 
@@ -366,3 +366,4 @@ export default function InstallationDetails({ invoiceId, readonly = false }) {
         </div>
     )
 }
+

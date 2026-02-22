@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { supabase } from '@/lib/supabase'
+import { Button } from '@/components/portal/ui/button'
+import { Input } from '@/components/portal/ui/input'
+import { Label } from '@/components/portal/ui/label'
+import { Badge } from '@/components/portal/ui/badge'
+import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
-import { SECURITY_ICONS } from '@/lib/security-icons'
+import { SECURITY_ICONS } from '@/lib/portal/security-icons'
 import {
     MousePointer2, Pencil, Type, ArrowUpRight,
     Save, X, Undo2, Trash2, Loader2, RotateCcw, Upload
@@ -656,3 +656,5 @@ function ToolButton({ active, onClick, icon, label }) {
         </Button>
     )
 }
+
+
