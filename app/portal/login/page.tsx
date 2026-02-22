@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/portal/ui/alert'
 import { Mail, Loader2, Lock, ArrowRight, ShieldCheck } from 'lucide-react'
 import Image from 'next/image'
+import type { User } from '@supabase/supabase-js'
 
 function LoginContent() {
     const [email, setEmail] = useState('')
@@ -25,7 +26,7 @@ function LoginContent() {
 
     const from = searchParams.get('from') || '/portal/dashboard'
 
-    const routeByRole = async (user: any) => {
+    const routeByRole = async (user: User) => {
         const { data: clientData } = await supabase
             .from('clients')
             .select('id')
@@ -63,9 +64,11 @@ function LoginContent() {
         try {
             const { data, error } = await signIn({ email, password })
             if (error) throw error
+            if (!data.user) throw new Error('Sign in succeeded but no user was returned')
             await routeByRole(data.user)
-        } catch (err: any) {
-            setError(err.message || 'Failed to sign in')
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Failed to sign in'
+            setError(message)
         } finally {
             setLoading(false)
         }
