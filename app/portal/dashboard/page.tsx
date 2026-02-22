@@ -29,12 +29,19 @@ export default function DashboardPage() {
         newClients: 0,
         overdueInvoices: 0
     })
-    const [monthlyData, setMonthlyData] = useState<any[]>([])
-    const [expenseBreakdown, setExpenseBreakdown] = useState<any[]>([])
-    const [activities, setActivities] = useState<any[]>([])
+    interface Client { id: string; created_at: string; metadata?: any; name?: string; company?: string; email?: string; }
+    interface Invoice { id: string; date_created: string; status: string; total_amount: string; profit_estimate: string; }
+    interface Expense { id: string; date: string; amount: string; type?: string; }
+    interface ActivityLog { id: string; type: string; description: string; timestamp: string; }
+    interface MonthlyData { month: string; revenue: number; profit: number; expenses: number; }
+    interface ExpenseBreakdown { name: string; value: number; }
+
+    const [monthlyData, setMonthlyData] = useState<MonthlyData[]>([])
+    const [expenseBreakdown, setExpenseBreakdown] = useState<ExpenseBreakdown[]>([])
+    const [activities, setActivities] = useState<ActivityLog[]>([])
     const [viewMode, setViewMode] = useState<'cash_flow' | 'projected'>('cash_flow')
-    const [rawInvoices, setRawInvoices] = useState<any[]>([])
-    const [rawExpenses, setRawExpenses] = useState<any[]>([])
+    const [rawInvoices, setRawInvoices] = useState<Invoice[]>([])
+    const [rawExpenses, setRawExpenses] = useState<Expense[]>([])
 
     const fetchDashboardData = useCallback(async () => {
         try {
@@ -54,10 +61,10 @@ export default function DashboardPage() {
                 supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(5)
             ]) as any
 
-            const clients = clientsRes.data
-            const invoices = invoicesRes.data
-            const expenses = expensesRes.data
-            const activityLog = activityLogRes.data
+            const clients = clientsRes.data as Client[]
+            const invoices = invoicesRes.data as Invoice[]
+            const expenses = expensesRes.data as Expense[]
+            const activityLog = activityLogRes.data as ActivityLog[]
 
             // Store Raw Data
             setRawInvoices(invoices || [])
@@ -65,11 +72,11 @@ export default function DashboardPage() {
             setActivities(activityLog || [])
 
             // Calculate Non-Financial Metrics
-            const newClients = clients?.filter((c: any) =>
+            const newClients = clients?.filter((c: Client) =>
                 new Date(c.created_at) >= new Date(firstDayOfMonth)
             ).length || 0
 
-            const overdueInvoices = invoices?.filter((inv: any) => inv.status === 'Overdue').length || 0
+            const overdueInvoices = invoices?.filter((inv: Invoice) => inv.status === 'Overdue').length || 0
 
             setMetrics(prev => ({ ...prev, newClients, overdueInvoices }))
 
@@ -132,8 +139,8 @@ export default function DashboardPage() {
                 }
             })
 
-            const sortedData = Object.values(data)
-                .sort((a: any, b: any) => new Date(a.month).getTime() - new Date(b.month).getTime())
+            const sortedData = (Object.values(data) as MonthlyData[])
+                .sort((a, b) => new Date(a.month).getTime() - new Date(b.month).getTime())
                 .slice(-6) // Last 6 months
 
             setMonthlyData(sortedData)
