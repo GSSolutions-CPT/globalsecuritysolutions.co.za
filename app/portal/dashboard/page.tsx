@@ -155,7 +155,10 @@ export default function DashboardPage() {
 
     // Fetch initial data on mount
     useEffect(() => {
-        fetchDashboardData()
+        const initData = async () => {
+            await fetchDashboardData()
+        }
+        initData()
     }, [fetchDashboardData])
 
     return (

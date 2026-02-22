@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ConditionalHeader, ConditionalFooter, ConditionalWhatsApp } from "@/components/ConditionalMarketingUI";
 import { AOSInit } from "@/components/AOSInit";
 import StructuredData from "@/components/StructuredData";
