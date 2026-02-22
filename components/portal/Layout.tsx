@@ -27,6 +27,8 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const pathname = usePathname()
     const router = useRouter()
+
+    // Added search params logic here
     const searchParams = useSearchParams()
     const isClient = searchParams.get('client') !== null
 
@@ -69,10 +71,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                     {/* Logo */}
                     <div className="flex items-center gap-2">
                         <Image src={settings?.logoUrl || "/logo.png"} alt="Logo" width={32} height={32} className="h-8 w-auto mb-1" />
-                        {/* <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent hidden md:inline-block">{settings.companyName || 'GSS Hub'}</span> */}
                     </div>
 
-                    {/* Desktop Navigation — hidden for customer users */}
+                    {/* Desktop Navigation - Hid navItems if isClient is true */}
                     <nav className="hidden md:flex items-center gap-1">
                         {!isClient && navItems.map((item) => {
                             const Icon = item.icon
@@ -99,7 +100,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                         <div className="hidden md:flex items-center gap-2 pr-4 border-r border-white/10 mr-4">
                             <div className="flex flex-col items-end">
                                 <span className="text-sm font-medium leading-none text-foreground">{user?.email?.split('@')[0]}</span>
-                                <span className="text-[10px] text-muted-foreground">Admin</span>
+                                <span className="text-[10px] text-muted-foreground">{isClient ? 'Customer' : 'Admin'}</span>
                             </div>
                         </div>
 
@@ -130,6 +131,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             {isMobileMenuOpen && (
                 <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-md pt-20 px-4 animate-in slide-in-from-top-10 fade-in duration-200">
                     <nav className="flex flex-col gap-2">
+                        {/* Hid navItems if isClient is true for mobile */}
                         {!isClient && navItems.map((item) => {
                             const Icon = item.icon
                             const isActive = pathname === item.path
