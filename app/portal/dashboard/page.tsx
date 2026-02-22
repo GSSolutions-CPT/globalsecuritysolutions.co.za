@@ -59,7 +59,7 @@ export default function DashboardPage() {
                 supabase.from('invoices').select('*'),
                 supabase.from('expenses').select('*'),
                 supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(5)
-            ]) as any
+            ])
 
             const clients = clientsRes.data as Client[]
             const invoices = invoicesRes.data as Invoice[]
@@ -154,7 +154,6 @@ export default function DashboardPage() {
     }, [rawInvoices, rawExpenses, viewMode])
 
     // Fetch initial data on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         fetchDashboardData()
     }, [fetchDashboardData])

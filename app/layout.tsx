@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ConditionalHeader, ConditionalFooter, ConditionalWhatsApp } from "@/components/ConditionalMarketingUI";
 import { AOSInit } from "@/components/AOSInit";
 import StructuredData from "@/components/StructuredData";
 import { cn } from "@/utils/cn";
@@ -82,12 +83,12 @@ export default function RootLayout({
         </Script>
         <StructuredData />
         <AOSInit />
-        <Header />
+        <ConditionalHeader />
         <main className="flex-grow min-h-screen">
           {children}
         </main>
-        <Footer />
-        <WhatsAppButton />
+        <ConditionalFooter />
+        <ConditionalWhatsApp />
         <ScrollToTop />
       </body>
     </html>
