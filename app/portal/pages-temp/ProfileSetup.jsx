@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
 import { Button } from '@/components/ui/button'
@@ -9,9 +9,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2, ShieldCheck, Lock, UserPlus, CheckCircle2 } from 'lucide-react'
 
-export default function ProfileSetup() {
-    const { id } = useParams()
-    const navigate = useNavigate()
+export default function ProfileSetup({ params }) {
+    const { id } = params
+    const router = useRouter()
     const [client, setClient] = useState(null)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -32,7 +32,7 @@ export default function ProfileSetup() {
                 if (error) throw error
                 if (data.auth_user_id) {
                     setError('Profile already setup for this client. Please sign in.')
-                    setTimeout(() => navigate('/login'), 3000)
+                    setTimeout(() => router.push('/login'), 3000)
                 }
                 setClient(data)
             } catch (err) {
@@ -44,7 +44,7 @@ export default function ProfileSetup() {
         }
 
         if (id) fetchClient()
-    }, [id, navigate])
+    }, [id, router])
 
     const handleSignup = async (e) => {
         e.preventDefault()

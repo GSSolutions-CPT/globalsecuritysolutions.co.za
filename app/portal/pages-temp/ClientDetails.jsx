@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useRouter, useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -9,9 +9,9 @@ import { ArrowLeft, Mail, Phone, MapPin, Loader2, Building2, Image as ImageIcon,
 import { ClientDialog } from '@/components/ClientDialog'
 import { formatCurrency } from '@/lib/utils'
 
-export default function ClientDetails() {
-    const { id } = useParams()
-    const navigate = useNavigate()
+export default function ClientDetails({ params }) {
+    const { id } = params
+    const router = useRouter()
     const [client, setClient] = useState(null)
     const [jobs, setJobs] = useState([])
     const [invoices, setInvoices] = useState([])
@@ -93,7 +93,7 @@ export default function ClientDetails() {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
                 <h2 className="text-xl font-semibold">Client not found</h2>
-                <Button onClick={() => navigate('/clients')}>Back to Clients</Button>
+                <Button onClick={() => router.push('/clients')}>Back to Clients</Button>
             </div>
         )
     }
@@ -276,7 +276,7 @@ export default function ClientDetails() {
                                             </div>
                                             <div className="text-right">
                                                 <p className="font-bold">{formatCurrency(inv.total_amount)}</p>
-                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => navigate('/sales')}>View Invoice</Button>
+                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/sales')}>View Invoice</Button>
                                             </div>
                                         </div>
                                     ))}
@@ -310,7 +310,7 @@ export default function ClientDetails() {
                                             </div>
                                             <div className="text-right">
                                                 <p className="font-bold">{formatCurrency(quote.total_amount)}</p>
-                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => navigate('/sales')}>View Quote</Button>
+                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/sales')}>View Quote</Button>
                                             </div>
                                         </div>
                                     ))}

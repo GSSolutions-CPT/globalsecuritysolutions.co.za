@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { Plus, Trash2, FileText, Receipt, Package, Loader2, User, Calendar, Percent, ChevronLeft, Map, ImageIcon } from 'lucide-react'
 import SitePlanner from '@/components/SitePlanner'
 import { supabase } from '@/lib/supabase'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { SmartEstimator } from '@/components/SmartEstimator'
 import { useCurrency } from '@/lib/use-currency'
 import { useSettings } from '@/lib/use-settings'
@@ -21,7 +21,7 @@ import { ProductSearch } from '@/components/ProductSearch'
 import { ClientSearch } from '@/components/ClientSearch'
 
 export default function CreateSale() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [searchParams] = useSearchParams()
   const defaultType = searchParams.get('type')
   const { formatCurrency } = useCurrency()
@@ -319,7 +319,7 @@ export default function CreateSale() {
       }])
 
       toast.success(`${mode === 'quotation' ? 'Quotation' : 'Invoice'} ${editId ? 'updated' : 'created'} successfully!`)
-      navigate('/sales')
+      router.push('/sales')
     } catch (error) {
       console.error('Error saving sale:', error)
       toast.error(`Error saving sale: ${error.message}`)
@@ -336,7 +336,7 @@ export default function CreateSale() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/sales')} className="rounded-full">
+          <Button variant="ghost" size="icon" onClick={() => router.push('/sales')} className="rounded-full">
             <ChevronLeft className="h-5 w-5" />
           </Button>
           <div>
@@ -725,7 +725,7 @@ export default function CreateSale() {
                 {isLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                 {editId ? 'Update' : 'Create'} {mode === 'quotation' ? 'Quotation' : 'Invoice'}
               </Button>
-              <Button variant="ghost" className="w-full text-muted-foreground" onClick={() => navigate('/sales')}>
+              <Button variant="ghost" className="w-full text-muted-foreground" onClick={() => router.push('/sales')}>
                 Cancel
               </Button>
             </CardFooter>

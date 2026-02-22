@@ -17,11 +17,12 @@ import { generateOutlookLink } from '@/lib/calendar-utils'
 const JobBoard = lazy(() => import('./jobs/JobBoard'))
 const JobCalendar = lazy(() => import('./jobs/JobCalendar'))
 
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 export default function Jobs() {
-  const location = useLocation()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+  const [searchParams] = useSearchParams()
   const [jobs, setJobs] = useState([])
   const [clients, setClients] = useState([])
   const [quotations, setQuotations] = useState([])
@@ -51,12 +52,9 @@ export default function Jobs() {
 
   // REFACTORED: Handle incoming "Create Job from Quote" via URL search params.
   // This survives page refreshes unlike location.state.
-  // Usage: navigate('/jobs?fromQuote=<quotation_id>')
+  // Usage: router.push('/jobs?fromQuote=<quotation_id>')
   useEffect(() => {
     const fromQuoteId = searchParams.get('fromQuote')
-
-    // Also support the legacy location.state approach for backwards-compatibility
-    const quoteData = location.state?.createFromQuote ? location.state.quoteData : null
 
     if (fromQuoteId) {
       // Fetch the quotation from Supabase and pre-fill the form
@@ -89,21 +87,9 @@ export default function Jobs() {
       }
       fetchAndPrefill()
       // Clear the search param to prevent re-opening on navigation
-      setSearchParams({}, { replace: true })
-    } else if (quoteData) {
-      // Legacy fallback: support location.state
-      setViewMode('board')
-      setFormData(prev => ({
-        ...prev,
-        client_id: quoteData.client_id,
-        quotation_id: quoteData.id,
-        notes: `Job for Quotation #${quoteData.id.substring(0, 6)}`,
-        status: 'Pending'
-      }))
-      setIsDialogOpen(true)
-      window.history.replaceState({}, document.title)
+      router.replace(pathname)
     }
-  }, [searchParams, location.state, setSearchParams])
+  }, [searchParams, router, pathname])
 
   const fetchJobs = useCallback(async () => {
     try {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
@@ -16,10 +17,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
 
     const { signIn, signInWithGoogle } = useAuth()
-    const navigate = useNavigate()
-    const location = useLocation()
-
-    const from = location.state?.from?.pathname || '/dashboard'
+    const router = useRouter()
 
     const routeByRole = async (user) => {
         // Check if this user is a client
@@ -38,15 +36,7 @@ export default function Login() {
             window.location.href = `${baseUrl}portal/?client=${clientData.id}`
         } else {
             // Employee/admin → go to dashboard
-            // Sanitize 'from' to prevent double /portal if it was captured with the basename
-            let target = from
-            if (target.startsWith('/portal')) {
-                target = target.substring(7)
-            }
-            if (!target.startsWith('/')) {
-                target = `/${target}`
-            }
-            navigate(target, { replace: true })
+            router.replace('/dashboard')
         }
     }
 
@@ -198,7 +188,7 @@ export default function Login() {
                         <div className="w-full text-center mt-2">
                             <p className="text-sm text-slate-500 dark:text-slate-400">
                                 Don&apos;t have an account?{' '}
-                                <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+                                <Link href="/register" className="font-semibold text-blue-600 hover:text-blue-500 hover:underline transition-colors">
                                     Register Account
                                 </Link>
                             </p>

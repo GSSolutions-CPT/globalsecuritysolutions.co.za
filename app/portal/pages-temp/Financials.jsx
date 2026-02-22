@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -29,6 +29,7 @@ export default function Financials() {
   })
   const [uploading, setUploading] = useState(false)
   const [editingId, setEditingId] = useState(null)
+  const router = useRouter()
   const [searchParams, setSearchParams] = useSearchParams()
   const [dateRange, setDateRange] = useState({
     start: new Date(new Date().setMonth(new Date().getMonth() - 6)).toISOString().split('T')[0],
@@ -41,11 +42,9 @@ export default function Financials() {
       // Optional: Clear the param so it doesn't reopen on refresh, 
       // but keeping it might be fine for now. 
       // Better to clear it after opening.
-      const newParams = new URLSearchParams(searchParams)
-      newParams.delete('action')
-      setSearchParams(newParams, { replace: true })
+      router.replace(window.location.pathname)
     }
-  }, [searchParams, setSearchParams])
+  }, [searchParams, router])
 
   const fetchExpenses = useCallback(async () => {
     try {

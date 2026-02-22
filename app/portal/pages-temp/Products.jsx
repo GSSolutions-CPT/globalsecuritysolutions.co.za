@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -31,15 +31,16 @@ export default function Products() {
     description: ''
   })
 
-  const location = useLocation()
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (location.state?.openAddDialog) {
+    if (searchParams.get('action') === 'new') {
       setIsDialogOpen(true)
-      // Clear state to prevent reopening on refresh (optional, requires navigate)
-      window.history.replaceState({}, document.title)
+      router.replace(pathname)
     }
-  }, [location])
+  }, [searchParams, router, pathname])
 
   const fetchProducts = useCallback(async () => {
     setIsLoading(true)

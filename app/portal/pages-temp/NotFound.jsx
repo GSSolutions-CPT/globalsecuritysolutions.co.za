@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { AlertCircle } from 'lucide-react'
 
 export default function NotFound() {
-    const navigate = useNavigate()
+    const router = useRouter()
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-background text-foreground animate-in fade-in duration-500">
@@ -16,10 +16,10 @@ export default function NotFound() {
                 The page you are looking for does not exist or has been moved.
             </p>
             <div className="flex gap-4">
-                <Button variant="outline" onClick={() => navigate(-1)}>
+                <Button variant="outline" onClick={() => router.back()}>
                     Go Back
                 </Button>
-                <Button onClick={() => navigate('/dashboard')}>
+                <Button onClick={() => router.push('/dashboard')}>
                     Go to Dashboard
                 </Button>
             </div>

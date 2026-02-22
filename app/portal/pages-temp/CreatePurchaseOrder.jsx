@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
 import { Loader2, Plus, Trash2, Upload, FileText, Calendar, Building2, ChevronLeft, CreditCard, Receipt, FileSearch } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'sonner'
 import { useCurrency } from '@/lib/use-currency'
 import { format } from 'date-fns'
@@ -16,7 +16,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 export default function CreatePurchaseOrder() {
-    const navigate = useNavigate()
+    const router = useRouter()
     const [searchParams] = useSearchParams()
     const editId = searchParams.get('id')
     const { formatCurrency } = useCurrency()
@@ -78,9 +78,9 @@ export default function CreatePurchaseOrder() {
         } catch (error) {
             console.error('Error loading PO:', error)
             toast.error('Failed to load Purchase Order', { id: toastId })
-            navigate('/sales')
+            router.push('/sales')
         }
-    }, [navigate])
+    }, [router])
 
     useEffect(() => {
         fetchSuppliers()
@@ -213,7 +213,7 @@ export default function CreatePurchaseOrder() {
             await supabase.from('purchase_order_lines').insert(poLines)
 
             toast.success(editId ? 'Order Updated!' : 'Order Created!', { id: toastId })
-            navigate('/sales')
+            router.push('/sales')
         } catch (error) {
             console.error('Error saving PO:', error)
             toast.error('Failed to save order', { id: toastId })
@@ -227,7 +227,7 @@ export default function CreatePurchaseOrder() {
             {/* Header */}
             <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 animate-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" onClick={() => navigate('/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
+                    <Button variant="ghost" size="icon" onClick={() => router.push('/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
                         <ChevronLeft className="h-5 w-5" />
                     </Button>
                     <div>
@@ -243,7 +243,7 @@ export default function CreatePurchaseOrder() {
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" onClick={() => navigate('/sales')}>
+                    <Button variant="outline" onClick={() => router.push('/sales')}>
                         Discard
                     </Button>
                     <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
