@@ -5,13 +5,19 @@ import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
+import { useState, Suspense } from 'react'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { useAuth } from '@/context/AuthContext'
+import { supabase } from '@/lib/supabase'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Mail, Loader2, Lock, ArrowRight, ShieldCheck } from 'lucide-react'
 
-export default function Login() {
+function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -19,6 +25,7 @@ export default function Login() {
 
     const { signIn, signInWithGoogle } = useAuth()
     const router = useRouter()
+    const searchParams = useSearchParams()
 
     const routeByRole = async (user) => {
         // Check if this user is a client
@@ -36,8 +43,9 @@ export default function Login() {
             const baseUrl = origin.endsWith('/') ? origin : `${origin}/`
             window.location.href = `${baseUrl}portal/?client=${clientData.id}`
         } else {
-            // Employee/admin → go to dashboard
-            router.replace('/dashboard')
+            // Employee/admin → go to previous path or dashboard
+            const from = searchParams?.get('from') || '/portal/dashboard'
+            router.replace(from)
         }
     }
 
@@ -208,3 +216,14 @@ export default function Login() {
     )
 }
 
+export default function Login() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+                <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+            </div>
+        }>
+            <LoginForm />
+        </Suspense>
+    )
+}

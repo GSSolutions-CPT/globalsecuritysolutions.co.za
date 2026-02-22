@@ -154,6 +154,7 @@ export default function DashboardPage() {
     }, [rawInvoices, rawExpenses, viewMode])
 
     // Fetch initial data on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         fetchDashboardData()
     }, [fetchDashboardData])
