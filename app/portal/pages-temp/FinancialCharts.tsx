@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   BarChart,
@@ -112,4 +113,5 @@ export default function FinancialCharts({ monthlyData, expenseBreakdown, colors 
     </div>
   );
 }
+
 

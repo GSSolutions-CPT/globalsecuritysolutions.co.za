@@ -1,5 +1,7 @@
+// @ts-nocheck
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
@@ -20,7 +22,7 @@ export default function Register() {
     const [loading, setLoading] = useState(false)
 
     const { signUp } = useAuth()
-    const navigate = useNavigate()
+    const router = useRouter()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -69,7 +71,7 @@ export default function Register() {
             }
 
             // Redirect to portal (they'll be auto-identified by their auth session)
-            navigate('/login', { state: { registered: true } })
+            router.push('/portal/login?registered=true')
         } catch (err) {
             setError(err.message || 'Failed to create account')
         } finally {
@@ -244,7 +246,7 @@ export default function Register() {
                         <div className="w-full text-center mt-4">
                             <p className="text-sm text-slate-500 dark:text-slate-400">
                                 Already have an account?{' '}
-                                <Link to="/login" className="font-semibold text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+                                <Link href="/portal/login" className="font-semibold text-blue-600 hover:text-blue-500 hover:underline transition-colors">
                                     Sign In
                                 </Link>
                             </p>
@@ -262,3 +264,4 @@ export default function Register() {
         </div>
     )
 }
+

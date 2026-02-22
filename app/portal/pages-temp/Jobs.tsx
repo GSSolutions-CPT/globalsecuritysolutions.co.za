@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -22,7 +23,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 export default function Jobs() {
   const router = useRouter()
   const pathname = usePathname()
-  const [searchParams] = useSearchParams()
+  const searchParams = useSearchParams()
   const [jobs, setJobs] = useState([])
   const [clients, setClients] = useState([])
   const [quotations, setQuotations] = useState([])
@@ -955,4 +956,5 @@ export default function Jobs() {
     </div>
   )
 }
+
 

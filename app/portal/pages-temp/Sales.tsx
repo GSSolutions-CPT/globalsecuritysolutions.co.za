@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -8,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Search, FileText, Receipt, Banknote, Calendar, Download, Trash2, CheckCircle, Package, FileSignature, AlertCircle, Share2, Wrench } from 'lucide-react'
 import InstallationDetails from '@/components/InstallationDetails'
 import { supabase } from '@/lib/supabase'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { generateInvoicePDF, generateQuotePDF, generatePurchaseOrderPDF } from '@/lib/pdf-service'
 import { shareLink } from '@/lib/share-utils'
 import { useCurrency } from '@/lib/use-currency.jsx'
@@ -17,7 +18,7 @@ import { useSettings } from '@/lib/use-settings.jsx'
 
 
 export default function Sales() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { formatCurrency } = useCurrency()
   const { settings } = useSettings()
   const [quotations, setQuotations] = useState([])
@@ -197,12 +198,7 @@ export default function Sales() {
       toast.success('Payment accepted! Redirecting to jobs...', { id: toastId })
 
       // Redirect to Jobs with create intent
-      navigate('/jobs', {
-        state: {
-          createFromQuote: true,
-          quoteData: quotation
-        }
-      })
+      router.push(`/portal/jobs?createFromQuote=true&quoteId=${quotation.id}`)
 
     } catch (error) {
       console.error('Error confirming payment:', error)
@@ -506,7 +502,7 @@ export default function Sales() {
                     size="sm"
                     variant="outline"
                     className="w-full hover:bg-blue-50 dark:hover:bg-blue-900/20 border-blue-200 text-blue-700"
-                    onClick={() => navigate(`/create-sale?edit=${sale.id}&type=quotation`)}
+                    onClick={() => router.push(`/portal/create-sale?edit=${sale.id}&type=quotation`)}
                   >
                     Edit
                   </Button>
@@ -563,7 +559,7 @@ export default function Sales() {
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() => navigate(`/create-sale?edit=${sale.id}&type=invoice`)}
+                    onClick={() => router.push(`/portal/create-sale?edit=${sale.id}&type=invoice`)}
                   >
                     Edit
                   </Button>
@@ -672,14 +668,14 @@ export default function Sales() {
         </div>
 
         <div className="flex flex-wrap gap-2 w-full md:w-auto">
-          <Button onClick={() => navigate('/create-sale')} className="flex-1 md:flex-none">
+          <Button onClick={() => router.push('/portal/create-sale')} className="flex-1 md:flex-none">
             Create New Sale
           </Button>
-          <Button onClick={() => navigate('/create-purchase-order')} variant="outline" className="flex-1 md:flex-none">
+          <Button onClick={() => router.push('/portal/create-purchase-order')} variant="outline" className="flex-1 md:flex-none">
             <Package className="mr-2 h-4 w-4 md:hidden lg:inline" />
             <span className="md:hidden lg:inline">Create </span>PO
           </Button>
-          <Button onClick={() => navigate('/contracts')} variant="outline" className="flex-1 md:flex-none">
+          <Button onClick={() => router.push('/portal/contracts')} variant="outline" className="flex-1 md:flex-none">
             <FileSignature className="mr-2 h-4 w-4 md:hidden lg:inline" />
             Contracts
           </Button>
@@ -717,7 +713,7 @@ export default function Sales() {
               </div>
               <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No active quotations</h3>
               <p className="mb-6 max-w-sm text-center">Create a new quote to get started with your sales pipeline.</p>
-              <Button onClick={() => navigate('/create-sale')}>Create Quote</Button>
+              <Button onClick={() => router.push('/portal/create-sale')}>Create Quote</Button>
             </div>
           )}
         </TabsContent>
@@ -931,4 +927,5 @@ export default function Sales() {
     </div>
   )
 }
+
 

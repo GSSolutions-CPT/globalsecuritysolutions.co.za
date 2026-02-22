@@ -29,7 +29,7 @@ export default function DashboardPage() {
         newClients: 0,
         overdueInvoices: 0
     })
-    interface Client { id: string; created_at: string; metadata?: any; name?: string; company?: string; email?: string; }
+    interface Client { id: string; created_at: string; metadata?: Record<string, unknown>; name?: string; company?: string; email?: string; }
     interface Invoice { id: string; date_created: string; status: string; total_amount: string; profit_estimate: string; }
     interface Expense { id: string; date: string; amount: string; type?: string; }
     interface ActivityLog { id: string; type: string; description: string; timestamp: string; }
@@ -115,7 +115,7 @@ export default function DashboardPage() {
             setMetrics(prev => ({ ...prev, monthlyRevenue, monthlyProfit }))
 
             // 2. Prepare Chart Data
-            const data: Record<string, any> = {}
+            const data: Record<string, MonthlyData> = {}
             const expenseTypes: Record<string, number> = { job: 0, general: 0 }
 
             // Process Invoices for Charts

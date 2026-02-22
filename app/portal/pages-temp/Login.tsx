@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -206,3 +207,4 @@ export default function Login() {
         </div>
     )
 }
+

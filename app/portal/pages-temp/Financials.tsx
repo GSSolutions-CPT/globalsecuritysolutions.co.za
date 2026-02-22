@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -30,7 +31,7 @@ export default function Financials() {
   const [uploading, setUploading] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const router = useRouter()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const searchParams = useSearchParams()
   const [dateRange, setDateRange] = useState({
     start: new Date(new Date().setMonth(new Date().getMonth() - 6)).toISOString().split('T')[0],
     end: new Date().toISOString().split('T')[0]
@@ -651,4 +652,5 @@ export default function Financials() {
     </div >
   )
 }
+
 

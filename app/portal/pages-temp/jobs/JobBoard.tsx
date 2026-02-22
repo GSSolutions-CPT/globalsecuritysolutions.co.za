@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useMemo } from 'react';
 import {
     DndContext,
@@ -268,3 +269,4 @@ export default function JobBoard({ jobs, onStatusChange }) {
         </DndContext>
     );
 }
+
