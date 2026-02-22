@@ -12,6 +12,7 @@ import { supabase } from '@/lib/portal/supabase'
 
 import { useCurrency } from '@/lib/portal/use-currency'
 import { useSettings } from '@/lib/portal/use-settings'
+import { useTheme } from '@/lib/portal/use-theme'
 import { Textarea } from '@/components/portal/ui/textarea'
 import Papa from 'papaparse'
 
