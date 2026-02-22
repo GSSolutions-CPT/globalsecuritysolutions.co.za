@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/context/AuthContext'
@@ -27,6 +27,8 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const pathname = usePathname()
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const isClient = searchParams.get('client') !== null
 
     const navItems = [
         { name: 'Dashboard', path: '/portal/dashboard', icon: LayoutDashboard },
@@ -70,9 +72,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                         {/* <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent hidden md:inline-block">{settings.companyName || 'GSS Hub'}</span> */}
                     </div>
 
-                    {/* Desktop Navigation */}
+                    {/* Desktop Navigation — hidden for customer users */}
                     <nav className="hidden md:flex items-center gap-1">
-                        {navItems.map((item) => {
+                        {!isClient && navItems.map((item) => {
                             const Icon = item.icon
                             const isActive = pathname === item.path
                             return (
@@ -128,7 +130,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             {isMobileMenuOpen && (
                 <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-md pt-20 px-4 animate-in slide-in-from-top-10 fade-in duration-200">
                     <nav className="flex flex-col gap-2">
-                        {navItems.map((item) => {
+                        {!isClient && navItems.map((item) => {
                             const Icon = item.icon
                             const isActive = pathname === item.path
                             return (

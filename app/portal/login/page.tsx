@@ -26,19 +26,28 @@ function LoginContent() {
     const from = searchParams.get('from') || '/portal/dashboard'
 
     const routeByRole = async (user: any) => {
-        // Check if this user is a client
         const { data: clientData } = await supabase
             .from('clients')
             .select('id')
             .eq('auth_user_id', user.id)
             .single()
 
+        let target = from
+
         if (clientData) {
-            // Client user
-            window.location.href = `/portal/?client=${clientData.id}`
+            // Customer user — honour the shared link `from`, but always carry the client ID
+            if (target === '/portal/dashboard' || target === '/') {
+                // Normal login with no specific destination → go to their portal home
+                target = `/portal/?client=${clientData.id}`
+            } else {
+                // Shared-link login — append client ID if not already present
+                if (!target.includes('client=')) {
+                    target += target.includes('?') ? `&client=${clientData.id}` : `?client=${clientData.id}`
+                }
+            }
+            router.replace(target)
         } else {
-            // Employee/admin → go to dashboard
-            let target = from
+            // Employee / admin → respect the from param
             if (!target.startsWith('/')) {
                 target = `/${target}`
             }
