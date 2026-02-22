@@ -7,7 +7,7 @@ import { advisorSteps, getRecommendation, AdvisorOption, Recommendation } from '
 import {
     ShieldAlert, ScanFace, Eye, Flame,
     Wallet, Briefcase, Gem,
-    ArrowRight, CheckCircle2, Loader2, Camera, Slash
+    CheckCircle2, Loader2, Camera, Slash, ArrowRight
 } from 'lucide-react'
 
 // Icon mapping helper
@@ -375,3 +375,5 @@ export default function AIAdvisorPage() {
         </div>
     )
 }
+
+

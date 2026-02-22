@@ -103,7 +103,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                     <p className="text-lg text-slate-600 leading-relaxed mb-6 italic border-l-4 border-blue-500 pl-6 bg-slate-50 py-4 rounded-r-xl">
                                         &quot;{location.localContent}&quot;
                                     </p>
-                                    <p className="text-slate-600 leading-relaxed">
+                                    <p className="text-slate-600 leading-relaxed overflow-hidden py-1">
                                         Global Security Solutions understands these unique challenges. We don&apos;t offer cookie-cutter systems; we design localized defense strategies that withstand the specific environmental and crime-trend factors of {location.suburb}.
                                     </p>
                                 </div>

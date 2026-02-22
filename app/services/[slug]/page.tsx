@@ -3,9 +3,10 @@ import { masterBusinessData } from '@/utils/generateSchema'
 import { ContactForm } from '@/components/ContactForm'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+
 import type { Metadata } from 'next'
 
 // Helper to normalize string to slug

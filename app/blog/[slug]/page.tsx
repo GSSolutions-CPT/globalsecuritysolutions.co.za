@@ -1,7 +1,7 @@
 import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Calendar, ArrowLeft, BookOpen } from 'lucide-react'
+import { Calendar, BookOpen } from 'lucide-react'
 import { ShareButton } from '@/components/ShareButton'
 import { ScrollProgress } from '@/components/ScrollProgress'
 // import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -66,7 +66,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
             <div className="bg-slate-900 text-white pt-24 pb-12">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <Link href="/blog" className="inline-flex items-center text-blue-400 hover:text-white mb-6 text-sm font-semibold uppercase tracking-wide transition-colors">
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Blog
+                        &larr; Back to Blog
                     </Link>
                     <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">{post.title}</h1>
                     <div className="flex items-center text-slate-400 text-sm">
