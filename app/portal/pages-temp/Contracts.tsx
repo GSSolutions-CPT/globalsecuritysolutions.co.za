@@ -13,6 +13,8 @@ import { Plus, FileText, Calendar, RefreshCw, AlertCircle, Search, CreditCard, C
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { useCurrency } from '@/lib/portal/use-currency'
+// date-fns: used for safe date arithmetic that avoids JS setMonth() rollover bug
+import { addMonths, addWeeks, addQuarters, addYears } from 'date-fns'
 
 export default function Contracts() {
   const { formatCurrency } = useCurrency()
@@ -68,23 +70,25 @@ export default function Contracts() {
     fetchClients()
   }, [fetchContracts, fetchClients])
 
-  const calculateNextBillingDate = (startDate, frequency) => {
+  /**
+   * calculateNextBillingDate
+   *
+   * Uses date-fns helpers instead of native setMonth() / setDate() to
+   * correctly handle end-of-month rollovers.
+   *
+   * Example bug with setMonth(): new Date('2024-01-31').setMonth(1)
+   * returns March 2 (February has only 28 days) — date-fns addMonths
+   * correctly clamps to 2024-02-29.
+   */
+  const calculateNextBillingDate = (startDate: string, frequency: string): string => {
     const date = new Date(startDate)
     switch (frequency) {
-      case 'weekly':
-        date.setDate(date.getDate() + 7)
-        break
-      case 'monthly':
-        date.setMonth(date.getMonth() + 1)
-        break
-      case 'quarterly':
-        date.setMonth(date.getMonth() + 3)
-        break
-      case 'annually':
-        date.setFullYear(date.getFullYear() + 1)
-        break
+      case 'weekly': return addWeeks(date, 1).toISOString().split('T')[0]
+      case 'monthly': return addMonths(date, 1).toISOString().split('T')[0]
+      case 'quarterly': return addQuarters(date, 1).toISOString().split('T')[0]
+      case 'annually': return addYears(date, 1).toISOString().split('T')[0]
+      default: return addMonths(date, 1).toISOString().split('T')[0]
     }
-    return date.toISOString().split('T')[0]
   }
 
   const handleSubmit = async (e) => {
@@ -236,10 +240,24 @@ export default function Contracts() {
 
   // Stats Logic
   const activeContracts = contracts.filter(c => c.active)
+  /**
+   * totalMRR — Monthly Recurring Revenue
+   *
+   * Normalises all billing frequencies to a monthly equivalent:
+   *   weekly:    amount × 52 weeks ÷ 12 months
+   *   monthly:   amount (already monthly)
+   *   quarterly: amount ÷ 3 months
+   *   annually:  amount ÷ 12 months
+   */
   const totalMRR = activeContracts.reduce((sum, c) => {
-    if (c.frequency === 'monthly') return sum + (c.amount || 0)
-    if (c.frequency === 'annually') return sum + ((c.amount || 0) / 12)
-    return sum
+    const amount = c.amount || 0
+    switch (c.frequency) {
+      case 'weekly': return sum + (amount * 52) / 12
+      case 'monthly': return sum + amount
+      case 'quarterly': return sum + amount / 3
+      case 'annually': return sum + amount / 12
+      default: return sum
+    }
   }, 0)
 
   return (

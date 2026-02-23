@@ -26,27 +26,65 @@ export default function ClientPortal() {
   const { user } = useAuth()
   const searchParams = useSearchParams()
   const urlClientId = searchParams.get('client')
-  const [clientId, setClientId] = useState(urlClientId)
+  const [clientId, setClientId] = useState<string | null>(urlClientId)
 
-  // Auth-based client resolution: if no URL param, look up by auth user
+  // Track whether the authenticated user is unauthorized to view the requested client
+  const [accessDenied, setAccessDenied] = useState(false)
+
+  // Controlled tab state — replaces dangerous document.getElementById().click() anti-pattern
+  const [activeTab, setActiveTab] = useState('overview')
+
+  /**
+   * SECURITY: resolveClient — IDOR Prevention
+   *
+   * If a ?client= URL param is provided, we MUST verify that the requesting
+   * user actually owns that client record by checking auth_user_id.
+   *
+   * An unauthenticated or mismatched user gets an accessDenied (403) state.
+   * We never rely solely on the URL param for authorization.
+   */
   useEffect(() => {
     async function resolveClient() {
-      if (urlClientId) {
-        setClientId(urlClientId)
+      if (!user) {
+        // Not authenticated — wait for auth to resolve
+        setLoading(false)
         return
       }
-      if (user) {
-        const { data } = await supabase
+
+      if (urlClientId) {
+        // URL param present: verify ownership by requiring auth_user_id match
+        const { data, error } = await supabase
           .from('clients')
           .select('id')
-          .eq('auth_user_id', user.id)
+          .eq('id', urlClientId)
+          .eq('auth_user_id', user.id) // IDOR guard: ownership check
           .single()
-        if (data) {
-          setClientId(data.id)
+
+        if (error || !data) {
+          // No matching record owned by this user — deny access
+          setAccessDenied(true)
+          setLoading(false)
           return
         }
+
+        // Ownership confirmed
+        setClientId(data.id)
+        return
       }
-      setLoading(false)
+
+      // No URL param — look up the client record for the authenticated user
+      const { data } = await supabase
+        .from('clients')
+        .select('id')
+        .eq('auth_user_id', user.id)
+        .single()
+
+      if (data) {
+        setClientId(data.id)
+      } else {
+        // Authenticated user has no client record
+        setLoading(false)
+      }
     }
     resolveClient()
   }, [urlClientId, user])
@@ -316,7 +354,21 @@ export default function ClientPortal() {
   const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\s+/g, '')}`
 
 
+  // Early render: loading spinner
   if (loading) return <div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>
+
+  // IDOR guard: render 403 if user doesn't own this client record
+  if (accessDenied) return (
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4 p-8 text-center">
+      <div className="text-6xl">🔒</div>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Access Denied</h1>
+      <p className="text-slate-500 max-w-sm">
+        You do not have permission to view this client record.
+        If you believe this is an error, please contact support.
+      </p>
+    </div>
+  )
+
   if (!client) return <div className="min-h-screen bg-background flex items-center justify-center">Invalid Link</div>
 
   /* 
@@ -474,7 +526,7 @@ export default function ClientPortal() {
                       <p className="text-sm text-slate-500 dark:text-slate-400">Requires your review and signature.</p>
                       <p className="text-lg font-bold text-slate-900 dark:text-white mt-3">{formatCurrency(q.total_amount)}</p>
                     </div>
-                    <Button onClick={() => document.getElementById('tab-quotations').click()} className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    <Button onClick={() => setActiveTab('quotations')} className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
                       Review Now
                     </Button>
                   </div>
@@ -496,7 +548,7 @@ export default function ClientPortal() {
                       <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Balance Due</p>
                       <p className="text-xl font-bold text-orange-600 dark:text-orange-400 mt-2">{formatCurrency(inv.total_amount)}</p>
                     </div>
-                    <Button variant="outline" onClick={() => document.getElementById('tab-invoices').click()} className="shrink-0 border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800 dark:border-orange-900/50 dark:text-orange-400 dark:hover:bg-orange-900/20">
+                    <Button variant="outline" onClick={() => setActiveTab('invoices')} className="shrink-0 border-orange-200 text-orange-700 hover:bg-orange-50 hover:text-orange-800 dark:border-orange-900/50 dark:text-orange-400 dark:hover:bg-orange-900/20">
                       Settle Now
                     </Button>
                   </div>
@@ -584,14 +636,16 @@ export default function ClientPortal() {
       </header>
 
       <div className="container mx-auto px-4 sm:px-6 py-8 pt-24 pb-32 max-w-7xl relative z-10">
-        <Tabs defaultValue="overview" className="space-y-8">
+        {/* Controlled Tabs: value/onValueChange replaces getElementById hacks */}
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
           <div className="sticky top-20 z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl py-2 -mx-4 px-4 md:mx-0 md:px-0 transition-all duration-300">
             <div className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 dark:border-slate-800 shadow-sm w-full md:w-max flex overflow-x-auto no-scrollbar gap-1">
               <TabsList className="bg-transparent gap-1 w-full flex justify-start md:justify-center">
+                {/* id attributes removed — no longer needed; navigation uses setActiveTab() */}
                 <TabsTrigger value="overview" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Overview</TabsTrigger>
-                <TabsTrigger id="tab-quotations" value="quotations" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Quotes</TabsTrigger>
+                <TabsTrigger value="quotations" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Quotes</TabsTrigger>
                 <TabsTrigger value="proforma" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Proforma</TabsTrigger>
-                <TabsTrigger id="tab-invoices" value="invoices" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Invoices</TabsTrigger>
+                <TabsTrigger value="invoices" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Invoices</TabsTrigger>
               </TabsList>
             </div>
           </div>

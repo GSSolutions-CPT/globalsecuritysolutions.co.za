@@ -11,6 +11,7 @@ import { supabase } from '@/lib/portal/supabase'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'sonner'
 import { useCurrency } from '@/lib/portal/use-currency'
+import { useSettings } from '@/lib/portal/use-settings'
 import { format } from 'date-fns'
 import { Separator } from '@/components/portal/ui/separator'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/portal/ui/command'
@@ -21,6 +22,9 @@ export default function CreatePurchaseOrder() {
     const searchParams = useSearchParams()
     const editId = searchParams.get('id')
     const { formatCurrency } = useCurrency()
+    // Dynamic tax rate from settings (defaults to 15% if not configured)
+    const { settings } = useSettings()
+    const taxRate = (parseFloat(settings?.taxRate) || 15) / 100
 
     const [file, setFile] = useState(null)
     const [isProcessing, setIsProcessing] = useState(false)
@@ -167,7 +171,8 @@ export default function CreatePurchaseOrder() {
     const calculateSubTotal = () => lines.reduce((sum, line) => sum + (line.quantity * line.unit_price), 0)
     const calculateTotal = () => {
         const sub = calculateSubTotal()
-        return vatApplicable ? sub * 1.15 : sub
+        // Use dynamic tax rate from settings instead of hardcoded 1.15
+        return vatApplicable ? sub * (1 + taxRate) : sub
     }
 
     const handleSubmit = async () => {
@@ -536,7 +541,7 @@ export default function CreatePurchaseOrder() {
                                 </div>
                                 <div className="flex justify-between text-sm items-center">
                                     <span className="text-muted-foreground flex items-center gap-2">
-                                        VAT (15%)
+                                        VAT ({Math.round(taxRate * 100)}%)
                                         <Switch
                                             checked={vatApplicable}
                                             onCheckedChange={setVatApplicable}
@@ -544,7 +549,7 @@ export default function CreatePurchaseOrder() {
                                         />
                                     </span>
                                     <span className={`font-medium ${!vatApplicable && 'text-muted-foreground decoration-slate-400 decoration-1 line-through opacity-50'}`}>
-                                        {formatCurrency(calculateSubTotal() * 0.15)}
+                                        {formatCurrency(calculateSubTotal() * taxRate)}
                                     </span>
                                 </div>
                                 <Separator className="bg-slate-200 dark:bg-slate-700" />
