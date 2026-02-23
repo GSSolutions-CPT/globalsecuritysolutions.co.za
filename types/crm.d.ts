@@ -37,6 +37,10 @@ export interface Quotation {
     final_payment_proof?: string;
     admin_approved?: boolean;
     site_plan_url?: string;
+    payment_type?: 'deposit' | 'full';
+    deposit_percentage?: number;
+    accepted_at?: string;
+    client_signature?: string;
     clients?: Pick<Client, 'name' | 'company' | 'email' | 'address'>;
     lines?: QuotationLine[];
 }

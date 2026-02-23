@@ -1,15 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/portal/ui/button'
 import { Download, X } from 'lucide-react'
+import Image from 'next/image'
+
+interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    readonly userChoice: Promise<{
+        outcome: 'accepted' | 'dismissed';
+        platform: string;
+    }>;
+    prompt(): Promise<void>;
+}
 
 export function InstallPrompt() {
-    const [deferredPrompt, setDeferredPrompt] = useState(null)
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
     const [showPrompt, setShowPrompt] = useState(false)
 
     useEffect(() => {
-        const handler = (e) => {
+        const handler = (e: Event) => {
             e.preventDefault()
-            setDeferredPrompt(e)
+            setDeferredPrompt(e as BeforeInstallPromptEvent)
             setShowPrompt(true)
         }
 
@@ -17,7 +27,7 @@ export function InstallPrompt() {
 
         // Check if already installed
         if (window.matchMedia('(display-mode: standalone)').matches) {
-            setShowPrompt(false)
+            // setShowPrompt(false) // This line is removed
         }
 
         return () => window.removeEventListener('beforeinstallprompt', handler)
@@ -41,8 +51,8 @@ export function InstallPrompt() {
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-primary/20 z-50 animate-in slide-in-from-bottom-5">
             <div className="container mx-auto max-w-md flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 bg-primary/20 rounded-lg flex items-center justify-center">
-                        <img src="/logo.png" alt="App Icon" className="h-8 w-8 object-contain" />
+                    <div className="h-10 w-10 bg-primary/20 rounded-lg flex items-center justify-center relative">
+                        <Image src="/logo.png" alt="App Icon" className="object-contain" width={32} height={32} />
                     </div>
                     <div>
                         <p className="font-semibold text-sm text-foreground">Install GSS Hub</p>
@@ -61,4 +71,3 @@ export function InstallPrompt() {
         </div>
     )
 }
-

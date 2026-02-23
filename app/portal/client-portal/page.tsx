@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/portal/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
 import { Badge } from '@/components/portal/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
-import { Download, CheckCircle, Upload, MessageCircle, Phone, Mail, HelpCircle, PenTool, CreditCard, FileText, MapPin, Send, Loader2 } from 'lucide-react'
+import { ShieldCheck, Download, CheckCircle, Upload, MessageCircle, Phone, Mail, HelpCircle, PenTool, CreditCard, FileText, MapPin, Send, Loader2 } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { generateInvoicePDF, generateQuotePDF } from '@/lib/portal/pdf-service'
@@ -15,7 +15,7 @@ import { useCurrency } from '@/lib/portal/use-currency'
 import { SignaturePad } from '@/components/portal/ui/signature-pad'
 import { toast } from 'sonner'
 import { useSettings } from '@/lib/portal/use-settings'
-import { InstallPrompt } from '@/components/InstallPrompt'
+import { InstallPrompt } from '@/components/portal/InstallPrompt'
 import { cn } from '@/lib/portal/utils'
 import { useAuth } from '@/context/AuthContext'
 import { Input } from '@/components/portal/ui/input'
@@ -258,9 +258,10 @@ export default function ClientPortalPage() {
             setStep(3)
             fetchClientData()
             toast.success('Submitted for review!', { id: toastId })
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error submitting final acceptance:', error)
-            toast.error(`Failed to submit: ${error.message}`, { id: toastId })
+            const message = error instanceof Error ? error.message : 'An unknown error occurred'
+            toast.error(`Failed to submit: ${message}`, { id: toastId })
         }
     }
 
@@ -290,9 +291,10 @@ export default function ClientPortalPage() {
             setStep(3)
             fetchClientData()
             toast.success('Final proof uploaded successfully!', { id: toastId })
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error uploading final proof:', error)
-            toast.error(`Failed to upload: ${error.message}`, { id: toastId })
+            const message = error instanceof Error ? error.message : 'An unknown error occurred'
+            toast.error(`Failed to upload: ${message}`, { id: toastId })
         }
     }
 
@@ -302,7 +304,7 @@ export default function ClientPortalPage() {
             await supabase.from('quotations').update({ status: 'Rejected' }).eq('id', quote.id)
             fetchClientData()
             toast.info('Quotation declined')
-        } catch (e) {
+        } catch (e: unknown) {
             console.error(e)
         }
     }
@@ -717,7 +719,7 @@ export default function ClientPortalPage() {
                 <MessageCircle className="h-7 w-7 fill-current" />
             </a>
 
-            <Dialog open={step > 0} onOpenChange={(open) => !open && setStep(0)}>
+            <Dialog open={step > 0} onOpenChange={(open: boolean) => !open && setStep(0)}>
                 <DialogContent className="sm:max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200 dark:border-slate-800 shadow-2xl rounded-3xl overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 to-purple-600"></div>
                     <DialogHeader className="pt-6">
@@ -797,7 +799,7 @@ export default function ClientPortalPage() {
                                         <label htmlFor="proof-upload-final" className="cursor-pointer flex flex-col items-center justify-center w-full h-full">
                                             <Upload className="h-10 w-10 text-slate-300 mb-2" />
                                             <p className="text-sm font-medium text-slate-600">Click to upload Final Proof</p>
-                                            <input id="proof-upload-final" type="file" accept="image/*,application/pdf" className="opacity-0 absolute inset-0 w-full h-full cursor-pointer" onChange={(e) => e.target.files?.[0] && submitFinalPaymentProof(e.target.files[0])} />
+                                            <input id="proof-upload-final" type="file" accept="image/*,application/pdf" className="opacity-0 absolute inset-0 w-full h-full cursor-pointer" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && submitFinalPaymentProof(e.target.files[0])} />
                                         </label>
                                     </div>
                                 </div>
@@ -857,19 +859,20 @@ export default function ClientPortalPage() {
                             if (reqError) throw reqError
                             toast.success('Quote request submitted!')
                             setRequestQuoteOpen(false)
-                        } catch (err: any) {
-                            toast.error(err.message || 'Failed to submit request')
+                        } catch (err: unknown) {
+                            const message = err instanceof Error ? err.message : 'Failed to submit request'
+                            toast.error(message)
                         } finally {
                             setRequestLoading(false)
                         }
                     }} className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="quoteDesc">What do you need?</Label>
-                            <Textarea id="quoteDesc" placeholder="e.g. CCTV installation..." value={requestForm.description} onChange={(e) => setRequestForm(f => ({ ...f, description: e.target.value }))} rows={4} required />
+                            <Textarea id="quoteDesc" placeholder="e.g. CCTV installation..." value={requestForm.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setRequestForm(f => ({ ...f, description: e.target.value }))} rows={4} required />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="quoteDate">Preferred Date</Label>
-                            <Input id="quoteDate" type="date" value={requestForm.preferredDate} onChange={(e) => setRequestForm(f => ({ ...f, preferredDate: e.target.value }))} />
+                            <Input id="quoteDate" type="date" value={requestForm.preferredDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRequestForm(f => ({ ...f, preferredDate: e.target.value }))} />
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="ghost" onClick={() => setRequestQuoteOpen(false)}>Cancel</Button>
@@ -903,15 +906,16 @@ export default function ClientPortalPage() {
                             if (reqError) throw reqError
                             toast.success('Site visit request submitted!')
                             setRequestVisitOpen(false)
-                        } catch (err: any) {
-                            toast.error(err.message || 'Failed to submit request')
+                        } catch (err: unknown) {
+                            const message = err instanceof Error ? err.message : 'Failed to submit request'
+                            toast.error(message)
                         } finally {
                             setRequestLoading(false)
                         }
                     }} className="space-y-4">
-                        <div className="space-y-2"><Label htmlFor="visitAddress">Site Address</Label><Input id="visitAddress" placeholder="123 Main Street..." value={requestForm.address} onChange={(e) => setRequestForm(f => ({ ...f, address: e.target.value }))} required /></div>
-                        <div className="space-y-2"><Label htmlFor="visitDesc">Notes</Label><Textarea id="visitDesc" placeholder="e.g. Need assessment..." value={requestForm.description} onChange={(e) => setRequestForm(f => ({ ...f, description: e.target.value }))} rows={3} required /></div>
-                        <div className="space-y-2"><Label htmlFor="visitDate">Preferred Date</Label><Input id="visitDate" type="date" value={requestForm.preferredDate} onChange={(e) => setRequestForm(f => ({ ...f, preferredDate: e.target.value }))} /></div>
+                        <div className="space-y-2"><Label htmlFor="visitAddress">Site Address</Label><Input id="visitAddress" placeholder="123 Main Street..." value={requestForm.address} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRequestForm(f => ({ ...f, address: e.target.value }))} required /></div>
+                        <div className="space-y-2"><Label htmlFor="visitDesc">Notes</Label><Textarea id="visitDesc" placeholder="e.g. Need assessment..." value={requestForm.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setRequestForm(f => ({ ...f, description: e.target.value }))} rows={3} required /></div>
+                        <div className="space-y-2"><Label htmlFor="visitDate">Preferred Date</Label><Input id="visitDate" type="date" value={requestForm.preferredDate} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRequestForm(f => ({ ...f, preferredDate: e.target.value }))} /></div>
                         <DialogFooter>
                             <Button type="button" variant="ghost" onClick={() => setRequestVisitOpen(false)}>Cancel</Button>
                             <Button type="submit" disabled={requestLoading || !clientId} className="bg-amber-600 hover:bg-amber-700 text-white">
