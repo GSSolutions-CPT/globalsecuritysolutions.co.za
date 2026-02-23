@@ -40,28 +40,43 @@ export default function Settings() {
     }
   }
 
-  // REFACTORED: Only create a user profile in the public.users table.
-  // Auth user creation requires admin/service-role privileges.
-  // The admin should invite the user via Supabase Dashboard > Authentication.
+  // Creates a real Supabase Auth account + public.users profile via Edge Function
+  // (service-role key required for admin.createUser, so it must run server-side)
   const handleAddUser = async (e) => {
     e.preventDefault()
     try {
-      const { error } = await supabase.from('users').insert([{
-        email: newUser.email,
-        role: newUser.role,
-        is_active: true
-      }])
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) throw new Error('Not authenticated')
 
-      if (error) throw error
-      alert('User profile created! Please invite this email address via the Supabase Dashboard > Authentication tab to finish setting up their account.')
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/create-team-user`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({
+            email: newUser.email,
+            password: newUser.password,
+            role: newUser.role,
+          }),
+        }
+      )
+
+      const result = await res.json()
+      if (!res.ok) throw new Error(result.error || 'Failed to create user')
+
+      alert(`Account created for ${newUser.email}. They can now sign in immediately with their email and password.`)
       setIsUserDialogOpen(false)
       setNewUser({ email: '', role: 'technician', password: '' })
       fetchUsers()
     } catch (error) {
       console.error('Error adding user:', error)
-      alert('Failed to add user profile')
+      alert('Failed to create user: ' + error.message)
     }
   }
+
 
   const handleDeleteUser = async (id) => {
     if (!confirm('Are you sure you want to remove this user?')) return
