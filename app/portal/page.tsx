@@ -47,7 +47,7 @@ function PortalContent() {
 
                 // If client has no account yet → send to profile setup
                 if (!clientData.auth_user_id) {
-                    router.push(`/portal/setup-profile/${clientId}`)
+                    router.push(`/portal/profile-setup/${clientId}`)
                     return
                 }
 

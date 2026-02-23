@@ -1,5 +1,6 @@
-// @ts-nocheck
-import { useState, useEffect, useCallback } from 'react'
+'use client'
+
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
@@ -18,14 +19,21 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/portal/ui/popover'
 import { Supplier } from '@/types/crm'
 
-export default function CreatePurchaseOrder() {
+interface POLine {
+    id: number | string;
+    description: string;
+    quantity: number;
+    unit_price: number;
+    line_total: number;
+}
+
+function CreatePurchaseOrderContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const editId = searchParams.get('id')
     const { formatCurrency } = useCurrency()
-    // Dynamic tax rate from settings (defaults to 15% if not configured)
     const { settings } = useSettings()
-    const taxRate = (parseFloat(settings?.taxRate) || 15) / 100
+    const taxRate = (parseFloat(settings?.taxRate as string) || 15) / 100
 
     const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
@@ -44,14 +52,14 @@ export default function CreatePurchaseOrder() {
     })
     const [vatApplicable, setVatApplicable] = useState(true)
 
-    const [lines, setLines] = useState<any[]>([
+    const [lines, setLines] = useState<POLine[]>([
         { id: 1, description: '', quantity: 1, unit_price: 0, line_total: 0 }
     ])
 
     const fetchSuppliers = useCallback(async () => {
         const { data, error } = await supabase.from('suppliers').select('*').order('name')
         if (error) console.error('Error fetching suppliers:', error)
-        else setSuppliers(data || [])
+        else setSuppliers(data as Supplier[] || [])
     }, [])
 
     const loadPurchaseOrder = useCallback(async (id: string) => {
@@ -75,7 +83,7 @@ export default function CreatePurchaseOrder() {
             setVatApplicable(data.metadata?.vat_applicable ?? true)
 
             if (data.lines && data.lines.length > 0) {
-                setLines(data.lines.map(l => ({ ...l, id: l.id })))
+                setLines(data.lines.map((l: any) => ({ ...l, id: l.id })))
             }
             if (data.metadata?.extracted_text_snippet) {
                 setExtractedText(data.metadata.extracted_text_snippet)
@@ -134,10 +142,10 @@ export default function CreatePurchaseOrder() {
             .insert([{ name: newSupplierName }])
             .select()
 
-        if (error) {
+        if (error || !data) {
             toast.error('Failed to add supplier', { id: toastId })
         } else {
-            setSuppliers([...suppliers, data[0]])
+            setSuppliers([...suppliers, data[0] as Supplier])
             setSelectedSupplierId(data[0].id)
             setNewSupplierName('')
             toast.success('Supplier added', { id: toastId })
@@ -147,9 +155,9 @@ export default function CreatePurchaseOrder() {
     const updateLine = (id: number | string, field: string, value: string | number) => {
         setLines(prev => prev.map(line => {
             if (line.id === id) {
-                const newLine = { ...line, [field]: value }
+                const newLine = { ...line, [field]: value } as POLine
                 if (field === 'quantity' || field === 'unit_price') {
-                    newLine.line_total = Number(newLine.quantity) * Number(newLine.unit_price) // Simple calc, no robust rounding here yet
+                    newLine.line_total = Number(newLine.quantity) * Number(newLine.unit_price)
                 }
                 return newLine
             }
@@ -172,7 +180,6 @@ export default function CreatePurchaseOrder() {
     const calculateSubTotal = () => lines.reduce((sum, line) => sum + (line.quantity * line.unit_price), 0)
     const calculateTotal = () => {
         const sub = calculateSubTotal()
-        // Use dynamic tax rate from settings instead of hardcoded 1.15
         return vatApplicable ? sub * (1 + taxRate) : sub
     }
 
@@ -205,7 +212,8 @@ export default function CreatePurchaseOrder() {
                 await supabase.from('purchase_orders').update(poPayload).eq('id', editId)
                 await supabase.from('purchase_order_lines').delete().eq('purchase_order_id', editId)
             } else {
-                const { data } = await supabase.from('purchase_orders').insert([poPayload]).select()
+                const { data, error } = await supabase.from('purchase_orders').insert([poPayload]).select()
+                if (error || !data) throw error || new Error('Failed to create PO')
                 poId = data[0].id
             }
 
@@ -231,7 +239,6 @@ export default function CreatePurchaseOrder() {
 
     return (
         <div className="min-h-screen bg-slate-50/50 dark:bg-slate-900/50 p-6 pb-20">
-            {/* Header */}
             <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 animate-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
@@ -261,10 +268,7 @@ export default function CreatePurchaseOrder() {
             </div>
 
             <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* LEFT COLUMN: Inputs */}
                 <div className="space-y-6 animate-in slide-in-from-left-4 duration-500 delay-100">
-
-                    {/* Source Document Card */}
                     <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20 overflow-hidden group">
                         <div className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500" />
                         <CardHeader className="pb-3">
@@ -305,7 +309,6 @@ export default function CreatePurchaseOrder() {
                         </CardContent>
                     </Card>
 
-                    {/* Order Details */}
                     <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -356,7 +359,7 @@ export default function CreatePurchaseOrder() {
                                                                 key={supplier.id}
                                                                 value={supplier.name}
                                                                 onSelect={() => {
-                                                                    setSelectedSupplierId(supplier.id)
+                                                                    setSelectedSupplierId(supplier.id!)
                                                                     setSupplierOpen(false)
                                                                 }}
                                                             >
@@ -406,7 +409,6 @@ export default function CreatePurchaseOrder() {
                         </CardContent>
                     </Card>
 
-                    {/* Line Items */}
                     <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20">
                         <CardHeader className="flex flex-row items-center justify-between">
                             <CardTitle className="flex items-center gap-2">
@@ -466,10 +468,8 @@ export default function CreatePurchaseOrder() {
                     </Card>
                 </div>
 
-                {/* RIGHT COLUMN: Preview */}
                 <div className="space-y-6 lg:sticky lg:top-8 h-fit animate-in slide-in-from-right-4 duration-500 delay-200">
                     <Card className="border-0 shadow-2xl shadow-blue-900/5 dark:shadow-black/40 overflow-hidden bg-white dark:bg-slate-950">
-                        {/* Preview Header */}
                         <div className="bg-slate-900 text-white p-6 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3" />
                             <div className="relative z-10 flex justify-between items-start">
@@ -485,7 +485,6 @@ export default function CreatePurchaseOrder() {
                         </div>
 
                         <CardContent className="p-0">
-                            {/* Vendor Info Section */}
                             <div className="p-6 bg-slate-50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-800">
                                 <div className="flex justify-between items-start">
                                     <div className="space-y-1">
@@ -495,7 +494,7 @@ export default function CreatePurchaseOrder() {
                                         </div>
                                         {selectedSupplier && (
                                             <div className="text-sm text-muted-foreground">
-                                                Supplier ID: {selectedSupplier.id.substring(0, 8)}
+                                                Supplier ID: {selectedSupplier.id?.substring(0, 8)}
                                             </div>
                                         )}
                                     </div>
@@ -508,7 +507,6 @@ export default function CreatePurchaseOrder() {
                                 </div>
                             </div>
 
-                            {/* Items List Preview */}
                             <div className="p-6 min-h-[300px]">
                                 <table className="w-full text-sm">
                                     <thead>
@@ -534,7 +532,6 @@ export default function CreatePurchaseOrder() {
                                 </table>
                             </div>
 
-                            {/* Totals Section */}
                             <div className="bg-slate-50 dark:bg-slate-900/50 p-6 space-y-3">
                                 <div className="flex justify-between text-sm">
                                     <span className="text-muted-foreground">Subtotal</span>
@@ -566,7 +563,6 @@ export default function CreatePurchaseOrder() {
                         </CardContent>
                     </Card>
 
-                    {/* Quick Tips */}
                     <Card className="bg-blue-50/50 dark:bg-blue-900/10 border-blue-100 dark:border-blue-900">
                         <CardContent className="p-4 flex items-start gap-3">
                             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600">
@@ -586,4 +582,10 @@ export default function CreatePurchaseOrder() {
     )
 }
 
-
+export default function CreatePurchaseOrder() {
+    return (
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-8 w-8 animate-spin text-blue-600" /></div>}>
+            <CreatePurchaseOrderContent />
+        </Suspense>
+    )
+}

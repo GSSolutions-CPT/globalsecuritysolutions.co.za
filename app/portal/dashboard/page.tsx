@@ -204,7 +204,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="relative z-10 flex flex-wrap gap-3">
                     <button
-                        onClick={() => router.push('/portal/create-sale')}
+                        onClick={() => router.push('/portal/sales/new')}
                         className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-4 py-2 rounded-lg transition-all text-sm font-medium"
                     >
                         <Plus className="h-4 w-4" /> Create New Sale

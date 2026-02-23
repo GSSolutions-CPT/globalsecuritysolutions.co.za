@@ -1,8 +1,8 @@
-// @ts-nocheck
-import { useState, useEffect } from 'react'
+'use client'
+
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/portal/supabase'
-
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
@@ -10,10 +10,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/portal/ui/alert'
 import { Loader2, ShieldCheck, Lock, UserPlus, CheckCircle2 } from 'lucide-react'
 
-export default function ProfileSetup({ params }) {
-    const { id } = params
+interface ProfileSetupProps {
+    params: Promise<{ id: string }>
+}
+
+export default function ProfileSetupPage({ params }: ProfileSetupProps) {
+    const { id } = use(params)
     const router = useRouter()
-    const [client, setClient] = useState(null)
+    const [client, setClient] = useState<any>(null)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(true)
@@ -33,10 +37,10 @@ export default function ProfileSetup({ params }) {
                 if (error) throw error
                 if (data.auth_user_id) {
                     setError('Profile already setup for this client. Please sign in.')
-                    setTimeout(() => router.push('/login'), 3000)
+                    setTimeout(() => router.push('/portal/login'), 3000)
                 }
                 setClient(data)
-            } catch (err) {
+            } catch (err: any) {
                 console.error('Error fetching client:', err)
                 setError('Invalid or expired invitation link.')
             } finally {
@@ -47,7 +51,7 @@ export default function ProfileSetup({ params }) {
         if (id) fetchClient()
     }, [id, router])
 
-    const handleSignup = async (e) => {
+    const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
 
@@ -83,11 +87,10 @@ export default function ProfileSetup({ params }) {
 
             setSuccess(true)
             setTimeout(() => {
-                // FIX: Force hard redirect with client param to ensure RootRedirect sends them to the Client Portal
                 const origin = window.location.origin
                 window.location.href = `${origin}/portal/?client=${client.id}`
             }, 2000)
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message || 'Failed to create profile')
         } finally {
             setActionLoading(false)
@@ -103,7 +106,7 @@ export default function ProfileSetup({ params }) {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-slate-950 px-4">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black opacity-80" />
 
             <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl ring-1 ring-slate-200 dark:ring-slate-800">
@@ -123,13 +126,13 @@ export default function ProfileSetup({ params }) {
 
                 <CardContent className="space-y-5">
                     {error && (
-                        <Alert variant="destructive" className="border-red-500/50 bg-red-500/10 text-red-600">
+                        <Alert variant="destructive" className="border-red-500/50 bg-red-500/10 text-red-600 font-sans">
                             <AlertDescription>{error}</AlertDescription>
                         </Alert>
                     )}
 
                     {success ? (
-                        <div className="flex flex-col items-center justify-center py-6 text-center space-y-4">
+                        <div className="flex flex-col items-center justify-center py-6 text-center space-y-4 font-sans">
                             <CheckCircle2 className="h-16 w-16 text-emerald-500 animate-bounce" />
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Profile Created!</h3>
@@ -147,14 +150,14 @@ export default function ProfileSetup({ params }) {
                                 <Input value={client.email} disabled className="bg-slate-50 text-slate-500 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 opacity-100" />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password" className="text-slate-900 dark:text-white font-medium">Create Password</Label>
+                                <Label htmlFor="password" title="password" className="text-slate-900 dark:text-white font-medium">Create Password</Label>
                                 <div className="relative group">
                                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                                     <Input
                                         id="password"
                                         type="password"
                                         placeholder="Min 6 characters"
-                                        className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700"
+                                        className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700 font-sans"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
@@ -162,14 +165,14 @@ export default function ProfileSetup({ params }) {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="confirmPassword" className="text-slate-900 dark:text-white font-medium">Confirm Password</Label>
+                                <Label htmlFor="confirmPassword" title='confirm password' className="text-slate-900 dark:text-white font-medium">Confirm Password</Label>
                                 <div className="relative group">
                                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                                     <Input
                                         id="confirmPassword"
                                         type="password"
                                         placeholder="Confirm your password"
-                                        className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700"
+                                        className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700 font-sans"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         required
@@ -188,10 +191,9 @@ export default function ProfileSetup({ params }) {
                 </CardContent>
 
                 <CardFooter className="justify-center border-t border-slate-100 dark:border-slate-800 mt-6 pt-4 text-xs text-slate-400">
-                    <ShieldCheck className="h-3 w-3 mr-1" /> Secure Access powered by GSS
+                    <ShieldCheck className="h-4 w-4 mr-1" /> Secure Access powered by GSS
                 </CardFooter>
             </Card>
         </div>
     )
 }
-

@@ -1,11 +1,9 @@
-// @ts-nocheck
+'use client'
+
 import { useState, useEffect } from 'react';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import enUS from 'date-fns/locale/en-US';
+import { Calendar, dateFnsLocalizer, ToolbarProps } from 'react-big-calendar';
+import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { enUS } from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { supabase } from '@/lib/portal/supabase'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/portal/ui/dialog'
@@ -16,6 +14,7 @@ import { Briefcase, Calendar as CalendarIcon, Receipt, ExternalLink, Clock, MapP
 import { generateOutlookLink } from '@/lib/portal/calendar-utils'
 import { toast } from 'sonner'
 import { cn } from '@/lib/portal/utils'
+import { Job, Invoice, CalendarEvent as CRMCalendarEvent } from '@/types/crm'
 
 const locales = {
     'en-US': enUS,
@@ -24,13 +23,24 @@ const locales = {
 const localizer = dateFnsLocalizer({
     format,
     parse,
-    startOfWeek,
+    startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 0 }),
     getDay,
     locales,
 });
 
+interface CalendarEvent {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+    type: string;
+    resource: any;
+    source: 'calendar' | 'job' | 'invoice';
+    status?: string;
+}
+
 // Custom Toolbar Component
-const CustomToolbar = (toolbar) => {
+const CustomToolbar = (toolbar: ToolbarProps<CalendarEvent>) => {
     const goToBack = () => {
         toolbar.onNavigate('PREV');
     };
@@ -67,7 +77,7 @@ const CustomToolbar = (toolbar) => {
                 <div className="ml-4">{label()}</div>
             </div>
             <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                {['month', 'week', 'day', 'agenda'].map(view => (
+                {(['month', 'week', 'day', 'agenda'] as const).map(view => (
                     <button
                         key={view}
                         onClick={() => toolbar.onView(view)}
@@ -87,8 +97,8 @@ const CustomToolbar = (toolbar) => {
 };
 
 export default function JobCalendar() {
-    const [events, setEvents] = useState([])
-    const [selectedEvent, setSelectedEvent] = useState(null)
+    const [events, setEvents] = useState<CalendarEvent[]>([])
+    const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
 
     useEffect(() => {
         fetchEvents()
@@ -96,14 +106,12 @@ export default function JobCalendar() {
 
     const fetchEvents = async () => {
         try {
-            // Fetch calendar events
             const { data: calendarEvents, error: calendarError } = await supabase
                 .from('calendar_events')
                 .select('*')
 
             if (calendarError) throw calendarError
 
-            // Fetch jobs with scheduled dates
             const { data: jobs, error: jobsError } = await supabase
                 .from('jobs')
                 .select(`*, clients (name, address)`)
@@ -111,7 +119,6 @@ export default function JobCalendar() {
 
             if (jobsError) throw jobsError
 
-            // Fetch invoices with due dates
             const { data: invoices, error: invoicesError } = await supabase
                 .from('invoices')
                 .select(`*, clients (name)`)
@@ -119,35 +126,34 @@ export default function JobCalendar() {
 
             if (invoicesError) throw invoicesError
 
-            // Combine all events
-            const allEvents = [
-                ...(calendarEvents || []).map(e => ({
-                    id: e.id,
-                    title: e.title,
-                    start: new Date(e.datetime),
-                    end: new Date(new Date(e.datetime).getTime() + 60 * 60 * 1000), // 1 hour default
+            const allEvents: CalendarEvent[] = [
+                ...(calendarEvents as CRMCalendarEvent[] || []).map(e => ({
+                    id: e.id!,
+                    title: e.title!,
+                    start: new Date(e.datetime!),
+                    end: e.end_datetime ? new Date(e.end_datetime) : new Date(new Date(e.datetime!).getTime() + 60 * 60 * 1000),
                     type: e.event_type || 'Event',
                     resource: e,
-                    source: 'calendar'
+                    source: 'calendar' as const
                 })),
-                ...(jobs || []).map(j => ({
-                    id: j.id,
+                ...(jobs as Job[] || []).map(j => ({
+                    id: j.id!,
                     title: `${j.clients?.name} - ${j.status}`,
-                    start: new Date(j.scheduled_datetime),
-                    end: new Date(new Date(j.scheduled_datetime).getTime() + 60 * 60 * 1000), // 1 hour default
+                    start: new Date(j.scheduled_datetime!),
+                    end: new Date(new Date(j.scheduled_datetime!).getTime() + 60 * 60 * 1000),
                     type: 'Job',
                     resource: j,
-                    source: 'job',
+                    source: 'job' as const,
                     status: j.status
                 })),
-                ...(invoices || []).map(i => ({
-                    id: i.id,
-                    title: `Due: ${i.invoice_number} (${i.clients?.name})`,
-                    start: new Date(i.due_date),
-                    end: new Date(new Date(i.due_date).getTime() + 60 * 60 * 1000), // 1 hour default
+                ...(invoices as Invoice[] || []).map(i => ({
+                    id: i.id!,
+                    title: `Due: ${i.id?.substring(0, 8)} (${i.clients?.name})`,
+                    start: new Date(i.due_date!),
+                    end: new Date(new Date(i.due_date!).getTime() + 60 * 60 * 1000),
                     type: 'Invoice',
                     resource: i,
-                    source: 'invoice',
+                    source: 'invoice' as const,
                     status: i.status
                 }))
             ]
@@ -158,7 +164,7 @@ export default function JobCalendar() {
         }
     }
 
-    const getEventStyle = (event) => {
+    const getEventStyle = (event: CalendarEvent) => {
         let bgClass = "bg-slate-600";
         if (event.source === 'job') {
             switch (event.status) {
@@ -188,11 +194,11 @@ export default function JobCalendar() {
         };
     };
 
-    const handleSelectEvent = (event) => {
+    const handleSelectEvent = (event: CalendarEvent) => {
         setSelectedEvent(event)
     }
 
-    const openOutlook = (event) => {
+    const openOutlook = (event: CalendarEvent) => {
         const link = generateOutlookLink({
             title: event.title,
             start: event.start,
@@ -209,7 +215,7 @@ export default function JobCalendar() {
                 <style>{`
                     .rbc-calendar { font-family: inherit; }
                     .rbc-header { padding: 8px; font-weight: 600; font-size: 0.875rem; color: #64748b; border-bottom: 0px; }
-                    .rbc-month-view { border: 1px solidhsl(var(--border) / 0.5); border-radius: 12px; overflow: hidden; }
+                    .rbc-month-view { border: 1px solid hsl(var(--border) / 0.5); border-radius: 12px; overflow: hidden; }
                     .rbc-day-bg { border-left: 1px solid hsl(var(--border) / 0.5); }
                     .rbc-off-range-bg { background: transparent; opacity: 0.5; }
                     .rbc-today { background: hsl(var(--primary) / 0.05); }
@@ -296,7 +302,7 @@ export default function JobCalendar() {
                     </div>
 
                     <DialogFooter>
-                        <Button onClick={() => openOutlook(selectedEvent)} className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
+                        <Button onClick={() => selectedEvent && openOutlook(selectedEvent)} className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
                             <ExternalLink className="mr-2 h-4 w-4" />
                             Add to Outlook
                         </Button>
@@ -306,4 +312,3 @@ export default function JobCalendar() {
         </Card>
     );
 }
-

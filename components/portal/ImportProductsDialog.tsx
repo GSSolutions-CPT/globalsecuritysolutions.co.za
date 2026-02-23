@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
 import { Button } from '@/components/portal/ui/button'
@@ -11,14 +13,27 @@ import Papa from 'papaparse'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 
-export function ImportProductsDialog({ onImportSuccess }) {
+interface ImportProductsDialogProps {
+    onImportSuccess?: () => void
+}
+
+interface Mapping {
+    name: string
+    code: string
+    category: string
+    retail_price: string
+    cost_price: string
+    description: string
+}
+
+export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [mode, setMode] = useState('csv') // 'csv' or 'paste'
+    const [mode, setMode] = useState<'csv' | 'paste'>('csv')
     const [pasteData, setPasteData] = useState('')
-    const [parsedData, setParsedData] = useState([])
-    const [headers, setHeaders] = useState([])
-    const [mapping, setMapping] = useState({
+    const [parsedData, setParsedData] = useState<any[]>([])
+    const [headers, setHeaders] = useState<string[]>([])
+    const [mapping, setMapping] = useState<Mapping>({
         name: '',
         code: '',
         category: '',
@@ -26,18 +41,18 @@ export function ImportProductsDialog({ onImportSuccess }) {
         cost_price: '',
         description: ''
     })
-    const [step, setStep] = useState(1) // 1: Input, 2: Mapping, 3: Preview
+    const [step, setStep] = useState(1)
 
-    const handleFileUpload = (e) => {
-        const file = e.target.files[0]
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
         if (file) {
             Papa.parse(file, {
                 header: true,
                 skipEmptyLines: true,
-                complete: (results) => {
+                complete: (results: any) => {
                     processParsedData(results.data, results.meta.fields)
                 },
-                error: (error) => {
+                error: (error: any) => {
                     toast.error(`Error parsing CSV: ${error.message}`)
                 }
             })
@@ -50,39 +65,51 @@ export function ImportProductsDialog({ onImportSuccess }) {
             return
         }
 
-        // Try to detect delimiter (Tab for excel/pdf copy, or Comma)
         const firstLine = pasteData.trim().split('\n')[0]
         const delimiter = firstLine.includes('\t') ? '\t' : ','
 
         Papa.parse(pasteData.trim(), {
             delimiter: delimiter,
-            header: true, // Assume first row is header for now, or we can add a toggle
+            header: true,
             skipEmptyLines: true,
-            complete: (results) => {
-                // If header seems wrong (e.g. fields are empty or indices), we might need generic headers
-                // For now assume user copies with headers or we map by index later (simplified)
+            complete: (results: any) => {
                 processParsedData(results.data, results.meta.fields || Object.keys(results.data[0]))
             }
         })
     }
 
-    const processParsedData = (data, fields) => {
+    const processParsedData = (data: any[], fields?: string[]) => {
         if (!data || data.length === 0) {
             toast.error('No data found')
             return
         }
         setParsedData(data)
-        setHeaders(fields || [])
+        const headerFields = fields || []
+        setHeaders(headerFields)
 
-        // Auto-map if headers match loosely
-        const lowerFields = fields.map(f => f.toLowerCase())
+        const lowerFields = headerFields.map(f => f.toLowerCase())
         const newMapping = { ...mapping }
 
-        if (lowerFields.includes('name') || lowerFields.includes('product name')) newMapping.name = fields.find(f => f.toLowerCase().includes('name'))
-        if (lowerFields.includes('code') || lowerFields.includes('sku')) newMapping.code = fields.find(f => f.toLowerCase().includes('code') || f.toLowerCase().includes('sku'))
-        if (lowerFields.includes('retail') || lowerFields.includes('price')) newMapping.retail_price = fields.find(f => f.toLowerCase().includes('retail') || f.toLowerCase().includes('price'))
-        if (lowerFields.includes('cost')) newMapping.cost_price = fields.find(f => f.toLowerCase().includes('cost'))
-        if (lowerFields.includes('category')) newMapping.category = fields.find(f => f.toLowerCase().includes('category'))
+        if (lowerFields.includes('name') || lowerFields.includes('product name')) {
+            const found = headerFields.find(f => f.toLowerCase().includes('name'))
+            if (found) newMapping.name = found
+        }
+        if (lowerFields.includes('code') || lowerFields.includes('sku')) {
+            const found = headerFields.find(f => f.toLowerCase().includes('code') || f.toLowerCase().includes('sku'))
+            if (found) newMapping.code = found
+        }
+        if (lowerFields.includes('retail') || lowerFields.includes('price')) {
+            const found = headerFields.find(f => f.toLowerCase().includes('retail') || f.toLowerCase().includes('price'))
+            if (found) newMapping.retail_price = found
+        }
+        if (lowerFields.includes('cost')) {
+            const found = headerFields.find(f => f.toLowerCase().includes('cost'))
+            if (found) newMapping.cost_price = found
+        }
+        if (lowerFields.includes('category')) {
+            const found = headerFields.find(f => f.toLowerCase().includes('category'))
+            if (found) newMapping.category = found
+        }
 
         setMapping(newMapping)
         setStep(2)
@@ -102,10 +129,10 @@ export function ImportProductsDialog({ onImportSuccess }) {
                 name: row[mapping.name],
                 code: mapping.code ? row[mapping.code] : null,
                 category: mapping.category ? row[mapping.category] : null,
-                retail_price: parseFloat(row[mapping.retail_price]?.replace(/[^0-9.-]+/g, '')) || 0,
-                cost_price: mapping.cost_price ? (parseFloat(row[mapping.cost_price]?.replace(/[^0-9.-]+/g, '')) || 0) : 0,
+                retail_price: parseFloat(row[mapping.retail_price]?.toString().replace(/[^0-9.-]+/g, '')) || 0,
+                cost_price: mapping.cost_price ? (parseFloat(row[mapping.cost_price]?.toString().replace(/[^0-9.-]+/g, '')) || 0) : 0,
                 description: mapping.description ? row[mapping.description] : null
-            })).filter(p => p.name) // Filter out empty names
+            })).filter(p => p.name)
 
             const { error } = await supabase
                 .from('products')
@@ -122,11 +149,10 @@ export function ImportProductsDialog({ onImportSuccess }) {
             toast.success(`Successfully imported ${productsToInsert.length} products`, { id: toastId })
             if (onImportSuccess) onImportSuccess()
             setIsOpen(false)
-            // Reset state
             setStep(1)
             setPasteData('')
             setParsedData([])
-        } catch (error) {
+        } catch (error: any) {
             console.error('Import error:', error)
             toast.error(`Import failed: ${error.message}`, { id: toastId })
         } finally {
@@ -151,7 +177,7 @@ export function ImportProductsDialog({ onImportSuccess }) {
                 </DialogHeader>
 
                 {step === 1 && (
-                    <Tabs value={mode} onValueChange={setMode}>
+                    <Tabs value={mode} onValueChange={(v) => setMode(v as 'csv' | 'paste')}>
                         <TabsList className="grid w-full grid-cols-2">
                             <TabsTrigger value="csv">Upload CSV</TabsTrigger>
                             <TabsTrigger value="paste">Paste from Clipboard</TabsTrigger>
@@ -264,4 +290,3 @@ export function ImportProductsDialog({ onImportSuccess }) {
         </Dialog>
     )
 }
-

@@ -1,0 +1,36 @@
+﻿app/portal/pages-temp/Clients.tsx(27,33): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+app/portal/pages-temp/Clients.tsx(126,24): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(137,11): error TS2322: Type 'Client | null' is not assignable to type 'null | undefined'.
+  Type 'Client' is not assignable to type 'null | undefined'.
+app/portal/pages-temp/Clients.tsx(169,122): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(175,142): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(216,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(227,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+app/portal/pages-temp/Sales.tsx(404,20): error TS2339: Property 'site_plan_url' does not exist on type '{ lines: any[]; id: string; client_id: string; status: "Sent" | "Draft" | "Accepted" | "Pending Review" | "Approved" | "Rejected" | "Converted" | "Cancelled"; date_created: string; valid_until?: string | undefined; ... 10 more ...; clients?: Pick<...> | undefined; } | { ...; }'.
+  Property 'site_plan_url' does not exist on type '{ lines: any[]; id: string; client_id: string; quotation_id?: string | undefined; status: "Overdue" | "Paid" | "Sent" | "Draft" | "Cancelled"; date_created: string; due_date?: string | undefined; ... 6 more ...; payment_proof?: string | undefined; }'.
+app/portal/pages-temp/Sales.tsx(452,25): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Sales.tsx(488,43): error TS2339: Property 'valid_until' does not exist on type 'Quotation | Invoice'.
+  Property 'valid_until' does not exist on type 'Invoice'.
+app/portal/pages-temp/Sales.tsx(489,42): error TS2339: Property 'valid_until' does not exist on type 'Quotation | Invoice'.
+  Property 'valid_until' does not exist on type 'Invoice'.
+app/portal/pages-temp/Sales.tsx(491,41): error TS2339: Property 'due_date' does not exist on type 'Quotation | Invoice'.
+  Property 'due_date' does not exist on type 'Quotation'.
+app/portal/pages-temp/Sales.tsx(492,40): error TS2339: Property 'due_date' does not exist on type 'Quotation | Invoice'.
+  Property 'due_date' does not exist on type 'Quotation'.
+app/portal/pages-temp/Sales.tsx(540,111): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/portal/pages-temp/Sales.tsx(616,46): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/portal/pages-temp/Sales.tsx(666,24): error TS7006: Parameter 'e' implicitly has an 'any' type.

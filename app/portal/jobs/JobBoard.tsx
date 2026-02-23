@@ -1,4 +1,5 @@
-// @ts-nocheck
+'use client'
+
 import React, { useMemo } from 'react';
 import {
     DndContext,
@@ -9,6 +10,8 @@ import {
     useSensors,
     DragOverlay,
     defaultDropAnimationSideEffects,
+    DragStartEvent,
+    DragEndEvent,
 } from '@dnd-kit/core';
 import {
     SortableContext,
@@ -22,10 +25,12 @@ import { Button } from '@/components/portal/ui/button';
 import { Badge } from '@/components/portal/ui/badge';
 import { Calendar, User, Download, GripVertical, Clock, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/portal/utils';
+import { Job } from '@/types/crm';
 
-const columns = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
+const columns = ['Pending', 'In Progress', 'Completed', 'Cancelled'] as const;
+type Status = typeof columns[number];
 
-const getColumnConfig = (status) => {
+const getColumnConfig = (status: Status) => {
     switch (status) {
         case 'Pending':
             return {
@@ -80,9 +85,13 @@ const dropAnimation = {
     }),
 };
 
-function SortableItem({ job }) {
+interface SortableItemProps {
+    job: Job;
+}
+
+function SortableItem({ job }: SortableItemProps) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-        id: job.id,
+        id: job.id!,
         data: { ...job },
     });
 
@@ -99,8 +108,12 @@ function SortableItem({ job }) {
     );
 }
 
-function JobCard({ job, isOverlay }) {
+interface JobCardProps {
+    job: Job;
+    isOverlay?: boolean;
+}
 
+function JobCard({ job, isOverlay }: JobCardProps) {
     return (
         <Card className={cn(
             "transition-all duration-200 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900",
@@ -116,7 +129,6 @@ function JobCard({ job, isOverlay }) {
                             {job.clients?.company}
                         </p>
                     </div>
-                    {/* Handle Icon for visual cue */}
                     <GripVertical className="h-4 w-4 text-slate-300" />
                 </div>
 
@@ -132,7 +144,7 @@ function JobCard({ job, isOverlay }) {
                             <Calendar className="h-3 w-3" />
                             <span>{job.scheduled_datetime ? new Date(job.scheduled_datetime).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Unscheduled'}</span>
                         </div>
-                        {job.assigned_technicians?.length > 0 && (
+                        {job.assigned_technicians && job.assigned_technicians.length > 0 && (
                             <div className="flex items-center gap-1">
                                 <User className="h-3 w-3" />
                                 <span>{job.assigned_technicians.length}</span>
@@ -141,14 +153,14 @@ function JobCard({ job, isOverlay }) {
                     </div>
                     {job.quotations?.payment_proof && (
                         <Button
-                            size="xs"
+                            size="sm"
                             variant="ghost"
                             className="w-full text-[10px] h-6 mt-1 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 const link = document.createElement('a');
-                                link.href = job.quotations.payment_proof;
-                                link.download = `PaymentProof_${job.id.substring(0, 6)}`;
+                                link.href = job.quotations!.payment_proof!;
+                                link.download = `PaymentProof_${job.id!.substring(0, 6)}`;
                                 document.body.appendChild(link);
                                 link.click();
                                 document.body.removeChild(link);
@@ -164,7 +176,12 @@ function JobCard({ job, isOverlay }) {
     );
 }
 
-function DroppableColumn({ id, jobs }) {
+interface DroppableColumnProps {
+    id: Status;
+    jobs: Job[];
+}
+
+function DroppableColumn({ id, jobs }: DroppableColumnProps) {
     const { setNodeRef } = useSortable({ id });
     const config = getColumnConfig(id);
     const Icon = config.icon;
@@ -187,7 +204,7 @@ function DroppableColumn({ id, jobs }) {
                 </div>
             </div>
 
-            <SortableContext items={jobs.map(j => j.id)} strategy={verticalListSortingStrategy}>
+            <SortableContext items={jobs.map(j => j.id!)} strategy={verticalListSortingStrategy}>
                 <div className="flex-1 overflow-y-auto pr-1 space-y-3 min-h-[200px] scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-700">
                     {jobs.map((job) => (
                         <SortableItem key={job.id} job={job} />
@@ -198,8 +215,13 @@ function DroppableColumn({ id, jobs }) {
     );
 }
 
-export default function JobBoard({ jobs, onStatusChange }) {
-    const [activeId, setActiveId] = React.useState(null);
+interface JobBoardProps {
+    jobs: Job[];
+    onStatusChange: (jobId: string, newStatus: string) => void;
+}
+
+export default function JobBoard({ jobs, onStatusChange }: JobBoardProps) {
+    const [activeId, setActiveId] = React.useState<string | null>(null);
 
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -210,14 +232,14 @@ export default function JobBoard({ jobs, onStatusChange }) {
         return columns.reduce((acc, status) => {
             acc[status] = jobs.filter(job => job.status === status);
             return acc;
-        }, {});
+        }, {} as Record<Status, Job[]>);
     }, [jobs]);
 
-    const handleDragStart = (event) => {
-        setActiveId(event.active.id);
+    const handleDragStart = (event: DragStartEvent) => {
+        setActiveId(event.active.id as string);
     };
 
-    const handleDragEnd = (event) => {
+    const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
         if (!over) {
@@ -225,19 +247,19 @@ export default function JobBoard({ jobs, onStatusChange }) {
             return;
         }
 
-        const jobId = active.id;
-        let newStatus = over.id;
+        const jobId = active.id as string;
+        let newStatus = over.id as string;
 
-        if (!columns.includes(over.id)) {
+        if (!columns.includes(over.id as any)) {
             const overJob = jobs.find(j => j.id === over.id);
             if (overJob) {
-                newStatus = overJob.status;
+                newStatus = overJob.status!;
             }
         }
 
         const currentJob = jobs.find(j => j.id === jobId);
 
-        if (currentJob && columns.includes(newStatus) && currentJob.status !== newStatus) {
+        if (currentJob && columns.includes(newStatus as any) && currentJob.status !== newStatus) {
             onStatusChange(jobId, newStatus);
         }
 
@@ -269,4 +291,3 @@ export default function JobBoard({ jobs, onStatusChange }) {
         </DndContext>
     );
 }
-
