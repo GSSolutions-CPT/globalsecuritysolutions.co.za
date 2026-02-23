@@ -33,7 +33,9 @@ export default function AuthCallbackPage() {
                 if (clientData) {
                     router.replace(`/portal/?client=${clientData.id}`)
                 } else {
-                    router.replace('/portal/dashboard')
+                    // Not a registered client — sign them out and reject access
+                    await supabase.auth.signOut()
+                    router.replace('/portal/login?error=google_not_client')
                 }
             } catch (err) {
                 console.error('[auth/callback]', err)

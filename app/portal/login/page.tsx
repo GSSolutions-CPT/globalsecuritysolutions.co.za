@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/portal/supabase'
 import { Button } from '@/components/portal/ui/button'
-import { Input } from '@/components/portal/ui/input'  
+import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Alert, AlertDescription } from '@/components/portal/ui/alert'
@@ -25,6 +25,9 @@ function LoginContent() {
     const searchParams = useSearchParams()
 
     const from = searchParams.get('from') || '/portal/dashboard'
+    const googleError = searchParams.get('error') === 'google_not_client'
+        ? 'Google Sign-In is for clients only. Staff must use email & password.'
+        : null
 
     const routeByRole = async (user: User) => {
         // Check if this user is a client
@@ -101,9 +104,9 @@ function LoginContent() {
 
                 <form onSubmit={handleSubmit}>
                     <CardContent className="space-y-5">
-                        {error && (
+                        {(error || googleError) && (
                             <Alert variant="destructive" className="border-red-500/50 bg-red-500/10 text-red-600">
-                                <AlertDescription>{error}</AlertDescription>
+                                <AlertDescription>{error || googleError}</AlertDescription>
                             </Alert>
                         )}
                         <div className="space-y-2">
@@ -184,6 +187,7 @@ function LoginContent() {
                             </svg>
                             Continue with Google
                         </Button>
+                        <p className="text-xs text-center text-slate-400 -mt-2">For clients only — staff use email &amp; password above</p>
 
                         <div className="w-full text-center mt-2">
                             <p className="text-sm text-slate-500 dark:text-slate-400">

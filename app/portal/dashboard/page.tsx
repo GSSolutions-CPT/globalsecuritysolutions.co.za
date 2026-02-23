@@ -3,13 +3,15 @@
 import { useState, useEffect, Suspense, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
-import { Banknote, TrendingUp, Users, AlertCircle, Activity, FileText, Receipt, Briefcase, Package, FileSignature, Plus, UserPlus } from 'lucide-react'
+import { Banknote, TrendingUp, Users, AlertCircle, Activity, FileText, Receipt, Briefcase, Package, FileSignature, Plus, UserPlus, Phone } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { useCurrency } from '@/lib/portal/use-currency'
 import FinancialCharts from './FinancialCharts'
 
 const getActivityConfig = (type: string) => {
     const t = (type || '').toLowerCase()
+    if (t.includes('quote request')) return { icon: FileText, color: 'text-blue-500', path: '/portal/clients' }
+    if (t.includes('callback request')) return { icon: Phone, color: 'text-emerald-500', path: '/portal/clients' }
     if (t.includes('quotation') || t.includes('quote')) return { icon: FileText, color: 'text-blue-500', path: '/portal/sales' }
     if (t.includes('invoice')) return { icon: Receipt, color: 'text-purple-500', path: '/portal/sales' }
     if (t.includes('payment')) return { icon: Banknote, color: 'text-green-500', path: '/portal/sales' }
@@ -58,7 +60,7 @@ export default function DashboardPage() {
                 supabase.from('clients').select('*'),
                 supabase.from('invoices').select('*'),
                 supabase.from('expenses').select('*'),
-                supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(5)
+                supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(10)
             ])
 
             const clients = clientsRes.data as Client[]
@@ -153,12 +155,20 @@ export default function DashboardPage() {
         recalculateFinancials()
     }, [rawInvoices, rawExpenses, viewMode])
 
-    // Fetch initial data on mount
+    // Fetch initial data on mount + real-time subscription
     useEffect(() => {
-        const initData = async () => {
-            await fetchDashboardData()
-        }
+        const initData = async () => { await fetchDashboardData() }
         initData()
+
+        // Real-time: re-fetch when a new activity_log row is inserted
+        const channel = supabase
+            .channel('activity_log_changes')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity_log' }, () => {
+                fetchDashboardData()
+            })
+            .subscribe()
+
+        return () => { supabase.removeChannel(channel) }
     }, [fetchDashboardData])
 
     return (
@@ -294,7 +304,18 @@ export default function DashboardPage() {
                 {/* Activity Feed */}
                 <Card className="col-span-3 glass-effect tech-border bg-transparent">
                     <CardHeader>
-                        <CardTitle>Recent Activity</CardTitle>
+                        <CardTitle className="flex items-center gap-2">
+                            Recent Activity
+                            {activities.some(a =>
+                                (a.type === 'Quote Request' || a.type === 'Callback Request') &&
+                                (Date.now() - new Date(a.timestamp).getTime() < 86400000)
+                            ) && (
+                                    <span className="relative flex h-2.5 w-2.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                                    </span>
+                                )}
+                        </CardTitle>
                         <CardDescription className="text-muted-foreground/80">
                             Latest actions across the system
                         </CardDescription>
