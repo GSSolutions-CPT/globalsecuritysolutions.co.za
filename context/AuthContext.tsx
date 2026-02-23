@@ -65,7 +65,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         loading,
         signIn: (data: SignInWithPasswordCredentials) => supabase.auth.signInWithPassword(data),
         signUp: (data: SignUpWithPasswordCredentials) => supabase.auth.signUp(data),
-        signInWithGoogle: () => supabase.auth.signInWithOAuth({ provider: 'google' }),
+        signInWithGoogle: () => supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/portal/auth/callback`,
+            },
+        }),
         signOut: () => supabase.auth.signOut(),
     }
 
