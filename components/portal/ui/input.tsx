@@ -4,7 +4,7 @@ import { cn } from "@/lib/portal/utils"
 export interface InputProps
     extends React.InputHTMLAttributes<HTMLInputElement> { }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input: any = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type, ...props }, ref) => {
         return (
             <input

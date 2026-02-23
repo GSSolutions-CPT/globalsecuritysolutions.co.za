@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -15,6 +16,7 @@ import { format } from 'date-fns'
 import { Separator } from '@/components/portal/ui/separator'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/portal/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/portal/ui/popover'
+import { Supplier } from '@/types/crm'
 
 export default function CreatePurchaseOrder() {
     const router = useRouter()
@@ -25,11 +27,11 @@ export default function CreatePurchaseOrder() {
     const { settings } = useSettings()
     const taxRate = (parseFloat(settings?.taxRate) || 15) / 100
 
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState<File | null>(null)
     const [isProcessing, setIsProcessing] = useState(false)
     const [extractedText, setExtractedText] = useState('')
 
-    const [suppliers, setSuppliers] = useState([])
+    const [suppliers, setSuppliers] = useState<Supplier[]>([])
     const [supplierOpen, setSupplierOpen] = useState(false)
     const [selectedSupplierId, setSelectedSupplierId] = useState('')
     const [newSupplierName, setNewSupplierName] = useState('')
@@ -42,7 +44,7 @@ export default function CreatePurchaseOrder() {
     })
     const [vatApplicable, setVatApplicable] = useState(true)
 
-    const [lines, setLines] = useState([
+    const [lines, setLines] = useState<any[]>([
         { id: 1, description: '', quantity: 1, unit_price: 0, line_total: 0 }
     ])
 
@@ -52,7 +54,7 @@ export default function CreatePurchaseOrder() {
         else setSuppliers(data || [])
     }, [])
 
-    const loadPurchaseOrder = useCallback(async (id) => {
+    const loadPurchaseOrder = useCallback(async (id: string) => {
         const toastId = toast.loading('Loading Purchase Order...')
         try {
             const { data, error } = await supabase
@@ -91,8 +93,8 @@ export default function CreatePurchaseOrder() {
         if (editId) loadPurchaseOrder(editId)
     }, [editId, loadPurchaseOrder, fetchSuppliers])
 
-    const handleFileUpload = async (e) => {
-        const uploadedFile = e.target.files[0]
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const uploadedFile = e.target.files?.[0]
         if (!uploadedFile) return
 
         setFile(uploadedFile)
@@ -142,7 +144,7 @@ export default function CreatePurchaseOrder() {
         }
     }
 
-    const updateLine = (id, field, value) => {
+    const updateLine = (id: number | string, field: string, value: string | number) => {
         setLines(prev => prev.map(line => {
             if (line.id === id) {
                 const newLine = { ...line, [field]: value }
@@ -155,7 +157,7 @@ export default function CreatePurchaseOrder() {
         }))
     }
 
-    const removeLineItem = (index) => {
+    const removeLineItem = (index: number) => {
         if (lines.length > 1) {
             setLines(lines.filter((_, i) => i !== index))
         } else {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/portal/supabase'
@@ -320,7 +320,7 @@ export default function ClientPortalPage() {
                                         id="site-address"
                                         placeholder="e.g. 12 Main Road, Claremont, Cape Town"
                                         value={siteAddress}
-                                        onChange={e => setSiteAddress(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSiteAddress(e.target.value)}
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -370,7 +370,7 @@ export default function ClientPortalPage() {
                                         type="tel"
                                         placeholder="+27 ..."
                                         value={callbackPhone}
-                                        onChange={e => setCallbackPhone(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCallbackPhone(e.target.value)}
                                         required
                                     />
                                 </div>

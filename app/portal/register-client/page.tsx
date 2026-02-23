@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/portal/supabase'
@@ -154,7 +154,7 @@ export default function RegisterClientPage() {
                                 id="reg-name"
                                 placeholder="Jane Smith"
                                 value={name}
-                                onChange={e => setName(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                 required
                                 className="h-11"
                             />
@@ -180,7 +180,7 @@ export default function RegisterClientPage() {
                                 id="reg-company"
                                 placeholder="Acme Corp (optional)"
                                 value={company}
-                                onChange={e => setCompany(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)}
                                 className="h-11"
                             />
                         </div>
@@ -193,7 +193,7 @@ export default function RegisterClientPage() {
                                 type="tel"
                                 placeholder="+27 ..."
                                 value={phone}
-                                onChange={e => setPhone(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
                                 required
                                 className="h-11"
                             />
@@ -206,7 +206,7 @@ export default function RegisterClientPage() {
                                 id="reg-address"
                                 placeholder="12 Main Road, Cape Town (optional)"
                                 value={address}
-                                onChange={e => setAddress(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
                                 className="h-11"
                             />
                         </div>

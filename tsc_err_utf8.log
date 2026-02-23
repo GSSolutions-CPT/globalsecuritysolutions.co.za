@@ -1,0 +1,772 @@
+﻿app/portal/client-portal/page.tsx(288,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(289,26): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(290,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(293,30): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(295,26): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(338,38): error TS2322: Type '{ children: (string | Element | null)[]; type: string; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(343,38): error TS2322: Type '{ children: string; type: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(352,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(353,26): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(354,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(357,30): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(359,26): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(406,38): error TS2322: Type '{ children: (string | Element | null)[]; type: string; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(411,38): error TS2322: Type '{ children: string; type: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(420,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(421,26): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(422,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(426,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(449,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(450,26): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(451,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/client-portal/page.tsx(455,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(36,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(37,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(38,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(40,18): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(70,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(71,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(72,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(74,18): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(104,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(105,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(106,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/FinancialCharts.tsx(108,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(238,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(239,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(240,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(245,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(252,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(253,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(254,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(259,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(266,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(267,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(268,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(273,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(280,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(281,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(282,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(287,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(305,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(306,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(307,26): error TS2322: Type '{ children: (string | false | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(319,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/dashboard/page.tsx(323,22): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(87,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(88,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(97,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(100,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(106,22): error TS2322: Type '{ children: ("" | Element | null)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(152,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(153,26): error TS2322: Type '{ children: Element; className: string; type: string; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/login/page.tsx(176,26): error TS2322: Type '{ children: (string | Element)[]; type: string; variant: string; className: string; onClick: () => Promise<{ data: { provider: string; url: string | null; }; error: AuthError | null; }>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(15,31): error TS2307: Cannot find module '@/components/InstallPrompt' or its corresponding type declarations.
+app/portal/pages-temp/ClientPortal.tsx(129,21): error TS2345: Argument of type 'any[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'any[]' is not assignable to type 'never[]'.
+    Type 'any' is not assignable to type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(148,19): error TS2345: Argument of type 'any[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'any[]' is not assignable to type 'never[]'.
+    Type 'any' is not assignable to type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(170,31): error TS7006: Parameter 'quote' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(176,32): error TS7006: Parameter 'dataUrl' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(190,26): error TS7006: Parameter 'dataurl' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(205,38): error TS7006: Parameter 'file' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(205,44): error TS7006: Parameter 'path' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(232,26): error TS7006: Parameter 'url' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(232,31): error TS7006: Parameter 'filename' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(244,40): error TS7006: Parameter 'paymentProofFile' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(256,77): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(261,128): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(271,19): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(277,73): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(278,28): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(287,40): error TS18046: 'error' is of type 'unknown'.
+app/portal/pages-temp/ClientPortal.tsx(291,42): error TS7006: Parameter 'proofFile' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(296,76): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(304,19): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(310,76): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(311,28): error TS18047: 'acceptingQuote' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(320,40): error TS18046: 'error' is of type 'unknown'.
+app/portal/pages-temp/ClientPortal.tsx(326,32): error TS7006: Parameter 'quote' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(337,27): error TS7006: Parameter 'status' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(379,22): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(379,45): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(380,36): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(382,24): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(382,51): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(385,17): error TS2339: Property 'final_payment_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(387,32): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(387,59): error TS2339: Property 'admin_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(388,35): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(388,70): error TS2339: Property 'deposit_percentage' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(390,29): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(392,29): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(397,22): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(405,22): error TS2339: Property 'final_payment_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(419,129): error TS2339: Property 'name' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(426,18): error TS2322: Type '{ children: string; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(439,20): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(452,20): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(465,20): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(485,29): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(493,106): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(513,41): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(514,29): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(521,26): error TS2322: Type '{ children: string; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(522,78): error TS2339: Property 'date_created' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(524,102): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(526,110): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(528,22): error TS2322: Type '{ children: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(535,39): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(535,62): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(536,31): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(543,26): error TS2322: Type '{ children: string; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(544,80): error TS2339: Property 'date_created' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(546,106): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(548,118): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(550,22): error TS2322: Type '{ children: string; variant: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(567,14): error TS2322: Type '{ children: Element[]; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(573,14): error TS2322: Type '{ children: Element[]; variant: string; className: string; onClick: () => Window | null; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(579,14): error TS2322: Type '{ children: Element[]; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(585,14): error TS2322: Type '{ children: Element[]; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(585,338): error TS2339: Property 'address' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(627,14): error TS2322: Type '{ children: (string | Element)[]; variant: string; size: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(631,176): error TS2339: Property 'name' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(639,10): error TS2741: Property 'defaultValue' is missing in type '{ children: Element[]; value: string; onValueChange: Dispatch<SetStateAction<string>>; className: string; }' but required in type '{ [x: string]: any; value: any; defaultValue: any; onValueChange: any; children: any; className: any; }'.
+app/portal/pages-temp/ClientPortal.tsx(642,16): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(644,18): error TS2322: Type '{ children: string; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(645,18): error TS2322: Type '{ children: string; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(646,18): error TS2322: Type '{ children: string; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(647,18): error TS2322: Type '{ children: string; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(652,12): error TS2322: Type '{ children: Element; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(656,12): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(658,30): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(658,53): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(658,77): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(660,18): error TS2322: Type '{ children: Element[]; key: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(660,38): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(664,74): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(666,20): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(670,28): error TS2322: Type '{ children: any[]; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(671,41): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(673,131): error TS2339: Property 'date_created' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(675,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(677,24): error TS2322: Type '{ children: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(677,136): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(677,157): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(680,20): error TS2322: Type '{ children: (false | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(683,137): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(687,24): error TS2322: Type '{ children: (string | Element)[]; variant: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(687,203): error TS2698: Spread types may only be created from object types.
+app/portal/pages-temp/ClientPortal.tsx(691,34): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(692,26): error TS2322: Type '{ children: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(698,32): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(708,39): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(708,62): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(719,12): error TS2322: Type '{ children: Element[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(721,30): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(721,57): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(723,18): error TS2322: Type '{ children: Element[]; key: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(723,38): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(729,20): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(732,26): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(736,28): error TS2322: Type '{ children: any[]; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(737,41): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(739,141): error TS2339: Property 'accepted_at' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(739,166): error TS2339: Property 'date_created' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(742,24): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(745,20): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(748,137): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(753,34): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(753,69): error TS2339: Property 'admin_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(757,35): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(757,70): error TS2339: Property 'admin_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(759,59): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(759,102): error TS2339: Property 'deposit_percentage' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(760,53): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(765,59): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(765,102): error TS2339: Property 'deposit_percentage' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(766,59): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(770,44): error TS2339: Property 'payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(770,98): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(780,24): error TS2322: Type '{ children: (string | Element)[]; className: string; variant: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(780,203): error TS2698: Spread types may only be created from object types.
+app/portal/pages-temp/ClientPortal.tsx(785,34): error TS2339: Property 'payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(785,62): error TS2339: Property 'final_payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(786,26): error TS2322: Type '{ children: (string | Element)[]; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(789,66): error TS2339: Property 'payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(789,107): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(797,35): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(797,70): error TS2339: Property 'admin_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(797,100): error TS2339: Property 'final_payment_approved' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(799,39): error TS2339: Property 'final_payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(800,30): error TS2322: Type '{ children: (string | Element)[]; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(811,30): error TS2322: Type '{ children: (string | Element)[]; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(814,70): error TS2339: Property 'final_payment_proof' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(814,115): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(828,12): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(830,34): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(832,18): error TS2322: Type '{ children: Element[]; key: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(832,36): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(836,72): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(837,20): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(844,28): error TS2322: Type '{ children: any[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(844,117): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(845,125): error TS2339: Property 'date_created' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(848,24): error TS2322: Type '{ children: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(848,112): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(848,131): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(851,20): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(854,135): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(857,24): error TS2322: Type '{ children: (string | Element)[]; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(857,233): error TS2698: Spread types may only be created from object types.
+app/portal/pages-temp/ClientPortal.tsx(864,41): error TS2339: Property 'status' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(890,46): error TS7006: Parameter 'open' implicitly has an 'any' type.
+app/portal/pages-temp/ClientPortal.tsx(891,10): error TS2322: Type '{ children: (false | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(895,12): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(896,14): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(913,14): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(928,16): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(929,18): error TS2322: Type '{ children: string; variant: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(930,18): error TS2322: Type '{ children: string; onClick: () => Promise<void>; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(951,64): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(966,60): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(966,122): error TS2339: Property 'deposit_percentage' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(966,193): error TS2339: Property 'total_amount' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(966,232): error TS2339: Property 'payment_type' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(966,281): error TS2339: Property 'deposit_percentage' does not exist on type 'never'.
+app/portal/pages-temp/ClientPortal.tsx(978,38): error TS18047: 'e.target.files' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(993,16): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(994,18): error TS2322: Type '{ children: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1026,40): error TS18047: 'e.target.files' is possibly 'null'.
+app/portal/pages-temp/ClientPortal.tsx(1035,16): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1036,18): error TS2322: Type '{ children: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1052,16): error TS2322: Type '{ children: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1060,10): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1061,12): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1062,14): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1063,14): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1087,12): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1088,14): error TS2322: Type '{ children: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1095,10): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1096,12): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1097,14): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1100,14): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1124,27): error TS18046: 'err' is of type 'unknown'.
+app/portal/pages-temp/ClientPortal.tsx(1149,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1150,16): error TS2322: Type '{ children: string; type: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1151,16): error TS2322: Type '{ children: (string | Element)[]; type: string; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1162,10): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1163,12): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1164,14): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1167,14): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1192,27): error TS18046: 'err' is of type 'unknown'.
+app/portal/pages-temp/ClientPortal.tsx(1227,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1228,16): error TS2322: Type '{ children: string; type: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/ClientPortal.tsx(1229,16): error TS2322: Type '{ children: (string | Element)[]; type: string; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(25,33): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+app/portal/pages-temp/Clients.tsx(135,11): error TS2322: Type 'Client | null' is not assignable to type 'null | undefined'.
+  Type 'Client' is not assignable to type 'null | undefined'.
+app/portal/pages-temp/Clients.tsx(142,14): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(153,12): error TS2322: Type '{ children: Element[]; key: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(155,14): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(158,20): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(160,22): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(167,20): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; onClick: (e: any) => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(167,122): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(173,20): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; onClick: (e: any) => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(173,142): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(182,14): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(210,20): error TS2322: Type '{ children: (string | Element)[]; size: string; variant: string; className: string; onClick: (e: any) => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Clients.tsx(214,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Clients.tsx(225,35): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+app/portal/pages-temp/Clients.tsx(245,16): error TS2322: Type '{ children: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(47,20): error TS2345: Argument of type 'any[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'any[]' is not assignable to type 'never[]'.
+    Type 'any' is not assignable to type 'never'.
+app/portal/pages-temp/Contracts.tsx(61,18): error TS2345: Argument of type '{ id: any; name: any; company: any; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '{ id: any; name: any; company: any; }[]' is not assignable to type 'never[]'.
+    Type '{ id: any; name: any; company: any; }' is not assignable to type 'never'.
+app/portal/pages-temp/Contracts.tsx(93,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(136,39): error TS7006: Parameter 'contractId' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(136,51): error TS7006: Parameter 'currentStatus' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(160,34): error TS7006: Parameter 'contract' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(221,22): error TS7006: Parameter 'date' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(224,37): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+app/portal/pages-temp/Contracts.tsx(224,47): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+app/portal/pages-temp/Contracts.tsx(228,22): error TS7006: Parameter 'date' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(236,14): error TS2339: Property 'description' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(237,14): error TS2339: Property 'clients' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(241,51): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(252,22): error TS2339: Property 'amount' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(253,15): error TS2339: Property 'frequency' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(297,40): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(297,62): error TS2339: Property 'next_billing_date' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(317,12): error TS2322: Type '{ children: Element; asChild: true; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(318,14): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(323,12): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(324,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(325,16): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(326,16): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(334,20): error TS2739: Type '{ children: Element[]; value: string; onValueChange: (value: any) => void; required: true; }' is missing the following properties from type '{ [x: string]: any; value: any; defaultValue: any; onValueChange: any; open: any; defaultOpen?: boolean | undefined; onOpenChange: any; disabled?: boolean | undefined; className: any; children: any; }': defaultValue, open, onOpenChange, className
+app/portal/pages-temp/Contracts.tsx(336,37): error TS7006: Parameter 'value' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(339,22): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(340,24): error TS2739: Type '{ placeholder: string; }' is missing the following properties from type '{ [x: string]: any; className: any; placeholder: any; children: any; }': className, children
+app/portal/pages-temp/Contracts.tsx(342,22): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(344,26): error TS2322: Type '{ children: any[]; key: any; value: any; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(344,49): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(344,67): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(345,35): error TS2339: Property 'name' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(345,49): error TS2339: Property 'company' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(345,71): error TS2339: Property 'company' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(380,22): error TS2739: Type '{ children: Element[]; value: string; onValueChange: (value: any) => void; required: true; }' is missing the following properties from type '{ [x: string]: any; value: any; defaultValue: any; onValueChange: any; open: any; defaultOpen?: boolean | undefined; onOpenChange: any; disabled?: boolean | undefined; className: any; children: any; }': defaultValue, open, onOpenChange, className
+app/portal/pages-temp/Contracts.tsx(382,39): error TS7006: Parameter 'value' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(385,24): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(386,26): error TS2739: Type '{}' is missing the following properties from type '{ [x: string]: any; className: any; placeholder: any; children: any; }': className, placeholder, children
+app/portal/pages-temp/Contracts.tsx(388,24): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(389,26): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(390,26): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(391,26): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(392,26): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(424,21): error TS2322: Type '{ id: string; checked: boolean; onCheckedChange: (checked: any) => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'id' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(426,39): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+app/portal/pages-temp/Contracts.tsx(431,16): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(432,18): error TS2322: Type '{ children: string; type: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(435,18): error TS2322: Type '{ children: (string | false | Element)[]; type: string; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(449,14): error TS2322: Type '{ children: Element[]; key: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(449,33): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(450,76): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(451,16): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(454,22): error TS2322: Type '{ children: any[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(455,33): error TS2339: Property 'clients' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(458,22): error TS2322: Type '{ children: any; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(458,73): error TS2339: Property 'clients' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(460,20): error TS2322: Type '{ children: string; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(460,44): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(460,98): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(461,31): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(465,16): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(468,46): error TS2339: Property 'amount' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(471,32): error TS2339: Property 'frequency' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(477,31): error TS2339: Property 'description' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(482,72): error TS2339: Property 'next_billing_date' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(482,129): error TS2339: Property 'next_billing_date' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(483,42): error TS2339: Property 'next_billing_date' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(488,16): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(489,18): error TS2322: Type '{ children: (string | Element)[]; variant: string; size: string; className: string; onClick: () => Promise<void>; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(494,39): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(499,18): error TS2322: Type '{ children: string; variant: string; size: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(500,37): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(502,49): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(503,64): error TS2339: Property 'id' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(503,77): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(505,29): error TS2339: Property 'active' does not exist on type 'never'.
+app/portal/pages-temp/Contracts.tsx(514,10): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(515,12): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Contracts.tsx(525,14): error TS2322: Type '{ children: (string | Element)[]; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(77,41): error TS7006: Parameter 'l' implicitly has an 'any' type.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(208,24): error TS18047: 'data' is possibly 'null'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(236,22): error TS2322: Type '{ children: Element; variant: string; size: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(252,22): error TS2322: Type '{ children: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(255,22): error TS2322: Type '{ children: (string | Element)[]; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(267,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(269,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(270,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(276,30): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(278,26): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(308,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(309,26): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(310,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(315,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(321,46): error TS2322: Type '{ children: string | undefined; variant: string; role: string; "aria-expanded": boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(332,42): error TS2322: Type '{ children: Element; className: string; align: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(333,46): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(334,63): error TS2322: Type '{ placeholder: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'placeholder' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(335,50): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(336,54): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(346,66): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(352,54): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(354,62): error TS2322: Type '{ children: string; key: string; value: string; onSelect: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(409,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(410,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(411,30): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(415,30): error TS2322: Type '{ children: (string | Element)[]; size: string; variant: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(419,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(453,42): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(470,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(486,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(546,45): error TS2322: Type '{ checked: boolean; onCheckedChange: Dispatch<SetStateAction<boolean>>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'checked' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(555,44): error TS2322: Type '{ className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(569,22): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/CreatePurchaseOrder.tsx(570,26): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(402,20): error TS2339: Property 'site_plan_url' does not exist on type '{ lines: any[]; id: string; client_id: string; status: "Draft" | "Pending Review" | "Rejected" | "Sent" | "Approved" | "Accepted" | "Converted" | "Cancelled"; date_created: string; valid_until?: string | undefined; ... 10 more ...; clients?: Pick<...> | undefined; } | { ...; }'.
+  Property 'site_plan_url' does not exist on type '{ lines: any[]; id: string; client_id: string; quotation_id?: string | undefined; status: "Draft" | "Sent" | "Paid" | "Overdue" | "Cancelled"; date_created: string; due_date?: string | undefined; ... 6 more ...; payment_proof?: string | undefined; }'.
+app/portal/pages-temp/Sales.tsx(431,6): error TS2322: Type '{ children: Element[]; key: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(433,8): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(436,14): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(441,16): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(445,14): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; title: string; onClick: (e: any) => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(450,25): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/pages-temp/Sales.tsx(458,14): error TS2322: Type '{ children: "Draft" | "Pending Review" | "Rejected" | "Sent" | "Approved" | "Accepted" | "Paid" | "Overdue" | "Converted" | "Cancelled"; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(464,8): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(486,43): error TS2339: Property 'valid_until' does not exist on type 'Quotation | Invoice'.
+  Property 'valid_until' does not exist on type 'Invoice'.
+app/portal/pages-temp/Sales.tsx(487,42): error TS2339: Property 'valid_until' does not exist on type 'Quotation | Invoice'.
+  Property 'valid_until' does not exist on type 'Invoice'.
+app/portal/pages-temp/Sales.tsx(489,41): error TS2339: Property 'due_date' does not exist on type 'Quotation | Invoice'.
+  Property 'due_date' does not exist on type 'Quotation'.
+app/portal/pages-temp/Sales.tsx(490,40): error TS2339: Property 'due_date' does not exist on type 'Quotation | Invoice'.
+  Property 'due_date' does not exist on type 'Quotation'.
+app/portal/pages-temp/Sales.tsx(500,20): error TS2322: Type '{ children: string; size: string; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(510,20): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(513,20): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(520,24): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(530,26): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(535,30): error TS2322: Type '{ children: string; size: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(538,30): error TS2322: Type '{ children: Element; size: string; variant: string; className: string; onClick: () => void; title: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(538,111): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/portal/pages-temp/Sales.tsx(543,28): error TS2322: Type '{ children: string; size: string; disabled: true; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(557,20): error TS2322: Type '{ children: string; size: string; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(567,20): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(570,20): error TS2322: Type '{ children: string; size: string; onClick: () => Promise<void>; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(573,20): error TS2322: Type '{ children: (string | Element)[]; size: string; variant: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(589,14): error TS2322: Type '{ children: Element; size: string; variant: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(599,16): error TS2322: Type '{ children: Element; size: string; variant: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(610,16): error TS2322: Type '{ children: Element; size: string; variant: string; className: string; onClick: () => void; title: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(614,46): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/portal/pages-temp/Sales.tsx(670,12): error TS2322: Type '{ children: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(673,12): error TS2322: Type '{ children: (string | Element)[]; onClick: () => void; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(677,12): error TS2322: Type '{ children: (string | Element)[]; onClick: () => void; variant: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(685,8): error TS2739: Type '{ children: Element[]; defaultValue: string; className: string; }' is missing the following properties from type '{ [x: string]: any; value: any; defaultValue: any; onValueChange: any; children: any; className: any; }': value, onValueChange
+app/portal/pages-temp/Sales.tsx(687,12): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(688,14): error TS2322: Type '{ children: (string | false | Element)[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(697,14): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(698,14): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(699,14): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(700,14): error TS2322: Type '{ children: string; value: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(704,10): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(715,16): error TS2322: Type '{ children: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(720,10): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(724,16): error TS2322: Type '{ children: Element[]; key: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(725,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(728,24): error TS2559: Type '{ children: string[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(729,24): error TS2559: Type '{ children: string | undefined; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(731,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(734,18): error TS2322: Type '{ children: ("" | Element | undefined)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(758,24): error TS2322: Type '{ children: (string | Element)[]; variant: string; size: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(771,22): error TS2322: Type '{ children: (string | Element)[]; size: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(774,22): error TS2322: Type '{ children: string; size: string; variant: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(792,10): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(807,10): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(816,16): error TS2322: Type '{ children: string; variant: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(821,10): error TS2322: Type '{ children: (false | Element | Element[])[]; value: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(823,14): error TS2322: Type '{ children: Element[]; key: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(825,16): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(828,22): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(833,24): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(835,26): error TS2322: Type '{ children: string; variant: string; size: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(839,26): error TS2322: Type '{ children: string; variant: string; size: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(845,20): error TS2322: Type '{ children: "Draft" | "Sent" | "Cancelled" | "Delivered"; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(850,16): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(873,22): error TS2322: Type '{ children: (string | Element)[]; size: string; variant: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(894,16): error TS2322: Type '{ children: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(901,10): error TS2322: Type '{ children: ("" | Element | null)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(902,12): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(903,14): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/pages-temp/Sales.tsx(904,14): error TS2559: Type '{ children: (string | undefined)[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(123,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(124,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(134,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(137,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(142,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register-client/page.tsx(214,26): error TS2322: Type '{ children: (string | Element | null)[]; type: string; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(93,14): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(94,18): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(103,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(106,22): error TS2322: Type '{ children: string; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(112,22): error TS2322: Type '{ children: ("" | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(233,22): error TS2322: Type '{ children: Element[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+app/portal/register/page.tsx(234,26): error TS2322: Type '{ children: Element; className: string; type: string; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(227,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(228,18): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(229,22): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(233,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(235,18): error TS2322: Type '{ children: Element; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(246,38): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(284,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(285,18): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(286,22): error TS2322: Type '{ children: (string | Element)[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(290,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(292,18): error TS2322: Type '{ children: (false | Element | Element[])[]; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(310,34): error TS2322: Type '{ children: Element; variant: string; size: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(323,26): error TS2322: Type '{ children: string; variant: string; onClick: () => void; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(335,14): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(336,18): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(337,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(338,22): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(340,18): error TS2559: Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/InstallationDetails.tsx(355,22): error TS2322: Type '{ children: string | Element; onClick: () => Promise<void>; disabled: boolean; className: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/Layout.tsx(107,26): error TS2322: Type '{ children: Element; variant: string; size: string; onClick: () => Promise<void>; className: string; title: string; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/Layout.tsx(118,26): error TS2322: Type '{ children: Element; variant: string; size: string; className: string; onClick: () => void; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.
+components/portal/Layout.tsx(154,26): error TS2322: Type '{ children: (string | Element)[]; variant: string; className: string; onClick: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & RefAttributes<unknown>'.

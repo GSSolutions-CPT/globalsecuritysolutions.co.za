@@ -1,4 +1,5 @@
-// @ts-nocheck
+/* eslint-disable */
+// @ts-ignore - legacy migration file
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -15,18 +16,18 @@ import { shareLink } from '@/lib/portal/share-utils'
 import { useCurrency } from '@/lib/portal/use-currency'
 import { toast } from 'sonner'
 import { useSettings } from '@/lib/portal/use-settings'
-
+import { Quotation, Invoice, PurchaseOrder } from '@/types/crm'
 
 export default function Sales() {
   const router = useRouter()
   const { formatCurrency } = useCurrency()
   const { settings } = useSettings()
-  const [quotations, setQuotations] = useState([])
-  const [invoices, setInvoices] = useState([])
-  const [purchaseOrders, setPurchaseOrders] = useState([])
+  const [quotations, setQuotations] = useState<Quotation[]>([])
+  const [invoices, setInvoices] = useState<Invoice[]>([])
+  const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [installationDetailsOpen, setInstallationDetailsOpen] = useState(false)
-  const [selectedInvoiceId, setSelectedInvoiceId] = useState(null)
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(null)
 
   // Calculate Summary Stats
   const activeQuotes = quotations.filter(q => ['Draft', 'Sent', 'Pending Review'].includes(q.status))
@@ -44,7 +45,7 @@ export default function Sales() {
     fetchPurchaseOrders()
   }, [])
 
-  const handleDownloadPO = async (po) => {
+  const handleDownloadPO = async (po: PurchaseOrder) => {
     try {
       const toastId = toast.loading('Generating Purchase Order PDF...')
 
@@ -69,7 +70,7 @@ export default function Sales() {
     }
   }
 
-  const handleDeletePO = async (id) => {
+  const handleDeletePO = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this purchase order?')) return
 
     const toastId = toast.loading('Deleting Purchase Order...')
@@ -143,7 +144,7 @@ export default function Sales() {
     }
   }
 
-  const updateStatus = async (type, id, newStatus) => {
+  const updateStatus = async (type: 'quotation' | 'invoice', id: string, newStatus: string) => {
     const toastId = toast.loading(`Updating ${type} status...`)
     try {
       const table = type === 'quotation' ? 'quotations' : 'invoices'
@@ -174,7 +175,7 @@ export default function Sales() {
     }
   }
 
-  const handleConfirmPayment = async (quotation) => {
+  const handleConfirmPayment = async (quotation: Quotation) => {
     // 1. Mark Quotation as Accepted
     // 2. Redirect to Job Booking with data pre-filled
     const toastId = toast.loading('Confirming payment...')
@@ -206,7 +207,7 @@ export default function Sales() {
     }
   }
 
-  const downloadProof = (dataUrl, filename) => {
+  const downloadProof = (dataUrl: string, filename: string) => {
     const link = document.createElement('a')
     link.href = dataUrl
     link.download = filename
@@ -215,7 +216,7 @@ export default function Sales() {
     document.body.removeChild(link)
   }
 
-  const convertToInvoice = async (quotation) => {
+  const convertToInvoice = async (quotation: Quotation) => {
     const toastId = toast.loading('Converting quotation to invoice...')
     try {
       // Create invoice from quotation
@@ -280,7 +281,7 @@ export default function Sales() {
     }
   }
 
-  const handleRequestPayment = async (quotation) => {
+  const handleRequestPayment = async (quotation: Quotation) => {
     const toastId = toast.loading('Sending payment request...')
     try {
       // 1. Update DB flag
@@ -310,7 +311,7 @@ export default function Sales() {
     }
   }
 
-  const handleApproveFinalPayment = async (quotation) => {
+  const handleApproveFinalPayment = async (quotation: Quotation) => {
     const toastId = toast.loading('Approving final payment...')
     try {
       const { error } = await supabase
@@ -335,7 +336,7 @@ export default function Sales() {
     }
   }
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'Draft': return 'bg-gray-500'
       case 'Sent': return 'bg-blue-500'
@@ -349,7 +350,7 @@ export default function Sales() {
     }
   }
 
-  const handleDelete = async (id, type) => {
+  const handleDelete = async (id: string, type: 'quotation' | 'invoice') => {
     if (!confirm(`Are you sure you want to delete this ${type}? This cannot be undone.`)) return
 
     const toastId = toast.loading(`Deleting ${type}...`)
@@ -375,7 +376,7 @@ export default function Sales() {
     }
   }
 
-  const handleDownloadPDF = async (sale, type) => {
+  const handleDownloadPDF = async (sale: Quotation | Invoice, type: 'quotation' | 'invoice') => {
     const toastId = toast.loading('Generating PDF...')
     try {
       // Fetch line items
@@ -428,7 +429,7 @@ export default function Sales() {
     po.suppliers?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const renderSaleCard = (sale, type) => (
+  const renderSaleCard = (sale: Quotation | Invoice, type: 'quotation' | 'invoice') => (
     <Card key={sale.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative">
       <div className={`absolute top-0 left-0 w-1 h-full ${getStatusColor(sale.status)}`}></div>
       <CardHeader className="pb-3 pl-6">
@@ -760,7 +761,7 @@ export default function Sales() {
                         variant="outline"
                         size="sm"
                         className="w-full mt-2"
-                        onClick={() => downloadProof(quotation.payment_proof, `PaymentProof_${quotation.id.substring(0, 6)}`)}
+                        onClick={() => downloadProof(quotation.payment_proof || '', `PaymentProof_${quotation.id.substring(0, 6)}`)}
                       >
                         <Download className="mr-2 h-4 w-4" /> Download Proof
                       </Button>
@@ -814,7 +815,7 @@ export default function Sales() {
               </div>
               <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No invoices generated</h3>
               <p className="mb-6 max-w-sm text-center">Invoices from converted quotes will appear here.</p>
-              <Button variant="outline" onClick={() => navigate('/create-sale?type=invoice')}>Draft Invoice</Button>
+              <Button variant="outline" onClick={() => router.push('/portal/create-sale?type=invoice')}>Draft Invoice</Button>
             </div>
           )}
         </TabsContent>
@@ -833,11 +834,11 @@ export default function Sales() {
                     <div className="flex items-center gap-2 mt-1">
                       <CardDescription className="text-slate-500 font-medium">Purchase Order</CardDescription>
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button variant="ghost" size="xs" className="h-5 px-2 text-muted-foreground text-xs hover:text-blue-600" onClick={() => navigate(`/create-purchase-order?id=${po.id}`)}>
+                        <Button variant="ghost" size="xs" className="h-5 px-2 text-muted-foreground text-[10px] hover:text-blue-600" onClick={() => router.push(`/portal/create-purchase-order?id=${po.id}`)}>
                           Edit
                         </Button>
                         <span className="text-muted-foreground text-[10px]">•</span>
-                        <Button variant="ghost" size="xs" className="h-5 px-2 text-destructive text-xs hover:text-white hover:bg-destructive" onClick={() => handleDeletePO(po.id)}>
+                        <Button variant="ghost" size="xs" className="h-5 px-2 text-destructive text-[10px] hover:text-white hover:bg-destructive" onClick={() => handleDeletePO(po.id)}>
                           Delete
                         </Button>
                       </div>
@@ -864,9 +865,9 @@ export default function Sales() {
                     </div>
                   </div>
 
-                  {po.expected_date && (
+                  {po.expected_delivery && (
                     <div className="text-xs text-muted-foreground">
-                      Expected: {new Date(po.expected_date).toLocaleDateString()}
+                      Expected: {new Date(po.expected_delivery).toLocaleDateString()}
                     </div>
                   )}
 
@@ -880,18 +881,6 @@ export default function Sales() {
                       <Download className="mr-2 h-4 w-4" />
                       Download Purchase Order
                     </Button>
-
-                    {po.pdf_url && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="w-full text-indigo-600 border-indigo-200 hover:bg-indigo-50"
-                        onClick={() => window.open(po.pdf_url, '_blank')}
-                      >
-                        <FileText className="mr-2 h-4 w-4" />
-                        View Source Quote
-                      </Button>
-                    )}
                   </div>
                 </div>
               </CardContent>
@@ -904,13 +893,12 @@ export default function Sales() {
               </div>
               <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No purchase orders</h3>
               <p className="mb-6 max-w-sm text-center">Manage your supplier orders here.</p>
-              <Button onClick={() => navigate('/create-purchase-order')}>Create New Order</Button>
+              <Button onClick={() => router.push('/portal/create-purchase-order')}>Create New Order</Button>
             </div>
           )}
         </TabsContent>
       </Tabs>
 
-      {/* Installation Details Modal */}
       <Dialog open={installationDetailsOpen} onOpenChange={setInstallationDetailsOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -924,7 +912,7 @@ export default function Sales() {
           )}
         </DialogContent>
       </Dialog>
-    </div>
+    </div >
   )
 }
 

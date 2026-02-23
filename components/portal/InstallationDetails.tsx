@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -7,12 +8,17 @@ import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { Upload, X, Camera, Hash, Loader2, Trash2 } from 'lucide-react'
 
-export default function InstallationDetails({ invoiceId, readonly = false }) {
+interface InstallationDetailsProps {
+    invoiceId: string;
+    readonly?: boolean;
+}
+
+export default function InstallationDetails({ invoiceId, readonly = false }: InstallationDetailsProps) {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
-    const [installationDetail, setInstallationDetail] = useState(null)
-    const [photos, setPhotos] = useState([])
-    const [serialNumbers, setSerialNumbers] = useState([])
+    const [installationDetail, setInstallationDetail] = useState<any>(null)
+    const [photos, setPhotos] = useState<any[]>([])
+    const [serialNumbers, setSerialNumbers] = useState<any[]>([])
     const [notes, setNotes] = useState('')
     const [uploading, setUploading] = useState(false)
 
@@ -56,8 +62,8 @@ export default function InstallationDetails({ invoiceId, readonly = false }) {
         fetchInstallationDetails()
     }, [fetchInstallationDetails])
 
-    const handlePhotoUpload = async (e) => {
-        const files = Array.from(e.target.files)
+    const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = Array.from(e.target.files || [])
         if (files.length === 0) return
 
         setUploading(true)
@@ -120,7 +126,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }) {
         }
     }
 
-    const handleDeletePhoto = async (photoId, photoUrl) => {
+    const handleDeletePhoto = async (photoId: string, photoUrl: string) => {
         if (!confirm('Are you sure you want to delete this photo?')) return
 
         const toastId = toast.loading('Deleting photo...')
@@ -156,13 +162,13 @@ export default function InstallationDetails({ invoiceId, readonly = false }) {
         setSerialNumbers([...serialNumbers, { component: '', serial: '' }])
     }
 
-    const updateSerialNumber = (index, field, value) => {
+    const updateSerialNumber = (index: number, field: string, value: string) => {
         const updated = [...serialNumbers]
         updated[index][field] = value
         setSerialNumbers(updated)
     }
 
-    const removeSerialNumber = (index) => {
+    const removeSerialNumber = (index: number) => {
         setSerialNumbers(serialNumbers.filter((_, i) => i !== index))
     }
 

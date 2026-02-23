@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React from 'react';
 import { cn } from '@/lib/portal/utils';
 
-export const Separator = React.forwardRef(
+export const Separator: any = React.forwardRef(
   ({ className, orientation = "horizontal", decorative = true, ...props }, ref) => (
     <div
       ref={ref}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -129,7 +129,7 @@ export default function Register() {
                                     placeholder="John Doe"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                     required
                                 />
                             </div>
@@ -148,7 +148,7 @@ export default function Register() {
                                     placeholder="name@example.com"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                     required
                                 />
                             </div>
@@ -167,7 +167,7 @@ export default function Register() {
                                     placeholder="082 123 4567"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
                                     required
                                 />
                             </div>
@@ -186,7 +186,7 @@ export default function Register() {
                                     placeholder="123 Main Street, Cape Town"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
                                     required
                                 />
                             </div>
@@ -205,7 +205,7 @@ export default function Register() {
                                     placeholder="Min 6 characters"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     required
                                 />
                             </div>
@@ -223,7 +223,7 @@ export default function Register() {
                                     type="password"
                                     className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500/20 transition-all font-sans"
                                     value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
                                     required
                                 />
                             </div>

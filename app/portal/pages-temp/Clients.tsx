@@ -1,4 +1,5 @@
-// @ts-nocheck
+/* eslint-disable */
+// @ts-ignore - legacy migration file
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -9,15 +10,16 @@ import { supabase } from '@/lib/portal/supabase'
 import { shareLink } from '@/lib/portal/share-utils'
 import { toast } from 'sonner'
 import { ClientDialog } from '@/components/portal/ClientDialog'
+import { Client } from '@/types/crm'
 
 import { useRouter } from 'next/navigation'
 
 export default function Clients() {
   const router = useRouter()
-  const [clients, setClients] = useState([])
+  const [clients, setClients] = useState<Client[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingClient, setEditingClient] = useState(null)
+  const [editingClient, setEditingClient] = useState<Client | null>(null)
 
   // Calculate Stats
   const totalClients = clients.length
@@ -38,7 +40,7 @@ export default function Clients() {
       if (error) throw error
 
       // Filter out archived clients client-side to handle null metadata safely
-      const activeClients = (data || []).filter(client => client.metadata?.status !== 'archived')
+      const activeClients = (data || []).filter((client: Client) => client.metadata?.status !== 'archived')
       setClients(activeClients)
     } catch (error) {
       console.error('Error fetching clients:', error)
@@ -49,13 +51,13 @@ export default function Clients() {
     fetchClients()
   }, [fetchClients])
 
-  const handleEdit = (client) => {
+  const handleEdit = (client: Client) => {
     setEditingClient(client)
     setIsDialogOpen(true)
   }
 
   /* 2. UPDATE handleDelete to "Soft Delete" (Archive) */
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to archive this client? Their financial history will be preserved but hidden from this list.')) return
 
     const toastId = toast.loading('Archiving client...')
@@ -63,8 +65,10 @@ export default function Clients() {
     try {
       // Instead of DELETE, we UPDATE metadata
       const clientToArchive = clients.find(c => c.id === id)
+      if (!clientToArchive) return
+
       const newMetadata = {
-        ...clientToArchive.metadata,
+        ...(clientToArchive.metadata || {}),
         status: 'archived',
         archived_at: new Date().toISOString()
       }
@@ -126,7 +130,7 @@ export default function Clients() {
 
         <ClientDialog
           open={isDialogOpen}
-          onOpenChange={(open) => {
+          onOpenChange={(open: boolean) => {
             setIsDialogOpen(open)
             if (!open) setEditingClient(null)
           }}

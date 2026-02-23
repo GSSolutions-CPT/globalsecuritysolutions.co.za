@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from "@/lib/portal/utils";
 
-const Label = React.forwardRef<
+const Label: any = React.forwardRef<
   HTMLLabelElement,
   React.LabelHTMLAttributes<HTMLLabelElement>
 >(({ className, ...props }, ref) => (

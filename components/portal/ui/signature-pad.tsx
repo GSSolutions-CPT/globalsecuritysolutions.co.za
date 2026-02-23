@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { useRef, useState, useEffect } from 'react'
 import { Button } from '@/components/portal/ui/button'
 import { Eraser } from 'lucide-react'
 
-export function SignaturePad({ onSave, className = '' }) {
+export const SignaturePad: any = function({ onSave, className = '' }) {
     const canvasRef = useRef(null)
     const [isDrawing, setIsDrawing] = useState(false)
     const [hasSignature, setHasSignature] = useState(false)

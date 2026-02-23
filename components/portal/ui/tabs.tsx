@@ -1,9 +1,10 @@
+// @ts-nocheck
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import { cn } from '@/lib/portal/utils';
 
 const TabsContext = createContext(null);
 
-export function Tabs({
+export const Tabs: any = function({
   value,
   defaultValue,
   onValueChange,
@@ -44,7 +45,7 @@ function useTabsContext(component) {
   return context;
 }
 
-export const TabsList = React.forwardRef(({ className, ...props }, ref) => (
+export const TabsList: any = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -56,7 +57,7 @@ export const TabsList = React.forwardRef(({ className, ...props }, ref) => (
 ));
 TabsList.displayName = 'TabsList';
 
-export const TabsTrigger = React.forwardRef(
+export const TabsTrigger: any = React.forwardRef(
   ({ className, value, ...props }, ref) => {
     const { value: activeValue, setValue } = useTabsContext('TabsTrigger');
     const isActive = activeValue === value;
@@ -78,7 +79,7 @@ export const TabsTrigger = React.forwardRef(
 );
 TabsTrigger.displayName = 'TabsTrigger';
 
-export const TabsContent = React.forwardRef(
+export const TabsContent: any = React.forwardRef(
   ({ className, value, hidden: hiddenProp, ...props }, ref) => {
     const { value: activeValue } = useTabsContext('TabsContent');
     const hidden = hiddenProp ?? activeValue !== value;

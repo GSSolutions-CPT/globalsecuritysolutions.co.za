@@ -23,6 +23,7 @@ const TOOL = {
 export default function SitePlanner({ quotationId, existingPlan, onSave, onClose }) {
     const canvasRef = useRef(null)
     const fabricRef = useRef(null)
+    const fabricLibRef = useRef(null)
     const fileInputRef = useRef(null)
     const [activeTool, setActiveTool] = useState(TOOL.SELECT)
     const [drawColor, setDrawColor] = useState('#ef4444')
@@ -40,6 +41,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         let canvas = null
         const initCanvas = async () => {
             const fabric = await import('fabric')
+            fabricLibRef.current = fabric
 
             canvas = new fabric.Canvas(canvasRef.current, {
                 width: 900,
@@ -135,7 +137,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         startPoint = pointer
                         setStatusText('Click to set arrow end point')
                     } else {
-                        const fabric = await import('fabric')
+                        const fabric = fabricLibRef.current
                         // Create line
                         const line = new fabric.Line(
                             [startPoint.x, startPoint.y, pointer.x, pointer.y],
@@ -192,7 +194,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                     const labelText = prompt('Enter label text:', 'Label')
                     if (!labelText) return
 
-                    const fabric = await import('fabric')
+                    const fabric = fabricLibRef.current
 
                     // Create text with background
                     const text = new fabric.IText(labelText, {
@@ -228,7 +230,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                 if (selectedIcon) {
                     const handleIconPlace = async (opt) => {
                         const pointer = canvas.getPointer(opt.e)
-                        const fabric = await import('fabric')
+                        const fabric = fabricLibRef.current
 
                         const imgEl = new Image()
                         imgEl.src = selectedIcon.svg
@@ -299,7 +301,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
         const reader = new FileReader()
         reader.onload = async (e) => {
-            const fabric = await import('fabric')
+            const fabric = fabricLibRef.current
             const imgEl = new Image()
             imgEl.src = e.target.result
             imgEl.onload = () => {
@@ -572,6 +574,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                                 : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
                                 }`}
                         >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={icon.svg} alt={icon.name} className="w-10 h-10" />
                             <span className="text-xs font-medium">{icon.name}</span>
                         </button>

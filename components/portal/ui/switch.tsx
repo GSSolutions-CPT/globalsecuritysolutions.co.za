@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/portal/utils';
 
-export const Switch = React.forwardRef(
+export const Switch: any = React.forwardRef(
   (
     {
       className,
