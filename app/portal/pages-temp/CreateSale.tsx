@@ -320,10 +320,58 @@ export default function CreateSale() {
       }])
 
       toast.success(`${mode === 'quotation' ? 'Quotation' : 'Invoice'} ${editId ? 'updated' : 'created'} successfully!`)
-      router.push('/sales')
+      router.push('/portal/sales')
     } catch (error) {
       console.error('Error saving sale:', error)
       toast.error(`Error saving sale: ${error.message}`)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Auto-save a draft so the site planner can attach to a real quotation ID
+  const saveDraftForSitePlan = async () => {
+    if (!formData.client_id) {
+      toast.error('Please select a client before adding a site plan.')
+      return
+    }
+    try {
+      setIsLoading(true)
+      const totals = calculateTotals()
+      const payload = {
+        client_id: formData.client_id,
+        total_amount: totals.total,
+        vat_applicable: formData.vat_applicable,
+        trade_subtotal: totals.tradeSubtotal,
+        profit_estimate: totals.profit,
+        valid_until: formData.valid_until || null,
+        payment_type: formData.payment_type,
+        deposit_percentage: parseFloat(formData.deposit_percentage) || 0,
+        status: 'Draft',
+        date_created: new Date().toISOString()
+      }
+      const { data: saleData, error: saleError } = await supabase
+        .from('quotations')
+        .insert([payload])
+        .select()
+      if (saleError) throw saleError
+      const newId = saleData[0].id
+      setEditId(newId)
+      // Save line items too
+      const lines = lineItems.map(item => ({
+        quotation_id: newId,
+        product_id: item.product_id || null,
+        description: item.description,
+        quantity: item.quantity,
+        unit_price: item.unit_price,
+        cost_price: item.cost_price,
+        line_total: item.quantity * item.unit_price
+      }))
+      await supabase.from('quotation_lines').insert(lines)
+      toast.success('Draft saved — you can now add a site plan.')
+      setSitePlannerOpen(true)
+    } catch (err) {
+      toast.error('Could not save draft: ' + err.message)
     } finally {
       setIsLoading(false)
     }
@@ -337,7 +385,7 @@ export default function CreateSale() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => router.push('/sales')} className="rounded-full">
+          <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full">
             <ChevronLeft className="h-5 w-5" />
           </Button>
           <div>
@@ -603,13 +651,7 @@ export default function CreateSale() {
                 ) : (
                   <div
                     className="flex flex-col items-center justify-center py-8 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-400 dark:hover:border-blue-600 transition-colors cursor-pointer"
-                    onClick={() => {
-                      if (!editId) {
-                        toast.info('Please save the quotation first, then edit it to add a site plan.')
-                        return
-                      }
-                      setSitePlannerOpen(true)
-                    }}
+                    onClick={() => editId ? setSitePlannerOpen(true) : saveDraftForSitePlan()}
                   >
                     <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded-full mb-3">
                       <Map className="h-6 w-6 text-blue-500" />
@@ -618,10 +660,7 @@ export default function CreateSale() {
                       Add Visual Site Plan
                     </h3>
                     <p className="text-xs text-muted-foreground text-center max-w-xs">
-                      {editId
-                        ? 'Upload a floor plan and place security icons, draw cable paths, and add labels'
-                        : 'Save the quotation first, then come back to add a site plan'
-                      }
+                      Upload a floor plan and place security icons, draw cable paths, and add labels
                     </p>
                   </div>
                 )}
@@ -726,7 +765,7 @@ export default function CreateSale() {
                 {isLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                 {editId ? 'Update' : 'Create'} {mode === 'quotation' ? 'Quotation' : 'Invoice'}
               </Button>
-              <Button variant="ghost" className="w-full text-muted-foreground" onClick={() => router.push('/sales')}>
+              <Button variant="ghost" className="w-full text-muted-foreground" onClick={() => router.push('/portal/sales')}>
                 Cancel
               </Button>
             </CardFooter>
