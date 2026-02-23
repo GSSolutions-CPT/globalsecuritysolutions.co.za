@@ -277,7 +277,7 @@ export default function ClientDetails({ params }) {
                                             </div>
                                             <div className="text-right">
                                                 <p className="font-bold">{formatCurrency(inv.total_amount)}</p>
-                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/sales')}>View Invoice</Button>
+                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/portal/sales')}>View Invoice</Button>
                                             </div>
                                         </div>
                                     ))}
@@ -311,7 +311,7 @@ export default function ClientDetails({ params }) {
                                             </div>
                                             <div className="text-right">
                                                 <p className="font-bold">{formatCurrency(quote.total_amount)}</p>
-                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/sales')}>View Quote</Button>
+                                                <Button variant="link" className="h-auto p-0 text-xs" onClick={() => router.push('/portal/sales')}>View Quote</Button>
                                             </div>
                                         </div>
                                     ))}

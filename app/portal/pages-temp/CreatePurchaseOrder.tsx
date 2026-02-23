@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -83,7 +82,7 @@ export default function CreatePurchaseOrder() {
         } catch (error) {
             console.error('Error loading PO:', error)
             toast.error('Failed to load Purchase Order', { id: toastId })
-            router.push('/sales')
+            router.push('/portal/sales')
         }
     }, [router])
 
@@ -219,7 +218,7 @@ export default function CreatePurchaseOrder() {
             await supabase.from('purchase_order_lines').insert(poLines)
 
             toast.success(editId ? 'Order Updated!' : 'Order Created!', { id: toastId })
-            router.push('/sales')
+            router.push('/portal/sales')
         } catch (error) {
             console.error('Error saving PO:', error)
             toast.error('Failed to save order', { id: toastId })
@@ -233,7 +232,7 @@ export default function CreatePurchaseOrder() {
             {/* Header */}
             <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 animate-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" onClick={() => router.push('/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
+                    <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
                         <ChevronLeft className="h-5 w-5" />
                     </Button>
                     <div>
@@ -249,7 +248,7 @@ export default function CreatePurchaseOrder() {
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" onClick={() => router.push('/sales')}>
+                    <Button variant="outline" onClick={() => router.push('/portal/sales')}>
                         Discard
                     </Button>
                     <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
