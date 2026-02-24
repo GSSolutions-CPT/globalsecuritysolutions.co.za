@@ -287,7 +287,7 @@ export default function ContractsPage() {
           <Input
             placeholder="Search contracts or clients..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
             className="pl-10 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800"
           />
         </div>

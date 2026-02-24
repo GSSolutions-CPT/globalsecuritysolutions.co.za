@@ -113,11 +113,13 @@ export interface Contract {
     title: string;
     amount: number;
     frequency: 'weekly' | 'monthly' | 'quarterly' | 'annually' | string;
+    description?: string;
     start_date: string;
     next_billing_date?: string;
     status: 'Active' | 'Paused' | 'Cancelled';
     service_type?: string;
     notes?: string;
+    active?: boolean;
     clients?: Pick<Client, 'name' | 'company'>;
 }
 
@@ -160,7 +162,7 @@ export interface Product {
 export interface SitePlan {
     id: string;
     quotation_id: string;
-    canvas_json: Record<string, any>;
+    canvas_json: Record<string, unknown>;
     background_url?: string;
     flattened_url?: string;
     updated_at?: string;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
@@ -415,7 +416,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             const canvasJson = canvas.toJSON()
 
             // 4. Upload or get background URL
-            let backgroundUrl = existingPlan?.background_url || null
+            const backgroundUrl = existingPlan?.background_url || null
 
             // 5. Upsert to database
             if (existingPlan?.id) {
@@ -534,7 +535,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                             min="1"
                             max="10"
                             value={drawWidth}
-                            onChange={(e) => setDrawWidth(parseInt(e.target.value))}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDrawWidth(parseInt(e.target.value))}
                             className="w-20 h-6"
                         />
                     </div>

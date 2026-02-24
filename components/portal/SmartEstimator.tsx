@@ -7,8 +7,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Brain, Sparkles, Calculator, Wand2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/portal/ui/card'
 
+interface EstimatorItem {
+    description: string;
+    quantity: number;
+    unit_price: number;
+    cost_price: number;
+}
+
 interface SmartEstimatorProps {
-    onApply: (items: any[]) => void;
+    onApply: (items: EstimatorItem[]) => void;
 }
 
 interface EstimatorInputs {
@@ -114,7 +121,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                 <Input
                                     type="number"
                                     value={inputs.hours}
-                                    onChange={(e) => setInputs({ ...inputs, hours: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, hours: parseFloat(e.target.value) || 0 })}
                                     className="bg-slate-50 dark:bg-slate-900"
                                 />
                             </div>
@@ -123,7 +130,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                 <Input
                                     type="number"
                                     value={inputs.technicians}
-                                    onChange={(e) => setInputs({ ...inputs, technicians: parseInt(e.target.value) || 1 })}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, technicians: parseInt(e.target.value) || 1 })}
                                     className="bg-slate-50 dark:bg-slate-900"
                                 />
                             </div>
@@ -137,7 +144,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                     className="pl-7 bg-slate-50 dark:bg-slate-900"
                                     type="number"
                                     value={inputs.materialCost}
-                                    onChange={(e) => setInputs({ ...inputs, materialCost: parseFloat(e.target.value) || 0 })}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, materialCost: parseFloat(e.target.value) || 0 })}
                                 />
                             </div>
                         </div>
@@ -146,7 +153,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                             <Label>Complexity / Markup</Label>
                             <Select
                                 value={inputs.markup}
-                                onValueChange={(v) => setInputs({ ...inputs, markup: v })}
+                                onValueChange={(v: string) => setInputs({ ...inputs, markup: v })}
                             >
                                 <SelectTrigger className="bg-slate-50 dark:bg-slate-900">
                                     <SelectValue />
@@ -165,7 +172,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                 className="h-8 text-xs bg-slate-50 dark:bg-slate-900"
                                 type="number"
                                 value={inputs.rate}
-                                onChange={(e) => setInputs({ ...inputs, rate: parseFloat(e.target.value) })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, rate: parseFloat(e.target.value) })}
                             />
                         </div>
                     </div>

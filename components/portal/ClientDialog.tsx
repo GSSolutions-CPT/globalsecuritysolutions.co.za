@@ -139,7 +139,7 @@ export function ClientDialog({
                             <Input
                                 id="name"
                                 value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value })}
                                 required
                             />
                         </div>
@@ -148,7 +148,7 @@ export function ClientDialog({
                             <Input
                                 id="company"
                                 value={formData.company}
-                                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, company: e.target.value })}
                             />
                         </div>
                         <div className="grid gap-2">
@@ -157,7 +157,7 @@ export function ClientDialog({
                                 id="email"
                                 type="email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, email: e.target.value })}
                             />
                         </div>
                         <div className="grid gap-2">
@@ -165,7 +165,7 @@ export function ClientDialog({
                             <Input
                                 id="phone"
                                 value={formData.phone}
-                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, phone: e.target.value })}
                             />
                         </div>
                         <div className="grid gap-2">
@@ -173,7 +173,7 @@ export function ClientDialog({
                             <Input
                                 id="address"
                                 value={formData.address}
-                                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, address: e.target.value })}
                             />
                         </div>
                     </div>
