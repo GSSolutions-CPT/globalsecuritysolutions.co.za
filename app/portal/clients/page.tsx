@@ -121,7 +121,7 @@ export default function ClientsPage() {
                     <Input
                         placeholder="Search clients..."
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                         className="pl-10"
                     />
                 </div>
@@ -163,13 +163,13 @@ export default function ClientsPage() {
                                     )}
                                 </div>
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-blue-600 hover:bg-blue-50" onClick={(e) => {
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-blue-600 hover:bg-blue-50" onClick={(e: React.MouseEvent) => {
                                         e.stopPropagation()
                                         handleEdit(client)
                                     }}>
                                         <Pencil className="h-4 w-4" />
                                     </Button>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50" onClick={(e) => {
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50" onClick={(e: React.MouseEvent) => {
                                         e.stopPropagation()
                                         handleDelete(client.id)
                                     }}>

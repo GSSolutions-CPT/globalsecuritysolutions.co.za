@@ -6,6 +6,7 @@ import { Badge } from '@/components/portal/ui/badge'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { SECURITY_ICONS } from '@/lib/portal/security-icons'
+import { SitePlan } from '@/types/crm'
 import {
     MousePointer2, Pencil, Type, ArrowUpRight,
     Save, X, Undo2, Trash2, Loader2, RotateCcw, Upload
@@ -18,30 +19,54 @@ const TOOL = {
     ARROW: 'arrow',
     TEXT: 'text',
     ICON: 'icon'
+} as const
+
+type ToolMode = typeof TOOL[keyof typeof TOOL]
+
+interface SitePlannerProps {
+    quotationId: string;
+    existingPlan?: SitePlan | null;
+    onSave?: (url: string) => void;
+    onClose?: () => void;
 }
 
-export default function SitePlanner({ quotationId, existingPlan, onSave, onClose }) {
-    const canvasRef = useRef(null)
-    const fabricRef = useRef(null)
-    const fabricLibRef = useRef(null)
-    const fileInputRef = useRef(null)
-    const [activeTool, setActiveTool] = useState(TOOL.SELECT)
+export default function SitePlanner({ quotationId, existingPlan, onSave, onClose }: SitePlannerProps) {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const fabricRef = useRef<any>(null)
+    const fabricLibRef = useRef<any>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null)
+    const [activeTool, setActiveTool] = useState<ToolMode>(TOOL.SELECT)
     const [drawColor, setDrawColor] = useState('#ef4444')
     const [drawWidth, setDrawWidth] = useState(3)
-    const [selectedIcon, setSelectedIcon] = useState(null)
+    const [selectedIcon, setSelectedIcon] = useState<any>(null)
     const [saving, setSaving] = useState(false)
     const [canvasReady, setCanvasReady] = useState(false)
     const [hasBackground, setHasBackground] = useState(false)
     const [statusText, setStatusText] = useState('Upload a floor plan to begin')
-    const historyRef = useRef([])
+    const historyRef = useRef<any[]>([])
     const historyIndexRef = useRef(-1)
+
+    // Save canvas state for undo
+    const saveHistory = useCallback(() => {
+        const canvas = fabricRef.current
+        if (!canvas) return
+        const json = canvas.toJSON()
+        const idx = historyIndexRef.current
+        const history = historyRef.current.slice(0, idx + 1)
+        history.push(json)
+        if (history.length > 30) history.shift()
+        historyRef.current = history
+        historyIndexRef.current = history.length - 1
+    }, [])
 
     // Initialize Fabric.js canvas
     useEffect(() => {
-        let canvas = null
+        let canvas: any = null
         const initCanvas = async () => {
             const fabric = await import('fabric')
             fabricLibRef.current = fabric
+
+            if (!canvasRef.current) return
 
             canvas = new fabric.Canvas(canvasRef.current, {
                 width: 900,
@@ -76,19 +101,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             }
         }
     }, [existingPlan, saveHistory])
-
-    // Save canvas state for undo
-    const saveHistory = useCallback(() => {
-        const canvas = fabricRef.current
-        if (!canvas) return
-        const json = canvas.toJSON()
-        const idx = historyIndexRef.current
-        const history = historyRef.current.slice(0, idx + 1)
-        history.push(json)
-        if (history.length > 30) history.shift()
-        historyRef.current = history
-        historyIndexRef.current = history.length - 1
-    }, [])
 
     // Undo
     const handleUndo = useCallback(() => {
@@ -129,9 +141,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             case TOOL.ARROW: {
                 canvas.selection = false
                 canvas.defaultCursor = 'crosshair'
-                let startPoint = null
+                let startPoint: any = null
 
-                const handleMouseDown = async (opt) => {
+                const handleMouseDown = async (opt: any) => {
                     const pointer = canvas.getPointer(opt.e)
                     if (!startPoint) {
                         startPoint = pointer
@@ -189,7 +201,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                 canvas.selection = false
                 canvas.defaultCursor = 'text'
 
-                const handleTextClick = async (opt) => {
+                const handleTextClick = async (opt: any) => {
                     const pointer = canvas.getPointer(opt.e)
                     const labelText = prompt('Enter label text:', 'Label')
                     if (!labelText) return
@@ -228,7 +240,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                 canvas.defaultCursor = 'copy'
 
                 if (selectedIcon) {
-                    const handleIconPlace = async (opt) => {
+                    const handleIconPlace = async (opt: any) => {
                         const pointer = canvas.getPointer(opt.e)
                         const fabric = fabricLibRef.current
 
@@ -295,15 +307,15 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     }, [drawColor, drawWidth, activeTool])
 
     // Handle background image upload
-    const handleBackgroundUpload = useCallback(async (file) => {
+    const handleBackgroundUpload = useCallback(async (file: File) => {
         if (!file || !fabricRef.current) return
         const canvas = fabricRef.current
 
         const reader = new FileReader()
-        reader.onload = async (e) => {
+        reader.onload = async (e: ProgressEvent<FileReader>) => {
             const fabric = fabricLibRef.current
             const imgEl = new Image()
-            imgEl.src = e.target.result
+            imgEl.src = e.target?.result as string
             imgEl.onload = () => {
                 const fImg = new fabric.Image(imgEl)
 
@@ -328,7 +340,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     }, [saveHistory])
 
     // Drag and drop
-    const handleDrop = useCallback((e) => {
+    const handleDrop = useCallback((e: React.DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
         const files = e.dataTransfer?.files
@@ -340,7 +352,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         }
     }, [handleBackgroundUpload])
 
-    const handleDragOver = useCallback((e) => {
+    const handleDragOver = useCallback((e: React.DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
     }, [])
@@ -350,7 +362,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         const canvas = fabricRef.current
         if (!canvas) return
         const selected = canvas.getActiveObjects()
-        selected.forEach(obj => canvas.remove(obj))
+        selected.forEach((obj: any) => canvas.remove(obj))
         canvas.discardActiveObject()
         canvas.renderAll()
         saveHistory()
@@ -433,7 +445,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
             toast.success('Site plan saved!', { id: toastId })
             onSave?.(flattenedUrl)
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error saving site plan:', error)
             toast.error(`Failed to save: ${error.message}`, { id: toastId })
         } finally {
@@ -443,7 +455,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
     // Keyboard shortcuts
     useEffect(() => {
-        const handleKeyDown = (e) => {
+        const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Delete' || e.key === 'Backspace') {
                 // Don't delete if editing text
                 const active = fabricRef.current?.getActiveObject()
@@ -460,7 +472,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [handleDelete, handleUndo])
 
-    const selectIcon = (icon) => {
+    const selectIcon = (icon: any) => {
         setSelectedIcon(icon)
         setActiveTool(TOOL.ICON)
     }
@@ -644,8 +656,15 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     )
 }
 
+interface ToolButtonProps {
+    active: boolean;
+    onClick: () => void;
+    icon: React.ReactNode;
+    label: string;
+}
+
 // Toolbar button component
-function ToolButton({ active, onClick, icon, label }) {
+function ToolButton({ active, onClick, icon, label }: ToolButtonProps) {
     return (
         <Button
             variant={active ? 'default' : 'ghost'}
@@ -659,5 +678,3 @@ function ToolButton({ active, onClick, icon, label }) {
         </Button>
     )
 }
-
-

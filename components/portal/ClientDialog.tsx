@@ -6,6 +6,17 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Loader2 } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
+import { Client } from '@/types/crm'
+
+interface ClientDialogProps {
+    trigger?: React.ReactNode;
+    title?: string;
+    description?: string;
+    clientToEdit?: Client | null;
+    onSuccess?: (client: Client) => void;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+}
 
 export function ClientDialog({
     trigger,
@@ -15,11 +26,17 @@ export function ClientDialog({
     onSuccess,
     open: controlledOpen,
     onOpenChange: setControlledOpen
-}) {
+}: ClientDialogProps) {
     const [internalOpen, setInternalOpen] = useState(false)
     const isControlled = controlledOpen !== undefined
     const open = isControlled ? controlledOpen : internalOpen
-    const setOpen = isControlled ? setControlledOpen : setInternalOpen
+    const setOpen = (newOpen: boolean) => {
+        if (isControlled && setControlledOpen) {
+            setControlledOpen(newOpen)
+        } else {
+            setInternalOpen(newOpen)
+        }
+    }
 
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
@@ -46,12 +63,12 @@ export function ClientDialog({
         }
     }, [open, clientToEdit])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
 
         try {
-            let resultClient = null
+            let resultClient: Client | null = null
 
             if (clientToEdit) {
                 // Update existing client
@@ -63,7 +80,7 @@ export function ClientDialog({
                     .single()
 
                 if (error) throw error
-                resultClient = data
+                resultClient = data as Client
 
                 await supabase.from('activity_log').insert([{
                     type: 'Client Updated',
@@ -81,7 +98,7 @@ export function ClientDialog({
                     .single()
 
                 if (error) throw error
-                resultClient = data
+                resultClient = data as Client
 
                 await supabase.from('activity_log').insert([{
                     type: 'Client Created',
@@ -94,7 +111,7 @@ export function ClientDialog({
             setOpen(false)
             setFormData({ name: '', company: '', email: '', phone: '', address: '' })
 
-            if (onSuccess) {
+            if (onSuccess && resultClient) {
                 onSuccess(resultClient)
             }
 
@@ -174,4 +191,3 @@ export function ClientDialog({
         </Dialog>
     )
 }
-

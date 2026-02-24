@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
+import { Product } from "@/types/crm"
 
 import { cn } from "@/lib/portal/utils"
 import { Button } from "@/components/portal/ui/button"
@@ -18,7 +19,13 @@ import {
 } from "@/components/portal/ui/popover"
 import { useCurrency } from "@/lib/portal/use-currency"
 
-export function ProductSearch({ products = [], value, onSelect }) {
+interface ProductSearchProps {
+    products?: Product[];
+    value?: string;
+    onSelect: (productId: string) => void;
+}
+
+export function ProductSearch({ products = [], value, onSelect }: ProductSearchProps) {
     const [open, setOpen] = React.useState(false)
     const [selectedCategory, setSelectedCategory] = React.useState("All")
     const { formatCurrency } = useCurrency()
@@ -57,7 +64,7 @@ export function ProductSearch({ products = [], value, onSelect }) {
                     {categories.map(category => (
                         <button
                             key={category}
-                            onClick={() => setSelectedCategory(category)}
+                            onClick={() => setSelectedCategory(category || "All")}
                             className={cn(
                                 "flex-none px-3 py-1.5 rounded-full text-xs font-medium transition-colors border",
                                 selectedCategory === category
@@ -134,5 +141,3 @@ export function ProductSearch({ products = [], value, onSelect }) {
         </Popover>
     )
 }
-
-

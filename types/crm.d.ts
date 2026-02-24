@@ -26,6 +26,7 @@ export interface Quotation {
     client_id: string;
     status: 'Draft' | 'Sent' | 'Pending Review' | 'Accepted' | 'Approved' | 'Rejected' | 'Converted' | 'Cancelled';
     date_created: string;
+    created_at?: string;
     valid_until?: string;
     total_amount: number;
     vat_applicable: boolean;
@@ -62,6 +63,7 @@ export interface Invoice {
     quotation_id?: string;
     status: 'Draft' | 'Sent' | 'Paid' | 'Overdue' | 'Cancelled';
     date_created: string;
+    created_at?: string;
     due_date?: string;
     total_amount: number;
     vat_applicable: boolean;
@@ -117,4 +119,49 @@ export interface Contract {
     service_type?: string;
     notes?: string;
     clients?: Pick<Client, 'name' | 'company'>;
+}
+
+export interface Job {
+    id: string;
+    client_id: string;
+    quotation_id?: string;
+    status: 'Pending' | 'In Progress' | 'Completed' | string;
+    assigned_technicians?: string[];
+    scheduled_datetime?: string;
+    scheduled_end_datetime?: string;
+    notes?: string;
+    created_at?: string;
+    clients?: Pick<Client, 'name' | 'company'>;
+    quotations?: Pick<Quotation, 'id' | 'payment_proof'>;
+}
+
+export interface JobAttachment {
+    id: string;
+    job_id?: string;
+    client_id?: string;
+    file_name: string;
+    file_url: string;
+    file_type?: string;
+    description?: string;
+    created_at?: string;
+}
+
+export interface Product {
+    id: string;
+    name: string;
+    code?: string;
+    category?: string;
+    description?: string;
+    retail_price: number;
+    cost_price?: number;
+    created_at?: string;
+}
+
+export interface SitePlan {
+    id: string;
+    quotation_id: string;
+    canvas_json: Record<string, any>;
+    background_url?: string;
+    flattened_url?: string;
+    updated_at?: string;
 }

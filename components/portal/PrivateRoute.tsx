@@ -1,8 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, ReactNode } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 
-export default function PrivateRoute({ children }) {
+interface PrivateRouteProps {
+    children: ReactNode;
+}
+
+export default function PrivateRoute({ children }: PrivateRouteProps) {
     const { user, loading } = useAuth()
     const router = useRouter()
     const pathname = usePathname()

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Check, ChevronsUpDown, Plus } from "lucide-react"
+import { Client } from "@/types/crm"
 
 import { Button } from "@/components/portal/ui/button"
 import {
@@ -16,7 +17,14 @@ import {
     PopoverTrigger,
 } from "@/components/portal/ui/popover"
 
-export function ClientSearch({ clients = [], value, onSelect, onAddNew }) {
+interface ClientSearchProps {
+    clients?: Client[];
+    value?: string;
+    onSelect: (clientId: string) => void;
+    onAddNew: () => void;
+}
+
+export function ClientSearch({ clients = [], value, onSelect, onAddNew }: ClientSearchProps) {
     const [open, setOpen] = React.useState(false)
 
     const selectedClient = clients.find((client) => client.id === value)
@@ -89,4 +97,3 @@ export function ClientSearch({ clients = [], value, onSelect, onAddNew }) {
         </Popover>
     )
 }
-

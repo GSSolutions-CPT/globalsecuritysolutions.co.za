@@ -7,10 +7,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Brain, Sparkles, Calculator, Wand2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/portal/ui/card'
 
-export function SmartEstimator({ onApply }) {
+interface SmartEstimatorProps {
+    onApply: (items: any[]) => void;
+}
+
+interface EstimatorInputs {
+    hours: number;
+    technicians: number;
+    materialCost: number;
+    markup: 'low' | 'medium' | 'high' | string;
+    rate: number;
+}
+
+export function SmartEstimator({ onApply }: SmartEstimatorProps) {
     const [open, setOpen] = useState(false)
-    const [step, setStep] = useState('input') // input, calculating, result
-    const [inputs, setInputs] = useState({
+    const [step, setStep] = useState<'input' | 'calculating' | 'result'>('input')
+    const [inputs, setInputs] = useState<EstimatorInputs>({
         hours: 4,
         technicians: 1,
         materialCost: 0,
@@ -28,8 +40,8 @@ export function SmartEstimator({ onApply }) {
 
     const getResults = () => {
         const labor = inputs.hours * inputs.technicians * inputs.rate
-        const markupMap = { low: 0.2, medium: 0.35, high: 0.5 }
-        const materialMarkup = inputs.materialCost * (1 + markupMap[inputs.markup])
+        const markupMap: Record<string, number> = { low: 0.2, medium: 0.35, high: 0.5 }
+        const materialMarkup = inputs.materialCost * (1 + (markupMap[inputs.markup] || 0.35))
         const total = labor + materialMarkup
 
         return {
@@ -188,7 +200,7 @@ export function SmartEstimator({ onApply }) {
                                     </span>
                                 </div>
                                 <div className="space-y-2 pt-4 border-t border-indigo-200 dark:border-indigo-800/50">
-                                    <div className="flex justify-between text-sm text-indigo-900/70 dark:text-indigo-200/70">
+                                    <div className="justify-between text-sm text-indigo-900/70 dark:text-indigo-200/70">
                                         <span>Labor ({inputs.hours}h x {inputs.technicians})</span>
                                         <span className="font-mono">R{results.labor.toFixed(2)}</span>
                                     </div>
@@ -227,4 +239,3 @@ export function SmartEstimator({ onApply }) {
         </Dialog>
     )
 }
-

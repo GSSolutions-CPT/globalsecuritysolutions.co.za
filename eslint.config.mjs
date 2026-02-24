@@ -14,8 +14,6 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "dump-html.js",
-    // Legacy migration staging files — not production code:
-    "app/portal/pages-temp/**",
   ]),
 ]);
 

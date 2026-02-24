@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { ErrorInfo, ReactNode } from 'react'
 import { Button } from '@/components/portal/ui/button'
 
-class ErrorBoundary extends React.Component {
-    constructor(props) {
+interface Props {
+    children: ReactNode;
+}
+
+interface State {
+    hasError: boolean;
+    error: Error | null;
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props)
         this.state = { hasError: false, error: null }
     }
 
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error: Error): State {
         return { hasError: true, error }
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         console.error('Uncaught error:', error, errorInfo)
 
         // Auto-reload on chunk load error (deployment cache issue)
@@ -46,4 +55,3 @@ class ErrorBoundary extends React.Component {
 }
 
 export default ErrorBoundary
-
