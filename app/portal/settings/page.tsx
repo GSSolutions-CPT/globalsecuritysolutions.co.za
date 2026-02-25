@@ -26,8 +26,9 @@ export default function SettingsPage() {
     const { settings, updateSetting } = useSettings()
     const [users, setUsers] = useState<UserProfile[]>([])
     const [isUserDialogOpen, setIsUserDialogOpen] = useState(false)
-    const [newUser, setNewUser] = useState({ email: '', role: 'technician', password: '' })
+    const [newUser, setNewUser] = useState({ email: '', role: 'technician' })
     const [isLoading, setIsLoading] = useState(false)
+    const [generatedLink, setGeneratedLink] = useState('')
 
     useEffect(() => {
         fetchUsers()
@@ -61,7 +62,6 @@ export default function SettingsPage() {
                     },
                     body: JSON.stringify({
                         email: newUser.email,
-                        password: newUser.password,
                         role: newUser.role,
                     }),
                 }
@@ -70,9 +70,9 @@ export default function SettingsPage() {
             const result = await res.json()
             if (!res.ok) throw new Error(result.error || 'Failed to create user')
 
-            toast.success(`Account created for ${newUser.email}. They can now sign in immediately.`)
-            setIsUserDialogOpen(false)
-            setNewUser({ email: '', role: 'technician', password: '' })
+            toast.success(`Account created for ${newUser.email}.`)
+            setGeneratedLink(result.inviteLink)
+            setNewUser({ email: '', role: 'technician' })
             fetchUsers()
         } catch (error: unknown) {
             console.error('Error adding user:', error)
@@ -414,39 +414,66 @@ export default function SettingsPage() {
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Add New User</DialogTitle>
-                                    <DialogDescription>Create a new account for a team member.</DialogDescription>
+                                    <DialogTitle>{generatedLink ? 'Setup Link Generated' : 'Add New User'}</DialogTitle>
+                                    <DialogDescription>
+                                        {generatedLink
+                                            ? 'Share this secure link with the new team member. They will be required to create a password.'
+                                            : 'Create a new account for a team member.'}
+                                    </DialogDescription>
                                 </DialogHeader>
-                                <form onSubmit={handleAddUser}>
-                                    <div className="grid gap-4 py-4">
-                                        <div className="grid gap-2">
-                                            <Label>Email</Label>
-                                            <Input type="email" value={newUser.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUser({ ...newUser, email: e.target.value })} required />
+                                {generatedLink ? (
+                                    <div className="py-6 space-y-4">
+                                        <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md border text-sm break-all font-mono">
+                                            {generatedLink}
                                         </div>
-                                        <div className="grid gap-2">
-                                            <Label>Role</Label>
-                                            <Select value={newUser.role} onValueChange={(value: string) => setNewUser({ ...newUser, role: value })}>
-                                                <SelectTrigger><SelectValue /></SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="admin">Admin</SelectItem>
-                                                    <SelectItem value="manager">Manager</SelectItem>
-                                                    <SelectItem value="technician">Technician</SelectItem>
-                                                    <SelectItem value="accountant">Accountant</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
-                                        <div className="grid gap-2">
-                                            <Label>Temporary Password</Label>
-                                            <Input type="password" value={newUser.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUser({ ...newUser, password: e.target.value })} required />
-                                        </div>
-                                    </div>
-                                    <DialogFooter>
-                                        <Button type="submit" disabled={isLoading}>
-                                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                            Create Account
+                                        <Button
+                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(generatedLink)
+                                                toast.success('Link copied to clipboard')
+                                            }}
+                                        >
+                                            Copy Link
                                         </Button>
-                                    </DialogFooter>
-                                </form>
+                                        <Button
+                                            variant="outline"
+                                            className="w-full"
+                                            onClick={() => {
+                                                setGeneratedLink('')
+                                                setIsUserDialogOpen(false)
+                                            }}
+                                        >
+                                            Done
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleAddUser}>
+                                        <div className="grid gap-4 py-4">
+                                            <div className="grid gap-2">
+                                                <Label>Email</Label>
+                                                <Input type="email" value={newUser.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUser({ ...newUser, email: e.target.value })} required />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <Label>Role</Label>
+                                                <Select value={newUser.role} onValueChange={(value: string) => setNewUser({ ...newUser, role: value })}>
+                                                    <SelectTrigger><SelectValue /></SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="admin">Admin</SelectItem>
+                                                        <SelectItem value="manager">Manager</SelectItem>
+                                                        <SelectItem value="technician">Technician</SelectItem>
+                                                        <SelectItem value="accountant">Accountant</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <DialogFooter>
+                                            <Button type="submit" disabled={isLoading}>
+                                                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                                Create Account
+                                            </Button>
+                                        </DialogFooter>
+                                    </form>
+                                )}
                             </DialogContent>
                         </Dialog>
                     </div>

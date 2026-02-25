@@ -89,10 +89,12 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
             })
             if (linkError) throw linkError
 
+            // 3. Sign out the user so they are forced to log in with their new credentials
+            await supabase.auth.signOut()
+
             setSuccess(true)
             setTimeout(() => {
-                const origin = window.location.origin
-                window.location.href = `${origin}/portal/?client=${client.id}`
+                router.push('/portal/login?setup=true')
             }, 2000)
         } catch (err: unknown) {
             setError((err as Error).message || 'Failed to create profile')
@@ -140,7 +142,7 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
                             <CheckCircle2 className="h-16 w-16 text-emerald-500 animate-bounce" />
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Profile Created!</h3>
-                                <p className="text-slate-500 dark:text-slate-400">Redirecting to your portal...</p>
+                                <p className="text-slate-500 dark:text-slate-400">Redirecting to sign-in...</p>
                             </div>
                         </div>
                     ) : client ? (

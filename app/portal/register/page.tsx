@@ -55,7 +55,7 @@ export default function Register() {
             if (signUpError) throw signUpError
 
             // 2. Create client record linked to auth user
-            const { data: newClient, error: clientError } = await supabase
+            const { error: clientError } = await supabase
                 .from('clients')
                 .insert([{
                     name,
@@ -69,15 +69,19 @@ export default function Register() {
 
             if (clientError) {
                 console.error('Error creating client record:', clientError)
+                await supabase.auth.signOut()
                 // User is created but client record failed — they can still log in
                 router.push('/portal/login?registered=true')
                 return
             }
 
-            // Redirect securely to portal
-            router.push(`/portal/?client=${newClient.id}`)
-        } catch (err: any) {
-            setError(err.message || 'Failed to create account')
+            // Sign out the session so they are forced to log in
+            await supabase.auth.signOut()
+
+            // Redirect securely to login
+            router.push('/portal/login?registered=true')
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : 'Failed to create account')
         } finally {
             setLoading(false)
         }
