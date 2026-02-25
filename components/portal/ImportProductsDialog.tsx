@@ -31,7 +31,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
     const [isLoading, setIsLoading] = useState(false)
     const [mode, setMode] = useState<'csv' | 'paste'>('csv')
     const [pasteData, setPasteData] = useState('')
-    const [parsedData, setParsedData] = useState<any[]>([])
+    const [parsedData, setParsedData] = useState<Record<string, string>[]>([])
     const [headers, setHeaders] = useState<string[]>([])
     const [mapping, setMapping] = useState<Mapping>({
         name: '',
@@ -49,10 +49,10 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
             Papa.parse(file, {
                 header: true,
                 skipEmptyLines: true,
-                complete: (results: any) => {
+                complete: (results: Papa.ParseResult<Record<string, string>>) => {
                     processParsedData(results.data, results.meta.fields)
                 },
-                error: (error: any) => {
+                error: (error: Error) => {
                     toast.error(`Error parsing CSV: ${error.message}`)
                 }
             })
@@ -72,13 +72,13 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
             delimiter: delimiter,
             header: true,
             skipEmptyLines: true,
-            complete: (results: any) => {
+            complete: (results: Papa.ParseResult<Record<string, string>>) => {
                 processParsedData(results.data, results.meta.fields || Object.keys(results.data[0]))
             }
         })
     }
 
-    const processParsedData = (data: any[], fields?: string[]) => {
+    const processParsedData = (data: Record<string, string>[], fields?: string[]) => {
         if (!data || data.length === 0) {
             toast.error('No data found')
             return
@@ -129,8 +129,8 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                 name: row[mapping.name],
                 code: mapping.code ? row[mapping.code] : null,
                 category: mapping.category ? row[mapping.category] : null,
-                retail_price: parseFloat(row[mapping.retail_price]?.toString().replace(/[^0-9.-]+/g, '')) || 0,
-                cost_price: mapping.cost_price ? (parseFloat(row[mapping.cost_price]?.toString().replace(/[^0-9.-]+/g, '')) || 0) : 0,
+                retail_price: parseFloat((row[mapping.retail_price] || '').replace(/[^0-9.-]+/g, '')) || 0,
+                cost_price: mapping.cost_price ? (parseFloat((row[mapping.cost_price] || '').replace(/[^0-9.-]+/g, '')) || 0) : 0,
                 description: mapping.description ? row[mapping.description] : null
             })).filter(p => p.name)
 
@@ -152,9 +152,9 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
             setStep(1)
             setPasteData('')
             setParsedData([])
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Import error:', error)
-            toast.error(`Import failed: ${error.message}`, { id: toastId })
+            toast.error(`Import failed: ${(error as Error).message}`, { id: toastId })
         } finally {
             setIsLoading(false)
         }
@@ -268,9 +268,9 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                                     <div key={i} className="flex gap-4 border-b pb-2 last:border-0">
                                         <span className="font-semibold w-8 text-muted-foreground">{i + 1}</span>
                                         <div className="grid grid-cols-4 gap-4 w-full">
-                                            <span>{row[mapping.name] || <span className="text-red-400 font-mono text-xs">Missing Name</span>}</span>
-                                            <span>{row[mapping.retail_price] || <span className="text-red-400 font-mono text-xs">Missing Price</span>}</span>
-                                            <span className="text-muted-foreground">{row[mapping.code]}</span>
+                                            <span>{row[mapping.name] ? String(row[mapping.name]) : <span className="text-red-400 font-mono text-xs">Missing Name</span>}</span>
+                                            <span>{row[mapping.retail_price] ? String(row[mapping.retail_price]) : <span className="text-red-400 font-mono text-xs">Missing Price</span>}</span>
+                                            <span className="text-muted-foreground">{row[mapping.code] ? String(row[mapping.code]) : ''}</span>
                                         </div>
                                     </div>
                                 ))}

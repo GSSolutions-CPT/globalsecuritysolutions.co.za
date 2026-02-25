@@ -15,7 +15,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/portal/ui
 import { Plus, Search, Briefcase, Calendar as CalendarIcon, User, Clock, List as ListIcon, Kanban, Pencil, Trash2, Loader2, CheckCircle, Activity, Upload, FileText, Image as ImageIcon } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
-import { generateOutlookLink } from '@/lib/portal/calendar-utils'
+
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Client, Job, Quotation, JobAttachment } from '@/types/crm'
 
@@ -388,7 +388,7 @@ function JobsContent() {
                             if (invoiceError) throw invoiceError
 
                             if (quote.quotation_lines && quote.quotation_lines.length > 0) {
-                                const invoiceLines = quote.quotation_lines.map((line: any) => ({
+                                const invoiceLines = quote.quotation_lines.map((line: { product_id: string; quantity: number; unit_price: number; line_total: number; cost_price?: number }) => ({
                                     invoice_id: invoiceData.id,
                                     product_id: line.product_id,
                                     quantity: line.quantity,
@@ -707,7 +707,10 @@ function JobsContent() {
                                                     <div key={file.id} className="group relative border border-border rounded-lg p-3 bg-card hover:shadow-md transition-all">
                                                         <div className="aspect-video bg-muted rounded-md mb-3 overflow-hidden flex items-center justify-center relative border border-border/50">
                                                             {file.file_type?.startsWith('image/') ? (
-                                                                <img src={file.file_url} alt={file.file_name} className="w-full h-full object-cover" />
+                                                                <>
+                                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                                    <img src={file.file_url} alt={file.file_name} className="w-full h-full object-cover" />
+                                                                </>
                                                             ) : (
                                                                 <FileText className="h-10 w-10 text-muted-foreground" />
                                                             )}

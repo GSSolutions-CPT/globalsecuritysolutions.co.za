@@ -34,7 +34,7 @@ interface CalendarEvent {
     start: Date;
     end: Date;
     type: string;
-    resource: any;
+    resource: CRMCalendarEvent | Job | Invoice | null;
     source: 'calendar' | 'job' | 'invoice';
     status?: string;
 }
@@ -203,8 +203,8 @@ export default function JobCalendar() {
             title: event.title,
             start: event.start,
             end: event.end,
-            description: event.resource.notes || event.title,
-            location: event.resource.clients?.address || ''
+            description: (event.resource as { notes?: string })?.notes || event.title,
+            location: (event.resource as { clients?: { address?: string } })?.clients?.address || ''
         })
         window.open(link, '_blank')
     }
@@ -278,15 +278,15 @@ export default function JobCalendar() {
                             )}
                         </div>
 
-                        {selectedEvent?.resource?.clients && (
+                        {(selectedEvent?.resource as { clients?: { name?: string, address?: string } })?.clients && (
                             <div className="flex items-start gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
                                 <User className="h-4 w-4 mt-0.5 text-muted-foreground" />
                                 <div>
-                                    <div className="text-sm font-medium">{selectedEvent.resource.clients.name}</div>
-                                    {selectedEvent.resource.clients.address && (
+                                    <div className="text-sm font-medium">{(selectedEvent?.resource as { clients: { name: string } })?.clients.name}</div>
+                                    {(selectedEvent?.resource as { clients: { address?: string } })?.clients.address && (
                                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-0.5">
                                             <MapPin className="h-3 w-3" />
-                                            {selectedEvent.resource.clients.address}
+                                            {(selectedEvent?.resource as { clients: { address?: string } })?.clients.address}
                                         </div>
                                     )}
                                 </div>
@@ -294,9 +294,9 @@ export default function JobCalendar() {
                         )}
 
 
-                        {selectedEvent?.resource?.notes && (
+                        {(selectedEvent?.resource as { notes?: string })?.notes && (
                             <div className="text-sm text-slate-600 dark:text-slate-300 italic">
-                                &quot; {selectedEvent.resource.notes} &quot;
+                                &quot; {(selectedEvent?.resource as { notes: string })?.notes} &quot;
                             </div>
                         )}
                     </div>

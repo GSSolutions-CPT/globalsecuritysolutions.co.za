@@ -17,7 +17,7 @@ interface ProfileSetupProps {
 export default function ProfileSetupPage({ params }: ProfileSetupProps) {
     const { id } = use(params)
     const router = useRouter()
-    const [client, setClient] = useState<any>(null)
+    const [client, setClient] = useState<{ id: string; name: string; email: string; auth_user_id?: string } | null>(null)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(true)
@@ -40,7 +40,7 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
                     setTimeout(() => router.push('/portal/login'), 3000)
                 }
                 setClient(data)
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error('Error fetching client:', err)
                 setError('Invalid or expired invitation link.')
             } finally {
@@ -54,6 +54,10 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
+
+        if (!client) {
+            return setError('Client data not loaded')
+        }
 
         if (password !== confirmPassword) {
             return setError('Passwords do not match')
@@ -90,8 +94,8 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
                 const origin = window.location.origin
                 window.location.href = `${origin}/portal/?client=${client.id}`
             }, 2000)
-        } catch (err: any) {
-            setError(err.message || 'Failed to create profile')
+        } catch (err: unknown) {
+            setError((err as Error).message || 'Failed to create profile')
         } finally {
             setActionLoading(false)
         }

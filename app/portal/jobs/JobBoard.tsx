@@ -250,7 +250,7 @@ export default function JobBoard({ jobs, onStatusChange }: JobBoardProps) {
         const jobId = active.id as string;
         let newStatus = over.id as string;
 
-        if (!columns.includes(over.id as any)) {
+        if (!columns.includes(over.id as Status)) {
             const overJob = jobs.find(j => j.id === over.id);
             if (overJob) {
                 newStatus = overJob.status!;
@@ -259,7 +259,7 @@ export default function JobBoard({ jobs, onStatusChange }: JobBoardProps) {
 
         const currentJob = jobs.find(j => j.id === jobId);
 
-        if (currentJob && columns.includes(newStatus as any) && currentJob.status !== newStatus) {
+        if (currentJob && columns.includes(newStatus as Status) && currentJob.status !== newStatus) {
             onStatusChange(jobId, newStatus);
         }
 

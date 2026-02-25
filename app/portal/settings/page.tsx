@@ -74,9 +74,9 @@ export default function SettingsPage() {
             setIsUserDialogOpen(false)
             setNewUser({ email: '', role: 'technician', password: '' })
             fetchUsers()
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error adding user:', error)
-            toast.error('Failed to create user: ' + error.message)
+            toast.error('Failed to create user: ' + (error as Error).message)
         } finally {
             setIsLoading(false)
         }
@@ -106,8 +106,8 @@ export default function SettingsPage() {
                     const { data } = results
                     if (!data || data.length === 0) throw new Error('No data found in file')
 
-                    const clients = (data as any[]).map(row => {
-                        const cleanRow: any = {}
+                    const clients = (data as Record<string, string>[]).map(row => {
+                        const cleanRow: Record<string, string> = {}
                         Object.keys(row).forEach(key => {
                             if (key.trim()) {
                                 cleanRow[key.trim()] = row[key]?.trim() || ''
@@ -119,9 +119,9 @@ export default function SettingsPage() {
                     const { error } = await supabase.from('clients').insert(clients)
                     if (error) throw error
                     toast.success(`Successfully imported ${clients.length} clients!`, { id: toastId })
-                } catch (error: any) {
+                } catch (error: unknown) {
                     console.error('Error importing clients:', error)
-                    toast.error('Error importing clients: ' + error.message, { id: toastId })
+                    toast.error('Error importing clients: ' + (error as Error).message, { id: toastId })
                 } finally {
                     setImporting(false)
                 }
@@ -145,8 +145,8 @@ export default function SettingsPage() {
                     const { data } = results
                     if (!data || data.length === 0) throw new Error('No data found in file')
 
-                    const products = (data as any[]).map(row => {
-                        const product: any = {}
+                    const products = (data as Record<string, string>[]).map(row => {
+                        const product: Record<string, string | number> = {}
                         Object.keys(row).forEach(key => {
                             const cleanKey = key.trim()
                             const value = row[key] ? row[key].trim() : ''
@@ -163,9 +163,9 @@ export default function SettingsPage() {
                     const { error } = await supabase.from('products').insert(products)
                     if (error) throw error
                     toast.success(`Successfully imported ${products.length} products!`, { id: toastId })
-                } catch (error: any) {
+                } catch (error: unknown) {
                     console.error('Error importing products:', error)
-                    toast.error('Error importing products: ' + error.message, { id: toastId })
+                    toast.error('Error importing products: ' + (error as Error).message, { id: toastId })
                 } finally {
                     setImporting(false)
                 }
@@ -319,7 +319,10 @@ export default function SettingsPage() {
                                     <Label>Company Logo</Label>
                                     <div className="flex items-center gap-4">
                                         {settings.logoUrl && (
-                                            <img src={settings.logoUrl} alt="Logo" className="h-16 w-16 object-contain bg-white rounded-md border p-1" />
+                                            <>
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img src={settings.logoUrl} alt="Logo" className="h-16 w-16 object-contain bg-white rounded-md border p-1" />
+                                            </>
                                         )}
                                         <div className="flex-1">
                                             <Input type="file" accept="image/*" onChange={handleLogoUpload} className="bg-white/50 dark:bg-slate-800/50" disabled={isLoading} />

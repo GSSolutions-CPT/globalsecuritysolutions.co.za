@@ -194,5 +194,5 @@ export interface UserProfile {
     role: string;
     created_at?: string;
     is_active?: boolean;
-    [key: string]: any;
+    [key: string]: unknown;
 }

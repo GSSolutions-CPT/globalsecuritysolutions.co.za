@@ -7,7 +7,7 @@ import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Badge } from '@/components/portal/ui/badge'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
 import { Search, FileText, Receipt, Banknote, Calendar, Download, Trash2, CheckCircle, Package, FileSignature, AlertCircle, Share2, Wrench, ExternalLink } from 'lucide-react'
 import InstallationDetails from '@/components/portal/InstallationDetails'
 import { supabase } from '@/lib/portal/supabase'
@@ -18,8 +18,6 @@ import { useCurrency } from '@/lib/portal/use-currency'
 import { toast } from 'sonner'
 import { useSettings } from '@/lib/portal/use-settings'
 import { Quotation, Invoice, PurchaseOrder } from '@/types/crm'
-import { cn } from '@/lib/portal/utils'
-
 export default function SalesPage() {
     const router = useRouter()
     const { formatCurrency } = useCurrency()
@@ -363,7 +361,7 @@ export default function SalesPage() {
             const { data: lines, error } = await supabase.from(table).select('*').eq(idColumn, sale.id)
             if (error) throw error
 
-            const fullData: any = { ...sale, lines: lines || [] }
+            const fullData = { ...sale, lines: lines || [] } as (Quotation | Invoice | PurchaseOrder) & { lines: unknown[]; site_plan_url?: string; invoice_id?: string }
             if (type === 'quotation') {
                 const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', sale.id).single()
                 if (sitePlanData?.flattened_url) fullData.site_plan_url = sitePlanData.flattened_url

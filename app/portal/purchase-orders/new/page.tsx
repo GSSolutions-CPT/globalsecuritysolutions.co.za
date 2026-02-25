@@ -83,7 +83,7 @@ function CreatePurchaseOrderContent() {
             setVatApplicable(data.metadata?.vat_applicable ?? true)
 
             if (data.lines && data.lines.length > 0) {
-                setLines(data.lines.map((l: any) => ({ ...l, id: l.id })))
+                setLines(data.lines.map((l: { id: number;[key: string]: unknown }) => ({ ...l, id: l.id } as POLine)))
             }
             if (data.metadata?.extracted_text_snippet) {
                 setExtractedText(data.metadata.extracted_text_snippet)

@@ -138,7 +138,7 @@ function CreateSaleContent() {
             })
 
             if (lines && lines.length > 0) {
-                setLineItems(lines.map((line: any) => ({
+                setLineItems(lines.map((line: { product_id?: string; quantity: number; unit_price: number; cost_price: number; description?: string }) => ({
                     product_id: line.product_id || '',
                     quantity: line.quantity,
                     unit_price: line.unit_price,
@@ -193,15 +193,15 @@ function CreateSaleContent() {
         }
     }
 
-    const updateLineItem = (index: number, field: keyof LineItem, value: any) => {
+    const updateLineItem = (index: number, field: keyof LineItem, value: unknown) => {
         const updated = [...lineItems]
         updated[index] = { ...updated[index], [field]: value }
 
         if (field === 'product_id' && value) {
             const product = products.find(p => p.id === value)
             if (product) {
-                updated[index].unit_price = parseFloat(product.retail_price as any)
-                updated[index].cost_price = parseFloat(product.cost_price as any)
+                updated[index].unit_price = parseFloat(product.retail_price as unknown as string)
+                updated[index].cost_price = parseFloat(product.cost_price as unknown as string)
                 updated[index].description = product.name!
             }
         }
@@ -226,7 +226,7 @@ function CreateSaleContent() {
         return { subtotal, tradeSubtotal, profit, vat, total }
     }
 
-    const handleAiEstimate = (items: any[]) => {
+    const handleAiEstimate = (items: { quantity: number; unit_price: number; cost_price: number; description?: string }[]) => {
         let newItems = [...lineItems]
         if (newItems.length === 1 && !newItems[0].product_id && !newItems[0].description && newItems[0].unit_price === 0) {
             newItems = []
@@ -270,9 +270,9 @@ function CreateSaleContent() {
                     ...basePayload,
                     valid_until: formData.valid_until || null,
                     payment_type: formData.payment_type,
-                    deposit_percentage: parseFloat(formData.deposit_percentage as any) || 0
+                    deposit_percentage: parseFloat(formData.deposit_percentage as unknown as string) || 0
                 }
-                : { ...basePayload, due_date: formData.due_date || null, deposit_amount: parseFloat(formData.deposit_amount as any) || 0 }
+                : { ...basePayload, due_date: formData.due_date || null, deposit_amount: parseFloat(formData.deposit_amount as unknown as string) || 0 }
 
             let saleId = editId
 
@@ -324,9 +324,9 @@ function CreateSaleContent() {
 
             toast.success(`${mode === 'quotation' ? 'Quotation' : 'Invoice'} ${editId ? 'updated' : 'created'} successfully!`)
             router.push('/portal/sales')
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Error saving sale:', error)
-            toast.error(`Error saving sale: ${error.message}`)
+            toast.error(`Error saving sale: ${(error as Error).message}`)
         } finally {
             setIsLoading(false)
         }
@@ -348,7 +348,7 @@ function CreateSaleContent() {
                 profit_estimate: totals.profit,
                 valid_until: formData.valid_until || null,
                 payment_type: formData.payment_type,
-                deposit_percentage: parseFloat(formData.deposit_percentage as any) || 0,
+                deposit_percentage: parseFloat(formData.deposit_percentage as unknown as string) || 0,
                 status: 'Draft',
                 date_created: new Date().toISOString()
             }
@@ -372,8 +372,8 @@ function CreateSaleContent() {
             await supabase.from('quotation_lines').insert(linesToInsert)
             toast.success('Draft saved — you can now add a site plan.')
             setSitePlannerOpen(true)
-        } catch (err: any) {
-            toast.error('Could not save draft: ' + err.message)
+        } catch (err: unknown) {
+            toast.error('Could not save draft: ' + (err as Error).message)
         } finally {
             setIsLoading(false)
         }
@@ -623,11 +623,14 @@ function CreateSaleContent() {
                                 {sitePlanPreview ? (
                                     <div className="space-y-3">
                                         <div className="relative group rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
-                                            <img
-                                                src={sitePlanPreview}
-                                                alt="Site Plan"
-                                                className="w-full h-48 object-contain bg-slate-50 dark:bg-slate-900"
-                                            />
+                                            <>
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img
+                                                    src={sitePlanPreview}
+                                                    alt="Site Plan"
+                                                    className="w-full h-48 object-contain bg-slate-50 dark:bg-slate-900"
+                                                />
+                                            </>
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
                                                 <Button
                                                     variant="secondary"
@@ -667,7 +670,7 @@ function CreateSaleContent() {
                     {sitePlannerOpen && editId && (
                         <SitePlanner
                             quotationId={editId}
-                            existingPlan={sitePlan as any}
+                            existingPlan={sitePlan as SitePlan}
                             onSave={(flattenedUrl) => {
                                 setSitePlanPreview(flattenedUrl)
                                 setSitePlannerOpen(false)

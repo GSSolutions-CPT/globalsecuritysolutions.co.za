@@ -1,0 +1,11 @@
+﻿app/portal/jobs/page.tsx(801,75): error TS2304: Cannot find name 'cn'.
+app/portal/settings/page.tsx(19,10): error TS2305: Module '"@/types/crm"' has no exported member 'UserProfile'.
+app/portal/settings/page.tsx(221,17): error TS7034: Variable 'content' implicitly has type 'any' in some locations where its type cannot be determined.
+app/portal/settings/page.tsx(233,21): error TS7005: Variable 'content' implicitly has an 'any' type.
+app/portal/settings/page.tsx(316,90): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(332,91): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(338,52): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(346,91): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(350,93): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(354,89): error TS7006: Parameter 'e' implicitly has an 'any' type.
+app/portal/settings/page.tsx(372,87): error TS7006: Parameter 'e' implicitly has an 'any' type.
