@@ -28,7 +28,7 @@ export default function AuthCallbackPage() {
                     .from('clients')
                     .select('id')
                     .eq('auth_user_id', session.user.id)
-                    .single()
+                    .maybeSingle()
 
                 if (clientData) {
                     router.replace(`/portal/?client=${clientData.id}`)

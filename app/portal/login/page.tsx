@@ -35,7 +35,7 @@ function LoginContent() {
             .from('clients')
             .select('id')
             .eq('auth_user_id', user.id)
-            .single()
+            .maybeSingle()
 
         let target = from
 

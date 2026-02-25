@@ -88,11 +88,14 @@ export default function ClientsPage() {
         }
     }
 
-    const filteredClients = clients.filter(client =>
-        client.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        client.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        client.email?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    const filteredClients = clients.filter(client => {
+        const term = searchTerm.toLowerCase()
+        return (
+            (client.name || '').toLowerCase().includes(term) ||
+            (client.company || '').toLowerCase().includes(term) ||
+            (client.email || '').toLowerCase().includes(term)
+        )
+    })
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
