@@ -516,8 +516,8 @@ export default function ClientPortalPage() {
 
             <header className="fixed top-0 left-0 right-0 glass-effect z-50 transition-all duration-300">
                 <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <div className="relative h-10 md:h-12 w-32">
+                    <div className="flex items-center gap-4 min-w-0">
+                        <div className="relative h-10 md:h-12 w-32 shrink-0">
                             <Image
                                 src={settings.logoUrl || "/logo.png"}
                                 alt={settings.companyName || "Global Security Solutions"}
@@ -525,16 +525,16 @@ export default function ClientPortalPage() {
                                 className="object-contain object-left"
                             />
                         </div>
-                        <div className="hidden md:block">
+                        <div className="hidden md:block truncate">
                             <h1 className="text-lg font-bold text-slate-900 dark:text-white leading-none tracking-tight">Client Portal</h1>
-                            <p className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mt-0.5">{settings.companyName || 'Global Security Solutions'}</p>
+                            <p className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mt-0.5 truncate">{settings.companyName || 'Global Security Solutions'}</p>
                         </div>
                     </div>
-                    <div className="flex gap-4 items-center">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-slate-600 hover:text-blue-600 hover:bg-blue-50 dark:text-slate-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/20" onClick={() => setContactOpen(true)}>
+                    <div className="flex gap-2 md:gap-4 items-center shrink-0">
+                        <Button variant="ghost" size="sm" className="hidden sm:flex text-slate-600 hover:text-blue-600 hover:bg-blue-50 dark:text-slate-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/20 whitespace-nowrap" onClick={() => setContactOpen(true)}>
                             <HelpCircle className="mr-2 h-4 w-4" /> Help Center
                         </Button>
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-[2px] shadow-lg shadow-blue-500/20">
+                        <div className="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-[2px] shadow-lg shadow-blue-500/20">
                             <div className="h-full w-full rounded-full bg-white dark:bg-slate-950 flex items-center justify-center text-slate-800 dark:text-white font-bold text-xs">{client.name.substring(0, 2).toUpperCase()}</div>
                         </div>
                     </div>
