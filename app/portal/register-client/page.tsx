@@ -94,7 +94,7 @@ export default function RegisterClientPage() {
                 timestamp: new Date().toISOString(),
             })
 
-            router.replace('/portal/client-portal')
+            router.replace(`/portal/client-portal?client=${newClient.id}`)
         } catch (err: unknown) {
             console.error('[register-client]', err)
             setError(err instanceof Error ? err.message : 'Registration failed. Please try again.')

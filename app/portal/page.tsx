@@ -53,8 +53,8 @@ function PortalContent() {
 
                 // If user is logged in and is this client → show portal
                 if (user && clientData.auth_user_id === user.id) {
-                    // Redirect to the client-portal route
-                    router.push('/portal/client-portal')
+                    // Redirect to the client-portal route WITH the param so Layout knows it's a client
+                    router.push(`/portal/client-portal?client=${clientData.id}`)
                     return
                 }
 
