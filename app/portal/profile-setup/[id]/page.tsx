@@ -28,14 +28,14 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
     useEffect(() => {
         async function fetchClient() {
             try {
-                const { data, error } = await supabase
-                    .from('clients')
-                    .select('id, name, email, auth_user_id')
-                    .eq('id', id)
+                const { data: rawData, error } = await supabase
+                    .rpc('get_client_for_setup', { p_client_id: id })
                     .single()
 
                 if (error) throw error
-                if (data.auth_user_id) {
+                const data = rawData as { id: string; name: string; email: string; auth_user_id?: string } | null
+
+                if (data?.auth_user_id) {
                     setError('Profile already setup for this client. Please sign in.')
                     setTimeout(() => router.push('/portal/login'), 3000)
                 }

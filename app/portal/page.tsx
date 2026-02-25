@@ -26,12 +26,10 @@ function PortalContent() {
                     return
                 }
 
-                // Look up the client record
-                const { data: clientData, error } = await supabase
-                    .from('clients')
-                    .select('id, auth_user_id')
-                    .eq('id', clientId)
+                const { data: clientDataRaw, error } = await supabase
+                    .rpc('get_client_for_setup', { p_client_id: clientId })
                     .single()
+                const clientData = clientDataRaw as { id: string, auth_user_id: string | null } | null
 
                 if (error) {
                     console.error("Portal Error: Failed to fetch client data", error)
