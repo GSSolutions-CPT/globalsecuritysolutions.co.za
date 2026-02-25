@@ -109,28 +109,7 @@ const nextConfig: NextConfig = {
       { source: '/terms-and-conditions', destination: '/terms-of-service', permanent: true },
       { source: '/home', destination: '/', permanent: true },
       { source: '/lander', destination: '/', permanent: true },
-      { source: '/test', destination: '/', permanent: true },
       { source: '/test-1', destination: '/', permanent: true },
-    ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/portal/assets/:path*',
-        destination: 'https://gss-hub.vercel.app/assets/:path*',
-      },
-      {
-        source: '/portal',
-        destination: 'https://gss-hub.vercel.app/index.html', // Serve index, app handles the rest? Wait, if app sees /portal, it's fine.
-      },
-      {
-        source: '/portal/',
-        destination: 'https://gss-hub.vercel.app/index.html',
-      },
-      {
-        source: '/portal/:path*',
-        destination: 'https://gss-hub.vercel.app/portal/:path*', // Keep /portal for router
-      },
     ]
   },
 };
