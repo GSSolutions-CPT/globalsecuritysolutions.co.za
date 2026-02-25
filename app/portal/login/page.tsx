@@ -10,13 +10,14 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Alert, AlertDescription } from '@/components/portal/ui/alert'
-import { Mail, Loader2, Lock, ArrowRight, ShieldCheck } from 'lucide-react'
+import { Mail, Loader2, Lock, ArrowRight, ShieldCheck, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import Image from 'next/image'
 import type { User } from '@supabase/supabase-js'
 
 function LoginContent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -77,6 +78,15 @@ function LoginContent() {
 
     return (
         <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-slate-950">
+            {/* Back Button */}
+            <Link
+                href="/"
+                className="absolute top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors bg-white/50 dark:bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full ring-1 ring-slate-200 dark:ring-slate-800 shadow-sm"
+            >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Website</span>
+            </Link>
+
             {/* Dynamic Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black opacity-80" />
 
@@ -139,12 +149,21 @@ function LoginContent() {
                                 </div>
                                 <Input
                                     id="password"
-                                    type="password"
-                                    className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500/20 transition-all font-sans"
+                                    type={showPassword ? "text" : "password"}
+                                    className="pl-10 pr-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500/20 transition-all font-sans"
                                     value={password}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors"
+                                    tabIndex={-1}
+                                    aria-label="Toggle password visibility"
+                                >
+                                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                                </button>
                             </div>
                         </div>
                     </CardContent>
