@@ -156,7 +156,7 @@ function JobCard({ job, isOverlay }: JobCardProps) {
                             size="sm"
                             variant="ghost"
                             className="w-full text-[10px] h-6 mt-1 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50"
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation();
                                 const link = document.createElement('a');
                                 link.href = job.quotations!.payment_proof!;

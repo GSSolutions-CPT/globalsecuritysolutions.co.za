@@ -177,7 +177,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                 </DialogHeader>
 
                 {step === 1 && (
-                    <Tabs value={mode} onValueChange={(v) => setMode(v as 'csv' | 'paste')}>
+                    <Tabs value={mode} onValueChange={(v: string) => setMode(v as 'csv' | 'paste')}>
                         <TabsList className="grid w-full grid-cols-2">
                             <TabsTrigger value="csv">Upload CSV</TabsTrigger>
                             <TabsTrigger value="paste">Paste from Clipboard</TabsTrigger>
@@ -225,7 +225,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label>Map &quot;Name&quot; Column *</Label>
-                                <Select value={mapping.name} onValueChange={(v) => setMapping({ ...mapping, name: v })}>
+                                <Select value={mapping.name} onValueChange={(v: string) => setMapping({ ...mapping, name: v })}>
                                     <SelectTrigger><SelectValue placeholder="Select column" /></SelectTrigger>
                                     <SelectContent>
                                         {headers.map(h => <SelectItem key={h} value={h}>{h}</SelectItem>)}
@@ -234,7 +234,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                             </div>
                             <div className="space-y-2">
                                 <Label>Map &quot;Retail Price&quot; Column *</Label>
-                                <Select value={mapping.retail_price} onValueChange={(v) => setMapping({ ...mapping, retail_price: v })}>
+                                <Select value={mapping.retail_price} onValueChange={(v: string) => setMapping({ ...mapping, retail_price: v })}>
                                     <SelectTrigger><SelectValue placeholder="Select column" /></SelectTrigger>
                                     <SelectContent>
                                         {headers.map(h => <SelectItem key={h} value={h}>{h}</SelectItem>)}
@@ -243,7 +243,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                             </div>
                             <div className="space-y-2">
                                 <Label>Map &quot;Cost Price&quot; Column (Optional)</Label>
-                                <Select value={mapping.cost_price} onValueChange={(v) => setMapping({ ...mapping, cost_price: v })}>
+                                <Select value={mapping.cost_price} onValueChange={(v: string) => setMapping({ ...mapping, cost_price: v })}>
                                     <SelectTrigger><SelectValue placeholder="Select column" /></SelectTrigger>
                                     <SelectContent>
                                         {headers.map(h => <SelectItem key={h} value={h}>{h}</SelectItem>)}
@@ -252,7 +252,7 @@ export function ImportProductsDialog({ onImportSuccess }: ImportProductsDialogPr
                             </div>
                             <div className="space-y-2">
                                 <Label>Map &quot;Code/SKU&quot; Column (Optional)</Label>
-                                <Select value={mapping.code} onValueChange={(v) => setMapping({ ...mapping, code: v })}>
+                                <Select value={mapping.code} onValueChange={(v: string) => setMapping({ ...mapping, code: v })}>
                                     <SelectTrigger><SelectValue placeholder="Select column" /></SelectTrigger>
                                     <SelectContent>
                                         {headers.map(h => <SelectItem key={h} value={h}>{h}</SelectItem>)}

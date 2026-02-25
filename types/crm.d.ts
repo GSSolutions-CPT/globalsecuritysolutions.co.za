@@ -167,3 +167,32 @@ export interface SitePlan {
     flattened_url?: string;
     updated_at?: string;
 }
+
+export interface Expense {
+    id: string;
+    type: string;
+    job_id?: string;
+    amount: number;
+    description?: string;
+    date: string;
+    receipt_url?: string;
+    created_at?: string;
+}
+
+export interface CalendarEvent {
+    id?: string;
+    title?: string;
+    datetime?: string;
+    end_datetime?: string;
+    event_type?: string;
+    notes?: string;
+}
+
+export interface UserProfile {
+    id: string;
+    email: string;
+    role: string;
+    created_at?: string;
+    is_active?: boolean;
+    [key: string]: any;
+}

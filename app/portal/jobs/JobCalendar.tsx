@@ -236,7 +236,7 @@ export default function JobCalendar() {
                 />
             </CardContent>
 
-            <Dialog open={!!selectedEvent} onOpenChange={(open) => !open && setSelectedEvent(null)}>
+            <Dialog open={!!selectedEvent} onOpenChange={(open: boolean) => !open && setSelectedEvent(null)}>
                 <DialogContent className="sm:max-w-md border-0 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl shadow-2xl">
                     <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-80" />
                     <DialogHeader className="pt-6">

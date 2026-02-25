@@ -13,6 +13,7 @@ import { Plus, Banknote, TrendingUp, TrendingDown, Receipt, Pencil, Trash2, Pape
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { Expense, Job, Invoice } from '@/types/crm'
+import { cn } from '@/lib/portal/utils'
 
 const FinancialCharts = lazy(() => import('./FinancialCharts'))
 
@@ -202,7 +203,7 @@ export default function FinancialsPage() {
             type: expense.type,
             job_id: expense.job_id || '',
             amount: expense.amount.toString(),
-            description: expense.description,
+            description: expense.description || '',
             date: expense.date,
             receipt_url: expense.receipt_url || ''
         })
@@ -324,7 +325,7 @@ export default function FinancialsPage() {
                                 id="start_date"
                                 type="date"
                                 value={dateRange.start}
-                                onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRange({ ...dateRange, start: e.target.value })}
                                 className="bg-white dark:bg-slate-950"
                             />
                         </div>
@@ -334,7 +335,7 @@ export default function FinancialsPage() {
                                 id="end_date"
                                 type="date"
                                 value={dateRange.end}
-                                onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRange({ ...dateRange, end: e.target.value })}
                                 className="bg-white dark:bg-slate-950"
                             />
                         </div>
@@ -472,7 +473,7 @@ export default function FinancialsPage() {
                                             <Label htmlFor="type">Expense Type *</Label>
                                             <Select
                                                 value={formData.type}
-                                                onValueChange={(value) => setFormData({ ...formData, type: value })}
+                                                onValueChange={(value: string) => setFormData({ ...formData, type: value })}
                                                 required
                                             >
                                                 <SelectTrigger>
@@ -490,7 +491,7 @@ export default function FinancialsPage() {
                                                 <Label htmlFor="job_id">Related Job</Label>
                                                 <Select
                                                     value={formData.job_id}
-                                                    onValueChange={(value) => setFormData({ ...formData, job_id: value })}
+                                                    onValueChange={(value: string) => setFormData({ ...formData, job_id: value })}
                                                 >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Select a job" />
@@ -513,7 +514,7 @@ export default function FinancialsPage() {
                                                 type="number"
                                                 step="0.01"
                                                 value={formData.amount}
-                                                onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, amount: e.target.value })}
                                                 required
                                             />
                                         </div>
@@ -523,7 +524,7 @@ export default function FinancialsPage() {
                                             <Textarea
                                                 id="description"
                                                 value={formData.description}
-                                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value })}
                                                 rows={3}
                                                 required
                                             />
@@ -535,7 +536,7 @@ export default function FinancialsPage() {
                                                 id="date"
                                                 type="date"
                                                 value={formData.date}
-                                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, date: e.target.value })}
                                                 required
                                             />
                                         </div>

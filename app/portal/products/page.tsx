@@ -148,8 +148,8 @@ function ProductsContent() {
             name: product.name,
             code: product.code || '',
             category: product.category || '',
-            retail_price: product.retail_price.toString(),
-            cost_price: product.cost_price.toString(),
+            retail_price: product.retail_price?.toString() || '',
+            cost_price: product.cost_price?.toString() || '',
             description: product.description || ''
         })
         setIsDialogOpen(true)
@@ -247,7 +247,7 @@ function ProductsContent() {
                         <Input
                             placeholder="Search products by name, code or category..."
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                             className="pl-10 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800"
                         />
                     </div>
@@ -256,7 +256,7 @@ function ProductsContent() {
                         <ImportProductsDialog onImportSuccess={fetchProducts} />
                         <Dialog
                             open={isDialogOpen}
-                            onOpenChange={(open) => {
+                            onOpenChange={(open: boolean) => {
                                 setIsDialogOpen(open)
                                 if (!open) {
                                     setEditingProduct(null)
@@ -284,7 +284,7 @@ function ProductsContent() {
                                             <Input
                                                 id="name"
                                                 value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value })}
                                                 required
                                             />
                                         </div>
@@ -294,7 +294,7 @@ function ProductsContent() {
                                                 <Input
                                                     id="code"
                                                     value={formData.code}
-                                                    onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, code: e.target.value })}
                                                 />
                                             </div>
                                             <div className="grid gap-2">
@@ -302,7 +302,7 @@ function ProductsContent() {
                                                 <Input
                                                     id="category"
                                                     value={formData.category}
-                                                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: e.target.value })}
                                                 />
                                             </div>
                                         </div>
@@ -314,7 +314,7 @@ function ProductsContent() {
                                                     type="number"
                                                     step="0.01"
                                                     value={formData.retail_price}
-                                                    onChange={(e) => setFormData({ ...formData, retail_price: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, retail_price: e.target.value })}
                                                     required
                                                 />
                                             </div>
@@ -325,7 +325,7 @@ function ProductsContent() {
                                                     type="number"
                                                     step="0.01"
                                                     value={formData.cost_price}
-                                                    onChange={(e) => setFormData({ ...formData, cost_price: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, cost_price: e.target.value })}
                                                     required
                                                 />
                                             </div>
@@ -412,13 +412,13 @@ function ProductsContent() {
                                         <div>
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider">Retail</p>
                                             <p className="text-lg font-bold text-emerald-600">
-                                                {formatCurrency(product.retail_price)}
+                                                {formatCurrency(product.retail_price || 0)}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider">Cost</p>
                                             <p className="text-lg font-semibold text-slate-600 dark:text-slate-400">
-                                                {formatCurrency(product.cost_price)}
+                                                {formatCurrency(product.cost_price || 0)}
                                             </p>
                                         </div>
                                     </div>
@@ -426,7 +426,7 @@ function ProductsContent() {
                                     <div className="flex items-center justify-between pt-2">
                                         <div className="flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded text-xs font-medium text-blue-700 dark:text-blue-300">
                                             <TrendingUp className="h-3 w-3" />
-                                            {calculateMargin(product.retail_price, product.cost_price)}% Margin
+                                            {calculateMargin(product.retail_price || 0, product.cost_price || 0)}% Margin
                                         </div>
                                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                             <Button variant="ghost" size="icon" className="h-8 w-8 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-950" onClick={() => handleEdit(product)}>

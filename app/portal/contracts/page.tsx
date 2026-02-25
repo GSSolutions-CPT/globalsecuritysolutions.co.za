@@ -311,7 +311,7 @@ export default function ContractsPage() {
                   <Label htmlFor="client_id">Client *</Label>
                   <Select
                     value={formData.client_id}
-                    onValueChange={(value) => setFormData({ ...formData, client_id: value })}
+                    onValueChange={(value: string) => setFormData({ ...formData, client_id: value })}
                     required
                   >
                     <SelectTrigger>
@@ -332,7 +332,7 @@ export default function ContractsPage() {
                   <Textarea
                     id="description"
                     value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, description: e.target.value })}
                     placeholder="e.g., Monthly maintenance service"
                     rows={3}
                     required
@@ -347,7 +347,7 @@ export default function ContractsPage() {
                       type="number"
                       step="0.01"
                       value={formData.amount}
-                      onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, amount: e.target.value })}
                       placeholder="0.00"
                       required
                     />
@@ -357,7 +357,7 @@ export default function ContractsPage() {
                     <Label htmlFor="frequency">Billing Frequency *</Label>
                     <Select
                       value={formData.frequency}
-                      onValueChange={(value) => setFormData({ ...formData, frequency: value })}
+                      onValueChange={(value: string) => setFormData({ ...formData, frequency: value })}
                       required
                     >
                       <SelectTrigger>
@@ -380,7 +380,7 @@ export default function ContractsPage() {
                       id="start_date"
                       type="date"
                       value={formData.start_date}
-                      onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, start_date: e.target.value })}
                       required
                     />
                   </div>
@@ -391,7 +391,7 @@ export default function ContractsPage() {
                       id="next_billing_date"
                       type="date"
                       value={formData.next_billing_date}
-                      onChange={(e) => setFormData({ ...formData, next_billing_date: e.target.value })}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, next_billing_date: e.target.value })}
                       placeholder="Auto-calculated"
                     />
                   </div>
@@ -401,7 +401,7 @@ export default function ContractsPage() {
                   <Switch
                     id="active"
                     checked={formData.active}
-                    onCheckedChange={(checked) => setFormData({ ...formData, active: checked })}
+                    onCheckedChange={(checked: boolean) => setFormData({ ...formData, active: checked })}
                   />
                   <Label htmlFor="active">Active (start billing immediately)</Label>
                 </div>

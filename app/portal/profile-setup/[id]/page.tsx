@@ -159,7 +159,7 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
                                         placeholder="Min 6 characters"
                                         className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700 font-sans"
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                         required
                                     />
                                 </div>
@@ -174,7 +174,7 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
                                         placeholder="Confirm your password"
                                         className="pl-10 h-11 bg-white text-slate-900 border-slate-300 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-950 dark:text-white dark:border-slate-700 font-sans"
                                         value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
                                         required
                                     />
                                 </div>

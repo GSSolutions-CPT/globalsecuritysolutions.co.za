@@ -363,7 +363,7 @@ export default function SalesPage() {
             const { data: lines, error } = await supabase.from(table).select('*').eq(idColumn, sale.id)
             if (error) throw error
 
-            const fullData = { ...sale, lines: lines || [] }
+            const fullData: any = { ...sale, lines: lines || [] }
             if (type === 'quotation') {
                 const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', sale.id).single()
                 if (sitePlanData?.flattened_url) fullData.site_plan_url = sitePlanData.flattened_url
@@ -412,7 +412,7 @@ export default function SalesPage() {
                             size="icon"
                             className="h-8 w-8 text-muted-foreground hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"
                             title="Copy Client Portal Link"
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation()
                                 const link = `${window.location.origin}/portal?client=${sale.client_id}`
                                 shareLink('GSS Client Portal', 'Access your client portal here:', link)
@@ -619,7 +619,7 @@ export default function SalesPage() {
                     <Input
                         placeholder="Search by client..."
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                         className="pl-10 w-full"
                     />
                 </div>
@@ -850,11 +850,14 @@ export default function SalesPage() {
                 </TabsContent>
             </Tabs>
 
-            <InstallationDetails
-                isOpen={installationDetailsOpen}
-                onClose={() => setInstallationDetailsOpen(false)}
-                invoiceId={selectedInvoiceId}
-            />
+            <Dialog open={installationDetailsOpen} onOpenChange={setInstallationDetailsOpen}>
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle>Installation Details</DialogTitle>
+                    </DialogHeader>
+                    {selectedInvoiceId && <InstallationDetails invoiceId={selectedInvoiceId} />}
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

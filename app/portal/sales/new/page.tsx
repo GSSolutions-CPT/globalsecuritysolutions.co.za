@@ -469,7 +469,7 @@ function CreateSaleContent() {
                                                 <Input
                                                     type="date"
                                                     value={formData.valid_until}
-                                                    onChange={(e) => setFormData({ ...formData, valid_until: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, valid_until: e.target.value })}
                                                     className="pl-9"
                                                 />
                                                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -479,7 +479,7 @@ function CreateSaleContent() {
                                             <Label>Payment Terms</Label>
                                             <Select
                                                 value={formData.payment_type}
-                                                onValueChange={(value) => setFormData({ ...formData, payment_type: value })}
+                                                onValueChange={(value: string) => setFormData({ ...formData, payment_type: value })}
                                             >
                                                 <SelectTrigger>
                                                     <SelectValue />
@@ -498,7 +498,7 @@ function CreateSaleContent() {
                                             <Input
                                                 type="date"
                                                 value={formData.due_date}
-                                                onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, due_date: e.target.value })}
                                                 className="pl-9"
                                             />
                                             <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -547,7 +547,7 @@ function CreateSaleContent() {
                                                         className="flex-1 bg-white dark:bg-slate-950"
                                                         placeholder="Item description..."
                                                         value={item.description}
-                                                        onChange={(e) => updateLineItem(index, 'description', e.target.value)}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'description', e.target.value)}
                                                     />
                                                 </div>
                                             </div>
@@ -561,7 +561,7 @@ function CreateSaleContent() {
                                                     min="1"
                                                     className="bg-white dark:bg-slate-950"
                                                     value={item.quantity}
-                                                    onChange={(e) => updateLineItem(index, 'quantity', parseInt(e.target.value) || 1)}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'quantity', parseInt(e.target.value) || 1)}
                                                 />
                                             </div>
                                             <div className="w-32 grid gap-1.5">
@@ -573,7 +573,7 @@ function CreateSaleContent() {
                                                         step="0.01"
                                                         className="pl-7 bg-white dark:bg-slate-950"
                                                         value={item.unit_price}
-                                                        onChange={(e) => updateLineItem(index, 'unit_price', parseFloat(e.target.value) || 0)}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'unit_price', parseFloat(e.target.value) || 0)}
                                                     />
                                                 </div>
                                             </div>
@@ -741,7 +741,7 @@ function CreateSaleContent() {
                                 <Switch
                                     id="vat-toggle"
                                     checked={formData.vat_applicable}
-                                    onCheckedChange={(c) => setFormData({ ...formData, vat_applicable: c })}
+                                    onCheckedChange={(c: boolean) => setFormData({ ...formData, vat_applicable: c })}
                                 />
                             </div>
 

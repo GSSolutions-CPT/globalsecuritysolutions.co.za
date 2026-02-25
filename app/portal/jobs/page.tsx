@@ -1,5 +1,7 @@
 'use client'
 
+import { cn } from '@/lib/portal/utils'
+
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
@@ -474,7 +476,7 @@ function JobsContent() {
                         <Input
                             placeholder="Search jobs..."
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                             className="pl-10"
                         />
                     </div>
@@ -513,7 +515,7 @@ function JobsContent() {
 
                     <Dialog
                         open={isDialogOpen}
-                        onOpenChange={(open) => {
+                        onOpenChange={(open: boolean) => {
                             setIsDialogOpen(open)
                             if (!open) {
                                 setEditingJob(null)
@@ -565,7 +567,7 @@ function JobsContent() {
                                                 <Label htmlFor="client_id">Client *</Label>
                                                 <Select
                                                     value={formData.client_id}
-                                                    onValueChange={(value) => setFormData({ ...formData, client_id: value })}
+                                                    onValueChange={(value: string) => setFormData({ ...formData, client_id: value })}
                                                     required
                                                 >
                                                     <SelectTrigger>
@@ -585,7 +587,7 @@ function JobsContent() {
                                                 <Label htmlFor="quotation_id">Related Quotation (Optional)</Label>
                                                 <Select
                                                     value={formData.quotation_id}
-                                                    onValueChange={(value) => setFormData({ ...formData, quotation_id: value })}
+                                                    onValueChange={(value: string) => setFormData({ ...formData, quotation_id: value })}
                                                 >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Select a quotation" />
@@ -609,7 +611,7 @@ function JobsContent() {
                                                     id="assigned_technicians"
                                                     placeholder="Enter names separated by commas"
                                                     value={formData.assigned_technicians}
-                                                    onChange={(e) => setFormData({ ...formData, assigned_technicians: e.target.value })}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, assigned_technicians: e.target.value })}
                                                 />
                                                 <p className="text-xs text-muted-foreground">
                                                     Example: John Doe, Jane Smith
@@ -623,7 +625,7 @@ function JobsContent() {
                                                         id="scheduled_datetime"
                                                         type="datetime-local"
                                                         value={formData.scheduled_datetime}
-                                                        onChange={(e) => setFormData({ ...formData, scheduled_datetime: e.target.value })}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, scheduled_datetime: e.target.value })}
                                                     />
                                                 </div>
                                                 <div className="grid gap-2">
@@ -632,7 +634,7 @@ function JobsContent() {
                                                         id="scheduled_end_datetime"
                                                         type="datetime-local"
                                                         value={formData.scheduled_end_datetime}
-                                                        onChange={(e) => setFormData({ ...formData, scheduled_end_datetime: e.target.value })}
+                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, scheduled_end_datetime: e.target.value })}
                                                     />
                                                 </div>
                                             </div>
@@ -724,11 +726,11 @@ function JobsContent() {
                                                                 placeholder="Description / Serial No."
                                                                 className="h-8 text-xs bg-background"
                                                                 value={file.description || ''}
-                                                                onChange={(e) => {
+                                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                                                     const newDescription = e.target.value;
                                                                     setAttachments(prev => prev.map(a => a.id === file.id ? { ...a, description: newDescription } : a));
                                                                 }}
-                                                                onBlur={(e) => handleUpdateAttachmentDescription(file.id!, e.target.value)}
+                                                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleUpdateAttachmentDescription(file.id!, e.target.value)}
                                                             />
                                                             <p className="text-[10px] text-muted-foreground text-right">{new Date(file.created_at!).toLocaleDateString()}</p>
                                                         </div>

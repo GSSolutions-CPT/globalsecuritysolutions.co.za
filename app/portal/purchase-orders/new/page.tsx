@@ -344,7 +344,7 @@ function CreatePurchaseOrderContent() {
                                                                 <Input
                                                                     placeholder="New Supplier Name"
                                                                     value={newSupplierName}
-                                                                    onChange={(e) => setNewSupplierName(e.target.value)}
+                                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewSupplierName(e.target.value)}
                                                                     className="h-8 text-xs"
                                                                 />
                                                                 <Button size="sm" onClick={handleCreateSupplier} disabled={!newSupplierName} className="h-8 text-xs">
@@ -380,7 +380,7 @@ function CreatePurchaseOrderContent() {
                                             type="date"
                                             className="pl-9 bg-slate-50/50 dark:bg-slate-900/50"
                                             value={poDetails.expected_date}
-                                            onChange={(e) => setPoDetails({ ...poDetails, expected_date: e.target.value })}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPoDetails({ ...poDetails, expected_date: e.target.value })}
                                         />
                                     </div>
                                 </div>
@@ -391,7 +391,7 @@ function CreatePurchaseOrderContent() {
                                 <Input
                                     placeholder="#PO-2024-001 or Job Ref"
                                     value={poDetails.reference}
-                                    onChange={(e) => setPoDetails({ ...poDetails, reference: e.target.value })}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPoDetails({ ...poDetails, reference: e.target.value })}
                                     className="bg-slate-50/50 dark:bg-slate-900/50 font-mono text-sm"
                                 />
                             </div>
@@ -426,7 +426,7 @@ function CreatePurchaseOrderContent() {
                                         <Label className="text-xs text-muted-foreground">Description</Label>
                                         <Input
                                             value={line.description}
-                                            onChange={(e) => updateLine(line.id, 'description', e.target.value)}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLine(line.id, 'description', e.target.value)}
                                             placeholder="Item details"
                                             className="border-0 bg-transparent p-0 h-auto text-sm focus-visible:ring-0 placeholder:text-muted-foreground/50"
                                         />
@@ -436,7 +436,7 @@ function CreatePurchaseOrderContent() {
                                         <Input
                                             type="number"
                                             value={line.quantity}
-                                            onChange={(e) => updateLine(line.id, 'quantity', e.target.value)}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLine(line.id, 'quantity', e.target.value)}
                                             className="h-8 bg-white dark:bg-slate-900 border-slate-200"
                                         />
                                     </div>
@@ -447,7 +447,7 @@ function CreatePurchaseOrderContent() {
                                             <Input
                                                 type="number"
                                                 value={line.unit_price}
-                                                onChange={(e) => updateLine(line.id, 'unit_price', e.target.value)}
+                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLine(line.id, 'unit_price', e.target.value)}
                                                 className="h-8 pl-5 bg-white dark:bg-slate-900 border-slate-200 text-right"
                                             />
                                         </div>

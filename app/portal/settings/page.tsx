@@ -218,7 +218,7 @@ export default function SettingsPage() {
                 return
             }
 
-            let content, type
+            let content: string = '', type: string = ''
             if (format === 'csv') {
                 const headers = Object.keys(data[0])
                 content = headers.join(',') + '\n'
@@ -313,7 +313,7 @@ export default function SettingsPage() {
                             <CardContent className="space-y-4">
                                 <div className="grid gap-2">
                                     <Label>Company Name</Label>
-                                    <Input value={settings.companyName || ''} onChange={(e) => updateSetting('companyName', e.target.value)} placeholder="Company Name" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyName', e.target.value)} placeholder="Company Name" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Company Logo</Label>
@@ -329,13 +329,13 @@ export default function SettingsPage() {
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Phone Number</Label>
-                                    <Input value={settings.companyPhone || ''} onChange={(e) => updateSetting('companyPhone', e.target.value)} placeholder="Phone" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyPhone || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyPhone', e.target.value)} placeholder="Phone" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>WhatsApp Number</Label>
                                     <Input
                                         value={settings.whatsappNumber || settings.companyPhone || ''}
-                                        onChange={(e) => updateSetting('whatsappNumber', e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('whatsappNumber', e.target.value)}
                                         placeholder="e.g. 062 123 4567"
                                         className="bg-white/50 dark:bg-slate-800/50"
                                     />
@@ -343,15 +343,15 @@ export default function SettingsPage() {
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Email Address</Label>
-                                    <Input value={settings.companyEmail || ''} onChange={(e) => updateSetting('companyEmail', e.target.value)} placeholder="Email" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyEmail || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyEmail', e.target.value)} placeholder="Email" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Physical Address</Label>
-                                    <Input value={settings.companyAddress || ''} onChange={(e) => updateSetting('companyAddress', e.target.value)} placeholder="Address" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyAddress || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyAddress', e.target.value)} placeholder="Address" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>VAT Registration</Label>
-                                    <Input value={settings.companyVat || ''} onChange={(e) => updateSetting('companyVat', e.target.value)} placeholder="VAT Number" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyVat || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyVat', e.target.value)} placeholder="VAT Number" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                             </CardContent>
                             <Globe className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
@@ -369,29 +369,29 @@ export default function SettingsPage() {
                             <CardContent className="space-y-4 relative z-10">
                                 <div className="grid gap-2">
                                     <Label>Bank Name</Label>
-                                    <Input value={settings.bankName || ''} onChange={(e) => updateSetting('bankName', e.target.value)} placeholder="Bank Name" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankName', e.target.value)} placeholder="Bank Name" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Account Holder</Label>
-                                    <Input value={settings.bankAccountHolder || ''} onChange={(e) => updateSetting('bankAccountHolder', e.target.value)} placeholder="Account Holder" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankAccountHolder || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountHolder', e.target.value)} placeholder="Account Holder" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-4 grid-cols-2">
                                     <div className="grid gap-2">
                                         <Label>Account Type</Label>
-                                        <Input value={settings.bankAccountType || ''} onChange={(e) => updateSetting('bankAccountType', e.target.value)} placeholder="Type" className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input value={settings.bankAccountType || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountType', e.target.value)} placeholder="Type" className="bg-white/50 dark:bg-slate-800/50" />
                                     </div>
                                     <div className="grid gap-2">
                                         <Label>Branch Code</Label>
-                                        <Input value={settings.bankBranchCode || ''} onChange={(e) => updateSetting('bankBranchCode', e.target.value)} placeholder="Code" className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input value={settings.bankBranchCode || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankBranchCode', e.target.value)} placeholder="Code" className="bg-white/50 dark:bg-slate-800/50" />
                                     </div>
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Account Number</Label>
-                                    <Input value={settings.bankAccountNumber || ''} onChange={(e) => updateSetting('bankAccountNumber', e.target.value)} placeholder="Account Number" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankAccountNumber || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountNumber', e.target.value)} placeholder="Account Number" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Reference</Label>
-                                    <Input value={settings.bankReference || ''} onChange={(e) => updateSetting('bankReference', e.target.value)} placeholder="Default Reference" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankReference || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankReference', e.target.value)} placeholder="Default Reference" className="bg-white/50 dark:bg-slate-800/50" />
                                 </div>
                             </CardContent>
                             <CreditCard className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
@@ -418,11 +418,11 @@ export default function SettingsPage() {
                                     <div className="grid gap-4 py-4">
                                         <div className="grid gap-2">
                                             <Label>Email</Label>
-                                            <Input type="email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} required />
+                                            <Input type="email" value={newUser.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUser({ ...newUser, email: e.target.value })} required />
                                         </div>
                                         <div className="grid gap-2">
                                             <Label>Role</Label>
-                                            <Select value={newUser.role} onValueChange={(value) => setNewUser({ ...newUser, role: value })}>
+                                            <Select value={newUser.role} onValueChange={(value: string) => setNewUser({ ...newUser, role: value })}>
                                                 <SelectTrigger><SelectValue /></SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="admin">Admin</SelectItem>
@@ -434,7 +434,7 @@ export default function SettingsPage() {
                                         </div>
                                         <div className="grid gap-2">
                                             <Label>Temporary Password</Label>
-                                            <Input type="password" value={newUser.password} onChange={(e) => setNewUser({ ...newUser, password: e.target.value })} required />
+                                            <Input type="password" value={newUser.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewUser({ ...newUser, password: e.target.value })} required />
                                         </div>
                                     </div>
                                     <DialogFooter>
@@ -517,13 +517,13 @@ export default function SettingsPage() {
                                         <Input
                                             type="color"
                                             value={settings.primaryColor || '#2563eb'}
-                                            onChange={(e) => updateSetting('primaryColor', e.target.value)}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('primaryColor', e.target.value)}
                                             className="w-12 h-12 p-1 cursor-pointer"
                                         />
                                         <Input
                                             type="text"
                                             value={settings.primaryColor || '#2563eb'}
-                                            onChange={(e) => updateSetting('primaryColor', e.target.value)}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('primaryColor', e.target.value)}
                                             placeholder="#2563eb"
                                             className="flex-1 bg-white/50 dark:bg-slate-800/50"
                                         />
@@ -536,7 +536,7 @@ export default function SettingsPage() {
                                         min="0"
                                         step="0.1"
                                         value={settings.taxRate || '15'}
-                                        onChange={(e) => updateSetting('taxRate', e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('taxRate', e.target.value)}
                                         placeholder="15"
                                         className="bg-white/50 dark:bg-slate-800/50"
                                     />
@@ -546,7 +546,7 @@ export default function SettingsPage() {
                                     <Input
                                         type="number"
                                         value={settings.defaultQuoteValidityDays || '14'}
-                                        onChange={(e) => updateSetting('defaultQuoteValidityDays', e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('defaultQuoteValidityDays', e.target.value)}
                                         placeholder="14"
                                         className="bg-white/50 dark:bg-slate-800/50"
                                     />
@@ -597,13 +597,13 @@ export default function SettingsPage() {
                                 <div className="space-y-2">
                                     <Label>Import Clients</Label>
                                     <div className="flex items-center gap-2">
-                                        <Input type="file" accept=".csv" onChange={(e) => e.target.files?.[0] && handleImportClients(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportClients(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <Label>Import Products</Label>
                                     <div className="flex items-center gap-2">
-                                        <Input type="file" accept=".csv" onChange={(e) => e.target.files?.[0] && handleImportProducts(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportProducts(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
                                     </div>
                                 </div>
                             </CardContent>
