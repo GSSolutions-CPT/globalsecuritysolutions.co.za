@@ -530,11 +530,11 @@ export default function ClientPortalPage() {
                             <p className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mt-0.5 truncate">{settings.companyName || 'Global Security Solutions'}</p>
                         </div>
                     </div>
-                    <div className="flex gap-2 md:gap-4 items-center shrink-0">
+                    <div className="flex gap-2 md:gap-4 items-center shrink-0 flex-nowrap">
                         <Button variant="ghost" size="sm" className="hidden sm:flex text-slate-600 hover:text-blue-600 hover:bg-blue-50 dark:text-slate-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/20 whitespace-nowrap" onClick={() => setContactOpen(true)}>
                             <HelpCircle className="mr-2 h-4 w-4" /> Help Center
                         </Button>
-                        <div className="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-[2px] shadow-lg shadow-blue-500/20">
+                        <div className="h-10 w-10 min-w-[40px] shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-[2px] shadow-lg shadow-blue-500/20 flex-none">
                             <div className="h-full w-full rounded-full bg-white dark:bg-slate-950 flex items-center justify-center text-slate-800 dark:text-white font-bold text-xs">{client.name.substring(0, 2).toUpperCase()}</div>
                         </div>
                     </div>
