@@ -119,7 +119,7 @@
         "content": [
             {
                 "type": "paragraph",
-                "text": "Are you tired of your CCTV system waking you up at 3 AM just because the \"Cape Doctor\" wind blew a tree branch across your driveway?"
+                "text": "Are you tired of your <a href='/services/cctv-surveillance-systems' class='text-blue-600 hover:underline'>CCTV</a> system waking you up at 3 AM just because the \"Cape Doctor\" wind blew a tree branch across your driveway?"
             },
             {
                 "type": "paragraph",
@@ -375,7 +375,7 @@
             },
             {
                 "type": "paragraph",
-                "text": "<strong>The Short Answer:</strong> Criminals use illegal handheld devices to flood the 433MHz radio frequency, blocking your remote’s signal so your gate won't close. To prevent this, you must physically watch the gate close, upgrade to a smart gate motor with push notifications, or install a dedicated signal jamming detector."
+                "text": "<strong>The Short Answer:</strong> Criminals use illegal handheld devices to flood the 433MHz radio frequency, blocking your remote’s signal so your gate won't close. To prevent this, you must physically watch the gate close, upgrade to a smart <a href='/services/gate-and-garage-automation' class='text-blue-600 hover:underline'>gate motor</a> with push notifications, or install a dedicated signal jamming detector."
             },
             {
                 "type": "heading",
@@ -1050,7 +1050,7 @@
             },
             {
                 "type": "paragraph",
-                "text": "Most older alarm systems run on Lead-Acid batteries designed for occasional outages, not daily cycling. If your keypad beeps or goes dead during a 4-hour slot, your battery is likely sulphated and useless."
+                "text": "Most older <a href='/services/alarm-system-installation' class='text-blue-600 hover:underline'>alarm systems</a> run on Lead-Acid batteries designed for occasional outages, not daily cycling. If your keypad beeps or goes dead during a 4-hour slot, your battery is likely sulphated and useless."
             },
             {
                 "type": "list",
@@ -1074,7 +1074,7 @@
             },
             {
                 "type": "paragraph",
-                "text": "Blind spots are dangerous. Traditional CCTV systems shut down without power. We are now installing independent solar-powered cameras from Hikvision and Ezviz that run completely off-grid. They connect to your phone via 4G, so even if your home Wi-Fi dies, you still get alerts."
+                "text": "Blind spots are dangerous. Traditional <a href='/services/cctv-surveillance-systems' class='text-blue-600 hover:underline'>CCTV</a> systems shut down without power. We are now installing independent solar-powered cameras from Hikvision and Ezviz that run completely off-grid. They connect to your phone via 4G, so even if your home Wi-Fi dies, you still get alerts."
             },
             {
                 "type": "heading",
@@ -1082,7 +1082,7 @@
             },
             {
                 "type": "paragraph",
-                "text": "Being stuck outside your gate is a major hijacking risk. Ensure your Centurion gate motor has high-capacity backup batteries. We also install anti-theft cages, as battery theft increases during load shedding."
+                "text": "Being stuck outside your gate is a major hijacking risk. Ensure your Centurion <a href='/services/gate-and-garage-automation' class='text-blue-600 hover:underline'>gate motor</a> has high-capacity backup batteries. We also install anti-theft cages, as battery theft increases during load shedding."
             },
             {
                 "type": "paragraph",
@@ -1155,7 +1155,7 @@
         "content": [
             {
                 "type": "paragraph",
-                "text": "Electric fencing is a popular deterrent in South Africa, but it strictly regulated by the Department of Labour. Installing a non-compliant fence is not only illegal but can leave you liable for injuries."
+                "text": "<a href='/services/electric-fence-installations' class='text-blue-600 hover:underline'>Electric fencing</a> is a popular deterrent in South Africa, but it strictly regulated by the Department of Labour. Installing a non-compliant fence is not only illegal but can leave you liable for injuries."
             },
             {
                 "type": "heading",
@@ -1211,7 +1211,7 @@
             },
             {
                 "type": "paragraph",
-                "text": "With load shedding, backup batteries are high-value targets. Thieves break open gate motors to steal the battery or the entire motor. An anti-theft bracket is now a mandatory requirement for insurance in many areas."
+                "text": "With load shedding, backup batteries are high-value targets. Thieves break open <a href='/services/gate-and-garage-automation' class='text-blue-600 hover:underline'>gate motor</a>s to steal the battery or the entire motor. An anti-theft bracket is now a mandatory requirement for insurance in many areas."
             },
             {
                 "type": "heading",
