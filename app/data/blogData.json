@@ -1,5 +1,112 @@
 [
     {
+        "slug": "how-motion-sensors-actually-work-cape-town",
+        "title": "How Motion Sensors Actually Work in Cape Town 🛡️",
+        "date": "March 19, 2026",
+        "category": "Technology",
+        "coverImage": "/blog/indoor-motion-sensor.png",
+        "excerpt": "Wondering how motion sensors actually work? Discover the technology behind PIR detectors and how they protect your family from break-ins. Learn more from GSS.",
+        "author": "Global Security Team",
+        "metaTitle": "How Motion Sensors Work to Secure Your Cape Town Home",
+        "metaDescription": "Wondering how motion sensors actually work? Discover the technology behind PIR detectors and how they protect your family from break-ins. Learn more from GSS.",
+        "content": [
+            {
+                "type": "paragraph",
+                "text": "Nothing is more frustrating than an alarm that cries wolf in the middle of the night, or worse, a system that stays silent when an intruder is on your property. The culprit is almost always a misunderstanding of how motion sensors work. If your sensors are outdated or incorrectly positioned, criminals can easily bypass them, leaving your family and assets vulnerable."
+            },
+            {
+                "type": "paragraph",
+                "text": "In this article, we explain exactly how this critical security technology works and how to ensure your system is set up flawlessly."
+            },
+            {
+                "type": "paragraph",
+                "text": "At a basic level, most modern motion sensors use Passive Infrared (PIR) technology. They don't emit beams like in the spy movies; instead, they passively \"look\" for sudden changes in infrared energy—specifically, the body heat of a human moving across their field of vision. When a warm body breaks the sensor's grid, the alarm triggers."
+            },
+            {
+                "type": "heading",
+                "text": "The Science Behind the Sensor: PIR Technology"
+            },
+            {
+                "type": "paragraph",
+                "text": "As technicians who install these daily, we often find that homeowners misunderstand what triggers an alarm. Passive Infrared (PIR) sensors are the backbone of any reliable alarm system installation. Inside the plastic casing of your sensor is a pyroelectric chip that detects heat."
+            },
+            {
+                "type": "paragraph",
+                "text": "The sensor is divided into multiple invisible grids or \"zones.\" When the ambient temperature of a room suddenly spikes because a 37°C human walks across those zones, the sensor detects the differential and trips the relay."
+            },
+            {
+                "type": "paragraph",
+                "text": "<strong>Pro Tip:</strong> Never point an indoor PIR sensor directly at a window that receives intense afternoon sun. The rapid heating of the glass or curtains can cause the temperature differential needed to trigger a false alarm!"
+            },
+            {
+                "type": "image",
+                "src": "/blog/indoor-motion-sensor.png",
+                "alt": "White indoor PIR motion sensor installed in a Cape Town home"
+            },
+            {
+                "type": "heading",
+                "text": "Why Placement Matters in the Western Cape"
+            },
+            {
+                "type": "paragraph",
+                "text": "In our experience, installing sensors in coastal regions presents unique challenges. On a recent installation in Blouberg, the homeowner was experiencing continuous false alarms in their living room. We quickly diagnosed the issue: a strong sea breeze was blowing warm thermal curtains directly into the sensor's path."
+            },
+            {
+                "type": "paragraph",
+                "text": "Correct placement is a science. Sensors should be placed in \"choke points\"—areas an intruder absolutely must walk through, like hallways or staircases. They should also be mounted flat against the wall or squarely in a corner, usually about 2.1 meters off the ground, to maximize their detection grid. If you are struggling with sensor placement, it might be time to review some of our <a href=\"/blog/top-5-security-tips-cape-town\" class=\"text-blue-600 hover:underline\">top 5 security tips for Cape Town</a> to see where your weak points are."
+            },
+            {
+                "type": "heading",
+                "text": "Pet-Friendly Sensors: Fact vs. Fiction"
+            },
+            {
+                "type": "paragraph",
+                "text": "One of the most common questions we get from clients in areas like <a href=\"/areas/durbanville-security-services\" class=\"text-blue-600 hover:underline\">Durbanville</a> is, \"Will my dog set off the alarm?\""
+            },
+            {
+                "type": "paragraph",
+                "text": "The answer is: not if you use the right technology. Pet-immune motion sensors ignore mass and heat signatures under a certain threshold (usually up to 18kg or 40kg, depending on the model). However, it is important to remember that this immunity relies heavily on the animal staying on the floor. If your cat jumps onto a shelf directly in front of the sensor, the proximity will make the cat appear massive to the lens, triggering an alarm."
+            },
+            {
+                "type": "image",
+                "src": "/blog/outdoor-motion-sensor.png",
+                "alt": "GSS technician installing a pet-friendly outdoor motion sensor in Durbanville"
+            },
+            {
+                "type": "heading",
+                "text": "Dual-Tech Sensors for Harsh Environments"
+            },
+            {
+                "type": "paragraph",
+                "text": "Sometimes, standard PIR isn't enough, especially in drafty garages or high-risk commercial setups. This is where Dual-Technology sensors come in."
+            },
+            {
+                "type": "paragraph",
+                "text": "These units combine PIR heat detection with Microwave technology. The microwave component actively sends out pulses and measures the reflection off moving objects (the Doppler effect). For the alarm to trigger, both the heat signature (PIR) and the physical movement (Microwave) must detect an anomaly at the exact same time. We highly recommend these for commercial security applications where false alarms cost businesses time and money."
+            },
+            {
+                "type": "heading",
+                "text": "Conclusion & Pitch"
+            },
+            {
+                "type": "paragraph",
+                "text": "Understanding the technology behind your motion sensors is the first step in eliminating false alarms and ensuring your home is a hard target. Whether you need standard indoor PIRs, pet-friendly upgrades, or heavy-duty dual-tech sensors for your business, professional placement and high-quality equipment make all the difference."
+            },
+            {
+                "type": "paragraph",
+                "text": "We have installed hundreds of these systems across the Western Cape, ensuring families sleep soundly. Read more about our full range of services at <a href=\"/\" class=\"text-blue-600 hover:underline\">globalsecuritysolutions.co.za</a>."
+            },
+            {
+                "type": "heading",
+                "text": "Ready to upgrade your security?"
+            },
+            {
+                "type": "paragraph",
+                "text": "<a href=\"https://wa.me/27629558559\" class=\"text-blue-600 hover:underline font-bold\">Click here to message us on WhatsApp for a quote</a> or <a href=\"/contact\" class=\"text-blue-600 hover:underline\">contact us online</a>."
+            }
+        ]
+    },
+    {
         "slug": "how-ai-cameras-are-changing-home-safety",
         "title": "5 Ways AI Cameras Are Changing Home Safety in Cape Town 👁️",
         "date": "March 6, 2026",
