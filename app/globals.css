@@ -2,6 +2,12 @@
 
 /* VS Code may flag @theme as unknown, but it is valid in Tailwind v4 */
 @theme {
+  --color-brand-electric: #00e5ff; /* Vibrant Electric Blue */
+  --color-brand-navy: #0a192f;     /* Deep Navy Blue */
+  --color-brand-slate: #64748b;    /* Slate Grey */
+  --color-brand-steel: #4682b4;    /* Steel Blue */
+  --color-brand-white: #ffffff;    /* White */
+
   --font-sans: var(--font-sans);
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
