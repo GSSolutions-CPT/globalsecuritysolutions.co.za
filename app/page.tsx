@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic'
 import { ArrowRight, ShieldCheck, Zap, Settings } from 'lucide-react'
 import { MarketingBanner } from '@/components/MarketingBanner'
 
-import { ServiceGrid } from '@/components/ServiceGrid'
-import { SectorGrid } from '@/components/SectorGrid'
+import { ServiceCarousel } from '@/components/ServiceCarousel'
+import { SectorCarousel } from '@/components/SectorCarousel'
 
 // Critical LCP Optimization: Lazy load heavy interactive components below the fold
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm))
@@ -67,7 +67,7 @@ export default function Home() {
             </p>
           </div>
 
-          <ServiceGrid />
+          <ServiceCarousel />
 
           <div className="mt-16 text-center">
             <Link
@@ -91,7 +91,7 @@ export default function Home() {
             </p>
           </div>
 
-          <SectorGrid />
+          <SectorCarousel />
         </div>
       </section>
 
