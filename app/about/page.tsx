@@ -27,7 +27,7 @@ export default function AboutPage() {
                     />
                 </div>
 
-                <div className="container relative z-20 mx-auto px-4 pt-20">
+                <div className="container relative z-20 mx-auto px-4 pt-8">
                     <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
                             <span className="w-2 h-2 rounded-full bg-blue-500"></span>
@@ -48,7 +48,7 @@ export default function AboutPage() {
             <div className="container mx-auto px-4 py-12">
 
                 {/* Mission & Vision Split */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20 md:mb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center mb-8 md:mb-4">
                     <div className="prose prose-lg text-slate-600">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">Our Mission</h2>
                         <p className="leading-relaxed mb-6 text-lg">
@@ -118,12 +118,12 @@ export default function AboutPage() {
                 </div>
 
                 {/* Certifications Section */}
-                <div className="mb-20">
-                    <div className="text-center mb-12">
+                <div className="mb-8">
+                    <div className="text-center mb-4">
                         <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Accredited & Certified</h2>
                         <p className="text-slate-500 mt-2">We are authorized installers for the world&apos;s leading security brands.</p>
                     </div>
-                    <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div className="flex flex-wrap justify-center gap-8 md:gap-4 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* We use existing brand logos here */}
                         <Image src="/brand-hikvision.png" alt="Hikvision Certified Installer Badge Cape Town" width={120} height={60} className="object-contain h-12 w-auto" />
                         <Image src="/brand-ajax.png" alt="Ajax Systems Authorized Dealer Badge" width={120} height={60} className="object-contain h-12 w-auto" />
@@ -134,9 +134,9 @@ export default function AboutPage() {
                 </div>
 
                 {/* Stats Section */}
-                <div className="bg-slate-900 rounded-3xl p-8 md:p-12 mb-20 text-white shadow-2xl relative overflow-hidden">
+                <div className="bg-slate-900 rounded-3xl p-8 md:p-12 mb-8 text-white shadow-2xl relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid-pattern.svg')] opacity-5" />
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 relative z-10 border-b md:border-b-0 md:border-r border-slate-800/50">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 relative z-10 border-b md:border-b-0 md:border-r border-slate-800/50">
                         <div className="text-center p-4">
                             <Counter end={10} label="Years Experience" />
                         </div>
@@ -154,8 +154,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* Values Grid */}
-                <div className="mb-20">
-                    <div className="text-center mb-16">
+                <div className="mb-8">
+                    <div className="text-center mb-4">
                         <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Core Values</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900">Why We Are Different</h2>
                     </div>

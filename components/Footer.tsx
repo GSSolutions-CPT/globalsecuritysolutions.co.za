@@ -7,13 +7,13 @@ export function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-brand-navy text-brand-white pt-16 pb-6 relative overflow-hidden font-sans border-t border-brand-electric/20 selection:bg-brand-electric selection:text-brand-navy">
+        <footer className="bg-brand-navy text-brand-white pt-4 pb-6 relative overflow-hidden font-sans border-t border-brand-electric/20 selection:bg-brand-electric selection:text-brand-navy">
             {/* Striking Top Glow Effect */}
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-electric to-transparent opacity-80 z-10 shadow-[0_0_15px_rgba(0,229,255,1)]"></div>
             <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1000px] h-[300px] bg-brand-electric/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
 
             <div className="container mx-auto px-4 md:px-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mb-4">
 
                     {/* Company Info */}
                     <div className="flex flex-col">

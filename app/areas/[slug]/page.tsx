@@ -85,16 +85,16 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                 </div>
             </section>
 
-            <div className="relative z-30 -mt-20 pb-20">
+            <div className="relative z-30 -mt-8 pb-8">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
 
                         {/* Main Content */}
                         <div className="lg:col-span-2 space-y-12">
 
                             {/* Local Insight Card */}
                             <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-slate-100 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16" />
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-4" />
                                 <div className="relative z-10">
                                     <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                                         <ShieldCheck className="w-6 h-6 text-blue-600 mr-3" />

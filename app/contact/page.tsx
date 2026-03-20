@@ -35,21 +35,21 @@ export default function ContactPage() {
                         Get in Touch with <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">The Experts</span>
                     </h1>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-4">
                         Whether you need a quick quote or a comprehensive security audit, our team is standing by to assist you.
                     </p>
                 </div>
             </section>
 
             {/* Main Content Area */}
-            <div className="relative z-30 -mt-20 pb-20">
+            <div className="relative z-30 -mt-8 pb-8">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
                         {/* Contact Info Card */}
                         <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden h-full">
                             {/* Decorative Background */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -mr-16 -mt-16 z-0" />
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -mr-16 -mt-4 z-0" />
 
                             <div className="relative z-10 space-y-10">
                                 <div>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Map Embed */}
-                    <div className="mt-12 rounded-[2rem] overflow-hidden border border-slate-200 shadow-lg h-[400px] relative z-10 w-full bg-slate-100">
+                    <div className="mt-4 rounded-[2rem] overflow-hidden border border-slate-200 shadow-lg h-[400px] relative z-10 w-full bg-slate-100">
                         <iframe
                             width="100%"
                             height="100%"

@@ -71,7 +71,7 @@ export default function SectorsPage() {
                         Security Tailored to <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Your Environment</span>
                     </h1>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-4">
                         We understand that a farm requires different protection than a retail store.
                         Our sector-specific approach ensures you get the exact defense architecture your property needs.
                     </p>
@@ -82,7 +82,7 @@ export default function SectorsPage() {
             <div className="container mx-auto px-4 py-12">
 
                 {/* Sector Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     {sectors.map((sector, index) => {
                         const slug = toSlug(sector)
                         const seoItem = seoData.sectorSolutions.find(item =>
@@ -123,7 +123,7 @@ export default function SectorsPage() {
                 </div>
 
                 {/* Why Specialization Matters */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center mb-8">
                     <div className="space-y-8">
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
                             Why One Size <span className="text-blue-600">Doesn&apos;t</span> Fit All

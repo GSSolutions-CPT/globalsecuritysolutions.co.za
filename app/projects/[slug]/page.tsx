@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 -mt-20 relative z-30 pb-24">
+            <div className="container mx-auto px-4 -mt-8 relative z-30 pb-8">
                 <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
                     {/* Main Images */}
                     {/* Main Images / Gallery */}

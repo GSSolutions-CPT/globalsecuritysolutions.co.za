@@ -184,7 +184,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             </section>
 
             <div className="container mx-auto px-4 py-16 -mt-10 relative z-30">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                     {/* Main Content */}
                     <div className="lg:col-span-2 space-y-12">
@@ -282,7 +282,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         </div>
 
                         {/* FAQ Section */}
-                        <div className="bg-slate-50 border-t border-slate-200 pt-12">
+                        <div className="bg-slate-50 border-t border-slate-200 pt-4">
                             <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
                             <div className="space-y-4">
                                 <div className="bg-white p-6 rounded-2xl border border-slate-200">
