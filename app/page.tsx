@@ -49,7 +49,7 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-4 text-center text-brand-white"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center text-brand-white"
           >
             {[
               { stat: "10+", label: "Years Experience" },
@@ -82,7 +82,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs lg:text-sm font-bold text-brand-slate uppercase tracking-[0.3em] mb-4 flex items-center justify-center gap-4"
+            className="text-xs lg:text-sm font-bold text-brand-slate uppercase tracking-[0.3em] mb-12 flex items-center justify-center gap-4"
           >
             <span className="w-12 h-px bg-brand-slate/30" />
             Trusted by Cape Town&apos;s Leading Brands
@@ -107,7 +107,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center md:mb-8 mb-4"
+            className="text-center md:mb-24 mb-16"
           >
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-navy text-brand-electric font-bold text-xs lg:text-sm tracking-[0.2em] uppercase mb-8 shadow-xl shadow-brand-navy/10 border border-brand-electric/20 backdrop-blur-md">
               <Command className="w-4 h-4" />
@@ -139,7 +139,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-8 text-center"
+            className="mt-20 text-center"
           >
             <Link
               href="/services"
@@ -164,7 +164,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-8"
+            className="text-center mb-24"
           >
             <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter">
               Tailored to Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]">Environment</span>
@@ -193,7 +193,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center md:mb-8 mb-4"
+            className="text-center md:mb-24 mb-16"
           >
             <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter">Why Global Security?</h2>
             <p className="text-brand-slate max-w-2xl mx-auto text-lg md:text-2xl font-medium">
@@ -254,7 +254,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-center text-brand-navy mb-8 tracking-tighter"
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-center text-brand-navy mb-24 tracking-tighter"
           >
             Client <span className="text-brand-slate">Outcomes</span>
           </motion.h2>
@@ -264,7 +264,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-4"
+            className="mb-32"
           >
             <TestimonialCarousel />
           </motion.div>
@@ -287,7 +287,7 @@ export default function Home() {
                   Featured Project
                 </span>
                 <h3 className="text-4xl md:text-6xl font-black text-brand-white mb-8 leading-tight tracking-tighter">Chere Botha School</h3>
-                <p className="text-brand-steel mb-4 text-lg md:text-xl leading-relaxed font-light">
+                <p className="text-brand-steel mb-12 text-lg md:text-xl leading-relaxed font-light">
                   A massive security overhaul ensuring total safety for students and staff. Features include IP CCTV, biometric access control, and rapid response alarm integration.
                 </p>
                 <div>
@@ -335,7 +335,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-5xl mx-auto"
           >
-            <div className="text-center mb-4 lg:mb-8">
+            <div className="text-center mb-16 lg:mb-24">
               <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-white mb-8 tracking-tighter leading-tight drop-shadow-2xl">
                 Ready to Upgrade <br /> 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Your Security?</span>

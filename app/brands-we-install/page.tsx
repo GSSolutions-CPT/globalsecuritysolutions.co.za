@@ -233,7 +233,7 @@ export default function BrandsPage() {
             {/* Why Certified Matters */}
             <section className="py-12 bg-slate-50">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Why Choose a <span className="text-blue-600">Certified Installer?</span></h2>
                             <div className="space-y-6">
@@ -287,7 +287,7 @@ export default function BrandsPage() {
             {/* CTA Section */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto text-center mb-4">
+                    <div className="max-w-4xl mx-auto text-center mb-12">
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Need a Specific Brand?</h2>
                         <p className="text-xl text-slate-600">Whether you need a new Hikvision camera or a battery for your Paradox alarm, we can help.</p>
                     </div>

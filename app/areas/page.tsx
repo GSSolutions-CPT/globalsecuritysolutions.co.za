@@ -34,18 +34,18 @@ export default function AreasIndexPage() {
                         Security Where <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">You Need It</span>
                     </h1>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-4">
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
                         From the Atlantic Seaboard to the Winelands. We bring expert security installations to your doorstep.
                     </p>
                 </div>
             </section>
 
             {/* Main Content */}
-            <div className="relative z-30 -mt-8 pb-8">
+            <div className="relative z-30 -mt-20 pb-20">
                 <div className="container mx-auto px-4">
 
                     {/* Areas Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
                         {locationData.map((location) => (
                             <Link
                                 key={location.slug}

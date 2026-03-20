@@ -44,7 +44,7 @@ export default function ServicesIndexPage() {
                         World-Class <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Services</span>
                     </h1>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-4">
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12">
                         From residential homes to industrial estates, we design systems that protect what matters most.
                     </p>
                 </div>
@@ -52,7 +52,7 @@ export default function ServicesIndexPage() {
 
             <div className="container mx-auto px-4 py-12">
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
                     {seoData.primaryServicePages.map((service) => (
                         <Link
                             key={service.page}
@@ -91,8 +91,8 @@ export default function ServicesIndexPage() {
                 </div>
 
                 {/* Process Section */}
-                <div className="mb-8">
-                    <div className="text-center mb-4">
+                <div className="mb-24">
+                    <div className="text-center mb-16">
                         <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Workflow</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900">How We Work</h2>
                     </div>
@@ -123,7 +123,7 @@ export default function ServicesIndexPage() {
                 <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-16 text-white relative overflow-hidden shadow-2xl">
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 relative z-10 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 relative z-10 items-center">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">Why Professional Security Matters</h2>
                             <p className="text-slate-300 mb-6 text-lg leading-relaxed">
