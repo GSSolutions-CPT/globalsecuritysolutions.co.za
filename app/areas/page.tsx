@@ -41,11 +41,11 @@ export default function AreasIndexPage() {
             </section>
 
             {/* Main Content */}
-            <div className="relative z-30 -mt-20 pb-20">
+            <div className="relative z-30 -mt-8 pb-8">
                 <div className="container mx-auto px-4">
 
                     {/* Areas Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
                         {locationData.map((location) => (
                             <Link
                                 key={location.slug}

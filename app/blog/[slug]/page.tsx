@@ -59,11 +59,11 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+        <div className="min-h-screen bg-slate-50 pb-8 font-sans">
             <ScrollProgress />
 
             {/* Minimal Header */}
-            <div className="bg-slate-900 text-white pt-24 pb-12">
+            <div className="bg-slate-900 text-white pt-8 pb-12">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <Link href="/blog" className="inline-flex items-center text-blue-400 hover:text-white mb-6 text-sm font-semibold uppercase tracking-wide transition-colors">
                         &larr; Back to Blog
@@ -149,7 +149,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
                     {/* Call to Action */}
                     <div className="mt-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-12" />
                         <h3 className="text-2xl font-bold mb-4 relative z-10">Need help with your security?</h3>
                         <p className="text-blue-100 mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
                             We can implement the advice in this article for you. Our technical teams operate across the Western Cape.

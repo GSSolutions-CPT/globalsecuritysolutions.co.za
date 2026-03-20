@@ -52,7 +52,7 @@ export default function ServicesIndexPage() {
 
             <div className="container mx-auto px-4 py-12">
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     {seoData.primaryServicePages.map((service) => (
                         <Link
                             key={service.page}
@@ -91,8 +91,8 @@ export default function ServicesIndexPage() {
                 </div>
 
                 {/* Process Section */}
-                <div className="mb-24">
-                    <div className="text-center mb-16">
+                <div className="mb-8">
+                    <div className="text-center mb-6">
                         <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Workflow</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900">How We Work</h2>
                     </div>

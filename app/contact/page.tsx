@@ -42,14 +42,14 @@ export default function ContactPage() {
             </section>
 
             {/* Main Content Area */}
-            <div className="relative z-30 -mt-20 pb-20">
+            <div className="relative z-30 -mt-8 pb-8">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
                         {/* Contact Info Card */}
                         <div className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden h-full">
                             {/* Decorative Background */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -mr-16 -mt-16 z-0" />
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full -mr-16 -mt-6 z-0" />
 
                             <div className="relative z-10 space-y-10">
                                 <div>

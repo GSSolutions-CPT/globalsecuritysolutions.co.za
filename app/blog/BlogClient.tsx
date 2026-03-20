@@ -85,7 +85,7 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 -mt-20 relative z-30 pb-24">
+            <div className="container mx-auto px-4 -mt-8 relative z-30 pb-8">
                 {filteredPosts.length === 0 && (
                     <div className="text-center py-12 bg-white rounded-[2.5rem] shadow-sm border border-slate-100">
                         <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">

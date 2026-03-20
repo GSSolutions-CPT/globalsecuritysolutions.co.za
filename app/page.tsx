@@ -38,7 +38,7 @@ export default function Home() {
       <MarketingBanner />
 
       {/* Stats Section - High Contrast Navy & Electric Blue */}
-      <section className="relative py-12 lg:py-16 bg-brand-navy overflow-hidden">
+      <section className="relative py-12 lg:py-6 bg-brand-navy overflow-hidden">
         {/* Dynamic Electric Blue Glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-electric/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-brand-steel/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none" />
@@ -95,7 +95,7 @@ export default function Home() {
       </section>
 
       {/* Services Section - Steel & White Elegance */}
-      <section className="py-16 relative bg-slate-50 isolate overflow-hidden">
+      <section className="py-6 relative bg-slate-50 isolate overflow-hidden">
         {/* Abstract Steel & Electric Backgrounds */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-steel/5 rounded-full blur-[150px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-electric/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -107,7 +107,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
-            className="text-center md:mb-24 mb-16"
+            className="text-center md:mb-8 mb-6"
           >
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-navy text-brand-electric font-bold text-xs lg:text-sm tracking-[0.2em] uppercase mb-8 shadow-xl shadow-brand-navy/10 border border-brand-electric/20 backdrop-blur-md">
               <Command className="w-4 h-4" />
@@ -139,7 +139,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-20 text-center"
+            className="mt-8 text-center"
           >
             <Link
               href="/services"
@@ -153,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Sector Focus - Ultra Premium Dark Theme */}
-      <section className="py-16 bg-brand-navy text-brand-white relative isolate overflow-hidden">
+      <section className="py-6 bg-brand-navy text-brand-white relative isolate overflow-hidden">
         {/* Deep immersive gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-navy via-[#061020] to-brand-navy" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] pointer-events-none mix-blend-screen" />
@@ -164,7 +164,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-24"
+            className="text-center mb-8"
           >
             <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter">
               Tailored to Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]">Environment</span>
@@ -186,14 +186,14 @@ export default function Home() {
       </section>
 
       {/* Why Us - Bento Grid with Brand Colors */}
-      <section className="py-16 bg-brand-white relative isolate border-b border-brand-slate/10">
+      <section className="py-6 bg-brand-white relative isolate border-b border-brand-slate/10">
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center md:mb-24 mb-16"
+            className="text-center md:mb-8 mb-6"
           >
             <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter">Why Global Security?</h2>
             <p className="text-brand-slate max-w-2xl mx-auto text-lg md:text-2xl font-medium">
@@ -248,13 +248,13 @@ export default function Home() {
       </section>
 
       {/* Testimonials & Project Feature */}
-      <section className="py-16 bg-slate-50 relative isolate overflow-hidden">
+      <section className="py-6 bg-slate-50 relative isolate overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-center text-brand-navy mb-24 tracking-tighter"
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-center text-brand-navy mb-8 tracking-tighter"
           >
             Client <span className="text-brand-slate">Outcomes</span>
           </motion.h2>
@@ -264,7 +264,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-32"
+            className="mb-12"
           >
             <TestimonialCarousel />
           </motion.div>
@@ -322,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA - Massive Impact */}
-      <section id="contact" className="py-16 lg:py-24 bg-brand-navy relative overflow-hidden isolate">
+      <section id="contact" className="py-6 lg:py-8 bg-brand-navy relative overflow-hidden isolate">
         {/* Soft background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-brand-electric/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
@@ -335,7 +335,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-5xl mx-auto"
           >
-            <div className="text-center mb-16 lg:mb-24">
+            <div className="text-center mb-6 lg:mb-8">
               <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-white mb-8 tracking-tighter leading-tight drop-shadow-2xl">
                 Ready to Upgrade <br /> 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Your Security?</span>

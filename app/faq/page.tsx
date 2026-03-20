@@ -37,7 +37,7 @@ export default function FAQPage() {
     }
 
     return (
-        <div className="bg-slate-50 min-h-screen font-sans pb-20">
+        <div className="bg-slate-50 min-h-screen font-sans pb-8">
 
             {/* Premium Hero */}
             <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">

@@ -183,7 +183,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 py-16 -mt-10 relative z-30">
+            <div className="container mx-auto px-4 py-6 -mt-10 relative z-30">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     {/* Main Content */}

@@ -66,7 +66,7 @@ export default async function ProjectsPage() {
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 -mt-24 relative z-30 pb-24">
+            <div className="container mx-auto px-4 -mt-8 relative z-30 pb-8">
 
                 {/* Empty State */}
                 {projects.length === 0 && (
@@ -136,9 +136,9 @@ export default async function ProjectsPage() {
                 </div>
 
                 {/* Bottom CTA / Standards */}
-                <div className="mt-20 lg:mt-32 max-w-5xl mx-auto bg-blue-600 rounded-[2.5rem] p-8 md:p-16 text-center text-white relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-32" />
+                <div className="mt-8 lg:mt-12 max-w-5xl mx-auto bg-blue-600 rounded-[2.5rem] p-8 md:p-16 text-center text-white relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-12" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-12" />
 
                     <div className="relative z-10">
                         <h2 className="text-3xl md:text-4xl font-bold mb-6">Installation Excellence</h2>
