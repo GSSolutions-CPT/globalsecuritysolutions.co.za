@@ -27,45 +27,59 @@ const getSectorIcon = (sector: string) => {
 export function SectorCarousel() {
     const sectors = seoData.sectorSolutions
 
+    // Vibrant, high-contrast color palette inspired by modern UI trends
+    const vibrantColors = [
+        "bg-[#E52D27]", // Bright Red
+        "bg-[#F7CE46]", // Lemon Yellow
+        "bg-[#2B9DF4]", // Vivid Blue
+        "bg-[#46F7A8]", // Mint Green
+        "bg-[#8B2BF4]", // Bright Purple
+        "bg-[#F42B76]", // Hot Pink
+    ];
+
     return (
-        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            {/* Duplicating the list 4 times to ensure enough content for smooth scrolling since there are only 5 items */}
-            <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-slow hover:[animation-play-state:paused]">
-                {[...sectors, ...sectors, ...sectors, ...sectors].map((service, index) => {
-                    // Simplified toSlug logic
-                    const slug = service.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
+        <ul className="w-full flex flex-col md:flex-row h-[700px] md:h-[500px] gap-2 overflow-hidden m-0 p-0">
+            {sectors.map((sector, index) => {
+                const slug = sector.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
+                const bgColor = vibrantColors[index % vibrantColors.length]
 
-                    return (
-                        <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
-                            <Link
-                                href={`/sectors/${slug}`}
-                                className="block h-full bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center flex flex-col items-center border border-slate-50"
-                            >
-                                {/* APEX DOG-EAR ACCENT */}
-                                <div className="absolute top-0 left-0 w-20 h-20 bg-indigo-600 rounded-br-[3.5rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
+                return (
+                    <li 
+                        key={`${sector.page}-${index}`} 
+                        className={`list-none relative flex-1 group hover:grow-[5] transition-all duration-500 ease-in-out overflow-hidden rounded-[2.5rem] cursor-pointer ${bgColor} shadow-lg`}
+                    >
+                        <Link href={`/sectors/${slug}`} className="block w-full h-full relative z-10">
+                            
+                            {/* Collapsed State - Horizontal on Mobile, Rotated Vertical on Desktop */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none p-4">
+                                <h3 className="md:-rotate-90 md:whitespace-nowrap text-2xl md:text-3xl font-black uppercase tracking-tighter text-white drop-shadow-md text-center">
+                                    {sector.page}
+                                </h3>
+                            </div>
 
-                                <div className="relative z-10 flex flex-col items-center h-full w-full">
-                                    <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
-                                        {getSectorIcon(service.page)}
-                                    </div>
-
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
-                                        {service.page}
-                                    </h3>
-
-                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3">
-                                        {service.description}
-                                    </p>
-
-                                    <span className="mt-auto text-indigo-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
-                                        View Sector <ArrowRight className="w-4 h-4 ml-1" />
-                                    </span>
+                            {/* Expanded State */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-8 px-4 md:px-8 text-center bg-black/5">
+                                {/* Filter to ensure the icon is white to contrast nicely with the vibrant background */}
+                                <div className="mb-4 md:mb-6 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl brightness-0 invert">
+                                    {getSectorIcon(sector.page)}
                                 </div>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+                                
+                                <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md">
+                                    {sector.page}
+                                </h3>
+                                
+                                <p className="text-white/95 text-xs md:text-sm font-medium max-w-[280px] md:max-w-md mb-6 md:mb-8 drop-shadow leading-relaxed line-clamp-3 md:line-clamp-none">
+                                    {sector.description}
+                                </p>
+                                
+                                <span className="mt-auto md:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-6 py-2.5 rounded-full font-bold text-sm transition-colors border border-white/20 shadow-lg">
+                                    View Sector <ArrowRight className="w-4 h-4 ml-2" />
+                                </span>
+                            </div>
+                        </Link>
+                    </li>
+                )
+            })}
+        </ul>
     )
 }

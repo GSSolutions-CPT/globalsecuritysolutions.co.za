@@ -9,59 +9,74 @@ import seoData from '@/app/data/seoData.json'
 export function ServiceCarousel() {
     const services = seoData.primaryServicePages
 
+    // Expanded vibrant palette for 12 items
+    const vibrantColors = [
+        "bg-[#FF3B30]", // Red
+        "bg-[#FF9500]", // Orange
+        "bg-[#FFCC00]", // Yellow
+        "bg-[#4CD964]", // Green
+        "bg-[#5AC8FA]", // Light Blue
+        "bg-[#007AFF]", // Blue
+        "bg-[#5856D6]", // Purple
+        "bg-[#FF2D55]", // Pink
+        "bg-[#E52D27]", // Crimson
+        "bg-[#46F7A8]", // Mint
+        "bg-[#8B2BF4]", // Bright Violet
+        "bg-[#F7CE46]"  // Sunflower
+    ];
+
     return (
-        <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-slow hover:[animation-play-state:paused]">
-                {[...services, ...services].map((service, index) => {
-                    // Simplified toSlug logic
-                    const slug = service.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
+        <ul className="w-full flex flex-col xl:flex-row h-[1200px] md:h-[800px] xl:h-[500px] gap-1 overflow-hidden m-0 p-0">
+            {services.map((service, index) => {
+                const slug = service.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
+                const bgColor = vibrantColors[index % vibrantColors.length]
 
-                    return (
-                        <li key={`${service.page}-${index}`} className="flex-shrink-0 w-[300px]">
-                            <Link
-                                href={`/services/${slug}`}
-                                className="block h-full bg-white pt-12 pb-8 px-6 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden text-center"
-                            >
-                                {/* THE "APEX" BLUE DOG-EAR ACCENT */}
-                                {/* This creates the blue shape at the top-left specific to the reference image */}
-                                <div className="absolute top-0 left-0 w-24 h-24 bg-blue-600 rounded-br-[4rem] transition-transform duration-300 group-hover:scale-110 -translate-x-4 -translate-y-4 shadow-lg z-10" />
+                return (
+                    <li 
+                        key={`${service.page}-${index}`} 
+                        className={`list-none relative flex-1 group hover:grow-[8] transition-all duration-500 ease-in-out overflow-hidden rounded-[2rem] cursor-pointer ${bgColor} shadow-lg`}
+                    >
+                        <Link href={`/services/${slug}`} className="block w-full h-full relative z-10">
+                            
+                            {/* Collapsed State - Rotated Vertical on Desktop */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none p-2">
+                                <h3 className="xl:-rotate-90 xl:whitespace-nowrap text-lg xl:text-2xl font-black uppercase tracking-tighter text-white drop-shadow-md text-center line-clamp-1 xl:line-clamp-none">
+                                    {service.page}
+                                </h3>
+                            </div>
 
-                                {/* Inner White Curve to refine the dog-ear shape if needed, or just let it be distinct */}
-                                <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-blue-400/30 blur-sm z-20" />
-
-                                <div className="relative z-10 flex flex-col items-center h-full">
-                                    {/* Frameless Icon - Large & Clean */}
-                                    <div className="w-24 h-24 mb-6 relative transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
-                                        {service.iconPath ? (
-                                            <Image
-                                                src={service.iconPath}
-                                                alt={`${service.page} icon`}
-                                                fill
-                                                className="object-contain drop-shadow-md"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full bg-blue-100 rounded-full" />
-                                        )}
-                                    </div>
-
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">
-                                        {service.page}
-                                    </h3>
-
-                                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-3">
-                                        {service.description}
-                                    </p>
-
-                                    {/* Minimalist Action */}
-                                    <span className="mt-auto text-blue-600 font-bold text-sm flex items-center group-hover:underline decoration-2 underline-offset-4">
-                                        View Details <ArrowRight className="w-4 h-4 ml-1" />
-                                    </span>
+                            {/* Expanded State */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-6 px-4 md:px-8 text-center bg-black/5">
+                                <div className="mb-4 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl w-16 h-16 relative brightness-0 invert">
+                                    {service.iconPath ? (
+                                        <Image
+                                            src={service.iconPath}
+                                            alt={`${service.page} icon`}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-white/20 rounded-full" />
+                                    )}
                                 </div>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+                                
+                                <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md">
+                                    {service.page}
+                                </h3>
+                                
+                                <p className="text-white/95 text-xs md:text-sm font-medium max-w-[250px] md:max-w-sm mb-4 md:mb-6 drop-shadow leading-relaxed line-clamp-3 md:line-clamp-none hidden sm:block">
+                                    {service.description}
+                                </p>
+                                
+                                <span className="mt-auto sm:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-sm transition-colors border border-white/20 shadow-lg">
+                                    Details <ArrowRight className="w-4 h-4 ml-2" />
+                                </span>
+                            </div>
+                        </Link>
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
+
