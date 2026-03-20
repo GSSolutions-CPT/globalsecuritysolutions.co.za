@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const MarketingBanner = () => {
     return (
-        <div className="relative w-full min-h-[85vh] flex items-center overflow-hidden bg-slate-950">
+        <div className="relative w-full py-16 flex items-center overflow-hidden bg-slate-950">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
@@ -23,7 +23,7 @@ export const MarketingBanner = () => {
             <div className="container mx-auto px-4 relative z-20">
                 <div className="max-w-4xl">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm animate-fade-in-up">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4 backdrop-blur-sm animate-fade-in-up">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
@@ -32,28 +32,28 @@ export const MarketingBanner = () => {
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tight animate-fade-in-up delay-100">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-[1.05] tracking-tight animate-fade-in-up delay-100">
                         Premium Security <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">System Installations.</span>
                     </h1>
 
                     {/* Sub-text */}
-                    <p className="text-xl md:text-2xl text-slate-300/90 mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
+                    <p className="text-lg md:text-xl text-slate-300/90 mb-6 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
                         We secure Cape Town homes and businesses with AI-powered CCTV, smart alarms, and off-grid power solutions.
-                        <span className="block mt-2 text-slate-400 text-lg">Over 10 years of experience and 500+ satisfied clients.</span>
+                        <span className="block mt-1 text-slate-400 text-sm">Over 10 years of experience and 500+ satisfied clients.</span>
                     </p>
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
                         <Link
                             href="/free-security-audit"
-                            className="inline-flex h-14 items-center justify-center rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:scale-105 hover:shadow-blue-600/40 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                            className="inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:scale-105 hover:shadow-blue-600/40 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                         >
                             Get Free Audit
                         </Link>
                         <Link
                             href="/services"
-                            className="inline-flex h-14 items-center justify-center rounded-full border border-slate-700 bg-white/5 px-8 text-base font-bold text-white transition-all hover:bg-white/10 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                            className="inline-flex h-12 items-center justify-center rounded-full border border-slate-700 bg-white/5 px-6 text-sm font-bold text-white transition-all hover:bg-white/10 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                         >
                             View Services
                         </Link>
