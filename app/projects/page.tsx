@@ -70,7 +70,7 @@ export default async function ProjectsPage() {
 
                 {/* Empty State */}
                 {projects.length === 0 && (
-                    <div className="text-center py-20 bg-white rounded-3xl shadow-xl border border-slate-100">
+                    <div className="text-center py-12 bg-white rounded-3xl shadow-xl border border-slate-100">
                         <div className="w-20 h-20 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Camera className="w-10 h-10" />
                         </div>

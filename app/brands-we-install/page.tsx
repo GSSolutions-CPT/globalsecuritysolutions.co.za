@@ -199,7 +199,7 @@ export default function BrandsPage() {
             </section>
 
             {/* Brands Grid */}
-            <section className="py-20">
+            <section className="py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
                         {allBrands.map((brand, idx) => (
@@ -231,7 +231,7 @@ export default function BrandsPage() {
             </section>
 
             {/* Why Certified Matters */}
-            <section className="py-20 bg-slate-50">
+            <section className="py-12 bg-slate-50">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
@@ -285,7 +285,7 @@ export default function BrandsPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 bg-white">
+            <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Need a Specific Brand?</h2>

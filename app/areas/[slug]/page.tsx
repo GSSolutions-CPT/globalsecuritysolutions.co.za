@@ -65,7 +65,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
                 </div>
 
-                <div className="container relative z-20 mx-auto px-4 py-20 lg:py-0">
+                <div className="container relative z-20 mx-auto px-4 py-12 lg:py-0">
                     <Link href="/areas" className="inline-flex items-center text-blue-400 hover:text-white mb-8 transition-colors text-sm font-semibold tracking-wide uppercase">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Areas
                     </Link>

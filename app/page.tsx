@@ -38,7 +38,7 @@ export default function Home() {
       <MarketingBanner />
 
       {/* Stats Section - High Contrast Navy & Electric Blue */}
-      <section className="relative py-16 lg:py-24 bg-brand-navy overflow-hidden">
+      <section className="relative py-12 lg:py-16 bg-brand-navy overflow-hidden">
         {/* Dynamic Electric Blue Glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-electric/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-brand-steel/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none" />
@@ -76,7 +76,7 @@ export default function Home() {
       </section>
 
       {/* Trusted By Carousel - Clean White & Slate */}
-      <section className="py-20 bg-brand-white border-b border-brand-slate/20 relative">
+      <section className="py-12 bg-brand-white border-b border-brand-slate/20 relative">
         <div className="container mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
@@ -95,7 +95,7 @@ export default function Home() {
       </section>
 
       {/* Services Section - Steel & White Elegance */}
-      <section className="py-32 relative bg-slate-50 isolate overflow-hidden">
+      <section className="py-16 relative bg-slate-50 isolate overflow-hidden">
         {/* Abstract Steel & Electric Backgrounds */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-steel/5 rounded-full blur-[150px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-electric/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -153,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Sector Focus - Ultra Premium Dark Theme */}
-      <section className="py-32 bg-brand-navy text-brand-white relative isolate overflow-hidden">
+      <section className="py-16 bg-brand-navy text-brand-white relative isolate overflow-hidden">
         {/* Deep immersive gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-brand-navy via-[#061020] to-brand-navy" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] pointer-events-none mix-blend-screen" />
@@ -186,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* Why Us - Bento Grid with Brand Colors */}
-      <section className="py-32 bg-brand-white relative isolate border-b border-brand-slate/10">
+      <section className="py-16 bg-brand-white relative isolate border-b border-brand-slate/10">
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div 
             initial="hidden"
@@ -248,7 +248,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials & Project Feature */}
-      <section className="py-32 bg-slate-50 relative isolate overflow-hidden">
+      <section className="py-16 bg-slate-50 relative isolate overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -322,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA - Massive Impact */}
-      <section id="contact" className="py-32 lg:py-48 bg-brand-navy relative overflow-hidden isolate">
+      <section id="contact" className="py-16 lg:py-24 bg-brand-navy relative overflow-hidden isolate">
         {/* Soft background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-brand-electric/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />

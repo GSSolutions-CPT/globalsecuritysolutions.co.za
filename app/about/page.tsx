@@ -45,7 +45,7 @@ export default function AboutPage() {
             </section>
 
             {/* Main Content */}
-            <div className="container mx-auto px-4 py-20">
+            <div className="container mx-auto px-4 py-12">
 
                 {/* Mission & Vision Split */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20 md:mb-32">

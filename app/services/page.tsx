@@ -50,7 +50,7 @@ export default function ServicesIndexPage() {
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 py-20">
+            <div className="container mx-auto px-4 py-12">
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
                     {seoData.primaryServicePages.map((service) => (

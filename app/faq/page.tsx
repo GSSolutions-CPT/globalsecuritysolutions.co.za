@@ -117,7 +117,7 @@ export default function FAQPage() {
                             </div>
 
                             {displayQuestions.length === 0 ? (
-                                <div className="text-center py-20 text-slate-500">
+                                <div className="text-center py-12 text-slate-500">
                                     <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                     <p>No questions found.</p>
                                     <button onClick={() => setSearchQuery("")} className="text-blue-600 font-bold mt-2 hover:underline">Clear Search</button>
