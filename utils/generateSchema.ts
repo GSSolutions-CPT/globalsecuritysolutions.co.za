@@ -135,8 +135,21 @@ export const masterBusinessData = {
 }
 
 export function getBaseSchema() {
-    return {
-        "@context": "https://schema.org",
-        ...masterBusinessData
-    }
+    return [
+        {
+            "@context": "https://schema.org",
+            ...masterBusinessData
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Global Security Solutions",
+            "url": "https://globalsecuritysolutions.co.za/",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://globalsecuritysolutions.co.za/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    ]
 }

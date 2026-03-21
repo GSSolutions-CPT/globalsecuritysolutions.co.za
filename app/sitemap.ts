@@ -38,8 +38,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: route === '' ? 1 : 0.8,
+        changeFrequency: route === '' ? 'daily' : 'weekly' as const,
+        priority: route === '' ? 1 : (route === '/contact' || route === '/free-security-audit') ? 0.9 : 0.8,
     }))
 
     // Dynamic Services
@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/services/${toSlug(service.page)}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+        priority: 0.9,
     }))
 
     // Dynamic Sectors
@@ -55,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/sectors/${toSlug(service.page)}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+        priority: 0.9,
     }))
 
     // Dynamic Areas

@@ -13,7 +13,10 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans", dis
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalsecuritysolutions.co.za'),
   alternates: {
-    canonical: './',
+    canonical: 'https://globalsecuritysolutions.co.za',
+    languages: {
+      'en-ZA': 'https://globalsecuritysolutions.co.za',
+    },
   },
   other: {
     'build-version': '2.0.2-BLOG-FIX-JAN14',
@@ -24,16 +27,19 @@ export const metadata: Metadata = {
   },
   description: "Cape Town's trusted security experts. We install AI-powered CCTV, smart alarms, and off-grid security systems. Get a free risk assessment today.",
   openGraph: {
-    title: "Security System Installations Cape Town | Global Security Solutions",
+    title: {
+      default: "Security System Installations Cape Town | Global Security Solutions",
+      template: "%s | Global Security Solutions",
+    },
     description: "Expert security system installations in Cape Town. We offer alarms, CCTV, and electric fencing. Get a free quote today from Global Security Solutions.",
     url: 'https://globalsecuritysolutions.co.za',
     siteName: 'Global Security Solutions',
     images: [
       {
-        url: 'https://globalsecuritysolutions.co.za/nav-logo-final.png', // Default OG Image
+        url: 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
         width: 1200,
         height: 630,
-        alt: 'Global Security Solutions',
+        alt: 'Global Security Solutions Cape Town',
       },
     ],
     locale: 'en_ZA',
@@ -41,9 +47,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Global Security Solutions | Cape Town Security Experts",
-    description: "Expert security system installations in Cape Town. Alarms, CCTV, and electric fencing.",
-    images: ['/nav-logo-final.png'],
+    title: {
+      default: "Global Security Solutions | Cape Town Security Experts",
+      template: "%s | Global Security Solutions",
+    },
+    description: "Expert security system installations in Cape Town by certified professionals.",
+    images: ['https://globalsecuritysolutions.co.za/nav-logo-final.png'],
+    creator: "@globalsecurityza",
   },
   robots: {
     index: true,

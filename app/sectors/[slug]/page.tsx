@@ -1,9 +1,10 @@
 import dynamic from 'next/dynamic'
 import seoData from '@/app/data/seoData.json'
+import { masterBusinessData } from '@/utils/generateSchema'
 
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight, Building, Home, Factory, Tractor, School, LayoutDashboard } from 'lucide-react'
+import { ShieldAlert, BadgeCheck, ArrowRight, Building, Home, Factory, Tractor, School, LayoutDashboard } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -36,6 +37,9 @@ interface SectorData {
     heroImage?: string
     heroAlt?: string
     brands?: string[]
+    features?: { title: string, text: string }[]
+    riskDescription?: string
+    solutionDescription?: string
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -43,9 +47,34 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const sector = getSector(params.slug)
     if (!sector) return {}
 
+    const url = `https://globalsecuritysolutions.co.za/sectors/${params.slug}`
+
     return {
-        title: sector.title,
+        title: `${sector.title} Security | Global Security Solutions`,
         description: sector.description,
+        alternates: {
+            canonical: url
+        },
+        openGraph: {
+            title: `${sector.title} Security Solutions`,
+            description: sector.description,
+            url: url,
+            images: [
+                {
+                    url: sector.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
+                    width: 1200,
+                    height: 630,
+                    alt: `${sector.title} Security`,
+                }
+            ],
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${sector.title} Security Solutions`,
+            description: sector.description,
+            images: [sector.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png']
+        }
     }
 }
 
@@ -61,6 +90,59 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
 
     return (
         <div className="flex flex-col min-h-screen bg-brand-white font-sans">
+
+            {/* Sector Service Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "name": `${sector.page} Security Systems`,
+                        "description": sector.description,
+                        "provider": {
+                            ...masterBusinessData
+                        },
+                        "areaServed": masterBusinessData.areaServed,
+                        "serviceType": "Security Systems Installation",
+                        "brand": (sector.brands || ['Hikvision', 'Paradox', 'Nemtek', 'Centurion']).map(brand => ({
+                            "@type": "Brand",
+                            "name": brand
+                        }))
+                    })
+                }}
+            />
+
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://globalsecuritysolutions.co.za"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Sectors",
+                                "item": "https://globalsecuritysolutions.co.za/sectors"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": sector.page,
+                                "item": `https://globalsecuritysolutions.co.za/sectors/${toSlug(sector.page)}`
+                            }
+                        ]
+                    })
+                }}
+            />
 
             {/* Hero Section */}
             <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
@@ -133,7 +215,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                     <h3 className="text-lg font-bold">Sector Risks</h3>
                                 </div>
                                 <p className="text-brand-slate leading-relaxed">
-                                    Security threats in the <strong>{sector.page}</strong> sector are evolving. Criminals target vulnerabilities specific to this environment, from perimeter breaches to specialized asset theft.
+                                    {sector.riskDescription || `Security threats in the ${sector.page} sector are evolving. Criminals target vulnerabilities specific to this environment, from perimeter breaches to specialized asset theft.`}
                                 </p>
                             </div>
                             <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
@@ -142,7 +224,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                     <h3 className="text-lg font-bold">Our Strategy</h3>
                                 </div>
                                 <p className="text-brand-slate leading-relaxed">
-                                    We implement a threat-specific defense strategy. By combining physical barriers with intelligent monitoring, we create a secure environment optimized for {sector.page} operations.
+                                    {sector.solutionDescription || `We implement a threat-specific defense strategy. By combining physical barriers with intelligent monitoring, we create a secure environment optimized for ${sector.page} operations.`}
                                 </p>
                             </div>
                         </div>
@@ -154,15 +236,15 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                 Why Choose Us
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {[
-                                    { icon: Smartphone, title: "Remote Management", text: "Control multiple sites from a single dashboard." },
-                                    { icon: Zap, title: "Power Redundancy", text: "Systems designed to withstand load shedding." },
-                                    { icon: Clock, title: "Proactive Monitoring", text: "Early warning cues prevent incidents." },
-                                    { icon: CheckCircle2, title: "Compliance Ready", text: "Installations meet all insurance and safety regulations." }
-                                ].map((feature, i) => (
+                                {(sector.features || [
+                                    { title: "Remote Management", text: "Control multiple sites from a single dashboard." },
+                                    { title: "Power Redundancy", text: "Systems designed to withstand load shedding." },
+                                    { title: "Proactive Monitoring", text: "Early warning cues prevent incidents." },
+                                    { title: "Compliance Ready", text: "Installations meet all insurance and safety regulations." }
+                                ]).map((feature, i) => (
                                     <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-brand-steel/20 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric">
-                                            <feature.icon className="w-6 h-6" />
+                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric text-xl font-black">
+                                            {i + 1}
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-brand-navy mb-1">{feature.title}</h4>

@@ -5,7 +5,7 @@ import { masterBusinessData } from '@/utils/generateSchema'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight } from 'lucide-react'
+import { ShieldAlert, BadgeCheck, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 import type { Metadata } from 'next'
@@ -36,7 +36,10 @@ interface ServiceData {
     description: string
     longDescription?: string
     iconPath?: string
-    features?: string[]
+    features?: { title: string, text: string }[]
+    faqs?: { q: string, a: string }[]
+    riskDescription?: string
+    solutionDescription?: string
     brands?: string[]
     heroImage?: string
     heroAlt?: string
@@ -47,9 +50,35 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const service = getService(params.slug)
     if (!service) return {}
 
+    const url = `https://globalsecuritysolutions.co.za/services/${params.slug}`
+
     return {
-        title: service.title,
+        title: `${service.title} | Global Security Solutions Cape Town`,
         description: service.description,
+        alternates: {
+            canonical: url
+        },
+        openGraph: {
+            title: service.title,
+            description: service.description,
+            url: url,
+            siteName: 'Global Security Solutions',
+            images: [
+                {
+                    url: service.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
+                    width: 1200,
+                    height: 630,
+                    alt: service.title,
+                }
+            ],
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: service.title,
+            description: service.description,
+            images: [service.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png']
+        }
     }
 }
 
@@ -119,41 +148,25 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             />
 
             {/* FAQ Schema */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": [
-                            {
+            {service.faqs && service.faqs.length > 0 && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            "mainEntity": service.faqs.map(faq => ({
                                 "@type": "Question",
-                                "name": "How long does installation take?",
+                                "name": faq.q,
                                 "acceptedAnswer": {
                                     "@type": "Answer",
-                                    "text": "Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves."
+                                    "text": faq.a
                                 }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": "Is there a warranty?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years)."
-                                }
-                            },
-                            {
-                                "@type": "Question",
-                                "name": "Can I upgrade my existing system?",
-                                "acceptedAnswer": {
-                                    "@type": "Answer",
-                                    "text": "Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion."
-                                }
-                            }
-                        ]
-                    })
-                }}
-            />
+                            }))
+                        })
+                    }}
+                />
+            )}
 
             {/* Hero Section */}
             <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
@@ -228,7 +241,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     <h3 className="text-lg font-bold">The Risk</h3>
                                 </div>
                                 <p className="text-brand-slate leading-relaxed">
-                                    Without reliable <strong>{service.page}</strong>, your property has blind spots. Criminals target easy access points and outdated systems, putting your assets and family at risk.
+                                    {service.riskDescription || `Without reliable ${service.page}, your property has blind spots. Criminals target easy access points and outdated systems, putting your assets and family at risk.`}
                                 </p>
                             </div>
                             <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
@@ -237,7 +250,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     <h3 className="text-lg font-bold">The Solution</h3>
                                 </div>
                                 <p className="text-brand-slate leading-relaxed">
-                                    Our intelligent <strong>{service.page}</strong> acts as a proactive shield. We don&apos;t just record crime; we deter it with visible, high-tech barriers and instant alerts.
+                                    {service.solutionDescription || `Our intelligent ${service.page} acts as a proactive shield. We don't just record crime; we deter it with visible, high-tech barriers and instant alerts.`}
                                 </p>
                             </div>
                         </div>
@@ -249,15 +262,15 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                 Key Features
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {[
-                                    { icon: Smartphone, title: "Mobile Control", text: "Arm, disarm, and view live feeds from your phone." },
-                                    { icon: Zap, title: "Load Shedding Ready", text: "Systems stay online with robust battery backups." },
-                                    { icon: Clock, title: "24/7 Monitoring", text: "Instant alerts to you and armed response." },
-                                    { icon: CheckCircle2, title: "Certified Installers", text: "Fully accredited and insured installation team." }
-                                ].map((feature, i) => (
+                                {(service.features || [
+                                    { title: "Mobile Control", text: "Arm, disarm, and view live feeds from your phone." },
+                                    { title: "Load Shedding Ready", text: "Systems stay online with robust battery backups." },
+                                    { title: "24/7 Monitoring", text: "Instant alerts to you and armed response." },
+                                    { title: "Certified Installers", text: "Fully accredited and insured installation team." }
+                                ]).map((feature, i) => (
                                     <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-brand-steel/20 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric">
-                                            <feature.icon className="w-6 h-6" />
+                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric text-xl font-black">
+                                            {i + 1}
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-brand-navy mb-1">{feature.title}</h4>
@@ -288,23 +301,19 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         </div>
 
                         {/* FAQ Section */}
-                        <div className="bg-brand-white border-t border-brand-steel/40 pt-12">
-                            <h3 className="text-2xl font-bold text-brand-navy mb-8">Frequently Asked Questions</h3>
-                            <div className="space-y-4">
-                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
-                                    <h4 className="font-bold text-brand-navy mb-2">How long does installation take?</h4>
-                                    <p className="text-brand-slate">Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves.</p>
-                                </div>
-                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
-                                    <h4 className="font-bold text-brand-navy mb-2">Is there a warranty?</h4>
-                                    <p className="text-brand-slate">Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years).</p>
-                                </div>
-                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
-                                    <h4 className="font-bold text-brand-navy mb-2">Can I upgrade my existing system?</h4>
-                                    <p className="text-brand-slate">Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion.</p>
+                        {service.faqs && service.faqs.length > 0 && (
+                            <div className="bg-brand-white border-t border-brand-steel/40 pt-12">
+                                <h3 className="text-2xl font-bold text-brand-navy mb-8">Frequently Asked Questions</h3>
+                                <div className="space-y-4">
+                                    {service.faqs.map((faq, i) => (
+                                        <div key={i} className="bg-white p-6 rounded-2xl border border-brand-steel/40">
+                                            <h4 className="font-bold text-brand-navy mb-2">{faq.q}</h4>
+                                            <p className="text-brand-slate">{faq.a}</p>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
+                        )}
 
                     </div>
 
