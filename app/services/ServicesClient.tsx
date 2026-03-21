@@ -69,7 +69,7 @@ export function ServicesClient() {
                                             alt={`${service.page} icon`}
                                             width={32}
                                             height={32}
-                                            className="object-contain brightness-[100] drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]"
+                                            className="object-contain drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]"
                                         />
                                     ) : (
                                         <div className="w-8 h-8 rounded-full bg-brand-electric/50" />

@@ -151,11 +151,11 @@ export function AboutClient() {
                         transition={{ duration: 1 }}
                         className="flex flex-wrap justify-center gap-6 md:gap-10 opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
                     >
-                        <Image src="/brand-hikvision.png" alt="Hikvision Certified Installer Badge Cape Town" width={100} height={40} className="object-contain h-8 w-auto brightness-0 invert" />
-                        <Image src="/brand-ajax.png" alt="Ajax Systems Authorized Dealer Badge" width={100} height={40} className="object-contain h-8 w-auto brightness-0 invert" />
-                        <Image src="/brand-paradox.png" alt="Paradox Security Systems Certified Partner" width={100} height={40} className="object-contain h-8 w-auto brightness-0 invert" />
-                        <Image src="/brand-nemtek.png" alt="Nemtek Electric Fencing Certified Installer" width={100} height={40} className="object-contain h-8 w-auto brightness-0 invert" />
-                        <Image src="/brand-centurion.png" alt="Centurion Gate Motors Accredited Installer" width={100} height={40} className="object-contain h-8 w-auto brightness-0 invert" />
+                        <Image src="/brand-hikvision.png" alt="Hikvision Certified Installer Badge Cape Town" width={100} height={40} className="object-contain h-8 w-auto" />
+                        <Image src="/brand-ajax.png" alt="Ajax Systems Authorized Dealer Badge" width={100} height={40} className="object-contain h-8 w-auto" />
+                        <Image src="/brand-paradox.png" alt="Paradox Security Systems Certified Partner" width={100} height={40} className="object-contain h-8 w-auto" />
+                        <Image src="/brand-nemtek.png" alt="Nemtek Electric Fencing Certified Installer" width={100} height={40} className="object-contain h-8 w-auto" />
+                        <Image src="/brand-centurion.png" alt="Centurion Gate Motors Accredited Installer" width={100} height={40} className="object-contain h-8 w-auto" />
                     </motion.div>
                 </div>
             </section>

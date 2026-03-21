@@ -60,7 +60,7 @@ export function SectorCarousel() {
                             {/* Expanded State */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-8 px-4 md:px-8 text-center bg-black/5">
                                 {/* Filter to ensure the icon is white to contrast nicely with the vibrant background */}
-                                <div className="mb-2 md:mb-4 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl brightness-0 invert scale-75">
+                                <div className="mb-2 md:mb-4 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl scale-75">
                                     {getSectorIcon(sector.page)}
                                 </div>
                                 

@@ -223,7 +223,7 @@ export function BrandCarousel({ variant = 'default' }: BrandCarouselProps) {
                 return "object-contain h-12 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
             }
             // Fallback for default images in footer: invert to make them white
-            return "object-contain h-12 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity duration-300"
+            return "object-contain h-12 w-auto opacity-50 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"
         }
         return "object-contain h-12 w-auto"
     }

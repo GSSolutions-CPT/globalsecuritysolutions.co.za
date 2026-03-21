@@ -46,7 +46,7 @@ export function ServiceCarousel() {
 
                             {/* Expanded State */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-4 px-3 md:px-6 text-center bg-black/5">
-                                <div className="mb-2 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl w-10 h-10 relative brightness-0 invert">
+                                <div className="mb-2 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl w-10 h-10 relative">
                                     {service.iconPath ? (
                                         <Image
                                             src={service.iconPath}
