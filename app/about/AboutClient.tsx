@@ -96,7 +96,7 @@ export function AboutClient() {
                                 <div className="flex items-center p-4 rounded-2xl bg-brand-white/5 border border-brand-steel/10 hover:border-brand-electric/40 hover:bg-brand-white/10 transition-all duration-300">
                                     <div className="relative w-14 h-14 mr-4 flex-shrink-0">
                                         <Image
-                                            src="/kyle_cass_headshot.jpg"
+                                            src="/kyle_cass_headshot.png"
                                             alt="Kyle Cass - Owner Global Security Solutions Cape Town"
                                             fill
                                             className="rounded-full object-cover object-top ring-2 ring-brand-steel/30"
@@ -112,7 +112,7 @@ export function AboutClient() {
                                 <div className="flex items-center p-4 rounded-2xl bg-brand-white/5 border border-brand-steel/10 hover:border-brand-electric/40 hover:bg-brand-white/10 transition-all duration-300">
                                     <div className="relative w-14 h-14 mr-4 flex-shrink-0">
                                         <Image
-                                            src="/rashaad_steyn_headshot.jpg"
+                                            src="/rashaad_steyn_headshot.png"
                                             alt="Rashaad Steyn - COO Global Security Solutions"
                                             fill
                                             className="rounded-full object-cover object-top ring-2 ring-brand-steel/30"

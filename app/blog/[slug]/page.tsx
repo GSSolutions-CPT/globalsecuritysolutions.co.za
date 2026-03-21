@@ -117,15 +117,15 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                                     <ul key={index} className="bg-brand-white p-6 rounded-2xl border border-brand-steel/20 list-none space-y-3 mb-6 my-6">
                                         {block.items?.map((item: string, i: number) => (
                                             <li key={i} className="flex items-start">
-                                                <span className="w-2 h-2 bg-brand-electric rounded-full mt-2 mr-3 flex-shrink-0" />
-                                                <span dangerouslySetInnerHTML={{ __html: item }} />
+                                                <span className="w-2 h-2 bg-brand-electric rounded-full mt-2 mr-3 flex-shrink-0 shadow-[0_0_8px_rgba(0,229,255,0.6)]" />
+                                                <span className="text-brand-navy/90 font-medium" dangerouslySetInnerHTML={{ __html: item }} />
                                             </li>
                                         ))}
                                     </ul>
                                 )
                             }
                             // Default to paragraph
-                            return <p key={index} className="mb-6 leading-relaxed" dangerouslySetInnerHTML={{ __html: block.text || '' }} />
+                            return <p key={index} className="mb-6 leading-relaxed text-brand-navy/90 font-medium whitespace-pre-line" dangerouslySetInnerHTML={{ __html: block.text || '' }} />
                         })}
                     </article>
 

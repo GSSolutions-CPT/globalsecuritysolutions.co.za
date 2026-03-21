@@ -233,8 +233,8 @@ export default function BrandsPage() {
                         </div>
                         <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] ring-1 ring-brand-white/10 group">
                             <Image
-                                src="/hero-bg.jpg" // Using existing image
-                                alt="Technician working"
+                                src="/hero-bg.png" // Fixed to PNG
+                                alt="Certified security technician professionally configuring enterprise alarm panels in Cape Town"
                                 fill
                                 className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
                             />

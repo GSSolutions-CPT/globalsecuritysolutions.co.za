@@ -9,6 +9,7 @@ interface PageHeroProps {
     badgeText?: string
     badgeIcon?: React.ReactNode
     bgImage: string
+    altText?: string // SEO enhancement
     pbClass?: string // To allow pages with overlapping cards to use pb-48
     align?: 'center' | 'left'
 }
@@ -33,7 +34,8 @@ export function PageHero({
     subtitle, 
     badgeText, 
     badgeIcon, 
-    bgImage, 
+    bgImage,
+    altText,
     pbClass = "pb-16", 
     align = "center" 
 }: PageHeroProps) {
@@ -47,7 +49,7 @@ export function PageHero({
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/30 z-10" />
                 <Image
                     src={bgImage}
-                    alt="Hero Background"
+                    alt={altText || "Global Security Solutions Cape Town - Professional Installation and Services"}
                     fill
                     className="object-cover opacity-30 mix-blend-luminosity"
                     priority
