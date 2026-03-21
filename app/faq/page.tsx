@@ -4,22 +4,18 @@ import { useState } from 'react'
 import { Plus, Minus, Search, MessageCircle, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 import faqData from '@/app/data/faqData.json'
-
-// Note: Revalidating purely static JSON data isn't necessary unless using fetch, but safe to leave or remove.
-// For client component, we rely on import.
+import { PageHero } from '@/components/PageHero'
 
 export default function FAQPage() {
     const [activeCategory, setActiveCategory] = useState("General")
     const [openIndex, setOpenIndex] = useState<number | null>(null)
     const [searchQuery, setSearchQuery] = useState("")
 
-    const categories = faqData.map(c => c.category)
+    const categories = Array.from(new Set(faqData.map(c => c.category)))
 
-    // Filter questions based on category AND search
     const activeData = faqData.find(c => c.category === activeCategory)
-
-    // If searching, search EVERYTHING. If not, show active category.
     let displayQuestions = activeData?.questions || []
     let isSearchMode = false
 
@@ -28,7 +24,7 @@ export default function FAQPage() {
         displayQuestions = faqData.flatMap(cat =>
             cat.questions
                 .filter(q => q.q.toLowerCase().includes(searchQuery.toLowerCase()) || q.a.toLowerCase().includes(searchQuery.toLowerCase()))
-                .map(q => ({ ...q, categoryName: cat.category })) // Attach category for context
+                .map(q => ({ ...q, categoryName: cat.category }))
         )
     }
 
@@ -38,49 +34,31 @@ export default function FAQPage() {
 
     return (
         <div className="bg-brand-white min-h-screen font-sans pb-8">
+            <PageHero
+                align="center"
+                badgeIcon={<HelpCircle className="w-4 h-4" />}
+                badgeText="Support Center"
+                title="How can we help?"
+                subtitle="Find answers to common questions about our security installations, warranties, and services."
+                bgImage="/page-heroes/faq-hero.png"
+                pbClass="pb-[220px]"
+            />
 
-            {/* Premium Hero */}
-            <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
-                    <Image
-                        src="/page-heroes/faq-hero.png"
-                        alt="Support Center"
-                        fill
-                        className="object-cover opacity-50"
-                        priority
-                    />
-                </div>
-
-                <div className="container relative z-20 mx-auto px-4 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-sm font-medium mb-6 backdrop-blur-sm mx-auto">
-                        <HelpCircle className="w-4 h-4" />
-                        <span>Support Center</span>
-                    </div>
-
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
-                        How can we help?
-                    </h1>
-                    <p className="text-xl text-brand-steel max-w-2xl mx-auto leading-relaxed mb-8">
-                        Find answers to common questions about our security installations, warranties, and services.
-                    </p>
-
-                    {/* Search Bar */}
-                    <div className="max-w-xl mx-auto relative group">
-                        <div className="absolute inset-0 bg-brand-electric/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative flex items-center bg-white/10 backdrop-blur-md rounded-full border border-white/20 overflow-hidden p-2 focus-within:bg-white/20 focus-within:border-white/30 transition-all">
-                            <Search className="w-5 h-5 text-brand-steel ml-4" />
-                            <input
-                                type="text"
-                                placeholder="Search e.g. 'Battery life' or 'Load shedding'"
-                                className="w-full bg-transparent text-white placeholder-brand-steel px-4 py-3 outline-none"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                        </div>
+            <div className="container mx-auto px-4 -mt-40 relative z-30">
+                {/* Search Bar Floating Over Hero */}
+                <div className="max-w-2xl mx-auto relative group mb-16">
+                    <div className="absolute inset-0 bg-brand-electric/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative flex items-center bg-brand-navy/60 backdrop-blur-2xl rounded-full border border-brand-white/20 overflow-hidden p-2 focus-within:bg-brand-navy/80 focus-within:border-brand-electric/50 transition-all shadow-xl ring-1 ring-brand-white/5">
+                        <Search className="w-6 h-6 text-brand-electric ml-6 drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]" />
+                        <input
+                            type="text"
+                            placeholder="Search e.g. 'Battery life' or 'Load shedding'"
+                            className="w-full bg-transparent text-brand-white placeholder-brand-steel/60 px-6 py-4 outline-none text-lg font-light"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
                     </div>
                 </div>
-            </section>
 
             <div className="container mx-auto px-4 -mt-10 relative z-30">
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
@@ -117,39 +95,45 @@ export default function FAQPage() {
                             </div>
 
                             {displayQuestions.length === 0 ? (
-                                <div className="text-center py-12 text-brand-steel">
-                                    <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                                    <p>No questions found.</p>
-                                    <button onClick={() => setSearchQuery("")} className="text-brand-electric font-bold mt-2 hover:underline">Clear Search</button>
+                                <div className="text-center py-16 text-brand-steel bg-brand-navy/5 rounded-[2rem] border border-brand-steel/10">
+                                    <Search className="w-16 h-16 mx-auto mb-6 opacity-20" />
+                                    <p className="text-xl font-light">No corresponding questions found.</p>
+                                    <button onClick={() => setSearchQuery("")} className="text-brand-electric font-bold mt-4 hover:underline">Clear Active Search</button>
                                 </div>
                             ) : (
                                 <div className="space-y-4">
                                     {displayQuestions.map((item: { q: string; a: string; categoryName?: string }, i) => (
                                         <div
                                             key={i}
-                                            className={`border rounded-2xl transition-all duration-300 overflow-hidden ${openIndex === i ? 'border-brand-electric/40 bg-brand-electric/10/30' : 'border-brand-steel/20 hover:border-brand-electric/20'}`}
+                                            className={`border rounded-2xl transition-all duration-300 overflow-hidden bg-white ${openIndex === i ? 'border-brand-electric/40 shadow-[0_5px_30px_rgba(0,229,255,0.05)]' : 'border-brand-steel/20 hover:border-brand-electric/20 hover:shadow-md'}`}
                                         >
                                             <button
                                                 onClick={() => toggleAccordion(i)}
-                                                className="w-full flex items-center justify-between p-6 text-left"
+                                                className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
                                             >
-                                                <div className="pr-4">
-                                                    {isSearchMode && <span className="text-xs text-brand-electric font-bold uppercase tracking-wider mb-1 block">{item.categoryName}</span>}
-                                                    <h3 className={`text-lg font-bold transition-colors ${openIndex === i ? 'text-brand-electric' : 'text-brand-navy'}`}>{item.q}</h3>
+                                                <div className="pr-6">
+                                                    {isSearchMode && <span className="text-xs text-brand-electric font-bold uppercase tracking-widest mb-2 block bg-brand-electric/10 inline-block px-3 py-1 rounded-full">{item.categoryName}</span>}
+                                                    <h3 className={`text-xl font-bold transition-colors leading-tight ${openIndex === i ? 'text-brand-electric' : 'text-brand-navy group-hover:text-brand-electric'}`}>{item.q}</h3>
                                                 </div>
-                                                <div className={`p-2 rounded-full transition-colors flex-shrink-0 ${openIndex === i ? 'bg-brand-electric/20 text-brand-electric' : 'bg-brand-steel/20 text-brand-steel'}`}>
-                                                    {openIndex === i ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                                                <div className={`p-3 rounded-full transition-all flex-shrink-0 ${openIndex === i ? 'bg-brand-electric text-brand-navy transform rotate-180 shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'bg-brand-steel/10 text-brand-steel group-hover:bg-brand-electric/20 group-hover:text-brand-electric'}`}>
+                                                    {openIndex === i ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                                                 </div>
                                             </button>
-                                            <div
-                                                className={`grid transition-[grid-template-rows] duration-300 ease-out ${openIndex === i ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
-                                            >
-                                                <div className="overflow-hidden">
-                                                    <div className="p-6 pt-0 text-brand-slate leading-relaxed border-t border-brand-electric/20/50 mt-2">
-                                                        {item.a}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
+                                            <AnimatePresence>
+                                                {openIndex === i && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: "auto", opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                    >
+                                                        <div className="px-6 md:px-8 pb-8 pt-2 text-brand-slate text-lg font-light leading-relaxed border-t border-brand-steel/10 mt-2 bg-brand-white/50">
+                                                            {item.a}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                     ))}
                                 </div>
