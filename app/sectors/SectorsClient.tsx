@@ -1,6 +1,6 @@
-import dynamic from 'next/dynamic'
 'use client'
 
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
