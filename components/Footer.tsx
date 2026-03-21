@@ -1,156 +1,100 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign, ChevronRight } from 'lucide-react'
-import { BrandCarousel } from './BrandCarousel'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-brand-navy text-brand-white pt-6 pb-6 relative overflow-hidden font-sans border-t border-brand-electric/20 selection:bg-brand-electric selection:text-brand-navy">
+        <footer className="bg-brand-navy text-brand-white pt-6 pb-2 relative overflow-hidden font-sans border-t border-brand-electric/20">
             {/* Striking Top Glow Effect */}
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-electric to-transparent opacity-80 z-10 shadow-[0_0_15px_rgba(0,229,255,1)]"></div>
-            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1000px] h-[300px] bg-brand-electric/5 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-electric to-transparent opacity-50 z-10"></div>
 
             <div className="container mx-auto px-4 md:px-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 
-                    {/* Company Info */}
-                    <div className="flex flex-col">
+                    {/* Company Info & Contact */}
+                    <div className="flex flex-col lg:col-span-1">
                         <div className="mb-4">
-                            <Image src="/nav-logo-final.png" alt="Global Security Solutions" width={240} height={80} className="h-14 w-auto object-contain drop-shadow-lg" />
+                            <Image src="/nav-logo-final.png" alt="Global Security Solutions" width={200} height={60} className="h-10 w-auto object-contain drop-shadow-lg" />
                         </div>
-                        <p className="text-brand-steel mb-4 leading-relaxed text-xs md:text-sm font-medium">
-                            Your trusted partner for high-performance security systems in Cape Town. We specialize in AI CCTV, biometric alarms, and off-grid electric fencing.
-                        </p>
-                        <div className="flex space-x-4 mt-auto">
-                            {[
-                                { icon: Facebook, href: "https://www.facebook.com/gssolutions.co.za/", label: "Facebook" },
-                                { icon: Instagram, href: "https://www.instagram.com/globalsecuritysolutions.co.za/", label: "Instagram" },
-                                { icon: AtSign, href: "https://www.threads.net/@globalsecuritysolutions.co.za", label: "Threads" },
-                                { icon: MapPin, href: "https://g.page/r/CekZuIweXZuaEBE", label: "Google Business" },
-                                { icon: Linkedin, href: "https://www.linkedin.com/company/global-security-solutions-cape-town", label: "LinkedIn" }
-                            ].map((social, idx) => (
-                                <a 
-                                    key={idx}
-                                    href={social.href} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="bg-brand-white/5 border border-brand-white/10 hover:border-brand-electric hover:bg-brand-electric/10 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group" 
-                                    aria-label={`Visit our ${social.label} Profile`}
-                                >
-                                    <social.icon className="w-5 h-5 text-brand-steel group-hover:text-brand-electric transition-colors duration-300" />
-                                </a>
-                            ))}
-                        </div>
+                        
+                        <ul className="space-y-2 text-xs text-brand-steel">
+                            <li className="flex items-center gap-2">
+                                <MapPin className="w-3 h-3 text-brand-electric" />
+                                <span>Durbanville & Western Cape</span>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <Phone className="w-3 h-3 text-brand-electric" />
+                                <a href="https://wa.me/27629558559" className="hover:text-brand-electric transition-colors">062 955 8559</a>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <Mail className="w-3 h-3 text-brand-electric" />
+                                <a href="mailto:sales@globalsecuritysolutions.co.za" className="hover:text-brand-electric transition-colors">sales@globalsecuritysolutions.co.za</a>
+                            </li>
+                        </ul>
                     </div>
 
                     {/* Links Column Wrapper */}
-                    <div className="grid grid-cols-2 gap-8 lg:col-span-2">
+                    <div className="grid grid-cols-2 gap-4 lg:col-span-3">
                         {/* Quick Links */}
                         <div>
-                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]"></span>
+                            <h3 className="text-xs font-black mb-2 text-brand-white uppercase tracking-widest flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
                                 Quick Links
                             </h3>
-                            <ul className="space-y-2 text-xs font-medium">
-                                {[
-                                    { name: "Home", href: "/" },
-                                    { name: "About Us", href: "/about" },
-                                    { name: "All Services", href: "/services" },
-                                    { name: "Areas We Serve", href: "/areas" },
-                                    { name: "Project Gallery", href: "/projects" },
-                                    { name: "Security Blog", href: "/blog" }
-                                ].map((link, idx) => (
-                                    <li key={idx}>
-                                        <Link href={link.href} className="text-brand-slate hover:text-brand-white transition-colors duration-300 flex items-center group">
-                                            <ChevronRight className="w-4 h-4 text-brand-electric opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 mr-1" />
-                                            {link.name}
-                                        </Link>
-                                    </li>
-                                ))}
+                            <ul className="space-y-1 text-[10px] md:text-xs text-brand-slate font-medium">
+                                <li><Link href="/" className="hover:text-brand-electric transition-colors">Home</Link></li>
+                                <li><Link href="/about" className="hover:text-brand-electric transition-colors">About Us</Link></li>
+                                <li><Link href="/services" className="hover:text-brand-electric transition-colors">All Services</Link></li>
+                                <li><Link href="/projects" className="hover:text-brand-electric transition-colors">Project Gallery</Link></li>
+                                <li><Link href="/blog" className="hover:text-brand-electric transition-colors">Security Blog</Link></li>
                             </ul>
                         </div>
 
                         {/* Services */}
                         <div>
-                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]"></span>
-                                Our Expertise
+                            <h3 className="text-xs font-black mb-2 text-brand-white uppercase tracking-widest flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                                Expertise
                             </h3>
-                            <ul className="space-y-2 text-xs font-medium">
-                                {[
-                                    { name: "Alarm Systems", href: "/services/alarm-system-installation" },
-                                    { name: "CCTV Surveillance", href: "/services/cctv-surveillance-systems" },
-                                    { name: "Access Control", href: "/services/access-control-solutions" },
-                                    { name: "Electric Fencing", href: "/services/electric-fence-installations" },
-                                    { name: "Load Shedding Ready", href: "/load-shedding-security-solutions" }
-                                ].map((service, idx) => (
-                                    <li key={idx}>
-                                        <Link href={service.href} className="text-brand-slate hover:text-brand-white transition-colors duration-300 flex items-center group">
-                                            <ChevronRight className="w-4 h-4 text-brand-electric opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 mr-1" />
-                                            {service.name}
-                                        </Link>
-                                    </li>
-                                ))}
+                            <ul className="space-y-1 text-[10px] md:text-xs text-brand-slate font-medium">
+                                <li><Link href="/services/alarm-system-installation" className="hover:text-brand-electric transition-colors">Alarm Systems</Link></li>
+                                <li><Link href="/services/cctv-surveillance-systems" className="hover:text-brand-electric transition-colors">CCTV Surveillance</Link></li>
+                                <li><Link href="/services/access-control-solutions" className="hover:text-brand-electric transition-colors">Access Control</Link></li>
+                                <li><Link href="/services/electric-fence-installations" className="hover:text-brand-electric transition-colors">Electric Fencing</Link></li>
+                                <li><Link href="/load-shedding-security-solutions" className="hover:text-brand-electric transition-colors">Load Shedding Ready</Link></li>
                             </ul>
                         </div>
-                    </div>
-
-                    {/* Highlighted Contact Block */}
-                    <div className="bg-brand-white/5 border border-brand-electric/30 rounded-2xl p-4 relative group overflow-hidden shadow-2xl shadow-brand-navy/50 self-start">
-                        {/* Hover Gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/10 via-transparent to-brand-steel/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
-                        
-                        <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest relative z-10 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)] animate-pulse"></span>
-                            Get In Touch
-                        </h3>
-                        <ul className="space-y-3 text-xs relative z-10">
-                            <li className="flex items-center gap-3">
-                                <div className="bg-brand-electric/10 border border-brand-electric/30 p-1.5 rounded-lg shrink-0 text-brand-electric shadow-inner">
-                                    <MapPin className="w-4 h-4" />
-                                </div>
-                                <div className="pt-1">
-                                    <span className="text-brand-white font-medium leading-relaxed block">Servicing Durbanville, Blouberg, and the greater Western Cape.</span>
-                                </div>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <div className="bg-brand-electric/10 border border-brand-electric/30 p-1.5 rounded-lg shrink-0 text-brand-electric shadow-inner">
-                                    <Phone className="w-4 h-4" />
-                                </div>
-                                <div className="pt-1">
-                                    <span className="text-brand-steel text-[10px] uppercase tracking-widest font-bold block mb-1">Call Us Now</span>
-                                    <a href="https://wa.me/27629558559" className="text-sm font-black text-brand-white hover:text-brand-electric transition-colors drop-shadow-sm">062 955 8559</a>
-                                </div>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <div className="bg-brand-electric/10 border border-brand-electric/30 p-1.5 rounded-lg shrink-0 text-brand-electric shadow-inner">
-                                    <Mail className="w-4 h-4" />
-                                </div>
-                                <div className="pt-1">
-                                    <span className="text-brand-steel text-[10px] uppercase tracking-widest font-bold block mb-1">Email Support</span>
-                                    <a href="mailto:sales@globalsecuritysolutions.co.za" className="text-brand-white font-medium hover:text-brand-electric transition-colors block text-sm">sales@globalsecuritysolutions.co.za</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Brands Trust Bar */}
-                <div className="border-t border-brand-white/10 pt-4 pb-2">
-                    <p className="text-center text-brand-slate text-[10px] mb-4 font-bold uppercase tracking-[0.3em]">Trusted By Leading Industry Brands</p>
-                    <div className="opacity-70 grayscale hover:grayscale-0 transition-all duration-700">
-                        <BrandCarousel variant="footer" />
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-brand-white/10 pt-6 mt-2 flex flex-col md:flex-row justify-between items-center text-brand-slate text-xs font-medium">
-                    <p className="mb-4 md:mb-0">&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
-                    <div className="flex space-x-6">
-                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-brand-electric transition-colors">Privacy Policy</a>
-                        <Link href="/terms-of-service" className="hover:text-brand-electric transition-colors">Terms of Service</Link>
+                <div className="border-t border-brand-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-brand-slate text-[10px] font-medium gap-4">
+                    <p>&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
+                    
+                    <div className="flex space-x-3">
+                        {[
+                            { icon: Facebook, href: "https://www.facebook.com/gssolutions.co.za/" },
+                            { icon: Instagram, href: "https://www.instagram.com/globalsecuritysolutions.co.za/" },
+                            { icon: AtSign, href: "https://www.threads.net/@globalsecuritysolutions.co.za" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/company/global-security-solutions-cape-town" }
+                        ].map((social, idx) => (
+                            <a 
+                                key={idx}
+                                href={social.href} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="hover:text-brand-electric transition-colors"
+                            >
+                                <social.icon className="w-3.5 h-3.5" />
+                            </a>
+                        ))}
+                    </div>
+
+                    <div className="flex space-x-4">
+                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-brand-electric transition-colors">Privacy</a>
+                        <Link href="/terms-of-service" className="hover:text-brand-electric transition-colors">Terms</Link>
                         <Link href="/sitemap.xml" className="hover:text-brand-electric transition-colors">Sitemap</Link>
                     </div>
                 </div>
