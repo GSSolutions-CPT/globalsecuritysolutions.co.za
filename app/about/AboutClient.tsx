@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { Shield, Zap, Award, BookOpen, ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { PageHero } from '@/components/PageHero'
@@ -10,12 +10,12 @@ import { PageHero } from '@/components/PageHero'
 // Lazy load the Counter component for performance below the fold
 const Counter = dynamic(() => import('@/components/Counter').then(mod => mod.Counter), { ssr: false })
 
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,

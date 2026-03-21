@@ -1,8 +1,6 @@
-```
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { CheckCircle2, ShieldCheck } from 'lucide-react'
 import { PageHero } from '@/components/PageHero'
 import BrandsClient from './BrandsClient'
@@ -268,4 +266,3 @@ export default function BrandsPage() {
         </div>
     )
 }
-```

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import seoData from '@/app/data/seoData.json'
 import { ArrowRight, CheckCircle2, Search, FileText, Wrench, HeadphonesIcon } from 'lucide-react'
 import { PageHero } from '@/components/PageHero'
@@ -11,12 +11,12 @@ const toSlug = (text: string) => {
     return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
 }
 
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,

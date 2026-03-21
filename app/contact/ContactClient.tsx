@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, MessageSquare, Facebook, Instagram, Linkedin } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { PageHero } from '@/components/PageHero'
@@ -11,12 +11,12 @@ const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod =>
     loading: () => <div className="h-64 flex items-center justify-center text-brand-steel">Loading secure form...</div>
 })
 
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,

@@ -1,10 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const staggerContainer = {
+const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -12,7 +12,7 @@ const staggerContainer = {
     }
 }
 
-const scaleUp = {
+const scaleUp: Variants = {
     hidden: { opacity: 0, scale: 0.9, y: 20 },
     visible: { 
         opacity: 1, 
