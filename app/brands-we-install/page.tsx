@@ -1,8 +1,11 @@
+```
 import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, ShieldCheck } from 'lucide-react'
+import { PageHero } from '@/components/PageHero'
+import BrandsClient from './BrandsClient'
 
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
     
@@ -177,112 +180,71 @@ const allBrands = [
 
 export default function BrandsPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative bg-brand-navy min-h-[60vh] flex items-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
-                    <Image
-                        src="/page-heroes/brands-hero.png"
-                        alt="World-Class Security Brands"
-                        fill
-                        className="object-cover opacity-60"
-                        priority
-                    />
-                </div>
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-brand-electric/20 text-brand-electric text-sm font-bold uppercase tracking-widest mb-6">
-                        Certified Partners
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        World-Class <span className="text-brand-electric">Security Brands</span>
-                    </h1>
-                    <p className="text-xl text-brand-steel/60 max-w-2xl mx-auto leading-relaxed">
-                        We are certified installers for the industry&apos;s most trusted manufacturers.
-                        We do not compromise on quality, ensuring your security system is built to last.
-                    </p>
-                </div>
-            </section>
+        <div className="flex flex-col min-h-screen bg-brand-navy selection:bg-brand-electric selection:text-brand-navy">
+            <PageHero
+                align="center"
+                badgeIcon={<ShieldCheck className="w-4 h-4" />}
+                badgeText="Certified Partners"
+                title="World-Class Security Brands"
+                subtitle="We are certified installers for the industry's most trusted manufacturers. We do not compromise on quality, ensuring your security system is built to last."
+                bgImage="/page-heroes/brands-hero.png"
+                pbClass="pb-[200px]"
+            />
 
-            {/* Brands Grid */}
-            <section className="py-12">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                        {allBrands.map((brand, idx) => (
-                            <div
-                                key={idx}
-                                className="group flex items-center justify-center p-8 bg-brand-white rounded-2xl border border-brand-steel/20 hover:shadow-xl hover:border-brand-electric/20 transition-all duration-300 relative"
-                            >
-                                {/* Hover Overlay Link */}
-                                <Link
-                                    href={brand.url}
-                                    target="_blank"
-                                    rel="nofollow noopener"
-                                    className="absolute inset-0 z-20"
-                                    aria-label={`Visit ${brand.name} website`}
-                                />
-
-                                <div className="relative h-16 w-full grayscale group-hover:grayscale-0 transition-all duration-300 opacity-60 group-hover:opacity-100">
-                                    <Image
-                                        src={brand.src}
-                                        alt={brand.alt}
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Brands Grid - Extracted to Client Component for Framer Motion */}
+            <div className="-mt-32 relative z-30 pb-24">
+                <BrandsClient brands={allBrands} />
+            </div>
 
             {/* Why Certified Matters */}
-            <section className="py-12 bg-brand-white">
-                <div className="container mx-auto px-4">
+            <section className="py-24 bg-brand-navy border-t border-brand-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-electric/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+                <div className="container mx-auto px-4 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">Why Choose a <span className="text-brand-electric">Certified Installer?</span></h2>
-                            <div className="space-y-6">
-                                <div className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle2 className="w-6 h-6 text-green-600" />
+                            <h2 className="text-3xl md:text-5xl font-black text-brand-white mb-10 tracking-tight">Why Choose a <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric filter drop-shadow-[0_0_15px_rgba(0,229,255,0.3)]">Certified Installer?</span></h2>
+                            <div className="space-y-8">
+                                <div className="flex gap-6 items-start group">
+                                    <div className="w-14 h-14 rounded-2xl bg-brand-electric/10 border border-brand-electric/30 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-electric/20 transition-all shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+                                        <CheckCircle2 className="w-7 h-7 text-brand-electric" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Valid Warranties</h3>
-                                        <p className="text-brand-slate">Manufacturer warranties are often void if equipment is installed by uncertified technicians.</p>
+                                        <h3 className="text-2xl font-bold text-brand-white mb-3">Valid Warranties</h3>
+                                        <p className="text-brand-steel/80 leading-relaxed font-light">Manufacturer warranties are often strictly voided if equipment is installed by uncertified technicians. We protect your investment natively.</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-brand-electric/20 flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle2 className="w-6 h-6 text-brand-electric" />
+                                <div className="flex gap-6 items-start group">
+                                    <div className="w-14 h-14 rounded-2xl bg-brand-electric/10 border border-brand-electric/30 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-electric/20 transition-all shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+                                        <ShieldCheck className="w-7 h-7 text-brand-electric" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Firmware Updates</h3>
-                                        <p className="text-brand-slate">Access to the latest firmware and security patches to keep your system safe from cyber threats.</p>
+                                        <h3 className="text-2xl font-bold text-brand-white mb-3">Firmware Updates</h3>
+                                        <p className="text-brand-steel/80 leading-relaxed font-light">Direct access to the latest manufacturer firmware and vital zero-day security patches to keep your localized system impenetrable.</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle2 className="w-6 h-6 text-purple-600" />
+                                <div className="flex gap-6 items-start group">
+                                    <div className="w-14 h-14 rounded-2xl bg-brand-electric/10 border border-brand-electric/30 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-electric/20 transition-all shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+                                        <CheckCircle2 className="w-7 h-7 text-brand-electric" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Correct Configuration</h3>
-                                        <p className="text-brand-slate">We configure advanced features like false alarm filtering and AI analytics correctly.</p>
+                                        <h3 className="text-2xl font-bold text-brand-white mb-3">Correct Configuration</h3>
+                                        <p className="text-brand-steel/80 leading-relaxed font-light">We flawlessly configure enterprise-grade features like deep-learning false alarm filtering and localized AI neural engine analytics.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl">
+                        <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] ring-1 ring-brand-white/10 group">
                             <Image
                                 src="/hero-bg.jpg" // Using existing image
                                 alt="Technician working"
                                 fill
-                                className="object-cover"
+                                className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
                             />
-                            <div className="absolute inset-0 bg-brand-navy/50" />
-                            <div className="absolute bottom-8 left-8 right-8 text-white">
-                                <p className="text-lg font-bold border-l-4 border-yellow-400 pl-4">
-                                    &quot;We don&apos;t just sell boxes. We design solutions using the world&apos;s best technology.&quot;
+                            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent" />
+                            <div className="absolute bottom-10 left-10 right-10 text-brand-white">
+                                <div className="w-10 h-1 bg-brand-electric mb-6" />
+                                <p className="text-2xl font-medium tracking-wide">
+                                    &quot;We don&apos;t just sell boxes. We architect resilient solutions using the world&apos;s premier technology.&quot;
                                 </p>
                             </div>
                         </div>
@@ -291,11 +253,12 @@ export default function BrandsPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-6 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto text-center mb-12">
-                        <h2 className="text-3xl md:text-5xl font-bold text-brand-navy mb-6">Need a Specific Brand?</h2>
-                        <p className="text-xl text-brand-slate">Whether you need a new Hikvision camera or a battery for your Paradox alarm, we can help.</p>
+            <section className="py-24 bg-brand-navy relative">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-electric/5 via-transparent to-transparent opacity-50 pointer-events-none" />
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-4xl mx-auto text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-brand-white mb-6 tracking-tight">Need a Specific Brand?</h2>
+                        <p className="text-xl text-brand-steel/80 font-light">Whether you need a new Hikvision camera expansion or a battery for your Paradox alarm, we can source it.</p>
                     </div>
                     <div className="max-w-2xl mx-auto">
                         <ContactForm />
@@ -305,3 +268,4 @@ export default function BrandsPage() {
         </div>
     )
 }
+```

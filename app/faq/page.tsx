@@ -59,6 +59,7 @@ export default function FAQPage() {
                         />
                     </div>
                 </div>
+            </div>
 
             <div className="container mx-auto px-4 -mt-10 relative z-30">
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
