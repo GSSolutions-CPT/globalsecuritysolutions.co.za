@@ -145,7 +145,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
             />
 
             {/* Hero Section */}
-            <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
+            <section className="relative bg-brand-navy text-white min-h-[60vh] pt-32 pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image

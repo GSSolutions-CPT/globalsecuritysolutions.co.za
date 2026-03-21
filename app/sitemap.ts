@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
-        changeFrequency: route === '' ? 'daily' : 'weekly' as const,
+        changeFrequency: (route === '' ? 'daily' : 'weekly') as 'daily' | 'weekly',
         priority: route === '' ? 1 : (route === '/contact' || route === '/free-security-audit') ? 0.9 : 0.8,
     }))
 
