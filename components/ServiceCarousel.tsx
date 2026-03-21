@@ -26,7 +26,7 @@ export function ServiceCarousel() {
     ];
 
     return (
-        <ul className="w-full flex flex-col xl:flex-row h-[1200px] md:h-[800px] xl:h-[500px] gap-1 overflow-hidden m-0 p-0">
+        <ul className="w-full flex flex-col xl:flex-row h-[800px] md:h-[600px] xl:h-[300px] gap-2 overflow-hidden m-0 p-0">
             {services.map((service, index) => {
                 const slug = service.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
                 const bgColor = vibrantColors[index % vibrantColors.length]
@@ -39,15 +39,14 @@ export function ServiceCarousel() {
                         <Link href={`/services/${slug}`} className="block w-full h-full relative z-10">
                             
                             {/* Collapsed State - Rotated Vertical on Desktop */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none p-2">
-                                <h3 className="xl:-rotate-90 xl:whitespace-nowrap text-lg xl:text-2xl font-black uppercase tracking-tighter text-white drop-shadow-md text-center line-clamp-1 xl:line-clamp-none">
+                                <h3 className="xl:-rotate-90 xl:whitespace-nowrap text-sm xl:text-lg font-black uppercase tracking-tighter text-white drop-shadow-md text-center line-clamp-1 xl:line-clamp-none">
                                     {service.page}
                                 </h3>
                             </div>
 
                             {/* Expanded State */}
-                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-6 px-4 md:px-8 text-center bg-black/5">
-                                <div className="mb-4 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl w-16 h-16 relative brightness-0 invert">
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-4 px-3 md:px-6 text-center bg-black/5">
+                                <div className="mb-2 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl w-10 h-10 relative brightness-0 invert">
                                     {service.iconPath ? (
                                         <Image
                                             src={service.iconPath}
@@ -60,15 +59,15 @@ export function ServiceCarousel() {
                                     )}
                                 </div>
                                 
-                                <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md">
+                                <h3 className="text-sm md:text-xl font-black uppercase tracking-tighter text-white mb-2 max-w-[90%] drop-shadow-md">
                                     {service.page}
                                 </h3>
                                 
-                                <p className="text-white/95 text-xs md:text-sm font-medium max-w-[250px] md:max-w-sm mb-4 md:mb-6 drop-shadow leading-relaxed line-clamp-3 md:line-clamp-none hidden sm:block">
+                                <p className="text-white/95 text-[10px] md:text-xs font-medium max-w-[200px] md:max-w-sm mb-3 drop-shadow leading-relaxed line-clamp-2 md:line-clamp-3 hidden sm:block">
                                     {service.description}
                                 </p>
                                 
-                                <span className="mt-auto sm:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-5 py-2 rounded-full font-bold text-sm transition-colors border border-white/20 shadow-lg">
+                                <span className="mt-auto sm:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-bold text-[10px] transition-colors border border-white/20 shadow-lg">
                                     Details <ArrowRight className="w-4 h-4 ml-2" />
                                 </span>
                             </div>

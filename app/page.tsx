@@ -60,13 +60,13 @@ export default function Home() {
               <motion.div 
                 key={idx} 
                 variants={fadeInUp}
-                className="relative p-8 rounded-3xl bg-brand-white/5 border border-brand-steel/30 backdrop-blur-md shadow-[0_0_40px_rgba(0,229,255,0.05)] hover:border-brand-electric/50 hover:bg-brand-white/10 transition-all duration-500 group"
+                className="relative p-6 rounded-2xl bg-brand-white/5 border border-brand-steel/30 backdrop-blur-md shadow-[0_0_20px_rgba(0,229,255,0.05)] hover:border-brand-electric/50 hover:bg-brand-white/10 transition-all duration-500 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-                <div className="text-5xl lg:text-7xl font-black mb-3 text-transparent bg-clip-text bg-gradient-to-br from-brand-white to-brand-electric drop-shadow-lg tracking-tighter">
+                <div className="absolute inset-0 bg-gradient-to-b from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="text-3xl lg:text-5xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-br from-brand-white to-brand-electric drop-shadow-lg tracking-tighter">
                   {item.stat}
                 </div>
-                <div className="text-brand-steel text-sm lg:text-base uppercase tracking-[0.2em] font-bold">
+                <div className="text-brand-steel text-xs lg:text-sm uppercase tracking-[0.1em] font-bold">
                   {item.label}
                 </div>
               </motion.div>
@@ -113,11 +113,11 @@ export default function Home() {
               <Command className="w-4 h-4" />
               Our Expertise
             </div>
-            <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter leading-tight drop-shadow-sm">
+            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter leading-tight drop-shadow-sm">
               Comprehensive <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Solutions</span>
             </h2>
-            <p className="text-brand-slate max-w-2xl mx-auto text-lg md:text-2xl leading-relaxed font-medium">
+            <p className="text-brand-slate max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-medium">
               Equipping your premises with state-of-the-art defenses. From perimeter fencing to intelligent alarm integration, we secure your peace of mind.
             </p>
           </motion.div>
@@ -166,10 +166,10 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center mb-8"
           >
-            <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter">
+            <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
               Tailored to Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]">Environment</span>
             </h2>
-            <p className="text-brand-steel max-w-3xl mx-auto text-lg md:text-2xl leading-relaxed font-light">
+            <p className="text-brand-steel max-w-3xl mx-auto text-sm md:text-base leading-relaxed font-light">
               Security needs differ vastly between a quiet residential estate and a bustling industrial park. We architect highly specific risk assessments for every sector.
             </p>
           </motion.div>
@@ -195,8 +195,8 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center md:mb-8 mb-6"
           >
-            <h2 className="text-4xl md:text-7xl font-black text-brand-navy mb-8 tracking-tighter">Why Global Security?</h2>
-            <p className="text-brand-slate max-w-2xl mx-auto text-lg md:text-2xl font-medium">
+            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter">Why Global Security?</h2>
+            <p className="text-brand-slate max-w-2xl mx-auto text-sm md:text-base font-medium">
               Beyond the hardware, it&apos;s our meticulous process and dedicated people that set us completely apart.
             </p>
           </motion.div>
@@ -229,16 +229,16 @@ export default function Home() {
                 key={idx}
                 variants={fadeInUp}
                 whileHover={{ y: -12 }}
-                className="group relative bg-brand-navy rounded-[2.5rem] p-10 md:p-12 shadow-2xl shadow-brand-navy/10 border border-brand-steel/20 hover:border-brand-electric/50 transition-all duration-500 overflow-hidden"
+                className="group relative bg-brand-navy rounded-[1.5rem] p-6 lg:p-8 shadow-2xl shadow-brand-navy/10 border border-brand-steel/20 hover:border-brand-electric/50 transition-all duration-500 overflow-hidden"
               >
                 {/* Hover Glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                <div className="w-20 h-20 bg-brand-white/10 backdrop-blur-md border border-brand-white/20 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner">
-                  <feature.icon className="w-10 h-10 text-brand-electric" />
+                <div className="w-12 h-12 bg-brand-white/10 backdrop-blur-md border border-brand-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner">
+                  <feature.icon className="w-6 h-6 text-brand-electric" />
                 </div>
-                <h3 className="text-3xl font-bold text-brand-white mb-6 tracking-tight">{feature.title}</h3>
-                <p className="text-brand-steel leading-relaxed text-lg lg:text-xl font-light">
+                <h3 className="text-xl font-bold text-brand-white mb-3 tracking-tight">{feature.title}</h3>
+                <p className="text-brand-steel leading-relaxed text-sm md:text-base font-light">
                   {feature.desc}
                 </p>
               </motion.div>
@@ -254,7 +254,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-center text-brand-navy mb-8 tracking-tighter"
+            className="text-3xl md:text-5xl font-black text-center text-brand-navy mb-8 tracking-tighter"
           >
             Client <span className="text-brand-slate">Outcomes</span>
           </motion.h2>
@@ -282,12 +282,12 @@ export default function Home() {
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-20 mix-blend-overlay" />
             
             <div className="grid grid-cols-1 lg:grid-cols-5 relative z-10">
-              <div className="p-12 lg:p-20 xl:p-24 flex flex-col justify-center lg:col-span-2">
-                <span className="inline-block px-5 py-2 rounded-full bg-brand-electric/10 text-brand-electric text-xs lg:text-sm font-black uppercase tracking-[0.25em] mb-8 w-fit ring-1 ring-brand-electric/30 backdrop-blur-md">
+              <div className="p-8 lg:p-12 flex flex-col justify-center lg:col-span-2">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-brand-electric/10 text-brand-electric text-xs font-black uppercase tracking-[0.2em] mb-4 w-fit ring-1 ring-brand-electric/30 backdrop-blur-md">
                   Featured Project
                 </span>
-                <h3 className="text-4xl md:text-6xl font-black text-brand-white mb-8 leading-tight tracking-tighter">Chere Botha School</h3>
-                <p className="text-brand-steel mb-12 text-lg md:text-xl leading-relaxed font-light">
+                <h3 className="text-2xl md:text-4xl font-black text-brand-white mb-4 leading-tight tracking-tighter">Chere Botha School</h3>
+                <p className="text-brand-steel mb-8 text-sm md:text-base leading-relaxed font-light">
                   A massive security overhaul ensuring total safety for students and staff. Features include IP CCTV, biometric access control, and rapid response alarm integration.
                 </p>
                 <div>

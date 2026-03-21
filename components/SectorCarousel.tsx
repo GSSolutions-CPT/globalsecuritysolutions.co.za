@@ -38,7 +38,7 @@ export function SectorCarousel() {
     ];
 
     return (
-        <ul className="w-full flex flex-col md:flex-row h-[700px] md:h-[500px] gap-2 overflow-hidden m-0 p-0">
+        <ul className="w-full flex flex-col md:flex-row h-[500px] md:h-[300px] gap-2 overflow-hidden m-0 p-0">
             {sectors.map((sector, index) => {
                 const slug = sector.page.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
                 const bgColor = vibrantColors[index % vibrantColors.length]
@@ -52,7 +52,7 @@ export function SectorCarousel() {
                             
                             {/* Collapsed State - Horizontal on Mobile, Rotated Vertical on Desktop */}
                             <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none p-4">
-                                <h3 className="md:-rotate-90 md:whitespace-nowrap text-2xl md:text-3xl font-black uppercase tracking-tighter text-white drop-shadow-md text-center">
+                                <h3 className="md:-rotate-90 md:whitespace-nowrap text-lg md:text-xl font-black uppercase tracking-tighter text-white drop-shadow-md text-center">
                                     {sector.page}
                                 </h3>
                             </div>
@@ -60,19 +60,19 @@ export function SectorCarousel() {
                             {/* Expanded State */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center py-8 px-4 md:px-8 text-center bg-black/5">
                                 {/* Filter to ensure the icon is white to contrast nicely with the vibrant background */}
-                                <div className="mb-4 md:mb-6 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl brightness-0 invert">
+                                <div className="mb-2 md:mb-4 transform transition-transform duration-500 group-hover:scale-110 drop-shadow-xl brightness-0 invert scale-75">
                                     {getSectorIcon(sector.page)}
                                 </div>
                                 
-                                <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md">
+                                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white mb-2 drop-shadow-md">
                                     {sector.page}
                                 </h3>
                                 
-                                <p className="text-white/95 text-xs md:text-sm font-medium max-w-[280px] md:max-w-md mb-6 md:mb-8 drop-shadow leading-relaxed line-clamp-3 md:line-clamp-none">
+                                <p className="text-white/95 text-[10px] md:text-xs font-medium max-w-[220px] md:max-w-[280px] mb-4 md:mb-6 drop-shadow leading-relaxed line-clamp-2 md:line-clamp-3">
                                     {sector.description}
                                 </p>
                                 
-                                <span className="mt-auto md:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-6 py-2.5 rounded-full font-bold text-sm transition-colors border border-white/20 shadow-lg">
+                                <span className="mt-auto md:mt-0 inline-flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-bold text-xs transition-colors border border-white/20 shadow-lg">
                                     View Sector <ArrowRight className="w-4 h-4 ml-2" />
                                 </span>
                             </div>

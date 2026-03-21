@@ -72,24 +72,24 @@ export function TestimonialCarousel() {
             <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-slow hover:[animation-play-state:paused]">
                 {/* Double the array for seamless looping */}
                 {[...reviews, ...reviews].map((review, index) => (
-                    <li key={index} className="flex-shrink-0 w-[400px]">
-                        <div className="bg-white pt-10 pb-8 px-8 rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] h-full relative overflow-hidden flex flex-col border border-slate-50 mx-4">
+                    <li key={index} className="flex-shrink-0 w-[300px]">
+                        <div className="bg-white pt-8 pb-6 px-6 rounded-[1.5rem] shadow-[0_5px_20px_rgba(0,0,0,0.06)] h-full relative overflow-hidden flex flex-col border border-slate-50 mx-2">
                             {/* Dog Ear Accent - slightly smaller/different for testimonials */}
-                            <div className="absolute top-0 left-0 w-16 h-16 bg-blue-500 rounded-br-[3rem] -translate-x-2 -translate-y-2 opacity-90" />
-                            <Quote className="absolute top-4 left-4 w-6 h-6 text-white z-10" />
+                            <div className="absolute top-0 left-0 w-12 h-12 bg-blue-500 rounded-br-[2rem] -translate-x-2 -translate-y-2 opacity-90" />
+                            <Quote className="absolute top-3 left-3 w-4 h-4 text-white z-10" />
 
                             <div className="relative z-10 flex-grow">
-                                <div className="flex text-yellow-400 mb-6 justify-center">
+                                <div className="flex text-yellow-400 mb-4 justify-center">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-5 h-5 fill-current" />
+                                        <Star key={i} className="w-4 h-4 fill-current" />
                                     ))}
                                 </div>
-                                <p className="text-slate-600 mb-8 italic text-lg leading-relaxed text-center">&quot;{review.text}&quot;</p>
+                                <p className="text-slate-600 mb-6 italic text-sm leading-relaxed text-center">&quot;{review.text}&quot;</p>
                             </div>
 
-                            <div className="mt-auto border-t border-slate-100 pt-6 text-center">
-                                <p className="font-bold text-slate-900 text-lg">{review.name}</p>
-                                <p className="text-slate-500 text-sm uppercase tracking-wider font-semibold">{review.location}</p>
+                            <div className="mt-auto border-t border-slate-100 pt-4 text-center">
+                                <p className="font-bold text-slate-900 text-sm">{review.name}</p>
+                                <p className="text-slate-500 text-[10px] uppercase tracking-wider font-semibold">{review.location}</p>
                             </div>
                         </div>
                     </li>
