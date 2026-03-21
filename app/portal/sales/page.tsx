@@ -325,7 +325,7 @@ export default function SalesPage() {
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'Draft': return 'bg-gray-500'
-            case 'Sent': return 'bg-blue-500'
+            case 'Sent': return 'bg-brand-electric'
             case 'Approved': case 'Accepted': return 'bg-green-500'
             case 'Rejected': return 'bg-red-500'
             case 'Converted': return 'bg-purple-500'
@@ -391,24 +391,24 @@ export default function SalesPage() {
     )
 
     const renderSaleCard = (sale: Quotation | Invoice, type: 'quotation' | 'invoice') => (
-        <Card key={sale.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative">
+        <Card key={sale.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border overflow-hidden relative">
             <div className={`absolute top-0 left-0 w-1 h-full ${getStatusColor(sale.status)}`}></div>
             <CardHeader className="pb-3 pl-6">
                 <div className="flex items-start justify-between">
                     <div className="flex-1">
-                        <CardTitle className="text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
-                            {type === 'quotation' ? <FileText className="h-5 w-5 text-blue-500" /> : <Receipt className="h-5 w-5 text-purple-500" />}
+                        <CardTitle className="text-lg flex items-center gap-2 text-brand-navy dark:text-brand-steel/20">
+                            {type === 'quotation' ? <FileText className="h-5 w-5 text-brand-electric" /> : <Receipt className="h-5 w-5 text-purple-500" />}
                             {sale.clients?.name || 'Unknown Client'}
                         </CardTitle>
                         {sale.clients?.company && (
-                            <CardDescription className="text-slate-500 font-medium">{sale.clients.company}</CardDescription>
+                            <CardDescription className="text-brand-steel font-medium">{sale.clients.company}</CardDescription>
                         )}
                     </div>
                     <div className="flex items-center gap-2">
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-muted-foreground hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="h-8 w-8 text-muted-foreground hover:text-brand-electric opacity-0 group-hover:opacity-100 transition-opacity"
                             title="Copy Client Portal Link"
                             onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation()
@@ -426,14 +426,14 @@ export default function SalesPage() {
             </CardHeader>
             <CardContent className="pl-6">
                 <div className="space-y-4">
-                    <div className="flex items-end justify-between border-b border-dashed border-slate-200 dark:border-slate-800 pb-3">
+                    <div className="flex items-end justify-between border-b border-dashed border-brand-steel/40 dark:border-brand-navy pb-3">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <Calendar className="h-4 w-4" />
                             <span>{new Date(sale.date_created).toLocaleDateString()}</span>
                         </div>
                         <div className="flex flex-col items-end">
                             <span className="text-xs text-muted-foreground uppercase tracking-wider">Total</span>
-                            <div className="flex items-center gap-1 text-xl font-bold text-slate-900 dark:text-white">
+                            <div className="flex items-center gap-1 text-xl font-bold text-brand-navy dark:text-white">
                                 <span className="text-xs text-muted-foreground self-start mt-1">R</span>
                                 {formatCurrency(sale.total_amount).replace('R', '')}
                             </div>
@@ -461,14 +461,14 @@ export default function SalesPage() {
                                     <Button
                                         size="sm"
                                         variant="outline"
-                                        className="w-full hover:bg-blue-50 dark:hover:bg-blue-900/20 border-blue-200 text-blue-700"
+                                        className="w-full hover:bg-brand-electric/10 dark:hover:bg-brand-navy/20 border-brand-electric/40 text-brand-electric"
                                         onClick={() => router.push(`/portal/sales/new?edit=${sale.id}&type=quotation`)}
                                     >
                                         Edit
                                     </Button>
                                 )}
                                 {sale.status === 'Draft' && (
-                                    <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Sent')} className="w-full bg-blue-600 hover:bg-blue-700">Send</Button>
+                                    <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Sent')} className="w-full bg-brand-electric hover:bg-brand-electric">Send</Button>
                                 )}
                                 {sale.status === 'Sent' && (
                                     <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Approved')} className="w-full bg-green-600 hover:bg-green-700">Approve</Button>
@@ -531,7 +531,7 @@ export default function SalesPage() {
                                     <Button
                                         size="sm"
                                         variant="outline"
-                                        className="w-full border-blue-200 text-blue-700 hover:bg-blue-50 dark:border-blue-900/50 dark:text-blue-400 dark:hover:bg-blue-900/20"
+                                        className="w-full border-brand-electric/40 text-brand-electric hover:bg-brand-electric/10 dark:border-brand-navy/50 dark:text-brand-electric dark:hover:bg-brand-navy/20"
                                         onClick={() => {
                                             setSelectedInvoiceId(sale.id)
                                             setInstallationDetailsOpen(true)
@@ -585,11 +585,11 @@ export default function SalesPage() {
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
                     <div className="relative z-10">
-                        <p className="text-blue-100 text-sm font-medium">Active Quotes</p>
+                        <p className="text-brand-electric/20 text-sm font-medium">Active Quotes</p>
                         <h3 className="text-3xl font-bold mt-1">{activeQuotes.length}</h3>
-                        <p className="text-blue-100 text-xs mt-2">Value: {formatCurrency(activeQuoteValue)}</p>
+                        <p className="text-brand-electric/20 text-xs mt-2">Value: {formatCurrency(activeQuoteValue)}</p>
                     </div>
                     <FileText className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
                 </div>
@@ -661,11 +661,11 @@ export default function SalesPage() {
                         .filter(q => !['Accepted', 'Approved', 'Converted', 'Pending Review'].includes(q.status))
                         .map((quotation) => renderSaleCard(quotation, 'quotation'))}
                     {filteredQuotations.filter(q => !['Accepted', 'Approved', 'Converted', 'Pending Review'].includes(q.status)).length === 0 && (
-                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-full mb-4">
-                                <FileText className="h-8 w-8 text-slate-400" />
+                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
+                            <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
+                                <FileText className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No active quotations</h3>
+                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No active quotations</h3>
                             <p className="mb-6 max-w-sm text-center">Create a new quote to get started with your sales pipeline.</p>
                             <Button onClick={() => router.push('/portal/sales/new')}>Create Quote</Button>
                         </div>
@@ -735,11 +735,11 @@ export default function SalesPage() {
                             </Card>
                         ))}
                     {filteredQuotations.filter(q => q.status === 'Pending Review').length === 0 && (
-                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
                             <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full mb-4">
                                 <CheckCircle className="h-8 w-8 text-green-500" />
                             </div>
-                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">All clear!</h3>
+                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">All clear!</h3>
                             <p className="text-center">No quotations are currently pending review.</p>
                         </div>
                     )}
@@ -750,11 +750,11 @@ export default function SalesPage() {
                         .filter(q => q.status === 'Accepted' || q.status === 'Approved')
                         .map((quotation) => renderSaleCard(quotation, 'quotation'))}
                     {filteredQuotations.filter(q => q.status === 'Accepted' || q.status === 'Approved').length === 0 && (
-                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-full mb-4">
-                                <FileText className="h-8 w-8 text-slate-400" />
+                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
+                            <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
+                                <FileText className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No proforma invoices</h3>
+                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No proforma invoices</h3>
                             <p className="text-center">Accepted/Approved quotes will appear here as proforma invoices.</p>
                         </div>
                     )}
@@ -763,11 +763,11 @@ export default function SalesPage() {
                 <TabsContent value="invoices" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredInvoices.map((invoice) => renderSaleCard(invoice, 'invoice'))}
                     {filteredInvoices.length === 0 && (
-                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-full mb-4">
-                                <Receipt className="h-8 w-8 text-slate-400" />
+                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
+                            <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
+                                <Receipt className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No invoices yet</h3>
+                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No invoices yet</h3>
                             <p className="text-center">Convert a quotation or create a direct invoice to see it here.</p>
                         </div>
                     )}
@@ -775,32 +775,32 @@ export default function SalesPage() {
 
                 <TabsContent value="purchase-orders" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredPurchaseOrders.map((po) => (
-                        <Card key={po.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative">
-                            <div className="absolute top-0 left-0 w-1 h-full bg-slate-500"></div>
+                        <Card key={po.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border overflow-hidden relative">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-brand-steel"></div>
                             <CardHeader className="pb-3 pl-6">
                                 <div className="flex items-start justify-between">
                                     <div className="flex-1">
-                                        <CardTitle className="text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
-                                            <Package className="h-5 w-5 text-slate-500" />
+                                        <CardTitle className="text-lg flex items-center gap-2 text-brand-navy dark:text-brand-steel/20">
+                                            <Package className="h-5 w-5 text-brand-steel" />
                                             {po.suppliers?.name || 'Unknown Supplier'}
                                         </CardTitle>
-                                        <CardDescription className="text-slate-500 font-medium">PO #{po.id.substring(0, 8)}</CardDescription>
+                                        <CardDescription className="text-brand-steel font-medium">PO #{po.id.substring(0, 8)}</CardDescription>
                                     </div>
-                                    <Badge className="bg-slate-500 text-white shadow-sm px-3 py-1">
+                                    <Badge className="bg-brand-steel text-white shadow-sm px-3 py-1">
                                         {po.status}
                                     </Badge>
                                 </div>
                             </CardHeader>
                             <CardContent className="pl-6">
                                 <div className="space-y-4">
-                                    <div className="flex items-end justify-between border-b border-dashed border-slate-200 dark:border-slate-800 pb-3">
+                                    <div className="flex items-end justify-between border-b border-dashed border-brand-steel/40 dark:border-brand-navy pb-3">
                                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                             <Calendar className="h-4 w-4" />
                                             <span>{new Date(po.date_created).toLocaleDateString()}</span>
                                         </div>
                                         <div className="flex flex-col items-end">
                                             <span className="text-xs text-muted-foreground uppercase tracking-wider">Total</span>
-                                            <div className="flex items-center gap-1 text-xl font-bold text-slate-900 dark:text-white">
+                                            <div className="flex items-center gap-1 text-xl font-bold text-brand-navy dark:text-white">
                                                 <span className="text-xs text-muted-foreground self-start mt-1">R</span>
                                                 {formatCurrency(po.total_amount).replace('R', '')}
                                             </div>
@@ -837,11 +837,11 @@ export default function SalesPage() {
                         </Card>
                     ))}
                     {filteredPurchaseOrders.length === 0 && (
-                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-full mb-4">
-                                <Package className="h-8 w-8 text-slate-400" />
+                        <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
+                            <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
+                                <Package className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">No purchase orders</h3>
+                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No purchase orders</h3>
                             <p className="text-center">Create a PO to track orders from your suppliers.</p>
                         </div>
                     )}

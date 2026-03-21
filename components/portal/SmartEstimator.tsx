@@ -94,17 +94,17 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white border-0 shadow-lg shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                <Button className="gap-2 bg-gradient-to-r from-violet-600 to-brand-electric hover:from-violet-700 hover:to-brand-electric text-white border-0 shadow-lg shadow-brand-electric/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
                     <Sparkles className="h-4 w-4 animate-pulse" />
                     AI Estimate
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[450px] overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-indigo-500" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-brand-electric" />
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2 text-xl">
-                        <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
-                            <Brain className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                        <div className="p-2 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-lg">
+                            <Brain className="h-5 w-5 text-brand-electric dark:text-brand-electric" />
                         </div>
                         Smart Job Estimator
                     </DialogTitle>
@@ -122,7 +122,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                     type="number"
                                     value={inputs.hours}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, hours: parseFloat(e.target.value) || 0 })}
-                                    className="bg-slate-50 dark:bg-slate-900"
+                                    className="bg-brand-white dark:bg-brand-navy"
                                 />
                             </div>
                             <div className="grid gap-2">
@@ -131,7 +131,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                     type="number"
                                     value={inputs.technicians}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, technicians: parseInt(e.target.value) || 1 })}
-                                    className="bg-slate-50 dark:bg-slate-900"
+                                    className="bg-brand-white dark:bg-brand-navy"
                                 />
                             </div>
                         </div>
@@ -141,7 +141,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                             <div className="relative">
                                 <span className="absolute left-3 top-2.5 text-gray-500">R</span>
                                 <Input
-                                    className="pl-7 bg-slate-50 dark:bg-slate-900"
+                                    className="pl-7 bg-brand-white dark:bg-brand-navy"
                                     type="number"
                                     value={inputs.materialCost}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, materialCost: parseFloat(e.target.value) || 0 })}
@@ -155,7 +155,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                                 value={inputs.markup}
                                 onValueChange={(v: string) => setInputs({ ...inputs, markup: v })}
                             >
-                                <SelectTrigger className="bg-slate-50 dark:bg-slate-900">
+                                <SelectTrigger className="bg-brand-white dark:bg-brand-navy">
                                     <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -169,7 +169,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                         <div className="grid gap-2">
                             <Label className="text-muted-foreground text-xs uppercase tracking-wider">Hourly Rate (Base)</Label>
                             <Input
-                                className="h-8 text-xs bg-slate-50 dark:bg-slate-900"
+                                className="h-8 text-xs bg-brand-white dark:bg-brand-navy"
                                 type="number"
                                 value={inputs.rate}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputs({ ...inputs, rate: parseFloat(e.target.value) })}
@@ -181,9 +181,9 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
                 {step === 'calculating' && (
                     <div className="py-12 flex flex-col items-center justify-center space-y-6 animate-in fade-in zoom-in duration-500">
                         <div className="relative">
-                            <div className="absolute inset-0 bg-indigo-500 blur-2xl opacity-20 animate-pulse rounded-full" />
-                            <div className="relative bg-white dark:bg-slate-900 p-4 rounded-full shadow-xl border border-indigo-100 dark:border-indigo-900">
-                                <Wand2 className="h-8 w-8 text-indigo-600 dark:text-indigo-400 animate-pulse" />
+                            <div className="absolute inset-0 bg-brand-electric blur-2xl opacity-20 animate-pulse rounded-full" />
+                            <div className="relative bg-white dark:bg-brand-navy p-4 rounded-full shadow-xl border border-brand-electric/20 dark:border-brand-navy">
+                                <Wand2 className="h-8 w-8 text-brand-electric dark:text-brand-electric animate-pulse" />
                             </div>
                         </div>
                         <div className="space-y-2 text-center">
@@ -195,30 +195,30 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
 
                 {step === 'result' && (
                     <div className="py-4 space-y-4 animate-in slide-in-from-bottom-4 duration-500">
-                        <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border-indigo-100 dark:border-indigo-900 overflow-hidden relative">
+                        <Card className="bg-gradient-to-br from-brand-electric/10 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border-brand-electric/20 dark:border-brand-navy overflow-hidden relative">
                             <div className="absolute top-0 right-0 p-3 opacity-10">
                                 <Sparkles className="h-24 w-24" />
                             </div>
                             <CardContent className="pt-6 relative">
                                 <div className="flex justify-between items-end mb-4">
-                                    <span className="text-sm text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase">Recommended Quote</span>
-                                    <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+                                    <span className="text-sm text-brand-electric dark:text-brand-electric font-semibold tracking-wide uppercase">Recommended Quote</span>
+                                    <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-purple-600 dark:from-brand-electric dark:to-purple-400">
                                         R{results.total.toFixed(2)}
                                     </span>
                                 </div>
-                                <div className="space-y-2 pt-4 border-t border-indigo-200 dark:border-indigo-800/50">
-                                    <div className="justify-between text-sm text-indigo-900/70 dark:text-indigo-200/70">
+                                <div className="space-y-2 pt-4 border-t border-brand-electric/40 dark:border-brand-navy/50">
+                                    <div className="justify-between text-sm text-brand-navy/70 dark:text-brand-electric/40/70">
                                         <span>Labor ({inputs.hours}h x {inputs.technicians})</span>
                                         <span className="font-mono">R{results.labor.toFixed(2)}</span>
                                     </div>
-                                    <div className="flex justify-between text-sm text-indigo-900/70 dark:text-indigo-200/70">
+                                    <div className="flex justify-between text-sm text-brand-navy/70 dark:text-brand-electric/40/70">
                                         <span>Materials (+Markup)</span>
                                         <span className="font-mono">R{results.materialMarkup.toFixed(2)}</span>
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
-                        <p className="text-xs text-muted-foreground text-center bg-slate-50 dark:bg-slate-900 py-2 rounded-lg">
+                        <p className="text-xs text-muted-foreground text-center bg-brand-white dark:bg-brand-navy py-2 rounded-lg">
                             Includes calculated profit margin of <span className="font-semibold text-green-600">R{(results.total - (results.labor * 0.7) - inputs.materialCost).toFixed(2)}</span>
                         </p>
                     </div>
@@ -226,7 +226,7 @@ export function SmartEstimator({ onApply }: SmartEstimatorProps) {
 
                 <DialogFooter>
                     {step === 'input' && (
-                        <Button onClick={calculateEstimate} size="lg" className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100">
+                        <Button onClick={calculateEstimate} size="lg" className="w-full bg-brand-navy dark:bg-white text-white dark:text-brand-navy hover:bg-brand-navy dark:hover:bg-brand-steel/20">
                             <Calculator className="mr-2 h-4 w-4" />
                             Calculate Estimate
                         </Button>

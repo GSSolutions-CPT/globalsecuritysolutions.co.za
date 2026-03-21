@@ -433,7 +433,7 @@ function JobsContent() {
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'Pending': return 'bg-yellow-500'
-            case 'In Progress': return 'bg-blue-500'
+            case 'In Progress': return 'bg-brand-electric'
             case 'Completed': return 'bg-green-500'
             case 'Cancelled': return 'bg-red-500'
             default: return 'bg-gray-500'
@@ -443,11 +443,11 @@ function JobsContent() {
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
                     <div className="relative z-10">
-                        <p className="text-blue-100 text-sm font-medium">Active Jobs</p>
+                        <p className="text-brand-electric/20 text-sm font-medium">Active Jobs</p>
                         <h3 className="text-3xl font-bold mt-1">{activeJobs}</h3>
-                        <p className="text-blue-100 text-xs mt-2">Currently in progress or pending</p>
+                        <p className="text-brand-electric/20 text-xs mt-2">Currently in progress or pending</p>
                     </div>
                     <Activity className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
                 </div>
@@ -749,7 +749,7 @@ function JobsContent() {
                 </div>
             </div>
 
-            <Card className="border-0 shadow-lg bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm">
                 <CardContent className="p-0">
                     <Suspense fallback={
                         <div className="flex items-center justify-center h-[400px]">
@@ -759,7 +759,7 @@ function JobsContent() {
                         {viewMode === 'list' && (
                             <div className="overflow-x-auto">
                                 <table className="w-full text-sm text-left">
-                                    <thead className="text-xs uppercase bg-slate-50 dark:bg-slate-800/50 text-muted-foreground border-b border-slate-100 dark:border-slate-800">
+                                    <thead className="text-xs uppercase bg-brand-white dark:bg-brand-navy/50 text-muted-foreground border-b border-brand-steel/20 dark:border-brand-navy">
                                         <tr>
                                             <th className="px-6 py-4 font-semibold">Client</th>
                                             <th className="px-6 py-4 font-semibold">Scheduled</th>
@@ -768,7 +768,7 @@ function JobsContent() {
                                             <th className="px-6 py-4 font-semibold">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <tbody className="divide-y divide-brand-steel/20 dark:divide-brand-navy">
                                         {filteredJobs.length === 0 ? (
                                             <tr>
                                                 <td colSpan={5} className="px-6 py-12 text-center text-muted-foreground italic">
@@ -777,9 +777,9 @@ function JobsContent() {
                                             </tr>
                                         ) : (
                                             filteredJobs.map((job) => (
-                                                <tr key={job.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                                <tr key={job.id} className="hover:bg-brand-white/50 dark:hover:bg-brand-navy/30 transition-colors group">
                                                     <td className="px-6 py-4">
-                                                        <div className="font-medium text-slate-900 dark:text-slate-100">{job.clients?.name}</div>
+                                                        <div className="font-medium text-brand-navy dark:text-brand-steel/20">{job.clients?.name}</div>
                                                         <div className="text-xs text-muted-foreground">{job.clients?.company}</div>
                                                     </td>
                                                     <td className="px-6 py-4 text-muted-foreground">
@@ -793,7 +793,7 @@ function JobsContent() {
                                                     <td className="px-6 py-4">
                                                         <div className="flex -space-x-2">
                                                             {job.assigned_technicians?.map((tech, i) => (
-                                                                <div key={i} className="h-8 w-8 rounded-full bg-primary/10 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[10px] font-bold text-primary" title={tech}>
+                                                                <div key={i} className="h-8 w-8 rounded-full bg-primary/10 border-2 border-white dark:border-brand-navy flex items-center justify-center text-[10px] font-bold text-primary" title={tech}>
                                                                     {tech.split(' ').map(n => n[0]).join('')}
                                                                 </div>
                                                             ))}

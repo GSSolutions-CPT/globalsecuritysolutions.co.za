@@ -9,23 +9,23 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
+        <div className="bg-brand-white min-h-screen pb-20">
             {/* Header */}
-            <div className="bg-slate-900 py-12 relative overflow-hidden">
+            <div className="bg-brand-navy py-12 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <Link href="/" className="inline-flex items-center text-blue-400 hover:text-white mb-6 transition-colors">
+                    <Link href="/" className="inline-flex items-center text-brand-electric hover:text-white mb-6 transition-colors">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
                     </Link>
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Privacy Policy</h1>
-                    <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                    <p className="text-xl text-brand-electric/40 max-w-2xl mx-auto">
                         Your privacy is important to us. Here is how we protect your data.
                     </p>
                 </div>
             </div>
 
             <div className="container mx-auto px-4 py-12 max-w-4xl">
-                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-slate-100 prose prose-lg prose-slate max-w-none">
+                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-brand-steel/20 prose prose-lg prose-slate max-w-none">
                     <p className="lead">
                         Global Security Solutions is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you visit our website or use our services.
                     </p>
@@ -78,12 +78,12 @@ export default function PrivacyPolicyPage() {
                     <h3>7. Contact Us</h3>
                     <p>
                         If you have any questions about this Privacy Policy, please contact us at:<br />
-                        <strong>Email:</strong> <a href="mailto:info@globalsecuritysolutions.co.za" className="text-blue-600 hover:underline">info@globalsecuritysolutions.co.za</a>
+                        <strong>Email:</strong> <a href="mailto:info@globalsecuritysolutions.co.za" className="text-brand-electric hover:underline">info@globalsecuritysolutions.co.za</a>
                     </p>
 
                     <hr className="my-8" />
 
-                    <p className="text-sm text-slate-500">
+                    <p className="text-sm text-brand-steel">
                         Last Updated: December 2025
                     </p>
                 </div>

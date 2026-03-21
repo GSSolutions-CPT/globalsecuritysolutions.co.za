@@ -71,7 +71,7 @@ export function TestimonialGrid() {
             {reviews.map((review, index) => (
                 <div
                     key={index}
-                    className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                    className="bg-white p-8 rounded-xl shadow-sm border border-brand-steel/20 hover:shadow-md transition-shadow"
                     data-aos="fade-up"
                     data-aos-delay={index * 50} // Stifled fade-in effect
                 >
@@ -80,10 +80,10 @@ export function TestimonialGrid() {
                             <Star key={i} className="w-5 h-5 fill-current" />
                         ))}
                     </div>
-                    <p className="text-slate-600 mb-6 italic min-h-[80px]">&quot;{review.text}&quot;</p>
+                    <p className="text-brand-slate mb-6 italic min-h-[80px]">&quot;{review.text}&quot;</p>
                     <div>
-                        <p className="font-bold text-slate-900">- {review.name}</p>
-                        <p className="text-sm text-slate-400">{review.location}</p>
+                        <p className="font-bold text-brand-navy">- {review.name}</p>
+                        <p className="text-sm text-brand-steel">{review.location}</p>
                     </div>
                 </div>
             ))}

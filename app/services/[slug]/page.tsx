@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic'
 import seoData from '@/app/data/seoData.json'
 import { masterBusinessData } from '@/utils/generateSchema'
-import { ContactForm } from '@/components/ContactForm'
+
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -8,6 +9,11 @@ import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRig
 import Link from 'next/link'
 
 import type { Metadata } from 'next'
+
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
+    
+    loading: () => <div className="h-[500px] w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
+});
 
 // Helper to normalize string to slug
 const toSlug = (text: string) => {
@@ -58,7 +64,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     const service = rawService as ServiceData
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+        <div className="flex flex-col min-h-screen bg-brand-white font-sans">
             {/* Service Schema */}
             <script
                 type="application/ld+json"
@@ -150,9 +156,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             />
 
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
+            <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
                         src={service.heroImage || "/hero-bg.jpg"}
                         alt={service.heroAlt || service.title}
@@ -168,15 +174,15 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     </div>
 
                     <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm">
-                            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-sm font-medium mb-6 backdrop-blur-sm">
+                            <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
                             Professional Installation
                         </div>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
                             {service.page} <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">in Cape Town</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric">in Cape Town</span>
                         </h1>
-                        <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+                        <p className="text-xl text-brand-steel/60 max-w-2xl leading-relaxed">
                             {service.description}
                         </p>
                     </div>
@@ -190,12 +196,12 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     <div className="lg:col-span-2 space-y-12">
 
                         {/* Intro Card */}
-                        <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-slate-100 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                        <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-brand-steel/20 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                             <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
                                 {service.iconPath && (
-                                    <div className="w-20 h-20 bg-blue-50 rounded-2xl p-4 flex-shrink-0 border border-blue-100">
+                                    <div className="w-20 h-20 bg-brand-electric/10 rounded-2xl p-4 flex-shrink-0 border border-brand-electric/20">
                                         <Image
                                             src={service.iconPath}
                                             alt={`${service.page} icon`}
@@ -206,8 +212,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     </div>
                                 )}
                                 <div>
-                                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Secure Your Property Today</h2>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Secure Your Property Today</h2>
+                                    <p className="text-brand-slate text-lg leading-relaxed">
                                         {service.longDescription || `Global Security Solutions is Cape Town's premier provider of ${service.page}. We combine cutting-edge technology with expert workmanship to ensure your property is never left vulnerable.`}
                                     </p>
                                 </div>
@@ -221,7 +227,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     <ShieldAlert className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">The Risk</h3>
                                 </div>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-brand-slate leading-relaxed">
                                     Without reliable <strong>{service.page}</strong>, your property has blind spots. Criminals target easy access points and outdated systems, putting your assets and family at risk.
                                 </p>
                             </div>
@@ -230,7 +236,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     <BadgeCheck className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">The Solution</h3>
                                 </div>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-brand-slate leading-relaxed">
                                     Our intelligent <strong>{service.page}</strong> acts as a proactive shield. We don&apos;t just record crime; we deter it with visible, high-tech barriers and instant alerts.
                                 </p>
                             </div>
@@ -238,8 +244,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
                         {/* Feature Grid */}
                         <div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center">
-                                <span className="bg-blue-600 w-2 h-8 rounded-full mr-4"></span>
+                            <h3 className="text-2xl font-bold text-brand-navy mb-8 flex items-center">
+                                <span className="bg-brand-electric w-2 h-8 rounded-full mr-4"></span>
                                 Key Features
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -249,13 +255,13 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     { icon: Clock, title: "24/7 Monitoring", text: "Instant alerts to you and armed response." },
                                     { icon: CheckCircle2, title: "Certified Installers", text: "Fully accredited and insured installation team." }
                                 ].map((feature, i) => (
-                                    <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-blue-600">
+                                    <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-brand-steel/20 shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric">
                                             <feature.icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
-                                            <p className="text-slate-500 text-sm">{feature.text}</p>
+                                            <h4 className="font-bold text-brand-navy mb-1">{feature.title}</h4>
+                                            <p className="text-brand-steel text-sm">{feature.text}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -263,11 +269,11 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         </div>
 
                         {/* Brands We Use */}
-                        <div className="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden">
+                        <div className="bg-brand-navy text-white p-8 rounded-3xl relative overflow-hidden">
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div>
                                     <h3 className="text-xl font-bold mb-2">Trusted Brands Only</h3>
-                                    <p className="text-slate-400 text-sm max-w-md">
+                                    <p className="text-brand-steel text-sm max-w-md">
                                         We refuse to install generic, unreliable hardware. For {toSlug(service.page).replace(/-/g, ' ')}, we use only:
                                     </p>
                                 </div>
@@ -282,20 +288,20 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         </div>
 
                         {/* FAQ Section */}
-                        <div className="bg-slate-50 border-t border-slate-200 pt-12">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
+                        <div className="bg-brand-white border-t border-brand-steel/40 pt-12">
+                            <h3 className="text-2xl font-bold text-brand-navy mb-8">Frequently Asked Questions</h3>
                             <div className="space-y-4">
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">How long does installation take?</h4>
-                                    <p className="text-slate-600">Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves.</p>
+                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
+                                    <h4 className="font-bold text-brand-navy mb-2">How long does installation take?</h4>
+                                    <p className="text-brand-slate">Most residential installations are completed within 1-2 days. We work neatly and clean up after ourselves.</p>
                                 </div>
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">Is there a warranty?</h4>
-                                    <p className="text-slate-600">Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years).</p>
+                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
+                                    <h4 className="font-bold text-brand-navy mb-2">Is there a warranty?</h4>
+                                    <p className="text-brand-slate">Yes, we provide a 12-month workmanship guarantee alongside standard manufacturer warranties (typically 1-3 years).</p>
                                 </div>
-                                <div className="bg-white p-6 rounded-2xl border border-slate-200">
-                                    <h4 className="font-bold text-slate-900 mb-2">Can I upgrade my existing system?</h4>
-                                    <p className="text-slate-600">Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion.</p>
+                                <div className="bg-white p-6 rounded-2xl border border-brand-steel/40">
+                                    <h4 className="font-bold text-brand-navy mb-2">Can I upgrade my existing system?</h4>
+                                    <p className="text-brand-slate">Often yes. We can assess your current hardware and see if it can be integrated with newer smart modules or used as a base for expansion.</p>
                                 </div>
                             </div>
                         </div>
@@ -305,23 +311,23 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     {/* Sidebar */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-24 space-y-8">
-                            <div className="bg-white p-6 rounded-[2rem] border border-blue-100 shadow-lg shadow-blue-500/5">
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Get a Free Quote</h3>
-                                <p className="text-slate-500 text-sm mb-6">Fill in your details and we&apos;ll call you back shortly.</p>
+                            <div className="bg-white p-6 rounded-[2rem] border border-brand-electric/20 shadow-lg shadow-brand-electric/5">
+                                <h3 className="text-xl font-bold text-brand-navy mb-2">Get a Free Quote</h3>
+                                <p className="text-brand-steel text-sm mb-6">Fill in your details and we&apos;ll call you back shortly.</p>
                                 <ContactForm />
                             </div>
 
                             {/* Other Services Links */}
-                            <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
-                                <h4 className="font-bold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Services</h4>
+                            <div className="bg-brand-white p-6 rounded-3xl border border-brand-steel/40">
+                                <h4 className="font-bold text-brand-navy mb-4 uppercase text-xs tracking-wider">Other Services</h4>
                                 <ul className="space-y-3">
                                     {seoData.primaryServicePages
                                         .filter(s => s.page !== service.page)
                                         .slice(0, 5)
                                         .map(s => (
                                             <li key={s.page}>
-                                                <Link href={`/services/${toSlug(s.page)}`} className="text-slate-600 hover:text-blue-600 text-sm flex items-center group transition-colors">
-                                                    <ArrowRight className="w-4 h-4 mr-2 text-slate-300 group-hover:text-blue-600 transition-colors" />
+                                                <Link href={`/services/${toSlug(s.page)}`} className="text-brand-slate hover:text-brand-electric text-sm flex items-center group transition-colors">
+                                                    <ArrowRight className="w-4 h-4 mr-2 text-brand-steel/60 group-hover:text-brand-electric transition-colors" />
                                                     {s.page}
                                                 </Link>
                                             </li>

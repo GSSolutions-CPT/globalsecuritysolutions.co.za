@@ -142,8 +142,8 @@ export default function ClientDetailsPage({ params }: PageProps) {
                     <CardContent className="space-y-4">
                         {client.email && (
                             <div className="flex items-center gap-3">
-                                <div className="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg">
-                                    <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                                <div className="bg-brand-electric/10 dark:bg-brand-navy/20 p-2 rounded-lg">
+                                    <Mail className="h-4 w-4 text-brand-electric dark:text-brand-electric" />
                                 </div>
                                 <div className="overflow-hidden">
                                     <p className="text-sm font-medium">Email</p>
@@ -328,7 +328,7 @@ export default function ClientDetailsPage({ params }: PageProps) {
                         <CardContent>
                             {attachments.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-                                    <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-full mb-3">
+                                    <div className="bg-brand-steel/20 dark:bg-brand-navy p-3 rounded-full mb-3">
                                         <ImageIcon className="h-6 w-6" />
                                     </div>
                                     <p>No photos uploaded yet.</p>
@@ -336,7 +336,7 @@ export default function ClientDetailsPage({ params }: PageProps) {
                             ) : (
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     {attachments.map((file) => (
-                                        <div key={file.id} className="group relative aspect-square bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border">
+                                        <div key={file.id} className="group relative aspect-square bg-brand-steel/20 dark:bg-brand-navy rounded-lg overflow-hidden border">
                                             {file.file_type?.startsWith('image/') ? (
                                                 <img
                                                     src={file.file_url}

@@ -49,11 +49,11 @@ export default function AuthCallbackPage() {
 
     if (error) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-50 dark:bg-slate-950">
+            <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-brand-white dark:bg-brand-navy">
                 <p className="text-red-500 text-sm font-medium">{error}</p>
                 <button
                     onClick={() => router.push('/portal/login')}
-                    className="text-sm text-blue-600 hover:underline"
+                    className="text-sm text-brand-electric hover:underline"
                 >
                     Back to login
                 </button>
@@ -62,10 +62,10 @@ export default function AuthCallbackPage() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-50 dark:bg-slate-950">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-            <p className="text-sm text-slate-500 dark:text-slate-400">Signing you in…</p>
-            <div className="flex items-center gap-2 text-xs text-slate-400 mt-4">
+        <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-brand-white dark:bg-brand-navy">
+            <Loader2 className="h-8 w-8 animate-spin text-brand-electric" />
+            <p className="text-sm text-brand-steel dark:text-brand-steel">Signing you in…</p>
+            <div className="flex items-center gap-2 text-xs text-brand-steel mt-4">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 <span>Secured by GSS Solutions</span>
             </div>

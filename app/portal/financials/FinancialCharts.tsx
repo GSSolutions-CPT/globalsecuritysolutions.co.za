@@ -43,7 +43,7 @@ export default function FinancialCharts({ monthlyData, expenseBreakdown, colors 
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="glass-effect tech-border bg-transparent col-span-2 lg:col-span-2 border-none shadow-sm bg-white dark:bg-slate-900/50">
+            <Card className="glass-effect tech-border bg-transparent col-span-2 lg:col-span-2 border-none shadow-sm bg-white dark:bg-brand-navy/50">
                 <CardHeader>
                     <CardTitle>Monthly Performance</CardTitle>
                     <CardDescription className="text-muted-foreground/80">Revenue, profit, and expenses over time</CardDescription>
@@ -88,7 +88,7 @@ export default function FinancialCharts({ monthlyData, expenseBreakdown, colors 
                 </CardContent>
             </Card>
 
-            <Card className="glass-effect tech-border bg-transparent col-span-2 lg:col-span-2 border-none shadow-sm bg-white dark:bg-slate-900/50">
+            <Card className="glass-effect tech-border bg-transparent col-span-2 lg:col-span-2 border-none shadow-sm bg-white dark:bg-brand-navy/50">
                 <CardHeader>
                     <CardTitle>Expense Breakdown</CardTitle>
                     <CardDescription className="text-muted-foreground/80">Job vs general expenses</CardDescription>

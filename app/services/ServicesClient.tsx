@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import seoData from '@/app/data/seoData.json'
 import { ArrowRight, CheckCircle2, Search, FileText, Wrench, HeadphonesIcon } from 'lucide-react'
+import { PageHero } from '@/components/PageHero'
 
 const toSlug = (text: string) => {
     return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
@@ -30,42 +31,18 @@ export function ServicesClient() {
         <div className="min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
 
             {/* Hero Section */}
-            <section className="relative bg-brand-navy text-brand-white py-16 md:py-24 flex items-center overflow-hidden border-b border-brand-steel/20">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] mix-blend-screen pointer-events-none" />
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
-                
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/30 z-10" />
-                    <Image
-                        src="/page-heroes/services-hero.png"
-                        alt="Security Services"
-                        fill
-                        className="object-cover opacity-30 mix-blend-luminosity"
-                        priority
-                    />
-                </div>
-
-                <div className="container relative z-20 mx-auto px-4 md:px-8 text-center pt-8">
-                    <motion.div 
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                        className="flex flex-col items-center"
-                    >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/30 text-brand-electric text-xs md:text-sm font-black tracking-widest uppercase mb-6 backdrop-blur-md">
-                            <span className="w-2 h-2 rounded-full bg-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]"></span>
-                            <span>Complete Protection</span>
-                        </motion.div>
-                        <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-tight drop-shadow-md">
-                            World-Class <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Services</span>
-                        </motion.h1>
-                        <motion.p variants={fadeInUp} className="text-brand-steel sm:text-lg max-w-2xl mx-auto leading-relaxed font-light mb-8">
-                            From residential homes to industrial estates, we design systems that protect what matters most with unwavering reliability.
-                        </motion.p>
-                    </motion.div>
-                </div>
-            </section>
+            <PageHero
+                badgeText="Complete Protection"
+                title={
+                    <>
+                        World-Class <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Services</span>
+                    </>
+                }
+                subtitle="From residential homes to industrial estates, we design systems that protect what matters most with unwavering reliability."
+                bgImage="/page-heroes/services-hero.png"
+                pbClass=""
+            />
 
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">
                 {/* Services Grid */}

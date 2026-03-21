@@ -8,6 +8,7 @@ import { ScrollProgress } from '@/components/ScrollProgress'
 import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image"
+import { PageHero } from '@/components/PageHero'
 
 // Helper to find post
 const getPost = async (slug: string) => {
@@ -59,57 +60,37 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 pb-8 font-sans">
+        <div className="min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
             <ScrollProgress />
+            <PageHero
+                align="left"
+                title={post.title}
+                subtitle={`${post.date} • Global Security Solutions`}
+                bgImage={post.coverImage || "/page-heroes/blog-hero.png"}
+                pbClass="pb-48"
+                badgeText="Security Insights"
+            />
 
-            {/* Minimal Header */}
-            <div className="bg-slate-900 text-white pt-8 pb-12">
-                <div className="container mx-auto px-4 max-w-4xl">
-                    <Link href="/blog" className="inline-flex items-center text-blue-400 hover:text-white mb-6 text-sm font-semibold uppercase tracking-wide transition-colors">
-                        &larr; Back to Blog
-                    </Link>
-                    <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">{post.title}</h1>
-                    <div className="flex items-center text-slate-400 text-sm">
-                        <Calendar className="w-4 h-4 mr-2 text-blue-500" />
-                        <span>{post.date}</span>
-                        <span className="mx-3">•</span>
-                        <span>Global Security Solutions</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="container mx-auto px-4 max-w-4xl -mt-8 relative z-10">
-                {/* Cover Image */}
-                {post.coverImage && (
-                    <div className="rounded-2xl overflow-hidden shadow-xl border border-white/20 relative aspect-video bg-slate-200 mb-10">
-                        <Image
-                            src={post.coverImage}
-                            alt={post.title}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 1024px"
-                            priority
-                            className="object-cover"
-                        />
-                    </div>
-                )}
-
+            <div className="container mx-auto px-4 max-w-4xl -mt-32 relative z-30 pb-16">
                 {/* Content Container */}
-                <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-slate-100">
-                    <div className="flex items-center justify-between border-b border-slate-100 pb-6 mb-8 text-sm">
+                <div className="bg-brand-white p-8 md:p-16 rounded-[2.5rem] shadow-2xl border border-brand-steel/10 ring-1 ring-brand-navy/5">
+                    <div className="flex items-center justify-between border-b border-brand-steel/20 pb-6 mb-10 text-sm">
                         <div className="flex gap-4">
-                            <span className="hidden md:inline text-slate-400">Published in Security Tips</span>
+                            <Link href="/blog" className="inline-flex items-center text-brand-navy font-bold hover:text-brand-electric transition-colors">
+                                &larr; Return to Articles
+                            </Link>
                         </div>
                         <div className="flex gap-2">
                             <ShareButton title={post.title} />
                         </div>
                     </div>
 
-                    <article className="prose prose-lg prose-slate max-w-none text-slate-700 prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-blue-600 prose-img:rounded-xl">
+                    <article className="prose prose-lg prose-slate max-w-none prose-p:text-brand-slate prose-headings:font-black prose-headings:text-brand-navy prose-a:text-brand-electric prose-a:font-bold prose-img:rounded-2xl prose-img:shadow-xl prose-li:text-brand-slate">
                         {post.content.map((block: { type: string, text?: string, items?: string[], src?: string, alt?: string }, index: number) => {
                             if (block.type === 'heading') {
                                 return (
                                     <h2 key={index} className="flex items-center mt-10 mb-4 text-2xl">
-                                        <BookOpen className="w-6 h-6 mr-3 text-blue-500" />
+                                        <BookOpen className="w-6 h-6 mr-3 text-brand-electric" />
                                         <span dangerouslySetInnerHTML={{ __html: block.text || '' }} />
                                     </h2>
                                 )
@@ -117,25 +98,26 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                             if (block.type === 'image') {
                                 return (
                                     <div key={index} className="my-8">
-                                        <div className="rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                                        <div className="rounded-xl overflow-hidden shadow-lg border border-brand-steel/40">
                                             <Image
                                                 src={block.src || ''}
                                                 alt={block.alt || ''}
                                                 width={800}
                                                 height={500}
                                                 className="w-full h-auto object-cover"
+                                                quality={80}
                                             />
                                         </div>
-                                        {block.alt && <p className="text-sm text-center text-slate-500 mt-2 italic">{block.alt}</p>}
+                                        {block.alt && <p className="text-sm text-center text-brand-steel mt-2 italic">{block.alt}</p>}
                                     </div>
                                 )
                             }
                             if (block.type === 'list') {
                                 return (
-                                    <ul key={index} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 list-none space-y-3 mb-6 my-6">
+                                    <ul key={index} className="bg-brand-white p-6 rounded-2xl border border-brand-steel/20 list-none space-y-3 mb-6 my-6">
                                         {block.items?.map((item: string, i: number) => (
                                             <li key={i} className="flex items-start">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                                                <span className="w-2 h-2 bg-brand-electric rounded-full mt-2 mr-3 flex-shrink-0" />
                                                 <span dangerouslySetInnerHTML={{ __html: item }} />
                                             </li>
                                         ))}
@@ -148,13 +130,13 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                     </article>
 
                     {/* Call to Action */}
-                    <div className="mt-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+                    <div className="mt-12 bg-gradient-to-br from-brand-electric to-brand-electric rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-12" />
                         <h3 className="text-2xl font-bold mb-4 relative z-10">Need help with your security?</h3>
-                        <p className="text-blue-100 mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
+                        <p className="text-brand-electric/20 mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
                             We can implement the advice in this article for you. Our technical teams operate across the Western Cape.
                         </p>
-                        <Link href="/contact" className="inline-flex relative z-10 bg-white text-blue-600 font-bold py-4 px-8 rounded-full hover:bg-blue-50 transition-all shadow-lg hover:translate-y-[-2px]">
+                        <Link href="/contact" className="inline-flex relative z-10 bg-white text-brand-electric font-bold py-4 px-8 rounded-full hover:bg-brand-electric/10 transition-all shadow-lg hover:translate-y-[-2px]">
                             Get a Local Quote &rarr;
                         </Link>
                     </div>

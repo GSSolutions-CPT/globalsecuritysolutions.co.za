@@ -1,11 +1,17 @@
+import dynamic from 'next/dynamic'
 import seoData from '@/app/data/seoData.json'
-import { ContactForm } from '@/components/ContactForm'
+
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { CheckCircle2, ShieldAlert, BadgeCheck, Smartphone, Zap, Clock, ArrowRight, Building, Home, Factory, Tractor, School, LayoutDashboard } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
+    
+    loading: () => <div className="h-[500px] w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
+});
 
 // Helper to normalize string to slug
 const toSlug = (text: string) => {
@@ -54,12 +60,12 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
     const sector = rawSector as SectorData
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
+        <div className="flex flex-col min-h-screen bg-brand-white font-sans">
 
             {/* Hero Section */}
-            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden">
+            <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
                         src={sector.heroImage || "/hero-bg.jpg"}
                         alt={sector.heroAlt || sector.title}
@@ -75,15 +81,15 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                     </div>
 
                     <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm">
-                            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-sm font-medium mb-6 backdrop-blur-sm">
+                            <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
                             Sector Specialist
                         </div>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
                             {sector.page} <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Security Solutions</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric">Security Solutions</span>
                         </h1>
-                        <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+                        <p className="text-xl text-brand-steel/60 max-w-2xl leading-relaxed">
                             {sector.description}
                         </p>
                     </div>
@@ -97,11 +103,11 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                     <div className="lg:col-span-2 space-y-12">
 
                         {/* Intro Card */}
-                        <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-slate-100 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                        <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-brand-steel/20 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                             <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
-                                <div className="w-20 h-20 bg-blue-50 rounded-2xl p-4 flex-shrink-0 border border-blue-100 flex items-center justify-center text-blue-600">
+                                <div className="w-20 h-20 bg-brand-electric/10 rounded-2xl p-4 flex-shrink-0 border border-brand-electric/20 flex items-center justify-center text-brand-electric">
                                     {sector.page.includes('Residential') ? <Home className="w-10 h-10" /> :
                                         sector.page.includes('Commercial') ? <Building className="w-10 h-10" /> :
                                             sector.page.includes('Industrial') ? <Factory className="w-10 h-10" /> :
@@ -111,8 +117,8 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                                             <Building className="w-10 h-10" />}
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Tailored for {sector.page}</h2>
-                                    <p className="text-slate-600 text-lg leading-relaxed">
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Tailored for {sector.page}</h2>
+                                    <p className="text-brand-slate text-lg leading-relaxed">
                                         {sector.longDescription || `Global Security Solutions understands the unique challenges of ${sector.page}. We provide customized security architectures that integrate seamlessly with your operations.`}
                                     </p>
                                 </div>
@@ -126,7 +132,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                     <ShieldAlert className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">Sector Risks</h3>
                                 </div>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-brand-slate leading-relaxed">
                                     Security threats in the <strong>{sector.page}</strong> sector are evolving. Criminals target vulnerabilities specific to this environment, from perimeter breaches to specialized asset theft.
                                 </p>
                             </div>
@@ -135,7 +141,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                     <BadgeCheck className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">Our Strategy</h3>
                                 </div>
-                                <p className="text-slate-700 leading-relaxed">
+                                <p className="text-brand-slate leading-relaxed">
                                     We implement a threat-specific defense strategy. By combining physical barriers with intelligent monitoring, we create a secure environment optimized for {sector.page} operations.
                                 </p>
                             </div>
@@ -143,8 +149,8 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
 
                         {/* Feature Grid */}
                         <div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center">
-                                <span className="bg-blue-600 w-2 h-8 rounded-full mr-4"></span>
+                            <h3 className="text-2xl font-bold text-brand-navy mb-8 flex items-center">
+                                <span className="bg-brand-electric w-2 h-8 rounded-full mr-4"></span>
                                 Why Choose Us
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -154,13 +160,13 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                     { icon: Clock, title: "Proactive Monitoring", text: "Early warning cues prevent incidents." },
                                     { icon: CheckCircle2, title: "Compliance Ready", text: "Installations meet all insurance and safety regulations." }
                                 ].map((feature, i) => (
-                                    <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-blue-600">
+                                    <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-brand-steel/20 shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric">
                                             <feature.icon className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
-                                            <p className="text-slate-500 text-sm">{feature.text}</p>
+                                            <h4 className="font-bold text-brand-navy mb-1">{feature.title}</h4>
+                                            <p className="text-brand-steel text-sm">{feature.text}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -168,11 +174,11 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                         </div>
 
                         {/* Brands We Use */}
-                        <div className="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden">
+                        <div className="bg-brand-navy text-white p-8 rounded-3xl relative overflow-hidden">
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div>
                                     <h3 className="text-xl font-bold mb-2">Sector-Specific Hardware</h3>
-                                    <p className="text-slate-400 text-sm max-w-md">
+                                    <p className="text-brand-steel text-sm max-w-md">
                                         We use equipment proven to perform in this specific environment. For {toSlug(sector.page).replace(/-/g, ' ')}, we trust:
                                     </p>
                                 </div>
@@ -187,9 +193,9 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                         </div>
 
                         {/* CTA Section */}
-                        <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 rounded-3xl text-white text-center">
+                        <div className="bg-gradient-to-br from-brand-electric to-brand-navy p-8 rounded-3xl text-white text-center">
                             <h3 className="text-2xl font-bold mb-4">Secure Your Environment Today</h3>
-                            <p className="text-blue-100 mb-6 max-w-xl mx-auto">
+                            <p className="text-brand-electric/20 mb-6 max-w-xl mx-auto">
                                 Don&apos;t wait for an incident. Contact our {sector.page} specialists for a comprehensive risk assessment.
                             </p>
                         </div>
@@ -199,22 +205,22 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                     {/* Sidebar */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-24 space-y-8">
-                            <div className="bg-white p-6 rounded-[2rem] border border-blue-100 shadow-lg shadow-blue-500/5">
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">Get a Free Assessment</h3>
-                                <p className="text-slate-500 text-sm mb-6">Expert security advice for your specific sector.</p>
+                            <div className="bg-white p-6 rounded-[2rem] border border-brand-electric/20 shadow-lg shadow-brand-electric/5">
+                                <h3 className="text-xl font-bold text-brand-navy mb-2">Get a Free Assessment</h3>
+                                <p className="text-brand-steel text-sm mb-6">Expert security advice for your specific sector.</p>
                                 <ContactForm />
                             </div>
 
                             {/* Other Sectors Links */}
-                            <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
-                                <h4 className="font-bold text-slate-900 mb-4 uppercase text-xs tracking-wider">Other Sectors</h4>
+                            <div className="bg-brand-white p-6 rounded-3xl border border-brand-steel/40">
+                                <h4 className="font-bold text-brand-navy mb-4 uppercase text-xs tracking-wider">Other Sectors</h4>
                                 <ul className="space-y-3">
                                     {seoData.sectorSolutions
                                         .filter(s => s.page !== sector.page)
                                         .map(s => (
                                             <li key={s.page}>
-                                                <Link href={`/sectors/${toSlug(s.page)}`} className="text-slate-600 hover:text-blue-600 text-sm flex items-center group transition-colors">
-                                                    <ArrowRight className="w-4 h-4 mr-2 text-slate-300 group-hover:text-blue-600 transition-colors" />
+                                                <Link href={`/sectors/${toSlug(s.page)}`} className="text-brand-slate hover:text-brand-electric text-sm flex items-center group transition-colors">
+                                                    <ArrowRight className="w-4 h-4 mr-2 text-brand-steel/60 group-hover:text-brand-electric transition-colors" />
                                                     {s.page}
                                                 </Link>
                                             </li>

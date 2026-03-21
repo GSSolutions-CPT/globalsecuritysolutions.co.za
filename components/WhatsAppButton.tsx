@@ -12,7 +12,7 @@ export function WhatsAppButton() {
             aria-label="Chat on WhatsApp"
         >
             <MessageCircle className="w-8 h-8" />
-            <span className="absolute right-full mr-3 bg-white text-slate-900 px-3 py-1 rounded shadow-md text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">
+            <span className="absolute right-full mr-3 bg-white text-brand-navy px-3 py-1 rounded shadow-md text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden md:block">
                 Chat with us
             </span>
         </a>

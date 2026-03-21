@@ -98,8 +98,8 @@ export function ContactForm() {
     }
 
     return (
-        <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-100">
-            <h3 className="text-2xl font-bold mb-6 text-slate-800">Get a Free Security Strategy Session</h3>
+        <div className="bg-white p-8 rounded-xl shadow-lg border border-brand-steel/20">
+            <h3 className="text-2xl font-bold mb-6 text-brand-navy">Get a Free Security Strategy Session</h3>
             {success && (
                 <div className="bg-green-50 border-l-4 border-green-500 text-green-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
                     <CheckCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-green-600" />
@@ -118,26 +118,26 @@ export function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                        <div className="relative"><User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="name" required className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="John Doe" /></div>
+                        <label className="block text-sm font-medium text-brand-slate mb-1">Name</label>
+                        <div className="relative"><User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-steel" /><input name="name" required className="w-full pl-11 pr-4 py-2 border border-brand-steel/60 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none" placeholder="John Doe" /></div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                        <div className="relative"><Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="phone" required type="tel" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="082 123 4567" /></div>
+                        <label className="block text-sm font-medium text-brand-slate mb-1">Phone</label>
+                        <div className="relative"><Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-steel" /><input name="phone" required type="tel" className="w-full pl-11 pr-4 py-2 border border-brand-steel/60 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none" placeholder="082 123 4567" /></div>
                     </div>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <div className="relative"><Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="email" required type="email" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="john@example.com" /></div>
+                    <label className="block text-sm font-medium text-brand-slate mb-1">Email</label>
+                    <div className="relative"><Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-steel" /><input name="email" required type="email" className="w-full pl-11 pr-4 py-2 border border-brand-steel/60 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none" placeholder="john@example.com" /></div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Suburb / Area</label>
-                        <div className="relative"><MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><input name="suburb" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Durbanville" /></div>
+                        <label className="block text-sm font-medium text-brand-slate mb-1">Suburb / Area</label>
+                        <div className="relative"><MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-steel" /><input name="suburb" className="w-full pl-11 pr-4 py-2 border border-brand-steel/60 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none" placeholder="e.g. Durbanville" /></div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Service Interested In</label>
-                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /><select name="service" required defaultValue="" className="w-full pl-11 pr-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white">
+                        <label className="block text-sm font-medium text-brand-slate mb-1">Service Interested In</label>
+                        <div className="relative"><Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-steel" /><select name="service" required defaultValue="" className="w-full pl-11 pr-4 py-2 border border-brand-steel/60 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none appearance-none bg-white">
                             <option value="" disabled>Select a Service</option>
                             <option value="General Inquiry">General Inquiry</option>
                             <optgroup label="Residential Security">

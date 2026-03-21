@@ -241,7 +241,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
                                 <img
                                     src={photo.photo_url}
                                     alt={photo.caption || 'Installation photo'}
-                                    className="w-full h-32 object-cover rounded-lg border border-slate-200 dark:border-slate-800"
+                                    className="w-full h-32 object-cover rounded-lg border border-brand-steel/40 dark:border-brand-navy"
                                 />
                                 {!readonly && (
                                     <Button
@@ -258,7 +258,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
 
                         {/* Upload Button */}
                         {!readonly && (
-                            <label className="flex flex-col items-center justify-center h-32 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg cursor-pointer hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+                            <label className="flex flex-col items-center justify-center h-32 border-2 border-dashed border-brand-steel/60 dark:border-brand-slate rounded-lg cursor-pointer hover:border-brand-electric dark:hover:border-brand-electric transition-colors">
                                 <input
                                     type="file"
                                     multiple

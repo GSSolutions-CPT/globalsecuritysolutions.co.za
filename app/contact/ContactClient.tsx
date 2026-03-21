@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, MessageSquare, Facebook, Instagram, Linkedin } from 'lucide-react'
-import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { PageHero } from '@/components/PageHero'
 
 // Lazy load the heavy form component
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
@@ -31,42 +31,19 @@ export function ContactClient() {
         <div className="flex flex-col min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
 
             {/* Hero Section */}
-            <section className="relative bg-brand-navy text-brand-white py-16 md:py-32 flex items-center overflow-hidden border-b border-brand-steel/20 pb-48">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] mix-blend-screen pointer-events-none" />
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
-                
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/30 z-10" />
-                    <Image
-                        src="/page-heroes/contact-hero.png"
-                        alt="Contact Global Security Solutions"
-                        fill
-                        className="object-cover opacity-30 mix-blend-luminosity"
-                        priority
-                    />
-                </div>
-
-                <div className="container relative z-20 mx-auto px-4 md:px-8 text-center pt-8">
-                    <motion.div 
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                        className="flex flex-col items-center"
-                    >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/30 text-brand-electric text-xs md:text-sm font-black tracking-widest uppercase mb-6 backdrop-blur-md">
-                            <MessageSquare className="w-3.5 h-3.5 text-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
-                            <span>We&apos;re Ready To Help</span>
-                        </motion.div>
-                        <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-tight drop-shadow-md">
-                            Get in Touch with <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">The Experts</span>
-                        </motion.h1>
-                        <motion.p variants={fadeInUp} className="text-brand-steel sm:text-lg max-w-2xl mx-auto leading-relaxed font-light mb-8">
-                            Whether you need a rapid deployment quote or a comprehensive security audit, our specialized tactical team is standing by to assist you.
-                        </motion.p>
-                    </motion.div>
-                </div>
-            </section>
+            <PageHero
+                badgeIcon={<MessageSquare className="w-3.5 h-3.5 text-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]" />}
+                badgeText="We're Ready To Help"
+                title={
+                    <>
+                        Get in Touch with <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">The Experts</span>
+                    </>
+                }
+                subtitle="Whether you need a rapid deployment quote or a comprehensive security audit, our specialized tactical team is standing by to assist you."
+                bgImage="/page-heroes/contact-hero.png"
+                pbClass="pb-48"
+            />
 
             {/* Main Content Area */}
             <div className="relative z-30 -mt-32 pb-16">

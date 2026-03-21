@@ -117,8 +117,8 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
         <div className="space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Blog Manager</h2>
-                    <p className="text-slate-500">Create and publish SEO-optimized content.</p>
+                    <h2 className="text-2xl font-bold text-brand-navy">Blog Manager</h2>
+                    <p className="text-brand-steel">Create and publish SEO-optimized content.</p>
                 </div>
                 <button
                     type="button"
@@ -151,47 +151,47 @@ Output: JSON ONLY { "title": "string", "excerpt": "string", "content": "markdown
                 </div>
             )}
 
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="bg-white p-8 rounded-2xl border border-brand-steel/40 shadow-sm">
                 <form onSubmit={handleBlogSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Post Title</label>
-                            <input type="text" value={blogTitle} onChange={handleBlogTitleChange} className="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="Enter title..." required />
+                            <label className="block text-sm font-bold text-brand-slate mb-2">Post Title</label>
+                            <input type="text" value={blogTitle} onChange={handleBlogTitleChange} className="w-full p-3 border border-brand-steel/40 rounded-xl focus:ring-2 focus:ring-brand-electric outline-none transition-all" placeholder="Enter title..." required />
                         </div>
                         <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-2">Slug (URL)</label>
-                            <input type="text" value={blogSlug} onChange={e => setBlogSlug(e.target.value)} className="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 text-slate-500" placeholder="auto-generated-slug" required readOnly />
+                            <label className="block text-sm font-bold text-brand-slate mb-2">Slug (URL)</label>
+                            <input type="text" value={blogSlug} onChange={e => setBlogSlug(e.target.value)} className="w-full p-3 border border-brand-steel/40 rounded-xl bg-brand-white text-brand-steel" placeholder="auto-generated-slug" required readOnly />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-2">Cover Image</label>
-                        <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 transition-colors relative group">
+                        <label className="block text-sm font-bold text-brand-slate mb-2">Cover Image</label>
+                        <div className="border-2 border-dashed border-brand-steel/60 rounded-xl p-8 text-center cursor-pointer hover:bg-brand-white transition-colors relative group">
                             <input type="file" id="blogImg" className="hidden" accept="image/*" onChange={e => setBlogImage(e.target.files?.[0] || null)} />
                             <label htmlFor="blogImg" className="cursor-pointer w-full h-full flex flex-col items-center justify-center">
-                                <div className="bg-slate-100 p-3 rounded-full mb-3 group-hover:bg-white transition-colors">
-                                    <ImagePlus className="w-6 h-6 text-slate-400" />
+                                <div className="bg-brand-steel/20 p-3 rounded-full mb-3 group-hover:bg-white transition-colors">
+                                    <ImagePlus className="w-6 h-6 text-brand-steel" />
                                 </div>
-                                <span className="text-slate-500 font-medium">{blogImage ? <span className="text-green-600 font-bold">{blogImage.name}</span> : 'Click to Upload Image'}</span>
+                                <span className="text-brand-steel font-medium">{blogImage ? <span className="text-green-600 font-bold">{blogImage.name}</span> : 'Click to Upload Image'}</span>
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-2">Excerpt (SEO Description)</label>
-                        <textarea value={blogExcerpt} onChange={e => setBlogExcerpt(e.target.value)} className="w-full p-3 border border-slate-200 rounded-xl h-24 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Short summary for search engines..." required />
+                        <label className="block text-sm font-bold text-brand-slate mb-2">Excerpt (SEO Description)</label>
+                        <textarea value={blogExcerpt} onChange={e => setBlogExcerpt(e.target.value)} className="w-full p-3 border border-brand-steel/40 rounded-xl h-24 focus:ring-2 focus:ring-brand-electric outline-none" placeholder="Short summary for search engines..." required />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-2">Content (Markdown Supported)</label>
-                        <textarea value={blogContent} onChange={e => setBlogContent(e.target.value)} className="w-full p-4 border border-slate-200 rounded-xl h-96 font-mono text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="# Heading 1&#10;&#10;Your content goes here..." required />
+                        <label className="block text-sm font-bold text-brand-slate mb-2">Content (Markdown Supported)</label>
+                        <textarea value={blogContent} onChange={e => setBlogContent(e.target.value)} className="w-full p-4 border border-brand-steel/40 rounded-xl h-96 font-mono text-sm bg-brand-white focus:bg-white focus:ring-2 focus:ring-brand-electric outline-none transition-all" placeholder="# Heading 1&#10;&#10;Your content goes here..." required />
                     </div>
 
                     <div className="pt-4">
                         {error && <div className="bg-red-50 text-red-600 p-4 rounded-xl flex items-center mb-4"><AlertCircle className="w-5 h-5 mr-2" />{error}</div>}
                         {success && <div className="bg-green-50 text-green-600 p-4 rounded-xl flex items-center mb-4"><CheckCircle className="w-5 h-5 mr-2" />{success}</div>}
 
-                        <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-all shadow-lg shadow-blue-900/10">
+                        <button type="submit" disabled={loading} className="w-full bg-brand-electric text-white font-bold py-4 rounded-xl hover:bg-brand-electric disabled:opacity-50 transition-all shadow-lg shadow-brand-navy/10">
                             {loading ? <span className="flex items-center justify-center"><Loader2 className="animate-spin mr-2" /> Publishing...</span> : 'Publish Post'}
                         </button>
                     </div>

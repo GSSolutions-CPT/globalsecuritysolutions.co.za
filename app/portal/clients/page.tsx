@@ -100,11 +100,11 @@ export default function ClientsPage() {
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
                     <div className="relative z-10">
-                        <p className="text-blue-100 text-sm font-medium">Total Clients</p>
+                        <p className="text-brand-electric/20 text-sm font-medium">Total Clients</p>
                         <h3 className="text-3xl font-bold mt-1">{totalClients}</h3>
-                        <p className="text-blue-100 text-xs mt-2">Active database</p>
+                        <p className="text-brand-electric/20 text-xs mt-2">Active database</p>
                     </div>
                     <Users className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
                 </div>
@@ -152,21 +152,21 @@ export default function ClientsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredClients.map((client) => (
-                    <Card key={client.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative cursor-pointer" onClick={() => router.push(`/portal/clients/${client.id}`)}>
-                        <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                    <Card key={client.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border overflow-hidden relative cursor-pointer" onClick={() => router.push(`/portal/clients/${client.id}`)}>
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-electric"></div>
                         <CardHeader className="pb-3 pl-6">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <CardTitle className="text-lg text-slate-900 dark:text-slate-100">{client.name}</CardTitle>
+                                    <CardTitle className="text-lg text-brand-navy dark:text-brand-steel/20">{client.name}</CardTitle>
                                     {client.company && (
-                                        <CardDescription className="flex items-center gap-2 font-medium text-slate-500 mt-1">
+                                        <CardDescription className="flex items-center gap-2 font-medium text-brand-steel mt-1">
                                             <Building2 className="h-3.5 w-3.5" />
                                             {client.company}
                                         </CardDescription>
                                     )}
                                 </div>
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-blue-600 hover:bg-blue-50" onClick={(e: React.MouseEvent) => {
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-brand-electric hover:bg-brand-electric/10" onClick={(e: React.MouseEvent) => {
                                         e.stopPropagation()
                                         handleEdit(client)
                                     }}>
@@ -184,25 +184,25 @@ export default function ClientsPage() {
                         <CardContent className="pl-6">
                             <div className="space-y-3 text-sm">
                                 {client.email && (
-                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-slate-600 dark:group-hover:text-slate-400 transition-colors">
-                                        <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full">
-                                            <Mail className="h-3.5 w-3.5 text-slate-500" />
+                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-brand-slate dark:group-hover:text-brand-steel transition-colors">
+                                        <div className="bg-brand-steel/20 dark:bg-brand-navy p-1.5 rounded-full">
+                                            <Mail className="h-3.5 w-3.5 text-brand-steel" />
                                         </div>
                                         <span className="truncate">{client.email}</span>
                                     </div>
                                 )}
                                 {client.phone && (
-                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-slate-600 dark:group-hover:text-slate-400 transition-colors">
-                                        <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full">
-                                            <Phone className="h-3.5 w-3.5 text-slate-500" />
+                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-brand-slate dark:group-hover:text-brand-steel transition-colors">
+                                        <div className="bg-brand-steel/20 dark:bg-brand-navy p-1.5 rounded-full">
+                                            <Phone className="h-3.5 w-3.5 text-brand-steel" />
                                         </div>
                                         <span>{client.phone}</span>
                                     </div>
                                 )}
                                 {client.address && (
-                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-slate-600 dark:group-hover:text-slate-400 transition-colors">
-                                        <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full">
-                                            <MapPin className="h-3.5 w-3.5 text-slate-500" />
+                                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-brand-slate dark:group-hover:text-brand-steel transition-colors">
+                                        <div className="bg-brand-steel/20 dark:bg-brand-navy p-1.5 rounded-full">
+                                            <MapPin className="h-3.5 w-3.5 text-brand-steel" />
                                         </div>
                                         <span className="truncate">{client.address}</span>
                                     </div>
@@ -212,14 +212,14 @@ export default function ClientsPage() {
                                     <Button
                                         size="sm"
                                         variant="outline"
-                                        className="w-full border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 group-hover:border-blue-200 dark:group-hover:border-blue-900/50 transition-colors"
+                                        className="w-full border-brand-steel/40 dark:border-brand-navy hover:bg-brand-white dark:hover:bg-brand-navy group-hover:border-brand-electric/40 dark:group-hover:border-brand-navy/50 transition-colors"
                                         onClick={(e: React.MouseEvent) => {
                                             e.stopPropagation()
                                             const portalLink = `${window.location.origin}/portal?client=${client.id}`
                                             shareLink('GSS Client Portal', 'Access your client portal here:', portalLink)
                                         }}
                                     >
-                                        <ExternalLink className="mr-2 h-4 w-4 text-blue-500" />
+                                        <ExternalLink className="mr-2 h-4 w-4 text-brand-electric" />
                                         Share Portal Link
                                     </Button>
                                 </div>
@@ -232,11 +232,11 @@ export default function ClientsPage() {
                 ))}
             </div>
             {filteredClients.length === 0 && (
-                <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                    <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full mb-4">
-                        <Users className="h-8 w-8 text-blue-500" />
+                <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
+                    <div className="bg-brand-electric/20 dark:bg-brand-navy/30 p-4 rounded-full mb-4">
+                        <Users className="h-8 w-8 text-brand-electric" />
                     </div>
-                    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">
+                    <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">
                         {searchTerm ? 'No matching clients' : 'No clients yet'}
                     </h3>
                     <p className="mb-6 max-w-sm text-center">

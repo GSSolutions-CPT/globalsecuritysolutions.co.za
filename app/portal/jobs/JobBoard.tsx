@@ -42,10 +42,10 @@ const getColumnConfig = (status: Status) => {
             };
         case 'In Progress':
             return {
-                color: 'text-blue-600 dark:text-blue-400',
-                bg: 'bg-blue-50 dark:bg-blue-950/30',
-                border: 'border-blue-100 dark:border-blue-900/50',
-                headerGradient: 'from-blue-500/10 to-transparent',
+                color: 'text-brand-electric dark:text-brand-electric',
+                bg: 'bg-brand-electric/10 dark:bg-brand-navy/30',
+                border: 'border-brand-electric/20 dark:border-brand-navy/50',
+                headerGradient: 'from-brand-electric/10 to-transparent',
                 icon: Clock
             };
         case 'Completed':
@@ -66,10 +66,10 @@ const getColumnConfig = (status: Status) => {
             };
         default:
             return {
-                color: 'text-slate-600',
-                bg: 'bg-slate-50',
-                border: 'border-slate-100',
-                headerGradient: 'from-slate-500/10 to-transparent',
+                color: 'text-brand-slate',
+                bg: 'bg-brand-white',
+                border: 'border-brand-steel/20',
+                headerGradient: 'from-brand-steel/10 to-transparent',
                 icon: AlertCircle
             };
     }
@@ -116,30 +116,30 @@ interface JobCardProps {
 function JobCard({ job, isOverlay }: JobCardProps) {
     return (
         <Card className={cn(
-            "transition-all duration-200 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900",
-            isOverlay ? "shadow-2xl shadow-blue-500/20 rotate-2 scale-105 cursor-grabbing" : "hover:shadow-md hover:-translate-y-0.5 cursor-grab active:cursor-grabbing shadow-sm"
+            "transition-all duration-200 border-brand-steel/40 dark:border-brand-navy bg-white dark:bg-brand-navy",
+            isOverlay ? "shadow-2xl shadow-brand-electric/20 rotate-2 scale-105 cursor-grabbing" : "hover:shadow-md hover:-translate-y-0.5 cursor-grab active:cursor-grabbing shadow-sm"
         )}>
             <CardContent className="p-3 space-y-3">
                 <div className="flex justify-between items-start gap-2">
                     <div className="space-y-1">
-                        <h4 className="font-semibold text-sm leading-tight text-slate-800 dark:text-slate-200 line-clamp-2">
+                        <h4 className="font-semibold text-sm leading-tight text-brand-navy dark:text-brand-steel/40 line-clamp-2">
                             {job.clients?.name || 'Unknown Client'}
                         </h4>
-                        <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wide line-clamp-1">
+                        <p className="text-[11px] font-medium text-brand-steel uppercase tracking-wide line-clamp-1">
                             {job.clients?.company}
                         </p>
                     </div>
-                    <GripVertical className="h-4 w-4 text-slate-300" />
+                    <GripVertical className="h-4 w-4 text-brand-steel/60" />
                 </div>
 
                 {job.notes && (
-                    <div className="relative text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-md border border-slate-100 dark:border-slate-800/50 italic">
+                    <div className="relative text-xs text-brand-slate dark:text-brand-steel bg-brand-white dark:bg-brand-navy/50 p-2 rounded-md border border-brand-steel/20 dark:border-brand-navy/50 italic">
                         <span className="line-clamp-2">{job.notes}</span>
                     </div>
                 )}
 
-                <div className="flex flex-col gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <div className="flex justify-between items-center text-xs text-slate-500">
+                <div className="flex flex-col gap-2 pt-2 border-t border-brand-steel/20 dark:border-brand-navy">
+                    <div className="flex justify-between items-center text-xs text-brand-steel">
                         <div className="flex items-center gap-1.5">
                             <Calendar className="h-3 w-3" />
                             <span>{job.scheduled_datetime ? new Date(job.scheduled_datetime).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Unscheduled'}</span>
@@ -205,7 +205,7 @@ function DroppableColumn({ id, jobs }: DroppableColumnProps) {
             </div>
 
             <SortableContext items={jobs.map(j => j.id!)} strategy={verticalListSortingStrategy}>
-                <div className="flex-1 overflow-y-auto pr-1 space-y-3 min-h-[200px] scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-700">
+                <div className="flex-1 overflow-y-auto pr-1 space-y-3 min-h-[200px] scrollbar-thin scrollbar-thumb-brand-steel/40 dark:scrollbar-thumb-brand-slate">
                     {jobs.map((job) => (
                         <SortableItem key={job.id} job={job} />
                     ))}

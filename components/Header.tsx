@@ -99,13 +99,13 @@ export function Header() {
                         {navItems.map((item, idx) => (
                             <div key={idx} className="relative group">
                                 {item.dropdown ? (
-                                    <button className={`flex items-center text-sm font-medium transition-colors py-2 ${pathname?.startsWith(item.href || '/NON-EXISTENT') && item.href !== '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-900'}`}>
+                                    <button className={`flex items-center text-sm font-medium transition-colors py-2 ${pathname?.startsWith(item.href || '/NON-EXISTENT') && item.href !== '/' ? 'text-brand-electric' : 'text-gray-700 hover:text-brand-navy'}`}>
                                         {item.label} <ChevronDown className="w-4 h-4 ml-1" />
                                     </button>
                                 ) : (
                                     <Link
                                         href={item.href!}
-                                        className={`text-sm font-medium transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-blue-600 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${pathname === item.href ? 'text-blue-600 font-bold after:scale-x-100' : 'text-gray-700 hover:text-blue-900'}`}
+                                        className={`text-sm font-medium transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-brand-electric after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${pathname === item.href ? 'text-brand-electric font-bold after:scale-x-100' : 'text-gray-700 hover:text-brand-navy'}`}
                                     >
                                         {item.label}
                                     </Link>
@@ -119,7 +119,7 @@ export function Header() {
                                                 <Link
                                                     key={subIdx}
                                                     href={subItem.href}
-                                                    className={`block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 ${subItem.highlight ? 'font-bold text-blue-600 border-t border-gray-100 mt-2 pt-3' : 'text-gray-600'}`}
+                                                    className={`block px-4 py-2 text-sm hover:bg-brand-electric/10 hover:text-brand-electric ${subItem.highlight ? 'font-bold text-brand-electric border-t border-gray-100 mt-2 pt-3' : 'text-gray-600'}`}
                                                 >
                                                     {subItem.label}
                                                 </Link>
@@ -131,7 +131,7 @@ export function Header() {
                         ))}
                         <Link
                             href="/portal/login"
-                            className="bg-slate-800 text-white text-sm px-4 py-2 rounded-md hover:bg-slate-900 transition-colors font-bold shadow-sm active:scale-95 duration-200"
+                            className="bg-brand-navy text-white text-sm px-4 py-2 rounded-md hover:bg-brand-navy transition-colors font-bold shadow-sm active:scale-95 duration-200"
                         >
                             Sign In
                         </Link>
@@ -164,18 +164,18 @@ export function Header() {
                                     <div>
                                         <button
                                             onClick={() => toggleDropdown(item.label)}
-                                            className="flex items-center justify-between w-full text-left text-gray-700 hover:text-blue-900 font-medium py-2 border-b border-gray-50"
+                                            className="flex items-center justify-between w-full text-left text-gray-700 hover:text-brand-navy font-medium py-2 border-b border-gray-50"
                                         >
                                             {item.label}
                                             <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
                                         </button>
                                         {activeDropdown === item.label && (
-                                            <div className="bg-slate-50 pl-4 py-2 space-y-2">
+                                            <div className="bg-brand-white pl-4 py-2 space-y-2">
                                                 {item.dropdown.map((subItem, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         href={subItem.href}
-                                                        className="block text-sm text-gray-600 hover:text-blue-700 py-1"
+                                                        className="block text-sm text-gray-600 hover:text-brand-electric py-1"
                                                         onClick={() => setIsOpen(false)}
                                                     >
                                                         {subItem.label}
@@ -187,7 +187,7 @@ export function Header() {
                                 ) : (
                                     <Link
                                         href={item.href!}
-                                        className={`block font-medium py-2 border-b border-gray-50 ${pathname === item.href || (pathname?.startsWith(item.href!) && item.href !== '/') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-900'}`}
+                                        className={`block font-medium py-2 border-b border-gray-50 ${pathname === item.href || (pathname?.startsWith(item.href!) && item.href !== '/') ? 'text-brand-electric font-bold' : 'text-gray-700 hover:text-brand-navy'}`}
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {item.label}
@@ -198,7 +198,7 @@ export function Header() {
                         <div className="pt-4 space-y-3">
                             <Link
                                 href="/portal/login"
-                                className="block w-full bg-slate-800 text-white px-5 py-3 rounded-md hover:bg-slate-900 text-center font-bold active:scale-95 duration-200"
+                                className="block w-full bg-brand-navy text-white px-5 py-3 rounded-md hover:bg-brand-navy text-center font-bold active:scale-95 duration-200"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Sign In

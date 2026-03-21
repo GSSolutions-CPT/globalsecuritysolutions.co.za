@@ -37,22 +37,22 @@ export function SectorGrid() {
                     <Link
                         key={`${service.page}-${index}`}
                         href={`/sectors/${slug}`}
-                        className="group relative flex flex-col items-center text-center bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300"
+                        className="group relative flex flex-col items-center text-center bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-brand-electric/30 transition-all duration-300"
                     >
                         {/* Icon Container */}
-                        <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-900/50 transition-all duration-300 shadow-lg shadow-black/20">
+                        <div className="w-20 h-20 bg-brand-navy rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-navy/50 transition-all duration-300 shadow-lg shadow-black/20">
                             {getSectorIcon(service.page)}
                         </div>
 
-                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">
+                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-brand-electric transition-colors">
                             {service.page}
                         </h3>
 
-                        <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                        <p className="text-brand-steel text-sm mb-6 leading-relaxed">
                             {service.description}
                         </p>
 
-                        <span className="mt-auto inline-flex items-center text-indigo-400 font-bold text-sm group-hover:text-indigo-300">
+                        <span className="mt-auto inline-flex items-center text-brand-electric font-bold text-sm group-hover:text-brand-electric/60">
                             Explore Sector <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </Link>

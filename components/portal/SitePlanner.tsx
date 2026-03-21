@@ -481,9 +481,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     const COLORS = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#000000', '#ffffff']
 
     return (
-        <div className="fixed inset-0 z-50 bg-white dark:bg-slate-950 flex flex-col">
+        <div className="fixed inset-0 z-50 bg-white dark:bg-brand-navy flex flex-col">
             {/* Top Toolbar */}
-            <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between px-4 py-2 bg-brand-white dark:bg-brand-navy border-b border-brand-steel/40 dark:border-brand-navy">
                 <div className="flex items-center gap-1">
                     {/* Tool buttons */}
                     <ToolButton
@@ -511,7 +511,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         label="Text"
                     />
 
-                    <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 mx-2" />
+                    <div className="w-px h-8 bg-brand-steel/40 dark:bg-brand-slate mx-2" />
 
                     {/* Color picker */}
                     <div className="flex items-center gap-1">
@@ -519,13 +519,13 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                             <button
                                 key={c}
                                 onClick={() => setDrawColor(c)}
-                                className={`w-6 h-6 rounded-full border-2 transition-transform hover:scale-110 ${drawColor === c ? 'border-slate-900 dark:border-white scale-110' : 'border-slate-300 dark:border-slate-600'}`}
+                                className={`w-6 h-6 rounded-full border-2 transition-transform hover:scale-110 ${drawColor === c ? 'border-brand-navy dark:border-white scale-110' : 'border-brand-steel/60 dark:border-brand-slate'}`}
                                 style={{ backgroundColor: c }}
                             />
                         ))}
                     </div>
 
-                    <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 mx-2" />
+                    <div className="w-px h-8 bg-brand-steel/40 dark:bg-brand-slate mx-2" />
 
                     {/* Stroke width */}
                     <div className="flex items-center gap-2">
@@ -552,13 +552,13 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         <RotateCcw className="h-4 w-4 mr-1" /> Clear
                     </Button>
 
-                    <div className="w-px h-8 bg-slate-200 dark:bg-slate-700 mx-1" />
+                    <div className="w-px h-8 bg-brand-steel/40 dark:bg-brand-slate mx-1" />
 
                     <Button
                         size="sm"
                         onClick={handleSave}
                         disabled={saving}
-                        className="bg-blue-600 hover:bg-blue-700"
+                        className="bg-brand-electric hover:bg-brand-electric"
                     >
                         {saving ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Save className="h-4 w-4 mr-1" />}
                         Save Plan
@@ -572,7 +572,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             {/* Main Area */}
             <div className="flex flex-1 overflow-hidden">
                 {/* Icon Sidebar */}
-                <div className="w-48 bg-slate-50 dark:bg-slate-900/50 border-r border-slate-200 dark:border-slate-800 overflow-y-auto p-3 space-y-2">
+                <div className="w-48 bg-brand-white dark:bg-brand-navy/50 border-r border-brand-steel/40 dark:border-brand-navy overflow-y-auto p-3 space-y-2">
                     <div className="mb-3">
                         <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Security Icons</h3>
                         <p className="text-[10px] text-muted-foreground">Click an icon, then click the canvas to place it</p>
@@ -583,8 +583,8 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                             key={icon.id}
                             onClick={() => selectIcon(icon)}
                             className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all text-sm ${selectedIcon?.id === icon.id
-                                ? 'bg-blue-100 dark:bg-blue-900/30 ring-2 ring-blue-500 text-blue-700 dark:text-blue-300'
-                                : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                                ? 'bg-brand-electric/20 dark:bg-brand-navy/30 ring-2 ring-brand-electric text-brand-electric dark:text-brand-electric/60'
+                                : 'hover:bg-brand-steel/20 dark:hover:bg-brand-navy text-brand-slate dark:text-brand-steel/60'
                                 }`}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -593,7 +593,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         </button>
                     ))}
 
-                    <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+                    <div className="pt-4 border-t border-brand-steel/40 dark:border-brand-navy">
                         <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Background</h3>
                         <Button
                             variant="outline"
@@ -618,17 +618,17 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
                 {/* Canvas Area */}
                 <div
-                    className="flex-1 flex items-center justify-center bg-slate-100 dark:bg-slate-950 overflow-auto p-4"
+                    className="flex-1 flex items-center justify-center bg-brand-steel/20 dark:bg-brand-navy overflow-auto p-4"
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                 >
-                    <div className="relative shadow-2xl rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
+                    <div className="relative shadow-2xl rounded-lg overflow-hidden border border-brand-steel/40 dark:border-brand-navy">
                         <canvas ref={canvasRef} />
                         {!hasBackground && canvasReady && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 text-center">
+                                <div className="bg-white/80 dark:bg-brand-navy/80 backdrop-blur-sm rounded-2xl p-8 text-center">
                                     <Upload className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                                    <h3 className="text-lg font-semibold text-brand-navy dark:text-white mb-2">
                                         Drop Floor Plan Here
                                     </h3>
                                     <p className="text-sm text-muted-foreground">
@@ -642,7 +642,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             </div>
 
             {/* Status Bar */}
-            <div className="px-4 py-1.5 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div className="px-4 py-1.5 bg-brand-white dark:bg-brand-navy border-t border-brand-steel/40 dark:border-brand-navy flex items-center justify-between">
                 <div className="flex items-center gap-2">
                     <Badge variant="outline" className="text-[10px]">
                         {activeTool.toUpperCase()}
@@ -671,7 +671,7 @@ function ToolButton({ active, onClick, icon, label }: ToolButtonProps) {
             variant={active ? 'default' : 'ghost'}
             size="sm"
             onClick={onClick}
-            className={`${active ? 'bg-blue-600 hover:bg-blue-700 text-white' : ''}`}
+            className={`${active ? 'bg-brand-electric hover:bg-brand-electric text-white' : ''}`}
             title={label}
         >
             {icon}

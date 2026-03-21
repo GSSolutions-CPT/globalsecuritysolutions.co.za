@@ -69,7 +69,7 @@ export default function AIAdvisorPage() {
     // 1. WELCOME SCREEN
     if (currentStepIndex === -1) {
         return (
-            <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center relative overflow-hidden px-4">
+            <div className="min-h-screen bg-brand-navy flex flex-col items-center justify-center relative overflow-hidden px-4">
                 {/* Background FX */}
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -79,23 +79,23 @@ export default function AIAdvisorPage() {
                         className="object-cover opacity-30"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                 </div>
 
                 <div className="relative z-10 text-center max-w-3xl">
-                    <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-full mb-8 border border-blue-500/30">
-                        <Loader2 className="w-6 h-6 text-blue-400 animate-spin-slow mr-2" />
-                        <span className="text-blue-300 font-mono text-sm tracking-wider">AI SECURITY SYSTEM V2.0</span>
+                    <div className="inline-flex items-center justify-center p-3 bg-brand-electric/10 rounded-full mb-8 border border-brand-electric/30">
+                        <Loader2 className="w-6 h-6 text-brand-electric animate-spin-slow mr-2" />
+                        <span className="text-brand-electric/60 font-mono text-sm tracking-wider">AI SECURITY SYSTEM V2.0</span>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
-                        Security <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Advisor</span>
+                        Security <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric">Advisor</span>
                     </h1>
-                    <p className="text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-xl text-brand-steel/60 mb-12 leading-relaxed max-w-2xl mx-auto">
                         Unsure what you need? Let our intelligent advisor analyze your property type, risks, and budget to recommend the perfect security strategy.
                     </p>
                     <button
                         onClick={handleStart}
-                        className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 focus:ring-offset-slate-900"
+                        className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-brand-electric rounded-full hover:bg-brand-electric focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-electric focus:ring-offset-brand-navy"
                     >
                         Start Free Assessment
                         <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -109,10 +109,10 @@ export default function AIAdvisorPage() {
     // 2. ANALYSIS SCREEN
     if (isAnalyzing) {
         return (
-            <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-center px-4">
-                <Loader2 className="w-16 h-16 text-blue-500 animate-spin mb-6" />
+            <div className="min-h-screen bg-brand-navy flex flex-col items-center justify-center text-center px-4">
+                <Loader2 className="w-16 h-16 text-brand-electric animate-spin mb-6" />
                 <h2 className="text-3xl font-bold text-white mb-2">Analyzing Requirements...</h2>
-                <p className="text-slate-400">Comparing your inputs against 50+ security configurations.</p>
+                <p className="text-brand-steel">Comparing your inputs against 50+ security configurations.</p>
             </div>
         )
     }
@@ -120,35 +120,35 @@ export default function AIAdvisorPage() {
     // 3. RESULT SCREEN
     if (result) {
         return (
-            <div className="min-h-screen bg-slate-50 py-12 px-4">
+            <div className="min-h-screen bg-brand-white py-12 px-4">
                 <div className="container mx-auto max-w-5xl">
                     <div className="text-center mb-12">
                         <span className="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-sm font-bold tracking-wide mb-4">
                             ANALYSIS COMPLETE
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Security Strategy Report</h2>
-                        <p className="text-slate-600 text-xl max-w-3xl mx-auto">
+                        <h2 className="text-4xl md:text-5xl font-bold text-brand-navy mb-6">Security Strategy Report</h2>
+                        <p className="text-brand-slate text-xl max-w-3xl mx-auto">
                             We&apos;ve analyzed your requirements and generated a tailored security profile.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                         {/* Main Strategy Card */}
-                        <div className="lg:col-span-2 bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100 relative">
+                        <div className="lg:col-span-2 bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-brand-steel/20 relative">
                             {/* Dog Ear Accent */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-600 rounded-bl-[4rem] z-10 flex items-center justify-center shadow-lg">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-electric rounded-bl-[4rem] z-10 flex items-center justify-center shadow-lg">
                                 <div className="transform rotate-45 text-white/20">
                                     <ShieldAlert className="w-12 h-12" />
                                 </div>
                             </div>
 
                             <div className="p-8 md:p-12">
-                                <h3 className="text-3xl font-bold text-slate-900 mb-2">{result.title}</h3>
+                                <h3 className="text-3xl font-bold text-brand-navy mb-2">{result.title}</h3>
                                 <div className="flex items-center space-x-4 mb-8">
-                                    <span className="text-indigo-600 font-bold uppercase tracking-wider text-sm bg-indigo-50 px-3 py-1 rounded-full">
+                                    <span className="text-brand-electric font-bold uppercase tracking-wider text-sm bg-brand-electric/10 px-3 py-1 rounded-full">
                                         {result.priority} Package
                                     </span>
-                                    <span className="text-slate-500 text-sm flex items-center">
+                                    <span className="text-brand-steel text-sm flex items-center">
                                         <Loader2 className="w-4 h-4 mr-1 text-green-500" />
                                         Est. Install: {result.timeline}
                                     </span>
@@ -157,32 +157,32 @@ export default function AIAdvisorPage() {
                                 <div className="space-y-8">
                                     {/* The "Why" */}
                                     <div>
-                                        <h4 className="text-lg font-semibold text-slate-900 mb-3 flex items-center">
-                                            <Eye className="w-5 h-5 mr-2 text-blue-500" /> Strategic Reasoning
+                                        <h4 className="text-lg font-semibold text-brand-navy mb-3 flex items-center">
+                                            <Eye className="w-5 h-5 mr-2 text-brand-electric" /> Strategic Reasoning
                                         </h4>
-                                        <p className="text-slate-600 leading-relaxed bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                                        <p className="text-brand-slate leading-relaxed bg-brand-white p-6 rounded-2xl border border-brand-steel/20">
                                             {result.reasoning}
                                         </p>
                                     </div>
 
                                     {/* Risk Analysis */}
                                     <div>
-                                        <h4 className="text-lg font-semibold text-slate-900 mb-3 flex items-center">
+                                        <h4 className="text-lg font-semibold text-brand-navy mb-3 flex items-center">
                                             <ShieldAlert className="w-5 h-5 mr-2 text-red-500" /> Vulnerability Assessment
                                         </h4>
-                                        <p className="text-slate-600 leading-relaxed">
+                                        <p className="text-brand-slate leading-relaxed">
                                             {result.riskAnalysis}
                                         </p>
                                     </div>
 
                                     {/* Recommended Services Grid */}
                                     <div>
-                                        <h4 className="text-lg font-semibold text-slate-900 mb-4">Recommended Hardware & Services</h4>
+                                        <h4 className="text-lg font-semibold text-brand-navy mb-4">Recommended Hardware & Services</h4>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             {result.suggestedServices.map((service, idx) => (
-                                                <div key={idx} className="flex items-center p-3 bg-indigo-50/50 rounded-xl border border-indigo-100/50">
-                                                    <CheckCircle2 className="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" />
-                                                    <span className="text-slate-800 font-medium text-sm">{service}</span>
+                                                <div key={idx} className="flex items-center p-3 bg-brand-electric/10/50 rounded-xl border border-brand-electric/20/50">
+                                                    <CheckCircle2 className="w-5 h-5 text-brand-electric mr-3 flex-shrink-0" />
+                                                    <span className="text-brand-navy font-medium text-sm">{service}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -194,18 +194,18 @@ export default function AIAdvisorPage() {
                         {/* Sidebar: Cost & Action */}
                         <div className="space-y-8">
                             {/* Estimated Cost Card */}
-                            <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
+                            <div className="bg-brand-navy rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
                                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
                                 <div className="relative z-10">
-                                    <p className="text-blue-300 font-medium mb-2 uppercase tracking-wide text-xs">Estimated Investment</p>
+                                    <p className="text-brand-electric/60 font-medium mb-2 uppercase tracking-wide text-xs">Estimated Investment</p>
                                     <div className="text-4xl font-bold mb-1 tracking-tight">{result.estimatedCost}</div>
-                                    <p className="text-slate-400 text-sm mb-6">*Includes hardware & labor</p>
+                                    <p className="text-brand-steel text-sm mb-6">*Includes hardware & labor</p>
 
-                                    <div className="border-t border-slate-700 pt-6 mt-6">
-                                        <h5 className="font-semibold mb-4 text-blue-200">Key Benefits</h5>
+                                    <div className="border-t border-brand-slate pt-6 mt-6">
+                                        <h5 className="font-semibold mb-4 text-brand-electric/40">Key Benefits</h5>
                                         <ul className="space-y-3">
                                             {result.keyBenefits.map((benefit, i) => (
-                                                <li key={i} className="flex items-center text-sm text-slate-300">
+                                                <li key={i} className="flex items-center text-sm text-brand-steel/60">
                                                     <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-3" />
                                                     {benefit}
                                                 </li>
@@ -216,19 +216,19 @@ export default function AIAdvisorPage() {
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="bg-white rounded-[2.5rem] p-8 shadow-lg border border-slate-100 text-center">
-                                <p className="text-slate-600 mb-6">
+                            <div className="bg-white rounded-[2.5rem] p-8 shadow-lg border border-brand-steel/20 text-center">
+                                <p className="text-brand-slate mb-6">
                                     Ready to implement this strategy?
                                 </p>
                                 <Link
                                     href="/contact?ref=advisor"
-                                    className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl text-center transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1 mb-4"
+                                    className="block w-full bg-brand-electric hover:bg-brand-electric text-white font-bold py-4 px-6 rounded-xl text-center transition-all shadow-lg shadow-brand-electric/30 hover:shadow-brand-electric/50 hover:-translate-y-1 mb-4"
                                 >
                                     Get Official Quote
                                 </Link>
                                 <button
                                     onClick={handleReset}
-                                    className="block w-full bg-white border-2 border-slate-200 text-slate-600 font-bold py-4 px-6 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all"
+                                    className="block w-full bg-white border-2 border-brand-steel/40 text-brand-slate font-bold py-4 px-6 rounded-xl hover:border-brand-steel/60 hover:bg-brand-white transition-all"
                                 >
                                     Start Over
                                 </button>
@@ -243,19 +243,19 @@ export default function AIAdvisorPage() {
     // 4. UPLOAD SCREEN (Custom Handling)
     if (currentStep.id === 'upload') {
         return (
-            <div className="min-h-screen bg-slate-50 flex flex-col">
+            <div className="min-h-screen bg-brand-white flex flex-col">
                 {/* Header */}
-                <div className="bg-white border-b border-slate-200 py-6 px-4">
+                <div className="bg-white border-b border-brand-steel/40 py-6 px-4">
                     <div className="container mx-auto max-w-3xl flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Step {currentStepIndex + 1} of {totalSteps}</span>
+                            <span className="text-xs font-bold text-brand-steel uppercase tracking-widest">Step {currentStepIndex + 1} of {totalSteps}</span>
                         </div>
-                        <button onClick={handleReset} className="text-slate-400 hover:text-slate-600 text-sm font-medium">Exit</button>
+                        <button onClick={handleReset} className="text-brand-steel hover:text-brand-slate text-sm font-medium">Exit</button>
                     </div>
                     {/* Progress Bar */}
-                    <div className="w-full h-1 bg-slate-100 mt-6 absolute bottom-0 left-0">
+                    <div className="w-full h-1 bg-brand-steel/20 mt-6 absolute bottom-0 left-0">
                         <div
-                            className="h-full bg-blue-600 transition-all duration-500 ease-out"
+                            className="h-full bg-brand-electric transition-all duration-500 ease-out"
                             style={{ width: `${((currentStepIndex + 1) / totalSteps) * 100}%` }}
                         />
                     </div>
@@ -263,11 +263,11 @@ export default function AIAdvisorPage() {
 
                 <div className="flex-grow flex items-center justify-center px-4 py-12">
                     <div className="max-w-xl w-full text-center">
-                        <h2 className="text-3xl font-bold text-slate-900 mb-8 animate-fade-in-up">
+                        <h2 className="text-3xl font-bold text-brand-navy mb-8 animate-fade-in-up">
                             {currentStep.question}
                         </h2>
 
-                        <div className="bg-white p-8 rounded-[2rem] border-2 border-dashed border-slate-300 hover:border-blue-500 transition-colors mb-8 cursor-pointer relative group">
+                        <div className="bg-white p-8 rounded-[2rem] border-2 border-dashed border-brand-steel/60 hover:border-brand-electric transition-colors mb-8 cursor-pointer relative group">
                             <input
                                 type="file"
                                 accept="image/*"
@@ -280,20 +280,20 @@ export default function AIAdvisorPage() {
                                 }}
                             />
                             <div className="flex flex-col items-center pointer-events-none">
-                                <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
+                                <div className="w-20 h-20 bg-brand-electric/10 rounded-full flex items-center justify-center text-brand-electric mb-4 group-hover:scale-110 transition-transform">
                                     <Image src="/icons/residential-security.png" alt="Upload" width={40} height={40} className="opacity-0 absolute" />
                                     {/* Using a Lucide icon here would be better but keeping consistency with import approach if needed, 
                                         but let's just use the Camera icon from lucide since we imported it in steps logic but need it here visually */}
                                     <Camera className="w-10 h-10" />
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 mb-1">Click to Upload Photo</h3>
-                                <p className="text-slate-500 text-sm">JPG or PNG (Max 5MB)</p>
+                                <h3 className="text-lg font-bold text-brand-navy mb-1">Click to Upload Photo</h3>
+                                <p className="text-brand-steel text-sm">JPG or PNG (Max 5MB)</p>
                             </div>
                         </div>
 
                         <button
                             onClick={() => handleOptionSelect('skip')}
-                            className="text-slate-400 hover:text-slate-600 font-medium text-sm"
+                            className="text-brand-steel hover:text-brand-slate font-medium text-sm"
                         >
                             Skip this step
                         </button>
@@ -305,19 +305,19 @@ export default function AIAdvisorPage() {
 
     // 5. STANDARD WIZARD STEPS
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col">
+        <div className="min-h-screen bg-brand-white flex flex-col">
             {/* Header / Progress */}
-            <div className="bg-white border-b border-slate-200 py-6 px-4">
+            <div className="bg-white border-b border-brand-steel/40 py-6 px-4">
                 <div className="container mx-auto max-w-3xl flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Step {currentStepIndex + 1} of {totalSteps}</span>
+                        <span className="text-xs font-bold text-brand-steel uppercase tracking-widest">Step {currentStepIndex + 1} of {totalSteps}</span>
                     </div>
-                    <button onClick={handleReset} className="text-slate-400 hover:text-slate-600 text-sm font-medium">Exit</button>
+                    <button onClick={handleReset} className="text-brand-steel hover:text-brand-slate text-sm font-medium">Exit</button>
                 </div>
                 {/* Progress Bar */}
-                <div className="w-full h-1 bg-slate-100 mt-6 absolute bottom-0 left-0">
+                <div className="w-full h-1 bg-brand-steel/20 mt-6 absolute bottom-0 left-0">
                     <div
-                        className="h-full bg-blue-600 transition-all duration-500 ease-out"
+                        className="h-full bg-brand-electric transition-all duration-500 ease-out"
                         style={{ width: `${((currentStepIndex + 1) / totalSteps) * 100}%` }}
                     />
                 </div>
@@ -326,7 +326,7 @@ export default function AIAdvisorPage() {
             {/* Question Area */}
             <div className="flex-grow flex items-center justify-center px-4 py-12">
                 <div className="max-w-4xl w-full">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center animate-fade-in-up">
+                    <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-12 text-center animate-fade-in-up">
                         {currentStep.question}
                     </h2>
 
@@ -338,26 +338,26 @@ export default function AIAdvisorPage() {
                                 className={`
                                     relative group p-8 rounded-[2rem] border-2 text-left transition-all duration-300
                                     ${answers[currentStep.id] === option.value
-                                        ? 'border-blue-600 bg-blue-50 shadow-xl scale-105'
-                                        : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-lg hover:-translate-y-1'
+                                        ? 'border-brand-electric bg-brand-electric/10 shadow-xl scale-105'
+                                        : 'border-brand-steel/40 bg-white hover:border-brand-electric/60 hover:shadow-lg hover:-translate-y-1'
                                     }
                                 `}
                             >
                                 <div className={`
                                     w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-colors
                                     ${answers[currentStep.id] === option.value
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-slate-100 text-slate-500 group-hover:bg-blue-100 group-hover:text-blue-600'
+                                        ? 'bg-brand-electric text-white'
+                                        : 'bg-brand-steel/20 text-brand-steel group-hover:bg-brand-electric/20 group-hover:text-brand-electric'
                                     }
                                 `}>
                                     {option.icon && iconMap[option.icon]}
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">{option.label}</h3>
+                                <h3 className="text-xl font-bold text-brand-navy mb-2">{option.label}</h3>
                                 <div className={`
                                     w-8 h-8 rounded-full border-2 flex items-center justify-center absolute top-6 right-6 transition-all
                                     ${answers[currentStep.id] === option.value
-                                        ? 'border-blue-600 bg-blue-600 text-white'
-                                        : 'border-slate-200 text-transparent group-hover:border-blue-300'
+                                        ? 'border-brand-electric bg-brand-electric text-white'
+                                        : 'border-brand-steel/40 text-transparent group-hover:border-brand-electric/60'
                                     }
                                 `}>
                                     <CheckCircle2 className="w-5 h-5" />
@@ -369,7 +369,7 @@ export default function AIAdvisorPage() {
             </div>
 
             {/* Step Navigation Hint */}
-            <div className="py-8 text-center text-slate-400 text-sm">
+            <div className="py-8 text-center text-brand-steel text-sm">
                 Select an option to proceed
             </div>
         </div>

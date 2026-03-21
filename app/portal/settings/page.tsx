@@ -258,7 +258,7 @@ export default function SettingsPage() {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300">
+                    <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60">
                         Settings
                     </h1>
                     <p className="text-muted-foreground mt-1 text-lg">Manage organization details, team access, and system preferences</p>
@@ -266,10 +266,10 @@ export default function SettingsPage() {
             </div>
 
             <Tabs defaultValue="organization" className="space-y-8">
-                <TabsList className="bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl w-full max-w-3xl grid grid-cols-4 gap-2">
+                <TabsList className="bg-brand-steel/20 dark:bg-brand-navy/50 p-1 rounded-xl w-full max-w-3xl grid grid-cols-4 gap-2">
                     <TabsTrigger
                         value="organization"
-                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-slate-900 data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
+                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
                     >
                         <Building className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Organization</span>
@@ -277,14 +277,14 @@ export default function SettingsPage() {
                     </TabsTrigger>
                     <TabsTrigger
                         value="team"
-                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-slate-900 data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
+                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
                     >
                         <Users className="mr-2 h-4 w-4" />
                         Team
                     </TabsTrigger>
                     <TabsTrigger
                         value="preferences"
-                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-slate-900 data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
+                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
                     >
                         <Palette className="mr-2 h-4 w-4" />
                         <span className="hidden sm:inline">Preferences</span>
@@ -292,7 +292,7 @@ export default function SettingsPage() {
                     </TabsTrigger>
                     <TabsTrigger
                         value="data"
-                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-slate-900 data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
+                        className="data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:shadow-md rounded-lg transition-all duration-300 py-3"
                     >
                         <Database className="mr-2 h-4 w-4" />
                         Data
@@ -301,11 +301,11 @@ export default function SettingsPage() {
 
                 <TabsContent value="organization" className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2">
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-blue-500/50"></div>
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-electric/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <Building className="h-5 w-5 text-blue-500" />
+                                    <Building className="h-5 w-5 text-brand-electric" />
                                     Company Profile
                                 </CardTitle>
                                 <CardDescription>Details displayed on invoices and quotes.</CardDescription>
@@ -313,7 +313,7 @@ export default function SettingsPage() {
                             <CardContent className="space-y-4">
                                 <div className="grid gap-2">
                                     <Label>Company Name</Label>
-                                    <Input value={settings.companyName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyName', e.target.value)} placeholder="Company Name" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyName', e.target.value)} placeholder="Company Name" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Company Logo</Label>
@@ -325,14 +325,14 @@ export default function SettingsPage() {
                                             </>
                                         )}
                                         <div className="flex-1">
-                                            <Input type="file" accept="image/*" onChange={handleLogoUpload} className="bg-white/50 dark:bg-slate-800/50" disabled={isLoading} />
+                                            <Input type="file" accept="image/*" onChange={handleLogoUpload} className="bg-white/50 dark:bg-brand-navy/50" disabled={isLoading} />
                                             {isLoading && <Loader2 className="h-4 w-4 animate-spin mt-2" />}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Phone Number</Label>
-                                    <Input value={settings.companyPhone || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyPhone', e.target.value)} placeholder="Phone" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyPhone || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyPhone', e.target.value)} placeholder="Phone" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>WhatsApp Number</Label>
@@ -340,27 +340,27 @@ export default function SettingsPage() {
                                         value={settings.whatsappNumber || settings.companyPhone || ''}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('whatsappNumber', e.target.value)}
                                         placeholder="e.g. 062 123 4567"
-                                        className="bg-white/50 dark:bg-slate-800/50"
+                                        className="bg-white/50 dark:bg-brand-navy/50"
                                     />
                                     <p className="text-xs text-muted-foreground">Used for &apos;Chat on WhatsApp&apos; links. Defaults to Phone Number if empty.</p>
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Email Address</Label>
-                                    <Input value={settings.companyEmail || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyEmail', e.target.value)} placeholder="Email" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyEmail || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyEmail', e.target.value)} placeholder="Email" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Physical Address</Label>
-                                    <Input value={settings.companyAddress || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyAddress', e.target.value)} placeholder="Address" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyAddress || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyAddress', e.target.value)} placeholder="Address" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>VAT Registration</Label>
-                                    <Input value={settings.companyVat || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyVat', e.target.value)} placeholder="VAT Number" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.companyVat || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('companyVat', e.target.value)} placeholder="VAT Number" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                             </CardContent>
-                            <Globe className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <Globe className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
 
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
@@ -372,32 +372,32 @@ export default function SettingsPage() {
                             <CardContent className="space-y-4 relative z-10">
                                 <div className="grid gap-2">
                                     <Label>Bank Name</Label>
-                                    <Input value={settings.bankName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankName', e.target.value)} placeholder="Bank Name" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankName || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankName', e.target.value)} placeholder="Bank Name" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Account Holder</Label>
-                                    <Input value={settings.bankAccountHolder || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountHolder', e.target.value)} placeholder="Account Holder" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankAccountHolder || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountHolder', e.target.value)} placeholder="Account Holder" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-4 grid-cols-2">
                                     <div className="grid gap-2">
                                         <Label>Account Type</Label>
-                                        <Input value={settings.bankAccountType || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountType', e.target.value)} placeholder="Type" className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input value={settings.bankAccountType || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountType', e.target.value)} placeholder="Type" className="bg-white/50 dark:bg-brand-navy/50" />
                                     </div>
                                     <div className="grid gap-2">
                                         <Label>Branch Code</Label>
-                                        <Input value={settings.bankBranchCode || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankBranchCode', e.target.value)} placeholder="Code" className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input value={settings.bankBranchCode || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankBranchCode', e.target.value)} placeholder="Code" className="bg-white/50 dark:bg-brand-navy/50" />
                                     </div>
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Account Number</Label>
-                                    <Input value={settings.bankAccountNumber || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountNumber', e.target.value)} placeholder="Account Number" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankAccountNumber || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankAccountNumber', e.target.value)} placeholder="Account Number" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Reference</Label>
-                                    <Input value={settings.bankReference || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankReference', e.target.value)} placeholder="Default Reference" className="bg-white/50 dark:bg-slate-800/50" />
+                                    <Input value={settings.bankReference || ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('bankReference', e.target.value)} placeholder="Default Reference" className="bg-white/50 dark:bg-brand-navy/50" />
                                 </div>
                             </CardContent>
-                            <CreditCard className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <CreditCard className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
                     </div>
                 </TabsContent>
@@ -410,7 +410,7 @@ export default function SettingsPage() {
                         </div>
                         <Dialog open={isUserDialogOpen} onOpenChange={setIsUserDialogOpen}>
                             <DialogTrigger asChild>
-                                <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all"><Users className="mr-2 h-4 w-4" /> Add User</Button>
+                                <Button className="bg-brand-electric hover:bg-brand-electric text-white shadow-lg hover:shadow-xl transition-all"><Users className="mr-2 h-4 w-4" /> Add User</Button>
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
@@ -423,11 +423,11 @@ export default function SettingsPage() {
                                 </DialogHeader>
                                 {generatedLink ? (
                                     <div className="py-6 space-y-4">
-                                        <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md border text-sm break-all font-mono">
+                                        <div className="p-4 bg-brand-white dark:bg-brand-navy rounded-md border text-sm break-all font-mono">
                                             {generatedLink}
                                         </div>
                                         <Button
-                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                            className="w-full bg-brand-electric hover:bg-brand-electric text-white"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(generatedLink)
                                                 toast.success('Link copied to clipboard')
@@ -479,12 +479,12 @@ export default function SettingsPage() {
                     </div>
                     <div className="grid gap-4">
                         {users.map((user) => (
-                            <Card key={user.id} className="border-none shadow-sm hover:shadow-md transition-all bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <Card key={user.id} className="border-none shadow-sm hover:shadow-md transition-all bg-white dark:bg-brand-navy border border-brand-steel/40 dark:border-brand-navy">
                                 <CardContent className="flex items-center justify-between p-6">
                                     <div className="flex items-center gap-4">
                                         <div className={`h-12 w-12 rounded-full flex items-center justify-center ${user.role === 'admin' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' :
-                                            user.role === 'manager' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' :
-                                                'bg-slate-100 text-slate-600 dark:bg-slate-800/50 dark:text-slate-400'
+                                            user.role === 'manager' ? 'bg-brand-electric/20 text-brand-electric dark:bg-brand-navy/30 dark:text-brand-electric' :
+                                                'bg-brand-steel/20 text-brand-slate dark:bg-brand-navy/50 dark:text-brand-steel'
                                             }`}>
                                             <Users className="h-6 w-6" />
                                         </div>
@@ -502,13 +502,13 @@ export default function SettingsPage() {
                                 </CardContent>
                             </Card>
                         ))}
-                        {users.length === 0 && <p className="text-center text-muted-foreground py-12 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">No users found.</p>}
+                        {users.length === 0 && <p className="text-center text-muted-foreground py-12 bg-brand-white dark:bg-brand-navy/50 rounded-xl border border-dashed border-brand-steel/40 dark:border-brand-navy">No users found.</p>}
                     </div>
                 </TabsContent>
 
                 <TabsContent value="preferences" className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2">
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-purple-500/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
@@ -530,7 +530,7 @@ export default function SettingsPage() {
                                 <div className="grid gap-2">
                                     <Label>Currency</Label>
                                     <Select value={currency} onValueChange={updateCurrency}>
-                                        <SelectTrigger className="bg-white/50 dark:bg-slate-800/50">
+                                        <SelectTrigger className="bg-white/50 dark:bg-brand-navy/50">
                                             <SelectValue placeholder="Select Currency" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -555,7 +555,7 @@ export default function SettingsPage() {
                                             value={settings.primaryColor || '#2563eb'}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('primaryColor', e.target.value)}
                                             placeholder="#2563eb"
-                                            className="flex-1 bg-white/50 dark:bg-slate-800/50"
+                                            className="flex-1 bg-white/50 dark:bg-brand-navy/50"
                                         />
                                     </div>
                                 </div>
@@ -568,7 +568,7 @@ export default function SettingsPage() {
                                         value={settings.taxRate || '15'}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('taxRate', e.target.value)}
                                         placeholder="15"
-                                        className="bg-white/50 dark:bg-slate-800/50"
+                                        className="bg-white/50 dark:bg-brand-navy/50"
                                     />
                                 </div>
                                 <div className="grid gap-2">
@@ -578,15 +578,15 @@ export default function SettingsPage() {
                                         value={settings.defaultQuoteValidityDays || '14'}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('defaultQuoteValidityDays', e.target.value)}
                                         placeholder="14"
-                                        className="bg-white/50 dark:bg-slate-800/50"
+                                        className="bg-white/50 dark:bg-brand-navy/50"
                                     />
                                     <p className="text-xs text-muted-foreground">Days before a quote expires.</p>
                                 </div>
                             </CardContent>
-                            <Palette className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <Palette className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
 
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-amber-500/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
@@ -597,7 +597,7 @@ export default function SettingsPage() {
                             </CardHeader>
                             <CardContent className="relative z-10">
                                 <Textarea
-                                    className="min-h-[200px] bg-white/50 dark:bg-slate-800/50 resize-y"
+                                    className="min-h-[200px] bg-white/50 dark:bg-brand-navy/50 resize-y"
                                     placeholder="Enter your standard terms and conditions here..."
                                     value={settings.legalTerms || ''}
                                     onChange={(e) => updateSetting('legalTerms', e.target.value)}
@@ -607,14 +607,14 @@ export default function SettingsPage() {
                                     Visible on all generated PDF documents.
                                 </p>
                             </CardContent>
-                            <FileText className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <FileText className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
                     </div>
                 </TabsContent>
 
                 <TabsContent value="data" className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2">
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-rose-500/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
@@ -627,49 +627,49 @@ export default function SettingsPage() {
                                 <div className="space-y-2">
                                     <Label>Import Clients</Label>
                                     <div className="flex items-center gap-2">
-                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportClients(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportClients(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-brand-navy/50" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <Label>Import Products</Label>
                                     <div className="flex items-center gap-2">
-                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportProducts(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-slate-800/50" />
+                                        <Input type="file" accept=".csv" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && handleImportProducts(e.target.files[0])} disabled={importing} className="bg-white/50 dark:bg-brand-navy/50" />
                                     </div>
                                 </div>
                             </CardContent>
-                            <Upload className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <Upload className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
 
-                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-indigo-500/50"></div>
+                        <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-brand-electric/50"></div>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <Download className="h-5 w-5 text-indigo-500" />
+                                    <Download className="h-5 w-5 text-brand-electric" />
                                     Export Data
                                 </CardTitle>
                                 <CardDescription>Download your data in CSV or JSON.</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4 relative z-10">
                                 <div className="grid grid-cols-2 gap-3">
-                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => exportData('clients', 'clients.csv')} disabled={exporting}>
+                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-brand-navy/50 hover:bg-brand-steel/20 dark:hover:bg-brand-navy" onClick={() => exportData('clients', 'clients.csv')} disabled={exporting}>
                                         <div className="flex flex-col items-center gap-1">
                                             <Users className="h-4 w-4 mb-1" />
                                             Clients
                                         </div>
                                     </Button>
-                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => exportData('products', 'products.csv')} disabled={exporting}>
+                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-brand-navy/50 hover:bg-brand-steel/20 dark:hover:bg-brand-navy" onClick={() => exportData('products', 'products.csv')} disabled={exporting}>
                                         <div className="flex flex-col items-center gap-1">
                                             <Database className="h-4 w-4 mb-1" />
                                             Products
                                         </div>
                                     </Button>
-                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => exportData('invoices', 'invoices.csv')} disabled={exporting}>
+                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-brand-navy/50 hover:bg-brand-steel/20 dark:hover:bg-brand-navy" onClick={() => exportData('invoices', 'invoices.csv')} disabled={exporting}>
                                         <div className="flex flex-col items-center gap-1">
                                             <FileText className="h-4 w-4 mb-1" />
                                             Invoices
                                         </div>
                                     </Button>
-                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => exportData('jobs', 'jobs.csv')} disabled={exporting}>
+                                    <Button variant="outline" className="h-auto py-3 bg-white/50 dark:bg-brand-navy/50 hover:bg-brand-steel/20 dark:hover:bg-brand-navy" onClick={() => exportData('jobs', 'jobs.csv')} disabled={exporting}>
                                         <div className="flex flex-col items-center gap-1">
                                             <Building className="h-4 w-4 mb-1" />
                                             Jobs
@@ -677,7 +677,7 @@ export default function SettingsPage() {
                                     </Button>
                                 </div>
                             </CardContent>
-                            <Download className="absolute -right-6 -bottom-6 h-32 w-32 text-slate-100 dark:text-slate-800 opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            <Download className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
                     </div>
                 </TabsContent>

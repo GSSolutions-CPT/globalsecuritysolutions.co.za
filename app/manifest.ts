@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: 'Premium security installations in Cape Town. CCTV, Alarms, Access Control & More.',
         start_url: '/',
         display: 'standalone',
-        background_color: '#0f172a', // slate-900
+        background_color: '#0f172a', // brand-navy
         theme_color: '#0f172a',
         icons: [
             {

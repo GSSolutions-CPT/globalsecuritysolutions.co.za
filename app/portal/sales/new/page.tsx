@@ -383,27 +383,27 @@ function CreateSaleContent() {
     const selectedClient = clients.find(c => c.id === formData.client_id)
 
     return (
-        <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950/50 -m-8 p-8">
+        <div className="min-h-screen bg-brand-white/50 dark:bg-brand-navy/50 -m-8 p-8">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full">
                         <ChevronLeft className="h-5 w-5" />
                     </Button>
                     <div>
-                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300">
+                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60">
                             New {mode.charAt(0).toUpperCase() + mode.slice(1)}
                         </h1>
                         <p className="text-muted-foreground text-sm">Create a new sales document</p>
                     </div>
                 </div>
 
-                <div className="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800">
+                <div className="flex bg-brand-steel/20 dark:bg-brand-navy p-1 rounded-lg border border-brand-steel/40 dark:border-brand-navy">
                     <button
                         onClick={() => setMode('quotation')}
                         className={cn(
                             "flex items-center gap-2 px-4 py-2 rounded-md transition-all text-sm font-medium",
                             mode === 'quotation'
-                                ? "bg-white dark:bg-slate-800 shadow-sm text-primary"
+                                ? "bg-white dark:bg-brand-navy shadow-sm text-primary"
                                 : "text-muted-foreground hover:text-foreground"
                         )}
                     >
@@ -415,7 +415,7 @@ function CreateSaleContent() {
                         className={cn(
                             "flex items-center gap-2 px-4 py-2 rounded-md transition-all text-sm font-medium",
                             mode === 'invoice'
-                                ? "bg-white dark:bg-slate-800 shadow-sm text-primary"
+                                ? "bg-white dark:bg-brand-navy shadow-sm text-primary"
                                 : "text-muted-foreground hover:text-foreground"
                         )}
                     >
@@ -427,7 +427,7 @@ function CreateSaleContent() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="space-y-6">
-                    <Card className="border-none shadow-md bg-white dark:bg-slate-900/50">
+                    <Card className="border-none shadow-md bg-white dark:bg-brand-navy/50">
                         <CardHeader className="pb-4">
                             <CardTitle className="text-lg flex items-center gap-2">
                                 <User className="h-5 w-5 text-primary" />
@@ -509,8 +509,8 @@ function CreateSaleContent() {
                         </CardContent>
                     </Card>
 
-                    <Card className="border-none shadow-md bg-white dark:bg-slate-900/50 overflow-hidden">
-                        <CardHeader className="flex flex-row items-center justify-between pb-4 bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
+                    <Card className="border-none shadow-md bg-white dark:bg-brand-navy/50 overflow-hidden">
+                        <CardHeader className="flex flex-row items-center justify-between pb-4 bg-brand-white/50 dark:bg-brand-navy/50 border-b border-brand-steel/20 dark:border-brand-navy">
                             <div>
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <Package className="h-5 w-5 text-primary" />
@@ -525,7 +525,7 @@ function CreateSaleContent() {
                         <CardContent className="p-0">
                             <div className="p-4 space-y-4">
                                 {lineItems.map((item, index) => (
-                                    <div key={index} className="group relative grid gap-4 p-4 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/20 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <div key={index} className="group relative grid gap-4 p-4 rounded-xl border border-brand-steel/20 dark:border-brand-navy bg-brand-white/30 dark:bg-brand-navy/20 hover:bg-brand-white dark:hover:bg-brand-navy/50 transition-colors">
                                         <div className="flex gap-4 items-start">
                                             <div className="grid gap-2 flex-1">
                                                 <Label className="text-xs text-muted-foreground uppercase tracking-wider">Product / Description</Label>
@@ -544,7 +544,7 @@ function CreateSaleContent() {
                                                         />
                                                     </div>
                                                     <Input
-                                                        className="flex-1 bg-white dark:bg-slate-950"
+                                                        className="flex-1 bg-white dark:bg-brand-navy"
                                                         placeholder="Item description..."
                                                         value={item.description}
                                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'description', e.target.value)}
@@ -559,7 +559,7 @@ function CreateSaleContent() {
                                                 <Input
                                                     type="number"
                                                     min="1"
-                                                    className="bg-white dark:bg-slate-950"
+                                                    className="bg-white dark:bg-brand-navy"
                                                     value={item.quantity}
                                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'quantity', parseInt(e.target.value) || 1)}
                                                 />
@@ -571,7 +571,7 @@ function CreateSaleContent() {
                                                     <Input
                                                         type="number"
                                                         step="0.01"
-                                                        className="pl-7 bg-white dark:bg-slate-950"
+                                                        className="pl-7 bg-white dark:bg-brand-navy"
                                                         value={item.unit_price}
                                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLineItem(index, 'unit_price', parseFloat(e.target.value) || 0)}
                                                     />
@@ -602,8 +602,8 @@ function CreateSaleContent() {
                                 ))}
                             </div>
                         </CardContent>
-                        <CardFooter className="bg-slate-50 dark:bg-slate-950/30 border-t border-slate-100 dark:border-slate-800 p-4">
-                            <Button variant="outline" onClick={addLineItem} className="w-full border-dashed border-2 hover:border-solid hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <CardFooter className="bg-brand-white dark:bg-brand-navy/30 border-t border-brand-steel/20 dark:border-brand-navy p-4">
+                            <Button variant="outline" onClick={addLineItem} className="w-full border-dashed border-2 hover:border-solid hover:bg-brand-steel/20 dark:hover:bg-brand-navy">
                                 <Plus className="mr-2 h-4 w-4" />
                                 Add Another Item
                             </Button>
@@ -611,8 +611,8 @@ function CreateSaleContent() {
                     </Card>
 
                     {mode === 'quotation' && (
-                        <Card className="border-none shadow-md bg-white dark:bg-slate-900/50 overflow-hidden">
-                            <CardHeader className="pb-4 bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
+                        <Card className="border-none shadow-md bg-white dark:bg-brand-navy/50 overflow-hidden">
+                            <CardHeader className="pb-4 bg-brand-white/50 dark:bg-brand-navy/50 border-b border-brand-steel/20 dark:border-brand-navy">
                                 <CardTitle className="text-lg flex items-center gap-2">
                                     <Map className="h-5 w-5 text-primary" />
                                     Visual Site Plan
@@ -622,13 +622,13 @@ function CreateSaleContent() {
                             <CardContent className="p-4">
                                 {sitePlanPreview ? (
                                     <div className="space-y-3">
-                                        <div className="relative group rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
+                                        <div className="relative group rounded-lg overflow-hidden border border-brand-steel/40 dark:border-brand-navy">
                                             <>
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img
                                                     src={sitePlanPreview}
                                                     alt="Site Plan"
-                                                    className="w-full h-48 object-contain bg-slate-50 dark:bg-slate-900"
+                                                    className="w-full h-48 object-contain bg-brand-white dark:bg-brand-navy"
                                                 />
                                             </>
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
@@ -649,13 +649,13 @@ function CreateSaleContent() {
                                     </div>
                                 ) : (
                                     <div
-                                        className="flex flex-col items-center justify-center py-8 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-400 dark:hover:border-blue-600 transition-colors cursor-pointer"
+                                        className="flex flex-col items-center justify-center py-8 border-2 border-dashed border-brand-steel/40 dark:border-brand-navy rounded-lg hover:border-brand-electric dark:hover:border-brand-electric transition-colors cursor-pointer"
                                         onClick={() => editId ? setSitePlannerOpen(true) : saveDraftForSitePlan()}
                                     >
-                                        <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded-full mb-3">
-                                            <Map className="h-6 w-6 text-blue-500" />
+                                        <div className="bg-brand-electric/10 dark:bg-brand-navy/30 p-3 rounded-full mb-3">
+                                            <Map className="h-6 w-6 text-brand-electric" />
                                         </div>
-                                        <h3 className="text-sm font-medium text-slate-900 dark:text-white mb-1">
+                                        <h3 className="text-sm font-medium text-brand-navy dark:text-white mb-1">
                                             Add Visual Site Plan
                                         </h3>
                                         <p className="text-xs text-muted-foreground text-center max-w-xs">
@@ -682,8 +682,8 @@ function CreateSaleContent() {
                 </div>
 
                 <div className="space-y-6 lg:sticky lg:top-8 h-fit">
-                    <Card className="border-none shadow-xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 overflow-hidden">
-                        <div className={`h-2 w-full ${mode === 'quotation' ? 'bg-blue-500' : 'bg-emerald-500'}`} />
+                    <Card className="border-none shadow-xl bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy border border-brand-steel/40 dark:border-brand-navy overflow-hidden">
+                        <div className={`h-2 w-full ${mode === 'quotation' ? 'bg-brand-electric' : 'bg-emerald-500'}`} />
                         <CardHeader className="text-center pb-2">
                             <Badge variant="outline" className="w-fit mx-auto mb-2 uppercase tracking-widest text-[10px]">
                                 Draft Preview
@@ -698,16 +698,16 @@ function CreateSaleContent() {
                         <CardContent className="space-y-6 pt-6">
                             <div className="space-y-3">
                                 <Label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider pl-1">Item Summary</Label>
-                                <div className="rounded-lg border border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 divide-y divide-slate-100 dark:divide-slate-800">
+                                <div className="rounded-lg border border-brand-steel/20 dark:border-brand-navy bg-white/50 dark:bg-brand-navy/50 divide-y divide-brand-steel/20 dark:divide-brand-navy">
                                     {lineItems.map((item, i) => (
                                         <div key={i} className="flex justify-between items-center p-3 text-sm">
                                             <div className="flex items-center gap-3">
                                                 <Badge variant="secondary" className="h-6 w-6 rounded-full flex items-center justify-center p-0">{item.quantity}</Badge>
-                                                <span className="font-medium text-slate-700 dark:text-slate-200">
+                                                <span className="font-medium text-brand-slate dark:text-brand-steel/40">
                                                     {item.description || item.product_id ? (item.description || products.find(p => p.id === item.product_id)?.name) : <span className="italic text-muted-foreground">Item {i + 1}</span>}
                                                 </span>
                                             </div>
-                                            <span className="text-slate-600 dark:text-slate-400">
+                                            <span className="text-brand-slate dark:text-brand-steel">
                                                 {formatCurrency(item.quantity * item.unit_price)}
                                             </span>
                                         </div>
@@ -730,13 +730,13 @@ function CreateSaleContent() {
                                 )}
                                 <div className="flex justify-between items-baseline pt-2">
                                     <span className="text-base font-semibold">Total Due</span>
-                                    <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <span className="text-2xl font-bold text-brand-navy dark:text-white">
                                         {formatCurrency(totals.total)}
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="bg-slate-100 dark:bg-slate-900 rounded-lg p-3 flex items-center justify-between">
+                            <div className="bg-brand-steel/20 dark:bg-brand-navy rounded-lg p-3 flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     <Percent className="h-4 w-4 text-muted-foreground" />
                                     <Label htmlFor="vat-toggle" className="text-sm cursor-pointer">Add VAT ({settings?.taxRate || 15}%)</Label>
@@ -754,7 +754,7 @@ function CreateSaleContent() {
                                 size="lg"
                                 onClick={handleSubmit}
                                 disabled={isLoading}
-                                className={`w-full text-lg shadow-lg shadow-blue-500/20 ${mode === 'quotation' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-emerald-600 hover:bg-emerald-700'}`}
+                                className={`w-full text-lg shadow-lg shadow-brand-electric/20 ${mode === 'quotation' ? 'bg-brand-electric hover:bg-brand-electric' : 'bg-emerald-600 hover:bg-emerald-700'}`}
                             >
                                 {isLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                                 {editId ? 'Update' : 'Create'} {mode === 'quotation' ? 'Quotation' : 'Invoice'}
@@ -766,7 +766,7 @@ function CreateSaleContent() {
                     </Card>
 
                     <div className="text-center">
-                        <span className="text-xs text-muted-foreground font-mono bg-slate-100 dark:bg-slate-900 px-2 py-1 rounded">
+                        <span className="text-xs text-muted-foreground font-mono bg-brand-steel/20 dark:bg-brand-navy px-2 py-1 rounded">
                             Est. Profit: {formatCurrency(totals.profit)}
                         </span>
                     </div>
@@ -778,7 +778,7 @@ function CreateSaleContent() {
 
 export default function CreateSale() {
     return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-8 w-8 animate-spin text-blue-600" /></div>}>
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-8 w-8 animate-spin text-brand-electric" /></div>}>
             <CreateSaleContent />
         </Suspense>
     )

@@ -38,10 +38,10 @@ export function Counter({ end, duration = 2000, label }: CounterProps) {
 
     return (
         <div ref={ref} className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-brand-electric mb-2">
                 {count}+
             </div>
-            <div className="text-sm uppercase tracking-wider text-slate-500 font-bold">
+            <div className="text-sm uppercase tracking-wider text-brand-steel font-bold">
                 {label}
             </div>
         </div>

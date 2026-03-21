@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 'use client'
 
 import Image from 'next/image'
@@ -5,7 +6,13 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, ShieldCheck, Target, Zap } from 'lucide-react'
 import seoData from '../data/seoData.json'
-import { ContactForm } from '@/components/ContactForm'
+
+import { PageHero } from '@/components/PageHero'
+
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
+    
+    loading: () => <div className="h-[500px] w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
+});
 
 const toSlug = (text: string) => {
     return text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim()
@@ -59,43 +66,19 @@ export function SectorsClient() {
         <div className="flex flex-col min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
 
             {/* Hero Section */}
-            <section className="relative bg-brand-navy text-brand-white py-16 md:py-24 flex items-center overflow-hidden border-b border-brand-steel/20">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] mix-blend-screen pointer-events-none" />
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
-                
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/30 z-10" />
-                    <Image
-                        src="/page-heroes/sectors-hero.png"
-                        alt="Security Solutions"
-                        fill
-                        className="object-cover opacity-30 mix-blend-luminosity"
-                        priority
-                    />
-                </div>
-
-                <div className="container relative z-20 mx-auto px-4 md:px-8 text-center pt-8">
-                    <motion.div 
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                        className="flex flex-col items-center"
-                    >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/30 text-brand-electric text-xs md:text-sm font-black tracking-widest uppercase mb-6 backdrop-blur-md">
-                            <ShieldCheck className="w-3.5 h-3.5 text-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)] rounded-full" />
-                            <span>Industry Specific Solutions</span>
-                        </motion.div>
-                        <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-tight drop-shadow-md">
-                            Security Tailored to <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Your Environment</span>
-                        </motion.h1>
-                        <motion.p variants={fadeInUp} className="text-brand-steel sm:text-lg max-w-2xl mx-auto leading-relaxed font-light mb-8">
-                            We understand that a farm requires different protection than a retail store.
-                            Our sector-specific approach ensures you get the exact defense architecture your property needs.
-                        </motion.p>
-                    </motion.div>
-                </div>
-            </section>
+            <PageHero
+                badgeIcon={<ShieldCheck className="w-3.5 h-3.5 text-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)] rounded-full" />}
+                badgeText="Industry Specific Solutions"
+                title={
+                    <>
+                        Security Tailored to <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Your Environment</span>
+                    </>
+                }
+                subtitle="We understand that a farm requires different protection than a retail store. Our sector-specific approach ensures you get the exact defense architecture your property needs."
+                bgImage="/page-heroes/sectors-hero.png"
+                pbClass=""
+            />
 
             {/* Main Content Area */}
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">

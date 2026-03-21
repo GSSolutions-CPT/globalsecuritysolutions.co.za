@@ -20,18 +20,18 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         <nav className="flex mb-8" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3 w-full overflow-hidden">
                 <li className="inline-flex items-center flex-shrink-0">
-                    <Link href="/" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">
+                    <Link href="/" className="inline-flex items-center text-sm font-medium text-brand-steel hover:text-brand-electric transition-colors">
                         <Home className="w-4 h-4 mr-2" />
                         Home
                     </Link>
                 </li>
                 {items.map((item, index) => (
                     <li key={index} className="flex items-center min-w-0">
-                        <ChevronRight className="w-4 h-4 text-slate-400 mx-1 flex-shrink-0" />
+                        <ChevronRight className="w-4 h-4 text-brand-steel mx-1 flex-shrink-0" />
                         {index === items.length - 1 ? (
-                            <span className="ml-1 text-sm font-bold text-slate-800 truncate block max-w-[200px] md:max-w-none">{item.label}</span>
+                            <span className="ml-1 text-sm font-bold text-brand-navy truncate block max-w-[200px] md:max-w-none">{item.label}</span>
                         ) : (
-                            <Link href={item.href} className="ml-1 text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors truncate block max-w-[150px] md:max-w-none">
+                            <Link href={item.href} className="ml-1 text-sm font-medium text-brand-steel hover:text-brand-electric transition-colors truncate block max-w-[150px] md:max-w-none">
                                 {item.label}
                             </Link>
                         )}

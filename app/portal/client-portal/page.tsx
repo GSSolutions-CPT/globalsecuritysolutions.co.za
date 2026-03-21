@@ -312,7 +312,7 @@ export default function ClientPortalPage() {
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'Draft': return 'bg-gray-500'
-            case 'Sent': return 'bg-blue-500'
+            case 'Sent': return 'bg-brand-electric'
             case 'Approved': case 'Accepted': return 'bg-green-500'
             case 'Rejected': return 'bg-red-500'
             case 'Paid': return 'bg-green-600'
@@ -329,10 +329,10 @@ export default function ClientPortalPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+            <div className="min-h-screen bg-brand-white dark:bg-brand-navy flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
-                    <p className="text-sm text-slate-500 animate-pulse">Loading Security Hub...</p>
+                    <Loader2 className="h-10 w-10 animate-spin text-brand-electric" />
+                    <p className="text-sm text-brand-steel animate-pulse">Loading Security Hub...</p>
                 </div>
             </div>
         )
@@ -340,12 +340,12 @@ export default function ClientPortalPage() {
 
     if (accessDenied) {
         return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center gap-4 p-8 text-center">
+            <div className="min-h-screen bg-brand-white dark:bg-brand-navy flex flex-col items-center justify-center gap-4 p-8 text-center">
                 <div className="h-20 w-20 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-2">
                     <ShieldCheck className="h-10 w-10 text-red-600 dark:text-red-400" />
                 </div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Access Denied</h1>
-                <p className="text-slate-500 dark:text-slate-400 max-w-sm">
+                <h1 className="text-2xl font-bold text-brand-navy dark:text-white">Access Denied</h1>
+                <p className="text-brand-steel dark:text-brand-steel max-w-sm">
                     You do not have permission to view this client record.
                     If you believe this is an error, please contact support.
                 </p>
@@ -356,10 +356,10 @@ export default function ClientPortalPage() {
 
     if (!clientId || !client) {
         return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 text-center">
-                <HelpCircle className="h-12 w-12 text-slate-400 mb-4" />
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Invalid Link</h1>
-                <p className="text-slate-500 dark:text-slate-400 mb-6">Invalid or expired portal link. Please contact support if you think this is a mistake.</p>
+            <div className="min-h-screen bg-brand-white dark:bg-brand-navy flex flex-col items-center justify-center p-4 text-center">
+                <HelpCircle className="h-12 w-12 text-brand-steel mb-4" />
+                <h1 className="text-2xl font-bold text-brand-navy dark:text-white mb-2">Invalid Link</h1>
+                <p className="text-brand-steel dark:text-brand-steel mb-6">Invalid or expired portal link. Please contact support if you think this is a mistake.</p>
                 <Button onClick={() => router.push('/portal/login')}>Return to Login</Button>
             </div>
         )
@@ -387,33 +387,33 @@ export default function ClientPortalPage() {
 
         return (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl group">
-                    <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl group-hover:bg-blue-600/30 transition-all duration-1000 animate-pulse"></div>
+                <div className="relative overflow-hidden rounded-3xl bg-brand-navy border border-brand-navy shadow-2xl group">
+                    <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-electric/20 rounded-full blur-3xl group-hover:bg-brand-electric/30 transition-all duration-1000 animate-pulse"></div>
                     <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-purple-600/30 transition-all duration-1000 delay-700 animate-pulse"></div>
                     <div className="relative z-10 p-8 md:p-12">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                             <div>
                                 <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">
-                                    Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{client.name.split(' ')[0]}</span>
+                                    Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-purple-400">{client.name.split(' ')[0]}</span>
                                 </h2>
-                                <p className="text-slate-400 text-lg max-w-xl">
+                                <p className="text-brand-steel text-lg max-w-xl">
                                     Your secure client dashboard. Track quotes, manage invoices, and approve payments in real-time.
                                 </p>
                             </div>
                             <div className="hidden md:block">
-                                <Badge variant="outline" className="text-blue-400 border-blue-500/30 px-4 py-1.5 text-sm backdrop-blur-md bg-blue-950/30">Verified Client</Badge>
+                                <Badge variant="outline" className="text-brand-electric border-brand-electric/30 px-4 py-1.5 text-sm backdrop-blur-md bg-brand-navy/30">Verified Client</Badge>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
                             <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 group/card">
                                 <div className="flex justify-between items-start mb-4">
-                                    <div className="p-3 bg-blue-500/20 rounded-xl text-blue-400 group-hover/card:text-blue-300 transition-colors">
+                                    <div className="p-3 bg-brand-electric/20 rounded-xl text-brand-electric group-hover/card:text-brand-electric/60 transition-colors">
                                         <CreditCard className="w-6 h-6" />
                                     </div>
-                                    <Badge className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 border-0">Outstanding</Badge>
+                                    <Badge className="bg-brand-electric/20 text-brand-electric/60 hover:bg-brand-electric/30 border-0">Outstanding</Badge>
                                 </div>
                                 <div>
-                                    <p className="text-slate-400 text-sm font-medium uppercase tracking-wider">Total Due</p>
+                                    <p className="text-brand-steel text-sm font-medium uppercase tracking-wider">Total Due</p>
                                     <p className="text-3xl font-bold text-white mt-1">{formatCurrency(totalOutstanding)}</p>
                                 </div>
                             </div>
@@ -425,7 +425,7 @@ export default function ClientPortalPage() {
                                     <Badge className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/30 border-0">Action Needed</Badge>
                                 </div>
                                 <div>
-                                    <p className="text-slate-400 text-sm font-medium uppercase tracking-wider">Pending Quotes</p>
+                                    <p className="text-brand-steel text-sm font-medium uppercase tracking-wider">Pending Quotes</p>
                                     <p className="text-3xl font-bold text-white mt-1">{activeQuotes}</p>
                                 </div>
                             </div>
@@ -437,7 +437,7 @@ export default function ClientPortalPage() {
                                     <Badge className="bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border-0">Secured</Badge>
                                 </div>
                                 <div>
-                                    <p className="text-slate-400 text-sm font-medium uppercase tracking-wider">Site Status</p>
+                                    <p className="text-brand-steel text-sm font-medium uppercase tracking-wider">Site Status</p>
                                     <p className="text-2xl font-bold text-white mt-1">Active</p>
                                 </div>
                             </div>
@@ -453,13 +453,13 @@ export default function ClientPortalPage() {
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {recentSuccesses.map(q => (
-                                <div key={q.id} className="relative overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-md border border-green-200/50 dark:border-green-900/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all flex justify-between items-center group">
+                                <div key={q.id} className="relative overflow-hidden bg-white/60 dark:bg-brand-navy/40 backdrop-blur-md border border-green-200/50 dark:border-green-900/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all flex justify-between items-center group">
                                     <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-green-500"></div>
                                     <div>
-                                        <p className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <p className="font-semibold text-brand-navy dark:text-brand-steel/40 flex items-center gap-2">
                                             <CheckCircle className="h-5 w-5 text-green-500" /> Payment Verified
                                         </p>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                        <p className="text-sm text-brand-steel dark:text-brand-steel mt-1">
                                             Final payment for Quote <strong className="text-green-600 dark:text-green-400">#{q.id.substring(0, 6)}</strong> approved.
                                         </p>
                                     </div>
@@ -474,33 +474,33 @@ export default function ClientPortalPage() {
 
                 <div className="animate-in fade-in slide-in-from-bottom-2 delay-500">
                     <h3 className="text-lg font-semibold mb-4 text-foreground flex items-center gap-2">
-                        <span className="w-1.5 h-6 bg-slate-300 dark:bg-slate-700 rounded-full"></span>
+                        <span className="w-1.5 h-6 bg-brand-steel/60 dark:bg-brand-slate rounded-full"></span>
                         Quick Access
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-slate-200 dark:border-slate-800 hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all group" onClick={() => setContactOpen(true)}>
-                            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
-                                <HelpCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/50 hover:bg-brand-electric/10/50 dark:hover:bg-brand-navy/10 transition-all group" onClick={() => setContactOpen(true)}>
+                            <div className="p-3 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full group-hover:scale-110 transition-transform duration-300">
+                                <HelpCircle className="h-6 w-6 text-brand-electric dark:text-brand-electric" />
                             </div>
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Support Center</span>
+                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Support Center</span>
                         </Button>
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-slate-200 dark:border-slate-800 hover:border-green-500/50 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all group" onClick={() => window.open(whatsappUrl, '_blank')}>
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-green-500/50 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all group" onClick={() => window.open(whatsappUrl, '_blank')}>
                             <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <MessageCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                             </div>
-                            <span className="font-medium text-slate-700 dark:text-slate-300">WhatsApp Us</span>
+                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">WhatsApp Us</span>
                         </Button>
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-slate-200 dark:border-slate-800 hover:border-purple-500/50 hover:bg-purple-50/50 dark:hover:bg-purple-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: '', preferredDate: '' }); setRequestQuoteOpen(true) }}>
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-purple-500/50 hover:bg-purple-50/50 dark:hover:bg-purple-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: '', preferredDate: '' }); setRequestQuoteOpen(true) }}>
                             <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <FileText className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                             </div>
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Request a Quote</span>
+                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Request a Quote</span>
                         </Button>
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-slate-200 dark:border-slate-800 hover:border-amber-500/50 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: client?.address || '', preferredDate: '' }); setRequestVisitOpen(true) }}>
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-amber-500/50 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: client?.address || '', preferredDate: '' }); setRequestVisitOpen(true) }}>
                             <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <MapPin className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                             </div>
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Request Site Visit</span>
+                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Request Site Visit</span>
                         </Button>
                     </div>
                 </div>
@@ -509,9 +509,9 @@ export default function ClientPortalPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 relative font-sans overflow-x-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/50 via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black opacity-80" />
-            <div className="fixed -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="min-h-screen bg-brand-white dark:bg-brand-navy relative font-sans overflow-x-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-electric/20/50 via-brand-white to-brand-steel/20 dark:from-brand-navy dark:via-brand-navy dark:to-black opacity-80" />
+            <div className="fixed -top-40 -right-40 w-96 h-96 bg-brand-electric/10 rounded-full blur-3xl animate-pulse" />
             <div className="fixed top-40 -left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
             <header className="fixed top-0 left-0 right-0 glass-effect z-50 transition-all duration-300">
@@ -526,16 +526,16 @@ export default function ClientPortalPage() {
                             />
                         </div>
                         <div className="hidden md:block truncate">
-                            <h1 className="text-lg font-bold text-slate-900 dark:text-white leading-none tracking-tight">Client Portal</h1>
-                            <p className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mt-0.5 truncate">{settings.companyName || 'Global Security Solutions'}</p>
+                            <h1 className="text-lg font-bold text-brand-navy dark:text-white leading-none tracking-tight">Client Portal</h1>
+                            <p className="text-[10px] font-bold text-brand-electric dark:text-brand-electric uppercase tracking-widest mt-0.5 truncate">{settings.companyName || 'Global Security Solutions'}</p>
                         </div>
                     </div>
                     <div className="flex gap-2 md:gap-4 items-center shrink-0 flex-nowrap">
-                        <Button variant="ghost" size="sm" className="hidden sm:flex text-slate-600 hover:text-blue-600 hover:bg-blue-50 dark:text-slate-400 dark:hover:text-blue-400 dark:hover:bg-blue-900/20 whitespace-nowrap" onClick={() => setContactOpen(true)}>
+                        <Button variant="ghost" size="sm" className="hidden sm:flex text-brand-slate hover:text-brand-electric hover:bg-brand-electric/10 dark:text-brand-steel dark:hover:text-brand-electric dark:hover:bg-brand-navy/20 whitespace-nowrap" onClick={() => setContactOpen(true)}>
                             <HelpCircle className="mr-2 h-4 w-4" /> Help Center
                         </Button>
-                        <div className="h-10 w-10 min-w-[40px] shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-[2px] shadow-lg shadow-blue-500/20 flex-none">
-                            <div className="h-full w-full rounded-full bg-white dark:bg-slate-950 flex items-center justify-center text-slate-800 dark:text-white font-bold text-xs">{client.name.substring(0, 2).toUpperCase()}</div>
+                        <div className="h-10 w-10 min-w-[40px] shrink-0 rounded-full bg-gradient-to-br from-brand-electric to-purple-600 p-[2px] shadow-lg shadow-brand-electric/20 flex-none">
+                            <div className="h-full w-full rounded-full bg-white dark:bg-brand-navy flex items-center justify-center text-brand-navy dark:text-white font-bold text-xs">{client.name.substring(0, 2).toUpperCase()}</div>
                         </div>
                     </div>
                 </div>
@@ -543,13 +543,13 @@ export default function ClientPortalPage() {
 
             <div className="container mx-auto px-4 sm:px-6 py-8 pt-24 pb-32 max-w-7xl relative z-10">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-                    <div className="sticky top-20 z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl py-2 -mx-4 px-4 md:mx-0 md:px-0 transition-all duration-300">
-                        <div className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 dark:border-slate-800 shadow-sm w-full md:w-max flex overflow-x-auto no-scrollbar gap-1">
+                    <div className="sticky top-20 z-40 bg-brand-white/80 dark:bg-brand-navy/80 backdrop-blur-xl py-2 -mx-4 px-4 md:mx-0 md:px-0 transition-all duration-300">
+                        <div className="bg-white/50 dark:bg-brand-navy/50 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 dark:border-brand-navy shadow-sm w-full md:w-max flex overflow-x-auto no-scrollbar gap-1">
                             <TabsList className="bg-transparent gap-1 w-full flex justify-start md:justify-center">
-                                <TabsTrigger value="overview" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Overview</TabsTrigger>
-                                <TabsTrigger value="quotations" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Quotes</TabsTrigger>
-                                <TabsTrigger value="proforma" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Proforma</TabsTrigger>
-                                <TabsTrigger value="invoices" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-md transition-all font-medium text-slate-600 dark:text-slate-400 flex-1 md:flex-none">Invoices</TabsTrigger>
+                                <TabsTrigger value="overview" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:text-brand-electric dark:data-[state=active]:text-brand-electric data-[state=active]:shadow-md transition-all font-medium text-brand-slate dark:text-brand-steel flex-1 md:flex-none">Overview</TabsTrigger>
+                                <TabsTrigger value="quotations" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:text-brand-electric dark:data-[state=active]:text-brand-electric data-[state=active]:shadow-md transition-all font-medium text-brand-slate dark:text-brand-steel flex-1 md:flex-none">Quotes</TabsTrigger>
+                                <TabsTrigger value="proforma" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:text-brand-electric dark:data-[state=active]:text-brand-electric data-[state=active]:shadow-md transition-all font-medium text-brand-slate dark:text-brand-steel flex-1 md:flex-none">Proforma</TabsTrigger>
+                                <TabsTrigger value="invoices" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-brand-navy data-[state=active]:text-brand-electric dark:data-[state=active]:text-brand-electric data-[state=active]:shadow-md transition-all font-medium text-brand-slate dark:text-brand-steel flex-1 md:flex-none">Invoices</TabsTrigger>
                             </TabsList>
                         </div>
                     </div>
@@ -562,32 +562,32 @@ export default function ClientPortalPage() {
                         {quotations
                             .filter(q => q.status === 'Sent' || q.status === 'Draft' || q.status === 'Rejected' || q.status === 'Pending Review')
                             .map((quotation) => (
-                                <Card key={quotation.id} className="group relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
-                                    <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <Card key={quotation.id} className="group relative overflow-hidden bg-white dark:bg-brand-navy border border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/30 dark:hover:border-brand-electric/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
+                                    <div className="absolute inset-0 bg-brand-electric/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     <div className={`h-1 w-full ${getStatusColor(quotation.status)}`}></div>
                                     <CardHeader className="relative z-10 pb-2">
                                         <div className="flex justify-between items-start">
                                             <div className="space-y-1">
                                                 <div className="flex items-center gap-2">
-                                                    <Badge variant="outline" className="font-mono text-[10px] bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border-none px-2 py-0.5 rounded-md">#{quotation.id.substring(0, 6)}</Badge>
-                                                    <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">{new Date(quotation.date_created).toLocaleDateString()}</span>
+                                                    <Badge variant="outline" className="font-mono text-[10px] bg-brand-steel/20 dark:bg-brand-navy/50 text-brand-slate dark:text-brand-steel border-none px-2 py-0.5 rounded-md">#{quotation.id.substring(0, 6)}</Badge>
+                                                    <span className="text-[10px] text-brand-steel font-semibold uppercase tracking-wider">{new Date(quotation.date_created).toLocaleDateString()}</span>
                                                 </div>
-                                                <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Security System Quote</CardTitle>
+                                                <CardTitle className="text-xl font-bold text-brand-navy dark:text-white">Security System Quote</CardTitle>
                                             </div>
                                             <Badge className={cn("px-3 py-1 rounded-full text-xs font-semibold shadow-sm border-0 text-white", getStatusColor(quotation.status))}>{quotation.status}</Badge>
                                         </div>
                                     </CardHeader>
                                     <CardContent className="relative z-10 space-y-6 pt-2">
-                                        <div className="flex justify-between items-end border-b border-slate-100 dark:border-slate-800/50 pb-4 border-dashed">
-                                            <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">Estimated Total</span>
-                                            <span className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
+                                        <div className="flex justify-between items-end border-b border-brand-steel/20 dark:border-brand-navy/50 pb-4 border-dashed">
+                                            <span className="text-brand-steel dark:text-brand-steel text-sm font-medium">Estimated Total</span>
+                                            <span className="text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
-                                            <Button variant="outline" className="w-full h-11 border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800 transition-all" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
+                                            <Button variant="outline" className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download PDF
                                             </Button>
                                             {quotation.status === 'Sent' && (
-                                                <Button className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 group-hover:scale-[1.02] transition-transform" onClick={() => initiateAcceptance(quotation)}>Accept & Sign</Button>
+                                                <Button className="w-full h-11 bg-brand-electric hover:bg-brand-electric text-white shadow-lg shadow-brand-electric/20 group-hover:scale-[1.02] transition-transform" onClick={() => initiateAcceptance(quotation)}>Accept & Sign</Button>
                                             )}
                                         </div>
                                         {quotation.status === 'Sent' && (
@@ -604,31 +604,31 @@ export default function ClientPortalPage() {
                         {quotations
                             .filter(q => q.status === 'Accepted' || q.status === 'Approved')
                             .map((quotation) => (
-                                <Card key={quotation.id} className="group relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-green-500/30 dark:hover:border-green-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
+                                <Card key={quotation.id} className="group relative overflow-hidden bg-white dark:bg-brand-navy border border-brand-steel/40 dark:border-brand-navy hover:border-green-500/30 dark:hover:border-green-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
                                     <div className="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     <div className="h-1 w-full bg-green-500"></div>
                                     <CardHeader className="relative z-10 pb-2">
                                         <div className="flex justify-between items-start">
                                             <div className="space-y-1">
-                                                <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Proforma Invoice</CardTitle>
+                                                <CardTitle className="text-xl font-bold text-brand-navy dark:text-white">Proforma Invoice</CardTitle>
                                                 <div className="flex items-center gap-2">
-                                                    <Badge variant="outline" className="font-mono text-[10px] bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 border-none px-2 py-0.5 rounded-md">#{quotation.id.substring(0, 6)}</Badge>
-                                                    <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Accepted: {new Date(quotation.accepted_at || quotation.date_created).toLocaleDateString()}</span>
+                                                    <Badge variant="outline" className="font-mono text-[10px] bg-brand-steel/20 dark:bg-brand-navy/50 text-brand-slate dark:text-brand-steel border-none px-2 py-0.5 rounded-md">#{quotation.id.substring(0, 6)}</Badge>
+                                                    <span className="text-[10px] text-brand-steel font-semibold uppercase tracking-wider">Accepted: {new Date(quotation.accepted_at || quotation.date_created).toLocaleDateString()}</span>
                                                 </div>
                                             </div>
                                             <Badge className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-0 shadow-sm rounded-full px-3 py-1">Active</Badge>
                                         </div>
                                     </CardHeader>
                                     <CardContent className="relative z-10 space-y-6 pt-2">
-                                        <div className="flex justify-between items-end border-b border-slate-100 dark:border-slate-800/50 pb-4 border-dashed">
-                                            <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Value</span>
-                                            <span className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
+                                        <div className="flex justify-between items-end border-b border-brand-steel/20 dark:border-brand-navy/50 pb-4 border-dashed">
+                                            <span className="text-brand-steel dark:text-brand-steel text-sm font-medium">Total Value</span>
+                                            <span className="text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
                                         </div>
 
                                         <div className={cn(
                                             "p-4 rounded-xl text-sm text-center border font-medium relative overflow-hidden",
                                             (quotation.status === 'Approved' || quotation.admin_approved)
-                                                ? "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800/50 dark:text-slate-300 dark:border-slate-700"
+                                                ? "bg-brand-white text-brand-slate border-brand-steel/40 dark:bg-brand-navy/50 dark:text-brand-steel/60 dark:border-brand-slate"
                                                 : "bg-amber-50 text-amber-800 border-amber-100 dark:bg-amber-900/10 dark:text-amber-400 dark:border-amber-900/20"
                                         )}>
                                             {(quotation.status === 'Approved' || quotation.admin_approved) ? (
@@ -636,7 +636,7 @@ export default function ClientPortalPage() {
                                                     {(() => {
                                                         const depositRatio = (quotation.payment_type === 'full' ? 100 : (quotation.deposit_percentage || 75)) / 100
                                                         const balance = quotation.total_amount * (1 - depositRatio)
-                                                        return <p>Outstanding Balance: <strong className="ml-1 text-slate-900 dark:text-white">{formatCurrency(balance)}</strong></p>
+                                                        return <p>Outstanding Balance: <strong className="ml-1 text-brand-navy dark:text-white">{formatCurrency(balance)}</strong></p>
                                                     })()}
                                                 </>
                                             ) : (
@@ -652,7 +652,7 @@ export default function ClientPortalPage() {
                                         </div>
 
                                         <div className="flex flex-col gap-3 pt-2">
-                                            <Button className="w-full h-11 border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800 transition-all" variant="outline" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
+                                            <Button className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" variant="outline" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download Proforma
                                             </Button>
                                             {quotation.payment_proof && !quotation.final_payment_proof && (
@@ -663,7 +663,7 @@ export default function ClientPortalPage() {
                                             {(quotation.status === 'Approved' || quotation.admin_approved) && !quotation.final_payment_approved && (
                                                 <>
                                                     {!quotation.final_payment_proof ? (
-                                                        <Button className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20 transition-transform" onClick={() => { setAcceptingQuote(quotation); setStep(4); }}>
+                                                        <Button className="w-full h-11 bg-brand-navy hover:bg-brand-navy text-white shadow-lg shadow-brand-navy/20 transition-transform" onClick={() => { setAcceptingQuote(quotation); setStep(4); }}>
                                                             <CreditCard className="mr-2 h-4 w-4" /> Complete Payment
                                                         </Button>
                                                     ) : (
@@ -683,29 +683,29 @@ export default function ClientPortalPage() {
                         {invoices
                             .filter(inv => inv.status !== 'Draft')
                             .map((invoice) => (
-                                <Card key={invoice.id} className="group relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-orange-500/30 dark:hover:border-orange-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
+                                <Card key={invoice.id} className="group relative overflow-hidden bg-white dark:bg-brand-navy border border-brand-steel/40 dark:border-brand-navy hover:border-orange-500/30 dark:hover:border-orange-500/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
                                     <div className="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     <div className={`h-1 w-full ${getStatusColor(invoice.status)}`}></div>
                                     <CardHeader className="relative z-10 pb-2">
                                         <div className="flex justify-between items-center">
                                             <div className="flex items-center gap-4">
-                                                <div className="h-12 w-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center border border-slate-100 dark:border-slate-700 transition-transform duration-300">
-                                                    <CreditCard className="w-6 h-6 text-slate-400 group-hover:text-orange-500 transition-colors" />
+                                                <div className="h-12 w-12 rounded-2xl bg-brand-white dark:bg-brand-navy flex items-center justify-center border border-brand-steel/20 dark:border-brand-slate transition-transform duration-300">
+                                                    <CreditCard className="w-6 h-6 text-brand-steel group-hover:text-orange-500 transition-colors" />
                                                 </div>
                                                 <div>
-                                                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">Invoice #{invoice.id.substring(0, 6)}</CardTitle>
-                                                    <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">{new Date(invoice.date_created).toLocaleDateString()}</p>
+                                                    <CardTitle className="text-lg font-bold text-brand-navy dark:text-white">Invoice #{invoice.id.substring(0, 6)}</CardTitle>
+                                                    <p className="text-xs text-brand-steel font-medium uppercase tracking-wider mt-1">{new Date(invoice.date_created).toLocaleDateString()}</p>
                                                 </div>
                                             </div>
                                             <Badge className={cn("px-3 py-1 rounded-full shadow-sm border-0 text-white", getStatusColor(invoice.status))}>{invoice.status}</Badge>
                                         </div>
                                     </CardHeader>
                                     <CardContent className="relative z-10 space-y-4 pt-4">
-                                        <div className="flex justify-between items-center py-4 border-y border-dashed border-slate-100 dark:border-slate-800/50">
-                                            <span className="text-slate-500 font-medium">Amount Due</span>
-                                            <span className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">{formatCurrency(invoice.total_amount)}</span>
+                                        <div className="flex justify-between items-center py-4 border-y border-dashed border-brand-steel/20 dark:border-brand-navy/50">
+                                            <span className="text-brand-steel font-medium">Amount Due</span>
+                                            <span className="text-2xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(invoice.total_amount)}</span>
                                         </div>
-                                        <Button className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white shadow-lg transition-transform" onClick={() => generateInvoicePDF({ ...invoice, clients: client }, settings)}>
+                                        <Button className="w-full h-11 bg-brand-navy hover:bg-brand-navy text-white shadow-lg transition-transform" onClick={() => generateInvoicePDF({ ...invoice, clients: client }, settings)}>
                                             <Download className="mr-2 h-4 w-4" /> Download Tax Invoice
                                         </Button>
                                     </CardContent>
@@ -720,13 +720,13 @@ export default function ClientPortalPage() {
             </a>
 
             <Dialog open={step > 0} onOpenChange={(open: boolean) => !open && setStep(0)}>
-                <DialogContent className="sm:max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-slate-200 dark:border-slate-800 shadow-2xl rounded-3xl overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+                <DialogContent className="sm:max-w-md bg-white/95 dark:bg-brand-navy/95 backdrop-blur-xl border-brand-steel/40 dark:border-brand-navy shadow-2xl rounded-3xl overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-electric to-purple-600"></div>
                     <DialogHeader className="pt-6">
-                        <DialogTitle className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                        <DialogTitle className="text-2xl font-bold text-brand-navy dark:text-white flex items-center gap-3">
                             {step === 1 ? (
                                 <>
-                                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400"><PenTool className="h-5 w-5" /></div>
+                                    <div className="p-2 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full text-brand-electric dark:text-brand-electric"><PenTool className="h-5 w-5" /></div>
                                     Sign Acceptance
                                 </>
                             ) : (
@@ -736,48 +736,48 @@ export default function ClientPortalPage() {
                                 </>
                             )}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-500 dark:text-slate-400 text-base mt-2">
+                        <DialogDescription className="text-brand-steel dark:text-brand-steel text-base mt-2">
                             {step === 1 ? 'Please sign below to accept this quotation and proceed to payment.' : 'Quotation accepted! Please proceed with the payment steps below.'}
                         </DialogDescription>
                     </DialogHeader>
 
                     {step === 1 && (
                         <div className="space-y-4">
-                            <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-inner bg-white"><SignaturePad onSave={handleSignatureSave} /></div>
-                            <p className="text-xs text-muted-foreground text-center bg-slate-50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">By signing, you agree to the Terms & Conditions.</p>
+                            <div className="border border-brand-steel/40 dark:border-brand-slate rounded-xl overflow-hidden shadow-inner bg-white"><SignaturePad onSave={handleSignatureSave} /></div>
+                            <p className="text-xs text-muted-foreground text-center bg-brand-white dark:bg-brand-navy/50 p-3 rounded-lg border border-brand-steel/20 dark:border-brand-navy">By signing, you agree to the Terms & Conditions.</p>
                             <DialogFooter className="gap-2 sm:gap-0">
                                 <Button variant="outline" onClick={() => setStep(0)}>Cancel</Button>
-                                <Button onClick={submitAcceptance} disabled={!signature} className="bg-slate-900 hover:bg-slate-800 text-white shadow-lg transition-all">Confirm & Sign</Button>
+                                <Button onClick={submitAcceptance} disabled={!signature} className="bg-brand-navy hover:bg-brand-navy text-white shadow-lg transition-all">Confirm & Sign</Button>
                             </DialogFooter>
                         </div>
                     )}
 
                     {step === 2 && (
                         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                            <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 p-5 rounded-xl text-sm space-y-4">
+                            <div className="bg-brand-white dark:bg-brand-navy/50 border border-brand-steel/20 dark:border-brand-navy p-5 rounded-xl text-sm space-y-4">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <div className="h-10 w-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-600 shadow-sm"><span className="font-bold text-lg">1</span></div>
-                                    <p className="font-bold text-lg text-slate-900 dark:text-white">Banking Details</p>
+                                    <div className="h-10 w-10 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full flex items-center justify-center text-brand-electric shadow-sm"><span className="font-bold text-lg">1</span></div>
+                                    <p className="font-bold text-lg text-brand-navy dark:text-white">Banking Details</p>
                                 </div>
-                                <div className="grid grid-cols-[80px_1fr] gap-y-2 gap-x-4 pl-3 text-slate-600 dark:text-slate-300">
-                                    <span className="text-muted-foreground font-medium text-right">Bank:</span> <span className="font-semibold text-slate-900 dark:text-white">{settings.bankName || 'FNB / RMB'}</span>
-                                    <span className="text-muted-foreground font-medium text-right">Account:</span> <span className="font-semibold text-slate-900 dark:text-white font-mono">{settings.bankAccountNumber || '63182000223'}</span>
-                                    <span className="text-muted-foreground font-medium text-right">Branch:</span> <span className="text-slate-900 dark:text-white">{settings.bankBranchCode || '250655'}</span>
+                                <div className="grid grid-cols-[80px_1fr] gap-y-2 gap-x-4 pl-3 text-brand-slate dark:text-brand-steel/60">
+                                    <span className="text-muted-foreground font-medium text-right">Bank:</span> <span className="font-semibold text-brand-navy dark:text-white">{settings.bankName || 'FNB / RMB'}</span>
+                                    <span className="text-muted-foreground font-medium text-right">Account:</span> <span className="font-semibold text-brand-navy dark:text-white font-mono">{settings.bankAccountNumber || '63182000223'}</span>
+                                    <span className="text-muted-foreground font-medium text-right">Branch:</span> <span className="text-brand-navy dark:text-white">{settings.bankBranchCode || '250655'}</span>
                                     <span className="text-muted-foreground font-medium text-right pt-1">Ref:</span>
-                                    <span className="font-mono bg-white dark:bg-black px-2 py-1 rounded border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-200 select-all font-bold tracking-wide w-fit">{settings.bankReference || acceptingQuote?.id.substring(0, 6)}</span>
+                                    <span className="font-mono bg-white dark:bg-black px-2 py-1 rounded border border-brand-steel/40 dark:border-brand-slate text-brand-navy dark:text-brand-steel/40 select-all font-bold tracking-wide w-fit">{settings.bankReference || acceptingQuote?.id.substring(0, 6)}</span>
                                 </div>
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2">
-                                    <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600"><span className="font-bold">2</span></div>
-                                    <p className="font-semibold text-slate-800 dark:text-slate-200">Upload Proof of Payment</p>
+                                    <div className="h-8 w-8 bg-brand-electric/20 rounded-full flex items-center justify-center text-brand-electric"><span className="font-bold">2</span></div>
+                                    <p className="font-semibold text-brand-navy dark:text-brand-steel/40">Upload Proof of Payment</p>
                                 </div>
                                 <div className="pl-10">
-                                    <p className="text-sm text-slate-500 mb-3">Please make a <strong>{acceptingQuote?.payment_type === 'full' ? 'Full Payment' : `${acceptingQuote?.deposit_percentage || 75}% deposit`} ({formatCurrency((acceptingQuote?.total_amount || 0) * ((acceptingQuote?.payment_type === 'full' ? 100 : (acceptingQuote?.deposit_percentage || 75)) / 100))})</strong> to secure your booking.</p>
-                                    <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:bg-slate-50 transition-colors relative">
+                                    <p className="text-sm text-brand-steel mb-3">Please make a <strong>{acceptingQuote?.payment_type === 'full' ? 'Full Payment' : `${acceptingQuote?.deposit_percentage || 75}% deposit`} ({formatCurrency((acceptingQuote?.total_amount || 0) * ((acceptingQuote?.payment_type === 'full' ? 100 : (acceptingQuote?.deposit_percentage || 75)) / 100))})</strong> to secure your booking.</p>
+                                    <div className="border-2 border-dashed border-brand-steel/40 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:bg-brand-white transition-colors relative">
                                         <label htmlFor="proof-upload-initial" className="cursor-pointer flex flex-col items-center justify-center w-full h-full">
-                                            <Upload className="h-10 w-10 text-slate-300 mb-2" />
-                                            <p className="text-sm font-medium text-slate-600">Click to upload Proof of Payment</p>
+                                            <Upload className="h-10 w-10 text-brand-steel/60 mb-2" />
+                                            <p className="text-sm font-medium text-brand-slate">Click to upload Proof of Payment</p>
                                             <input id="proof-upload-initial" type="file" accept="image/*,application/pdf" className="opacity-0 absolute inset-0 w-full h-full cursor-pointer" onChange={(e) => e.target.files?.[0] && submitFinalAcceptance(e.target.files[0])} />
                                         </label>
                                     </div>
@@ -791,14 +791,14 @@ export default function ClientPortalPage() {
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2">
                                     <div className="h-8 w-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600"><Upload className="h-4 w-4" /></div>
-                                    <p className="font-semibold text-slate-800 dark:text-slate-200">Upload Final Proof of Payment</p>
+                                    <p className="font-semibold text-brand-navy dark:text-brand-steel/40">Upload Final Proof of Payment</p>
                                 </div>
                                 <div className="pl-10">
-                                    <p className="text-sm text-slate-500 mb-3">Please upload the proof for your <strong>Outstanding Balance</strong>.</p>
-                                    <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:bg-slate-50 transition-colors relative">
+                                    <p className="text-sm text-brand-steel mb-3">Please upload the proof for your <strong>Outstanding Balance</strong>.</p>
+                                    <div className="border-2 border-dashed border-brand-steel/40 rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:bg-brand-white transition-colors relative">
                                         <label htmlFor="proof-upload-final" className="cursor-pointer flex flex-col items-center justify-center w-full h-full">
-                                            <Upload className="h-10 w-10 text-slate-300 mb-2" />
-                                            <p className="text-sm font-medium text-slate-600">Click to upload Final Proof</p>
+                                            <Upload className="h-10 w-10 text-brand-steel/60 mb-2" />
+                                            <p className="text-sm font-medium text-brand-slate">Click to upload Final Proof</p>
                                             <input id="proof-upload-final" type="file" accept="image/*,application/pdf" className="opacity-0 absolute inset-0 w-full h-full cursor-pointer" onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.files?.[0] && submitFinalPaymentProof(e.target.files[0])} />
                                         </label>
                                     </div>
@@ -810,8 +810,8 @@ export default function ClientPortalPage() {
                     {step === 3 && (
                         <div className="text-center py-8 space-y-4">
                             <div className="flex justify-center mb-6"><div className="h-24 w-24 bg-green-100 rounded-full flex items-center justify-center animate-in zoom-in duration-500"><CheckCircle className="h-12 w-12 text-green-600" /></div></div>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Submission Received!</h3>
-                            <p className="text-slate-500 max-w-xs mx-auto">Thank you! We have received your signature and payment proof. Our team will review your submission shortly.</p>
+                            <h3 className="text-2xl font-bold text-brand-navy dark:text-white">Submission Received!</h3>
+                            <p className="text-brand-steel max-w-xs mx-auto">Thank you! We have received your signature and payment proof. Our team will review your submission shortly.</p>
                             <Button onClick={() => setStep(0)} className="w-full mt-4">Return to Dashboard</Button>
                         </div>
                     )}

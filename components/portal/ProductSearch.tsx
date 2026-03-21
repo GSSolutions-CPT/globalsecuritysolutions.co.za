@@ -49,7 +49,7 @@ export function ProductSearch({ products = [], value, onSelect }: ProductSearchP
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full justify-between bg-white dark:bg-slate-950 font-normal px-3"
+                    className="w-full justify-between bg-white dark:bg-brand-navy font-normal px-3"
                 >
                     {value === "custom"
                         ? "Custom Item"
@@ -60,7 +60,7 @@ export function ProductSearch({ products = [], value, onSelect }: ProductSearchP
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[500px] p-0" align="start">
-                <div className="flex items-center border-b p-2 overflow-x-auto gap-2 bg-slate-50/50 dark:bg-slate-900/50 no-scrollbar">
+                <div className="flex items-center border-b p-2 overflow-x-auto gap-2 bg-brand-white/50 dark:bg-brand-navy/50 no-scrollbar">
                     {categories.map(category => (
                         <button
                             key={category}
@@ -69,7 +69,7 @@ export function ProductSearch({ products = [], value, onSelect }: ProductSearchP
                                 "flex-none px-3 py-1.5 rounded-full text-xs font-medium transition-colors border",
                                 selectedCategory === category
                                     ? "bg-primary text-primary-foreground border-primary"
-                                    : "bg-white dark:bg-slate-800 text-muted-foreground border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-foreground"
+                                    : "bg-white dark:bg-brand-navy text-muted-foreground border-brand-steel/40 dark:border-brand-slate hover:bg-brand-steel/20 dark:hover:bg-brand-navy hover:text-foreground"
                             )}
                         >
                             {category}
@@ -104,11 +104,11 @@ export function ProductSearch({ products = [], value, onSelect }: ProductSearchP
                                         onSelect(product.id)
                                         setOpen(false)
                                     }}
-                                    className="flex flex-col items-start gap-1 py-3 border-b border-slate-100 dark:border-slate-800 last:border-0"
+                                    className="flex flex-col items-start gap-1 py-3 border-b border-brand-steel/20 dark:border-brand-navy last:border-0"
                                 >
                                     <div className="flex w-full items-center justify-between">
                                         <span className="font-medium truncate pr-2">{product.name}</span>
-                                        <span className="text-sm font-semibold text-slate-900 dark:text-slate-100 whitespace-nowrap">
+                                        <span className="text-sm font-semibold text-brand-navy dark:text-brand-steel/20 whitespace-nowrap">
                                             {formatCurrency(product.retail_price)}
                                         </span>
                                     </div>
@@ -121,11 +121,11 @@ export function ProductSearch({ products = [], value, onSelect }: ProductSearchP
                                                 )}
                                             />
                                             <div className="flex gap-2">
-                                                <span className="font-mono bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-[10px] tracking-wider">
+                                                <span className="font-mono bg-brand-steel/20 dark:bg-brand-navy px-1.5 py-0.5 rounded text-[10px] tracking-wider">
                                                     {product.code}
                                                 </span>
                                                 {selectedCategory === "All" && (
-                                                    <span className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">
+                                                    <span className="bg-brand-steel/20 dark:bg-brand-navy px-1.5 py-0.5 rounded text-[10px]">
                                                         {product.category}
                                                     </span>
                                                 )}

@@ -77,37 +77,37 @@ function LoginContent() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-brand-white dark:bg-brand-navy">
             {/* Back Button */}
             <Link
                 href="/"
-                className="absolute top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors bg-white/50 dark:bg-slate-900/50 backdrop-blur-md px-4 py-2 rounded-full ring-1 ring-slate-200 dark:ring-slate-800 shadow-sm"
+                className="absolute top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 text-sm font-medium text-brand-steel hover:text-brand-navy dark:text-brand-steel dark:hover:text-white transition-colors bg-white/50 dark:bg-brand-navy/50 backdrop-blur-md px-4 py-2 rounded-full ring-1 ring-brand-steel/40 dark:ring-brand-navy shadow-sm"
             >
                 <ArrowLeft className="h-4 w-4" />
                 <span>Back to Website</span>
             </Link>
 
             {/* Dynamic Background Elements */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black opacity-80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-electric/20 via-brand-white to-brand-steel/20 dark:from-brand-navy dark:via-brand-navy dark:to-black opacity-80" />
 
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-electric/20 rounded-full blur-3xl animate-pulse" />
             <div className="absolute top-40 -left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
 
             {/* Login Card */}
-            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl ring-1 ring-slate-200 dark:ring-slate-800 p-0 md:p-2">
+            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 dark:bg-brand-navy/80 backdrop-blur-xl ring-1 ring-brand-steel/40 dark:ring-brand-navy p-0 md:p-2">
                 <CardHeader className="space-y-1 text-center pb-8">
                     <div className="flex justify-center mb-6">
                         <div className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-                            <div className="relative p-4 rounded-full bg-white dark:bg-slate-950 ring-1 ring-slate-200 dark:ring-slate-800 shadow-xl">
+                            <div className="absolute -inset-1 bg-gradient-to-r from-brand-electric to-emerald-600 rounded-full blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+                            <div className="relative p-4 rounded-full bg-white dark:bg-brand-navy ring-1 ring-brand-steel/40 dark:ring-brand-navy shadow-xl">
                                 <Image src="/logo.png" alt="Company Logo" width={48} height={48} className="w-12 h-12 object-contain" />
                             </div>
                         </div>
                     </div>
-                    <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                    <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60 bg-clip-text text-transparent">
                         Welcome back
                     </CardTitle>
-                    <CardDescription className="text-slate-500 dark:text-slate-400">
+                    <CardDescription className="text-brand-steel dark:text-brand-steel">
                         Enter your credentials to access the GSS Hub
                     </CardDescription>
                 </CardHeader>
@@ -123,13 +123,13 @@ function LoginContent() {
                             <Label htmlFor="email">Email Address</Label>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Mail className="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                                    <Mail className="h-5 w-5 text-brand-steel group-focus-within:text-brand-electric transition-colors" />
                                 </div>
                                 <Input
                                     id="email"
                                     type="email"
                                     placeholder="name@company.com"
-                                    className="pl-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500/20 transition-all font-sans"
+                                    className="pl-10 h-11 bg-brand-white dark:bg-brand-navy/50 border-brand-steel/40 dark:border-brand-navy focus:ring-2 focus:ring-brand-electric/20 transition-all font-sans"
                                     value={email}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                     required
@@ -139,18 +139,18 @@ function LoginContent() {
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <a href="#" className="text-xs font-medium text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+                                <a href="#" className="text-xs font-medium text-brand-electric hover:text-brand-electric hover:underline transition-colors">
                                     Forgot password?
                                 </a>
                             </div>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Lock className="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                                    <Lock className="h-5 w-5 text-brand-steel group-focus-within:text-brand-electric transition-colors" />
                                 </div>
                                 <Input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
-                                    className="pl-10 pr-10 h-11 bg-slate-50 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500/20 transition-all font-sans"
+                                    className="pl-10 pr-10 h-11 bg-brand-white dark:bg-brand-navy/50 border-brand-steel/40 dark:border-brand-navy focus:ring-2 focus:ring-brand-electric/20 transition-all font-sans"
                                     value={password}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     required
@@ -158,7 +158,7 @@ function LoginContent() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors"
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-brand-steel hover:text-brand-slate dark:text-brand-steel dark:hover:text-brand-steel/60 transition-colors"
                                     tabIndex={-1}
                                     aria-label="Toggle password visibility"
                                 >
@@ -170,7 +170,7 @@ function LoginContent() {
 
                     <CardFooter className="flex flex-col gap-4 pt-2 pb-8">
                         <Button
-                            className="w-full h-11 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-lg shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-0.5"
+                            className="w-full h-11 bg-gradient-to-r from-brand-electric to-emerald-600 hover:from-brand-electric hover:to-emerald-700 text-white shadow-lg shadow-brand-electric/20 transition-all duration-300 transform hover:-translate-y-0.5"
                             type="submit"
                             disabled={loading}
                         >
@@ -185,17 +185,17 @@ function LoginContent() {
 
                         <div className="relative w-full my-2">
                             <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-slate-200 dark:border-slate-800" />
+                                <span className="w-full border-t border-brand-steel/40 dark:border-brand-navy" />
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-white dark:bg-slate-900 px-3 text-slate-400 tracking-wider">Or continue with</span>
+                                <span className="bg-white dark:bg-brand-navy px-3 text-brand-steel tracking-wider">Or continue with</span>
                             </div>
                         </div>
 
                         <Button
                             type="button"
                             variant="outline"
-                            className="w-full h-11 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all font-semibold"
+                            className="w-full h-11 border-brand-steel/40 dark:border-brand-navy hover:bg-brand-white dark:hover:bg-brand-navy transition-all font-semibold"
                             onClick={() => signInWithGoogle && signInWithGoogle()}
                         >
                             <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
@@ -207,9 +207,9 @@ function LoginContent() {
                         </Button>
 
                         <div className="w-full text-center mt-2">
-                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                            <p className="text-sm text-brand-steel dark:text-brand-steel">
                                 Don&apos;t have an account?{' '}
-                                <Link href="/portal/register" className="font-semibold text-blue-600 hover:text-blue-500 hover:underline transition-colors">
+                                <Link href="/portal/register" className="font-semibold text-brand-electric hover:text-brand-electric hover:underline transition-colors">
                                     Register Account
                                 </Link>
                             </p>
@@ -217,10 +217,10 @@ function LoginContent() {
                     </CardFooter>
                 </form>
 
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-emerald-500 to-blue-600 opacity-50" />
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-brand-electric via-emerald-500 to-brand-electric opacity-50" />
             </Card>
 
-            <div className="absolute bottom-6 flex items-center gap-2 text-sm text-slate-400 dark:text-slate-600 z-10">
+            <div className="absolute bottom-6 flex items-center gap-2 text-sm text-brand-steel dark:text-brand-slate z-10">
                 <ShieldCheck className="h-4 w-4" />
                 <span>Secured by GSS Solutions</span>
             </div>
@@ -231,8 +231,8 @@ function LoginContent() {
 export default function Login() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center bg-slate-50">
-                <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+            <div className="min-h-screen flex items-center justify-center bg-brand-white">
+                <Loader2 className="w-8 h-8 animate-spin text-brand-electric" />
             </div>
         }>
             <LoginContent />

@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from "next/image"
-import { Calendar, ArrowRight, User, ArrowLeft, BookOpen } from 'lucide-react'
+import { Calendar, ArrowRight, User, BookOpen } from 'lucide-react'
+import { PageHero } from '@/components/PageHero'
 
 interface BlogPost {
     id: string
@@ -29,70 +30,41 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
         : posts.filter(p => (p.category || "General") === activeCategory)
 
     return (
-        <div className="bg-slate-50 min-h-screen font-sans">
+        <div className="bg-brand-white min-h-screen font-sans">
             {/* Premium Hero Section */}
-            <section className="relative bg-slate-950 text-white min-h-[60vh] flex items-center overflow-hidden pb-64">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
-                    <Image
-                        src="/page-heroes/blog-hero.png"
-                        alt="Security Blog & Insights"
-                        fill
-                        className="object-cover opacity-60"
-                        priority
-                    />
+            <PageHero
+                align="center"
+                title="Insights & News"
+                subtitle="Expert advice, crime trend updates, and practical tips to keep your Cape Town property safe and secure."
+                bgImage="/page-heroes/blog-hero.png"
+                badgeIcon={<BookOpen className="w-4 h-4" />}
+                badgeText="Security Knowledge Hub"
+                pbClass="pb-64"
+            />
+
+            <div className="container mx-auto px-4 -mt-40 relative z-30 pb-16">
+                {/* Category Filter Moved Here */}
+                <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto mb-16 bg-brand-navy/80 p-4 rounded-3xl backdrop-blur-md border border-brand-white/10 shadow-2xl">
+                    {categories.map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveCategory(cat)}
+                            className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 ${activeCategory === cat
+                                ? 'bg-brand-electric text-brand-navy shadow-[0_0_15px_rgba(0,229,255,0.4)] scale-105 ring-1 ring-brand-electric'
+                                : 'bg-brand-navy text-brand-steel/70 hover:bg-brand-white/5 hover:text-brand-white border border-brand-steel/20'
+                                }`}
+                        >
+                            {cat}
+                        </button>
+                    ))}
                 </div>
-
-                <div className="container relative z-20 mx-auto px-4 text-center">
-                    <Link href="/" className="inline-flex items-center text-blue-400 hover:text-white mb-8 transition-colors text-sm font-semibold tracking-wide uppercase">
-                        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
-                    </Link>
-
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm mx-auto">
-                        <BookOpen className="w-4 h-4" />
-                        <span>Security Knowledge Hub</span>
-                    </div>
-
-                    <h1
-                        className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight"
-                        data-aos="fade-up"
-                    >
-                        Insights & News
-                    </h1>
-                    <p
-                        className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10"
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                    >
-                        Expert advice, crime trend updates, and practical tips to keep your Cape Town property safe and secure.
-                    </p>
-
-                    {/* Category Filter */}
-                    <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
-                                    : 'bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white'
-                                    }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <div className="container mx-auto px-4 -mt-8 relative z-30 pb-8">
                 {filteredPosts.length === 0 && (
-                    <div className="text-center py-12 bg-white rounded-[2.5rem] shadow-sm border border-slate-100">
-                        <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="text-center py-12 bg-white rounded-[2.5rem] shadow-sm border border-brand-steel/20">
+                        <div className="w-16 h-16 bg-brand-steel/20 text-brand-steel rounded-full flex items-center justify-center mx-auto mb-4">
                             <BookOpen className="w-8 h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">No Articles Found</h3>
-                        <p className="text-slate-500">Try selecting a different category.</p>
+                        <h3 className="text-xl font-bold text-brand-navy mb-2">No Articles Found</h3>
+                        <p className="text-brand-steel">Try selecting a different category.</p>
                     </div>
                 )}
 
@@ -103,41 +75,42 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
                             href={`/blog/${post.slug || '#'}`}
                             data-aos="fade-up"
                             data-aos-delay={i * 100}
-                            className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full border border-slate-100"
+                            className="bg-brand-navy rounded-[2rem] overflow-hidden shadow-xl hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full border border-brand-white/5 ring-1 ring-brand-white/5"
                         >
-                            <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
+                            <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-navy">
                                 {post.featured_image ? (
                                     <Image
                                         src={post.featured_image}
                                         alt={post.title}
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity hover:mix-blend-normal opacity-80 group-hover:opacity-100"
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                        <BookOpen className="w-12 h-12 opacity-50" />
+                                    <div className="w-full h-full flex items-center justify-center text-brand-steel border-b border-brand-white/10">
+                                        <BookOpen className="w-12 h-12 opacity-20" />
                                     </div>
                                 )}
 
                                 {post.category && (
-                                    <div className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10">
+                                    <div className="absolute top-4 left-4 bg-brand-electric/20 backdrop-blur-md border border-brand-electric/50 text-brand-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider z-10 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
                                         {post.category}
                                     </div>
                                 )}
 
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy to-transparent opacity-80 transition-opacity duration-300 pointer-events-none" />
                             </div>
 
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-center text-xs font-semibold text-blue-600 mb-4 uppercase tracking-wider space-x-3">
-                                    <span className="flex items-center text-slate-500"><Calendar className="w-3 h-3 mr-1" /> {new Date(post.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                                    {post.author && <span className="flex items-center text-slate-500 border-l border-slate-200 pl-3"><User className="w-3 h-3 mr-1" /> {post.author}</span>}
+                            <div className="p-8 flex flex-col flex-grow bg-brand-navy relative">
+                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-steel/20 to-transparent"></div>
+                                <div className="flex items-center text-xs font-bold text-brand-electric mb-4 uppercase tracking-wider space-x-3 drop-shadow-[0_0_5px_rgba(0,229,255,0.3)]">
+                                    <span className="flex items-center"><Calendar className="w-3 h-3 mr-1" /> {new Date(post.created_at).toLocaleDateString('en-ZA', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                                    {post.author && <span className="flex items-center border-l border-brand-electric/30 pl-3"><User className="w-3 h-3 mr-1" /> {post.author}</span>}
                                 </div>
-                                <h2 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">{post.title}</h2>
-                                <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-6 flex-grow">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
-                                <span className="mt-auto text-slate-900 font-bold text-sm flex items-center transition-all group-hover:text-blue-600">
-                                    Read Article <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                                <h2 className="text-xl font-black text-brand-white mb-4 group-hover:text-brand-electric transition-colors line-clamp-2 leading-tight tracking-tight drop-shadow-sm">{post.title}</h2>
+                                <p className="text-brand-steel text-sm leading-relaxed line-clamp-3 mb-8 flex-grow font-light">{post.excerpt || 'Read the full article for more insights on security solutions.'}</p>
+                                <span className="mt-auto text-brand-white font-bold text-sm flex items-center transition-all group-hover:text-brand-electric">
+                                    Read Article <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-2" />
                                 </span>
                             </div>
                         </Link>

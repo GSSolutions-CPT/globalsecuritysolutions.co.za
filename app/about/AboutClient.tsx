@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Shield, Zap, Award, BookOpen, ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { PageHero } from '@/components/PageHero'
 
 // Lazy load the Counter component for performance below the fold
 const Counter = dynamic(() => import('@/components/Counter').then(mod => mod.Counter), { ssr: false })
@@ -28,43 +29,19 @@ export function AboutClient() {
     return (
         <div className="min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
             {/* Hero Section */}
-            <section className="relative bg-brand-navy text-brand-white py-16 md:py-24 flex items-center overflow-hidden border-b border-brand-steel/20">
-                {/* Immersive Glows */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] mix-blend-screen pointer-events-none" />
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
-                
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/30 z-10" />
-                    <Image
-                        src="/page-heroes/about-hero.png"
-                        alt="Global Security Solutions Operations and Monitoring Center Cape Town"
-                        fill
-                        className="object-cover opacity-30 mix-blend-luminosity"
-                        priority
-                    />
-                </div>
-
-                <div className="container relative z-20 mx-auto px-4 md:px-8">
-                    <motion.div 
-                        initial="hidden"
-                        animate="visible"
-                        variants={staggerContainer}
-                        className="max-w-3xl flex flex-col items-start"
-                    >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/30 text-brand-electric text-xs md:text-sm font-black tracking-widest uppercase mb-6 backdrop-blur-md">
-                            <span className="w-2 h-2 rounded-full bg-brand-electric shadow-[0_0_10px_rgba(0,229,255,0.8)]"></span>
-                            Est. 2015
-                        </motion.div>
-                        <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-tight drop-shadow-md">
-                            More Than Just <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Installers</span>
-                        </motion.h1>
-                        <motion.p variants={fadeInUp} className="text-brand-steel sm:text-lg max-w-2xl leading-relaxed font-light">
-                            We are your strategic partners in safety. Founded on Cape Town soil, we understand the local landscape and the unique challenges our clients face.
-                        </motion.p>
-                    </motion.div>
-                </div>
-            </section>
+            <PageHero
+                align="left"
+                badgeText="Est. 2015"
+                title={
+                    <>
+                        More Than Just <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Installers</span>
+                    </>
+                }
+                subtitle="We are your strategic partners in safety. Founded on Cape Town soil, we understand the local landscape and the unique challenges our clients face."
+                bgImage="/page-heroes/about-hero.png"
+                pbClass=""
+            />
 
             {/* Main Content */}
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">

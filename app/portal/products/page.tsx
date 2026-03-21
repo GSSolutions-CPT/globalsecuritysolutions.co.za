@@ -201,19 +201,19 @@ function ProductsContent() {
         <div className="space-y-8">
             {/* Header Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-to-br from-indigo-600 to-violet-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="bg-gradient-to-br from-brand-electric to-violet-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <div className="relative z-10">
-                        <p className="text-indigo-100 text-sm font-medium flex items-center gap-2">
+                        <p className="text-brand-electric/20 text-sm font-medium flex items-center gap-2">
                             Total Products
                             <Package className="h-4 w-4 opacity-75" />
                         </p>
                         <h3 className="text-3xl font-bold mt-2">{totalProducts}</h3>
-                        <p className="text-indigo-200 text-xs mt-1">in catalogue</p>
+                        <p className="text-brand-electric/40 text-xs mt-1">in catalogue</p>
                     </div>
                     <Package className="absolute right-[-20px] bottom-[-20px] h-32 w-32 text-white opacity-10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
                 </div>
 
-                <div className="bg-gradient-to-br from-cyan-600 to-blue-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="bg-gradient-to-br from-cyan-600 to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <div className="relative z-10">
                         <p className="text-cyan-100 text-sm font-medium flex items-center gap-2">
                             Retail Value
@@ -241,14 +241,14 @@ function ProductsContent() {
             {/* Main Content */}
             <div className="space-y-6">
                 {/* Toolbar */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-brand-navy p-4 rounded-xl shadow-sm border border-brand-steel/40 dark:border-brand-navy">
                     <div className="relative flex-1 w-full sm:max-w-md">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
                             placeholder="Search products by name, code or category..."
                             value={searchTerm}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-                            className="pl-10 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800"
+                            className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy"
                         />
                     </div>
 
@@ -265,7 +265,7 @@ function ProductsContent() {
                             }}
                         >
                             <DialogTrigger asChild>
-                                <Button className="flex-1 sm:flex-none bg-indigo-600 hover:bg-indigo-700 text-white">
+                                <Button className="flex-1 sm:flex-none bg-brand-electric hover:bg-brand-electric text-white">
                                     <Plus className="mr-2 h-4 w-4" />
                                     Add Product
                                 </Button>
@@ -344,7 +344,7 @@ function ProductsContent() {
                                         <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                                             Cancel
                                         </Button>
-                                        <Button type="submit" disabled={isLoading} className="bg-indigo-600 hover:bg-indigo-700">
+                                        <Button type="submit" disabled={isLoading} className="bg-brand-electric hover:bg-brand-electric">
                                             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                             {editingProduct ? 'Update Product' : 'Add Product'}
                                         </Button>
@@ -364,10 +364,10 @@ function ProductsContent() {
                             size="sm"
                             onClick={() => setSelectedCategory(category)}
                             className={cn(
-                                "rounded-full px-6 transition-all whitespace-nowrap border-slate-200 dark:border-slate-800",
+                                "rounded-full px-6 transition-all whitespace-nowrap border-brand-steel/40 dark:border-brand-navy",
                                 selectedCategory === category
-                                    ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20"
-                                    : "bg-white dark:bg-slate-900 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:text-indigo-600 dark:hover:text-indigo-400"
+                                    ? "bg-brand-electric hover:bg-brand-electric text-white shadow-md shadow-brand-electric/20"
+                                    : "bg-white dark:bg-brand-navy hover:bg-brand-electric/10 dark:hover:bg-indigo-950/30 hover:text-brand-electric dark:hover:text-brand-electric"
                             )}
                         >
                             {category}
@@ -383,16 +383,16 @@ function ProductsContent() {
                 {/* Products Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProducts.map((product) => (
-                        <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative">
-                            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                        <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border overflow-hidden relative">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-brand-electric"></div>
                             <CardHeader className="pb-2">
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <CardTitle className="text-lg font-semibold text-slate-900 dark:text-slate-100">{product.name}</CardTitle>
+                                        <CardTitle className="text-lg font-semibold text-brand-navy dark:text-brand-steel/20">{product.name}</CardTitle>
                                         <CardDescription className="text-xs mt-1">{product.code || 'No Code'}</CardDescription>
                                     </div>
                                     {product.category && (
-                                        <Badge variant="secondary" className="bg-indigo-50 text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-300 pointer-events-none">
+                                        <Badge variant="secondary" className="bg-brand-electric/10 text-brand-electric dark:bg-indigo-950/30 dark:text-brand-electric/60 pointer-events-none">
                                             {product.category}
                                         </Badge>
                                     )}
@@ -408,7 +408,7 @@ function ProductsContent() {
                                         <div className="min-h-[40px]"></div>
                                     )}
 
-                                    <div className="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
+                                    <div className="grid grid-cols-2 gap-4 pt-2 border-t border-brand-steel/20 dark:border-brand-navy">
                                         <div>
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider">Retail</p>
                                             <p className="text-lg font-bold text-emerald-600">
@@ -417,19 +417,19 @@ function ProductsContent() {
                                         </div>
                                         <div>
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider">Cost</p>
-                                            <p className="text-lg font-semibold text-slate-600 dark:text-slate-400">
+                                            <p className="text-lg font-semibold text-brand-slate dark:text-brand-steel">
                                                 {formatCurrency(product.cost_price || 0)}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-center justify-between pt-2">
-                                        <div className="flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded text-xs font-medium text-blue-700 dark:text-blue-300">
+                                        <div className="flex items-center gap-1.5 bg-brand-electric/10 dark:bg-brand-navy/20 px-2 py-1 rounded text-xs font-medium text-brand-electric dark:text-brand-electric/60">
                                             <TrendingUp className="h-3 w-3" />
                                             {calculateMargin(product.retail_price || 0, product.cost_price || 0)}% Margin
                                         </div>
                                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-950" onClick={() => handleEdit(product)}>
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-electric hover:text-brand-electric hover:bg-brand-electric/10 dark:hover:bg-indigo-950" onClick={() => handleEdit(product)}>
                                                 <Pencil className="h-4 w-4" />
                                             </Button>
                                             <Button variant="ghost" size="icon" className="h-8 w-8 text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950" onClick={() => handleDelete(product.id!)}>
@@ -444,18 +444,18 @@ function ProductsContent() {
                 </div>
 
                 {filteredProducts.length === 0 && (
-                    <Card className="border-dashed border-2 border-slate-200 dark:border-slate-800 bg-transparent shadow-none">
+                    <Card className="border-dashed border-2 border-brand-steel/40 dark:border-brand-navy bg-transparent shadow-none">
                         <CardContent className="flex flex-col items-center justify-center py-16">
-                            <div className="bg-indigo-50 dark:bg-indigo-950/30 p-6 rounded-full mb-4">
-                                <Package className="h-12 w-12 text-indigo-400" />
+                            <div className="bg-brand-electric/10 dark:bg-indigo-950/30 p-6 rounded-full mb-4">
+                                <Package className="h-12 w-12 text-brand-electric" />
                             </div>
-                            <p className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-1">
+                            <p className="text-lg font-medium text-brand-navy dark:text-brand-steel/20 mb-1">
                                 {searchTerm ? 'No products found' : 'No products yet'}
                             </p>
                             <p className="text-muted-foreground text-sm max-w-sm text-center mb-6">
                                 {searchTerm ? `We couldn't find anything matching "${searchTerm}". Try different keywords.` : 'Start building your inventory by adding your first product.'}
                             </p>
-                            <Button onClick={() => setIsDialogOpen(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                            <Button onClick={() => setIsDialogOpen(true)} className="bg-brand-electric hover:bg-brand-electric text-white">
                                 <Plus className="mr-2 h-4 w-4" />
                                 Add First Product
                             </Button>

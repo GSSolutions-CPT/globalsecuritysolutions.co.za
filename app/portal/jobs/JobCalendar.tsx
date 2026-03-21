@@ -56,7 +56,7 @@ const CustomToolbar = (toolbar: ToolbarProps<CalendarEvent>) => {
     const label = () => {
         const date = toolbar.date;
         return (
-            <span className="text-lg font-bold text-slate-900 dark:text-slate-100 capitalize">
+            <span className="text-lg font-bold text-brand-navy dark:text-brand-steel/20 capitalize">
                 {format(date, 'MMMM yyyy')}
             </span>
         );
@@ -76,7 +76,7 @@ const CustomToolbar = (toolbar: ToolbarProps<CalendarEvent>) => {
                 </Button>
                 <div className="ml-4">{label()}</div>
             </div>
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+            <div className="flex items-center gap-1 bg-brand-steel/20 dark:bg-brand-navy p-1 rounded-lg">
                 {(['month', 'week', 'day', 'agenda'] as const).map(view => (
                     <button
                         key={view}
@@ -84,8 +84,8 @@ const CustomToolbar = (toolbar: ToolbarProps<CalendarEvent>) => {
                         className={cn(
                             "px-3 py-1.5 text-xs font-medium rounded-md transition-all",
                             toolbar.view === view
-                                ? "bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 shadow-sm"
-                                : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
+                                ? "bg-white dark:bg-brand-navy text-brand-navy dark:text-brand-steel/20 shadow-sm"
+                                : "text-brand-steel hover:text-brand-navy dark:hover:text-brand-steel/60"
                         )}
                     >
                         {view.charAt(0).toUpperCase() + view.slice(1)}
@@ -165,14 +165,14 @@ export default function JobCalendar() {
     }
 
     const getEventStyle = (event: CalendarEvent) => {
-        let bgClass = "bg-slate-600";
+        let bgClass = "bg-brand-slate";
         if (event.source === 'job') {
             switch (event.status) {
                 case 'Pending': bgClass = "bg-gradient-to-r from-amber-500 to-amber-600 border-amber-400"; break;
-                case 'In Progress': bgClass = "bg-gradient-to-r from-blue-500 to-indigo-600 border-blue-400"; break;
+                case 'In Progress': bgClass = "bg-gradient-to-r from-brand-electric to-brand-electric border-brand-electric"; break;
                 case 'Completed': bgClass = "bg-gradient-to-r from-emerald-500 to-emerald-600 border-emerald-400"; break;
                 case 'Cancelled': bgClass = "bg-gradient-to-r from-rose-500 to-rose-600 border-rose-400"; break;
-                default: bgClass = "bg-slate-600";
+                default: bgClass = "bg-brand-slate";
             }
         } else if (event.source === 'invoice') {
             switch (event.status) {
@@ -210,7 +210,7 @@ export default function JobCalendar() {
     }
 
     return (
-        <Card className="h-[calc(100vh-220px)] border-0 shadow-lg bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+        <Card className="h-[calc(100vh-220px)] border-0 shadow-lg bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm">
             <CardContent className="p-4 h-full">
                 <style>{`
                     .rbc-calendar { font-family: inherit; }
@@ -237,13 +237,13 @@ export default function JobCalendar() {
             </CardContent>
 
             <Dialog open={!!selectedEvent} onOpenChange={(open: boolean) => !open && setSelectedEvent(null)}>
-                <DialogContent className="sm:max-w-md border-0 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl shadow-2xl">
-                    <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-80" />
+                <DialogContent className="sm:max-w-md border-0 bg-white/90 dark:bg-brand-navy/90 backdrop-blur-xl shadow-2xl">
+                    <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-brand-electric via-purple-500 to-pink-500 opacity-80" />
                     <DialogHeader className="pt-6">
                         <DialogTitle className="flex items-start gap-3 text-xl">
                             <div className={cn(
                                 "p-2 rounded-lg shadow-inner",
-                                selectedEvent?.type === 'Job' ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400" :
+                                selectedEvent?.type === 'Job' ? "bg-brand-electric/20 text-brand-electric dark:bg-brand-navy/30 dark:text-brand-electric" :
                                     selectedEvent?.type === 'Invoice' ? "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400" :
                                         "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
                             )}>
@@ -271,7 +271,7 @@ export default function JobCalendar() {
                                     "border-0",
                                     selectedEvent.status === 'Completed' || selectedEvent.status === 'Paid' ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
                                         selectedEvent.status === 'Pending' || selectedEvent.status === 'Draft' ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" :
-                                            "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                                            "bg-brand-electric/20 text-brand-electric dark:bg-brand-navy/30 dark:text-brand-electric"
                                 )}>
                                     {selectedEvent?.status}
                                 </Badge>
@@ -279,7 +279,7 @@ export default function JobCalendar() {
                         </div>
 
                         {(selectedEvent?.resource as { clients?: { name?: string, address?: string } })?.clients && (
-                            <div className="flex items-start gap-2 p-3 rounded-lg bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-brand-white dark:bg-brand-navy/50 border border-brand-steel/20 dark:border-brand-navy">
                                 <User className="h-4 w-4 mt-0.5 text-muted-foreground" />
                                 <div>
                                     <div className="text-sm font-medium">{(selectedEvent?.resource as { clients: { name: string } })?.clients.name}</div>
@@ -295,14 +295,14 @@ export default function JobCalendar() {
 
 
                         {(selectedEvent?.resource as { notes?: string })?.notes && (
-                            <div className="text-sm text-slate-600 dark:text-slate-300 italic">
+                            <div className="text-sm text-brand-slate dark:text-brand-steel/60 italic">
                                 &quot; {(selectedEvent?.resource as { notes: string })?.notes} &quot;
                             </div>
                         )}
                     </div>
 
                     <DialogFooter>
-                        <Button onClick={() => selectedEvent && openOutlook(selectedEvent)} className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
+                        <Button onClick={() => selectedEvent && openOutlook(selectedEvent)} className="w-full bg-brand-electric hover:bg-brand-electric text-white shadow-lg shadow-brand-electric/20">
                             <ExternalLink className="mr-2 h-4 w-4" />
                             Add to Outlook
                         </Button>

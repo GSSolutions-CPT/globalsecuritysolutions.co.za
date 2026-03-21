@@ -12,7 +12,7 @@ const links = [
         title: 'Visit our Website',
         url: '/',
         icon: Globe,
-        color: 'bg-blue-600 hover:bg-blue-700',
+        color: 'bg-brand-electric hover:bg-brand-electric',
         description: 'Explore our full range of security solutions',
     },
     {
@@ -26,7 +26,7 @@ const links = [
         title: 'Call Us Now',
         url: 'tel:+27629558559',
         icon: Phone,
-        color: 'bg-slate-700 hover:bg-slate-800',
+        color: 'bg-brand-slate hover:bg-brand-navy',
         description: 'Immediate assistance: 062 955 8559',
     },
     {
@@ -63,7 +63,7 @@ const links = [
         title: 'Email Sales',
         url: 'mailto:sales@globalsecuritysolutions.co.za',
         icon: Mail,
-        color: 'bg-slate-600 hover:bg-slate-700',
+        color: 'bg-brand-slate hover:bg-brand-slate',
     },
 ];
 
@@ -93,11 +93,11 @@ export default function LinksPage() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-brand-navy via-brand-navy to-brand-navy text-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600 z-10"></div>
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-electric via-brand-electric to-brand-electric z-10"></div>
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-electric/10 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-electric/10 rounded-full blur-[100px] pointer-events-none"></div>
 
             <motion.div
                 variants={containerVariants}
@@ -107,7 +107,7 @@ export default function LinksPage() {
             >
                 {/* Profile / Header Section */}
                 <motion.div variants={itemVariants} className="text-center mb-8">
-                    <div className="relative w-24 h-24 mx-auto mb-4 rounded-full bg-white p-2 shadow-xl ring-4 ring-blue-500/30 overflow-hidden">
+                    <div className="relative w-24 h-24 mx-auto mb-4 rounded-full bg-white p-2 shadow-xl ring-4 ring-brand-electric/30 overflow-hidden">
                         <Image
                             src="/nav-logo-final.png" // Using the nav logo as it seemed appropriate
                             alt="Global Security Solutions"
@@ -116,10 +116,10 @@ export default function LinksPage() {
                             priority
                         />
                     </div>
-                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-brand-steel">
                         Global Security Solutions
                     </h1>
-                    <p className="text-slate-400 text-sm mt-1 max-w-[80%] mx-auto">
+                    <p className="text-brand-steel text-sm mt-1 max-w-[80%] mx-auto">
                         Expert Security System Installations in Cape Town
                     </p>
                 </motion.div>
@@ -156,9 +156,9 @@ export default function LinksPage() {
                 </div>
 
                 {/* Footer Section */}
-                <motion.div variants={itemVariants} className="mt-12 text-center text-slate-500 text-xs">
+                <motion.div variants={itemVariants} className="mt-12 text-center text-brand-steel text-xs">
                     <p>&copy; {currentYear} Global Security Solutions.</p>
-                    <Link href="/" className="hover:text-blue-400 transition-colors mt-2 inline-block">
+                    <Link href="/" className="hover:text-brand-electric transition-colors mt-2 inline-block">
                         globalsecuritysolutions.co.za
                     </Link>
                 </motion.div>

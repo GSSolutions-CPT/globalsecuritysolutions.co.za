@@ -107,34 +107,34 @@ export default function RegisterClientPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+            <div className="min-h-screen flex items-center justify-center bg-brand-white dark:bg-brand-navy">
+                <Loader2 className="h-8 w-8 animate-spin text-brand-electric" />
             </div>
         )
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-slate-950 px-4">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-brand-white dark:bg-brand-navy px-4">
             {/* Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black opacity-80" />
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-electric/20 via-brand-white to-brand-steel/20 dark:from-brand-navy dark:via-brand-navy dark:to-black opacity-80" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-electric/20 rounded-full blur-3xl animate-pulse" />
             <div className="absolute top-40 -left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
 
-            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl ring-1 ring-slate-200 dark:ring-slate-800">
+            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 dark:bg-brand-navy/80 backdrop-blur-xl ring-1 ring-brand-steel/40 dark:ring-brand-navy">
                 <CardHeader className="text-center pb-6">
                     {/* Icon */}
                     <div className="flex justify-center mb-4">
                         <div className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-700" />
-                            <div className="relative p-4 rounded-full bg-white dark:bg-slate-950 ring-1 ring-slate-200 dark:ring-slate-800 shadow-xl">
-                                <UserCheck className="h-8 w-8 text-blue-600" />
+                            <div className="absolute -inset-1 bg-gradient-to-r from-brand-electric to-emerald-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-700" />
+                            <div className="relative p-4 rounded-full bg-white dark:bg-brand-navy ring-1 ring-brand-steel/40 dark:ring-brand-navy shadow-xl">
+                                <UserCheck className="h-8 w-8 text-brand-electric" />
                             </div>
                         </div>
                     </div>
-                    <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                    <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60 bg-clip-text text-transparent">
                         Complete Your Profile
                     </CardTitle>
-                    <CardDescription className="text-slate-500 dark:text-slate-400 mt-1">
+                    <CardDescription className="text-brand-steel dark:text-brand-steel mt-1">
                         Just a few details to set up your client portal.
                     </CardDescription>
                 </CardHeader>
@@ -168,9 +168,9 @@ export default function RegisterClientPage() {
                                 type="email"
                                 value={email}
                                 readOnly
-                                className="h-11 bg-slate-50 dark:bg-slate-800 text-slate-500 cursor-not-allowed"
+                                className="h-11 bg-brand-white dark:bg-brand-navy text-brand-steel cursor-not-allowed"
                             />
-                            <p className="text-xs text-slate-400">Provided by your Google account</p>
+                            <p className="text-xs text-brand-steel">Provided by your Google account</p>
                         </div>
 
                         {/* Company */}
@@ -214,7 +214,7 @@ export default function RegisterClientPage() {
                         <Button
                             type="submit"
                             disabled={submitting}
-                            className="w-full h-11 mt-2 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-lg shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5"
+                            className="w-full h-11 mt-2 bg-gradient-to-r from-brand-electric to-emerald-600 hover:from-brand-electric hover:to-emerald-700 text-white shadow-lg shadow-brand-electric/20 transition-all duration-300 hover:-translate-y-0.5"
                         >
                             {submitting
                                 ? <Loader2 className="h-4 w-4 animate-spin mr-2" />
@@ -225,7 +225,7 @@ export default function RegisterClientPage() {
                         <button
                             type="button"
                             onClick={async () => { await signOut(); router.replace('/portal/login') }}
-                            className="w-full text-xs text-slate-400 hover:text-red-500 transition-colors text-center mt-1"
+                            className="w-full text-xs text-brand-steel hover:text-red-500 transition-colors text-center mt-1"
                         >
                             Cancel and sign out
                         </button>
@@ -233,10 +233,10 @@ export default function RegisterClientPage() {
                 </CardContent>
 
                 {/* Bottom gradient bar */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-emerald-500 to-blue-600 opacity-50 rounded-b-xl" />
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-brand-electric via-emerald-500 to-brand-electric opacity-50 rounded-b-xl" />
             </Card>
 
-            <div className="absolute bottom-6 flex items-center gap-2 text-sm text-slate-400 dark:text-slate-600 z-10">
+            <div className="absolute bottom-6 flex items-center gap-2 text-sm text-brand-steel dark:text-brand-slate z-10">
                 <ShieldCheck className="h-4 w-4" />
                 <span>Secured by GSS Solutions</span>
             </div>

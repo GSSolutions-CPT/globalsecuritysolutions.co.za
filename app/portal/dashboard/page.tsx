@@ -10,14 +10,14 @@ import FinancialCharts from './FinancialCharts'
 
 const getActivityConfig = (type: string) => {
     const t = (type || '').toLowerCase()
-    if (t.includes('quote request')) return { icon: FileText, color: 'text-blue-500', path: '/portal/clients' }
+    if (t.includes('quote request')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/clients' }
     if (t.includes('callback request')) return { icon: Phone, color: 'text-emerald-500', path: '/portal/clients' }
-    if (t.includes('quotation') || t.includes('quote')) return { icon: FileText, color: 'text-blue-500', path: '/portal/sales' }
+    if (t.includes('quotation') || t.includes('quote')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/sales' }
     if (t.includes('invoice')) return { icon: Receipt, color: 'text-purple-500', path: '/portal/sales' }
     if (t.includes('payment')) return { icon: Banknote, color: 'text-green-500', path: '/portal/sales' }
     if (t.includes('job')) return { icon: Briefcase, color: 'text-orange-500', path: '/portal/jobs' }
     if (t.includes('client')) return { icon: Users, color: 'text-teal-500', path: '/portal/clients' }
-    if (t.includes('purchase order') || t.includes('order')) return { icon: Package, color: 'text-indigo-500', path: '/portal/sales' }
+    if (t.includes('purchase order') || t.includes('order')) return { icon: Package, color: 'text-brand-electric', path: '/portal/sales' }
     if (t.includes('contract')) return { icon: FileSignature, color: 'text-cyan-500', path: '/portal/contracts' }
     return { icon: Activity, color: 'text-muted-foreground', path: '/portal/dashboard' }
 }
@@ -174,7 +174,7 @@ export default function DashboardPage() {
     return (
         <div className="space-y-6">
             {/* Welcome Banner & Quick Actions */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-slate-900 to-slate-800 p-6 rounded-2xl text-white shadow-xl relative overflow-hidden">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-brand-navy to-brand-navy p-6 rounded-2xl text-white shadow-xl relative overflow-hidden">
                 <div className="relative z-10">
                     <h2 className="text-3xl font-bold tracking-tight mb-1">
                         {(() => {
@@ -184,19 +184,19 @@ export default function DashboardPage() {
                             return 'Good Evening'
                         })()}
                     </h2>
-                    <p className="text-slate-300">Here&apos;s your daily overview.</p>
+                    <p className="text-brand-steel/60">Here&apos;s your daily overview.</p>
 
                     {/* View Mode Toggle */}
-                    <div className="flex items-center gap-2 mt-4 bg-slate-950/30 p-1 rounded-lg w-fit backdrop-blur-sm border border-white/10">
+                    <div className="flex items-center gap-2 mt-4 bg-brand-navy/30 p-1 rounded-lg w-fit backdrop-blur-sm border border-white/10">
                         <button
                             onClick={() => setViewMode('cash_flow')}
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'cash_flow' ? 'bg-emerald-500 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'cash_flow' ? 'bg-emerald-500 text-white shadow-lg' : 'text-brand-steel hover:text-white hover:bg-white/5'}`}
                         >
                             Cash Flow
                         </button>
                         <button
                             onClick={() => setViewMode('projected')}
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'projected' ? 'bg-blue-500 text-white shadow-lg' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'projected' ? 'bg-brand-electric text-white shadow-lg' : 'text-brand-steel hover:text-white hover:bg-white/5'}`}
                         >
                             Projected
                         </button>
@@ -205,7 +205,7 @@ export default function DashboardPage() {
                 <div className="relative z-10 flex flex-wrap gap-3">
                     <button
                         onClick={() => router.push('/portal/sales/new')}
-                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-4 py-2 rounded-lg transition-all text-sm font-medium"
+                        className="flex items-center gap-2 bg-brand-electric hover:bg-brand-electric text-white shadow-lg shadow-brand-electric/20 px-4 py-2 rounded-lg transition-all text-sm font-medium"
                     >
                         <Plus className="h-4 w-4" /> Create New Sale
                     </button>
@@ -230,26 +230,26 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
             </div>
 
             {/* KPIs */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border">
+                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-brand-electric/10 to-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Monthly Revenue</CardTitle>
-                        <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                            <Banknote className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <div className="h-8 w-8 rounded-full bg-brand-electric/20 dark:bg-brand-navy/30 flex items-center justify-center">
+                            <Banknote className="h-4 w-4 text-brand-electric dark:text-brand-electric" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(metrics.monthlyRevenue)}</div>
+                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{formatCurrency(metrics.monthlyRevenue)}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             <span className="text-emerald-500 font-medium">+20.1%</span> from last month
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-emerald-50 to-white dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border">
+                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-emerald-50 to-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Est. Profit</CardTitle>
                         <div className="h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
@@ -257,13 +257,13 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-slate-900 dark:text-white">{formatCurrency(metrics.monthlyProfit)}</div>
+                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{formatCurrency(metrics.monthlyProfit)}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             <span className="text-emerald-500 font-medium">+15%</span> from last month
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border">
+                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-purple-50 to-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">New Clients</CardTitle>
                         <div className="h-8 w-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
@@ -271,13 +271,13 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-slate-900 dark:text-white">+{metrics.newClients}</div>
+                        <div className="text-2xl font-bold text-brand-navy dark:text-white">+{metrics.newClients}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             Joined this month
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-orange-50 to-white dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border">
+                <Card className="hover:shadow-lg transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-orange-50 to-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Overdue</CardTitle>
                         <div className="h-8 w-8 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
@@ -285,7 +285,7 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-slate-900 dark:text-white">{metrics.overdueInvoices}</div>
+                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{metrics.overdueInvoices}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             Invoices require attention
                         </p>

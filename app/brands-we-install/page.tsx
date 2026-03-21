@@ -1,8 +1,14 @@
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle2 } from 'lucide-react'
-import { ContactForm } from '@/components/ContactForm'
+
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
+    
+    loading: () => <div className="h-[500px] w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
+});
+
 
 export const metadata: Metadata = {
     title: 'Security Brands We Install | Hikvision, Paradox, Ajax & More',
@@ -173,9 +179,9 @@ export default function BrandsPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white">
             {/* Hero Section */}
-            <section className="relative bg-slate-900 min-h-[60vh] flex items-center overflow-hidden">
+            <section className="relative bg-brand-navy min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-blue-950/10 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
                         src="/page-heroes/brands-hero.png"
                         alt="World-Class Security Brands"
@@ -185,13 +191,13 @@ export default function BrandsPage() {
                     />
                 </div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-6">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-brand-electric/20 text-brand-electric text-sm font-bold uppercase tracking-widest mb-6">
                         Certified Partners
                     </span>
                     <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        World-Class <span className="text-blue-500">Security Brands</span>
+                        World-Class <span className="text-brand-electric">Security Brands</span>
                     </h1>
-                    <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-xl text-brand-steel/60 max-w-2xl mx-auto leading-relaxed">
                         We are certified installers for the industry&apos;s most trusted manufacturers.
                         We do not compromise on quality, ensuring your security system is built to last.
                     </p>
@@ -205,7 +211,7 @@ export default function BrandsPage() {
                         {allBrands.map((brand, idx) => (
                             <div
                                 key={idx}
-                                className="group flex items-center justify-center p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 relative"
+                                className="group flex items-center justify-center p-8 bg-brand-white rounded-2xl border border-brand-steel/20 hover:shadow-xl hover:border-brand-electric/20 transition-all duration-300 relative"
                             >
                                 {/* Hover Overlay Link */}
                                 <Link
@@ -231,28 +237,28 @@ export default function BrandsPage() {
             </section>
 
             {/* Why Certified Matters */}
-            <section className="py-12 bg-slate-50">
+            <section className="py-12 bg-brand-white">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Why Choose a <span className="text-blue-600">Certified Installer?</span></h2>
+                            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">Why Choose a <span className="text-brand-electric">Certified Installer?</span></h2>
                             <div className="space-y-6">
                                 <div className="flex gap-4">
                                     <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                                         <CheckCircle2 className="w-6 h-6 text-green-600" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Valid Warranties</h3>
-                                        <p className="text-slate-600">Manufacturer warranties are often void if equipment is installed by uncertified technicians.</p>
+                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Valid Warranties</h3>
+                                        <p className="text-brand-slate">Manufacturer warranties are often void if equipment is installed by uncertified technicians.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                                        <CheckCircle2 className="w-6 h-6 text-blue-600" />
+                                    <div className="w-12 h-12 rounded-full bg-brand-electric/20 flex items-center justify-center flex-shrink-0">
+                                        <CheckCircle2 className="w-6 h-6 text-brand-electric" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Firmware Updates</h3>
-                                        <p className="text-slate-600">Access to the latest firmware and security patches to keep your system safe from cyber threats.</p>
+                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Firmware Updates</h3>
+                                        <p className="text-brand-slate">Access to the latest firmware and security patches to keep your system safe from cyber threats.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
@@ -260,8 +266,8 @@ export default function BrandsPage() {
                                         <CheckCircle2 className="w-6 h-6 text-purple-600" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-slate-900 mb-2">Correct Configuration</h3>
-                                        <p className="text-slate-600">We configure advanced features like false alarm filtering and AI analytics correctly.</p>
+                                        <h3 className="text-xl font-bold text-brand-navy mb-2">Correct Configuration</h3>
+                                        <p className="text-brand-slate">We configure advanced features like false alarm filtering and AI analytics correctly.</p>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +279,7 @@ export default function BrandsPage() {
                                 fill
                                 className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-blue-900/50" />
+                            <div className="absolute inset-0 bg-brand-navy/50" />
                             <div className="absolute bottom-8 left-8 right-8 text-white">
                                 <p className="text-lg font-bold border-l-4 border-yellow-400 pl-4">
                                     &quot;We don&apos;t just sell boxes. We design solutions using the world&apos;s best technology.&quot;
@@ -288,8 +294,8 @@ export default function BrandsPage() {
             <section className="py-6 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center mb-12">
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Need a Specific Brand?</h2>
-                        <p className="text-xl text-slate-600">Whether you need a new Hikvision camera or a battery for your Paradox alarm, we can help.</p>
+                        <h2 className="text-3xl md:text-5xl font-bold text-brand-navy mb-6">Need a Specific Brand?</h2>
+                        <p className="text-xl text-brand-slate">Whether you need a new Hikvision camera or a battery for your Paradox alarm, we can help.</p>
                     </div>
                     <div className="max-w-2xl mx-auto">
                         <ContactForm />

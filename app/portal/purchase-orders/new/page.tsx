@@ -238,20 +238,20 @@ function CreatePurchaseOrderContent() {
     const selectedSupplier = suppliers.find(s => s.id === selectedSupplierId)
 
     return (
-        <div className="min-h-screen bg-slate-50/50 dark:bg-slate-900/50 p-6 pb-20">
+        <div className="min-h-screen bg-brand-white/50 dark:bg-brand-navy/50 p-6 pb-20">
             <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 animate-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">
+                    <Button variant="ghost" size="icon" onClick={() => router.push('/portal/sales')} className="rounded-full hover:bg-brand-steel/40 dark:hover:bg-brand-navy">
                         <ChevronLeft className="h-5 w-5" />
                     </Button>
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                        <h1 className="text-3xl font-bold tracking-tight text-brand-navy dark:text-brand-steel/20 flex items-center gap-2">
                             {editId ? 'Edit Purchase Order' : 'New Purchase Order'}
-                            <span className="text-sm font-normal text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700">
+                            <span className="text-sm font-normal text-brand-steel bg-brand-steel/20 dark:bg-brand-navy px-2 py-1 rounded-full border border-brand-steel/40 dark:border-brand-slate">
                                 Draft
                             </span>
                         </h1>
-                        <p className="text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-brand-steel dark:text-brand-steel mt-1">
                             Create official orders for your suppliers.
                         </p>
                     </div>
@@ -260,7 +260,7 @@ function CreatePurchaseOrderContent() {
                     <Button variant="outline" onClick={() => router.push('/portal/sales')}>
                         Discard
                     </Button>
-                    <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20">
+                    <Button onClick={handleSubmit} className="bg-brand-electric hover:bg-brand-electric text-white shadow-lg shadow-brand-electric/20">
                         <FileText className="mr-2 h-4 w-4" />
                         {editId ? 'Save Changes' : 'Create Order'}
                     </Button>
@@ -269,11 +269,11 @@ function CreatePurchaseOrderContent() {
 
             <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="space-y-6 animate-in slide-in-from-left-4 duration-500 delay-100">
-                    <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20 overflow-hidden group">
-                        <div className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500" />
+                    <Card className="border-0 shadow-lg shadow-brand-steel/40/50 dark:shadow-black/20 overflow-hidden group">
+                        <div className="h-1 bg-gradient-to-r from-brand-electric to-brand-electric" />
                         <CardHeader className="pb-3">
                             <CardTitle className="text-lg flex items-center gap-2">
-                                <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600">
+                                <div className="p-2 bg-brand-electric/10 dark:bg-brand-navy/20 rounded-lg text-brand-electric">
                                     <FileSearch className="h-4 w-4" />
                                 </div>
                                 Source Document
@@ -281,7 +281,7 @@ function CreatePurchaseOrderContent() {
                             <CardDescription>Upload a supplier quote to auto-fill items</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="relative border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-6 transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:border-blue-400 dark:hover:border-blue-500 group-hover:shadow-inner">
+                            <div className="relative border-2 border-dashed border-brand-steel/40 dark:border-brand-slate rounded-xl p-6 transition-all hover:bg-brand-white dark:hover:bg-brand-navy/50 hover:border-brand-electric dark:hover:border-brand-electric group-hover:shadow-inner">
                                 <Input
                                     type="file"
                                     accept=".pdf"
@@ -289,18 +289,18 @@ function CreatePurchaseOrderContent() {
                                     onChange={handleFileUpload}
                                 />
                                 <div className="flex flex-col items-center justify-center gap-3 text-center">
-                                    <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full">
+                                    <div className="bg-brand-electric/20 dark:bg-brand-navy/30 p-3 rounded-full">
                                         {isProcessing ? (
-                                            <Loader2 className="h-6 w-6 text-blue-600 animate-spin" />
+                                            <Loader2 className="h-6 w-6 text-brand-electric animate-spin" />
                                         ) : (
-                                            <Upload className="h-6 w-6 text-blue-600" />
+                                            <Upload className="h-6 w-6 text-brand-electric" />
                                         )}
                                     </div>
                                     <div className="space-y-1">
-                                        <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
+                                        <p className="text-sm font-medium text-brand-slate dark:text-brand-steel/40">
                                             {file ? file.name : "Drop PDF or Click to Upload"}
                                         </p>
-                                        <p className="text-xs text-slate-500">
+                                        <p className="text-xs text-brand-steel">
                                             {isProcessing ? "Analyzing text..." : "Supports text-based PDFs"}
                                         </p>
                                     </div>
@@ -309,10 +309,10 @@ function CreatePurchaseOrderContent() {
                         </CardContent>
                     </Card>
 
-                    <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20">
+                    <Card className="border-0 shadow-lg shadow-brand-steel/40/50 dark:shadow-black/20">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Building2 className="h-5 w-5 text-slate-400" />
+                                <Building2 className="h-5 w-5 text-brand-steel" />
                                 Supplier & Details
                             </CardTitle>
                         </CardHeader>
@@ -326,7 +326,7 @@ function CreatePurchaseOrderContent() {
                                                 variant="outline"
                                                 role="combobox"
                                                 aria-expanded={supplierOpen}
-                                                className="justify-between bg-slate-50/50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700"
+                                                className="justify-between bg-brand-white/50 dark:bg-brand-navy/50 border-brand-steel/40 dark:border-brand-slate"
                                             >
                                                 {selectedSupplierId
                                                     ? suppliers.find((s) => s.id === selectedSupplierId)?.name
@@ -378,7 +378,7 @@ function CreatePurchaseOrderContent() {
                                         <Calendar className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                                         <Input
                                             type="date"
-                                            className="pl-9 bg-slate-50/50 dark:bg-slate-900/50"
+                                            className="pl-9 bg-brand-white/50 dark:bg-brand-navy/50"
                                             value={poDetails.expected_date}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPoDetails({ ...poDetails, expected_date: e.target.value })}
                                         />
@@ -392,7 +392,7 @@ function CreatePurchaseOrderContent() {
                                     placeholder="#PO-2024-001 or Job Ref"
                                     value={poDetails.reference}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPoDetails({ ...poDetails, reference: e.target.value })}
-                                    className="bg-slate-50/50 dark:bg-slate-900/50 font-mono text-sm"
+                                    className="bg-brand-white/50 dark:bg-brand-navy/50 font-mono text-sm"
                                 />
                             </div>
 
@@ -400,7 +400,7 @@ function CreatePurchaseOrderContent() {
                                 <Label>Internal Notes</Label>
                                 <Textarea
                                     placeholder="Delivery instructions, payment terms, etc..."
-                                    className="bg-slate-50/50 dark:bg-slate-900/50 resize-none"
+                                    className="bg-brand-white/50 dark:bg-brand-navy/50 resize-none"
                                     rows={3}
                                     value={poDetails.notes}
                                     onChange={(e) => setPoDetails({ ...poDetails, notes: e.target.value })}
@@ -409,19 +409,19 @@ function CreatePurchaseOrderContent() {
                         </CardContent>
                     </Card>
 
-                    <Card className="border-0 shadow-lg shadow-slate-200/50 dark:shadow-black/20">
+                    <Card className="border-0 shadow-lg shadow-brand-steel/40/50 dark:shadow-black/20">
                         <CardHeader className="flex flex-row items-center justify-between">
                             <CardTitle className="flex items-center gap-2">
-                                <Receipt className="h-5 w-5 text-slate-400" />
+                                <Receipt className="h-5 w-5 text-brand-steel" />
                                 Line Items
                             </CardTitle>
-                            <Button size="sm" variant="ghost" onClick={addLine} className="text-blue-600 hover:bg-blue-50">
+                            <Button size="sm" variant="ghost" onClick={addLine} className="text-brand-electric hover:bg-brand-electric/10">
                                 <Plus className="h-4 w-4 mr-1" /> Add Item
                             </Button>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             {lines.map((line, index) => (
-                                <div key={line.id} className="group relative grid grid-cols-12 gap-3 items-start p-3 rounded-lg border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                                <div key={line.id} className="group relative grid grid-cols-12 gap-3 items-start p-3 rounded-lg border border-brand-steel/20 dark:border-brand-navy hover:bg-brand-white dark:hover:bg-brand-navy/50 transition-all">
                                     <div className="col-span-6 space-y-1">
                                         <Label className="text-xs text-muted-foreground">Description</Label>
                                         <Input
@@ -437,7 +437,7 @@ function CreatePurchaseOrderContent() {
                                             type="number"
                                             value={line.quantity}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLine(line.id, 'quantity', e.target.value)}
-                                            className="h-8 bg-white dark:bg-slate-900 border-slate-200"
+                                            className="h-8 bg-white dark:bg-brand-navy border-brand-steel/40"
                                         />
                                     </div>
                                     <div className="col-span-3 space-y-1">
@@ -448,7 +448,7 @@ function CreatePurchaseOrderContent() {
                                                 type="number"
                                                 value={line.unit_price}
                                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateLine(line.id, 'unit_price', e.target.value)}
-                                                className="h-8 pl-5 bg-white dark:bg-slate-900 border-slate-200 text-right"
+                                                className="h-8 pl-5 bg-white dark:bg-brand-navy border-brand-steel/40 text-right"
                                             />
                                         </div>
                                     </div>
@@ -456,7 +456,7 @@ function CreatePurchaseOrderContent() {
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            className="h-6 w-6 text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="h-6 w-6 text-brand-steel hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
                                             onClick={() => removeLineItem(index)}
                                         >
                                             <Trash2 className="h-4 w-4" />
@@ -469,27 +469,27 @@ function CreatePurchaseOrderContent() {
                 </div>
 
                 <div className="space-y-6 lg:sticky lg:top-8 h-fit animate-in slide-in-from-right-4 duration-500 delay-200">
-                    <Card className="border-0 shadow-2xl shadow-blue-900/5 dark:shadow-black/40 overflow-hidden bg-white dark:bg-slate-950">
-                        <div className="bg-slate-900 text-white p-6 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3" />
+                    <Card className="border-0 shadow-2xl shadow-brand-navy/5 dark:shadow-black/40 overflow-hidden bg-white dark:bg-brand-navy">
+                        <div className="bg-brand-navy text-white p-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3" />
                             <div className="relative z-10 flex justify-between items-start">
                                 <div>
                                     <h2 className="text-2xl font-bold tracking-wider uppercase opacity-90">Purchase Order</h2>
-                                    <p className="text-blue-200 text-sm mt-1">{poDetails.reference || 'Draft Order'}</p>
+                                    <p className="text-brand-electric/40 text-sm mt-1">{poDetails.reference || 'Draft Order'}</p>
                                 </div>
                                 <div className="text-right">
-                                    <div className="text-xs text-blue-300 uppercase tracking-wider mb-1">Total Amount</div>
+                                    <div className="text-xs text-brand-electric/60 uppercase tracking-wider mb-1">Total Amount</div>
                                     <div className="text-3xl font-bold">{formatCurrency(calculateTotal())}</div>
                                 </div>
                             </div>
                         </div>
 
                         <CardContent className="p-0">
-                            <div className="p-6 bg-slate-50 dark:bg-slate-900/30 border-b border-slate-100 dark:border-slate-800">
+                            <div className="p-6 bg-brand-white dark:bg-brand-navy/30 border-b border-brand-steel/20 dark:border-brand-navy">
                                 <div className="flex justify-between items-start">
                                     <div className="space-y-1">
                                         <div className="text-xs text-muted-foreground uppercase tracking-wider">Vendor</div>
-                                        <div className="font-semibold text-lg text-slate-900 dark:text-slate-100">
+                                        <div className="font-semibold text-lg text-brand-navy dark:text-brand-steel/20">
                                             {selectedSupplier ? selectedSupplier.name : <span className="text-muted-foreground italic">Select a supplier...</span>}
                                         </div>
                                         {selectedSupplier && (
@@ -510,20 +510,20 @@ function CreatePurchaseOrderContent() {
                             <div className="p-6 min-h-[300px]">
                                 <table className="w-full text-sm">
                                     <thead>
-                                        <tr className="border-b border-slate-200 dark:border-slate-800">
+                                        <tr className="border-b border-brand-steel/40 dark:border-brand-navy">
                                             <th className="text-left font-medium text-muted-foreground py-2 w-[50%]">Item</th>
                                             <th className="text-center font-medium text-muted-foreground py-2 w-[15%]">Qty</th>
                                             <th className="text-right font-medium text-muted-foreground py-2 w-[35%]">Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
+                                    <tbody className="divide-y divide-brand-steel/20 dark:divide-brand-navy/50">
                                         {lines.map((line, i) => (
                                             <tr key={i} className="group">
-                                                <td className="py-3 text-slate-700 dark:text-slate-300">
+                                                <td className="py-3 text-brand-slate dark:text-brand-steel/60">
                                                     {line.description || <span className="text-muted-foreground italic">Item description...</span>}
                                                 </td>
-                                                <td className="py-3 text-center text-slate-600 dark:text-slate-400">{line.quantity}</td>
-                                                <td className="py-3 text-right font-medium text-slate-900 dark:text-slate-200">
+                                                <td className="py-3 text-center text-brand-slate dark:text-brand-steel">{line.quantity}</td>
+                                                <td className="py-3 text-right font-medium text-brand-navy dark:text-brand-steel/40">
                                                     {formatCurrency(line.quantity * line.unit_price)}
                                                 </td>
                                             </tr>
@@ -532,10 +532,10 @@ function CreatePurchaseOrderContent() {
                                 </table>
                             </div>
 
-                            <div className="bg-slate-50 dark:bg-slate-900/50 p-6 space-y-3">
+                            <div className="bg-brand-white dark:bg-brand-navy/50 p-6 space-y-3">
                                 <div className="flex justify-between text-sm">
                                     <span className="text-muted-foreground">Subtotal</span>
-                                    <span className="font-medium text-slate-900 dark:text-slate-200">{formatCurrency(calculateSubTotal())}</span>
+                                    <span className="font-medium text-brand-navy dark:text-brand-steel/40">{formatCurrency(calculateSubTotal())}</span>
                                 </div>
                                 <div className="flex justify-between text-sm items-center">
                                     <span className="text-muted-foreground flex items-center gap-2">
@@ -543,18 +543,18 @@ function CreatePurchaseOrderContent() {
                                         <Switch
                                             checked={vatApplicable}
                                             onCheckedChange={setVatApplicable}
-                                            className="scale-75 data-[state=checked]:bg-blue-600"
+                                            className="scale-75 data-[state=checked]:bg-brand-electric"
                                         />
                                     </span>
-                                    <span className={`font-medium ${!vatApplicable && 'text-muted-foreground decoration-slate-400 decoration-1 line-through opacity-50'}`}>
+                                    <span className={`font-medium ${!vatApplicable && 'text-muted-foreground decoration-brand-steel decoration-1 line-through opacity-50'}`}>
                                         {formatCurrency(calculateSubTotal() * taxRate)}
                                     </span>
                                 </div>
-                                <Separator className="bg-slate-200 dark:bg-slate-700" />
+                                <Separator className="bg-brand-steel/40 dark:bg-brand-slate" />
                                 <div className="flex justify-between items-end pt-2">
-                                    <span className="font-bold text-lg text-slate-900 dark:text-white">Total Due</span>
+                                    <span className="font-bold text-lg text-brand-navy dark:text-white">Total Due</span>
                                     <div className="text-right">
-                                        <span className="block text-2xl font-bold text-blue-600 dark:text-blue-400">
+                                        <span className="block text-2xl font-bold text-brand-electric dark:text-brand-electric">
                                             {formatCurrency(calculateTotal())}
                                         </span>
                                     </div>
@@ -563,14 +563,14 @@ function CreatePurchaseOrderContent() {
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-blue-50/50 dark:bg-blue-900/10 border-blue-100 dark:border-blue-900">
+                    <Card className="bg-brand-electric/10/50 dark:bg-brand-navy/10 border-brand-electric/20 dark:border-brand-navy">
                         <CardContent className="p-4 flex items-start gap-3">
-                            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600">
+                            <div className="p-2 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full text-brand-electric">
                                 <CreditCard className="h-4 w-4" />
                             </div>
                             <div>
-                                <h4 className="font-semibold text-sm text-blue-900 dark:text-blue-200">Payment Terms</h4>
-                                <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                                <h4 className="font-semibold text-sm text-brand-navy dark:text-brand-electric/40">Payment Terms</h4>
+                                <p className="text-xs text-brand-electric dark:text-brand-electric/60 mt-1">
                                     Ensure suppliers include your Order Reference ({poDetails.reference || '...'}) on their invoices.
                                 </p>
                             </div>
@@ -584,7 +584,7 @@ function CreatePurchaseOrderContent() {
 
 export default function CreatePurchaseOrder() {
     return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-8 w-8 animate-spin text-blue-600" /></div>}>
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="h-8 w-8 animate-spin text-brand-electric" /></div>}>
             <CreatePurchaseOrderContent />
         </Suspense>
     )

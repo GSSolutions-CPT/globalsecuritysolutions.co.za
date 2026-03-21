@@ -95,7 +95,7 @@ export default function Home() {
       </section>
 
       {/* Services Section - Steel & White Elegance */}
-      <section className="py-6 relative bg-slate-50 isolate overflow-hidden">
+      <section className="py-6 relative bg-brand-white isolate overflow-hidden">
         {/* Abstract Steel & Electric Backgrounds */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-steel/5 rounded-full blur-[150px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-electric/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
@@ -248,7 +248,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials & Project Feature */}
-      <section className="py-6 bg-slate-50 relative isolate overflow-hidden">
+      <section className="py-6 bg-brand-white relative isolate overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}

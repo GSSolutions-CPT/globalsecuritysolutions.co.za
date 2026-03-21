@@ -34,7 +34,7 @@ export function ShareButton({ title, url }: { title: string, url?: string }) {
     return (
         <button
             onClick={handleShare}
-            className="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-full"
+            className="flex items-center text-brand-electric hover:text-brand-navy font-semibold transition-colors bg-brand-electric/10 hover:bg-brand-electric/20 px-4 py-2 rounded-full"
         >
             {copied ? <Check className="w-5 h-5 mr-2" /> : <Share2 className="w-5 h-5 mr-2" />}
             {copied ? 'Copied!' : 'Share'}

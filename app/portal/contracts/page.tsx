@@ -254,14 +254,14 @@ export default function ContractsPage() {
           <CreditCard className="absolute right-[-20px] bottom-[-20px] h-32 w-32 text-white opacity-10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
         </div>
 
-        <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+        <div className="bg-gradient-to-br from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
           <div className="relative z-10">
-            <p className="text-blue-100 text-sm font-medium flex items-center gap-2">
+            <p className="text-brand-electric/20 text-sm font-medium flex items-center gap-2">
               Active Contracts
               <CheckCircle className="h-4 w-4 opacity-75" />
             </p>
             <h3 className="text-3xl font-bold mt-2">{activeContractsList.length}</h3>
-            <p className="text-blue-200 text-xs mt-1">active subscriptions</p>
+            <p className="text-brand-electric/40 text-xs mt-1">active subscriptions</p>
           </div>
           <FileText className="absolute right-[-20px] bottom-[-20px] h-32 w-32 text-white opacity-10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
         </div>
@@ -281,14 +281,14 @@ export default function ContractsPage() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-brand-navy p-4 rounded-xl shadow-sm border border-brand-steel/40 dark:border-brand-navy">
         <div className="relative flex-1 w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search contracts or clients..."
             value={searchTerm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800"
+            className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy"
           />
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -423,14 +423,14 @@ export default function ContractsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredContracts.map((contract) => {
           return (
-            <Card key={contract.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 dark:border dark:border-border overflow-hidden relative">
-              <div className={`absolute top-0 left-0 w-1 h-full ${contract.active ? 'bg-emerald-500' : 'bg-slate-400'}`}></div>
+            <Card key={contract.id} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy dark:border dark:border-border overflow-hidden relative">
+              <div className={`absolute top-0 left-0 w-1 h-full ${contract.active ? 'bg-emerald-500' : 'bg-brand-steel'}`}></div>
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <CardTitle className="text-lg font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                    <CardTitle className="text-lg font-semibold text-brand-navy dark:text-brand-steel/20 flex items-center gap-2">
                       {contract.clients?.name || 'Unknown Client'}
-                      <ChevronRight className="h-4 w-4 text-slate-400" />
+                      <ChevronRight className="h-4 w-4 text-brand-steel" />
                     </CardTitle>
                     <CardDescription className="line-clamp-1">{contract.clients?.company}</CardDescription>
                   </div>
@@ -441,7 +441,7 @@ export default function ContractsPage() {
               </CardHeader>
               <CardContent className="pt-4">
                 <div className="flex items-baseline gap-1 mb-4">
-                  <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <span className="text-2xl font-bold text-brand-navy dark:text-white">
                     {formatCurrency(contract.amount)}
                   </span>
                   <span className="text-sm text-muted-foreground font-medium capitalize">
@@ -454,19 +454,19 @@ export default function ContractsPage() {
                     {contract.description}
                   </div>
 
-                  <div className="flex items-center justify-between text-muted-foreground bg-slate-50 dark:bg-slate-900/50 p-2 rounded">
+                  <div className="flex items-center justify-between text-muted-foreground bg-brand-white dark:bg-brand-navy/50 p-2 rounded">
                     <span className="flex items-center gap-2"><Calendar className="h-4 w-4" /> Next Billing</span>
-                    <span className={`font-medium ${isOverdue(contract.next_billing_date) ? 'text-red-600' : isDueSoon(contract.next_billing_date) ? 'text-amber-600' : 'text-slate-700 dark:text-slate-300'}`}>
+                    <span className={`font-medium ${isOverdue(contract.next_billing_date) ? 'text-red-600' : isDueSoon(contract.next_billing_date) ? 'text-amber-600' : 'text-brand-slate dark:text-brand-steel/60'}`}>
                       {contract.next_billing_date ? new Date(contract.next_billing_date).toLocaleDateString() : 'N/A'}
                     </span>
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="pt-2 flex gap-2 border-t border-slate-100 dark:border-slate-800 mt-2">
+              <CardFooter className="pt-2 flex gap-2 border-t border-brand-steel/20 dark:border-brand-navy mt-2">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex-1 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="flex-1 hover:bg-brand-white dark:hover:bg-brand-navy"
                   onClick={() => generateInvoiceFromContract(contract)}
                   disabled={!contract.active}
                 >
@@ -488,12 +488,12 @@ export default function ContractsPage() {
       </div>
 
       {filteredContracts.length === 0 && (
-        <Card className="border-dashed border-2 border-slate-200 dark:border-slate-800 bg-transparent shadow-none">
+        <Card className="border-dashed border-2 border-brand-steel/40 dark:border-brand-navy bg-transparent shadow-none">
           <CardContent className="flex flex-col items-center justify-center py-16">
             <div className="bg-emerald-50 dark:bg-emerald-950/30 p-6 rounded-full mb-4">
               <FileText className="h-12 w-12 text-emerald-400" />
             </div>
-            <p className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-1">
+            <p className="text-lg font-medium text-brand-navy dark:text-brand-steel/20 mb-1">
               {searchTerm ? 'No contracts found' : 'No active contracts'}
             </p>
             <p className="text-muted-foreground text-sm max-w-sm text-center mb-6">

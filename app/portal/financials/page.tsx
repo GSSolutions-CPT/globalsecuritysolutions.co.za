@@ -305,11 +305,11 @@ export default function FinancialsPage() {
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
-            <Card className="border-none shadow-sm bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+            <Card className="border-none shadow-sm bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm">
                 <CardHeader className="pb-4">
                     <div className="flex items-center gap-2">
-                        <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                            <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        <div className="bg-brand-electric/20 dark:bg-brand-navy/30 p-2 rounded-lg">
+                            <Calendar className="h-5 w-5 text-brand-electric dark:text-brand-electric" />
                         </div>
                         <div>
                             <CardTitle className="text-lg">Financial Period</CardTitle>
@@ -326,7 +326,7 @@ export default function FinancialsPage() {
                                 type="date"
                                 value={dateRange.start}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRange({ ...dateRange, start: e.target.value })}
-                                className="bg-white dark:bg-slate-950"
+                                className="bg-white dark:bg-brand-navy"
                             />
                         </div>
                         <div className="flex-1 w-full space-y-2">
@@ -336,7 +336,7 @@ export default function FinancialsPage() {
                                 type="date"
                                 value={dateRange.end}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateRange({ ...dateRange, end: e.target.value })}
-                                className="bg-white dark:bg-slate-950"
+                                className="bg-white dark:bg-brand-navy"
                             />
                         </div>
                         <Button onClick={fetchInvoices} className="w-full sm:w-auto">Apply Filter</Button>
@@ -359,15 +359,15 @@ export default function FinancialsPage() {
                     <Banknote className="absolute right-[-20px] bottom-[-20px] h-32 w-32 text-white opacity-10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="bg-gradient-to-br from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                     <div className="relative z-10">
-                        <p className="text-blue-100 text-sm font-medium flex items-center gap-2">
+                        <p className="text-brand-electric/20 text-sm font-medium flex items-center gap-2">
                             Gross Profit
                             <PieChart className="h-4 w-4 opacity-75" />
                         </p>
                         <h3 className="text-3xl font-bold mt-2">R{metrics.totalProfit.toLocaleString()}</h3>
                         <div className="flex items-center gap-2 mt-3">
-                            <p className="text-blue-100 text-xs bg-blue-700/30 w-fit px-2 py-1 rounded-full">
+                            <p className="text-brand-electric/20 text-xs bg-brand-electric/30 w-fit px-2 py-1 rounded-full">
                                 Margin: {metrics.profitMargin}%
                             </p>
                         </div>
@@ -391,12 +391,12 @@ export default function FinancialsPage() {
 
                 <div className={cn(
                     "rounded-xl p-6 text-white shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-300",
-                    metrics.netProfit >= 0 ? 'bg-gradient-to-br from-indigo-600 to-indigo-500' : 'bg-gradient-to-br from-orange-600 to-orange-500'
+                    metrics.netProfit >= 0 ? 'bg-gradient-to-br from-brand-electric to-brand-electric' : 'bg-gradient-to-br from-orange-600 to-orange-500'
                 )}>
                     <div className="relative z-10">
                         <p className={cn(
                             "text-sm font-medium flex items-center gap-2",
-                            metrics.netProfit >= 0 ? 'text-indigo-100' : 'text-orange-100'
+                            metrics.netProfit >= 0 ? 'text-brand-electric/20' : 'text-orange-100'
                         )}>
                             Net Profit
                             <Wallet className="h-4 w-4 opacity-75" />
@@ -404,7 +404,7 @@ export default function FinancialsPage() {
                         <h3 className="text-3xl font-bold mt-2">R{metrics.netProfit.toLocaleString()}</h3>
                         <p className={cn(
                             "text-xs mt-3 w-fit px-2 py-1 rounded-full",
-                            metrics.netProfit >= 0 ? 'text-indigo-100 bg-indigo-700/30' : 'text-orange-100 bg-orange-700/30'
+                            metrics.netProfit >= 0 ? 'text-brand-electric/20 bg-brand-electric/30' : 'text-orange-100 bg-orange-700/30'
                         )}>
                             Bottom line
                         </p>
@@ -575,11 +575,11 @@ export default function FinancialsPage() {
                 <CardContent>
                     <div className="space-y-4">
                         {expenses.slice(0, 10).map((expense) => (
-                            <div key={expense.id} className="flex items-center justify-between p-4 rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                            <div key={expense.id} className="flex items-center justify-between p-4 rounded-lg border border-brand-steel/20 dark:border-brand-navy bg-brand-white/50 dark:bg-brand-navy/30 hover:bg-brand-white dark:hover:bg-brand-navy/50 transition-colors">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2">
-                                        <p className="font-medium text-slate-900 dark:text-slate-100">{expense.description}</p>
-                                        {expense.type === 'job' && <span className="text-[10px] bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 px-1.5 py-0.5 rounded-full font-medium uppercase">JOB</span>}
+                                        <p className="font-medium text-brand-navy dark:text-brand-steel/20">{expense.description}</p>
+                                        {expense.type === 'job' && <span className="text-[10px] bg-brand-electric/20 text-brand-electric dark:bg-brand-navy/30 dark:text-brand-electric/60 px-1.5 py-0.5 rounded-full font-medium uppercase">JOB</span>}
                                     </div>
                                     <p className="text-xs text-muted-foreground mt-1 flex items-center gap-2">
                                         <Calendar className="h-3 w-3" /> {new Date(expense.date).toLocaleDateString()}
@@ -594,16 +594,16 @@ export default function FinancialsPage() {
                                     </div>
                                     <div className="flex gap-1">
                                         {expense.receipt_url && (
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-blue-600" asChild title="View Receipt">
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-steel hover:text-brand-electric" asChild title="View Receipt">
                                                 <a href={expense.receipt_url} target="_blank" rel="noopener noreferrer">
                                                     <FileText className="h-4 w-4" />
                                                 </a>
                                             </Button>
                                         )}
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-indigo-600" onClick={() => handleEdit(expense)}>
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-steel hover:text-brand-electric" onClick={() => handleEdit(expense)}>
                                             <Pencil className="h-4 w-4" />
                                         </Button>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-red-600" onClick={() => handleDelete(expense.id!)}>
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-steel hover:text-red-600" onClick={() => handleDelete(expense.id!)}>
                                             <Trash2 className="h-4 w-4" />
                                         </Button>
                                     </div>
