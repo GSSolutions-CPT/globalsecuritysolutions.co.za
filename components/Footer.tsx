@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign, ChevronRight } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign } from 'lucide-react'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
