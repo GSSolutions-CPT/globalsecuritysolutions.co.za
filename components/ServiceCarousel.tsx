@@ -38,7 +38,7 @@ export function ServiceCarousel() {
                     >
                         <Link href={`/services/${slug}`} className="block w-full h-full relative z-10">
                             
-                            {/* Collapsed State - Rotated Vertical on Desktop */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none p-2">
                                 <h3 className="xl:-rotate-90 xl:whitespace-nowrap text-sm xl:text-lg font-black uppercase tracking-tighter text-white drop-shadow-md text-center line-clamp-1 xl:line-clamp-none">
                                     {service.page}
                                 </h3>
