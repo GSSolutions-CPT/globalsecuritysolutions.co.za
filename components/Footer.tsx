@@ -75,15 +75,16 @@ export function Footer() {
                     
                     <div className="flex space-x-3">
                         {[
-                            { icon: Facebook, href: "https://www.facebook.com/gssolutions.co.za/" },
-                            { icon: Instagram, href: "https://www.instagram.com/globalsecuritysolutions.co.za/" },
-                            { icon: AtSign, href: "https://www.threads.net/@globalsecuritysolutions.co.za" },
-                            { icon: Linkedin, href: "https://www.linkedin.com/company/global-security-solutions-cape-town" }
+                            { icon: Facebook, href: "https://www.facebook.com/gssolutions.co.za/", label: "Facebook" },
+                            { icon: Instagram, href: "https://www.instagram.com/globalsecuritysolutions.co.za/", label: "Instagram" },
+                            { icon: AtSign, href: "https://www.threads.net/@globalsecuritysolutions.co.za", label: "Threads" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/company/global-security-solutions-cape-town", label: "LinkedIn" }
                         ].map((social, idx) => (
                             <a 
                                 key={idx}
                                 href={social.href} 
                                 target="_blank" 
+                                aria-label={social.label}
                                 rel="noopener noreferrer" 
                                 className="hover:text-brand-electric transition-colors"
                             >

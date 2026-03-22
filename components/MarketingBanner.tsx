@@ -47,13 +47,13 @@ export const MarketingBanner = () => {
                     <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
                         <Link
                             href="/free-security-audit"
-                            className="inline-flex h-12 items-center justify-center rounded-full bg-brand-electric px-6 text-sm font-bold text-white shadow-lg shadow-brand-electric/25 transition-all hover:bg-brand-electric hover:scale-105 hover:shadow-brand-electric/40 focus:outline-none focus:ring-2 focus:ring-brand-electric focus:ring-offset-2 focus:ring-offset-brand-navy"
+                            className="inline-flex h-12 items-center justify-center rounded-full bg-brand-electric px-6 text-sm font-black text-brand-navy shadow-lg shadow-brand-electric/25 transition-all hover:bg-brand-electric hover:scale-105 hover:shadow-brand-electric/40 focus:outline-none focus:ring-2 focus:ring-brand-electric focus:ring-offset-2 focus:ring-offset-brand-navy"
                         >
                             Get Free Audit
                         </Link>
                         <Link
                             href="/services"
-                            className="inline-flex h-12 items-center justify-center rounded-full border border-brand-slate bg-white/5 px-6 text-sm font-bold text-white transition-all hover:bg-white/10 hover:border-brand-slate focus:outline-none focus:ring-2 focus:ring-brand-steel focus:ring-offset-2 focus:ring-offset-brand-navy"
+                            className="inline-flex h-12 items-center justify-center rounded-full border border-brand-slate bg-white/5 px-6 text-sm font-bold text-brand-white transition-all hover:bg-white/10 hover:border-brand-slate focus:outline-none focus:ring-2 focus:ring-brand-steel focus:ring-offset-2 focus:ring-offset-brand-navy"
                         >
                             View Services
                         </Link>
