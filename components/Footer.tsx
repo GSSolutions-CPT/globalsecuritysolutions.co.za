@@ -19,18 +19,18 @@ export function Footer() {
                             <Image src="/nav-logo-final.png" alt="Global Security Solutions" width={200} height={60} className="h-10 w-auto object-contain drop-shadow-lg" />
                         </div>
                         
-                        <ul className="space-y-2 text-xs text-brand-steel">
-                            <li className="flex items-center gap-2">
-                                <MapPin className="w-3 h-3 text-brand-electric" />
+                        <ul className="space-y-0 text-sm text-brand-slate">
+                            <li className="flex items-center gap-2 py-2">
+                                <MapPin className="w-4 h-4 text-brand-electric shrink-0" />
                                 <span>Durbanville & Western Cape</span>
                             </li>
                             <li className="flex items-center gap-2">
-                                <Phone className="w-3 h-3 text-brand-electric" />
-                                <a href="https://wa.me/27629558559" className="hover:text-brand-electric transition-colors">062 955 8559</a>
+                                <Phone className="w-4 h-4 text-brand-electric shrink-0" />
+                                <a href="https://wa.me/27629558559" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">062 955 8559</a>
                             </li>
                             <li className="flex items-center gap-2">
-                                <Mail className="w-3 h-3 text-brand-electric" />
-                                <a href="mailto:sales@globalsecuritysolutions.co.za" className="hover:text-brand-electric transition-colors">sales@globalsecuritysolutions.co.za</a>
+                                <Mail className="w-4 h-4 text-brand-electric shrink-0" />
+                                <a href="mailto:sales@globalsecuritysolutions.co.za" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors truncate">sales@globalsecuritysolutions.co.za</a>
                             </li>
                         </ul>
                     </div>
@@ -39,39 +39,39 @@ export function Footer() {
                     <div className="grid grid-cols-2 gap-4 lg:col-span-3">
                         {/* Quick Links */}
                         <div>
-                            <h3 className="text-xs font-black mb-2 text-brand-white uppercase tracking-widest flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
                                 Quick Links
                             </h3>
-                            <ul className="space-y-1 text-[10px] md:text-xs text-brand-slate font-medium">
-                                <li><Link href="/" className="hover:text-brand-electric transition-colors">Home</Link></li>
-                                <li><Link href="/about" className="hover:text-brand-electric transition-colors">About Us</Link></li>
-                                <li><Link href="/services" className="hover:text-brand-electric transition-colors">All Services</Link></li>
-                                <li><Link href="/projects" className="hover:text-brand-electric transition-colors">Project Gallery</Link></li>
-                                <li><Link href="/blog" className="hover:text-brand-electric transition-colors">Security Blog</Link></li>
+                            <ul className="text-sm font-medium">
+                                <li><Link href="/" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Home</Link></li>
+                                <li><Link href="/about" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">About Us</Link></li>
+                                <li><Link href="/services" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">All Services</Link></li>
+                                <li><Link href="/projects" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Project Gallery</Link></li>
+                                <li><Link href="/blog" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Security Blog</Link></li>
                             </ul>
                         </div>
 
                         {/* Services */}
                         <div>
-                            <h3 className="text-xs font-black mb-2 text-brand-white uppercase tracking-widest flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
                                 Expertise
                             </h3>
-                            <ul className="space-y-1 text-[10px] md:text-xs text-brand-slate font-medium">
-                                <li><Link href="/services/alarm-system-installation" className="hover:text-brand-electric transition-colors">Alarm Systems</Link></li>
-                                <li><Link href="/services/cctv-surveillance-systems" className="hover:text-brand-electric transition-colors">CCTV Surveillance</Link></li>
-                                <li><Link href="/services/access-control-solutions" className="hover:text-brand-electric transition-colors">Access Control</Link></li>
-                                <li><Link href="/services/electric-fence-installations" className="hover:text-brand-electric transition-colors">Electric Fencing</Link></li>
-                                <li><Link href="/load-shedding-security-solutions" className="hover:text-brand-electric transition-colors">Load Shedding Ready</Link></li>
+                            <ul className="text-sm font-medium">
+                                <li><Link href="/services/alarm-system-installation" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Alarm Systems</Link></li>
+                                <li><Link href="/services/cctv-surveillance-systems" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">CCTV Surveillance</Link></li>
+                                <li><Link href="/services/access-control-solutions" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Access Control</Link></li>
+                                <li><Link href="/services/electric-fence-installations" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Electric Fencing</Link></li>
+                                <li><Link href="/load-shedding-security-solutions" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Load Shedding Ready</Link></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-brand-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-brand-slate text-[10px] font-medium gap-4">
-                    <p>&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
+                <div className="border-t border-brand-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-brand-slate text-xs font-medium gap-4">
+                    <p className="py-2">&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
                     
                     <div className="flex space-x-3">
                         {[
@@ -86,17 +86,17 @@ export function Footer() {
                                 target="_blank" 
                                 aria-label={social.label}
                                 rel="noopener noreferrer" 
-                                className="hover:text-brand-electric transition-colors"
+                                className="block p-2 text-brand-slate hover:text-brand-electric transition-colors"
                             >
-                                <social.icon className="w-3.5 h-3.5" />
+                                <social.icon className="w-4 h-4" />
                             </a>
                         ))}
                     </div>
 
-                    <div className="flex space-x-4">
-                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-brand-electric transition-colors">Privacy</a>
-                        <Link href="/terms-of-service" className="hover:text-brand-electric transition-colors">Terms</Link>
-                        <Link href="/sitemap.xml" className="hover:text-brand-electric transition-colors">Sitemap</Link>
+                    <div className="flex space-x-2">
+                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Privacy</a>
+                        <Link href="/terms-of-service" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Terms</Link>
+                        <Link href="/sitemap.xml" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Sitemap</Link>
                     </div>
                 </div>
             </div>
