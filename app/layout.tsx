@@ -8,6 +8,8 @@ import StructuredData from "@/components/StructuredData";
 import { cn } from "@/utils/cn";
 import Script from "next/script";
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
@@ -76,18 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-LM5YX7EWWH"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-LM5YX7EWWH');
-          `}
-        </Script>
+        <GoogleAnalytics gaId="G-LM5YX7EWWH" />
         <StructuredData />
         <AOSInit />
         <ConditionalHeader />
