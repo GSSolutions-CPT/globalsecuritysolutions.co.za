@@ -14,6 +14,7 @@ export const MarketingBanner = () => {
                     alt="Security Solutions Cape Town"
                     fill
                     priority={true}
+                    fetchPriority="high"
                     quality={75}
                     sizes="100vw"
                     className="object-cover opacity-90 transform scale-105 hover:scale-110 transition-transform duration-[20s]"
