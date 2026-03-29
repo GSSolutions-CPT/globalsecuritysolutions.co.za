@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import locationData from '@/app/data/locationData.json'
 import seoData from '@/app/data/seoData.json'
+import { masterBusinessData } from '@/utils/generateSchema'
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -56,6 +57,53 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
 
     return (
         <div className="flex flex-col min-h-screen bg-brand-white font-sans">
+            {/* Localized Business Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        ...masterBusinessData,
+                        "areaServed": {
+                            "@type": "City",
+                            "name": location.suburb
+                        },
+                        "url": `https://globalsecuritysolutions.co.za/areas/${location.slug}`,
+                        "description": location.description
+                    })
+                }}
+            />
+
+            {/* Breadcrumb Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://globalsecuritysolutions.co.za"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Areas",
+                                "item": "https://globalsecuritysolutions.co.za/areas"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": location.suburb,
+                                "item": `https://globalsecuritysolutions.co.za/areas/${location.slug}`
+                            }
+                        ]
+                    })
+                }}
+            />
 
             {/* Dynamic Hero Section */}
             <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">

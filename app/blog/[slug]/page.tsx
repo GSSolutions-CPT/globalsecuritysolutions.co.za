@@ -9,6 +9,7 @@ import type { Metadata } from 'next'
 import { supabase } from '@/utils/supabase/client'
 import Image from "next/image"
 import { PageHero } from '@/components/PageHero'
+import { masterBusinessData } from '@/utils/generateSchema'
 
 // Helper to find post
 const getPost = async (slug: string) => {
@@ -40,7 +41,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     if (!post) return {}
 
     return {
-        title: `${post.title} | Security Blog`,
+        title: `${post.title} | Global Security Solutions Blog`,
         description: post.excerpt,
         openGraph: {
             title: post.title,
@@ -61,6 +62,28 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
     return (
         <div className="min-h-screen bg-brand-white font-sans selection:bg-brand-electric selection:text-brand-navy">
+            {/* Blog Article Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BlogPosting",
+                        "headline": post.title,
+                        "image": post.coverImage ? [post.coverImage] : ['https://globalsecuritysolutions.co.za/hero-bg.jpg'],
+                        "datePublished": new Date(post.date).toISOString(),
+                        "author": {
+                            "@type": "Organization",
+                            "name": "Global Security Solutions",
+                            "url": "https://globalsecuritysolutions.co.za/"
+                        },
+                        "publisher": {
+                            ...masterBusinessData
+                        },
+                        "description": post.excerpt
+                    })
+                }}
+            />
             <ScrollProgress />
             <PageHero
                 align="left"

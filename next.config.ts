@@ -11,10 +11,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // --- New Localized Hub Migration Redirects ---
+      { source: '/services/cctv-surveillance-systems', destination: '/locations/durbanville/cctv-installation', permanent: true },
+      { source: '/services/alarm-system-installation', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/services/access-control-solutions', destination: '/locations/durbanville/access-control', permanent: true },
+
       // --- Services ---
-      { source: '/alarm-system-cape-town', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/cctv-system-cape-town', destination: '/services/cctv-surveillance-systems', permanent: true },
-      { source: '/access-control-cape-town', destination: '/services/access-control-solutions', permanent: true },
+      { source: '/alarm-system-cape-town', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/cctv-system-cape-town', destination: '/locations/durbanville/cctv-installation', permanent: true },
+      { source: '/access-control-cape-town', destination: '/locations/durbanville/access-control', permanent: true },
       { source: '/intercom-system-cape-town', destination: '/services/intercom-system-installers', permanent: true },
       { source: '/electric-fence-cape-town', destination: '/services/electric-fence-installations', permanent: true },
       { source: '/perimeter-security', destination: '/services/perimeter-security-enhancement', permanent: true },
@@ -77,16 +82,16 @@ const nextConfig: NextConfig = {
       { source: '/service-areas', destination: '/areas', permanent: true },
 
       // --- Messy/Duplicate Links ---
-      { source: '/alarm-system', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/alarm-system2', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/alarm-system-Cape-Town', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/intruder-and-alarm-system', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/intruder-and-alarm-system-1', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/intruder-and-alarm-system.html', destination: '/services/alarm-system-installation', permanent: true },
-      { source: '/cctv-surveillance-systems-1', destination: '/services/cctv-surveillance-systems', permanent: true },
-      { source: '/cctv-surveillance-systems.html', destination: '/services/cctv-surveillance-systems', permanent: true },
-      { source: '/access-control', destination: '/services/access-control-solutions', permanent: true },
-      { source: '/access-control.html', destination: '/services/access-control-solutions', permanent: true },
+      { source: '/alarm-system', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/alarm-system2', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/alarm-system-Cape-Town', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/intruder-and-alarm-system', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/intruder-and-alarm-system-1', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/intruder-and-alarm-system.html', destination: '/locations/durbanville/alarm-systems', permanent: true },
+      { source: '/cctv-surveillance-systems-1', destination: '/locations/durbanville/cctv-installation', permanent: true },
+      { source: '/cctv-surveillance-systems.html', destination: '/locations/durbanville/cctv-installation', permanent: true },
+      { source: '/access-control', destination: '/locations/durbanville/access-control', permanent: true },
+      { source: '/access-control.html', destination: '/locations/durbanville/access-control', permanent: true },
       { source: '/intercom-systems', destination: '/services/intercom-system-installers', permanent: true },
       { source: '/intercom-systems-1', destination: '/services/intercom-system-installers', permanent: true },
       { source: '/electric-fencing-page', destination: '/services/electric-fence-installations', permanent: true },

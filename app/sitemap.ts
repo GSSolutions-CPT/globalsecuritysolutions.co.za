@@ -55,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/sectors/${toSlug(service.page)}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
-        priority: 0.9,
+        priority: 0.8,
     }))
 
     // Dynamic Areas
@@ -63,7 +63,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/areas/${location.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
-        priority: 0.6,
+        priority: 0.7,
     }))
 
     // Dynamic Blog Posts
@@ -83,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${BASE_URL}/projects/${project.slug}`,
         lastModified: new Date(project.created_at),
         changeFrequency: 'weekly' as const,
-        priority: 0.9,
+        priority: 0.8,
     })) || []
 
     return [...staticRoutes, ...services, ...sectors, ...areas, ...blogPosts, ...projectRoutes]
