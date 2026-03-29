@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { ConditionalHeader, ConditionalFooter, ConditionalWhatsApp } from "@/components/ConditionalMarketingUI";
@@ -88,6 +89,7 @@ export default function RootLayout({
         <ConditionalFooter />
         <ConditionalWhatsApp />
         <ScrollToTop />
+        <Analytics />
       </body>
     </html>
   );
