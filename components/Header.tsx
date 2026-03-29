@@ -91,6 +91,8 @@ export function Header() {
                             height={100}
                             className="absolute top-[-10px] left-0 h-16 w-auto object-contain max-w-none"
                             priority
+                            fetchPriority="high"
+                            sizes="(max-width: 768px) 120px, 200px"
                         />
                     </Link>
 
