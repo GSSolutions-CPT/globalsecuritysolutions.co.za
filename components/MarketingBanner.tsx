@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export const MarketingBanner = () => {
     return (
-        <div className="relative w-full py-16 flex items-center overflow-hidden bg-brand-navy">
+        <div className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-24 flex items-center overflow-hidden bg-brand-navy">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />

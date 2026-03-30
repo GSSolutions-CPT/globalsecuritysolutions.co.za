@@ -40,7 +40,7 @@ export function PageHero({
     align = "center" 
 }: PageHeroProps) {
     return (
-        <section className={`relative bg-brand-navy text-brand-white py-16 md:py-32 flex items-center overflow-hidden border-b border-brand-steel/20 ${pbClass}`}>
+        <section className={`relative bg-brand-navy text-brand-white pt-32 pb-16 md:pt-48 flex items-center overflow-hidden border-b border-brand-steel/20 ${pbClass}`}>
             {/* Immersive Glows */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-brand-electric/10 blur-[150px] mix-blend-screen pointer-events-none" />
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
