@@ -5,6 +5,7 @@ import { ArrowRight, Camera } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PageHero } from '@/components/PageHero'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 const staggerContainer: Variants = {
     hidden: { opacity: 0 },
@@ -47,23 +48,84 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
             />
 
             <div className="container mx-auto px-4 -mt-32 relative z-30 pb-8">
+                <Breadcrumbs items={[{ label: 'Project Gallery', href: '/projects' }]} />
                 {projects.length === 0 && (
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center py-12 bg-brand-navy rounded-3xl shadow-xl border border-brand-steel/20"
-                    >
-                        <div className="w-20 h-20 bg-brand-white/5 text-brand-electric rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Camera className="w-10 h-10" />
+                    <div className="mb-12">
+                        <div className="text-center mb-10">
+                            <h2 className="text-3xl md:text-4xl font-black text-brand-navy tracking-tighter mb-3">Featured Security Installations</h2>
+                            <p className="text-brand-slate max-w-2xl mx-auto text-sm md:text-base">Every project is owner-supervised by Kyle Cass. We deliver neat, reliable, integrated systems with full client training and handover. Here are representative examples of our work across Cape Town and the Western Cape.</p>
                         </div>
-                        <h3 className="text-2xl font-bold text-brand-white mb-2">Portfolio Updating...</h3>
-                        <p className="text-brand-steel max-w-md mx-auto mb-8">
-                            We are currently curating our latest project images. Please check back soon or follow us on social media for recent updates.
-                        </p>
-                        <Link href="/contact" className="inline-flex items-center text-brand-electric font-bold hover:text-white transition-colors">
-                            Request a Portfolio PDF <ArrowRight className="ml-2 w-4 h-4" />
-                        </Link>
-                    </motion.div>
+
+                        {/* Static Rich Case Studies for SEO & Proof (shown when DB is empty or as supplement) */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {[
+                                {
+                                    title: "Chere Botha School, Bellville (Oak Glen)",
+                                    category: "Schools & Education",
+                                    desc: "Major security overhaul for this special-needs school. Delivered IP CCTV network, biometric access control at key points, and rapid-response alarm integration with full site coverage.",
+                                    outcome: "Total safety for students and staff. Controlled access, remote monitoring capability, and a strong deterrent. Professional installation supporting a secure learning environment.",
+                                    services: "IP CCTV, Biometric Access Control, Alarm Integration"
+                                },
+                                {
+                                    title: "Luxury Residence, Hout Bay",
+                                    category: "Residential",
+                                    desc: "Premium multi-camera IP CCTV with smartphone app control and AI analytics, electric perimeter fencing, and integrated intruder alarm system with off-grid backup.",
+                                    outcome: "24/7 remote visibility for owners. Strong physical + electronic perimeter. Clean, professional installation with full handover training.",
+                                    services: "IP CCTV + AI, Electric Fencing, Smart Alarms"
+                                },
+                                {
+                                    title: "Family Home, Durbanville",
+                                    category: "Residential",
+                                    desc: "Complete layered security: full HD CCTV coverage, biometric gate access control, smart alarm system with battery backup and mobile notifications.",
+                                    outcome: "Parents gained complete peace of mind with live views and controlled convenient access. Reliable performance through load shedding.",
+                                    services: "CCTV, Biometric Access, Alarm + Backup"
+                                },
+                                {
+                                    title: "Commercial Office Premises, Somerset West",
+                                    category: "Commercial",
+                                    desc: "Enterprise-grade biometric access control with intercom, high-resolution IP CCTV across parking and internal areas, plus alarm integration for the business.",
+                                    outcome: "Precise access logging, high-quality incident footage, and a professional reassuring environment for staff and clients.",
+                                    services: "Access Control, IP CCTV, Alarm Integration"
+                                },
+                                {
+                                    title: "Gated Estate, Northern Suburbs",
+                                    category: "Estates",
+                                    desc: "Perimeter electric fencing upgrade, ANPR/LPR overview cameras, centralised access control and alarm monitoring integration for the body corporate.",
+                                    outcome: "Significantly improved perimeter integrity, streamlined resident and visitor management, and reliable evidence-grade surveillance.",
+                                    services: "Electric Fencing, LPR CCTV, Access Control"
+                                },
+                                {
+                                    title: "Wine Farm, Stellenbosch Area",
+                                    category: "Agricultural / Estate",
+                                    desc: "Strategic perimeter protection with electric fencing and detection, long-range CCTV covering vineyards, cellars and access roads, plus remote monitoring setup.",
+                                    outcome: "Protection of high-value assets with minimal visual impact. Owners monitor operations and security securely from anywhere.",
+                                    services: "Perimeter Fencing, Long-Range CCTV, Remote Monitoring"
+                                }
+                            ].map((project, index) => (
+                                <div key={index} className="group block bg-brand-navy rounded-3xl overflow-hidden shadow-sm border border-brand-white/10 ring-1 ring-brand-white/5">
+                                    <div className="p-6 md:p-8">
+                                        <div className="text-xs font-black text-brand-electric uppercase tracking-widest mb-2">{project.category}</div>
+                                        <h3 className="text-xl font-bold text-brand-white mb-3 group-hover:text-brand-electric transition-colors tracking-tight">{project.title}</h3>
+                                        <p className="text-brand-steel text-sm leading-relaxed mb-4 font-light">{project.desc}</p>
+                                        <div className="text-xs uppercase tracking-widest text-brand-electric mb-1">Key Services</div>
+                                        <p className="text-brand-white/80 text-sm mb-4 font-medium">{project.services}</p>
+                                        <div className="text-xs uppercase tracking-widest text-brand-electric mb-1">Outcome</div>
+                                        <p className="text-brand-steel text-sm leading-relaxed font-light">{project.outcome}</p>
+                                    </div>
+                                    <div className="border-t border-brand-white/10 px-6 py-4 bg-brand-navy/50">
+                                        <Link href="/contact" className="text-brand-electric text-sm font-bold hover:text-white inline-flex items-center gap-1">
+                                            Discuss a similar project <ArrowRight className="w-3.5 h-3.5" />
+                                        </Link>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="text-center mt-8 text-sm text-brand-slate">
+                            Real projects delivered with owner supervision, professional training, and reliable results. 
+                            <Link href="/contact" className="text-brand-electric font-bold ml-1 hover:underline">Request your free security assessment →</Link>
+                        </div>
+                    </div>
                 )}
 
                 <motion.div 

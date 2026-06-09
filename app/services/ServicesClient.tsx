@@ -45,6 +45,17 @@ export function ServicesClient() {
             />
 
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">
+                {/* Substantial On-Page Content for SEO - Professional Security Installations Cape Town */}
+                <div className="max-w-4xl mx-auto text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-black text-brand-navy tracking-tighter mb-4">Expert Security System Installation Across Cape Town and the Western Cape</h2>
+                    <p className="text-brand-slate text-sm md:text-base leading-relaxed mb-4">
+                        Global Security Solutions delivers premium, owner-managed security installations for residential homes, commercial premises, schools, estates, farms, and industrial sites. With over a decade of experience since 2015, we focus on integrated solutions that combine IP CCTV, biometric access control, electric perimeter fencing, smart alarms, and gate automation. Every project is personally supervised by founder Kyle Cass to ensure meticulous workmanship, full compliance with South African standards, and reliable performance — including during load shedding.
+                    </p>
+                    <p className="text-brand-slate text-sm md:text-base leading-relaxed">
+                        Our process begins with a free security audit to identify vulnerabilities specific to your property and location. We then design a tailored, layered defense system using only certified equipment from leading brands. Installation is neat, professional, and includes comprehensive hands-on training and documentation so you and your team can operate the system confidently. We stand behind our work with clear workmanship guarantees and ongoing support.
+                    </p>
+                </div>
+
                 {/* Services Grid */}
                 <motion.div 
                     initial="hidden"

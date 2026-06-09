@@ -22,7 +22,7 @@ export function Footer() {
                         <ul className="space-y-0 text-sm text-brand-slate">
                             <li className="flex items-center gap-2 py-2">
                                 <MapPin className="w-4 h-4 text-brand-electric shrink-0" />
-                                <span>Durbanville & Western Cape</span>
+                                <span>66 Robyn Rd, Durbanville, Cape Town 7550</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <Phone className="w-4 h-4 text-brand-electric shrink-0" />
@@ -33,6 +33,11 @@ export function Footer() {
                                 <a href="mailto:sales@globalsecuritysolutions.co.za" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors truncate">sales@globalsecuritysolutions.co.za</a>
                             </li>
                         </ul>
+
+                        {/* Compact Trust Signals for site-wide E-E-A-T */}
+                        <div className="mt-4 pt-3 border-t border-brand-white/10 text-[10px] leading-tight text-brand-steel">
+                            Owner-managed by Kyle Cass • Est. 2015 • Professional training &amp; handover on every project • Workmanship guarantees
+                        </div>
                     </div>
 
                     {/* Links Column Wrapper */}

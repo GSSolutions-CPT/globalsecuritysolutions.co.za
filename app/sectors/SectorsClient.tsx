@@ -83,6 +83,17 @@ export function SectorsClient() {
             {/* Main Content Area */}
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">
 
+                {/* Substantial On-Page Content for SEO - Tailored Security Solutions Cape Town */}
+                <div className="max-w-4xl mx-auto text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-black text-brand-navy tracking-tighter mb-4">Specialised Security Solutions for Every Environment in Cape Town</h2>
+                    <p className="text-brand-slate text-sm md:text-base leading-relaxed mb-4">
+                        Different properties face different risks. A family home in Durbanville needs discreet, pet-friendly protection. A wine farm in Stellenbosch requires long-range, off-grid perimeter systems. Schools and estates demand robust access control and lockdown capabilities. Global Security Solutions designs layered, site-specific security installations using proven technology from certified brands. Owner Kyle Cass ensures every system is installed to the highest standard with full training and support.
+                    </p>
+                    <p className="text-brand-slate text-sm md:text-base leading-relaxed">
+                        Our sector-specific solutions combine perimeter deterrence, visual verification, access management, and smart automation. All installations include a free risk assessment, professional design, neat execution, and ongoing maintenance options so your security performs reliably year after year in Western Cape conditions.
+                    </p>
+                </div>
+
                 {/* Sector Grid */}
                 <motion.div 
                     initial="hidden"

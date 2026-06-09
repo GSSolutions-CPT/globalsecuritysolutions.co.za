@@ -69,6 +69,33 @@ export function HomeClient() {
         </div>
       </section>
 
+      {/* Prominent Trust & Credibility Bar - E-E-A-T & Local SEO Signals */}
+      <section className="bg-brand-white border-b border-brand-slate/10 py-6">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-center text-sm md:text-base text-brand-navy font-medium">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Owner-Managed by Kyle Cass</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Established 2015</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Professional Training &amp; Complete Handover</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Workmanship Guarantees</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Certified Installers – Leading Brands</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
+              <span className="text-brand-electric font-black">✓</span> <span>Cape Town &amp; Western Cape Specialists</span>
+            </div>
+          </div>
+          <p className="text-center text-xs text-brand-slate mt-3 tracking-wide">Every installation is personally supervised. We deliver reliable systems with full client training so your security works when you need it.</p>
+        </div>
+      </section>
+
       {/* Trusted By Carousel - Clean White & Slate */}
       <section className="py-12 bg-brand-white border-b border-brand-slate/20 relative">
         <div className="container mx-auto px-4 text-center">
@@ -189,9 +216,9 @@ export function HomeClient() {
             variants={fadeInUp}
             className="text-center md:mb-8 mb-6"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter">Why Global Security?</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter">Why Global Security Solutions?</h2>
             <p className="text-brand-slate max-w-2xl mx-auto text-sm md:text-base font-medium">
-              Beyond the hardware, it&apos;s our meticulous process and dedicated people that set us completely apart.
+              Beyond the hardware, it&apos;s our meticulous process and dedicated people that set us completely apart. Since 2015, owner Kyle Cass has personally supervised every installation to deliver reliable, integrated security systems with full client training.
             </p>
           </motion.div>
 
@@ -238,6 +265,13 @@ export function HomeClient() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Additional On-Page Content for SEO Depth & E-E-A-T */}
+          <div className="mt-10 max-w-4xl mx-auto text-center text-brand-slate text-sm md:text-base leading-relaxed">
+            <p>
+              We specialise in professional security system installations for homes, estates, schools, farms, and businesses across Cape Town and the Western Cape. From IP CCTV and biometric access control to electric fencing and smart alarm integration, every system is designed for reliability during load shedding and harsh local conditions. Our process includes a free security audit, custom design, neat certified installation, and complete hands-on training so you can use your system with confidence.
+            </p>
+          </div>
         </div>
       </section>
 

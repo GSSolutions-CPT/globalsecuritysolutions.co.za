@@ -7,6 +7,7 @@ import seoData from '@/app/data/seoData.json'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PageHero } from '@/components/PageHero'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
     loading: () => <div className="h-[500px] w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
@@ -33,6 +34,10 @@ export default function FreeAuditPage() {
                 badgeText="Professional Assessment"
                 pbClass="pb-40"
             />
+
+            <div className="container mx-auto px-4">
+                <Breadcrumbs items={[{ label: 'Free Security Audit', href: '/free-security-audit' }]} />}
+            </div>
 
             {/* Assessment Choice Section */}
             <div className="relative z-30 -mt-20 pb-20">
@@ -110,7 +115,7 @@ export default function FreeAuditPage() {
                             <div>
                                 <h2 className="text-4xl font-black text-brand-navy mb-6 tracking-tight">What We Check On-Site</h2>
                                 <p className="text-brand-slate text-lg leading-relaxed mb-8 font-light">
-                                    Our technicians don&apos;t just look at the walls; we look for the path of least resistance that a criminal would take.
+                                    Our technicians don&apos;t just look at the walls; we look for the path of least resistance that a criminal would take. Every audit is supervised to the standards set by owner Kyle Cass, with a focus on practical, reliable recommendations and clear handover of findings.
                                 </p>
                             </div>
 

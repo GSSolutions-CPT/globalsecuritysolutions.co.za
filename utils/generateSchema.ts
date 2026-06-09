@@ -1,18 +1,18 @@
 
 export const masterBusinessData = {
-    "@type": "HomeAndConstructionBusiness",
+    "@type": "LocalBusiness",
     "name": "Global Security Solutions",
     "image": [
-        "https://globalsecuritysolutions.co.za/logo.png",
-        "https://globalsecuritysolutions.co.za/hero-bg.jpg"
+        "https://globalsecuritysolutions.co.za/nav-logo-final.png",
+        "https://globalsecuritysolutions.co.za/hero-bg.png"
     ],
     "url": "https://www.globalsecuritysolutions.co.za/",
-    "telephone": "+27629558559",
+    "telephone": "+27 62 955 8559",
     "email": "sales@globalsecuritysolutions.co.za",
-    "description": "Global Security Solutions provides expert security system installations in Durbanville and Western Cape. Certified installers of Paradox alarms, Hikvision CCTV, electric fencing, and access control.",
+    "description": "Owner-managed security system installation company in Durbanville, Cape Town. Established 2015. Kyle Cass personally oversees every professional installation of CCTV, alarms, electric fencing, access control and integrated security solutions across the Western Cape. Hands-on training and complete handover included on every project.",
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "66 Robyn Rd",
+        "streetAddress": "66 Robyn Rd, Langeberg Ridge",
         "addressLocality": "Durbanville",
         "addressRegion": "Western Cape",
         "postalCode": "7550",
@@ -38,36 +38,52 @@ export const masterBusinessData = {
         }
     ],
     "sameAs": [
-        "https://www.facebook.com/globalsecuritysolutionscpt",
+        "https://www.facebook.com/gssolutions.co.za",
         "https://www.linkedin.com/company/global-security-solutions-cape-town",
         "https://www.instagram.com/globalsecuritysolutions.co.za",
         "https://wa.me/27629558559"
     ],
     "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+27629558559",
+        "telephone": "+27 62 955 8559",
         "contactType": "customer service",
-        "areaServed": "ZA",
+        "areaServed": ["Western Cape", "Cape Town"],
         "availableLanguage": "English"
     },
     "priceRange": "$$",
-    "paymentAccepted": ["Cash", "Credit Card", "EFT"],
-    "founders": [
-        { "@type": "Person", "name": "Kyle Cass" },
-        { "@type": "Person", "name": "Rashaad Steyn" }
+    "paymentAccepted": ["Cash", "Credit Card", "EFT", "Bank Transfer"],
+    "founder": [
+        {
+            "@type": "Person",
+            "name": "Kyle Cass",
+            "jobTitle": "Owner & Founder",
+            "description": "Hands-on owner who personally supervises every security installation to ensure rigorous standards and direct accountability."
+        }
+    ],
+    "employee": [
+        {
+            "@type": "Person",
+            "name": "Rashaad Steyn",
+            "jobTitle": "Chief Operating Officer"
+        }
     ],
     "areaServed": {
         "@type": "AdministrativeArea",
-        "name": "Western Cape"
+        "name": "Western Cape, South Africa"
     },
     "knowsAbout": [
-        "Paradox Security Systems",
-        "Hikvision CCTV",
-        "Dahua Technology",
-        "Nemtek Electric Fencing",
-        "Centurion Gate Motors",
+        "Security System Installation",
+        "IP CCTV Surveillance",
         "Biometric Access Control",
-        "Smart Home Automation"
+        "Electric Perimeter Fencing",
+        "Smart Alarm Systems",
+        "Gate Automation",
+        "Security System Integration",
+        "Load Shedding Backup Solutions",
+        "Perimeter Security Beams"
+    ],
+    "hasCredential": [
+        "Certified installer for Hikvision, AJAX, Paradox, Nemtek, Centurion and leading security brands"
     ],
     "potentialAction": {
         "@type": "CommunicateAction",
@@ -75,63 +91,22 @@ export const masterBusinessData = {
             "@type": "EntryPoint",
             "urlTemplate": "tel:+27629558559"
         },
-        "name": "Call for Security Assessment"
+        "name": "Call or WhatsApp for Free Security Assessment"
     },
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Security Services",
+        "name": "Professional Security System Installation Services",
         "itemListElement": [
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Intruder Detection and Alarm Systems"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "CCTV Surveillance Systems"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Access Control and Intercom Systems"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Electric Fencing and Perimeter Security"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Gate and Garage Automation"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Security Systems Integration"
-                }
-            },
-            {
-                "@type": "Offer",
-                "itemOffered": {
-                    "@type": "Service",
-                    "name": "Emergency Repairs"
-                }
-            }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alarm System Installation & Monitoring Integration" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IP CCTV & AI Surveillance Systems" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Biometric Access Control & Intercoms" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electric Fencing & Perimeter Security" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gate & Garage Automation" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Security System Integration & Smart Home" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Repairs, Upgrades & Maintenance Contracts" } }
         ]
-    }
+    },
+    "slogan": "Owner-managed premium security installations in Cape Town since 2015."
 }
 
 export function getBaseSchema() {
@@ -152,4 +127,29 @@ export function getBaseSchema() {
             }
         }
     ]
+}
+
+// Helper for additional page-specific schema (can be expanded)
+export function getLocalBusinessSchema() {
+    return {
+        "@context": "https://schema.org",
+        ...masterBusinessData
+    }
+}
+
+// Enhanced FAQ schema helper for pages with FAQs
+export function getFAQSchema(faqs: Array<{q: string, a: string}>) {
+    if (!faqs || faqs.length === 0) return null;
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+            }
+        }))
+    };
 }

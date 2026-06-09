@@ -4,6 +4,7 @@ import { motion, Variants } from 'framer-motion'
 import { Phone, Mail, MapPin, Clock, MessageSquare, Facebook, Instagram, Linkedin } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { PageHero } from '@/components/PageHero'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 // Lazy load the heavy form component
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
@@ -48,6 +49,7 @@ export function ContactClient() {
             {/* Main Content Area */}
             <div className="relative z-30 -mt-32 pb-16">
                 <div className="container mx-auto px-4 md:px-8">
+                    <Breadcrumbs items={[{ label: 'Contact Us', href: '/contact' }]} />
                     <motion.div 
                         initial="hidden"
                         whileInView="visible"

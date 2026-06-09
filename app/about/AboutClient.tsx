@@ -6,6 +6,7 @@ import { motion, Variants } from 'framer-motion'
 import { Shield, Zap, Award, BookOpen, ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { PageHero } from '@/components/PageHero'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 // Lazy load the Counter component for performance below the fold
 const Counter = dynamic(() => import('@/components/Counter').then(mod => mod.Counter), { ssr: false })
@@ -45,6 +46,7 @@ export function AboutClient() {
 
             {/* Main Content */}
             <div className="container mx-auto px-4 md:px-8 py-10 md:py-16">
+                <Breadcrumbs items={[{ label: 'About Us', href: '/about' }]} />
 
                 {/* Mission & Vision Split */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
@@ -105,7 +107,7 @@ export function AboutClient() {
                                     <div>
                                         <h4 className="font-bold text-brand-white text-base">Kyle Cass</h4>
                                         <p className="text-brand-electric font-black uppercase tracking-widest text-[10px] mb-1">Owner & Founder</p>
-                                        <p className="text-brand-steel text-xs leading-snug font-light">Hands-on supervision ensuring rigorous standards.</p>
+                                        <p className="text-brand-steel text-xs leading-snug font-light">Personally oversees every project for direct accountability and premium standards. Hands-on from assessment to final handover.</p>
                                     </div>
                                 </div>
 
@@ -121,7 +123,7 @@ export function AboutClient() {
                                     <div>
                                         <h4 className="font-bold text-brand-white text-base">Rashaad Steyn</h4>
                                         <p className="text-brand-electric font-black uppercase tracking-widest text-[10px] mb-1">Chief Operating Officer</p>
-                                        <p className="text-brand-steel text-xs leading-snug font-light">Overseeing operational excellence & growth.</p>
+                                        <p className="text-brand-steel text-xs leading-snug font-light">Overseeing operational excellence, client training, and growth across the Western Cape.</p>
                                     </div>
                                 </div>
                             </div>
@@ -229,6 +231,39 @@ export function AboutClient() {
                             </motion.div>
                         ))}
                     </motion.div>
+                </div>
+
+                {/* Our Commitments & Guarantees - E-E-A-T Section */}
+                <div className="mb-16">
+                    <motion.div 
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        variants={fadeInUp}
+                        className="text-center mb-8"
+                    >
+                        <span className="text-brand-electric font-black tracking-[0.2em] uppercase text-xs mb-2 block">Our Promise to You</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-brand-navy tracking-tighter">Commitments & Guarantees</h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-brand-navy text-brand-white p-8 rounded-[1.5rem] border border-brand-steel/20">
+                            <h3 className="text-xl font-bold mb-4 tracking-tight">Owner-Supervised Installations</h3>
+                            <p className="text-brand-steel text-sm leading-relaxed">Kyle Cass, Owner & Founder, personally oversees every project from the initial site assessment through to final commissioning. This ensures consistent premium quality and direct accountability on every job — no ghost installers, no shortcuts.</p>
+                        </div>
+                        <div className="bg-brand-navy text-brand-white p-8 rounded-[1.5rem] border border-brand-steel/20">
+                            <h3 className="text-xl font-bold mb-4 tracking-tight">Complete Training & Handover</h3>
+                            <p className="text-brand-steel text-sm leading-relaxed">We believe a security system is only as good as the people using it. Every installation includes thorough, hands-on training for you and your team. We fully configure your system, walk you through every feature, and provide clear documentation so you can operate it confidently from day one.</p>
+                        </div>
+                        <div className="bg-brand-navy text-brand-white p-8 rounded-[1.5rem] border border-brand-steel/20">
+                            <h3 className="text-xl font-bold mb-4 tracking-tight">Workmanship & Brand Warranties</h3>
+                            <p className="text-brand-steel text-sm leading-relaxed">All our installations come with a clear workmanship guarantee. We stand behind our work and use only premium, certified equipment from leading brands (Hikvision, AJAX, Paradox, Nemtek, Centurion and more), each backed by their own manufacturer warranties.</p>
+                        </div>
+                        <div className="bg-brand-navy text-brand-white p-8 rounded-[1.5rem] border border-brand-steel/20">
+                            <h3 className="text-xl font-bold mb-4 tracking-tight">Reliable Local Expertise</h3>
+                            <p className="text-brand-steel text-sm leading-relaxed">Based in Durbanville and serving the greater Cape Town and Western Cape region since 2015. We understand local conditions, load shedding realities, and property types. Our team delivers practical, robust solutions designed for South African environments.</p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Bottom CTA */}
