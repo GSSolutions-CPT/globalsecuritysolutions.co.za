@@ -73,8 +73,8 @@ export function ContactClient() {
                                 <div className="space-y-6">
                                     {[
                                         { icon: Phone, title: "Call or WhatsApp", desc: "Mon-Fri, 8am - 5pm", link: "062 955 8559", href: "https://wa.me/27629558559" },
-                                        { icon: Mail, title: "Email Headquarters", desc: "For quotes & rapid tactical queries", link: "sales@globalsecuritysolutions.co.za", href: "mailto:sales@globalsecuritysolutions.co.za" },
-                                        { icon: Mail, title: "Administration", desc: "Accounts & vendor relations", link: "admin@globalsecuritysolutions.co.za", href: "mailto:admin@globalsecuritysolutions.co.za" }
+                                        { icon: Mail, title: "Email Kyle Cass", desc: "Direct owner enquiries & quotes", link: "Kyle@globalsecuritysolutions.co.za", href: "mailto:Kyle@globalsecuritysolutions.co.za" },
+                                        { icon: Mail, title: "General Enquiries", desc: "Support, maintenance & scheduling", link: "info@globalsecuritysolutions.co.za", href: "mailto:info@globalsecuritysolutions.co.za" }
                                     ].map((item, idx) => (
                                         <div key={idx} className="flex items-start group/item">
                                             <div className="w-12 h-12 rounded-2xl bg-brand-white/5 border border-brand-steel/10 text-brand-electric flex items-center justify-center shrink-0 mr-5 group-hover/item:bg-brand-electric group-hover/item:text-brand-navy transition-all duration-300 shadow-inner">

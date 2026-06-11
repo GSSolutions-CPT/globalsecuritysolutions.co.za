@@ -40,12 +40,16 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const post = await getPost(params.slug)
     if (!post) return {}
 
+    // Prefer dedicated metaTitle/metaDescription from data when available for better SEO control
+    const metaTitle = (post as any).metaTitle || `${post.title} | Global Security Solutions`;
+    const metaDesc = (post as any).metaDescription || post.excerpt;
+
     return {
-        title: `${post.title} | Global Security Solutions Blog`,
-        description: post.excerpt,
+        title: metaTitle,
+        description: metaDesc,
         openGraph: {
             title: post.title,
-            description: post.excerpt,
+            description: metaDesc,
             type: 'article',
             images: post.coverImage ? [post.coverImage] : []
         }

@@ -35,7 +35,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     if (seoItem) {
         return {
             title: seoItem.title,
-            description: seoItem.description
+            description: seoItem.description,
+            alternates: { canonical: `https://globalsecuritysolutions.co.za/areas/${params.slug}` }
         }
     }
 
@@ -44,6 +45,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return {
         title: location.h1,
         description: location.description,
+        alternates: { canonical: `https://globalsecuritysolutions.co.za/areas/${params.slug}` }
     }
 }
 
@@ -167,7 +169,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                             <div>
                                 <h3 className="text-2xl font-bold text-brand-navy mb-8">Our Services in {location.suburb}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
+                                    <Link href="/services/alarm-system-installation" className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
                                         <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0 mr-4">
                                             <Siren className="w-6 h-6" />
                                         </div>
@@ -175,8 +177,8 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                             <h4 className="font-bold text-brand-navy mb-1">Smart Alarms</h4>
                                             <p className="text-sm text-brand-steel">Wireless detection & app control.</p>
                                         </div>
-                                    </div>
-                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
+                                    </Link>
+                                    <Link href="/services/cctv-surveillance-systems" className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
                                         <div className="w-12 h-12 rounded-xl bg-brand-electric/10 text-brand-electric flex items-center justify-center shrink-0 mr-4">
                                             <Cctv className="w-6 h-6" />
                                         </div>
@@ -184,8 +186,8 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                             <h4 className="font-bold text-brand-navy mb-1">CCTV Systems</h4>
                                             <p className="text-sm text-brand-steel">HD night vision & remote viewing.</p>
                                         </div>
-                                    </div>
-                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
+                                    </Link>
+                                    <Link href="/services/electric-fence-installations" className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
                                         <div className="w-12 h-12 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 mr-4">
                                             <Zap className="w-6 h-6" />
                                         </div>
@@ -193,8 +195,8 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                             <h4 className="font-bold text-brand-navy mb-1">Electric Fencing</h4>
                                             <p className="text-sm text-brand-steel">COC certified perimeter defense.</p>
                                         </div>
-                                    </div>
-                                    <div className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
+                                    </Link>
+                                    <Link href="/services/gate-and-garage-automation" className="flex items-start p-6 bg-white rounded-2xl shadow-sm border border-brand-steel/20 hover:border-brand-electric/40 transition-colors">
                                         <div className="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center shrink-0 mr-4">
                                             <KeyRound className="w-6 h-6" />
                                         </div>
@@ -202,31 +204,38 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                             <h4 className="font-bold text-brand-navy mb-1">Gate Automation</h4>
                                             <p className="text-sm text-brand-steel">Fast motors & anti-theft cages.</p>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
 
-                            {/* SEO Content Block */}
-                            <div className="prose max-w-none text-brand-slate">
-                                <h3 className="text-xl font-bold text-brand-navy">Why Residents Trust Us</h3>
-                                <p>
-                                    Whether you live in a freestanding home, a complex, or manage a business premises in <strong>{location.suburb}</strong>, security is non-negotiable.
-                                    Criminals often target properties with visible vulnerabilities. Our team provides rapid response installations tailored to the architectural style and risk profile of {location.suburb}.
-                                </p>
-                                <ul className="space-y-2 mt-4 not-prose">
-                                    <li className="flex items-center text-brand-slate">
-                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
-                                        Local technical support teams
-                                    </li>
-                                    <li className="flex items-center text-brand-slate">
-                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
-                                        Knowledge of local crime trends
-                                    </li>
-                                    <li className="flex items-center text-brand-slate">
-                                        <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
-                                        Rapid installation turnaround
-                                    </li>
-                                </ul>
+                            {/* SEO Content Block - Expanded unique local value */}
+                            <div className="space-y-8 text-brand-slate">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Security Challenges Specific to {location.suburb}</h2>
+                                    <p className="leading-relaxed">
+                                        {location.localContent}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Recommended Solutions for {location.suburb} Properties</h2>
+                                    <p className="mb-4 leading-relaxed">
+                                        We tailor every installation to the typical property types, vegetation, and crime patterns in {location.suburb}. Most clients benefit from a layered approach:
+                                    </p>
+                                    <ul className="space-y-3">
+                                        <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-brand-electric mt-1 shrink-0" /> <span><strong>Perimeter first:</strong> Certified electric fencing or dual-tech outdoor beams as the primary deterrent.</span></li>
+                                        <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-brand-electric mt-1 shrink-0" /> <span><strong>Visual verification:</strong> 4K Hikvision or Dahua CCTV with AI analytics and remote smartphone viewing.</span></li>
+                                        <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-brand-electric mt-1 shrink-0" /> <span><strong>Access control:</strong> Video intercoms or biometric readers at gates and pedestrian entries.</span></li>
+                                        <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 text-brand-electric mt-1 shrink-0" /> <span><strong>Load shedding resilience:</strong> All systems include quality battery or solar backup so protection never goes down.</span></li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Why {location.suburb} Residents Choose Global Security Solutions</h2>
+                                    <p className="leading-relaxed">
+                                        As a Durbanville-based, owner-managed company we respond quickly across the greater Cape Town area. Every project receives direct supervision from Kyle Cass, full hands-on training, and clear documentation. We only install premium, warrantied equipment from brands like Nemtek, Hikvision, AJAX and Centurion.
+                                    </p>
+                                </div>
                             </div>
 
                         </div>

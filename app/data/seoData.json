@@ -2,8 +2,8 @@
     "coreWebsitePages": [
         {
             "page": "Home",
-            "title": "Security System Installations Cape Town | Global Security Solutions",
-            "description": "Expert security system installations in Cape Town. We offer alarms, CCTV, and electric fencing. Get a free quote today from Global Security Solutions."
+            "title": "CCTV & Electric Fencing Installation Cape Town | Global Security Solutions",
+            "description": "Owner-managed security experts in Cape Town. Certified electric fencing, AI CCTV, smart alarms with load shedding protection. Free risk assessment & quote."
         },
         {
             "page": "About Us",
@@ -12,8 +12,8 @@
         },
         {
             "page": "Contact Us",
-            "title": "Contact Us | Security System Quotes Cape Town",
-            "description": "Get a free quote on your security needs in Cape Town. Call 062 955 8559 or email Kyle for professional service and expert advice on all security systems."
+            "title": "Contact | Free Security Risk Assessment Cape Town",
+            "description": "Call/WhatsApp 062 955 8559 or book free on-site risk assessment. Durbanville-based experts for CCTV, fencing & alarms across Cape Town & Western Cape."
         },
         {
             "page": "AI Security Advisor",
@@ -34,8 +34,8 @@
     "primaryServicePages": [
         {
             "page": "Alarm System Installation",
-            "title": "Alarm System Installation Cape Town | Global Security Solutions",
-            "description": "Stop intruders in their tracks with 24/7 monitored alarm systems. We install wireless and wired solutions from AJAX, IDS, and Paradox for ultimate peace of mind.",
+            "title": "Alarm System Installation Cape Town | AJAX & Paradox",
+            "description": "Wireless AJAX & Paradox alarm installation Cape Town with app control and battery backup for load shedding. Pet-immune sensors. Free quote.",
             "longDescription": "An alarm system is the heartbeat of your property's security. We don't just stick sensors on doors; we design a comprehensive trap-zone strategy. Using top-tier brands like AJAX and Paradox, our systems are fully app-controllable, allowing you to arm, disarm, and check status from anywhere. Whether you need a simple wired upgrade or a fully wireless smart-home integration, our certified technicians ensure zero false alarms and maximum reliability.",
             "iconPath": "/icons/alarm-system-installation.png",
             "heroImage": "/services/heroes/alarm-system.png",
@@ -87,8 +87,8 @@
         },
         {
             "page": "CCTV Surveillance Systems",
-            "title": "CCTV Surveillance Cape Town | Camera System Installation",
-            "description": "Watch over your property from anywhere in the world. Our high-definition CCTV systems offer crystal-clear night vision and instant mobile alerts.",
+            "title": "CCTV Installation Cape Town | Hikvision AI Cameras",
+            "description": "Hikvision 4K AI CCTV installation Cape Town. Crystal night vision, human/vehicle detection, remote app access. Free risk assessment for homes & businesses.",
             "longDescription": "Modern CCTV is about more than just recording crime; it's about prevention. We install AI-powered cameras capable of distinguishing between humans, vehicles, and pets, drastically reducing false alerts. From 4K residential dome cameras to long-range PTZ units for commercial perimeters, our Hikvision and Dahua systems give you crystal clear vision day or night, directly to your smartphone.",
             "iconPath": "/icons/cctv-surveillance-systems.png",
             "heroImage": "/services/heroes/cctv.jpg",
@@ -234,8 +234,8 @@
         },
         {
             "page": "Electric Fence Installations",
-            "title": "Electric Fence Installations Cape Town | Professional Setup",
-            "description": "Your first line of defense. Our certified electric fencing provides a powerful deterrent against intruders, keeping your perimeter secure around the clock.",
+            "title": "Electric Fence Installation Cape Town | Nemtek Certified",
+            "description": "Certified Nemtek electric fence installation in Cape Town. COC included. Powerful perimeter deterrent with load shedding backup. Free assessment.",
             "longDescription": "A robust electric fence is the ultimate psychological and physical deterrent. We are certified Nemtek installers, ensuring every inch of your perimeter is compliant with South African safety laws (COC provided). We use multi-zone energizers, heavy-duty suppression monitoring, and anti-climb brackets to ensure your boundary is impenetrable and fully monitored.",
             "iconPath": "/icons/electric-fence-installations.png",
             "heroImage": "/services/heroes/electric-fence.png",
@@ -866,8 +866,8 @@
     "serviceAreaPages": [
         {
             "page": "Durbanville",
-            "title": "Durbanville Security Services | Alarms & CCTV Installation",
-            "description": "Expert security system installation in Durbanville. Global Security Solutions provides premium alarm, fencing, and CCTV services for your home and business."
+            "title": "Durbanville Security | CCTV, Fencing & Alarms Cape Town",
+            "description": "Local Durbanville experts for certified electric fencing, Hikvision CCTV and smart alarms. Owner-managed with free risk assessment. Serving all estates."
         },
         {
             "page": "Blouberg",
@@ -876,13 +876,13 @@
         },
         {
             "page": "Stellenbosch",
-            "title": "Stellenbosch Security Services | Estate Security Experts",
-            "description": "Top-tier security installations for Stellenbosch estates and homes. Expert alarm and fencing setup by Global Security Solutions."
+            "title": "Stellenbosch Estate Security | Fencing, CCTV & Access Control",
+            "description": "Premium security for Stellenbosch wine farms and estates. Nemtek fencing, long-range CCTV, biometric access. Free on-site assessment."
         },
         {
             "page": "Somerset West",
-            "title": "Somerset West Security Services | Home & Business Security",
-            "description": "Professional security systems in Somerset West. We offer alarms, fencing, and CCTV for 24/7 safety and peace of mind. Get a free quote today."
+            "title": "Somerset West Security | Alarms, Fencing & CCTV Installation",
+            "description": "Somerset West security experts. Solar-backed systems for estates and winelands properties. Certified installs with free risk assessment."
         },
         {
             "page": "Milnerton",
@@ -896,8 +896,8 @@
         },
         {
             "page": "Table View",
-            "title": "Table View Security Services | Gate Automation & Alarms",
-            "description": "Reliable security services and gate automation in Table View. Get a free quote from Global Security Solutions for your home or business today."
+            "title": "Table View Security Installation | Wind-Resistant Fencing & Alarms",
+            "description": "Table View security specialists. Wind-proof gate motors, salt-resistant CCTV and perimeter alarms. Free assessment for coastal homes."
         },
         {
             "page": "Plattekloof",

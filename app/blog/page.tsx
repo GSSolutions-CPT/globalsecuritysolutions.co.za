@@ -3,8 +3,8 @@ import { supabase } from '@/utils/supabase/client'
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Security Blog | Global Security Solutions',
-    description: 'Read the latest news and tips on home and business security in Cape Town.',
+    title: 'Security Blog Cape Town | Tips on Alarms, CCTV & Perimeter Protection',
+    description: 'Practical guides and local insights on CCTV installation, electric fencing, alarms and load shedding security for Cape Town homes and businesses.',
 }
 
 export const revalidate = 0

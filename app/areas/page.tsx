@@ -4,8 +4,8 @@ import locationData from '@/app/data/locationData.json'
 import { MapPin, ArrowRight, Navigation } from 'lucide-react'
 
 export const metadata = {
-    title: 'Service Areas | Global Security Solutions',
-    description: 'We provide expert security installations across the Western Cape. Find your area to learn more about our local services.',
+    title: 'Security Installation Areas Cape Town & Western Cape | Global Security Solutions',
+    description: 'Expert CCTV, electric fencing and alarm installations across Cape Town suburbs and Winelands. Find your area for local security specialists.',
 }
 
 export default function AreasIndexPage() {
@@ -31,8 +31,8 @@ export default function AreasIndexPage() {
                         <span>Western Cape Coverage</span>
                     </div>
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
-                        Security Where <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric">You Need It</span>
+                        Security Installation Across <br />
+                        Cape Town &amp; the Western Cape
                     </h1>
                     <p className="text-xl text-brand-steel max-w-2xl mx-auto leading-relaxed mb-12">
                         From the Atlantic Seaboard to the Winelands. We bring expert security installations to your doorstep.

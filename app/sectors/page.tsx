@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { SectorsClient } from './SectorsClient'
 
 export const metadata: Metadata = {
-    title: 'Security Sectors | Global Security Solutions',
-    description: 'Specialized security solutions for residential, commercial, industrial, agricultural, and estate sectors in Cape Town.',
+    title: 'Security Solutions by Sector | Residential, Farms, Estates, Schools & Commercial Cape Town',
+    description: 'Bespoke security for Durbanville homes, Stellenbosch farms, Cape Town estates, schools and businesses. Owner-managed, load-shedding ready, certified installations.',
 }
 
 export default function SectorsPage() {

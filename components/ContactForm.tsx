@@ -100,19 +100,20 @@ export function ContactForm() {
     return (
         <div className="bg-white p-8 rounded-xl shadow-lg border border-brand-steel/20">
             <h3 className="text-2xl font-bold mb-6 text-brand-navy">Get a Free Security Strategy Session</h3>
+
             {success && (
-                <div className="bg-green-50 border-l-4 border-green-500 text-green-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
-                    <CheckCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-green-600" />
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-5 rounded-2xl mb-6 flex items-start">
+                    <CheckCircle className="w-6 h-6 mr-3 mt-0.5 shrink-0 text-emerald-600" />
                     <div>
-                        <h4 className="font-bold mb-1">Request Received!</h4>
-                        <p className="text-green-700">Thank you! One of our security experts will contact you shortly.</p>
+                        <h4 className="font-semibold mb-0.5">Thank you — your request has been received.</h4>
+                        <p className="text-emerald-800/90 text-sm">A security specialist will contact you shortly to arrange your free assessment. We typically respond the same business day.</p>
                     </div>
                 </div>
             )}
             {error && (
-                <div className="bg-red-50 border-l-4 border-red-500 text-red-800 p-6 rounded-r-xl mb-6 flex items-start shadow-sm">
-                    <AlertCircle className="w-6 h-6 mr-4 mt-0.5 shrink-0 text-red-600" />
-                    <div><h4 className="font-bold mb-1">Submission Error</h4><p>{error}</p></div>
+                <div className="bg-amber-50 border border-amber-200 text-amber-900 p-5 rounded-2xl mb-6 flex items-start">
+                    <AlertCircle className="w-6 h-6 mr-3 mt-0.5 shrink-0 text-amber-600" />
+                    <div><h4 className="font-semibold mb-0.5">There was a problem submitting your request</h4><p className="text-sm">{error}</p></div>
                 </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-4">

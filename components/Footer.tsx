@@ -30,7 +30,7 @@ export function Footer() {
                             </li>
                             <li className="flex items-center gap-2">
                                 <Mail className="w-4 h-4 text-brand-electric shrink-0" />
-                                <a href="mailto:sales@globalsecuritysolutions.co.za" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors truncate">sales@globalsecuritysolutions.co.za</a>
+                                <a href="mailto:Kyle@globalsecuritysolutions.co.za" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors truncate">Kyle@globalsecuritysolutions.co.za</a>
                             </li>
                         </ul>
 

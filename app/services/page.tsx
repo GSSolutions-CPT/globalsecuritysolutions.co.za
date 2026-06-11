@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { ServicesClient } from './ServicesClient'
 
 export const metadata: Metadata = {
-    title: 'All Security Services | Global Security Solutions',
-    description: 'Explore our full range of security services including Alarms, CCTV, Electric Fencing, and Access Control in Cape Town.',
+    title: 'Security Services Cape Town | Alarms, CCTV, Electric Fencing & Access Control',
+    description: 'Premium certified security installations in Cape Town: Smart alarms (Ajax, Paradox), 4K IP CCTV (Hikvision), Nemtek electric fencing, biometric access control. Free risk assessment.',
 }
 
 export default function ServicesIndexPage() {

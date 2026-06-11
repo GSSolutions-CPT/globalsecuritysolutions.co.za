@@ -8,7 +8,7 @@ export const masterBusinessData = {
     ],
     "url": "https://www.globalsecuritysolutions.co.za/",
     "telephone": "+27 62 955 8559",
-    "email": "sales@globalsecuritysolutions.co.za",
+    "email": "Kyle@globalsecuritysolutions.co.za",
     "description": "Owner-managed security system installation company in Durbanville, Cape Town. Established 2015. Kyle Cass personally oversees every professional installation of CCTV, alarms, electric fencing, access control and integrated security solutions across the Western Cape. Hands-on training and complete handover included on every project.",
     "address": {
         "@type": "PostalAddress",

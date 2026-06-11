@@ -9,8 +9,8 @@ export const revalidate = 60
 const pageData = seoData.trustAndSupportPages.find(p => p.page === "Project Gallery")
 
 export const metadata: Metadata = {
-    title: pageData?.title || 'Project Gallery | Global Security Solutions',
-    description: pageData?.description || 'View our recent security installations in Cape Town.',
+    title: 'Project Gallery | Real Security Installations Cape Town | Global Security Solutions',
+    description: 'Featured premium security projects: Chere Botha School, luxury estates in Hout Bay & Constantia, wine farms, commercial premises. Owner-supervised CCTV, fencing & access control.',
 }
 
 async function getProjects() {
