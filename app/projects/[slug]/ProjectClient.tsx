@@ -23,7 +23,17 @@ const fadeInUp: Variants = {
     }
 }
 
-export default function ProjectClient({ project }: { project: any }) {
+interface Project {
+  id?: string;
+  slug?: string;
+  image_url?: string | null;
+  title: string;
+  category?: string;
+  desc?: string;
+  description?: string;
+}
+
+export default function ProjectClient({ project }: { project: Project }) {
     return (
         <div className="bg-brand-white min-h-screen font-sans selection:bg-brand-electric selection:text-brand-navy">
             <PageHero

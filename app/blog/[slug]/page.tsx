@@ -1,7 +1,7 @@
 import blogData from '@/app/data/blogData.json'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Calendar, BookOpen } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 import { ShareButton } from '@/components/ShareButton'
 import { ScrollProgress } from '@/components/ScrollProgress'
 // import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -41,8 +41,9 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     if (!post) return {}
 
     // Prefer dedicated metaTitle/metaDescription from data when available for better SEO control
-    const metaTitle = (post as any).metaTitle || `${post.title} | Global Security Solutions`;
-    const metaDesc = (post as any).metaDescription || post.excerpt;
+    const postWithMeta = post as { metaTitle?: string; metaDescription?: string; title: string; excerpt?: string; coverImage?: string };
+    const metaTitle = postWithMeta.metaTitle || `${post.title} | Global Security Solutions`;
+    const metaDesc = postWithMeta.metaDescription || post.excerpt;
 
     return {
         title: metaTitle,

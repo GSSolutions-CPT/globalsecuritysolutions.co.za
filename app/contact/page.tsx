@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { ContactClient } from './ContactClient'
-import seoData from '@/app/data/seoData.json'
 
 export const metadata: Metadata = {
     title: 'Contact Global Security Solutions | Free Risk Assessment Cape Town',

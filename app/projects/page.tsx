@@ -1,12 +1,9 @@
 import { supabase } from "@/utils/supabase/client";
-import seoData from '@/app/data/seoData.json'
 import type { Metadata } from 'next'
 import ProjectsClient from './ProjectsClient'
 
 // Revalidate every 60 seconds to improve performance while keeping data fresh
 export const revalidate = 60
-
-const pageData = seoData.trustAndSupportPages.find(p => p.page === "Project Gallery")
 
 export const metadata: Metadata = {
     title: 'Project Gallery | Real Security Installations Cape Town | Global Security Solutions',

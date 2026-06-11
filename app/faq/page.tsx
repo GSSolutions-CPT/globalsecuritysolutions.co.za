@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Plus, Minus, Search, MessageCircle, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import faqData from '@/app/data/faqData.json'
 import { PageHero } from '@/components/PageHero'

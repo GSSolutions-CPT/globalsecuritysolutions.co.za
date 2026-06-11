@@ -3,10 +3,8 @@ import React from 'react'
 import { Metadata } from 'next'
 import { CheckCircle2, Bot, CalendarDays, ArrowRight, ShieldCheck, HardHat } from 'lucide-react'
 
-import seoData from '@/app/data/seoData.json'
 import Link from 'next/link'
 import { PageHero } from '@/components/PageHero'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
     loading: () => <div className="h-96 w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
@@ -115,7 +113,7 @@ export default function FreeAuditPage() {
                             <div>
                                 <h2 className="text-4xl font-black text-brand-navy mb-6 tracking-tight">What We Check On-Site</h2>
                                 <p className="text-brand-slate text-lg leading-relaxed mb-8 font-light">
-                                    Our technicians don't just look at the walls; we look for the path of least resistance that a criminal would take. Every audit is supervised to the standards set by owner Kyle Cass, with a focus on practical, reliable recommendations and clear handover of findings.
+                                    Our technicians don&apos;t just look at the walls; we look for the path of least resistance that a criminal would take. Every audit is supervised to the standards set by owner Kyle Cass, with a focus on practical, reliable recommendations and clear handover of findings.
                                 </p>
                             </div>
 

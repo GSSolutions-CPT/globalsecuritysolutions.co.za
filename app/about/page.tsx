@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import seoData from '@/app/data/seoData.json'
 import { AboutClient } from './AboutClient'
 
 export const metadata: Metadata = {
