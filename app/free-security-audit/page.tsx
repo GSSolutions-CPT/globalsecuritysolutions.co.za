@@ -1,4 +1,4 @@
-﻿import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import { Metadata } from 'next'
 import { CheckCircle2, Bot, CalendarDays, ArrowRight, ShieldCheck, HardHat } from 'lucide-react'
@@ -9,8 +9,6 @@ import { PageHero } from '@/components/PageHero'
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { 
     loading: () => <div className="h-96 w-full animate-pulse bg-brand-navy/5 rounded-2xl border border-brand-steel/10 flex items-center justify-center text-brand-steel">Loading secure form...</div>
 });
-
-const pageData = seoData.trustAndSupportPages.find(p => p.page === "Free Security Audit")
 
 export const metadata: Metadata = {
     title: 'Free Security Risk Assessment Cape Town | Global Security Solutions',

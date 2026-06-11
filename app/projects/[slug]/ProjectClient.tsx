@@ -31,6 +31,11 @@ interface Project {
   category?: string;
   desc?: string;
   description?: string;
+  before_gallery?: string[];
+  before_image_url?: string;
+  after_gallery?: string[];
+  after_image_url?: string;
+  created_at?: string;
 }
 
 export default function ProjectClient({ project }: { project: Project }) {
@@ -112,7 +117,7 @@ export default function ProjectClient({ project }: { project: Project }) {
                             )}
                             <span className="inline-flex items-center px-4 py-2 rounded-full bg-brand-steel/10 border border-brand-steel/20 text-brand-steel text-sm font-medium backdrop-blur-sm">
                                 <Calendar className="w-4 h-4 mr-2" />
-                                {new Date(project.created_at).toLocaleDateString()}
+                                {project.created_at ? new Date(project.created_at).toLocaleDateString() : 'N/A'}
                             </span>
                         </motion.div>
 
