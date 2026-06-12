@@ -1,5 +1,4 @@
 // @ts-nocheck
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/portal/utils'; // Moved or import from relative if utils is in same dir
