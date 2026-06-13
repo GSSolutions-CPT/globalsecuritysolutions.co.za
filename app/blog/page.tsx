@@ -5,6 +5,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Security Blog Cape Town | Tips on Alarms, CCTV & Perimeter Protection',
     description: 'Practical guides and local insights on CCTV installation, electric fencing, alarms and load shedding security for Cape Town homes and businesses.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/blog',
+    },
 }
 
 export const revalidate = 0

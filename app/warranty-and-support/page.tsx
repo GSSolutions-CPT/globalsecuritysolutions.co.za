@@ -16,6 +16,9 @@ const pageData = seoData.trustAndSupportPages.find(p => p.page === "Warranty and
 export const metadata: Metadata = {
     title: pageData?.title || 'Warranty and Support | Global Security Solutions',
     description: pageData?.description || 'Learn about our installation warranties and after-sales support.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/warranty-and-support',
+    },
 }
 
 export default function WarrantyPage() {

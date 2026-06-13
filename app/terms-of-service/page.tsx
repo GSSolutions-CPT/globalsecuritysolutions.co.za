@@ -19,6 +19,9 @@ import {
 export const metadata: Metadata = {
     title: 'Terms and Conditions | Global Security Solutions',
     description: 'Terms and conditions governing the provision and installation of security systems by Global Security Solutions.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/terms-of-service',
+    },
 }
 
 export default function TermsOfServicePage() {
