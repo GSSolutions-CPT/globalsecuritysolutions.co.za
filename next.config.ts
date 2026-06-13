@@ -11,7 +11,16 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // --- www → non-www canonical redirect ---
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.globalsecuritysolutions.co.za' }],
+        destination: 'https://globalsecuritysolutions.co.za/:path*',
+        permanent: true,
+      },
+
       // --- New Localized Hub Migration Redirects ---
+
       { source: '/services/cctv-surveillance-systems', destination: '/locations/durbanville/cctv-installation', permanent: true },
       { source: '/services/alarm-system-installation', destination: '/locations/durbanville/alarm-systems', permanent: true },
       { source: '/services/access-control-solutions', destination: '/locations/durbanville/access-control', permanent: true },

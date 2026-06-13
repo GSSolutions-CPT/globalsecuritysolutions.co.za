@@ -35,11 +35,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/privacy-policy',
         '/terms-of-service',
         '/links',
+        // Durbanville location hub pages
+        '/locations/durbanville/cctv-installation',
+        '/locations/durbanville/alarm-systems',
+        '/locations/durbanville/access-control',
     ].map((route) => ({
         url: `${BASE_URL}${route}`,
         lastModified: new Date(),
         changeFrequency: (route === '' ? 'daily' : 'weekly') as 'daily' | 'weekly',
-        priority: route === '' ? 1 : (route === '/contact' || route === '/free-security-audit') ? 0.9 : 0.8,
+        priority: route === '' ? 1 : (route === '/contact' || route === '/free-security-audit') ? 0.9 : route.startsWith('/locations/') ? 0.9 : 0.8,
     }))
 
     // Dynamic Services
