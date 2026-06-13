@@ -1,11 +1,15 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import locationData from '@/app/data/locationData.json'
 import { MapPin, ArrowRight, Navigation } from 'lucide-react'
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Security Installation Areas Cape Town & Western Cape | Global Security Solutions',
     description: 'Expert CCTV, electric fencing and alarm installations across Cape Town suburbs and Winelands. Find your area for local security specialists.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/areas',
+    },
 }
 
 export default function AreasIndexPage() {

@@ -1,5 +1,12 @@
+import type { Metadata } from 'next'
 import { MarketingBanner } from '@/components/MarketingBanner'
 import { HomeClient } from './HomeClient'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://globalsecuritysolutions.co.za',
+  },
+}
 
 export default function Home() {
   return (

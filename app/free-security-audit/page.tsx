@@ -13,7 +13,11 @@ const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod =>
 export const metadata: Metadata = {
     title: 'Free Security Risk Assessment Cape Town | Global Security Solutions',
     description: 'Book a no-obligation professional risk assessment or use our instant AI advisor. Identify vulnerabilities and receive a custom quote for alarms, CCTV, fencing and access control.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/free-security-audit',
+    },
 }
+
 
 export default function FreeAuditPage() {
     return (

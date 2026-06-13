@@ -13,7 +13,6 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans", dis
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalsecuritysolutions.co.za'),
   alternates: {
-    canonical: 'https://globalsecuritysolutions.co.za',
     languages: {
       'en-ZA': 'https://globalsecuritysolutions.co.za',
     },

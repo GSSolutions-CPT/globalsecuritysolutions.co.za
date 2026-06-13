@@ -8,7 +8,11 @@ export const revalidate = 60
 export const metadata: Metadata = {
     title: 'Project Gallery | Real Security Installations Cape Town | Global Security Solutions',
     description: 'Featured premium security projects: Chere Botha School, luxury estates in Hout Bay & Constantia, wine farms, commercial premises. Owner-supervised CCTV, fencing & access control.',
+    alternates: {
+        canonical: 'https://globalsecuritysolutions.co.za/projects',
+    },
 }
+
 
 async function getProjects() {
     const { data } = await supabase
