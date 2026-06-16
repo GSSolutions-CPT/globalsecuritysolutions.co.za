@@ -16,9 +16,13 @@ import { ImportProductsDialog } from '@/components/portal/ImportProductsDialog'
 import { Badge } from '@/components/portal/ui/badge'
 import { cn } from '@/lib/portal/utils'
 import { Product } from '@/types/crm'
+import { useSettings } from '@/lib/portal/use-settings'
+import { countLowStockProducts, getDefaultReorderLevel } from '@/lib/portal/product-stock'
+import { isLowStockProduct } from '@/lib/portal/chart-utils'
 
 function ProductsContent() {
     const { formatCurrency } = useCurrency()
+    const { settings } = useSettings()
     const [products, setProducts] = useState<Product[]>([])
     const [searchTerm, setSearchTerm] = useState('')
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -31,6 +35,8 @@ function ProductsContent() {
         category: '',
         retail_price: '',
         cost_price: '',
+        stock_quantity: '',
+        reorder_level: '',
         description: ''
     })
 
@@ -92,9 +98,14 @@ function ProductsContent() {
 
         try {
             const payload = {
-                ...formData,
+                name: formData.name,
+                code: formData.code,
+                category: formData.category,
+                description: formData.description,
                 retail_price: parseFloat(formData.retail_price),
-                cost_price: parseFloat(formData.cost_price)
+                cost_price: parseFloat(formData.cost_price),
+                stock_quantity: formData.stock_quantity === '' ? null : parseInt(formData.stock_quantity, 10),
+                reorder_level: formData.reorder_level === '' ? null : parseInt(formData.reorder_level, 10),
             }
 
             if (editingProduct) {
@@ -132,7 +143,7 @@ function ProductsContent() {
 
             setIsDialogOpen(false)
             setEditingProduct(null)
-            setFormData({ name: '', code: '', category: '', retail_price: '', cost_price: '', description: '' })
+            setFormData({ name: '', code: '', category: '', retail_price: '', cost_price: '', stock_quantity: '', reorder_level: '', description: '' })
             fetchProducts()
         } catch (error) {
             console.error('Error saving product:', error)
@@ -150,6 +161,8 @@ function ProductsContent() {
             category: product.category || '',
             retail_price: product.retail_price?.toString() || '',
             cost_price: product.cost_price?.toString() || '',
+            stock_quantity: product.stock_quantity?.toString() || '',
+            reorder_level: product.reorder_level?.toString() || '',
             description: product.description || ''
         })
         setIsDialogOpen(true)
@@ -194,7 +207,8 @@ function ProductsContent() {
     }
 
     const totalValue = products.reduce((sum, p) => sum + (p.retail_price || 0), 0)
-    const lowStockCount = 0
+    const defaultReorderLevel = getDefaultReorderLevel(settings)
+    const lowStockCount = countLowStockProducts(products, settings)
     const totalProducts = products.length
 
     return (
@@ -232,7 +246,9 @@ function ProductsContent() {
                             <AlertTriangle className="h-4 w-4 opacity-75" />
                         </p>
                         <h3 className="text-3xl font-bold mt-2">{lowStockCount}</h3>
-                        <p className="text-amber-100/80 text-xs mt-1">items needing attention</p>
+                        <p className="text-amber-100/80 text-xs mt-1">
+                            {lowStockCount > 0 ? 'items at or below reorder level' : 'inventory tracking enabled'}
+                        </p>
                     </div>
                     <AlertTriangle className="absolute right-[-20px] bottom-[-20px] h-32 w-32 text-white opacity-10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
                 </div>
@@ -260,7 +276,7 @@ function ProductsContent() {
                                 setIsDialogOpen(open)
                                 if (!open) {
                                     setEditingProduct(null)
-                                    setFormData({ name: '', code: '', category: '', retail_price: '', cost_price: '', description: '' })
+                                    setFormData({ name: '', code: '', category: '', retail_price: '', cost_price: '', stock_quantity: '', reorder_level: '', description: '' })
                                 }
                             }}
                         >
@@ -303,6 +319,30 @@ function ProductsContent() {
                                                     id="category"
                                                     value={formData.category}
                                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: e.target.value })}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="stock_quantity">Stock Quantity</Label>
+                                                <Input
+                                                    id="stock_quantity"
+                                                    type="number"
+                                                    min="0"
+                                                    value={formData.stock_quantity}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, stock_quantity: e.target.value })}
+                                                    placeholder="Optional"
+                                                />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="reorder_level">Reorder Level</Label>
+                                                <Input
+                                                    id="reorder_level"
+                                                    type="number"
+                                                    min="0"
+                                                    value={formData.reorder_level}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, reorder_level: e.target.value })}
+                                                    placeholder={`Default ${defaultReorderLevel}`}
                                                 />
                                             </div>
                                         </div>
@@ -391,11 +431,18 @@ function ProductsContent() {
                                         <CardTitle className="text-lg font-semibold text-brand-navy dark:text-brand-steel/20">{product.name}</CardTitle>
                                         <CardDescription className="text-xs mt-1">{product.code || 'No Code'}</CardDescription>
                                     </div>
-                                    {product.category && (
-                                        <Badge variant="secondary" className="bg-brand-electric/10 text-brand-electric dark:bg-indigo-950/30 dark:text-brand-electric/60 pointer-events-none">
-                                            {product.category}
-                                        </Badge>
-                                    )}
+                                    <div className="flex flex-col items-end gap-1">
+                                        {product.category && (
+                                            <Badge variant="secondary" className="bg-brand-electric/10 text-brand-electric dark:bg-indigo-950/30 dark:text-brand-electric/60 pointer-events-none">
+                                                {product.category}
+                                            </Badge>
+                                        )}
+                                        {isLowStockProduct(product, defaultReorderLevel) && (
+                                            <Badge className="bg-amber-500 text-white pointer-events-none">
+                                                Low Stock
+                                            </Badge>
+                                        )}
+                                    </div>
                                 </div>
                             </CardHeader>
                             <CardContent>
@@ -406,6 +453,13 @@ function ProductsContent() {
                                         </p>
                                     ) : (
                                         <div className="min-h-[40px]"></div>
+                                    )}
+
+                                    {product.stock_quantity !== undefined && product.stock_quantity !== null && (
+                                        <div className="flex items-center justify-between text-sm bg-brand-white/70 dark:bg-brand-navy/40 rounded-lg px-3 py-2">
+                                            <span className="text-muted-foreground">In stock</span>
+                                            <span className="font-semibold">{product.stock_quantity}</span>
+                                        </div>
                                     )}
 
                                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-brand-steel/20 dark:border-brand-navy">

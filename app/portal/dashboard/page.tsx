@@ -6,19 +6,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Banknote, TrendingUp, Users, AlertCircle, Activity, FileText, Receipt, Briefcase, Package, FileSignature, Plus, UserPlus, Phone } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { useCurrency } from '@/lib/portal/use-currency'
-import FinancialCharts from './FinancialCharts'
+import FinancialCharts from '@/components/portal/FinancialCharts'
+import {
+    calculatePercentChange,
+    formatMonthLabel,
+    formatPercentChange,
+    getMonthSortKey,
+    getTrendColor,
+    sortMonthlyChartData,
+} from '@/lib/portal/chart-utils'
 
 const getActivityConfig = (type: string) => {
     const t = (type || '').toLowerCase()
-    if (t.includes('quote request')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/clients' }
-    if (t.includes('callback request')) return { icon: Phone, color: 'text-emerald-500', path: '/portal/clients' }
+    if (t.includes('quote request')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/requests' }
+    if (t.includes('site visit')) return { icon: Briefcase, color: 'text-amber-500', path: '/portal/requests' }
+    if (t.includes('callback request')) return { icon: Phone, color: 'text-brand-steel', path: '/portal/clients' }
+    if (t.includes('request')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/requests' }
     if (t.includes('quotation') || t.includes('quote')) return { icon: FileText, color: 'text-brand-electric', path: '/portal/sales' }
-    if (t.includes('invoice')) return { icon: Receipt, color: 'text-purple-500', path: '/portal/sales' }
-    if (t.includes('payment')) return { icon: Banknote, color: 'text-green-500', path: '/portal/sales' }
-    if (t.includes('job')) return { icon: Briefcase, color: 'text-orange-500', path: '/portal/jobs' }
-    if (t.includes('client')) return { icon: Users, color: 'text-teal-500', path: '/portal/clients' }
+    if (t.includes('invoice')) return { icon: Receipt, color: 'text-brand-steel', path: '/portal/sales' }
+    if (t.includes('payment')) return { icon: Banknote, color: 'text-brand-electric', path: '/portal/sales' }
+    if (t.includes('job')) return { icon: Briefcase, color: 'text-brand-steel', path: '/portal/jobs' }
+    if (t.includes('client')) return { icon: Users, color: 'text-brand-electric', path: '/portal/clients' }
     if (t.includes('purchase order') || t.includes('order')) return { icon: Package, color: 'text-brand-electric', path: '/portal/sales' }
-    if (t.includes('contract')) return { icon: FileSignature, color: 'text-cyan-500', path: '/portal/contracts' }
+    if (t.includes('contract')) return { icon: FileSignature, color: 'text-brand-steel', path: '/portal/contracts' }
     return { icon: Activity, color: 'text-muted-foreground', path: '/portal/dashboard' }
 }
 
@@ -29,13 +39,15 @@ export default function DashboardPage() {
         monthlyRevenue: 0,
         monthlyProfit: 0,
         newClients: 0,
-        overdueInvoices: 0
+        overdueInvoices: 0,
+        revenueTrend: null as number | null,
+        profitTrend: null as number | null,
     })
     interface Client { id: string; created_at: string; metadata?: Record<string, unknown>; name?: string; company?: string; email?: string; }
     interface Invoice { id: string; date_created: string; status: string; total_amount: string; profit_estimate: string; }
     interface Expense { id: string; date: string; amount: string; type?: string; }
     interface ActivityLog { id: string; type: string; description: string; timestamp: string; }
-    interface MonthlyData { month: string; revenue: number; profit: number; expenses: number; }
+    interface MonthlyData { month: string; sortKey: string; revenue: number; profit: number; expenses: number; }
     interface ExpenseBreakdown { name: string; value: number; }
 
     const [monthlyData, setMonthlyData] = useState<MonthlyData[]>([])
@@ -114,7 +126,31 @@ export default function DashboardPage() {
                 .filter(inv => targetStatuses.includes(inv.status))
                 .reduce((sum, inv) => sum + (parseFloat(inv.profit_estimate) || 0), 0)
 
-            setMetrics(prev => ({ ...prev, monthlyRevenue, monthlyProfit }))
+            const previousMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+            const previousMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999)
+
+            const previousMonthInvoices = rawInvoices.filter(inv => {
+                const invoiceDate = new Date(inv.date_created)
+                return invoiceDate >= previousMonthStart &&
+                    invoiceDate <= previousMonthEnd &&
+                    inv.status !== 'Draft'
+            })
+
+            const previousMonthRevenue = previousMonthInvoices
+                .filter(inv => targetStatuses.includes(inv.status))
+                .reduce((sum, inv) => sum + (parseFloat(inv.total_amount) || 0), 0)
+
+            const previousMonthProfit = previousMonthInvoices
+                .filter(inv => targetStatuses.includes(inv.status))
+                .reduce((sum, inv) => sum + (parseFloat(inv.profit_estimate) || 0), 0)
+
+            setMetrics(prev => ({
+                ...prev,
+                monthlyRevenue,
+                monthlyProfit,
+                revenueTrend: calculatePercentChange(monthlyRevenue, previousMonthRevenue),
+                profitTrend: calculatePercentChange(monthlyProfit, previousMonthProfit),
+            }))
 
             // 2. Prepare Chart Data
             const data: Record<string, MonthlyData> = {}
@@ -123,27 +159,41 @@ export default function DashboardPage() {
             // Process Invoices for Charts
             rawInvoices.forEach(inv => {
                 if (targetStatuses.includes(inv.status)) {
-                    const month = new Date(inv.date_created).toLocaleDateString('en-US', { month: 'short' })
-                    if (!data[month]) data[month] = { month, revenue: 0, profit: 0, expenses: 0 }
-                    data[month].revenue += parseFloat(inv.total_amount) || 0
-                    data[month].profit += parseFloat(inv.profit_estimate) || 0
+                    const sortKey = getMonthSortKey(inv.date_created)
+                    if (!data[sortKey]) {
+                        data[sortKey] = {
+                            month: formatMonthLabel(inv.date_created),
+                            sortKey,
+                            revenue: 0,
+                            profit: 0,
+                            expenses: 0,
+                        }
+                    }
+                    data[sortKey].revenue += parseFloat(inv.total_amount) || 0
+                    data[sortKey].profit += parseFloat(inv.profit_estimate) || 0
                 }
             })
 
             // Process Expenses (Independent of view mode, expenses are expenses)
             rawExpenses.forEach(exp => {
-                const month = new Date(exp.date).toLocaleDateString('en-US', { month: 'short' })
-                if (!data[month]) data[month] = { month, revenue: 0, profit: 0, expenses: 0 }
-                data[month].expenses += parseFloat(exp.amount) || 0
+                const sortKey = getMonthSortKey(exp.date)
+                if (!data[sortKey]) {
+                    data[sortKey] = {
+                        month: formatMonthLabel(exp.date),
+                        sortKey,
+                        revenue: 0,
+                        profit: 0,
+                        expenses: 0,
+                    }
+                }
+                data[sortKey].expenses += parseFloat(exp.amount) || 0
 
                 if (exp.type) {
                     expenseTypes[exp.type] = (expenseTypes[exp.type] || 0) + (parseFloat(exp.amount) || 0)
                 }
             })
 
-            const sortedData = (Object.values(data) as MonthlyData[])
-                .sort((a, b) => new Date(a.month).getTime() - new Date(b.month).getTime())
-                .slice(-6) // Last 6 months
+            const sortedData = sortMonthlyChartData(Object.values(data)).slice(-6)
 
             setMonthlyData(sortedData)
             setExpenseBreakdown([
@@ -190,7 +240,7 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2 mt-4 bg-brand-navy/30 p-1 rounded-lg w-fit backdrop-blur-sm border border-white/10">
                         <button
                             onClick={() => setViewMode('cash_flow')}
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'cash_flow' ? 'bg-emerald-500 text-white shadow-lg' : 'text-brand-steel hover:text-white hover:bg-white/5'}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${viewMode === 'cash_flow' ? 'bg-brand-steel text-white shadow-lg' : 'text-brand-steel hover:text-white hover:bg-white/5'}`}
                         >
                             Cash Flow
                         </button>
@@ -243,9 +293,11 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{formatCurrency(metrics.monthlyRevenue)}</div>
+                        <div className="text-2xl font-bold text-foreground">{formatCurrency(metrics.monthlyRevenue)}</div>
                         <p className="text-xs text-muted-foreground mt-1">
-                            <span className="text-emerald-500 font-medium">+20.1%</span> from last month
+                            <span className={`font-medium ${getTrendColor(metrics.revenueTrend)}`}>
+                                {formatPercentChange(metrics.revenueTrend)}
+                            </span>
                         </p>
                     </CardContent>
                 </Card>
@@ -257,9 +309,11 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{formatCurrency(metrics.monthlyProfit)}</div>
+                        <div className="text-2xl font-bold text-foreground">{formatCurrency(metrics.monthlyProfit)}</div>
                         <p className="text-xs text-muted-foreground mt-1">
-                            <span className="text-emerald-500 font-medium">+15%</span> from last month
+                            <span className={`font-medium ${getTrendColor(metrics.profitTrend)}`}>
+                                {formatPercentChange(metrics.profitTrend)}
+                            </span>
                         </p>
                     </CardContent>
                 </Card>
@@ -271,7 +325,7 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-brand-navy dark:text-white">+{metrics.newClients}</div>
+                        <div className="text-2xl font-bold text-foreground">+{metrics.newClients}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             Joined this month
                         </p>
@@ -285,7 +339,7 @@ export default function DashboardPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-brand-navy dark:text-white">{metrics.overdueInvoices}</div>
+                        <div className="text-2xl font-bold text-foreground">{metrics.overdueInvoices}</div>
                         <p className="text-xs text-muted-foreground mt-1">
                             Invoices require attention
                         </p>
@@ -297,7 +351,7 @@ export default function DashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <div className="col-span-4">
                     <Suspense fallback={<div>Loading charts...</div>}>
-                        <FinancialCharts monthlyData={monthlyData} expenseBreakdown={expenseBreakdown} />
+                        <FinancialCharts monthlyData={monthlyData} expenseBreakdown={expenseBreakdown} showRevenueTrend />
                     </Suspense>
                 </div>
 
@@ -307,7 +361,7 @@ export default function DashboardPage() {
                         <CardTitle className="flex items-center gap-2">
                             Recent Activity
                             {activities.some(a =>
-                                (a.type === 'Quote Request' || a.type === 'Callback Request') &&
+                                (a.type === 'Quote Request' || a.type === 'Site Visit Request' || a.type === 'Callback Request') &&
                                 (Date.now() - new Date(a.timestamp).getTime() < 86400000)
                             ) && (
                                     <span className="relative flex h-2.5 w-2.5">

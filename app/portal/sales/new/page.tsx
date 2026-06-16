@@ -10,6 +10,8 @@ import { Switch } from '@/components/portal/ui/switch'
 import { Separator } from '@/components/portal/ui/separator'
 import { Plus, Trash2, FileText, Receipt, Package, Loader2, User, Calendar, Percent, ChevronLeft, Map, ImageIcon } from 'lucide-react'
 import SitePlanner from '@/components/portal/SitePlanner'
+import { StorageImage } from '@/components/portal/StorageImage'
+import { PRIVATE_STORAGE_BUCKETS } from '@/lib/portal/storage'
 import { supabase } from '@/lib/portal/supabase'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SmartEstimator } from '@/components/portal/SmartEstimator'
@@ -262,58 +264,41 @@ function CreateSaleContent() {
                 total_amount: totals.total,
                 vat_applicable: formData.vat_applicable,
                 trade_subtotal: totals.tradeSubtotal,
-                profit_estimate: totals.profit
+                profit_estimate: totals.profit,
             }
 
-            const payload = mode === 'quotation'
+            const headerPayload = mode === 'quotation'
                 ? {
                     ...basePayload,
                     valid_until: formData.valid_until || null,
                     payment_type: formData.payment_type,
-                    deposit_percentage: parseFloat(formData.deposit_percentage as unknown as string) || 0
+                    deposit_percentage: parseFloat(formData.deposit_percentage as unknown as string) || 0,
+                    ...(editId ? {} : { status: 'Draft', date_created: new Date().toISOString() }),
                 }
-                : { ...basePayload, due_date: formData.due_date || null, deposit_amount: parseFloat(formData.deposit_amount as unknown as string) || 0 }
+                : {
+                    ...basePayload,
+                    due_date: formData.due_date || null,
+                    deposit_amount: parseFloat(formData.deposit_amount as unknown as string) || 0,
+                    ...(editId ? {} : { status: 'Draft', date_created: new Date().toISOString() }),
+                }
 
-            let saleId = editId
-
-            if (editId) {
-                const { error: updateError } = await supabase
-                    .from(table)
-                    .update(payload)
-                    .eq('id', editId)
-
-                if (updateError) throw updateError
-
-                const linesTable = mode === 'quotation' ? 'quotation_lines' : 'invoice_lines'
-                const idColumn = mode === 'quotation' ? 'quotation_id' : 'invoice_id'
-
-                await supabase.from(linesTable).delete().eq(idColumn, editId)
-
-            } else {
-                const { data: saleData, error: saleError } = await supabase
-                    .from(table)
-                    .insert([{ ...payload, status: 'Draft', date_created: new Date().toISOString() }])
-                    .select()
-
-                if (saleError || !saleData) throw saleError || new Error('Failed to create sale')
-                saleId = saleData[0].id
-            }
-
-            const linesToInsert = lineItems.map(item => ({
-                [`${mode}_id`]: saleId,
+            const linesPayload = lineItems.map(item => ({
                 product_id: item.product_id || null,
                 description: item.description,
                 quantity: item.quantity,
                 unit_price: item.unit_price,
                 cost_price: item.cost_price,
-                line_total: item.quantity * item.unit_price
+                line_total: item.quantity * item.unit_price,
             }))
 
-            const { error: linesError } = await supabase
-                .from(`${mode}_lines`)
-                .insert(linesToInsert)
+            const { data: saleId, error: rpcError } = await supabase.rpc('upsert_sale_with_lines', {
+                p_table: table,
+                p_sale_id: editId || null,
+                p_header: headerPayload,
+                p_lines: linesPayload,
+            })
 
-            if (linesError) throw linesError
+            if (rpcError) throw rpcError
 
             await supabase.from('activity_log').insert([{
                 type: editId ? `${mode === 'quotation' ? 'Quotation' : 'Invoice'} Updated` : `${mode === 'quotation' ? 'Quotation' : 'Invoice'} Created`,
@@ -623,14 +608,12 @@ function CreateSaleContent() {
                                 {sitePlanPreview ? (
                                     <div className="space-y-3">
                                         <div className="relative group rounded-lg overflow-hidden border border-brand-steel/40 dark:border-brand-navy">
-                                            <>
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                <img
-                                                    src={sitePlanPreview}
-                                                    alt="Site Plan"
-                                                    className="w-full h-48 object-contain bg-brand-white dark:bg-brand-navy"
-                                                />
-                                            </>
+                                            <StorageImage
+                                                bucket={PRIVATE_STORAGE_BUCKETS.SITE_PLANS}
+                                                storedValue={sitePlanPreview}
+                                                alt="Site Plan"
+                                                className="w-full h-48 object-contain bg-brand-white dark:bg-brand-navy"
+                                            />
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
                                                 <Button
                                                     variant="secondary"

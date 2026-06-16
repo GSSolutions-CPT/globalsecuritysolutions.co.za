@@ -11,6 +11,10 @@ import { toast } from 'sonner'
 import { ClientDialog } from '@/components/portal/ClientDialog'
 import { Client } from '@/types/crm'
 import { useRouter } from 'next/navigation'
+import { getPageRange, getTotalPages } from '@/lib/portal/pagination'
+import { PaginationBar } from '@/components/portal/PaginationBar'
+import { PageHeader } from '@/components/portal/PageHeader'
+import { StatCard } from '@/components/portal/StatCard'
 
 export default function ClientsPage() {
     const router = useRouter()
@@ -18,39 +22,62 @@ export default function ClientsPage() {
     const [searchTerm, setSearchTerm] = useState('')
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [editingClient, setEditingClient] = useState<Client | null>(null)
+    const [clientsPage, setClientsPage] = useState(0)
+    const [clientsCount, setClientsCount] = useState(0)
+    const [clientStats, setClientStats] = useState<Pick<Client, 'created_at' | 'metadata'>[]>([])
 
     // Calculate Stats
-    const totalClients = clients.length
-    const newThisMonth = clients.filter(c => {
+    const activeStats = clientStats.filter(c => {
+        const metadata = c.metadata as Record<string, unknown> | undefined
+        return metadata?.status !== 'archived'
+    })
+    const totalClients = activeStats.length
+    const newThisMonth = activeStats.filter(c => {
         if (!c.created_at) return false
         const clientDate = new Date(c.created_at)
         const now = new Date()
         return clientDate.getMonth() === now.getMonth() && clientDate.getFullYear() === now.getFullYear()
     }).length
 
-    const fetchClients = useCallback(async () => {
+    const fetchClientStats = useCallback(async () => {
         try {
-            const { data, error } = await supabase
+            const { data, error } = await supabase.from('clients').select('created_at, metadata')
+            if (error) throw error
+            setClientStats((data as Pick<Client, 'created_at' | 'metadata'>[]) || [])
+        } catch (error) {
+            console.error('Error fetching client stats:', error)
+        }
+    }, [])
+
+    const fetchClients = useCallback(async (page = clientsPage) => {
+        try {
+            const { from, to } = getPageRange(page)
+            const { data, error, count } = await supabase
                 .from('clients')
-                .select('*')
+                .select('*', { count: 'exact' })
                 .order('created_at', { ascending: false })
+                .range(from, to)
 
             if (error) throw error
 
-            // Filter out archived clients client-side to handle null metadata safely
             const activeClients = (data || []).filter((client: Client) => {
                 const metadata = client.metadata as Record<string, unknown> | undefined
                 return metadata?.status !== 'archived'
             })
             setClients(activeClients as Client[])
+            setClientsCount(count || 0)
         } catch (error) {
             console.error('Error fetching clients:', error)
         }
-    }, [])
+    }, [clientsPage])
 
     useEffect(() => {
-        fetchClients()
-    }, [fetchClients])
+        fetchClientStats()
+    }, [fetchClientStats])
+
+    useEffect(() => {
+        fetchClients(clientsPage)
+    }, [clientsPage, fetchClients])
 
     const handleEdit = (client: Client) => {
         setEditingClient(client)
@@ -81,7 +108,8 @@ export default function ClientsPage() {
             if (error) throw error
 
             toast.success('Client archived successfully', { id: toastId })
-            fetchClients()
+            fetchClients(clientsPage)
+            fetchClientStats()
         } catch (error) {
             console.error('Error archiving client:', error)
             toast.error('Error archiving client.', { id: toastId })
@@ -99,23 +127,14 @@ export default function ClientsPage() {
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
+            <PageHeader
+                title="Clients"
+                description="Manage customer profiles, contact details, and portal access"
+            />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-brand-electric/20 text-sm font-medium">Total Clients</p>
-                        <h3 className="text-3xl font-bold mt-1">{totalClients}</h3>
-                        <p className="text-brand-electric/20 text-xs mt-2">Active database</p>
-                    </div>
-                    <Users className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
-                <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-emerald-100 text-sm font-medium">New This Month</p>
-                        <h3 className="text-3xl font-bold mt-1">+{newThisMonth}</h3>
-                        <p className="text-emerald-100 text-xs mt-2">Growing your network</p>
-                    </div>
-                    <Building2 className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
+                <StatCard label="Total Clients" value={totalClients} hint="Active database" variant="primary" icon={Users} />
+                <StatCard label="New This Month" value={`+${newThisMonth}`} hint="Growing your network" variant="success" icon={Building2} />
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -137,7 +156,8 @@ export default function ClientsPage() {
                     }}
                     clientToEdit={editingClient}
                     onSuccess={() => {
-                        fetchClients()
+                        fetchClients(clientsPage)
+                        fetchClientStats()
                         setIsDialogOpen(false)
                         setEditingClient(null)
                     }}
@@ -157,7 +177,7 @@ export default function ClientsPage() {
                         <CardHeader className="pb-3 pl-6">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <CardTitle className="text-lg text-brand-navy dark:text-brand-steel/20">{client.name}</CardTitle>
+                                    <CardTitle className="text-lg text-foreground">{client.name}</CardTitle>
                                     {client.company && (
                                         <CardDescription className="flex items-center gap-2 font-medium text-brand-steel mt-1">
                                             <Building2 className="h-3.5 w-3.5" />
@@ -231,6 +251,12 @@ export default function ClientsPage() {
                     </Card>
                 ))}
             </div>
+            <PaginationBar
+                page={clientsPage}
+                totalPages={getTotalPages(clientsCount)}
+                totalCount={clientsCount}
+                onPageChange={setClientsPage}
+            />
             {filteredClients.length === 0 && (
                 <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
                     <div className="bg-brand-electric/20 dark:bg-brand-navy/30 p-4 rounded-full mb-4">

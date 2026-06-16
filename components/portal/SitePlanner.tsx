@@ -5,6 +5,7 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Badge } from '@/components/portal/ui/badge'
 import { supabase } from '@/lib/portal/supabase'
+import { PRIVATE_STORAGE_BUCKETS, uploadPrivateFile } from '@/lib/portal/storage'
 import { toast } from 'sonner'
 import { SECURITY_ICONS } from '@/lib/portal/security-icons'
 import { SitePlan } from '@/types/crm'
@@ -400,17 +401,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             const res = await fetch(dataUrl)
             const blob = await res.blob()
 
-            // 2. Upload flattened image to storage
+            // 2. Upload flattened image to private storage (store path, not public URL)
             const flatFilename = `${quotationId}/flattened-${Date.now()}.png`
-            const { error: uploadError } = await supabase.storage
-                .from('site-plans')
-                .upload(flatFilename, blob, { contentType: 'image/png', upsert: true })
-
-            if (uploadError) throw uploadError
-
-            const { data: { publicUrl: flattenedUrl } } = supabase.storage
-                .from('site-plans')
-                .getPublicUrl(flatFilename)
+            const flattenedUrl = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, flatFilename, blob)
 
             // 3. Save canvas JSON for re-editing
             const canvasJson = canvas.toJSON()

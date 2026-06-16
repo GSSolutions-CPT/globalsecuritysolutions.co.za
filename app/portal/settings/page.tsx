@@ -10,6 +10,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Database, Users, Building, Trash2, Shield, Upload, Download, CreditCard, Palette, FileText, Globe, Loader2 } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
+import { useAuth } from '@/context/AuthContext'
+import { canExportData, canImportData, canManageTeam } from '@/lib/portal/permissions'
 import { useCurrency } from '@/lib/portal/use-currency'
 import { useSettings } from '@/lib/portal/use-settings'
 import { useTheme } from '@/lib/portal/use-theme'
@@ -17,8 +19,15 @@ import { Textarea } from '@/components/portal/ui/textarea'
 import Papa from 'papaparse'
 import { toast } from 'sonner'
 import { UserProfile } from '@/types/crm'
+import { PageHeader } from '@/components/portal/PageHeader'
 
 export default function SettingsPage() {
+    const { portalAccess } = useAuth()
+    const staffRole = portalAccess?.staffRole ?? null
+    const canManageUsers = canManageTeam(staffRole)
+    const canExport = canExportData(staffRole)
+    const canImport = canImportData(staffRole)
+
     const [importing, setImporting] = useState(false)
     const [exporting, setExporting] = useState(false)
     const { theme, setTheme } = useTheme()
@@ -47,6 +56,10 @@ export default function SettingsPage() {
 
     const handleAddUser = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (!canManageUsers) {
+            toast.error('Only admins can add team members')
+            return
+        }
         setIsLoading(true)
         try {
             const { data: { session } } = await supabase.auth.getSession()
@@ -83,19 +96,40 @@ export default function SettingsPage() {
     }
 
     const handleDeleteUser = async (id: string) => {
+        if (!canManageUsers) {
+            toast.error('Only admins can remove team members')
+            return
+        }
         if (!confirm('Are you sure you want to remove this user?')) return
         try {
-            const { error } = await supabase.from('users').delete().eq('id', id)
-            if (error) throw error
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!session) throw new Error('Not authenticated')
+
+            const res = await fetch('/api/portal/delete-team-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${session.access_token}`,
+                },
+                body: JSON.stringify({ userId: id }),
+            })
+
+            const result = await res.json()
+            if (!res.ok) throw new Error(result.error || 'Failed to delete user')
+
             toast.success('User removed')
             fetchUsers()
         } catch (error) {
             console.error('Error deleting user:', error)
-            toast.error('Failed to delete user')
+            toast.error(error instanceof Error ? error.message : 'Failed to delete user')
         }
     }
 
     const handleImportClients = (file: File) => {
+        if (!canImport) {
+            toast.error('Only admins can import data')
+            return
+        }
         setImporting(true)
         const toastId = toast.loading('Importing clients...')
         Papa.parse(file, {
@@ -135,6 +169,10 @@ export default function SettingsPage() {
     }
 
     const handleImportProducts = (file: File) => {
+        if (!canImport) {
+            toast.error('Only admins can import data')
+            return
+        }
         setImporting(true)
         const toastId = toast.loading('Importing products...')
         Papa.parse(file, {
@@ -209,6 +247,10 @@ export default function SettingsPage() {
     }
 
     const exportData = async (table: string, filename: string, format: 'csv' | 'json' = 'csv') => {
+        if (!canExport) {
+            toast.error('You do not have permission to export data')
+            return
+        }
         setExporting(true)
         try {
             const { data, error } = await supabase.from(table).select('*')
@@ -256,14 +298,10 @@ export default function SettingsPage() {
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60">
-                        Settings
-                    </h1>
-                    <p className="text-muted-foreground mt-1 text-lg">Manage organization details, team access, and system preferences</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Settings"
+                description="Manage organization details, team access, and system preferences"
+            />
 
             <Tabs defaultValue="organization" className="space-y-8">
                 <TabsList className="bg-brand-steel/20 dark:bg-brand-navy/50 p-1 rounded-xl w-full max-w-3xl grid grid-cols-4 gap-2">
@@ -408,6 +446,7 @@ export default function SettingsPage() {
                             <h2 className="text-xl font-semibold">Team Members</h2>
                             <p className="text-muted-foreground">Manage access and roles</p>
                         </div>
+                        {canManageUsers && (
                         <Dialog open={isUserDialogOpen} onOpenChange={setIsUserDialogOpen}>
                             <DialogTrigger asChild>
                                 <Button className="bg-brand-electric hover:bg-brand-electric text-white shadow-lg hover:shadow-xl transition-all"><Users className="mr-2 h-4 w-4" /> Add User</Button>
@@ -476,6 +515,7 @@ export default function SettingsPage() {
                                 )}
                             </DialogContent>
                         </Dialog>
+                        )}
                     </div>
                     <div className="grid gap-4">
                         {users.map((user) => (
@@ -496,9 +536,11 @@ export default function SettingsPage() {
                                             </p>
                                         </div>
                                     </div>
+                                    {canManageUsers && (
                                     <Button variant="ghost" size="icon" onClick={() => handleDeleteUser(user.id!)} className="text-destructive hover:text-destructive/90 hover:bg-destructive/10">
                                         <Trash2 className="h-5 w-5" />
                                     </Button>
+                                    )}
                                 </CardContent>
                             </Card>
                         ))}
@@ -582,6 +624,18 @@ export default function SettingsPage() {
                                     />
                                     <p className="text-xs text-muted-foreground">Days before a quote expires.</p>
                                 </div>
+                                <div className="grid gap-2">
+                                    <Label>Default Low Stock Threshold</Label>
+                                    <Input
+                                        type="number"
+                                        min="0"
+                                        value={settings.lowStockThreshold || '5'}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSetting('lowStockThreshold', e.target.value)}
+                                        placeholder="5"
+                                        className="bg-white/50 dark:bg-brand-navy/50"
+                                    />
+                                    <p className="text-xs text-muted-foreground">Used when a product has no custom reorder level.</p>
+                                </div>
                             </CardContent>
                             <Palette className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
@@ -614,6 +668,7 @@ export default function SettingsPage() {
 
                 <TabsContent value="data" className="space-y-6">
                     <div className="grid gap-6 md:grid-cols-2">
+                        {canImport && (
                         <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-rose-500/50"></div>
                             <CardHeader>
@@ -639,7 +694,9 @@ export default function SettingsPage() {
                             </CardContent>
                             <Upload className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
+                        )}
 
+                        {canExport && (
                         <Card className="border-none shadow-lg bg-gradient-to-br from-white to-brand-white dark:from-brand-navy dark:to-brand-navy relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-brand-electric/50"></div>
                             <CardHeader>
@@ -679,6 +736,7 @@ export default function SettingsPage() {
                             </CardContent>
                             <Download className="absolute -right-6 -bottom-6 h-32 w-32 text-brand-steel/20 dark:text-brand-navy opacity-50 group-hover:scale-110 transition-transform duration-500" />
                         </Card>
+                        )}
                     </div>
                 </TabsContent>
             </Tabs>

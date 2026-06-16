@@ -1,10 +1,12 @@
-// @ts-nocheck
 import { useState, useEffect, useCallback } from 'react'
+import { InstallationDetail, InstallationPhoto, SerialNumberEntry } from '@/types/crm'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
 import { Textarea } from '@/components/portal/ui/textarea'
 import { supabase } from '@/lib/portal/supabase'
+import { PRIVATE_STORAGE_BUCKETS, deleteStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
+import { StorageImage } from '@/components/portal/StorageImage'
 import { toast } from 'sonner'
 import { Upload, X, Camera, Hash, Loader2, Trash2 } from 'lucide-react'
 
@@ -16,9 +18,9 @@ interface InstallationDetailsProps {
 export default function InstallationDetails({ invoiceId, readonly = false }: InstallationDetailsProps) {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
-    const [installationDetail, setInstallationDetail] = useState<any>(null)
-    const [photos, setPhotos] = useState<any[]>([])
-    const [serialNumbers, setSerialNumbers] = useState<any[]>([])
+    const [installationDetail, setInstallationDetail] = useState<InstallationDetail | null>(null)
+    const [photos, setPhotos] = useState<InstallationPhoto[]>([])
+    const [serialNumbers, setSerialNumbers] = useState<SerialNumberEntry[]>([])
     const [notes, setNotes] = useState('')
     const [uploading, setUploading] = useState(false)
 
@@ -85,28 +87,19 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
             }
 
             // Upload each file
-            const uploadedPhotos = []
+            const uploadedPhotos: InstallationPhoto[] = []
             for (const file of files) {
                 const fileExt = file.name.split('.').pop()
                 const fileName = `${invoiceId}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
-                const { error: uploadError } = await supabase.storage
-                    .from('installation-photos')
-                    .upload(fileName, file)
-
-                if (uploadError) throw uploadError
-
-                // Get public URL
-                const { data: { publicUrl } } = supabase.storage
-                    .from('installation-photos')
-                    .getPublicUrl(fileName)
+                const storedPath = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.INSTALLATION_PHOTOS, fileName, file)
 
                 // Insert photo record
                 const { data: photoData, error: photoError } = await supabase
                     .from('installation_photos')
                     .insert([{
                         installation_detail_id: detailId,
-                        photo_url: publicUrl,
+                        photo_url: storedPath,
                         caption: file.name
                     }])
                     .select()
@@ -131,16 +124,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
 
         const toastId = toast.loading('Deleting photo...')
         try {
-            // Extract file path from URL
-            const urlParts = photoUrl.split('/installation-photos/')
-            const filePath = urlParts[1]
-
-            // Delete from storage
-            const { error: storageError } = await supabase.storage
-                .from('installation-photos')
-                .remove([filePath])
-
-            if (storageError) throw storageError
+            await deleteStorageFile(PRIVATE_STORAGE_BUCKETS.INSTALLATION_PHOTOS, photoUrl)
 
             // Delete from database
             const { error: dbError } = await supabase
@@ -162,7 +146,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
         setSerialNumbers([...serialNumbers, { component: '', serial: '' }])
     }
 
-    const updateSerialNumber = (index: number, field: string, value: string) => {
+    const updateSerialNumber = (index: number, field: keyof SerialNumberEntry, value: string) => {
         const updated = [...serialNumbers]
         updated[index][field] = value
         setSerialNumbers(updated)
@@ -238,8 +222,9 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {photos.map((photo) => (
                             <div key={photo.id} className="relative group">
-                                <img
-                                    src={photo.photo_url}
+                                <StorageImage
+                                    bucket={PRIVATE_STORAGE_BUCKETS.INSTALLATION_PHOTOS}
+                                    storedValue={photo.photo_url}
                                     alt={photo.caption || 'Installation photo'}
                                     className="w-full h-32 object-cover rounded-lg border border-brand-steel/40 dark:border-brand-navy"
                                 />
@@ -296,14 +281,14 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
                             <Input
                                 placeholder="Component (e.g., Camera 1)"
                                 value={item.component}
-                                onChange={(e) => updateSerialNumber(index, 'component', e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSerialNumber(index, 'component', e.target.value)}
                                 disabled={readonly}
                                 className="flex-1"
                             />
                             <Input
                                 placeholder="Serial Number"
                                 value={item.serial}
-                                onChange={(e) => updateSerialNumber(index, 'serial', e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateSerialNumber(index, 'serial', e.target.value)}
                                 disabled={readonly}
                                 className="flex-1"
                             />
@@ -342,7 +327,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
                     <Textarea
                         placeholder="Enter any additional notes about the installation..."
                         value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNotes(e.target.value)}
                         disabled={readonly}
                         rows={4}
                         className="resize-none"

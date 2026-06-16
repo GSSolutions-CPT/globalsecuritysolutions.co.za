@@ -10,6 +10,7 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/portal/ui/card'
 import { Alert, AlertDescription } from '@/components/portal/ui/alert'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
 import { Mail, Loader2, Lock, ArrowRight, ShieldCheck, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import Image from 'next/image'
 import type { User } from '@supabase/supabase-js'
@@ -20,15 +21,25 @@ function LoginContent() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [forgotOpen, setForgotOpen] = useState(false)
+    const [resetEmail, setResetEmail] = useState('')
+    const [resetLoading, setResetLoading] = useState(false)
+    const [resetMessage, setResetMessage] = useState('')
+    const [resetError, setResetError] = useState('')
 
     const { signIn, signInWithGoogle } = useAuth()
     const router = useRouter()
     const searchParams = useSearchParams()
 
     const from = searchParams.get('from') || '/portal/dashboard'
-    const googleError = searchParams.get('error') === 'google_not_client'
+    const errorParam = searchParams.get('error')
+    const googleError = errorParam === 'google_not_client'
         ? 'Google Sign-In is for clients only. Staff must use email & password.'
-        : null
+        : errorParam === 'registration_disabled'
+            ? 'Self-registration is disabled. Please use your invitation link or contact support.'
+            : errorParam === 'unauthorized'
+                ? 'Your account does not have access to this portal.'
+                : null
 
     const routeByRole = async (user: User) => {
         // Check if this user is a client
@@ -41,13 +52,10 @@ function LoginContent() {
         let target = from
 
         if (clientData) {
-            // Client user
-            if (target === '/portal/dashboard' || target === '/') {
-                target = `/portal/?client=${clientData.id}`
-            } else {
-                if (!target.includes('client=')) {
-                    target += target.includes('?') ? `&client=${clientData.id}` : `?client=${clientData.id}`
-                }
+            if (target === '/portal/dashboard' || target === '/' || target.startsWith('/portal/dashboard')) {
+                target = `/portal/client-portal?client=${clientData.id}`
+            } else if (!target.startsWith('/portal/client-portal')) {
+                target = `/portal/client-portal?client=${clientData.id}`
             }
             router.replace(target)
         } else {
@@ -56,6 +64,24 @@ function LoginContent() {
                 target = `/${target}`
             }
             router.replace(target)
+        }
+    }
+
+    const handleForgotPassword = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setResetError('')
+        setResetMessage('')
+        setResetLoading(true)
+
+        try {
+            const redirectTo = `${window.location.origin}/portal/reset-password`
+            const { error: resetErr } = await supabase.auth.resetPasswordForEmail(resetEmail, { redirectTo })
+            if (resetErr) throw resetErr
+            setResetMessage('If an account exists for that email, a reset link has been sent.')
+        } catch (err: unknown) {
+            setResetError(err instanceof Error ? err.message : 'Failed to send reset email')
+        } finally {
+            setResetLoading(false)
         }
     }
 
@@ -139,9 +165,18 @@ function LoginContent() {
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <a href="#" className="text-xs font-medium text-brand-electric hover:text-brand-electric hover:underline transition-colors">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setResetEmail(email)
+                                        setResetError('')
+                                        setResetMessage('')
+                                        setForgotOpen(true)
+                                    }}
+                                    className="text-xs font-medium text-brand-electric hover:text-brand-electric hover:underline transition-colors"
+                                >
                                     Forgot password?
-                                </a>
+                                </button>
                             </div>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -208,10 +243,7 @@ function LoginContent() {
 
                         <div className="w-full text-center mt-2">
                             <p className="text-sm text-brand-steel dark:text-brand-steel">
-                                Don&apos;t have an account?{' '}
-                                <Link href="/portal/register" className="font-semibold text-brand-electric hover:text-brand-electric hover:underline transition-colors">
-                                    Register Account
-                                </Link>
+                                Need access? Contact your GSS account manager for an invitation link.
                             </p>
                         </div>
                     </CardFooter>
@@ -224,6 +256,48 @@ function LoginContent() {
                 <ShieldCheck className="h-4 w-4" />
                 <span>Secured by GSS Solutions</span>
             </div>
+
+            <Dialog open={forgotOpen} onOpenChange={setForgotOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Reset your password</DialogTitle>
+                        <DialogDescription>
+                            Enter your account email and we&apos;ll send you a secure reset link.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={handleForgotPassword} className="space-y-4">
+                        {resetError && (
+                            <Alert variant="destructive">
+                                <AlertDescription>{resetError}</AlertDescription>
+                            </Alert>
+                        )}
+                        {resetMessage && (
+                            <Alert>
+                                <AlertDescription>{resetMessage}</AlertDescription>
+                            </Alert>
+                        )}
+                        <div className="space-y-2">
+                            <Label htmlFor="reset-email">Email address</Label>
+                            <Input
+                                id="reset-email"
+                                type="email"
+                                value={resetEmail}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setResetEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <DialogFooter>
+                            <Button type="button" variant="ghost" onClick={() => setForgotOpen(false)}>
+                                Cancel
+                            </Button>
+                            <Button type="submit" disabled={resetLoading}>
+                                {resetLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                Send reset link
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

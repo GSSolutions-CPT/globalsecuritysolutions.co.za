@@ -18,6 +18,13 @@ import { toast } from 'sonner'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Client, Job, Quotation, JobAttachment } from '@/types/crm'
+import { PRIVATE_STORAGE_BUCKETS, deleteStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
+import { StorageImage } from '@/components/portal/StorageImage'
+import { getPageRange, getTotalPages } from '@/lib/portal/pagination'
+import { PaginationBar } from '@/components/portal/PaginationBar'
+import { PageHeader } from '@/components/portal/PageHeader'
+import { StatCard } from '@/components/portal/StatCard'
+import { JOB_STATUS_COLORS } from '@/lib/portal/portal-theme'
 
 // Lazy load heavy components
 const JobBoard = lazy(() => import('./JobBoard'))
@@ -39,6 +46,9 @@ function JobsContent() {
     const [attachments, setAttachments] = useState<JobAttachment[]>([])
     const [isUploading, setIsUploading] = useState(false)
     const [activeTab, setActiveTab] = useState('details')
+    const [jobsPage, setJobsPage] = useState(0)
+    const [jobsCount, setJobsCount] = useState(0)
+    const [jobStats, setJobStats] = useState<Pick<Job, 'status'>[]>([])
     const [formData, setFormData] = useState({
         client_id: '',
         quotation_id: '',
@@ -50,27 +60,54 @@ function JobsContent() {
     })
 
     // Calculate Stats
-    const activeJobs = jobs.filter(j => ['Pending', 'In Progress'].includes(j.status || '')).length
-    const completedJobs = jobs.filter(j => j.status === 'Completed').length
-    const pendingJobs = jobs.filter(j => j.status === 'Pending').length
+    const activeJobs = jobStats.filter(j => ['Pending', 'In Progress'].includes(j.status || '')).length
+    const completedJobs = jobStats.filter(j => j.status === 'Completed').length
+    const pendingJobs = jobStats.filter(j => j.status === 'Pending').length
 
-    const fetchJobs = useCallback(async () => {
+    const fetchJobStats = useCallback(async () => {
         try {
-            const { data, error } = await supabase
-                .from('jobs')
-                .select(`
+            const { data, error } = await supabase.from('jobs').select('status')
+            if (error) throw error
+            setJobStats((data as Pick<Job, 'status'>[]) || [])
+        } catch (error) {
+            console.error('Error fetching job stats:', error)
+        }
+    }, [])
+
+    const fetchJobs = useCallback(async (page = jobsPage, mode = viewMode) => {
+        try {
+            if (mode === 'list') {
+                const { from, to } = getPageRange(page)
+                const { data, error, count } = await supabase
+                    .from('jobs')
+                    .select(`
+          *,
+          clients (name, company),
+          quotations (id, payment_proof)
+        `, { count: 'exact' })
+                    .order('created_at', { ascending: false })
+                    .range(from, to)
+
+                if (error) throw error
+                setJobs((data as Job[]) || [])
+                setJobsCount(count || 0)
+            } else {
+                const { data, error } = await supabase
+                    .from('jobs')
+                    .select(`
           *,
           clients (name, company),
           quotations (id, payment_proof)
         `)
-                .order('created_at', { ascending: false })
+                    .order('created_at', { ascending: false })
 
-            if (error) throw error
-            setJobs((data as Job[]) || [])
+                if (error) throw error
+                setJobs((data as Job[]) || [])
+            }
         } catch (error) {
             console.error('Error fetching jobs:', error)
         }
-    }, [])
+    }, [jobsPage, viewMode])
 
     const fetchClients = useCallback(async () => {
         try {
@@ -91,7 +128,7 @@ function JobsContent() {
             const { data, error } = await supabase
                 .from('quotations')
                 .select('id, client_id')
-                .eq('status', 'Approved')
+                .in('status', ['Approved', 'Accepted'])
 
             if (error) throw error
             setQuotations((data as Quotation[]) || [])
@@ -101,13 +138,20 @@ function JobsContent() {
     }, [])
 
     useEffect(() => {
-        fetchJobs()
+        fetchJobStats()
         fetchClients()
         fetchQuotations()
-    }, [fetchJobs, fetchClients, fetchQuotations])
+    }, [fetchJobStats, fetchClients, fetchQuotations])
 
     useEffect(() => {
-        const fromQuoteId = searchParams.get('fromQuote')
+        fetchJobs(jobsPage, viewMode)
+    }, [jobsPage, viewMode, fetchJobs])
+
+    useEffect(() => {
+        const fromQuoteId =
+            searchParams.get('fromQuote') ||
+            searchParams.get('quoteId') ||
+            (searchParams.get('createFromQuote') === 'true' ? searchParams.get('quoteId') : null)
 
         if (fromQuoteId) {
             const fetchAndPrefill = async () => {
@@ -173,21 +217,13 @@ function JobsContent() {
                 const fileExt = file.name.split('.').pop()
                 const fileName = `${editingJob.id}/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`
 
-                const { error: uploadError } = await supabase.storage
-                    .from('job-attachments')
-                    .upload(fileName, file)
-
-                if (uploadError) throw uploadError
-
-                const { data: { publicUrl } } = supabase.storage
-                    .from('job-attachments')
-                    .getPublicUrl(fileName)
+                const storedPath = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.JOB_ATTACHMENTS, fileName, file)
 
                 const { error: dbError } = await supabase
                     .from('job_attachments')
                     .insert([{
                         job_id: editingJob.id,
-                        file_url: publicUrl,
+                        file_url: storedPath,
                         file_type: file.type,
                         file_name: file.name,
                         description: ''
@@ -207,14 +243,16 @@ function JobsContent() {
         }
     }
 
-    const handleDeleteAttachment = async (attachmentId: string) => {
+    const handleDeleteAttachment = async (attachment: JobAttachment) => {
         if (!confirm('Are you sure you want to delete this attachment?')) return
 
         try {
+            await deleteStorageFile(PRIVATE_STORAGE_BUCKETS.JOB_ATTACHMENTS, attachment.file_url)
+
             const { error: dbError } = await supabase
                 .from('job_attachments')
                 .delete()
-                .eq('id', attachmentId)
+                .eq('id', attachment.id)
 
             if (dbError) throw dbError
 
@@ -249,9 +287,14 @@ function JobsContent() {
         try {
             const technicians = formData.assigned_technicians.split(',').map(t => t.trim())
 
+            const quotationId =
+                formData.quotation_id && formData.quotation_id !== 'none'
+                    ? formData.quotation_id
+                    : null
+
             const jobPayload = {
                 client_id: formData.client_id,
-                quotation_id: formData.quotation_id || null,
+                quotation_id: quotationId,
                 assigned_technicians: technicians,
                 scheduled_datetime: formData.scheduled_datetime || null,
                 notes: formData.notes,
@@ -295,6 +338,7 @@ function JobsContent() {
                         title: `Job scheduled`,
                         datetime: formData.scheduled_datetime,
                         end_datetime: formData.scheduled_end_datetime,
+                        related_entity_id: newJob?.id,
                         related_entity_type: 'job'
                     }])
                 }
@@ -312,12 +356,54 @@ function JobsContent() {
                 notes: '',
                 status: 'Pending'
             })
-            fetchJobs()
+            fetchJobs(jobsPage, viewMode)
+            fetchJobStats()
         } catch (error) {
             console.error('Error saving job:', error)
             toast.error('Failed to save job')
         } finally {
             setIsLoading(false)
+        }
+    }
+
+    const handleDeleteJob = async (job: Job) => {
+        if (!confirm(`Delete this job for ${job.clients?.name || 'this client'}? This cannot be undone.`)) return
+
+        const toastId = toast.loading('Deleting job...')
+        try {
+            const { error: attachmentsError } = await supabase
+                .from('job_attachments')
+                .delete()
+                .eq('job_id', job.id)
+
+            if (attachmentsError) throw attachmentsError
+
+            await supabase
+                .from('calendar_events')
+                .delete()
+                .eq('related_entity_id', job.id)
+                .eq('related_entity_type', 'job')
+
+            const { error } = await supabase
+                .from('jobs')
+                .delete()
+                .eq('id', job.id)
+
+            if (error) throw error
+
+            await supabase.from('activity_log').insert([{
+                type: 'Job Deleted',
+                description: `Job deleted for ${job.clients?.name || 'client'}`,
+                related_entity_id: job.id,
+                related_entity_type: 'job'
+            }])
+
+            toast.success('Job deleted', { id: toastId })
+            fetchJobs(jobsPage, viewMode)
+            fetchJobStats()
+        } catch (error) {
+            console.error('Error deleting job:', error)
+            toast.error('Failed to delete job', { id: toastId })
         }
     }
 
@@ -360,6 +446,18 @@ function JobsContent() {
                     if (confirm('Job completed! Do you want to generate a Tax Invoice from the linked quotation?')) {
                         const toastId = toast.loading('Generating invoice...')
                         try {
+                            const { data: existingInvoice, error: existingError } = await supabase
+                                .from('invoices')
+                                .select('id')
+                                .eq('quotation_id', job.quotation_id)
+                                .maybeSingle()
+
+                            if (existingError) throw existingError
+                            if (existingInvoice) {
+                                toast.info('An invoice already exists for this quotation.', { id: toastId })
+                                return
+                            }
+
                             const { data: quote, error: quoteError } = await supabase
                                 .from('quotations')
                                 .select('*, quotation_lines(*)')
@@ -404,6 +502,20 @@ function JobsContent() {
                                 if (linesError) throw linesError
                             }
 
+                            const { error: statusError } = await supabase
+                                .from('quotations')
+                                .update({ status: 'Converted', updated_at: new Date().toISOString() })
+                                .eq('id', quote.id)
+
+                            if (statusError) throw statusError
+
+                            await supabase.from('activity_log').insert([{
+                                type: 'Quotation Converted',
+                                description: `Quotation converted to invoice from completed job`,
+                                related_entity_id: quote.id,
+                                related_entity_type: 'quotation'
+                            }])
+
                             toast.success('Tax Invoice generated successfully!', { id: toastId })
                         } catch (invError) {
                             console.error('Invoice generation failed:', invError)
@@ -413,10 +525,12 @@ function JobsContent() {
                 }
             }
 
-            fetchJobs()
+            fetchJobs(jobsPage, viewMode)
+            fetchJobStats()
         } catch (error) {
             console.error('Error updating job status:', error)
-            fetchJobs()
+            fetchJobs(jobsPage, viewMode)
+            fetchJobStats()
         }
     }
 
@@ -430,43 +544,19 @@ function JobsContent() {
         return matchesSearch && matchesStatus
     })
 
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'Pending': return 'bg-yellow-500'
-            case 'In Progress': return 'bg-brand-electric'
-            case 'Completed': return 'bg-green-500'
-            case 'Cancelled': return 'bg-red-500'
-            default: return 'bg-gray-500'
-        }
-    }
+    const getStatusColor = (status: string) => JOB_STATUS_COLORS[status] || 'bg-muted-foreground'
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
+            <PageHeader
+                title="Jobs"
+                description="Schedule installations, track progress, and manage site attachments"
+            />
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-brand-electric/20 text-sm font-medium">Active Jobs</p>
-                        <h3 className="text-3xl font-bold mt-1">{activeJobs}</h3>
-                        <p className="text-brand-electric/20 text-xs mt-2">Currently in progress or pending</p>
-                    </div>
-                    <Activity className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
-                <div className="bg-gradient-to-r from-green-600 to-green-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-green-100 text-sm font-medium">Completed Jobs</p>
-                        <h3 className="text-3xl font-bold mt-1">{completedJobs}</h3>
-                        <p className="text-green-100 text-xs mt-2">Successfully delivered</p>
-                    </div>
-                    <CheckCircle className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
-                <div className="bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-amber-100 text-sm font-medium">Pending Start</p>
-                        <h3 className="text-3xl font-bold mt-1">{pendingJobs}</h3>
-                        <p className="text-amber-100 text-xs mt-2">Awaiting action</p>
-                    </div>
-                    <Clock className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
+                <StatCard label="Active Jobs" value={activeJobs} hint="Currently in progress or pending" variant="primary" icon={Activity} />
+                <StatCard label="Completed Jobs" value={completedJobs} hint="Successfully delivered" variant="success" icon={CheckCircle} />
+                <StatCard label="Pending Start" value={pendingJobs} hint="Awaiting action" variant="warning" icon={Clock} />
             </div>
 
             <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
@@ -586,8 +676,11 @@ function JobsContent() {
                                             <div className="grid gap-2">
                                                 <Label htmlFor="quotation_id">Related Quotation (Optional)</Label>
                                                 <Select
-                                                    value={formData.quotation_id}
-                                                    onValueChange={(value: string) => setFormData({ ...formData, quotation_id: value })}
+                                                    value={formData.quotation_id || 'none'}
+                                                    onValueChange={(value: string) => setFormData({
+                                                        ...formData,
+                                                        quotation_id: value === 'none' ? '' : value,
+                                                    })}
                                                 >
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Select a quotation" />
@@ -707,10 +800,12 @@ function JobsContent() {
                                                     <div key={file.id} className="group relative border border-border rounded-lg p-3 bg-card hover:shadow-md transition-all">
                                                         <div className="aspect-video bg-muted rounded-md mb-3 overflow-hidden flex items-center justify-center relative border border-border/50">
                                                             {file.file_type?.startsWith('image/') ? (
-                                                                <>
-                                                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                                    <img src={file.file_url} alt={file.file_name} className="w-full h-full object-cover" />
-                                                                </>
+                                                                <StorageImage
+                                                                    bucket={PRIVATE_STORAGE_BUCKETS.JOB_ATTACHMENTS}
+                                                                    storedValue={file.file_url}
+                                                                    alt={file.file_name}
+                                                                    className="w-full h-full object-cover"
+                                                                />
                                                             ) : (
                                                                 <FileText className="h-10 w-10 text-muted-foreground" />
                                                             )}
@@ -718,7 +813,7 @@ function JobsContent() {
                                                                 variant="destructive"
                                                                 size="icon"
                                                                 className="absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
-                                                                onClick={() => handleDeleteAttachment(file.id!)}
+                                                                onClick={() => handleDeleteAttachment(file)}
                                                             >
                                                                 <Trash2 className="h-3.5 w-3.5" />
                                                             </Button>
@@ -812,7 +907,7 @@ function JobsContent() {
                                                             <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-primary" onClick={() => handleEdit(job)}>
                                                                 <Pencil className="h-4 w-4" />
                                                             </Button>
-                                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-600">
+                                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-600" onClick={() => handleDeleteJob(job)}>
                                                                 <Trash2 className="h-4 w-4" />
                                                             </Button>
                                                         </div>
@@ -822,6 +917,14 @@ function JobsContent() {
                                         )}
                                     </tbody>
                                 </table>
+                                {viewMode === 'list' && (
+                                    <PaginationBar
+                                        page={jobsPage}
+                                        totalPages={getTotalPages(jobsCount)}
+                                        totalCount={jobsCount}
+                                        onPageChange={setJobsPage}
+                                    />
+                                )}
                             </div>
                         )}
                         {viewMode === 'board' && <JobBoard jobs={jobs} onStatusChange={updateJobStatus} />}

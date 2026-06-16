@@ -31,11 +31,23 @@ export default function AuthCallbackPage() {
                     .maybeSingle()
 
                 if (clientData) {
-                    router.replace(`/portal/?client=${clientData.id}`)
-                } else {
-                    // New Google user — send to registration to create their client record
-                    router.replace('/portal/register-client')
+                    router.replace(`/portal/client-portal?client=${clientData.id}`)
+                    return
                 }
+
+                const { data: staffProfile } = await supabase
+                    .from('users')
+                    .select('id')
+                    .eq('id', session.user.id)
+                    .maybeSingle()
+
+                if (staffProfile) {
+                    router.replace('/portal/dashboard')
+                    return
+                }
+
+                await supabase.auth.signOut()
+                router.replace('/portal/login?error=google_not_client')
             } catch (err) {
                 console.error('[auth/callback]', err)
                 setError('Authentication failed. Please try again.')

@@ -14,7 +14,12 @@ import { Plus, FileText, Calendar, RefreshCw, AlertCircle, Search, CreditCard, C
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { useCurrency } from '@/lib/portal/use-currency'
-import { addMonths, addWeeks, addQuarters, addYears } from 'date-fns'
+import {
+  calculateNextBillingDate,
+  generateInvoiceFromContract,
+  isContractBillingDue,
+  processDueContractBilling,
+} from '@/lib/portal/contract-billing'
 import { Client, Contract } from '@/types/crm'
 
 export default function ContractsPage() {
@@ -24,6 +29,8 @@ export default function ContractsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isBillingRun, setIsBillingRun] = useState(false)
+  const [autoBillingDone, setAutoBillingDone] = useState(false)
   const [formData, setFormData] = useState({
     client_id: '',
     description: '',
@@ -70,16 +77,25 @@ export default function ContractsPage() {
     fetchClients()
   }, [fetchContracts, fetchClients])
 
-  const calculateNextBillingDate = (startDate: string, frequency: string): string => {
-    const date = new Date(startDate)
-    switch (frequency) {
-      case 'weekly': return addWeeks(date, 1).toISOString().split('T')[0]
-      case 'monthly': return addMonths(date, 1).toISOString().split('T')[0]
-      case 'quarterly': return addQuarters(date, 1).toISOString().split('T')[0]
-      case 'annually': return addYears(date, 1).toISOString().split('T')[0]
-      default: return addMonths(date, 1).toISOString().split('T')[0]
+  useEffect(() => {
+    if (autoBillingDone || contracts.length === 0) return
+
+    const runAutoBilling = async () => {
+      setAutoBillingDone(true)
+      const dueContracts = contracts.filter(
+        (c) => c.active && isContractBillingDue(c.next_billing_date)
+      )
+      if (dueContracts.length === 0) return
+
+      const generated = await processDueContractBilling(dueContracts)
+      if (generated.length > 0) {
+        toast.success(`Auto-billed ${generated.length} due contract${generated.length === 1 ? '' : 's'}`)
+        fetchContracts()
+      }
     }
-  }
+
+    runAutoBilling()
+  }, [contracts, autoBillingDone, fetchContracts])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -148,62 +164,44 @@ export default function ContractsPage() {
     }
   }
 
-  const generateInvoiceFromContract = async (contract: Contract) => {
+  const handleGenerateInvoice = async (contract: Contract) => {
     const toastId = toast.loading('Generating invoice...')
     try {
-      const { data: invoiceData, error: invoiceError } = await supabase
-        .from('invoices')
-        .insert([{
-          client_id: contract.client_id,
-          status: 'Draft',
-          date_created: new Date().toISOString(),
-          due_date: contract.next_billing_date,
-          total_amount: contract.amount,
-          vat_applicable: false,
-          metadata: {
-            contract_id: contract.id,
-            auto_generated: true
-          }
-        }])
-        .select()
-
-      if (invoiceError || !invoiceData) throw invoiceError || new Error('Failed to create invoice')
-
-      const invoiceId = invoiceData[0].id
-
-      const { error: lineError } = await supabase
-        .from('invoice_lines')
-        .insert([{
-          invoice_id: invoiceId,
-          quantity: 1,
-          unit_price: contract.amount,
-          line_total: contract.amount,
-          cost_price: 0,
-          description: contract.description || 'Recurring Service'
-        }])
-
-      if (lineError) throw lineError
-
-      const nextBilling = calculateNextBillingDate(contract.next_billing_date!, contract.frequency)
-      const { error: updateError } = await supabase
-        .from('recurring_contracts')
-        .update({ next_billing_date: nextBilling })
-        .eq('id', contract.id)
-
-      if (updateError) throw updateError
-
-      await supabase.from('activity_log').insert([{
-        type: 'Invoice Generated',
-        description: `Invoice auto-generated from recurring contract`,
-        related_entity_id: invoiceId,
-        related_entity_type: 'invoice'
-      }])
-
+      const invoiceId = await generateInvoiceFromContract(contract, supabase, { status: 'Draft' })
+      if (!invoiceId) {
+        toast.info('Invoice already exists for this billing period', { id: toastId })
+        return
+      }
       fetchContracts()
       toast.success('Invoice generated successfully!', { id: toastId })
     } catch (error) {
       console.error('Error generating invoice:', error)
       toast.error('Error generating invoice. Please try again.', { id: toastId })
+    }
+  }
+
+  const handleBillDueContracts = async () => {
+    setIsBillingRun(true)
+    const toastId = toast.loading('Processing due contracts...')
+    try {
+      const response = await fetch('/api/portal/run-contract-billing', { method: 'POST' })
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to process billing')
+      }
+
+      fetchContracts()
+      if (result.generatedCount > 0) {
+        toast.success(`Generated ${result.generatedCount} invoice${result.generatedCount === 1 ? '' : 's'} from due contracts`, { id: toastId })
+      } else {
+        toast.info('No due contracts needed billing', { id: toastId })
+      }
+    } catch (error) {
+      console.error('Error billing contracts:', error)
+      toast.error(error instanceof Error ? error.message : 'Billing failed', { id: toastId })
+    } finally {
+      setIsBillingRun(false)
     }
   }
 
@@ -291,7 +289,17 @@ export default function ContractsPage() {
             className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy"
           />
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={handleBillDueContracts}
+            disabled={isBillingRun || contracts.filter(c => c.active && isContractBillingDue(c.next_billing_date)).length === 0}
+            className="border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-800 dark:text-amber-400 dark:hover:bg-amber-950/30"
+          >
+            {isBillingRun ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
+            Bill Due Contracts
+          </Button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-500/20">
               <Plus className="mr-2 h-4 w-4" />
@@ -418,6 +426,7 @@ export default function ContractsPage() {
             </form>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -467,7 +476,7 @@ export default function ContractsPage() {
                   variant="outline"
                   size="sm"
                   className="flex-1 hover:bg-brand-white dark:hover:bg-brand-navy"
-                  onClick={() => generateInvoiceFromContract(contract)}
+                  onClick={() => handleGenerateInvoice(contract)}
                   disabled={!contract.active}
                 >
                   <RefreshCw className="mr-2 h-3 w-3" />

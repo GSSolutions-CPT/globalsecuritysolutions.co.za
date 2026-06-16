@@ -18,6 +18,12 @@ import { useCurrency } from '@/lib/portal/use-currency'
 import { toast } from 'sonner'
 import { useSettings } from '@/lib/portal/use-settings'
 import { Quotation, Invoice, PurchaseOrder } from '@/types/crm'
+import { PRIVATE_STORAGE_BUCKETS, openStorageFile } from '@/lib/portal/storage'
+import { getPageRange, getTotalPages } from '@/lib/portal/pagination'
+import { PaginationBar } from '@/components/portal/PaginationBar'
+import { PageHeader } from '@/components/portal/PageHeader'
+import { StatCard } from '@/components/portal/StatCard'
+import { QUOTATION_STATUS_COLORS } from '@/lib/portal/portal-theme'
 export default function SalesPage() {
     const router = useRouter()
     const { formatCurrency } = useCurrency()
@@ -28,21 +34,34 @@ export default function SalesPage() {
     const [searchTerm, setSearchTerm] = useState('')
     const [installationDetailsOpen, setInstallationDetailsOpen] = useState(false)
     const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(null)
+    const [quotesPage, setQuotesPage] = useState(0)
+    const [invoicesPage, setInvoicesPage] = useState(0)
+    const [quotesCount, setQuotesCount] = useState(0)
+    const [invoicesCount, setInvoicesCount] = useState(0)
+    const [quoteStats, setQuoteStats] = useState<Quotation[]>([])
+    const [invoiceStats, setInvoiceStats] = useState<Invoice[]>([])
 
     // Calculate Summary Stats
-    const activeQuotes = quotations.filter(q => ['Draft', 'Sent', 'Pending Review'].includes(q.status))
+    const activeQuotes = quoteStats.filter(q => ['Draft', 'Sent', 'Pending Review'].includes(q.status))
     const activeQuoteValue = activeQuotes.reduce((sum, q) => sum + (q.total_amount || 0), 0)
 
-    const outstandingInvoices = invoices.filter(i => ['Sent', 'Overdue'].includes(i.status))
+    const outstandingInvoices = invoiceStats.filter(i => ['Sent', 'Overdue'].includes(i.status))
     const outstandingValue = outstandingInvoices.reduce((sum, i) => sum + (i.total_amount || 0), 0)
 
-    const paidInvoices = invoices.filter(i => i.status === 'Paid')
+    const paidInvoices = invoiceStats.filter(i => i.status === 'Paid')
     const totalRevenue = paidInvoices.reduce((sum, i) => sum + (i.total_amount || 0), 0)
 
     useEffect(() => {
-        fetchQuotations()
-        fetchInvoices()
+        fetchQuotations(quotesPage)
+    }, [quotesPage])
+
+    useEffect(() => {
+        fetchInvoices(invoicesPage)
+    }, [invoicesPage])
+
+    useEffect(() => {
         fetchPurchaseOrders()
+        fetchSalesStats()
     }, [])
 
     const handleDownloadPO = async (po: PurchaseOrder) => {
@@ -102,46 +121,74 @@ export default function SalesPage() {
         }
     }
 
-    const fetchQuotations = async () => {
+    const fetchSalesStats = async () => {
         try {
-            const { data, error } = await supabase
+            const [{ data: quotes }, { data: invs }] = await Promise.all([
+                supabase.from('quotations').select('status, total_amount'),
+                supabase.from('invoices').select('status, total_amount'),
+            ])
+            setQuoteStats((quotes as Quotation[]) || [])
+            setInvoiceStats((invs as Invoice[]) || [])
+        } catch (error) {
+            console.error('Error fetching sales stats:', error)
+        }
+    }
+
+    const fetchQuotations = async (page = quotesPage) => {
+        try {
+            const { from, to } = getPageRange(page)
+            const { data, error, count } = await supabase
                 .from('quotations')
                 .select(`
           *,
           clients (name, company, email, address)
-        `)
+        `, { count: 'exact' })
                 .order('date_created', { ascending: false })
+                .range(from, to)
 
             if (error) throw error
             setQuotations(data as Quotation[] || [])
+            setQuotesCount(count || 0)
         } catch (error) {
             console.error('Error fetching quotations:', error)
         }
     }
 
-    const fetchInvoices = async () => {
+    const fetchInvoices = async (page = invoicesPage) => {
         try {
-            const { data, error } = await supabase
+            const { from, to } = getPageRange(page)
+            const { data, error, count } = await supabase
                 .from('invoices')
                 .select(`
           *,
           clients (name, company, email, address),
           quotations (payment_proof)
-        `)
+        `, { count: 'exact' })
                 .order('date_created', { ascending: false })
+                .range(from, to)
 
             if (error) throw error
 
-            // Flatten payment_proof from quotation into invoice object for easy access
             const processedData = (data || []).map((inv: Invoice & { quotations?: { payment_proof: string | null } }) => ({
                 ...inv,
-                payment_proof: inv.payment_proof || inv.quotations?.payment_proof || null
+                payment_proof: inv.payment_proof || inv.quotations?.payment_proof || null,
             }))
 
             setInvoices(processedData as Invoice[])
+            setInvoicesCount(count || 0)
         } catch (error) {
             console.error('Error fetching invoices:', error)
         }
+    }
+
+    const refreshQuotations = () => {
+        fetchQuotations(quotesPage)
+        fetchSalesStats()
+    }
+
+    const refreshInvoices = () => {
+        fetchInvoices(invoicesPage)
+        fetchSalesStats()
     }
 
     const updateStatus = async (type: 'quotation' | 'invoice', id: string, newStatus: string) => {
@@ -164,9 +211,9 @@ export default function SalesPage() {
             }])
 
             if (type === 'quotation') {
-                fetchQuotations()
+                refreshQuotations()
             } else {
-                fetchInvoices()
+                refreshInvoices()
             }
             toast.success(`${type === 'quotation' ? 'Quotation' : 'Invoice'} marked as ${newStatus}`, { id: toastId })
         } catch (error) {
@@ -192,23 +239,22 @@ export default function SalesPage() {
                 related_entity_type: 'quotation'
             }])
 
-            fetchQuotations()
+            refreshQuotations()
             toast.success('Payment accepted! Redirecting to jobs...', { id: toastId })
-            router.push(`/portal/jobs?createFromQuote=true&quoteId=${quotation.id}`)
+            router.push(`/portal/jobs?fromQuote=${quotation.id}`)
         } catch (error) {
             console.error('Error confirming payment:', error)
             toast.error('Failed to confirm payment', { id: toastId })
         }
     }
 
-    const downloadProof = (url: string, filename: string) => {
-        const link = document.createElement('a')
-        link.href = url
-        link.download = filename
-        link.target = '_blank'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+    const downloadProof = async (storedValue: string, filename: string) => {
+        try {
+            await openStorageFile(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, storedValue, filename)
+        } catch (error) {
+            console.error('Error opening payment proof:', error)
+            toast.error('Unable to open payment proof')
+        }
     }
 
     const convertToInvoice = async (quotation: Quotation) => {
@@ -264,8 +310,8 @@ export default function SalesPage() {
             }])
 
             toast.success('Quotation converted to invoice successfully!', { id: toastId })
-            fetchQuotations()
-            fetchInvoices()
+            refreshQuotations()
+            refreshInvoices()
         } catch (error) {
             console.error('Error converting to invoice:', error)
             toast.error('Error converting quotation. Please try again.', { id: toastId })
@@ -275,25 +321,36 @@ export default function SalesPage() {
     const handleRequestPayment = async (quotation: Quotation) => {
         const toastId = toast.loading('Sending payment request...')
         try {
-            const { error } = await supabase
-                .from('quotations')
-                .update({ payment_request_sent: true })
-                .eq('id', quotation.id)
+            const response = await fetch('/api/portal/request-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ quotationId: quotation.id }),
+            })
 
-            if (error) throw error
+            const result = await response.json()
 
-            await supabase.from('activity_log').insert([{
-                type: 'Payment Requested',
-                description: `Outstanding payment requested for Quote #${quotation.id.substring(0, 6)}`,
-                related_entity_id: quotation.id,
-                related_entity_type: 'quotation'
-            }])
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to send payment request')
+            }
 
-            fetchQuotations()
-            toast.success('Payment request sent to client!', { id: toastId })
+            refreshQuotations()
+
+            if (result.emailSent) {
+                toast.success('Payment request sent! Client emailed and notified in portal.', { id: toastId })
+            } else if (result.mailtoLink) {
+                toast.success('Payment request sent! Client notified in portal.', {
+                    id: toastId,
+                    action: {
+                        label: 'Email client',
+                        onClick: () => window.open(result.mailtoLink, '_blank'),
+                    },
+                })
+            } else {
+                toast.success(result.message || 'Payment request sent to client!', { id: toastId })
+            }
         } catch (error) {
             console.error('Error requesting payment:', error)
-            toast.error('Failed to update status', { id: toastId })
+            toast.error(error instanceof Error ? error.message : 'Failed to update status', { id: toastId })
         }
     }
 
@@ -314,7 +371,7 @@ export default function SalesPage() {
                 related_entity_type: 'quotation'
             }])
 
-            fetchQuotations()
+            refreshQuotations()
             toast.success('Final payment approved! You can now convert to invoice.', { id: toastId })
         } catch (error) {
             console.error('Error approving payment:', error)
@@ -322,20 +379,8 @@ export default function SalesPage() {
         }
     }
 
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'Draft': return 'bg-gray-500'
-            case 'Sent': return 'bg-brand-electric'
-            case 'Approved': case 'Accepted': return 'bg-green-500'
-            case 'Rejected': return 'bg-red-500'
-            case 'Converted': return 'bg-purple-500'
-            case 'Paid': return 'bg-green-600'
-            case 'Overdue': return 'bg-red-600'
-            case 'Cancelled': return 'bg-gray-600'
-            case 'Pending Review': return 'bg-amber-500'
-            default: return 'bg-gray-500'
-        }
-    }
+    const getStatusColor = (status: string) =>
+        QUOTATION_STATUS_COLORS[status] || (status === 'Rejected' ? 'bg-destructive' : 'bg-muted-foreground')
 
     const handleDelete = async (id: string, type: 'quotation' | 'invoice') => {
         if (!confirm(`Are you sure you want to delete this ${type}? This cannot be undone.`)) return
@@ -344,8 +389,8 @@ export default function SalesPage() {
             const table = type === 'quotation' ? 'quotations' : 'invoices'
             const { error } = await supabase.from(table).delete().eq('id', id)
             if (error) throw error
-            if (type === 'quotation') fetchQuotations()
-            else fetchInvoices()
+            if (type === 'quotation') refreshQuotations()
+            else refreshInvoices()
             toast.success(`${type === 'quotation' ? 'Quotation' : 'Invoice'} deleted successfully`, { id: toastId })
         } catch (error) {
             console.error('Error deleting sale:', error)
@@ -364,7 +409,10 @@ export default function SalesPage() {
             const fullData = { ...sale, lines: lines || [] } as (Quotation | Invoice | PurchaseOrder) & { lines: unknown[]; site_plan_url?: string; invoice_id?: string }
             if (type === 'quotation') {
                 const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', sale.id).single()
-                if (sitePlanData?.flattened_url) fullData.site_plan_url = sitePlanData.flattened_url
+                if (sitePlanData?.flattened_url) {
+                    const { resolveStorageUrl, PRIVATE_STORAGE_BUCKETS } = await import('@/lib/portal/storage')
+                    fullData.site_plan_url = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, sitePlanData.flattened_url)
+                }
                 generateQuotePDF(fullData, settings)
             } else {
                 generateInvoicePDF(fullData, settings)
@@ -397,7 +445,7 @@ export default function SalesPage() {
                 <div className="flex items-start justify-between">
                     <div className="flex-1">
                         <CardTitle className="text-lg flex items-center gap-2 text-brand-navy dark:text-brand-steel/20">
-                            {type === 'quotation' ? <FileText className="h-5 w-5 text-brand-electric" /> : <Receipt className="h-5 w-5 text-purple-500" />}
+                            {type === 'quotation' ? <FileText className="h-5 w-5 text-brand-electric" /> : <Receipt className="h-5 w-5 text-brand-steel" />}
                             {sale.clients?.name || 'Unknown Client'}
                         </CardTitle>
                         {sale.clients?.company && (
@@ -443,7 +491,7 @@ export default function SalesPage() {
                     <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
                         {sale.profit_estimate && (
                             <div>
-                                Profit: <span className="text-green-600 font-medium">{formatCurrency(sale.profit_estimate)}</span>
+                                Profit: <span className="text-brand-electric font-medium">{formatCurrency(sale.profit_estimate)}</span>
                             </div>
                         )}
                         {type === 'quotation' && (sale as Quotation).valid_until && (
@@ -471,7 +519,7 @@ export default function SalesPage() {
                                     <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Sent')} className="w-full bg-brand-electric hover:bg-brand-electric">Send</Button>
                                 )}
                                 {sale.status === 'Sent' && (
-                                    <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Approved')} className="w-full bg-green-600 hover:bg-green-700">Approve</Button>
+                                    <Button size="sm" onClick={() => updateStatus('quotation', sale.id, 'Approved')} className="w-full">Approve</Button>
                                 )}
 
                                 {(sale.status === 'Approved' || sale.status === 'Accepted') && (
@@ -486,15 +534,15 @@ export default function SalesPage() {
                                             </Button>
                                         ) : (
                                             (sale as Quotation).final_payment_approved ? (
-                                                <Button size="sm" onClick={() => convertToInvoice(sale as Quotation)} className="w-full bg-purple-600 hover:bg-purple-700">Convert</Button>
+                                                <Button size="sm" onClick={() => convertToInvoice(sale as Quotation)} className="w-full bg-brand-steel hover:bg-brand-steel/90">Convert</Button>
                                             ) : (
                                                 (sale as Quotation).final_payment_proof ? (
                                                     <div className="flex gap-1 w-full">
-                                                        <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700 text-xs" onClick={() => handleApproveFinalPayment(sale as Quotation)}>
+                                                        <Button size="sm" className="flex-1 text-xs" onClick={() => handleApproveFinalPayment(sale as Quotation)}>
                                                             Approve Pay
                                                         </Button>
                                                         <Button size="sm" variant="outline" className="px-2" onClick={() => downloadProof((sale as Quotation).final_payment_proof!, `FinalProof_${sale.id.substring(0, 6)}`)} title="View Proof">
-                                                            <CheckCircle className="h-4 w-4 text-green-600" />
+                                                            <CheckCircle className="h-4 w-4 text-brand-electric" />
                                                         </Button>
                                                     </div>
                                                 ) : (
@@ -525,7 +573,7 @@ export default function SalesPage() {
                                     <Button size="sm" onClick={() => updateStatus('invoice', sale.id, 'Sent')} className="w-full">Send</Button>
                                 )}
                                 {(sale.status === 'Sent' || sale.status === 'Overdue') && (
-                                    <Button size="sm" onClick={() => updateStatus('invoice', sale.id, 'Paid')} className="w-full bg-green-600 hover:bg-green-700">Mark Paid</Button>
+                                    <Button size="sm" onClick={() => updateStatus('invoice', sale.id, 'Paid')} className="w-full">Mark Paid</Button>
                                 )}
                                 {sale.status === 'Paid' && (
                                     <Button
@@ -584,31 +632,15 @@ export default function SalesPage() {
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
+            <PageHeader
+                title="Sales"
+                description="Quotes, invoices, purchase orders, and payment tracking"
+            />
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-r from-brand-electric to-brand-electric rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-brand-electric/20 text-sm font-medium">Active Quotes</p>
-                        <h3 className="text-3xl font-bold mt-1">{activeQuotes.length}</h3>
-                        <p className="text-brand-electric/20 text-xs mt-2">Value: {formatCurrency(activeQuoteValue)}</p>
-                    </div>
-                    <FileText className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
-                <div className="bg-gradient-to-r from-purple-600 to-purple-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-purple-100 text-sm font-medium">Outstanding Invoices</p>
-                        <h3 className="text-3xl font-bold mt-1">{outstandingInvoices.length}</h3>
-                        <p className="text-purple-100 text-xs mt-2">Due: {formatCurrency(outstandingValue)}</p>
-                    </div>
-                    <AlertCircle className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
-                <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <p className="text-emerald-100 text-sm font-medium">Revenue (All Time)</p>
-                        <h3 className="text-3xl font-bold mt-1">{formatCurrency(totalRevenue)}</h3>
-                        <p className="text-emerald-100 text-xs mt-2">{paidInvoices.length} Paid Invoices</p>
-                    </div>
-                    <Banknote className="absolute right-[-10px] bottom-[-10px] h-24 w-24 text-white opacity-10 rotate-12" />
-                </div>
+                <StatCard label="Active Quotes" value={activeQuotes.length} hint={`Value: ${formatCurrency(activeQuoteValue)}`} variant="primary" icon={FileText} />
+                <StatCard label="Outstanding Invoices" value={outstandingInvoices.length} hint={`Due: ${formatCurrency(outstandingValue)}`} variant="accent" icon={AlertCircle} />
+                <StatCard label="Revenue (All Time)" value={formatCurrency(totalRevenue)} hint={`${paidInvoices.length} paid invoices`} variant="success" icon={Banknote} />
             </div>
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -656,7 +688,8 @@ export default function SalesPage() {
                     </TabsList>
                 </div>
 
-                <TabsContent value="quotations" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <TabsContent value="quotations" className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredQuotations
                         .filter(q => !['Accepted', 'Approved', 'Converted', 'Pending Review'].includes(q.status))
                         .map((quotation) => renderSaleCard(quotation, 'quotation'))}
@@ -670,6 +703,13 @@ export default function SalesPage() {
                             <Button onClick={() => router.push('/portal/sales/new')}>Create Quote</Button>
                         </div>
                     )}
+                    </div>
+                    <PaginationBar
+                        page={quotesPage}
+                        totalPages={getTotalPages(quotesCount)}
+                        totalCount={quotesCount}
+                        onPageChange={setQuotesPage}
+                    />
                 </TabsContent>
 
                 <TabsContent value="pending" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -708,9 +748,13 @@ export default function SalesPage() {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <a href={quotation.payment_proof} target="_blank" rel="noopener noreferrer" className="text-primary underline flex items-center gap-1">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => downloadProof(quotation.payment_proof!, `PaymentProof_${quotation.id.substring(0, 6)}`)}
+                                                    className="text-primary underline flex items-center gap-1"
+                                                >
                                                     View Proof <ExternalLink className="h-3 w-3" />
-                                                </a>
+                                                </button>
                                             )}
                                             <Button
                                                 variant="outline"
@@ -760,7 +804,8 @@ export default function SalesPage() {
                     )}
                 </TabsContent>
 
-                <TabsContent value="invoices" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <TabsContent value="invoices" className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredInvoices.map((invoice) => renderSaleCard(invoice, 'invoice'))}
                     {filteredInvoices.length === 0 && (
                         <div className="col-span-full flex flex-col items-center justify-center py-16 text-muted-foreground bg-brand-white dark:bg-brand-navy/50 rounded-2xl border-2 border-dashed border-brand-steel/40 dark:border-brand-navy">
@@ -771,6 +816,13 @@ export default function SalesPage() {
                             <p className="text-center">Convert a quotation or create a direct invoice to see it here.</p>
                         </div>
                     )}
+                    </div>
+                    <PaginationBar
+                        page={invoicesPage}
+                        totalPages={getTotalPages(invoicesCount)}
+                        totalCount={invoicesCount}
+                        onPageChange={setInvoicesPage}
+                    />
                 </TabsContent>
 
                 <TabsContent value="purchase-orders" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -811,7 +863,7 @@ export default function SalesPage() {
                                             size="sm"
                                             variant="outline"
                                             className="w-full"
-                                            onClick={() => router.push(`/portal/purchase-orders/new?edit=${po.id}`)}
+                                            onClick={() => router.push(`/portal/purchase-orders/new?id=${po.id}`)}
                                         >
                                             Edit
                                         </Button>

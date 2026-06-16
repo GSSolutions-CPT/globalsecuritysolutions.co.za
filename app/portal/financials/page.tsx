@@ -14,10 +14,14 @@ import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { Expense, Job, Invoice } from '@/types/crm'
 import { cn } from '@/lib/portal/utils'
+import { formatMonthLabel, getMonthSortKey, sortMonthlyChartData } from '@/lib/portal/chart-utils'
+import { useCurrency } from '@/lib/portal/use-currency'
+import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
 
-const FinancialCharts = lazy(() => import('./FinancialCharts'))
+const FinancialCharts = lazy(() => import('@/components/portal/FinancialCharts'))
 
-export default function FinancialsPage() {
+function FinancialsContent() {
+    const { formatCurrency } = useCurrency()
     const [expenses, setExpenses] = useState<Expense[]>([])
     const [jobs, setJobs] = useState<Job[]>([])
     const [invoices, setInvoices] = useState<Invoice[]>([])
@@ -51,6 +55,8 @@ export default function FinancialsPage() {
             const { data, error } = await supabase
                 .from('expenses')
                 .select('*')
+                .gte('date', dateRange.start)
+                .lte('date', dateRange.end)
                 .order('date', { ascending: false })
 
             if (error) throw error
@@ -58,7 +64,7 @@ export default function FinancialsPage() {
         } catch (error) {
             console.error('Error fetching expenses:', error)
         }
-    }, [])
+    }, [dateRange])
 
     const fetchJobs = useCallback(async () => {
         try {
@@ -111,17 +117,9 @@ export default function FinancialsPage() {
             const fileName = `${Math.random()}.${fileExt}`
             const filePath = `${fileName}`
 
-            const { error: uploadError } = await supabase.storage
-                .from('receipts')
-                .upload(filePath, file)
+            const storedPath = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.RECEIPTS, filePath, file)
 
-            if (uploadError) throw uploadError
-
-            const { data: { publicUrl } } = supabase.storage
-                .from('receipts')
-                .getPublicUrl(filePath)
-
-            setFormData(prev => ({ ...prev, receipt_url: publicUrl }))
+            setFormData(prev => ({ ...prev, receipt_url: storedPath }))
             toast.success('Receipt attached!')
 
         } catch (error) {
@@ -254,30 +252,40 @@ export default function FinancialsPage() {
     }
 
     const prepareMonthlyData = () => {
-        const monthlyData: Record<string, { month: string, revenue: number, profit: number, expenses: number }> = {}
+        const monthlyData: Record<string, { month: string; sortKey: string; revenue: number; profit: number; expenses: number }> = {}
 
         invoices.forEach(inv => {
             if (inv.status === 'Paid') {
-                const month = new Date(inv.date_created!).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-                if (!monthlyData[month]) {
-                    monthlyData[month] = { month, revenue: 0, profit: 0, expenses: 0 }
+                const sortKey = getMonthSortKey(inv.date_created!)
+                if (!monthlyData[sortKey]) {
+                    monthlyData[sortKey] = {
+                        month: formatMonthLabel(inv.date_created!),
+                        sortKey,
+                        revenue: 0,
+                        profit: 0,
+                        expenses: 0,
+                    }
                 }
-                monthlyData[month].revenue += parseFloat(inv.total_amount?.toString() || '0')
-                monthlyData[month].profit += parseFloat(inv.profit_estimate?.toString() || '0')
+                monthlyData[sortKey].revenue += parseFloat(inv.total_amount?.toString() || '0')
+                monthlyData[sortKey].profit += parseFloat(inv.profit_estimate?.toString() || '0')
             }
         })
 
         expenses.forEach(exp => {
-            const month = new Date(exp.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-            if (!monthlyData[month]) {
-                monthlyData[month] = { month, revenue: 0, profit: 0, expenses: 0 }
+            const sortKey = getMonthSortKey(exp.date)
+            if (!monthlyData[sortKey]) {
+                monthlyData[sortKey] = {
+                    month: formatMonthLabel(exp.date),
+                    sortKey,
+                    revenue: 0,
+                    profit: 0,
+                    expenses: 0,
+                }
             }
-            monthlyData[month].expenses += parseFloat(exp.amount?.toString() || '0')
+            monthlyData[sortKey].expenses += parseFloat(exp.amount?.toString() || '0')
         })
 
-        return Object.values(monthlyData).sort((a, b) =>
-            new Date(a.month).getTime() - new Date(b.month).getTime()
-        )
+        return sortMonthlyChartData(Object.values(monthlyData))
     }
 
     const prepareExpenseBreakdown = () => {
@@ -339,7 +347,15 @@ export default function FinancialsPage() {
                                 className="bg-white dark:bg-brand-navy"
                             />
                         </div>
-                        <Button onClick={fetchInvoices} className="w-full sm:w-auto">Apply Filter</Button>
+                        <Button
+                            onClick={() => {
+                                fetchInvoices()
+                                fetchExpenses()
+                            }}
+                            className="w-full sm:w-auto"
+                        >
+                            Apply Filter
+                        </Button>
                     </div>
                 </CardContent>
             </Card>
@@ -351,7 +367,7 @@ export default function FinancialsPage() {
                             Total Revenue
                             <ArrowUpRight className="h-4 w-4 opacity-75" />
                         </p>
-                        <h3 className="text-3xl font-bold mt-2">R{metrics.totalRevenue.toLocaleString()}</h3>
+                        <h3 className="text-3xl font-bold mt-2">{formatCurrency(metrics.totalRevenue)}</h3>
                         <p className="text-emerald-100 text-xs mt-3 bg-emerald-700/30 w-fit px-2 py-1 rounded-full">
                             From paid invoices
                         </p>
@@ -365,7 +381,7 @@ export default function FinancialsPage() {
                             Gross Profit
                             <PieChart className="h-4 w-4 opacity-75" />
                         </p>
-                        <h3 className="text-3xl font-bold mt-2">R{metrics.totalProfit.toLocaleString()}</h3>
+                        <h3 className="text-3xl font-bold mt-2">{formatCurrency(metrics.totalProfit)}</h3>
                         <div className="flex items-center gap-2 mt-3">
                             <p className="text-brand-electric/20 text-xs bg-brand-electric/30 w-fit px-2 py-1 rounded-full">
                                 Margin: {metrics.profitMargin}%
@@ -381,7 +397,7 @@ export default function FinancialsPage() {
                             Total Expenses
                             <ArrowDownRight className="h-4 w-4 opacity-75" />
                         </p>
-                        <h3 className="text-3xl font-bold mt-2">R{metrics.totalExpenses.toLocaleString()}</h3>
+                        <h3 className="text-3xl font-bold mt-2">{formatCurrency(metrics.totalExpenses)}</h3>
                         <p className="text-rose-100 text-xs mt-3 bg-rose-700/30 w-fit px-2 py-1 rounded-full">
                             Recorded overheads
                         </p>
@@ -401,7 +417,7 @@ export default function FinancialsPage() {
                             Net Profit
                             <Wallet className="h-4 w-4 opacity-75" />
                         </p>
-                        <h3 className="text-3xl font-bold mt-2">R{metrics.netProfit.toLocaleString()}</h3>
+                        <h3 className="text-3xl font-bold mt-2">{formatCurrency(metrics.netProfit)}</h3>
                         <p className={cn(
                             "text-xs mt-3 w-fit px-2 py-1 rounded-full",
                             metrics.netProfit >= 0 ? 'text-brand-electric/20 bg-brand-electric/30' : 'text-orange-100 bg-orange-700/30'
@@ -589,15 +605,19 @@ export default function FinancialsPage() {
                                 <div className="flex items-center gap-4">
                                     <div className="text-right">
                                         <div className="text-lg font-bold text-rose-600 dark:text-rose-500">
-                                            -R{parseFloat(expense.amount.toString()).toFixed(2)}
+                                            -{formatCurrency(expense.amount)}
                                         </div>
                                     </div>
                                     <div className="flex gap-1">
                                         {expense.receipt_url && (
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-steel hover:text-brand-electric" asChild title="View Receipt">
-                                                <a href={expense.receipt_url} target="_blank" rel="noopener noreferrer">
-                                                    <FileText className="h-4 w-4" />
-                                                </a>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 text-brand-steel hover:text-brand-electric"
+                                                title="View Receipt"
+                                                onClick={() => openStorageFile(PRIVATE_STORAGE_BUCKETS.RECEIPTS, expense.receipt_url!, `Receipt_${expense.id}`)}
+                                            >
+                                                <FileText className="h-4 w-4" />
                                             </Button>
                                         )}
                                         <Button variant="ghost" size="icon" className="h-8 w-8 text-brand-steel hover:text-brand-electric" onClick={() => handleEdit(expense)}>
@@ -619,5 +639,17 @@ export default function FinancialsPage() {
                 </CardContent>
             </Card>
         </div>
+    )
+}
+
+export default function FinancialsPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex items-center justify-center min-h-[400px]">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        }>
+            <FinancialsContent />
+        </Suspense>
     )
 }

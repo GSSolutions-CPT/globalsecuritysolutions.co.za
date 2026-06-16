@@ -30,7 +30,7 @@ interface POLine {
 function CreatePurchaseOrderContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const editId = searchParams.get('id')
+    const editId = searchParams.get('id') || searchParams.get('edit')
     const { formatCurrency } = useCurrency()
     const { settings } = useSettings()
     const taxRate = (parseFloat(settings?.taxRate as string) || 15) / 100
@@ -563,7 +563,7 @@ function CreatePurchaseOrderContent() {
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-brand-electric/10/50 dark:bg-brand-navy/10 border-brand-electric/20 dark:border-brand-navy">
+                    <Card className="bg-brand-electric/10 dark:bg-brand-navy/10 border-brand-electric/20 dark:border-brand-navy">
                         <CardContent className="p-4 flex items-start gap-3">
                             <div className="p-2 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full text-brand-electric">
                                 <CreditCard className="h-4 w-4" />

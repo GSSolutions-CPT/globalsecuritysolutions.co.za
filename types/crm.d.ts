@@ -57,6 +57,13 @@ export interface InvoiceLine {
     cost_price?: number;
 }
 
+export interface InvoiceMetadata {
+    contract_id?: string;
+    billing_date?: string;
+    auto_generated?: boolean;
+    [key: string]: unknown;
+}
+
 export interface Invoice {
     id: string;
     client_id: string;
@@ -69,6 +76,7 @@ export interface Invoice {
     vat_applicable: boolean;
     trade_subtotal?: number;
     profit_estimate?: number;
+    metadata?: InvoiceMetadata;
     clients?: Pick<Client, 'name' | 'company' | 'email' | 'address'>;
     quotations?: Pick<Quotation, 'payment_proof'>;
     payment_proof?: string;
@@ -107,20 +115,33 @@ export interface PurchaseOrder {
     metadata?: Record<string, unknown>;
 }
 
-export interface Contract {
+export type ContractFrequency = 'weekly' | 'monthly' | 'quarterly' | 'annually';
+
+/** Maps to the `recurring_contracts` table. */
+export interface RecurringContract {
     id: string;
     client_id: string;
-    title: string;
+    description: string;
     amount: number;
-    frequency: 'weekly' | 'monthly' | 'quarterly' | 'annually' | string;
-    description?: string;
+    frequency: ContractFrequency | string;
     start_date: string;
     next_billing_date?: string;
-    status: 'Active' | 'Paused' | 'Cancelled';
-    service_type?: string;
-    notes?: string;
-    active?: boolean;
-    clients?: Pick<Client, 'name' | 'company'>;
+    active: boolean;
+    created_at?: string;
+    clients?: Pick<Client, 'name' | 'company' | 'email'>;
+}
+
+/** @deprecated Use RecurringContract — kept as alias for existing imports. */
+export type Contract = RecurringContract;
+
+export interface ActivityLog {
+    id: string;
+    type: string;
+    description: string;
+    timestamp?: string;
+    created_at?: string;
+    related_entity_id?: string;
+    related_entity_type?: string;
 }
 
 export interface Job {
@@ -156,6 +177,8 @@ export interface Product {
     description?: string;
     retail_price: number;
     cost_price?: number;
+    stock_quantity?: number | null;
+    reorder_level?: number | null;
     created_at?: string;
 }
 
@@ -186,6 +209,42 @@ export interface CalendarEvent {
     end_datetime?: string;
     event_type?: string;
     notes?: string;
+}
+
+export interface ClientRequest {
+    id: string;
+    client_id: string;
+    type: 'quote' | 'site_visit';
+    description: string;
+    address?: string;
+    preferred_date?: string | null;
+    status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
+    staff_notes?: string | null;
+    created_at?: string;
+    updated_at?: string;
+    clients?: Pick<Client, 'name' | 'company' | 'email' | 'phone'>;
+}
+
+export interface SerialNumberEntry {
+    component: string;
+    serial: string;
+}
+
+export interface InstallationDetail {
+    id: string;
+    invoice_id: string;
+    serial_numbers: SerialNumberEntry[];
+    notes?: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface InstallationPhoto {
+    id: string;
+    installation_detail_id: string;
+    photo_url: string;
+    caption?: string;
+    uploaded_at?: string;
 }
 
 export interface UserProfile {

@@ -26,6 +26,7 @@ import { Badge } from '@/components/portal/ui/badge';
 import { Calendar, User, Download, GripVertical, Clock, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/portal/utils';
 import { Job } from '@/types/crm';
+import { PRIVATE_STORAGE_BUCKETS, openStorageFile } from '@/lib/portal/storage';
 
 const columns = ['Pending', 'In Progress', 'Completed', 'Cancelled'] as const;
 type Status = typeof columns[number];
@@ -156,14 +157,13 @@ function JobCard({ job, isOverlay }: JobCardProps) {
                             size="sm"
                             variant="ghost"
                             className="w-full text-[10px] h-6 mt-1 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50"
-                            onClick={(e: React.MouseEvent) => {
+                            onClick={async (e: React.MouseEvent) => {
                                 e.stopPropagation();
-                                const link = document.createElement('a');
-                                link.href = job.quotations!.payment_proof!;
-                                link.download = `PaymentProof_${job.id!.substring(0, 6)}`;
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
+                                await openStorageFile(
+                                    PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS,
+                                    job.quotations!.payment_proof!,
+                                    `PaymentProof_${job.id!.substring(0, 6)}`
+                                );
                             }}
                         >
                             <Download className="mr-1.5 h-3 w-3" />

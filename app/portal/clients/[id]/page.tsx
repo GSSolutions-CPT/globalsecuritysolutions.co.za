@@ -11,6 +11,8 @@ import { ArrowLeft, Mail, Phone, MapPin, Loader2, Building2, Image as ImageIcon,
 import { ClientDialog } from '@/components/portal/ClientDialog'
 import { formatCurrency } from '@/lib/portal/utils'
 import { Client, Job, Invoice, Quotation, JobAttachment } from '@/types/crm'
+import { PRIVATE_STORAGE_BUCKETS } from '@/lib/portal/storage'
+import { StorageImage } from '@/components/portal/StorageImage'
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -338,8 +340,9 @@ export default function ClientDetailsPage({ params }: PageProps) {
                                     {attachments.map((file) => (
                                         <div key={file.id} className="group relative aspect-square bg-brand-steel/20 dark:bg-brand-navy rounded-lg overflow-hidden border">
                                             {file.file_type?.startsWith('image/') ? (
-                                                <img
-                                                    src={file.file_url}
+                                                <StorageImage
+                                                    bucket={PRIVATE_STORAGE_BUCKETS.JOB_ATTACHMENTS}
+                                                    storedValue={file.file_url}
                                                     alt={file.file_name}
                                                     className="w-full h-full object-cover transition-transform hover:scale-105"
                                                 />

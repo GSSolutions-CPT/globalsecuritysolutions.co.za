@@ -1,88 +1,79 @@
 "use client"
 
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useAuth } from "@/context/AuthContext"
 import { supabase } from "@/lib/portal/supabase"
-// Assuming ClientPortal is a component we can import directly or wrap
-// We will need to migrate ClientPortal.jsx to .tsx or adjust imports.
-// For now, let's assume we copy ClientPortal to app/portal/client-portal/page.tsx or similar
-// This page acts as the RootRedirect from App.jsx
 
 function PortalContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const clientId = searchParams.get('client')
-    const { user, loading: authLoading } = useAuth()
-    const [checking, setChecking] = useState(true)
+    const { user, loading: authLoading, portalAccess } = useAuth()
 
     useEffect(() => {
-        async function checkClientAccess() {
-            try {
-                if (!clientId) {
-                    // Default to dashboard logic or check role
-                    // For now, redirect to dashboard if no client param
-                    router.push('/portal/dashboard')
-                    return
-                }
+        async function routeUser() {
+            if (authLoading) return
 
-                const { data: clientDataRaw, error } = await supabase
-                    .rpc('get_client_for_setup', { p_client_id: clientId })
-                    .single()
-                const clientData = clientDataRaw as { id: string, auth_user_id: string | null } | null
-
-                if (error) {
-                    console.error("Portal Error: Failed to fetch client data", error)
-                    router.push('/portal/login')
-                    return
-                }
-
-                if (!clientData) {
-                    console.error("Portal Error: No client data found")
-                    router.push('/portal/login')
-                    return
-                }
-
-                // If client has no account yet → send to profile setup
-                if (!clientData.auth_user_id) {
-                    router.push(`/portal/profile-setup/${clientId}`)
-                    return
-                }
-
-                // If user is logged in and is this client → show portal
-                if (user && clientData.auth_user_id === user.id) {
-                    // Redirect to the client-portal route WITH the param so Layout knows it's a client
-                    router.push(`/portal/client-portal?client=${clientData.id}`)
-                    return
-                }
-
-                // Client has account but user isn't logged in → send to login
-                router.push('/portal/login')
-            } catch (err) {
-                console.error("Portal: Unexpected error checking access", err)
-                router.push('/portal/login')
-            } finally {
-                setChecking(false)
+            if (!user) {
+                router.replace('/portal/login')
+                return
             }
+
+            if (portalAccess?.userType === 'staff') {
+                router.replace('/portal/dashboard')
+                return
+            }
+
+            if (portalAccess?.userType === 'client' && portalAccess.clientId) {
+                if (clientId && clientId !== portalAccess.clientId) {
+                    router.replace(`/portal/client-portal?client=${portalAccess.clientId}`)
+                    return
+                }
+
+                router.replace(`/portal/client-portal?client=${portalAccess.clientId}`)
+                return
+            }
+
+            if (clientId) {
+                const { data: clientData, error } = await supabase
+                    .from('clients')
+                    .select('id, auth_user_id')
+                    .eq('id', clientId)
+                    .maybeSingle()
+
+                if (error || !clientData) {
+                    router.replace('/portal/login?error=unauthorized')
+                    return
+                }
+
+                if (!clientData.auth_user_id) {
+                    router.replace(`/portal/profile-setup/${clientId}`)
+                    return
+                }
+
+                if (clientData.auth_user_id === user.id) {
+                    router.replace(`/portal/client-portal?client=${clientData.id}`)
+                    return
+                }
+
+                router.replace('/portal/login?error=unauthorized')
+                return
+            }
+
+            router.replace('/portal/login?error=unauthorized')
         }
 
-        // Only run if auth is done loading
-        if (!authLoading) {
-            checkClientAccess()
-        }
-    }, [clientId, user, authLoading, router])
+        routeUser()
+    }, [clientId, user, authLoading, portalAccess, router])
 
-    if (authLoading || checking) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="p-6 text-sm text-muted-foreground animate-pulse">
-                    Loading Security Hub...
-                </div>
+    return (
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="p-6 text-sm text-muted-foreground animate-pulse">
+                Loading Security Hub...
             </div>
-        )
-    }
-
-    return null // Redirecting...
+        </div>
+    )
 }
 
 export default function PortalRootPage() {

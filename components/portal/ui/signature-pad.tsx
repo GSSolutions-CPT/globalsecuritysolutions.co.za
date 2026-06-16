@@ -65,7 +65,7 @@ export const SignaturePad: any = function({ onSave, className = '' }) {
 
     return (
         <div className={`space-y-2 ${className}`}>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg overflow-hidden relative bg-white">
+            <div className="border-2 border-dashed border-brand-steel/40 rounded-lg overflow-hidden relative bg-white">
                 <canvas
                     ref={canvasRef}
                     className="touch-none cursor-crosshair w-full"

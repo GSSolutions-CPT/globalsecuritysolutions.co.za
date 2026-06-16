@@ -7,7 +7,7 @@ import { Button } from '@/components/portal/ui/button'
 import { Badge } from '@/components/portal/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
-import { ShieldCheck, Download, CheckCircle, Upload, MessageCircle, Phone, Mail, HelpCircle, PenTool, CreditCard, FileText, MapPin, Send, Loader2 } from 'lucide-react'
+import { ShieldCheck, Download, CheckCircle, Upload, MessageCircle, Phone, Mail, HelpCircle, PenTool, CreditCard, FileText, MapPin, Send, Loader2, Bell } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { generateInvoicePDF, generateQuotePDF } from '@/lib/portal/pdf-service'
@@ -22,11 +22,12 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Textarea } from '@/components/portal/ui/textarea'
 import { Client, Quotation, Invoice } from '@/types/crm'
+import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
 
 export default function ClientPortalPage() {
     const { formatCurrency } = useCurrency()
     const { settings } = useSettings()
-    const { user } = useAuth()
+    const { user, loading: authLoading } = useAuth()
     const searchParams = useSearchParams()
     const router = useRouter()
     const urlClientId = searchParams.get('client')
@@ -64,8 +65,11 @@ export default function ClientPortalPage() {
      */
     useEffect(() => {
         async function resolveClient() {
+            if (authLoading) return
+
             if (!user) {
-                // Not authenticated — wait for auth context to load (AuthContext handles redirect)
+                setLoading(false)
+                router.replace('/portal/login')
                 return
             }
 
@@ -112,7 +116,7 @@ export default function ClientPortalPage() {
             }
         }
         resolveClient()
-    }, [urlClientId, user])
+    }, [urlClientId, user, authLoading, router])
 
     const fetchClientData = useCallback(async () => {
         if (!clientId) return
@@ -194,17 +198,7 @@ export default function ClientPortalPage() {
 
     const uploadFileToStorage = async (file: File | Blob, path: string) => {
         const fileName = `${path}_${Math.random().toString(36).substring(7)}`
-        const { error: uploadError } = await supabase.storage
-            .from('payment-proofs')
-            .upload(fileName, file)
-
-        if (uploadError) throw uploadError
-
-        const { data: { publicUrl } } = supabase.storage
-            .from('payment-proofs')
-            .getPublicUrl(fileName)
-
-        return publicUrl
+        return uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, fileName, file)
     }
 
     const submitAcceptance = async () => {
@@ -215,14 +209,13 @@ export default function ClientPortalPage() {
         setStep(2)
     }
 
-    const downloadProof = (url: string, filename: string) => {
-        const link = document.createElement('a')
-        link.href = url
-        link.download = filename
-        link.target = '_blank'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+    const downloadProof = async (storedValue: string, filename: string) => {
+        try {
+            await openStorageFile(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, storedValue, filename)
+        } catch (error) {
+            console.error('Error opening payment proof:', error)
+            toast.error('Unable to open payment proof')
+        }
     }
 
     const submitFinalAcceptance = async (paymentProofFile: File) => {
@@ -322,12 +315,18 @@ export default function ClientPortalPage() {
         }
     }
 
-    const companyPhone = settings.companyPhone || '0629558559'
-    const companyEmail = settings.companyEmail || 'Kyle@GSSolutions.co.za'
-    const whatsappNumber = settings.whatsappNumber || companyPhone
-    const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\s+/g, '')}`
+    const companyPhone = settings.companyPhone?.trim() || ''
+    const companyEmail = settings.companyEmail?.trim() || ''
+    const whatsappNumber = (settings.whatsappNumber || settings.companyPhone || '').trim()
+    const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber.replace(/\s+/g, '')}` : ''
+    const hasBankingDetails = Boolean(
+        settings.bankName &&
+        settings.bankAccountNumber &&
+        settings.bankBranchCode
+    )
+    const hasContactDetails = Boolean(companyPhone || companyEmail)
 
-    if (loading) {
+    if (authLoading || loading) {
         return (
             <div className="min-h-screen bg-brand-white dark:bg-brand-navy flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
@@ -384,17 +383,51 @@ export default function ClientPortalPage() {
 
         const activeQuotes = quotations.filter(q => q.status === 'Sent').length
         const recentSuccesses = quotations.filter(q => q.final_payment_approved)
+        const paymentRequests = quotations.filter(
+            (q) =>
+                q.payment_request_sent &&
+                !q.final_payment_approved &&
+                (q.status === 'Approved' || q.status === 'Accepted' || q.admin_approved)
+        )
 
         return (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                {paymentRequests.length > 0 && (
+                    <div className="relative overflow-hidden rounded-2xl border border-amber-300/60 dark:border-amber-700/50 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/30 p-6 shadow-sm">
+                        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-500" />
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-2">
+                            <div className="flex items-start gap-3">
+                                <div className="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 shrink-0">
+                                    <Bell className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-amber-900 dark:text-amber-200">Payment requested</p>
+                                    <p className="text-sm text-amber-800/80 dark:text-amber-300/80 mt-0.5">
+                                        {paymentRequests.length === 1
+                                            ? `Outstanding payment is due on Quote #${paymentRequests[0].id.substring(0, 6)}.`
+                                            : `${paymentRequests.length} quotations have outstanding payments due.`}
+                                    </p>
+                                </div>
+                            </div>
+                            <Button
+                                className="bg-amber-600 hover:bg-amber-700 text-white shrink-0"
+                                onClick={() => setActiveTab('proforma')}
+                            >
+                                <CreditCard className="mr-2 h-4 w-4" />
+                                Pay Now
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="relative overflow-hidden rounded-3xl bg-brand-navy border border-brand-navy shadow-2xl group">
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-electric/20 rounded-full blur-3xl group-hover:bg-brand-electric/30 transition-all duration-1000 animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-purple-600/30 transition-all duration-1000 delay-700 animate-pulse"></div>
+                    <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-brand-steel/20 rounded-full blur-3xl group-hover:bg-brand-steel/30 transition-all duration-1000 delay-700 animate-pulse"></div>
                     <div className="relative z-10 p-8 md:p-12">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                             <div>
                                 <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">
-                                    Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-purple-400">{client.name.split(' ')[0]}</span>
+                                    Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">{client.name.split(' ')[0]}</span>
                                 </h2>
                                 <p className="text-brand-steel text-lg max-w-xl">
                                     Your secure client dashboard. Track quotes, manage invoices, and approve payments in real-time.
@@ -419,10 +452,10 @@ export default function ClientPortalPage() {
                             </div>
                             <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 group/card">
                                 <div className="flex justify-between items-start mb-4">
-                                    <div className="p-3 bg-purple-500/20 rounded-xl text-purple-400 group-hover/card:text-purple-300 transition-colors">
+                                    <div className="p-3 bg-brand-steel/20 rounded-xl text-brand-steel group-hover/card:text-brand-electric transition-colors">
                                         <PenTool className="w-6 h-6" />
                                     </div>
-                                    <Badge className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/30 border-0">Action Needed</Badge>
+                                    <Badge className="bg-brand-steel/20 text-brand-steel hover:bg-brand-steel/30 border-0">Action Needed</Badge>
                                 </div>
                                 <div>
                                     <p className="text-brand-steel text-sm font-medium uppercase tracking-wider">Pending Quotes</p>
@@ -478,21 +511,21 @@ export default function ClientPortalPage() {
                         Quick Access
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/50 hover:bg-brand-electric/10/50 dark:hover:bg-brand-navy/10 transition-all group" onClick={() => setContactOpen(true)}>
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/50 hover:bg-brand-electric/10 dark:hover:bg-brand-electric/10 transition-all group" onClick={() => setContactOpen(true)}>
                             <div className="p-3 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <HelpCircle className="h-6 w-6 text-brand-electric dark:text-brand-electric" />
                             </div>
                             <span className="font-medium text-brand-slate dark:text-brand-steel/60">Support Center</span>
                         </Button>
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-green-500/50 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all group" onClick={() => window.open(whatsappUrl, '_blank')}>
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-green-500/50 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all group" disabled={!whatsappUrl} onClick={() => whatsappUrl && window.open(whatsappUrl, '_blank')}>
                             <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <MessageCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                             </div>
                             <span className="font-medium text-brand-slate dark:text-brand-steel/60">WhatsApp Us</span>
                         </Button>
-                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-purple-500/50 hover:bg-purple-50/50 dark:hover:bg-purple-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: '', preferredDate: '' }); setRequestQuoteOpen(true) }}>
-                            <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
-                                <FileText className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                        <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/50 hover:bg-brand-electric/10 dark:hover:bg-brand-electric/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: '', preferredDate: '' }); setRequestQuoteOpen(true) }}>
+                            <div className="p-3 bg-brand-electric/15 dark:bg-brand-electric/20 rounded-full group-hover:scale-110 transition-transform duration-300">
+                                <FileText className="h-6 w-6 text-brand-electric" />
                             </div>
                             <span className="font-medium text-brand-slate dark:text-brand-steel/60">Request a Quote</span>
                         </Button>
@@ -534,7 +567,7 @@ export default function ClientPortalPage() {
                         <Button variant="ghost" size="sm" className="hidden sm:flex text-brand-slate hover:text-brand-electric hover:bg-brand-electric/10 dark:text-brand-steel dark:hover:text-brand-electric dark:hover:bg-brand-navy/20 whitespace-nowrap" onClick={() => setContactOpen(true)}>
                             <HelpCircle className="mr-2 h-4 w-4" /> Help Center
                         </Button>
-                        <div className="h-10 w-10 min-w-[40px] shrink-0 rounded-full bg-gradient-to-br from-brand-electric to-purple-600 p-[2px] shadow-lg shadow-brand-electric/20 flex-none">
+                        <div className="h-10 w-10 min-w-[40px] shrink-0 rounded-full bg-gradient-to-br from-brand-electric to-brand-steel p-[2px] shadow-lg shadow-brand-electric/20 flex-none">
                             <div className="h-full w-full rounded-full bg-white dark:bg-brand-navy flex items-center justify-center text-brand-navy dark:text-white font-bold text-xs">{client.name.substring(0, 2).toUpperCase()}</div>
                         </div>
                     </div>
@@ -560,7 +593,7 @@ export default function ClientPortalPage() {
 
                     <TabsContent value="quotations" className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500">
                         {quotations
-                            .filter(q => q.status === 'Sent' || q.status === 'Draft' || q.status === 'Rejected' || q.status === 'Pending Review')
+                            .filter(q => q.status === 'Sent' || q.status === 'Rejected' || q.status === 'Pending Review')
                             .map((quotation) => (
                                 <Card key={quotation.id} className="group relative overflow-hidden bg-white dark:bg-brand-navy border border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/30 dark:hover:border-brand-electric/30 transition-all duration-300 shadow-sm hover:shadow-2xl rounded-3xl">
                                     <div className="absolute inset-0 bg-brand-electric/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -616,7 +649,14 @@ export default function ClientPortalPage() {
                                                     <span className="text-[10px] text-brand-steel font-semibold uppercase tracking-wider">Accepted: {new Date(quotation.accepted_at || quotation.date_created).toLocaleDateString()}</span>
                                                 </div>
                                             </div>
-                                            <Badge className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-0 shadow-sm rounded-full px-3 py-1">Active</Badge>
+                                            <div className="flex flex-col items-end gap-1">
+                                                {quotation.payment_request_sent && !quotation.final_payment_approved && (
+                                                    <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 border-0 shadow-sm rounded-full px-3 py-1 animate-pulse">
+                                                        Payment Due
+                                                    </Badge>
+                                                )}
+                                                <Badge className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-0 shadow-sm rounded-full px-3 py-1">Active</Badge>
+                                            </div>
                                         </div>
                                     </CardHeader>
                                     <CardContent className="relative z-10 space-y-6 pt-2">
@@ -624,6 +664,13 @@ export default function ClientPortalPage() {
                                             <span className="text-brand-steel dark:text-brand-steel text-sm font-medium">Total Value</span>
                                             <span className="text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
                                         </div>
+
+                                        {quotation.payment_request_sent && !quotation.final_payment_approved && (
+                                            <div className="flex items-center gap-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-sm">
+                                                <Bell className="h-4 w-4 shrink-0" />
+                                                <span>Your team has requested payment for this quotation. Please complete payment below.</span>
+                                            </div>
+                                        )}
 
                                         <div className={cn(
                                             "p-4 rounded-xl text-sm text-center border font-medium relative overflow-hidden",
@@ -715,13 +762,15 @@ export default function ClientPortalPage() {
                 </Tabs>
             </div>
 
+            {whatsappUrl && (
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center animate-in zoom-in duration-300">
                 <MessageCircle className="h-7 w-7 fill-current" />
             </a>
+            )}
 
             <Dialog open={step > 0} onOpenChange={(open: boolean) => !open && setStep(0)}>
                 <DialogContent className="sm:max-w-md bg-white/95 dark:bg-brand-navy/95 backdrop-blur-xl border-brand-steel/40 dark:border-brand-navy shadow-2xl rounded-3xl overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-electric to-purple-600"></div>
+                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-electric to-brand-steel"></div>
                     <DialogHeader className="pt-6">
                         <DialogTitle className="text-2xl font-bold text-brand-navy dark:text-white flex items-center gap-3">
                             {step === 1 ? (
@@ -759,13 +808,19 @@ export default function ClientPortalPage() {
                                     <div className="h-10 w-10 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full flex items-center justify-center text-brand-electric shadow-sm"><span className="font-bold text-lg">1</span></div>
                                     <p className="font-bold text-lg text-brand-navy dark:text-white">Banking Details</p>
                                 </div>
+                                {hasBankingDetails ? (
                                 <div className="grid grid-cols-[80px_1fr] gap-y-2 gap-x-4 pl-3 text-brand-slate dark:text-brand-steel/60">
-                                    <span className="text-muted-foreground font-medium text-right">Bank:</span> <span className="font-semibold text-brand-navy dark:text-white">{settings.bankName || 'FNB / RMB'}</span>
-                                    <span className="text-muted-foreground font-medium text-right">Account:</span> <span className="font-semibold text-brand-navy dark:text-white font-mono">{settings.bankAccountNumber || '63182000223'}</span>
-                                    <span className="text-muted-foreground font-medium text-right">Branch:</span> <span className="text-brand-navy dark:text-white">{settings.bankBranchCode || '250655'}</span>
+                                    <span className="text-muted-foreground font-medium text-right">Bank:</span> <span className="font-semibold text-brand-navy dark:text-white">{settings.bankName}</span>
+                                    <span className="text-muted-foreground font-medium text-right">Account:</span> <span className="font-semibold text-brand-navy dark:text-white font-mono">{settings.bankAccountNumber}</span>
+                                    <span className="text-muted-foreground font-medium text-right">Branch:</span> <span className="text-brand-navy dark:text-white">{settings.bankBranchCode}</span>
                                     <span className="text-muted-foreground font-medium text-right pt-1">Ref:</span>
                                     <span className="font-mono bg-white dark:bg-black px-2 py-1 rounded border border-brand-steel/40 dark:border-brand-slate text-brand-navy dark:text-brand-steel/40 select-all font-bold tracking-wide w-fit">{settings.bankReference || acceptingQuote?.id.substring(0, 6)}</span>
                                 </div>
+                                ) : (
+                                    <p className="text-sm text-amber-700 dark:text-amber-400 pl-3">
+                                        Banking details are not configured yet. Please contact support before making payment.
+                                    </p>
+                                )}
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2">
@@ -825,14 +880,23 @@ export default function ClientPortalPage() {
                         <DialogDescription>Need help? Reach out to us directly.</DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
+                        {companyPhone ? (
                         <a href={`tel:${companyPhone}`} className="flex items-center gap-4 p-4 border rounded-lg hover:bg-muted transition-colors">
                             <div className="bg-primary/10 p-2 rounded-full"><Phone className="h-6 w-6 text-primary" /></div>
                             <div><p className="font-medium">Phone Support</p><p className="text-sm text-muted-foreground">{companyPhone}</p></div>
                         </a>
+                        ) : null}
+                        {companyEmail ? (
                         <a href={`mailto:${companyEmail}`} className="flex items-center gap-4 p-4 border rounded-lg hover:bg-muted transition-colors">
                             <div className="bg-primary/10 p-2 rounded-full"><Mail className="h-6 w-6 text-primary" /></div>
                             <div><p className="font-medium">Email Support</p><p className="text-sm text-muted-foreground">{companyEmail}</p></div>
                         </a>
+                        ) : null}
+                        {!hasContactDetails && (
+                            <p className="text-sm text-muted-foreground text-center py-4">
+                                Contact details are not configured yet. Please reach out through your account manager.
+                            </p>
+                        )}
                     </div>
                     <DialogFooter><Button variant="ghost" onClick={() => setContactOpen(false)}>Close</Button></DialogFooter>
                 </DialogContent>
@@ -841,7 +905,7 @@ export default function ClientPortalPage() {
             <Dialog open={requestQuoteOpen} onOpenChange={setRequestQuoteOpen}>
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                        <DialogTitle className="flex items-center gap-2"><FileText className="h-5 w-5 text-purple-600" /> Request a Quote</DialogTitle>
+                        <DialogTitle className="flex items-center gap-2"><FileText className="h-5 w-5 text-brand-electric" /> Request a Quote</DialogTitle>
                         <DialogDescription>Tell us what you need and we&apos;ll prepare a quote for you.</DialogDescription>
                     </DialogHeader>
                     <form onSubmit={async (e) => {
@@ -857,6 +921,14 @@ export default function ClientPortalPage() {
                                 status: 'pending'
                             }])
                             if (reqError) throw reqError
+
+                            await supabase.from('activity_log').insert([{
+                                type: 'Quote Request',
+                                description: `${client?.name || 'Client'} requested a quote: ${requestForm.description.substring(0, 120)}`,
+                                related_entity_id: clientId,
+                                related_entity_type: 'client',
+                            }])
+
                             toast.success('Quote request submitted!')
                             setRequestQuoteOpen(false)
                         } catch (err: unknown) {
@@ -876,7 +948,7 @@ export default function ClientPortalPage() {
                         </div>
                         <DialogFooter>
                             <Button type="button" variant="ghost" onClick={() => setRequestQuoteOpen(false)}>Cancel</Button>
-                            <Button type="submit" disabled={requestLoading || !clientId} className="bg-purple-600 hover:bg-purple-700 text-white">
+                            <Button type="submit" disabled={requestLoading || !clientId}>
                                 {requestLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />} Submit Request
                             </Button>
                         </DialogFooter>
@@ -904,6 +976,14 @@ export default function ClientPortalPage() {
                                 status: 'pending'
                             }])
                             if (reqError) throw reqError
+
+                            await supabase.from('activity_log').insert([{
+                                type: 'Site Visit Request',
+                                description: `${client?.name || 'Client'} requested a site visit at ${requestForm.address}: ${requestForm.description.substring(0, 100)}`,
+                                related_entity_id: clientId,
+                                related_entity_type: 'client',
+                            }])
+
                             toast.success('Site visit request submitted!')
                             setRequestVisitOpen(false)
                         } catch (err: unknown) {
