@@ -17,7 +17,7 @@ as $$
   select exists (
     select 1
     from public.users
-    where id = auth.uid()
+    where id = (select auth.uid())
   );
 $$;
 
@@ -53,7 +53,7 @@ set search_path = public
 as $$
   select id
   from public.clients
-  where auth_user_id = auth.uid()
+  where auth_user_id = (select auth.uid())
   limit 1;
 $$;
 
@@ -98,13 +98,22 @@ alter table if exists public.installation_photos enable row level security;
 drop policy if exists "staff_read_own_profile" on public.users;
 create policy "staff_read_own_profile"
   on public.users for select
-  using (auth.uid() = id or private.is_staff_role(array['admin']));
+  using ((select auth.uid()) = id or private.is_staff_role(array['admin']));
 
 drop policy if exists "staff_manage_users_admin" on public.users;
-create policy "staff_manage_users_admin"
-  on public.users for all
+drop policy if exists "staff_manage_users_admin_insert" on public.users;
+drop policy if exists "staff_manage_users_admin_update" on public.users;
+drop policy if exists "staff_manage_users_admin_delete" on public.users;
+create policy "staff_manage_users_admin_insert"
+  on public.users for insert
+  with check (private.is_staff_role(array['admin']));
+create policy "staff_manage_users_admin_update"
+  on public.users for update
   using (private.is_staff_role(array['admin']))
   with check (private.is_staff_role(array['admin']));
+create policy "staff_manage_users_admin_delete"
+  on public.users for delete
+  using (private.is_staff_role(array['admin']));
 
 -- Clients --------------------------------------------------------------------
 
@@ -117,13 +126,13 @@ create policy "staff_all_clients"
 drop policy if exists "client_read_own_record" on public.clients;
 create policy "client_read_own_record"
   on public.clients for select
-  using (auth_user_id = auth.uid());
+  using (auth_user_id = (select auth.uid()));
 
 drop policy if exists "client_update_own_record" on public.clients;
 create policy "client_update_own_record"
   on public.clients for update
-  using (auth_user_id = auth.uid())
-  with check (auth_user_id = auth.uid());
+  using (auth_user_id = (select auth.uid()))
+  with check (auth_user_id = (select auth.uid()));
 
 -- Quotations ---------------------------------------------------------------
 
@@ -215,12 +224,26 @@ end $$;
 -- Settings -------------------------------------------------------------------
 
 drop policy if exists "staff_manage_settings" on public.settings;
-create policy "staff_manage_settings"
-  on public.settings for all
+drop policy if exists "staff_manage_settings_insert" on public.settings;
+drop policy if exists "staff_manage_settings_update" on public.settings;
+drop policy if exists "staff_manage_settings_delete" on public.settings;
+drop policy if exists "staff_read_settings" on public.settings;
+drop policy if exists "authenticated_read_settings" on public.settings;
+
+create policy "authenticated_read_settings"
+  on public.settings for select
+  to authenticated
+  using (true);
+
+create policy "staff_manage_settings_insert"
+  on public.settings for insert
+  with check (private.is_staff_role(array['admin', 'manager']));
+
+create policy "staff_manage_settings_update"
+  on public.settings for update
   using (private.is_staff_role(array['admin', 'manager']))
   with check (private.is_staff_role(array['admin', 'manager']));
 
-drop policy if exists "staff_read_settings" on public.settings;
-create policy "staff_read_settings"
-  on public.settings for select
-  using (private.is_staff_user());
+create policy "staff_manage_settings_delete"
+  on public.settings for delete
+  using (private.is_staff_role(array['admin', 'manager']));
