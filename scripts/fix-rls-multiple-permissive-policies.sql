@@ -1,25 +1,33 @@
--- Missing CRM tables: client_requests, job_attachments, installation_details, installation_photos
--- Project: relzsctzfotbyaafnkqr
+-- Fix Supabase multiple_permissive_policies linter warnings
+-- Merge staff FOR ALL policies with client per-action policies so each role/action
+-- has at most one permissive policy (staff access via OR, not a second policy).
+
+-- clients --------------------------------------------------------------------
+
+drop policy if exists "staff_all_clients" on public.clients;
+
+drop policy if exists "client_read_own_record" on public.clients;
+create policy "client_read_own_record"
+  on public.clients for select
+  using (auth_user_id = (select auth.uid()) or private.is_staff_user());
+
+drop policy if exists "client_update_own_record" on public.clients;
+create policy "client_update_own_record"
+  on public.clients for update
+  using (auth_user_id = (select auth.uid()) or private.is_staff_user())
+  with check (auth_user_id = (select auth.uid()) or private.is_staff_user());
+
+drop policy if exists "staff_insert_clients" on public.clients;
+create policy "staff_insert_clients"
+  on public.clients for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_clients" on public.clients;
+create policy "staff_delete_clients"
+  on public.clients for delete
+  using (private.is_staff_user());
 
 -- client_requests ------------------------------------------------------------
-
-create table if not exists public.client_requests (
-  id uuid primary key default gen_random_uuid(),
-  client_id uuid not null references public.clients(id) on delete cascade,
-  type text not null check (type in ('quote', 'site_visit')),
-  description text not null,
-  address text,
-  preferred_date date,
-  status text not null default 'pending' check (status in ('pending', 'in_progress', 'completed', 'cancelled')),
-  staff_notes text,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz
-);
-
-create index if not exists client_requests_client_id_idx on public.client_requests(client_id);
-create index if not exists client_requests_status_idx on public.client_requests(status);
-
-alter table public.client_requests enable row level security;
 
 drop policy if exists "staff_all_client_requests" on public.client_requests;
 
@@ -44,21 +52,88 @@ create policy "staff_delete_client_requests"
   on public.client_requests for delete
   using (private.is_staff_user());
 
+-- quotations -----------------------------------------------------------------
+
+drop policy if exists "staff_all_quotations" on public.quotations;
+
+drop policy if exists "client_own_quotations" on public.quotations;
+create policy "client_own_quotations"
+  on public.quotations for select
+  using (
+    private.is_staff_user()
+    or (client_id = private.current_client_id() and status <> 'Draft')
+  );
+
+drop policy if exists "client_update_own_quotations" on public.quotations;
+create policy "client_update_own_quotations"
+  on public.quotations for update
+  using (client_id = private.current_client_id() or private.is_staff_user())
+  with check (client_id = private.current_client_id() or private.is_staff_user());
+
+drop policy if exists "staff_insert_quotations" on public.quotations;
+create policy "staff_insert_quotations"
+  on public.quotations for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_quotations" on public.quotations;
+create policy "staff_delete_quotations"
+  on public.quotations for delete
+  using (private.is_staff_user());
+
+-- invoices -------------------------------------------------------------------
+
+drop policy if exists "staff_all_invoices" on public.invoices;
+
+drop policy if exists "client_own_invoices" on public.invoices;
+create policy "client_own_invoices"
+  on public.invoices for select
+  using (
+    private.is_staff_user()
+    or (client_id = private.current_client_id() and status <> 'Draft')
+  );
+
+drop policy if exists "staff_insert_invoices" on public.invoices;
+create policy "staff_insert_invoices"
+  on public.invoices for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_update_invoices" on public.invoices;
+create policy "staff_update_invoices"
+  on public.invoices for update
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_invoices" on public.invoices;
+create policy "staff_delete_invoices"
+  on public.invoices for delete
+  using (private.is_staff_user());
+
+-- jobs -----------------------------------------------------------------------
+
+drop policy if exists "staff_all_jobs" on public.jobs;
+
+drop policy if exists "client_own_jobs" on public.jobs;
+create policy "client_own_jobs"
+  on public.jobs for select
+  using (private.is_staff_user() or client_id = private.current_client_id());
+
+drop policy if exists "staff_insert_jobs" on public.jobs;
+create policy "staff_insert_jobs"
+  on public.jobs for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_update_jobs" on public.jobs;
+create policy "staff_update_jobs"
+  on public.jobs for update
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_jobs" on public.jobs;
+create policy "staff_delete_jobs"
+  on public.jobs for delete
+  using (private.is_staff_user());
+
 -- job_attachments ------------------------------------------------------------
-
-create table if not exists public.job_attachments (
-  id uuid primary key default gen_random_uuid(),
-  job_id uuid not null references public.jobs(id) on delete cascade,
-  file_url text not null,
-  file_type text,
-  file_name text not null,
-  description text default '',
-  created_at timestamptz not null default now()
-);
-
-create index if not exists job_attachments_job_id_idx on public.job_attachments(job_id);
-
-alter table public.job_attachments enable row level security;
 
 drop policy if exists "staff_all_job_attachments" on public.job_attachments;
 
@@ -93,19 +168,6 @@ create policy "staff_delete_job_attachments"
 
 -- installation_details -------------------------------------------------------
 
-create table if not exists public.installation_details (
-  id uuid primary key default gen_random_uuid(),
-  invoice_id uuid not null references public.invoices(id) on delete cascade,
-  serial_numbers jsonb not null default '[]'::jsonb,
-  notes text default '',
-  created_at timestamptz not null default now(),
-  updated_at timestamptz
-);
-
-create unique index if not exists installation_details_invoice_id_idx on public.installation_details(invoice_id);
-
-alter table public.installation_details enable row level security;
-
 drop policy if exists "staff_all_installation_details" on public.installation_details;
 
 drop policy if exists "client_read_own_installation_details" on public.installation_details;
@@ -139,18 +201,6 @@ create policy "staff_delete_installation_details"
 
 -- installation_photos --------------------------------------------------------
 
-create table if not exists public.installation_photos (
-  id uuid primary key default gen_random_uuid(),
-  installation_detail_id uuid not null references public.installation_details(id) on delete cascade,
-  photo_url text not null,
-  caption text,
-  uploaded_at timestamptz not null default now()
-);
-
-create index if not exists installation_photos_detail_id_idx on public.installation_photos(installation_detail_id);
-
-alter table public.installation_photos enable row level security;
-
 drop policy if exists "staff_all_installation_photos" on public.installation_photos;
 
 drop policy if exists "client_read_own_installation_photos" on public.installation_photos;
@@ -182,38 +232,3 @@ drop policy if exists "staff_delete_installation_photos" on public.installation_
 create policy "staff_delete_installation_photos"
   on public.installation_photos for delete
   using (private.is_staff_user());
-
--- Storage: clients can read their own job attachments and installation photos
-
-drop policy if exists "client_read_own_job_attachment_files" on storage.objects;
-create policy "client_read_own_job_attachment_files"
-  on storage.objects for select
-  to authenticated
-  using (
-    bucket_id = 'job-attachments'
-    and private.current_client_id() is not null
-    and exists (
-      select 1
-      from public.job_attachments ja
-      join public.jobs j on j.id = ja.job_id
-      where ja.file_url = storage.objects.name
-        and j.client_id = private.current_client_id()
-    )
-  );
-
-drop policy if exists "client_read_own_installation_photo_files" on storage.objects;
-create policy "client_read_own_installation_photo_files"
-  on storage.objects for select
-  to authenticated
-  using (
-    bucket_id = 'installation-photos'
-    and private.current_client_id() is not null
-    and exists (
-      select 1
-      from public.installation_photos ip
-      join public.installation_details d on d.id = ip.installation_detail_id
-      join public.invoices i on i.id = d.invoice_id
-      where ip.photo_url = storage.objects.name
-        and i.client_id = private.current_client_id()
-    )
-  );

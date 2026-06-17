@@ -118,66 +118,108 @@ create policy "staff_manage_users_admin_delete"
 -- Clients --------------------------------------------------------------------
 
 drop policy if exists "staff_all_clients" on public.clients;
-create policy "staff_all_clients"
-  on public.clients for all
-  using (private.is_staff_user())
-  with check (private.is_staff_user());
 
 drop policy if exists "client_read_own_record" on public.clients;
 create policy "client_read_own_record"
   on public.clients for select
-  using (auth_user_id = (select auth.uid()));
+  using (auth_user_id = (select auth.uid()) or private.is_staff_user());
 
 drop policy if exists "client_update_own_record" on public.clients;
 create policy "client_update_own_record"
   on public.clients for update
-  using (auth_user_id = (select auth.uid()))
-  with check (auth_user_id = (select auth.uid()));
+  using (auth_user_id = (select auth.uid()) or private.is_staff_user())
+  with check (auth_user_id = (select auth.uid()) or private.is_staff_user());
+
+drop policy if exists "staff_insert_clients" on public.clients;
+create policy "staff_insert_clients"
+  on public.clients for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_clients" on public.clients;
+create policy "staff_delete_clients"
+  on public.clients for delete
+  using (private.is_staff_user());
 
 -- Quotations ---------------------------------------------------------------
 
 drop policy if exists "staff_all_quotations" on public.quotations;
-create policy "staff_all_quotations"
-  on public.quotations for all
-  using (private.is_staff_user())
-  with check (private.is_staff_user());
 
 drop policy if exists "client_own_quotations" on public.quotations;
 create policy "client_own_quotations"
   on public.quotations for select
-  using (client_id = private.current_client_id() and status <> 'Draft');
+  using (
+    private.is_staff_user()
+    or (client_id = private.current_client_id() and status <> 'Draft')
+  );
 
 drop policy if exists "client_update_own_quotations" on public.quotations;
 create policy "client_update_own_quotations"
   on public.quotations for update
-  using (client_id = private.current_client_id())
-  with check (client_id = private.current_client_id());
+  using (client_id = private.current_client_id() or private.is_staff_user())
+  with check (client_id = private.current_client_id() or private.is_staff_user());
+
+drop policy if exists "staff_insert_quotations" on public.quotations;
+create policy "staff_insert_quotations"
+  on public.quotations for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_quotations" on public.quotations;
+create policy "staff_delete_quotations"
+  on public.quotations for delete
+  using (private.is_staff_user());
 
 -- Invoices -------------------------------------------------------------------
 
 drop policy if exists "staff_all_invoices" on public.invoices;
-create policy "staff_all_invoices"
-  on public.invoices for all
-  using (private.is_staff_user())
-  with check (private.is_staff_user());
 
 drop policy if exists "client_own_invoices" on public.invoices;
 create policy "client_own_invoices"
   on public.invoices for select
-  using (client_id = private.current_client_id() and status <> 'Draft');
+  using (
+    private.is_staff_user()
+    or (client_id = private.current_client_id() and status <> 'Draft')
+  );
+
+drop policy if exists "staff_insert_invoices" on public.invoices;
+create policy "staff_insert_invoices"
+  on public.invoices for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_update_invoices" on public.invoices;
+create policy "staff_update_invoices"
+  on public.invoices for update
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_invoices" on public.invoices;
+create policy "staff_delete_invoices"
+  on public.invoices for delete
+  using (private.is_staff_user());
 
 -- Jobs -----------------------------------------------------------------------
 
 drop policy if exists "staff_all_jobs" on public.jobs;
-create policy "staff_all_jobs"
-  on public.jobs for all
-  using (private.is_staff_user())
-  with check (private.is_staff_user());
 
 drop policy if exists "client_own_jobs" on public.jobs;
 create policy "client_own_jobs"
   on public.jobs for select
-  using (client_id = private.current_client_id());
+  using (private.is_staff_user() or client_id = private.current_client_id());
+
+drop policy if exists "staff_insert_jobs" on public.jobs;
+create policy "staff_insert_jobs"
+  on public.jobs for insert
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_update_jobs" on public.jobs;
+create policy "staff_update_jobs"
+  on public.jobs for update
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
+
+drop policy if exists "staff_delete_jobs" on public.jobs;
+create policy "staff_delete_jobs"
+  on public.jobs for delete
+  using (private.is_staff_user());
 
 -- Activity log ---------------------------------------------------------------
 
