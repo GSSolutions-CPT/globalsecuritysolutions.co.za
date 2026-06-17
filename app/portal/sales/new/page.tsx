@@ -291,14 +291,21 @@ function CreateSaleContent() {
                 line_total: item.quantity * item.unit_price,
             }))
 
-            const { data: saleId, error: rpcError } = await supabase.rpc('upsert_sale_with_lines', {
-                p_table: table,
-                p_sale_id: editId || null,
-                p_header: headerPayload,
-                p_lines: linesPayload,
+            const saveRes = await fetch('/api/portal/upsert-sale', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    table,
+                    saleId: editId || null,
+                    header: headerPayload,
+                    lines: linesPayload,
+                }),
             })
-
-            if (rpcError) throw rpcError
+            const saveResult = await saveRes.json() as { saleId?: string; error?: string }
+            if (!saveRes.ok) {
+                throw new Error(saveResult.error || 'Failed to save sale')
+            }
+            const saleId = saveResult.saleId
 
             await supabase.from('activity_log').insert([{
                 type: editId ? `${mode === 'quotation' ? 'Quotation' : 'Invoice'} Updated` : `${mode === 'quotation' ? 'Quotation' : 'Invoice'} Created`,

@@ -28,18 +28,29 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
     useEffect(() => {
         async function fetchClient() {
             try {
-                const { data: rawData, error } = await supabase
-                    .rpc('get_client_for_setup', { p_client_id: id })
-                    .single()
-
-                if (error) throw error
-                const data = rawData as { id: string; name: string; email: string; auth_user_id?: string } | null
-
-                if (data?.auth_user_id) {
-                    setError('Profile already setup for this client. Please sign in.')
-                    setTimeout(() => router.push('/portal/login'), 3000)
+                const res = await fetch(`/api/portal/client-setup/${id}`)
+                const data = await res.json() as {
+                    id?: string
+                    name?: string
+                    email?: string
+                    auth_user_id?: string
+                    error?: string
                 }
-                setClient(data)
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Invalid or expired invitation link.')
+                }
+
+                if (!data.id || !data.name || !data.email) {
+                    throw new Error('Invalid or expired invitation link.')
+                }
+
+                setClient({
+                    id: data.id,
+                    name: data.name,
+                    email: data.email,
+                    auth_user_id: data.auth_user_id,
+                })
             } catch (err: unknown) {
                 console.error('Error fetching client:', err)
                 setError('Invalid or expired invitation link.')
@@ -84,10 +95,15 @@ export default function ProfileSetupPage({ params }: ProfileSetupProps) {
             if (signUpError) throw signUpError
 
             // 2. Securely link the client profile using RPC
-            const { error: linkError } = await supabase.rpc('claim_client_profile', {
-                p_client_id: client.id
+            const linkRes = await fetch('/api/portal/claim-client-profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ clientId: client.id }),
             })
-            if (linkError) throw linkError
+            const linkResult = await linkRes.json() as { error?: string }
+            if (!linkRes.ok) {
+                throw new Error(linkResult.error || 'Failed to link client profile')
+            }
 
             // 3. Sign out the user so they are forced to log in with their new credentials
             await supabase.auth.signOut()

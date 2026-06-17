@@ -18,11 +18,11 @@ create policy "staff_manage_private_portal_files"
   to authenticated
   using (
     bucket_id in ('payment-proofs', 'receipts', 'job-attachments', 'installation-photos', 'site-plans')
-    and public.is_staff_user()
+    and private.is_staff_user()
   )
   with check (
     bucket_id in ('payment-proofs', 'receipts', 'job-attachments', 'installation-photos', 'site-plans')
-    and public.is_staff_user()
+    and private.is_staff_user()
   );
 
 -- Clients can upload payment proofs
@@ -32,7 +32,7 @@ create policy "client_upload_payment_proofs"
   to authenticated
   with check (
     bucket_id = 'payment-proofs'
-    and public.current_client_id() is not null
+    and private.current_client_id() is not null
   );
 
 -- Clients can read payment proof files
@@ -43,7 +43,7 @@ create policy "client_read_payment_proofs"
   using (
     bucket_id = 'payment-proofs'
     and (
-      public.is_staff_user()
-      or public.current_client_id() is not null
+      private.is_staff_user()
+      or private.current_client_id() is not null
     )
   );

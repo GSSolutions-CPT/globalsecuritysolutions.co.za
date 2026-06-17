@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareSupabaseClient } from '@/lib/portal/supabase/middleware'
+import { resolvePortalAccessFromTables } from '@/lib/portal/resolve-portal-access-from-tables'
 import {
     isClientPortalRoute,
     isPublicPortalRoute,
@@ -30,8 +31,10 @@ export async function middleware(request: NextRequest) {
 
     if (isPublicPortalRoute(pathname)) {
         if (user && (pathname === '/portal/login' || pathname === '/portal/register')) {
-            const destination = await resolvePostLoginPath(supabase, user.id, '/portal/dashboard')
-            return NextResponse.redirect(new URL(destination, request.url))
+            const destination = await resolvePostLoginPath(supabase, '/portal/dashboard')
+            if (!destination.startsWith('/portal/login')) {
+                return NextResponse.redirect(new URL(destination, request.url))
+            }
         }
         return response
     }
@@ -43,14 +46,11 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(loginUrl)
     }
 
-    const [{ data: staffProfile }, { data: clientProfile }] = await Promise.all([
-        supabase.from('users').select('role').eq('id', user.id).maybeSingle(),
-        supabase.from('clients').select('id').eq('auth_user_id', user.id).maybeSingle(),
-    ])
-
-    const staffRole = (staffProfile?.role as StaffRole | undefined) ?? null
-    const isStaff = Boolean(staffProfile)
-    const isClient = Boolean(clientProfile)
+    const portalAccess = await resolvePortalAccessFromDb(supabase)
+    const staffRole = portalAccess.staffRole
+    const isStaff = Boolean(staffRole)
+    const isClient = Boolean(portalAccess.clientId)
+    const clientProfile = portalAccess.clientId ? { id: portalAccess.clientId } : null
 
     if (pathname === '/portal') {
         if (isClient && clientProfile) {
@@ -109,21 +109,33 @@ export async function middleware(request: NextRequest) {
     return response
 }
 
-async function resolvePostLoginPath(
-    supabase: ReturnType<typeof createMiddlewareSupabaseClient>,
-    userId: string,
-    fallback: string
-) {
-    const [{ data: clientProfile }, { data: staffProfile }] = await Promise.all([
-        supabase.from('clients').select('id').eq('auth_user_id', userId).maybeSingle(),
-        supabase.from('users').select('role').eq('id', userId).maybeSingle(),
-    ])
+type MiddlewarePortalAccess = {
+    staffRole: StaffRole | null
+    clientId: string | null
+}
 
-    if (clientProfile) {
-        return `/portal/client-portal?client=${clientProfile.id}`
+async function resolvePortalAccessFromDb(
+    supabase: ReturnType<typeof createMiddlewareSupabaseClient>
+): Promise<MiddlewarePortalAccess> {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+        return { staffRole: null, clientId: null }
     }
 
-    if (staffProfile) {
+    return resolvePortalAccessFromTables(supabase, user.id)
+}
+
+async function resolvePostLoginPath(
+    supabase: ReturnType<typeof createMiddlewareSupabaseClient>,
+    fallback: string
+) {
+    const portalAccess = await resolvePortalAccessFromDb(supabase)
+
+    if (portalAccess.clientId) {
+        return `/portal/client-portal?client=${portalAccess.clientId}`
+    }
+
+    if (portalAccess.staffRole) {
         return fallback
     }
 

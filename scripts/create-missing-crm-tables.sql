@@ -24,18 +24,18 @@ alter table public.client_requests enable row level security;
 drop policy if exists "staff_all_client_requests" on public.client_requests;
 create policy "staff_all_client_requests"
   on public.client_requests for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_insert_own_requests" on public.client_requests;
 create policy "client_insert_own_requests"
   on public.client_requests for insert
-  with check (client_id = public.current_client_id());
+  with check (client_id = private.current_client_id());
 
 drop policy if exists "client_read_own_requests" on public.client_requests;
 create policy "client_read_own_requests"
   on public.client_requests for select
-  using (client_id = public.current_client_id());
+  using (client_id = private.current_client_id());
 
 -- job_attachments ------------------------------------------------------------
 
@@ -56,8 +56,8 @@ alter table public.job_attachments enable row level security;
 drop policy if exists "staff_all_job_attachments" on public.job_attachments;
 create policy "staff_all_job_attachments"
   on public.job_attachments for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_read_own_job_attachments" on public.job_attachments;
 create policy "client_read_own_job_attachments"
@@ -67,7 +67,7 @@ create policy "client_read_own_job_attachments"
       select 1
       from public.jobs j
       where j.id = job_attachments.job_id
-        and j.client_id = public.current_client_id()
+        and j.client_id = private.current_client_id()
     )
   );
 
@@ -89,8 +89,8 @@ alter table public.installation_details enable row level security;
 drop policy if exists "staff_all_installation_details" on public.installation_details;
 create policy "staff_all_installation_details"
   on public.installation_details for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_read_own_installation_details" on public.installation_details;
 create policy "client_read_own_installation_details"
@@ -100,7 +100,7 @@ create policy "client_read_own_installation_details"
       select 1
       from public.invoices i
       where i.id = installation_details.invoice_id
-        and i.client_id = public.current_client_id()
+        and i.client_id = private.current_client_id()
     )
   );
 
@@ -121,8 +121,8 @@ alter table public.installation_photos enable row level security;
 drop policy if exists "staff_all_installation_photos" on public.installation_photos;
 create policy "staff_all_installation_photos"
   on public.installation_photos for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_read_own_installation_photos" on public.installation_photos;
 create policy "client_read_own_installation_photos"
@@ -133,7 +133,7 @@ create policy "client_read_own_installation_photos"
       from public.installation_details d
       join public.invoices i on i.id = d.invoice_id
       where d.id = installation_photos.installation_detail_id
-        and i.client_id = public.current_client_id()
+        and i.client_id = private.current_client_id()
     )
   );
 
@@ -145,13 +145,13 @@ create policy "client_read_own_job_attachment_files"
   to authenticated
   using (
     bucket_id = 'job-attachments'
-    and public.current_client_id() is not null
+    and private.current_client_id() is not null
     and exists (
       select 1
       from public.job_attachments ja
       join public.jobs j on j.id = ja.job_id
       where ja.file_url = storage.objects.name
-        and j.client_id = public.current_client_id()
+        and j.client_id = private.current_client_id()
     )
   );
 
@@ -161,13 +161,13 @@ create policy "client_read_own_installation_photo_files"
   to authenticated
   using (
     bucket_id = 'installation-photos'
-    and public.current_client_id() is not null
+    and private.current_client_id() is not null
     and exists (
       select 1
       from public.installation_photos ip
       join public.installation_details d on d.id = ip.installation_detail_id
       join public.invoices i on i.id = d.invoice_id
       where ip.photo_url = storage.objects.name
-        and i.client_id = public.current_client_id()
+        and i.client_id = private.current_client_id()
     )
   );

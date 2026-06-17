@@ -1,9 +1,13 @@
 -- Portal RLS policies for Global Security Solutions CRM
 -- Schema-aligned for project relzsctzfotbyaafnkqr
 
--- Helper functions -----------------------------------------------------------
+-- Helper functions (private schema — not exposed via PostgREST) ---------------
 
-create or replace function public.is_staff_user()
+create schema if not exists private;
+revoke all on schema private from public;
+grant usage on schema private to postgres, service_role;
+
+create or replace function private.is_staff_user()
 returns boolean
 language sql
 stable
@@ -17,7 +21,7 @@ as $$
   );
 $$;
 
-create or replace function public.staff_role()
+create or replace function private.staff_role()
 returns text
 language sql
 stable
@@ -30,17 +34,17 @@ as $$
   limit 1;
 $$;
 
-create or replace function public.is_staff_role(allowed_roles text[])
+create or replace function private.is_staff_role(allowed_roles text[])
 returns boolean
 language sql
 stable
 security definer
 set search_path = public
 as $$
-  select coalesce(public.staff_role(), '') = any (allowed_roles);
+  select coalesce(private.staff_role(), '') = any (allowed_roles);
 $$;
 
-create or replace function public.current_client_id()
+create or replace function private.current_client_id()
 returns uuid
 language sql
 stable
@@ -52,6 +56,15 @@ as $$
   where auth_user_id = auth.uid()
   limit 1;
 $$;
+
+revoke all on function private.is_staff_user() from public;
+revoke all on function private.staff_role() from public;
+revoke all on function private.is_staff_role(text[]) from public;
+revoke all on function private.current_client_id() from public;
+grant execute on function private.is_staff_user() to authenticated, service_role;
+grant execute on function private.staff_role() to authenticated, service_role;
+grant execute on function private.is_staff_role(text[]) to authenticated, service_role;
+grant execute on function private.current_client_id() to authenticated, service_role;
 
 -- Enable RLS on existing tables --------------------------------------------
 
@@ -85,21 +98,21 @@ alter table if exists public.installation_photos enable row level security;
 drop policy if exists "staff_read_own_profile" on public.users;
 create policy "staff_read_own_profile"
   on public.users for select
-  using (auth.uid() = id or public.is_staff_role(array['admin']));
+  using (auth.uid() = id or private.is_staff_role(array['admin']));
 
 drop policy if exists "staff_manage_users_admin" on public.users;
 create policy "staff_manage_users_admin"
   on public.users for all
-  using (public.is_staff_role(array['admin']))
-  with check (public.is_staff_role(array['admin']));
+  using (private.is_staff_role(array['admin']))
+  with check (private.is_staff_role(array['admin']));
 
 -- Clients --------------------------------------------------------------------
 
 drop policy if exists "staff_all_clients" on public.clients;
 create policy "staff_all_clients"
   on public.clients for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_read_own_record" on public.clients;
 create policy "client_read_own_record"
@@ -117,57 +130,57 @@ create policy "client_update_own_record"
 drop policy if exists "staff_all_quotations" on public.quotations;
 create policy "staff_all_quotations"
   on public.quotations for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_own_quotations" on public.quotations;
 create policy "client_own_quotations"
   on public.quotations for select
-  using (client_id = public.current_client_id() and status <> 'Draft');
+  using (client_id = private.current_client_id() and status <> 'Draft');
 
 drop policy if exists "client_update_own_quotations" on public.quotations;
 create policy "client_update_own_quotations"
   on public.quotations for update
-  using (client_id = public.current_client_id())
-  with check (client_id = public.current_client_id());
+  using (client_id = private.current_client_id())
+  with check (client_id = private.current_client_id());
 
 -- Invoices -------------------------------------------------------------------
 
 drop policy if exists "staff_all_invoices" on public.invoices;
 create policy "staff_all_invoices"
   on public.invoices for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_own_invoices" on public.invoices;
 create policy "client_own_invoices"
   on public.invoices for select
-  using (client_id = public.current_client_id() and status <> 'Draft');
+  using (client_id = private.current_client_id() and status <> 'Draft');
 
 -- Jobs -----------------------------------------------------------------------
 
 drop policy if exists "staff_all_jobs" on public.jobs;
 create policy "staff_all_jobs"
   on public.jobs for all
-  using (public.is_staff_user())
-  with check (public.is_staff_user());
+  using (private.is_staff_user())
+  with check (private.is_staff_user());
 
 drop policy if exists "client_own_jobs" on public.jobs;
 create policy "client_own_jobs"
   on public.jobs for select
-  using (client_id = public.current_client_id());
+  using (client_id = private.current_client_id());
 
 -- Activity log ---------------------------------------------------------------
 
 drop policy if exists "staff_read_activity_log" on public.activity_log;
 create policy "staff_read_activity_log"
   on public.activity_log for select
-  using (public.is_staff_user());
+  using (private.is_staff_user());
 
 drop policy if exists "staff_insert_activity_log" on public.activity_log;
 create policy "staff_insert_activity_log"
   on public.activity_log for insert
-  with check (public.is_staff_user() or public.current_client_id() is not null);
+  with check (private.is_staff_user() or private.current_client_id() is not null);
 
 -- Staff-only operational tables ------------------------------------------------
 
@@ -193,7 +206,7 @@ begin
   loop
     execute format('drop policy if exists "staff_manage_%I" on public.%I', tbl, tbl);
     execute format(
-      'create policy "staff_manage_%I" on public.%I for all using (public.is_staff_user()) with check (public.is_staff_user())',
+      'create policy "staff_manage_%I" on public.%I for all using (private.is_staff_user()) with check (private.is_staff_user())',
       tbl, tbl
     );
   end loop;
@@ -204,10 +217,10 @@ end $$;
 drop policy if exists "staff_manage_settings" on public.settings;
 create policy "staff_manage_settings"
   on public.settings for all
-  using (public.is_staff_role(array['admin', 'manager']))
-  with check (public.is_staff_role(array['admin', 'manager']));
+  using (private.is_staff_role(array['admin', 'manager']))
+  with check (private.is_staff_role(array['admin', 'manager']));
 
 drop policy if exists "staff_read_settings" on public.settings;
 create policy "staff_read_settings"
   on public.settings for select
-  using (public.is_staff_user());
+  using (private.is_staff_user());

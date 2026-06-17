@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/portal/supabase'
 import type { PortalUserType, StaffRole } from '@/lib/portal/permissions'
+import { resolvePortalAccessFromTables } from '@/lib/portal/resolve-portal-access-from-tables'
 
 export type PortalAccess = {
     userType: PortalUserType
@@ -8,24 +9,21 @@ export type PortalAccess = {
 }
 
 export async function resolvePortalAccess(userId: string): Promise<PortalAccess> {
-    const [{ data: staffProfile }, { data: clientProfile }] = await Promise.all([
-        supabase.from('users').select('role').eq('id', userId).maybeSingle(),
-        supabase.from('clients').select('id').eq('auth_user_id', userId).maybeSingle(),
-    ])
+    const { staffRole, clientId } = await resolvePortalAccessFromTables(supabase, userId)
 
-    if (staffProfile?.role) {
+    if (staffRole) {
         return {
             userType: 'staff',
-            staffRole: staffProfile.role as StaffRole,
-            clientId: clientProfile?.id ?? null,
+            staffRole,
+            clientId,
         }
     }
 
-    if (clientProfile) {
+    if (clientId) {
         return {
             userType: 'client',
             staffRole: null,
-            clientId: clientProfile.id,
+            clientId,
         }
     }
 

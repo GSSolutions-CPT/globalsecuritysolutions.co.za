@@ -42,30 +42,38 @@ function LoginContent() {
                 : null
 
     const routeByRole = async (user: User) => {
-        // Check if this user is a client
-        const { data: clientData } = await supabase
-            .from('clients')
-            .select('id')
-            .eq('auth_user_id', user.id)
-            .maybeSingle()
+        const [{ data: clientData }, { data: staffData }] = await Promise.all([
+            supabase.from('clients').select('id').eq('auth_user_id', user.id).maybeSingle(),
+            supabase.from('users').select('role').eq('id', user.id).maybeSingle(),
+        ])
+        const clientId = clientData?.id ?? null
+        const staffRole = staffData?.role ?? null
+
+        if (!staffRole && !clientId) {
+            await supabase.auth.signOut()
+            setError('Your account does not have portal access. Contact support to be added as staff or linked to a client record.')
+            return
+        }
 
         let target = from
 
-        if (clientData) {
+        if (clientId) {
             if (target === '/portal/dashboard' || target === '/' || target.startsWith('/portal/dashboard')) {
-                target = `/portal/client-portal?client=${clientData.id}`
+                target = `/portal/client-portal?client=${clientId}`
             } else if (!target.startsWith('/portal/client-portal')) {
-                target = `/portal/client-portal?client=${clientData.id}`
+                target = `/portal/client-portal?client=${clientId}`
             }
             router.replace(target)
-        } else {
-            // Employee/admin
-            if (!target.startsWith('/')) {
-                target = `/${target}`
-            }
-            router.replace(target)
+            return
         }
+
+        if (!target.startsWith('/')) {
+            target = `/${target}`
+        }
+        router.replace(target)
     }
+
+    const normalizeEmail = (value: string) => value.trim().toLowerCase()
 
     const handleForgotPassword = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -75,7 +83,7 @@ function LoginContent() {
 
         try {
             const redirectTo = `${window.location.origin}/portal/reset-password`
-            const { error: resetErr } = await supabase.auth.resetPasswordForEmail(resetEmail, { redirectTo })
+            const { error: resetErr } = await supabase.auth.resetPasswordForEmail(normalizeEmail(resetEmail), { redirectTo })
             if (resetErr) throw resetErr
             setResetMessage('If an account exists for that email, a reset link has been sent.')
         } catch (err: unknown) {
@@ -91,8 +99,14 @@ function LoginContent() {
         setLoading(true)
 
         try {
-            const { data, error } = await signIn({ email, password })
-            if (error) throw error
+            const normalizedEmail = normalizeEmail(email)
+            const { data, error } = await signIn({ email: normalizedEmail, password })
+            if (error) {
+                if (error.message === 'Invalid login credentials') {
+                    throw new Error('Invalid email or password. Use Forgot password to reset your account password.')
+                }
+                throw error
+            }
             if (!data.user) throw new Error('Sign in succeeded but no user was returned')
             await routeByRole(data.user)
         } catch (err: unknown) {
