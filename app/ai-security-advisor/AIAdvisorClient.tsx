@@ -73,7 +73,7 @@ export default function AIAdvisorClient() {
                 {/* Background FX */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/page-heroes/ai-advisor-hero.png"
+                        src="/page-heroes/ai-advisor-hero.jpg"
                         alt="AI Security Advisor"
                         fill
                         className="object-cover opacity-30 mix-blend-overlay"

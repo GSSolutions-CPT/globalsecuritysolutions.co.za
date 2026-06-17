@@ -28,7 +28,7 @@ export default function FreeAuditPage() {
                 align="center"
                 title="Identify Your Vulnerabilities"
                 subtitle="Don't wait for a break-in to find out where your security is weak. Choose how you want to be assessed."
-                bgImage="/page-heroes/audit-hero.png"
+                bgImage="/page-heroes/audit-hero.jpg"
                 badgeIcon={<ShieldCheck className="w-4 h-4" />}
                 badgeText="Professional Assessment"
                 pbClass="pb-40"

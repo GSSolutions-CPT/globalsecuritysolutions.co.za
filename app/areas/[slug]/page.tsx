@@ -111,7 +111,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
             <section className="relative bg-brand-navy text-white min-h-[60vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src={location.heroImage || '/hero-bg.jpg'}
+                        src={location.heroImage || '/hero-bg-v2.jpg'}
                         alt={location.heroAlt || `Security services in ${location.suburb}`}
                         fill
                         className="object-cover opacity-60"

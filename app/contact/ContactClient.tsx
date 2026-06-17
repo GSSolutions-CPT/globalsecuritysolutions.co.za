@@ -42,7 +42,7 @@ export function ContactClient() {
                     </>
                 }
                 subtitle="Whether you need a rapid deployment quote or a comprehensive security audit, our specialized tactical team is standing by to assist you."
-                bgImage="/page-heroes/contact-hero.png"
+                bgImage="/page-heroes/contact-hero.jpg"
                 pbClass="pb-48"
             />
 

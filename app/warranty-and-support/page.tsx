@@ -30,7 +30,7 @@ export default function WarrantyPage() {
                 badgeText="Guaranteed Protection"
                 title="Warranty & Support"
                 subtitle="Our commitment to your security doesn't end after installation. Explore our comprehensive cover and maintenance tiers."
-                bgImage="/page-heroes/faq-hero.png" // using existing generic hero image
+                bgImage="/page-heroes/faq-hero.jpg"
                 pbClass="pb-[200px]"
             />
 

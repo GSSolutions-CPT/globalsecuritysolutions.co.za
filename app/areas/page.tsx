@@ -21,7 +21,7 @@ export default function AreasIndexPage() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
-                        src="/page-heroes/areas-hero.png"
+                        src="/page-heroes/areas-hero.jpg"
                         alt="Western Cape Service Areas"
                         fill
                         className="object-cover opacity-50"

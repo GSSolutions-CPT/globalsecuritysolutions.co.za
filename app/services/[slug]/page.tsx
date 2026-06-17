@@ -173,7 +173,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
-                        src={service.heroImage || "/hero-bg.jpg"}
+                        src={service.heroImage || "/hero-bg-v2.jpg"}
                         alt={service.heroAlt || service.title}
                         fill
                         className="object-cover opacity-60"

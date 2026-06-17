@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: 'https://globalsecuritysolutions.co.za/locations/durbanville/alarm-systems',
         siteName: 'Global Security Solutions',
         images: [{
-            url: '/services/heroes/alarm-system.png',
+            url: '/services/heroes/alarm-system.jpg',
             width: 1200,
             height: 630,
             alt: 'Wireless Alarm System Installation in Durbanville',
@@ -133,7 +133,7 @@ export default function DurbanvilleAlarmsPage() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-brand-navy/20 z-10" />
                     <Image
-                        src="/services/heroes/alarm-system.png"
+                        src="/services/heroes/alarm-system.jpg"
                         alt="Professional AJAX wireless alarm system installation in a modern home in Durbanville"
                         fill
                         className="object-cover opacity-60"

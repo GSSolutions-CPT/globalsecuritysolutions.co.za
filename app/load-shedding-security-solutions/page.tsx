@@ -31,7 +31,7 @@ export default function LoadSheddingPage() {
                 badgeText="Power Intelligence"
                 title="Security That Never Sleeps"
                 subtitle="Load shedding is a reality. A security system that turns off when the lights go out is just a decoration. We keep you protected 24/7."
-                bgImage="/page-heroes/load-shedding-hero.png"
+                bgImage="/page-heroes/load-shedding-hero.jpg"
                 pbClass="pb-[220px]"
             />
 

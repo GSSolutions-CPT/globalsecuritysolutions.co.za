@@ -149,7 +149,7 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                     <Image
-                        src={sector.heroImage || "/hero-bg.jpg"}
+                        src={sector.heroImage || "/hero-bg-v2.jpg"}
                         alt={sector.heroAlt || sector.title}
                         fill
                         className="object-cover opacity-60"

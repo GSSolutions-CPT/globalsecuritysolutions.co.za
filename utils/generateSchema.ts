@@ -4,7 +4,7 @@ export const masterBusinessData = {
     "name": "Global Security Solutions",
     "image": [
         "https://globalsecuritysolutions.co.za/nav-logo-final.png",
-        "https://globalsecuritysolutions.co.za/hero-bg.png"
+        "https://globalsecuritysolutions.co.za/hero-bg-v2.jpg"
     ],
     "url": "https://www.globalsecuritysolutions.co.za/",
     "telephone": "+27 62 955 8559",

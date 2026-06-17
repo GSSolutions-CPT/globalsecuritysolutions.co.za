@@ -43,7 +43,7 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
                 align="center"
                 title="Our Work"
                 subtitle="Explore our portfolio of precision security installations across Cape Town's residential and commercial sectors."
-                bgImage="/page-heroes/gallery-hero.png"
+                bgImage="/page-heroes/gallery-hero.jpg"
                 pbClass="pb-48"
             />
 

@@ -10,7 +10,7 @@ export const MarketingBanner = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
                 {/* We use a high-quality abstract tech/security background or existing hero image */}
                 <Image
-                    src="/hero-bg-v2.png"
+                    src="/hero-bg-v2.jpg"
                     alt="Security Solutions Cape Town"
                     fill
                     priority={true}

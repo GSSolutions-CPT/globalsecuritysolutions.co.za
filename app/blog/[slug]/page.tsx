@@ -94,7 +94,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                 align="left"
                 title={post.title}
                 subtitle={`${post.date} • Global Security Solutions`}
-                bgImage={post.coverImage || "/page-heroes/blog-hero.png"}
+                bgImage={post.coverImage || "/page-heroes/blog-hero.jpg"}
                 pbClass="pb-48"
                 badgeText="Security Insights"
             />

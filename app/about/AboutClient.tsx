@@ -40,7 +40,7 @@ export function AboutClient() {
                     </>
                 }
                 subtitle="We are your strategic partners in safety. Founded on Cape Town soil, we understand the local landscape and the unique challenges our clients face."
-                bgImage="/page-heroes/about-hero.png"
+                bgImage="/page-heroes/about-hero.jpg"
                 pbClass=""
             />
 

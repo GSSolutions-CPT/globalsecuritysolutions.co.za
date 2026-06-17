@@ -76,7 +76,7 @@ export function SectorsClient() {
                     </>
                 }
                 subtitle="We understand that a farm requires different protection than a retail store. Our sector-specific approach ensures you get the exact defense architecture your property needs."
-                bgImage="/page-heroes/sectors-hero.png"
+                bgImage="/page-heroes/sectors-hero.jpg"
                 pbClass=""
             />
 

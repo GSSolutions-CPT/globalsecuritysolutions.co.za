@@ -39,7 +39,7 @@ export default function FAQClient() {
                 badgeText="Support Center"
                 title="How can we help?"
                 subtitle="Find answers to common questions about our security installations, warranties, and services."
-                bgImage="/page-heroes/faq-hero.png"
+                bgImage="/page-heroes/faq-hero.jpg"
                 pbClass="pb-[220px]"
             />
 

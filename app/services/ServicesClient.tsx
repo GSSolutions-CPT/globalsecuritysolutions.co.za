@@ -40,7 +40,7 @@ export function ServicesClient() {
                     </>
                 }
                 subtitle="From residential homes to industrial estates, we design systems that protect what matters most with unwavering reliability."
-                bgImage="/page-heroes/services-hero.png"
+                bgImage="/page-heroes/services-hero.jpg"
                 pbClass=""
             />
 

@@ -36,7 +36,7 @@ export default function BlogClient({ posts, categories }: BlogClientProps) {
                 align="center"
                 title="Insights & News"
                 subtitle="Expert advice, crime trend updates, and practical tips to keep your Cape Town property safe and secure."
-                bgImage="/page-heroes/blog-hero.png"
+                bgImage="/page-heroes/blog-hero.jpg"
                 badgeIcon={<BookOpen className="w-4 h-4" />}
                 badgeText="Security Knowledge Hub"
                 pbClass="pb-64"

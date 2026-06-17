@@ -45,7 +45,7 @@ export default function ProjectClient({ project }: { project: Project }) {
                 align="left"
                 title={project.title}
                 subtitle={project.description || "A deep dive into our custom security engineering and implementation."}
-                bgImage={project.image_url || "/page-heroes/gallery-hero.png"}
+                bgImage={project.image_url || "/page-heroes/gallery-hero.jpg"}
                 pbClass="pb-48"
                 badgeText="Featured Case Study"
             />
