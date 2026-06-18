@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { supabase as browserSupabase } from '@/lib/portal/supabase'
+import { getBrowserSupabaseClient } from '@/lib/portal/supabase'
 import { addMonths, addWeeks, addQuarters, addYears } from 'date-fns'
 import { Contract } from '@/types/crm'
 
@@ -44,20 +44,21 @@ async function contractInvoiceExists(
 
 export async function generateInvoiceFromContract(
     contract: Contract,
-    db: SupabaseClient = browserSupabase,
+    db?: SupabaseClient,
     options?: { status?: 'Draft' | 'Sent' }
 ): Promise<string | null> {
+    const client = db ?? getBrowserSupabaseClient()
     if (!contract.active || !contract.next_billing_date) {
         return null
     }
 
-    if (await contractInvoiceExists(contract, db)) {
+    if (await contractInvoiceExists(contract, client)) {
         return null
     }
 
     const invoiceStatus = options?.status ?? 'Sent'
 
-    const { data: invoiceData, error: invoiceError } = await db
+    const { data: invoiceData, error: invoiceError } = await client
         .from('invoices')
         .insert([{
             client_id: contract.client_id,
@@ -79,7 +80,7 @@ export async function generateInvoiceFromContract(
         throw invoiceError || new Error('Failed to create invoice')
     }
 
-    const { error: lineError } = await db
+    const { error: lineError } = await client
         .from('invoice_lines')
         .insert([{
             invoice_id: invoiceData.id,
@@ -93,14 +94,14 @@ export async function generateInvoiceFromContract(
     if (lineError) throw lineError
 
     const nextBilling = calculateNextBillingDate(contract.next_billing_date, contract.frequency)
-    const { error: updateError } = await db
+    const { error: updateError } = await client
         .from('recurring_contracts')
         .update({ next_billing_date: nextBilling })
         .eq('id', contract.id)
 
     if (updateError) throw updateError
 
-    await db.from('activity_log').insert([{
+    await client.from('activity_log').insert([{
         type: 'Invoice Generated',
         description: `Recurring invoice generated for ${contract.clients?.name || 'client'}`,
         related_entity_id: invoiceData.id,
@@ -112,8 +113,9 @@ export async function generateInvoiceFromContract(
 
 export async function processDueContractBilling(
     contracts: Contract[],
-    db: SupabaseClient = browserSupabase
+    db?: SupabaseClient
 ): Promise<string[]> {
+    const client = db ?? getBrowserSupabaseClient()
     const generatedInvoiceIds: string[] = []
 
     for (const contract of contracts) {
@@ -122,7 +124,7 @@ export async function processDueContractBilling(
         }
 
         try {
-            const invoiceId = await generateInvoiceFromContract(contract, db)
+            const invoiceId = await generateInvoiceFromContract(contract, client)
             if (invoiceId) {
                 generatedInvoiceIds.push(invoiceId)
             }

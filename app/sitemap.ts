@@ -79,16 +79,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
 
     // Dynamic Projects from Supabase
-    const { data: projects } = await supabase
-        .from('projects')
-        .select('slug, created_at')
+    let projectRoutes: MetadataRoute.Sitemap = []
+    try {
+        const { data: projects } = await supabase
+            .from('projects')
+            .select('slug, created_at')
 
-    const projectRoutes = projects?.map((project) => ({
+        projectRoutes = projects?.map((project) => ({
         url: `${BASE_URL}/projects/${project.slug}`,
         lastModified: new Date(project.created_at),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
-    })) || []
+        })) || []
+    } catch {
+        projectRoutes = []
+    }
 
     return [...staticRoutes, ...services, ...sectors, ...areas, ...blogPosts, ...projectRoutes]
 }
