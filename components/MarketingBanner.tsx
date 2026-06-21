@@ -19,6 +19,12 @@ export const MarketingBanner = () => {
     return (
         <div className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-28 flex items-center overflow-hidden bg-brand-navy min-h-[85vh]">
             
+            {/* Tech HUD Corner Accents */}
+            <div className="absolute top-28 left-6 w-8 h-8 border-t-2 border-l-2 border-brand-electric/20 pointer-events-none hidden lg:block" />
+            <div className="absolute top-28 right-6 w-8 h-8 border-t-2 border-r-2 border-brand-electric/20 pointer-events-none hidden lg:block" />
+            <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-brand-electric/20 pointer-events-none hidden lg:block" />
+            <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-brand-electric/20 pointer-events-none hidden lg:block" />
+            
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/75 to-transparent z-10" />

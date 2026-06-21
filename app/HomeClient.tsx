@@ -3,10 +3,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { ArrowRight, ShieldCheck, Zap, Settings, Command } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Zap, Settings, Command, Check, Award } from 'lucide-react'
 import { motion, Variants } from 'framer-motion'
 import { ServiceCarousel } from '@/components/ServiceCarousel'
 import { SectorCarousel } from '@/components/SectorCarousel'
+import { cn } from '@/utils/cn'
 
 // Strongly deferred off main thread 
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { ssr: false })
@@ -71,22 +72,22 @@ export function HomeClient() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-center text-sm md:text-base text-brand-navy font-medium">
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Owner-Managed by Kyle Cass</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Owner-Managed by Kyle Cass</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Established 2015</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Established 2015</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Professional Training &amp; Complete Handover</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Professional Training &amp; Complete Handover</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Workmanship Guarantees</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Workmanship Guarantees</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Certified Installers – Leading Brands</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Certified Installers – Leading Brands</span>
             </div>
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-navy/5 border border-brand-navy/10">
-              <span className="text-brand-electric font-black">✓</span> <span>Cape Town &amp; Western Cape Specialists</span>
+              <Check className="w-4 h-4 text-brand-electric stroke-[3]" /> <span>Cape Town &amp; Western Cape Specialists</span>
             </div>
           </div>
           <p className="text-center text-xs text-brand-slate mt-3 tracking-wide">Every installation is personally supervised. We deliver reliable systems with full client training so your security works when you need it.</p>
@@ -224,30 +225,42 @@ export function HomeClient() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
           >
             {[
               {
                 icon: Settings,
-                title: "Owner Managed",
-                desc: "Kyle Cass personally oversees projects, ensuring direct accountability and consistent premium quality standards on every job."
+                title: "Owner Managed by Kyle Cass",
+                desc: "Kyle Cass personally supervises and signs off on every project, ensuring absolute accountability, premium quality standards, and dedicated client training on every single installation.",
+                colSpan: "md:col-span-2"
               },
               {
                 icon: ShieldCheck,
                 title: "Certified Experts",
-                desc: "Our team is certified by leading brands like Hikvision, Ajax, Paradox, and Nemtek, ensuring full warranty compliance and flawless integrations."
+                desc: "Fully certified by top-tier manufacturers Hikvision, Ajax, Paradox, and Nemtek, securing full warranty protection.",
+                colSpan: "md:col-span-1"
               },
               {
                 icon: Zap,
-                title: "Always Online",
-                desc: "We design with South African realities in mind. Advanced battery backups ensure your security stays online even when the grid fails."
+                title: "Load Shedding Ready",
+                desc: "Equipped with advanced intelligent battery backups, keeping your security defenses online through outages.",
+                colSpan: "md:col-span-1"
+              },
+              {
+                icon: Award,
+                title: "Workmanship Guarantees",
+                desc: "We stand 100% behind our installations. Our systems use premium SABS-approved cabling and are backed by robust service level agreements for absolute peace of mind.",
+                colSpan: "md:col-span-2"
               }
             ].map((feature, idx) => (
               <motion.div 
                 key={idx}
                 variants={fadeInUp}
-                whileHover={{ y: -12 }}
-                className="group relative glass-card-light rounded-3xl p-6 lg:p-8 shadow-md border border-brand-steel/10 hover:border-brand-electric/40 hover:shadow-[0_15px_30px_rgba(0,229,255,0.05)] transition-all duration-300 overflow-hidden cursor-pointer"
+                whileHover={{ y: -8 }}
+                className={cn(
+                  "group relative glass-card-light rounded-3xl p-6 lg:p-8 shadow-md border border-brand-steel/10 hover:border-brand-electric/40 hover:shadow-[0_15px_30px_rgba(0,229,255,0.08)] transition-all duration-300 overflow-hidden cursor-pointer",
+                  feature.colSpan
+                )}
               >
                 {/* Subtle Gradient Glow Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

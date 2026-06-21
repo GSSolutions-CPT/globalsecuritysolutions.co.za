@@ -81,10 +81,9 @@ export function Header() {
         setActiveDropdown(activeDropdown === name ? null : name)
     }
 
-    // Determine base colors depending on scroll state (inverts if we are at the very top of the page on dark hero)
-    const navTextColor = isScrolled ? 'text-brand-navy hover:text-brand-electric font-semibold' : 'text-white/90 hover:text-brand-electric font-semibold drop-shadow-sm'
+    // Determine base colors (fully dark cyberpunk theme)
+    const navTextColor = 'text-white/90 hover:text-brand-electric font-semibold drop-shadow-sm'
     const activeNavColor = 'text-brand-electric font-bold'
-    const iconColor = isScrolled ? 'text-brand-navy' : 'text-white/90'
 
     return (
         <div 
@@ -98,7 +97,7 @@ export function Header() {
                 className={cn(
                     "w-full transition-all duration-500 ease-in-out",
                     isScrolled 
-                        ? "bg-white/80 backdrop-blur-md shadow-lg border border-brand-steel/10 rounded-full max-w-7xl mx-auto px-6 py-2.5" 
+                        ? "bg-brand-navy/80 backdrop-blur-md shadow-[0_0_30px_rgba(0,229,255,0.08)] border border-brand-electric/25 rounded-full max-w-7xl mx-auto px-6 py-2.5" 
                         : "bg-gradient-to-b from-brand-navy/80 via-brand-navy/20 to-transparent py-6 px-4"
                 )}
             >
@@ -116,8 +115,6 @@ export function Header() {
                                     !isScrolled && "drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
                                 )}
                                 priority
-                                fetchPriority="high"
-                                sizes="(max-width: 768px) 120px, 200px"
                             />
                         </Link>
 
@@ -160,8 +157,8 @@ export function Header() {
                                                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                                                 className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-64 origin-top"
                                             >
-                                                <div className="bg-white/95 backdrop-blur-3xl rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] border border-gray-100/50 overflow-hidden ring-1 ring-black/5">
-                                                    <div className="py-3 uppercase text-[10px] font-black tracking-widest text-brand-steel px-5 border-b border-gray-50 bg-gray-50/50">Explore</div>
+                                                <div className="bg-brand-navy/95 backdrop-blur-3xl rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] border border-brand-steel/20 overflow-hidden ring-1 ring-white/10">
+                                                    <div className="py-3 uppercase text-[10px] font-black tracking-widest text-brand-steel px-5 border-b border-brand-steel/10 bg-brand-navy/50">Explore</div>
                                                     <div className="py-2">
                                                         {item.dropdown.map((subItem, subIdx) => (
                                                             <Link
@@ -170,8 +167,8 @@ export function Header() {
                                                                 className={cn(
                                                                     "block px-5 py-2.5 text-sm font-medium transition-all duration-200 cursor-pointer",
                                                                     subItem.highlight 
-                                                                        ? "text-brand-electric border-t border-gray-50/50 mt-1 pt-3 bg-brand-electric/5 hover:bg-brand-electric/15 font-bold" 
-                                                                        : "text-gray-600 hover:text-brand-navy hover:bg-gray-50/80 hover:pl-6" // hover push effect
+                                                                        ? "text-brand-electric border-t border-brand-steel/10 mt-1 pt-3 bg-brand-electric/5 hover:bg-brand-electric/15 font-bold" 
+                                                                        : "text-white/80 hover:text-brand-electric hover:bg-brand-steel/10 hover:pl-6" // hover push effect
                                                                 )}
                                                                 onClick={() => setHoveredDropdown(null)}
                                                             >
@@ -192,7 +189,7 @@ export function Header() {
                                     className={cn(
                                         "text-sm font-bold transition-all duration-300 rounded-full px-5 py-2 ring-1 ring-inset active:scale-95 cursor-pointer",
                                         isScrolled 
-                                            ? "text-brand-navy ring-brand-navy border-brand-navy/20 hover:bg-brand-navy hover:text-white" 
+                                            ? "text-white ring-brand-electric border-brand-electric hover:bg-brand-electric hover:text-brand-navy" 
                                             : "text-white ring-white/30 hover:bg-white hover:text-brand-navy"
                                     )}
                                 >
@@ -212,7 +209,7 @@ export function Header() {
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className={cn("lg:hidden p-2 rounded-lg transition-colors cursor-pointer", iconColor, isScrolled ? "hover:bg-gray-100" : "hover:bg-white/10")}
+                            className="lg:hidden p-2 rounded-lg transition-colors cursor-pointer hover:bg-white/10 text-white"
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Toggle Menu"
                             aria-expanded={isOpen}
@@ -230,7 +227,7 @@ export function Header() {
                             animate={{ opacity: 1, height: "100vh" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // smooth apple-like ease
-                            className="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-3xl shadow-2xl border-t border-gray-100 overflow-hidden"
+                            className="lg:hidden absolute top-full left-0 w-full bg-brand-navy/95 backdrop-blur-3xl shadow-2xl border-t border-brand-steel/20 overflow-hidden"
                         >
                             <nav className="flex flex-col p-6 space-y-2 h-full overflow-y-auto pb-40">
                                 <div className="text-[10px] font-black uppercase text-brand-steel tracking-[0.2em] mb-4">Menu</div>
@@ -243,10 +240,10 @@ export function Header() {
                                         transition={{ delay: 0.1 + (idx * 0.05) }}
                                     >
                                         {item.dropdown ? (
-                                            <div className="bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100/50">
+                                            <div className="bg-brand-navy/40 rounded-2xl overflow-hidden border border-brand-steel/10">
                                                 <button
                                                     onClick={() => toggleMobileDropdown(item.label)}
-                                                    className="flex items-center justify-between w-full text-left font-bold text-brand-navy p-4"
+                                                    className="flex items-center justify-between w-full text-left font-bold text-white p-4"
                                                 >
                                                     {item.label}
                                                     <motion.div animate={{ rotate: activeDropdown === item.label ? 180 : 0 }}>
@@ -260,14 +257,14 @@ export function Header() {
                                                             initial={{ height: 0, opacity: 0 }}
                                                             animate={{ height: "auto", opacity: 1 }}
                                                             exit={{ height: 0, opacity: 0 }}
-                                                            className="bg-white/50"
+                                                            className="bg-brand-navy/20"
                                                         >
                                                             <div className="px-5 pb-4 pt-1 flex flex-col space-y-4">
                                                                 {item.dropdown.map((subItem, subIdx) => (
                                                                     <Link
                                                                         key={subIdx}
                                                                         href={subItem.href}
-                                                                        className="text-sm font-medium text-gray-600 hover:text-brand-electric"
+                                                                        className="text-sm font-medium text-white/70 hover:text-brand-electric"
                                                                         onClick={() => setIsOpen(false)}
                                                                     >
                                                                         {subItem.label}
@@ -282,10 +279,10 @@ export function Header() {
                                             <Link
                                                 href={item.href!}
                                                 className={cn(
-                                                    "block font-bold p-4 bg-gray-50/50 rounded-2xl border border-gray-100/50 transition-colors",
+                                                    "block font-bold p-4 bg-brand-navy/40 rounded-2xl border border-brand-steel/10 transition-colors",
                                                     pathname === item.href || (pathname?.startsWith(item.href!) && item.href !== '/') 
                                                         ? "text-brand-electric ring-1 ring-brand-electric/20 bg-brand-electric/5" 
-                                                        : "text-brand-navy hover:bg-gray-100"
+                                                        : "text-white/90 hover:bg-brand-steel/10"
                                                 )}
                                                 onClick={() => setIsOpen(false)}
                                             >
@@ -303,7 +300,7 @@ export function Header() {
                                 >
                                     <Link
                                         href="/portal/login"
-                                        className="block w-full text-brand-navy border-2 border-brand-navy hover:bg-brand-navy hover:text-white px-6 py-4 text-lg rounded-2xl text-center font-bold active:scale-95 duration-200 transition-colors"
+                                        className="block w-full text-white border-2 border-brand-steel/30 hover:bg-brand-electric hover:border-brand-electric hover:text-brand-navy px-6 py-4 text-lg rounded-2xl text-center font-bold active:scale-95 duration-200 transition-colors"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         Portal Sign In
