@@ -48,6 +48,12 @@ export function ServicesClient() {
                 {/* Substantial On-Page Content for SEO - Professional Security Installations Cape Town */}
                 <div className="max-w-4xl mx-auto text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-black text-brand-navy tracking-tighter mb-4">Expert Security System Installation Across Cape Town and the Western Cape</h2>
+                    {/* Decorative accent line */}
+                    <div className="flex items-center justify-center gap-2 mb-6">
+                        <div className="h-px w-12 bg-brand-steel/20" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-brand-electric" />
+                        <div className="h-px w-12 bg-brand-steel/20" />
+                    </div>
                     <p className="text-brand-slate text-sm md:text-base leading-relaxed mb-4">
                         Global Security Solutions delivers premium, owner-managed security installations for residential homes, commercial premises, schools, estates, farms, and industrial sites. With over a decade of experience since 2015, we focus on integrated solutions that combine IP CCTV, biometric access control, electric perimeter fencing, smart alarms, and gate automation. Every project is personally supervised by founder Kyle Cass to ensure meticulous workmanship, full compliance with South African standards, and reliable performance — including during load shedding.
                     </p>
@@ -68,12 +74,11 @@ export function ServicesClient() {
                         <motion.div variants={fadeInUp} key={service.page} className="h-full">
                             <Link
                                 href={`/services/${toSlug(service.page)}`}
-                                className="group relative bg-brand-navy rounded-[1.5rem] p-6 shadow-xl shadow-brand-navy/10 border border-brand-steel/20 hover:border-brand-electric/50 transition-all duration-500 overflow-hidden flex flex-col items-center text-center h-full focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none"
+                                className="group relative bg-white/80 backdrop-blur-md rounded-[1.5rem] p-6 shadow-lg border border-brand-steel/10 hover:shadow-xl hover:border-brand-electric/30 transition-all duration-500 overflow-hidden flex flex-col items-center text-center h-full focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                                <div className="w-16 h-16 mb-4 relative mx-auto bg-brand-white/5 rounded-2xl border border-brand-white/10 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 shadow-inner z-10">
+                                <div className="w-16 h-16 mb-4 relative mx-auto bg-brand-electric/10 rounded-2xl border border-brand-electric/20 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 shadow-sm z-10">
                                     {service.iconPath ? (
                                         <Image
                                             src={service.iconPath}
@@ -87,15 +92,15 @@ export function ServicesClient() {
                                     )}
                                 </div>
 
-                                <h2 className="text-lg md:text-xl font-bold text-brand-white mb-2 group-hover:text-brand-electric transition-colors tracking-tight relative z-10">
+                                <h2 className="text-lg md:text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-electric transition-colors tracking-tight relative z-10">
                                     {service.page}
                                 </h2>
 
-                                <p className="text-brand-steel text-xs leading-relaxed flex-grow mb-6 font-light relative z-10">
+                                <p className="text-brand-slate text-xs leading-relaxed flex-grow mb-6 font-light relative z-10">
                                     {service.description}
                                 </p>
 
-                                <span className="inline-flex mt-auto items-center text-brand-navy font-bold text-xs uppercase tracking-wider bg-brand-white px-5 py-2.5 rounded-full w-fit group-hover:bg-brand-electric group-hover:shadow-[0_0_15px_rgba(0,229,255,0.5)] transition-all relative z-10">
+                                <span className="inline-flex mt-auto items-center text-brand-white font-bold text-xs uppercase tracking-wider bg-brand-navy px-5 py-2.5 rounded-full w-fit hover:bg-brand-electric hover:text-brand-navy group-hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all relative z-10">
                                     Learn More
                                     <ArrowRight className="w-3.5 h-3.5 ml-2" />
                                 </span>
@@ -133,9 +138,9 @@ export function ServicesClient() {
                             <motion.div variants={fadeInUp} key={i} className="text-center relative group">
                                 {/* Connector Line (Desktop) */}
                                 {i < 3 && (
-                                    <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-brand-steel/30 -z-10 group-hover:bg-brand-electric transition-colors" />
+                                    <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px bg-brand-steel/20 -z-10 group-hover:bg-brand-electric/40 transition-colors" />
                                 )}
-                                <div className="w-16 h-16 mx-auto bg-brand-navy border border-brand-steel/20 rounded-2xl flex items-center justify-center mb-4 shadow-[0_10px_30px_-10px_rgba(10,25,47,0.5)] group-hover:scale-110 group-hover:border-brand-electric/50 transition-all z-10 relative overflow-hidden">
+                                <div className="w-16 h-16 mx-auto bg-white border border-brand-steel/10 rounded-2xl flex items-center justify-center mb-4 shadow-md group-hover:scale-110 group-hover:border-brand-electric/30 group-hover:shadow-lg transition-all z-10 relative overflow-hidden">
                                      <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                     <step.icon className="w-7 h-7 text-brand-electric relative z-10" />
                                 </div>
@@ -179,7 +184,7 @@ export function ServicesClient() {
                             </ul>
                         </div>
 
-                        <div className="bg-brand-white/5 backdrop-blur-md p-8 rounded-[1.5rem] border border-brand-steel/10 shadow-inner">
+                        <div className="bg-white/10 backdrop-blur-md p-8 rounded-[1.5rem] border border-brand-steel/10 shadow-inner">
                             <h3 className="text-xl font-bold text-brand-white mb-6 tracking-tight">Common Questions</h3>
                             <div className="space-y-6">
                                 <div>

@@ -7,9 +7,10 @@ interface CounterProps {
     end: number
     duration?: number
     label: string
+    suffix?: string
 }
 
-export function Counter({ end, duration = 2000, label }: CounterProps) {
+export function Counter({ end, duration = 2000, label, suffix = "+" }: CounterProps) {
     const [count, setCount] = useState(0)
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true })
@@ -38,12 +39,13 @@ export function Counter({ end, duration = 2000, label }: CounterProps) {
 
     return (
         <div ref={ref} className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-brand-electric mb-2">
-                {count}+
+            <div className="text-3xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-white via-brand-electric to-brand-electric drop-shadow-lg tracking-tighter mb-2">
+                {count}{suffix}
             </div>
-            <div className="text-sm uppercase tracking-wider text-brand-steel font-bold">
+            <div className="text-[10px] lg:text-xs uppercase tracking-[0.15em] text-brand-steel font-bold">
                 {label}
             </div>
         </div>
     )
 }
+

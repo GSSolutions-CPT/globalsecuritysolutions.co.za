@@ -68,33 +68,46 @@ const reviews = [
 export function TestimonialCarousel() {
     return (
         <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            {/* The carousel container text-brand-slate mb-6 italic min-h-[80px] */}
+            {/* The carousel container */}
             <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-scroll-slow hover:[animation-play-state:paused]">
                 {/* Double the array for seamless looping */}
-                {[...reviews, ...reviews].map((review, index) => (
-                    <li key={index} className="flex-shrink-0 w-[300px]">
-                        <div className="bg-white pt-8 pb-6 px-6 rounded-[1.5rem] shadow-[0_5px_20px_rgba(0,0,0,0.06)] h-full relative overflow-hidden flex flex-col border border-brand-white mx-2">
-                            {/* Dog Ear Accent - slightly smaller/different for testimonials */}
-                            <div className="absolute top-0 left-0 w-12 h-12 bg-brand-electric rounded-br-[2rem] -translate-x-2 -translate-y-2 opacity-90" />
-                            <Quote className="absolute top-3 left-3 w-4 h-4 text-white z-10" />
+                {[...reviews, ...reviews].map((review, index) => {
+                    const initials = review.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("");
 
-                            <div className="relative z-10 flex-grow">
-                                <div className="flex text-yellow-400 mb-4 justify-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-current" />
-                                    ))}
+                    return (
+                        <li key={index} className="flex-shrink-0 w-[320px] py-4">
+                            <div className="glass-card-light pt-8 pb-6 px-6 rounded-3xl h-full relative overflow-hidden flex flex-col border border-brand-steel/10 mx-2 hover:border-brand-electric/40 hover:shadow-[0_10px_35px_rgba(0,229,255,0.06)] hover:-translate-y-1 duration-300 transition-all select-none">
+                                {/* Subtle Quote Icon in Background */}
+                                <Quote className="absolute right-4 top-4 w-12 h-12 text-brand-steel/5 pointer-events-none" />
+
+                                <div className="relative z-10 flex-grow">
+                                    <div className="flex text-amber-400 mb-4 justify-start gap-0.5">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star key={i} className="w-4 h-4 fill-current" />
+                                        ))}
+                                    </div>
+                                    <p className="text-brand-slate mb-6 italic text-sm leading-relaxed text-left">&quot;{review.text}&quot;</p>
                                 </div>
-                                <p className="text-brand-slate mb-6 italic text-sm leading-relaxed text-center">&quot;{review.text}&quot;</p>
-                            </div>
 
-                            <div className="mt-auto border-t border-brand-steel/20 pt-4 text-center">
-                                <p className="font-bold text-brand-navy text-sm">{review.name}</p>
-                                <p className="text-brand-steel text-[10px] uppercase tracking-wider font-semibold">{review.location}</p>
+                                <div className="mt-auto border-t border-brand-steel/10 pt-4 flex items-center gap-3">
+                                    {/* Styled Avatar Circle */}
+                                    <div className="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-brand-electric font-black text-xs border border-brand-electric/20 shrink-0">
+                                        {initials}
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-brand-navy text-sm leading-none mb-1">{review.name}</p>
+                                        <p className="text-brand-steel text-[10px] uppercase tracking-wider font-semibold leading-none">{review.location}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                ))}
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     )
 }
+

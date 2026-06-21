@@ -189,6 +189,58 @@ export function AboutClient() {
                     </div>
                 </motion.div>
 
+                {/* Timeline Section */}
+                <div className="mb-20">
+                    <motion.div 
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        variants={fadeInUp}
+                        className="text-center mb-12"
+                    >
+                        <span className="text-brand-electric font-black tracking-[0.2em] uppercase text-xs mb-2 block">Our Journey</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-brand-navy tracking-tighter">GSS Milestones</h2>
+                    </motion.div>
+
+                    <div className="relative max-w-4xl mx-auto px-4">
+                        {/* Timeline Center Line */}
+                        <div className="absolute left-1/2 -translate-x-1/2 top-2 bottom-2 w-0.5 bg-brand-steel/20 hidden md:block" />
+
+                        <div className="space-y-12">
+                            {[
+                                { year: "2015", title: "Company Founded", desc: "Global Security Solutions is established in Durbanville, Cape Town by Kyle Cass to offer reliable perimeter fencing and alarm installations." },
+                                { year: "2018", title: "CCTV & Smart Integrations", desc: "Partnered with global leaders (Hikvision & Ajax) to supply AI-powered IP CCTV systems and remote control security apps." },
+                                { year: "2021", title: "Commercial Security Expansion", desc: "Scaled operations to design complex security architectures for estates, office parks, and schools across Cape Town." },
+                                { year: "2024", title: "Off-Grid Resilience", desc: "Innovated custom battery backup and solar solutions for electric fences and alarm systems to counter heavy load shedding." }
+                            ].map((milestone, idx) => (
+                                <motion.div 
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                                    className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-12 ${idx % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                                >
+                                    {/* Timeline Dot (Desktop) */}
+                                    <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-brand-navy border-4 border-brand-electric rounded-full hidden md:block z-10 shadow-[0_0_10px_rgba(0,229,255,0.4)]" />
+
+                                    {/* Content Card */}
+                                    <div className="w-full md:w-1/2">
+                                        <div className="glass-card-light p-6 rounded-3xl border border-brand-steel/10 hover:border-brand-electric/30 duration-300 transition-all shadow-sm">
+                                            <span className="inline-block px-3 py-1 rounded-full bg-brand-navy text-brand-electric text-xs font-black mb-3">
+                                                {milestone.year}
+                                            </span>
+                                            <h3 className="text-lg font-bold text-brand-navy mb-2 tracking-tight">{milestone.title}</h3>
+                                            <p className="text-brand-slate text-sm leading-relaxed font-medium">{milestone.desc}</p>
+                                        </div>
+                                    </div>
+                                    <div className="hidden md:block w-1/2" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 {/* Values Grid */}
                 <div className="mb-16">
                     <motion.div 
@@ -218,14 +270,14 @@ export function AboutClient() {
                                 key={idx}
                                 variants={fadeInUp}
                                 whileHover={{ y: -8 }}
-                                className="group bg-brand-navy p-6 md:p-8 rounded-[1.5rem] border border-brand-steel/20 shadow-xl shadow-brand-navy/10 hover:border-brand-electric/50 transition-all duration-500 relative overflow-hidden focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none"
+                                className="group glass-card-light p-6 md:p-8 rounded-[1.5rem] border border-brand-steel/10 hover:border-brand-electric/40 hover:shadow-lg transition-all duration-300 relative overflow-hidden focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none cursor-pointer"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="w-12 h-12 bg-brand-white/10 backdrop-blur-md rounded-xl border border-brand-white/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner">
-                                    <item.icon className="w-6 h-6 text-brand-electric" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                <div className="w-12 h-12 bg-brand-navy rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-md">
+                                    <item.icon className="w-5 h-5 text-brand-electric" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2 text-brand-white tracking-tight relative z-10">{item.title}</h3>
-                                <p className="text-brand-steel text-sm leading-relaxed font-light relative z-10">
+                                <h3 className="text-xl font-bold mb-2 text-brand-navy tracking-tight relative z-10">{item.title}</h3>
+                                <p className="text-brand-slate text-sm leading-relaxed font-medium relative z-10">
                                     {item.desc}
                                 </p>
                             </motion.div>

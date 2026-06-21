@@ -169,4 +169,30 @@
   .prose-apex blockquote {
     @apply border-l-4 border-blue-600 bg-blue-50 py-4 px-6 rounded-r-lg italic text-slate-800 my-8 shadow-sm not-italic;
   }
-}
+
+  /* Premium Light Glassmorphism Card */
+  .glass-card-light {
+    @apply bg-white/80 border border-brand-steel/10 shadow-[0_8px_30px_rgb(0,0,0,0.02)] backdrop-blur-md transition-all duration-300;
+  }
+
+  /* Premium Dark Glassmorphism Card */
+  .glass-card-dark {
+    @apply bg-brand-navy/70 border border-brand-steel/20 shadow-[0_8px_32px_rgba(10,25,47,0.3)] backdrop-blur-md transition-all duration-300;
+  }
+
+  /* Cyberpunk Tech Scanlines */
+  .tech-grid-bg {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(70, 130, 180, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(70, 130, 180, 0.05) 1px, transparent 1px);
+  }
+
+  /* Glow Border Hover effect */
+  .glow-hover {
+    @apply transition-all duration-300;
+  }
+  .glow-hover:hover {
+    @apply border-brand-electric/40 shadow-[0_0_20px_rgba(0,229,255,0.15)];
+  }
+}

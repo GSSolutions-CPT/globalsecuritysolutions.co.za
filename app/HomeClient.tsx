@@ -12,6 +12,7 @@ import { SectorCarousel } from '@/components/SectorCarousel'
 const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => mod.ContactForm), { ssr: false })
 const TestimonialCarousel = dynamic(() => import('@/components/TestimonialCarousel').then(mod => mod.TestimonialCarousel), { ssr: false })
 const BrandCarousel = dynamic(() => import('@/components/BrandCarousel').then(mod => mod.BrandCarousel))
+const Counter = dynamic(() => import('@/components/Counter').then(mod => mod.Counter), { ssr: false })
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 50 },
@@ -32,12 +33,12 @@ export function HomeClient() {
   return (
     <>
       {/* Stats Section - High Contrast Navy & Electric Blue */}
-      <section className="relative py-12 lg:py-6 bg-brand-navy overflow-hidden">
+      <section className="relative py-12 lg:py-8 bg-brand-navy overflow-hidden">
         {/* Dynamic Electric Blue Glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-electric/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-brand-steel/20 rounded-full blur-[100px] mix-blend-screen pointer-events-none" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-5 lg:px-8 relative z-10">
           <motion.div 
             variants={staggerContainer}
             initial="hidden"
@@ -46,28 +47,24 @@ export function HomeClient() {
             className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 text-center text-brand-white"
           >
             {[
-              { stat: "10+", label: "Years Experience" },
-              { stat: "500+", label: "Installations" },
-              { stat: "100%", label: "Quality Guaranteed" },
-              { stat: "24/7", label: "Support" }
+              { end: 10, label: "Years Experience", suffix: "+" },
+              { end: 500, label: "Installations", suffix: "+" },
+              { end: 100, label: "Quality Guaranteed", suffix: "%" },
+              { end: 24, label: "Support", suffix: "/7" }
             ].map((item, idx) => (
               <motion.div 
                 key={idx} 
                 variants={fadeInUp}
-                className="relative p-6 rounded-2xl bg-brand-white/5 border border-brand-steel/30 backdrop-blur-md shadow-[0_0_20px_rgba(0,229,255,0.05)] hover:border-brand-electric/50 hover:bg-brand-white/10 transition-all duration-500 group"
+                className="relative p-6 rounded-2xl bg-brand-white/5 border border-brand-steel/10 backdrop-blur-md hover:border-brand-electric/40 hover:bg-brand-white/10 transition-all duration-300 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                <div className="text-3xl lg:text-5xl font-black mb-2 text-transparent bg-clip-text bg-gradient-to-br from-brand-white to-brand-electric drop-shadow-lg tracking-tighter">
-                  {item.stat}
-                </div>
-                <div className="text-brand-steel text-xs lg:text-sm uppercase tracking-[0.1em] font-bold">
-                  {item.label}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-b from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <Counter end={item.end} label={item.label} suffix={item.suffix} />
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
+
 
       {/* Prominent Trust & Credibility Bar - E-E-A-T & Local SEO Signals */}
       <section className="bg-brand-white border-b border-brand-slate/10 py-6">
@@ -250,21 +247,22 @@ export function HomeClient() {
                 key={idx}
                 variants={fadeInUp}
                 whileHover={{ y: -12 }}
-                className="group relative bg-brand-navy rounded-[1.5rem] p-6 lg:p-8 shadow-2xl shadow-brand-navy/10 border border-brand-steel/20 hover:border-brand-electric/50 transition-all duration-500 overflow-hidden"
+                className="group relative glass-card-light rounded-3xl p-6 lg:p-8 shadow-md border border-brand-steel/10 hover:border-brand-electric/40 hover:shadow-[0_15px_30px_rgba(0,229,255,0.05)] transition-all duration-300 overflow-hidden cursor-pointer"
               >
-                {/* Hover Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Subtle Gradient Glow Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                <div className="w-12 h-12 bg-brand-white/10 backdrop-blur-md border border-brand-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-inner">
-                  <feature.icon className="w-6 h-6 text-brand-electric" />
+                <div className="w-12 h-12 bg-brand-navy rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-md">
+                  <feature.icon className="w-5 h-5 text-brand-electric" />
                 </div>
-                <h3 className="text-xl font-bold text-brand-white mb-3 tracking-tight">{feature.title}</h3>
-                <p className="text-brand-steel leading-relaxed text-sm md:text-base font-light">
+                <h3 className="text-xl font-bold text-brand-navy mb-3 tracking-tight">{feature.title}</h3>
+                <p className="text-brand-slate leading-relaxed text-sm md:text-base font-medium">
                   {feature.desc}
                 </p>
               </motion.div>
             ))}
           </motion.div>
+
 
           {/* Additional On-Page Content for SEO Depth & E-E-A-T */}
           <div className="mt-10 max-w-4xl mx-auto text-center text-brand-slate text-sm md:text-base leading-relaxed">

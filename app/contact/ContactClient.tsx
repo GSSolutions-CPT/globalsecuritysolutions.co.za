@@ -58,16 +58,15 @@ export function ContactClient() {
                         className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
                     >
                         {/* Contact Info Card */}
-                        <motion.div variants={fadeInUp} className="bg-brand-navy p-8 md:p-12 rounded-[2rem] shadow-[0_20px_50px_-15px_rgba(10,25,47,0.5)] border border-brand-steel/20 relative overflow-hidden h-full group">
-                            {/* Decorative Background Glow */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-brand-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-[100px] pointer-events-none" />
-                            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+                        <motion.div variants={fadeInUp} className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-[2rem] shadow-xl border border-brand-steel/10 relative overflow-hidden h-full group">
+                            {/* Decorative Gradient Blobs */}
+                            <div className="absolute -top-20 -right-20 w-60 h-60 bg-brand-electric/5 rounded-full blur-[80px] pointer-events-none" />
+                            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-brand-steel/5 rounded-full blur-[60px] pointer-events-none" />
 
                             <div className="relative z-10 space-y-10">
                                 <div>
-                                    <h2 className="text-3xl font-black text-brand-white mb-2 tracking-tighter">Contact Details</h2>
-                                    <p className="text-brand-steel font-light text-sm md:text-base">Reach out directly through your preferred encrypted channel.</p>
+                                    <h2 className="text-3xl font-black text-brand-navy mb-2 tracking-tighter">Contact Details</h2>
+                                    <p className="text-brand-slate font-light text-sm md:text-base">Reach out directly through your preferred encrypted channel.</p>
                                 </div>
 
                                 <div className="space-y-6">
@@ -77,24 +76,24 @@ export function ContactClient() {
                                         { icon: Mail, title: "General Enquiries", desc: "Support, maintenance & scheduling", link: "info@globalsecuritysolutions.co.za", href: "mailto:info@globalsecuritysolutions.co.za" }
                                     ].map((item, idx) => (
                                         <div key={idx} className="flex items-start group/item">
-                                            <div className="w-12 h-12 rounded-2xl bg-brand-white/5 border border-brand-steel/10 text-brand-electric flex items-center justify-center shrink-0 mr-5 group-hover/item:bg-brand-electric group-hover/item:text-brand-navy transition-all duration-300 shadow-inner">
+                                            <div className="w-12 h-12 rounded-2xl bg-brand-electric/10 border border-brand-electric/20 text-brand-electric flex items-center justify-center shrink-0 mr-5 group-hover/item:bg-brand-electric group-hover/item:text-brand-white transition-all duration-300 shadow-sm">
                                                 <item.icon className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-brand-white text-base mb-1 tracking-tight">{item.title}</h3>
-                                                <p className="text-brand-steel text-xs mb-1 font-light">{item.desc}</p>
-                                                <a href={item.href} className="text-sm font-bold text-brand-electric hover:text-brand-white transition-colors">{item.link}</a>
+                                                <h3 className="font-bold text-brand-navy text-base mb-1 tracking-tight">{item.title}</h3>
+                                                <p className="text-brand-slate text-xs mb-1 font-light">{item.desc}</p>
+                                                <a href={item.href} className="text-sm font-bold text-brand-electric hover:text-brand-navy transition-colors">{item.link}</a>
                                             </div>
                                         </div>
                                     ))}
 
                                     <div className="flex items-start group/item">
-                                        <div className="w-12 h-12 rounded-2xl bg-brand-white/5 border border-brand-steel/10 text-brand-electric flex items-center justify-center shrink-0 mr-5 group-hover/item:bg-brand-electric group-hover/item:text-brand-navy transition-all duration-300 shadow-inner">
+                                        <div className="w-12 h-12 rounded-2xl bg-brand-electric/10 border border-brand-electric/20 text-brand-electric flex items-center justify-center shrink-0 mr-5 group-hover/item:bg-brand-electric group-hover/item:text-brand-white transition-all duration-300 shadow-sm">
                                             <MapPin className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-brand-white text-base mb-1 tracking-tight">Visit Our HQ</h3>
-                                            <p className="text-brand-steel text-xs mb-1 font-light">Appointments highly recommended</p>
+                                            <h3 className="font-bold text-brand-navy text-base mb-1 tracking-tight">Visit Our HQ</h3>
+                                            <p className="text-brand-slate text-xs mb-1 font-light">Appointments highly recommended</p>
                                             <address className="not-italic text-brand-slate text-sm leading-relaxed mb-2 font-medium">
                                                 66 Robyn Rd, Langeberg Ridge,<br />
                                                 Cape Town, 7550
@@ -103,7 +102,7 @@ export function ContactClient() {
                                                 href="https://www.google.com/maps/dir//66+Robyn+Rd,+Langeberg+Ridge,+Cape+Town,+7550"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-block text-xs font-bold text-brand-electric hover:text-brand-white uppercase tracking-wider transition-colors"
+                                                className="inline-block text-xs font-bold text-brand-electric hover:text-brand-navy uppercase tracking-wider transition-colors"
                                             >
                                                 Get Directions &rarr;
                                             </a>
@@ -111,18 +110,18 @@ export function ContactClient() {
                                     </div>
                                 </div>
 
-                                <div className="pt-8 border-t border-brand-steel/20">
-                                    <h3 className="font-black text-brand-white mb-4 flex items-center gap-2 tracking-tight text-lg">
+                                <div className="pt-8 border-t border-brand-steel/10">
+                                    <h3 className="font-black text-brand-navy mb-4 flex items-center gap-2 tracking-tight text-lg">
                                         <Clock className="w-5 h-5 text-brand-electric" />
                                         Operating Hours
                                     </h3>
                                     <div className="grid grid-cols-2 gap-4 text-xs md:text-sm">
-                                        <div className="bg-brand-white/5 p-4 rounded-xl border border-brand-white/10 shadow-inner">
-                                            <span className="block font-black text-brand-white tracking-widest uppercase text-[10px] mb-1">Weekdays</span>
+                                        <div className="bg-brand-navy/5 p-4 rounded-xl border border-brand-steel/10 shadow-sm">
+                                            <span className="block font-black text-brand-navy tracking-widest uppercase text-[10px] mb-1">Weekdays</span>
                                             <span className="text-brand-electric font-bold">08:00 - 17:00</span>
                                         </div>
-                                        <div className="bg-brand-white/5 p-4 rounded-xl border border-brand-white/10 shadow-inner">
-                                            <span className="block font-black text-brand-white tracking-widest uppercase text-[10px] mb-1">Weekends</span>
+                                        <div className="bg-brand-navy/5 p-4 rounded-xl border border-brand-steel/10 shadow-sm">
+                                            <span className="block font-black text-brand-navy tracking-widest uppercase text-[10px] mb-1">Weekends</span>
                                             <span className="text-brand-electric font-bold">Emergency Only</span>
                                         </div>
                                     </div>
@@ -131,36 +130,34 @@ export function ContactClient() {
                         </motion.div>
 
                         {/* Contact Form Card */}
-                        <motion.div variants={fadeInUp} className="bg-brand-navy p-8 md:p-12 rounded-[2rem] shadow-[0_20px_50px_-15px_rgba(10,25,47,0.5)] border border-brand-steel/20 relative overflow-hidden h-full flex flex-col focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none">
-                            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                                <MessageSquare className="w-32 h-32 text-brand-electric" />
-                            </div>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-full bg-brand-electric/5 blur-[100px] pointer-events-none mix-blend-screen" />
-                            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+                        <motion.div variants={fadeInUp} className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-[2rem] shadow-xl border border-brand-steel/10 relative overflow-hidden h-full flex flex-col focus-within:ring-2 focus-within:ring-brand-electric focus-within:outline-none">
+                            {/* Decorative Gradient Blobs */}
+                            <div className="absolute -top-24 -left-24 w-56 h-56 bg-brand-electric/5 rounded-full blur-[80px] pointer-events-none" />
+                            <div className="absolute -bottom-20 -right-20 w-52 h-52 bg-brand-steel/5 rounded-full blur-[60px] pointer-events-none" />
 
                             <div className="relative z-10 flex-grow">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <h2 className="text-3xl font-black text-brand-white tracking-tighter drop-shadow-md">Send us a Message</h2>
-                                    <span className="bg-brand-electric/20 border border-brand-electric/50 text-brand-electric text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.4)]">
+                                    <h2 className="text-3xl font-black text-brand-navy tracking-tighter">Send us a Message</h2>
+                                    <span className="bg-brand-electric/15 border border-brand-electric/40 text-brand-electric text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.3)]">
                                         Online
                                     </span>
                                 </div>
-                                <p className="text-brand-steel mb-8 max-w-sm text-sm font-light">
+                                <p className="text-brand-slate mb-8 max-w-sm text-sm font-light">
                                     Initialize contact below and our tactical dispatch will respond <span className="text-brand-electric font-bold">within 24 hours</span>.
                                 </p>
 
-                                <div className="bg-brand-white/5 p-4 rounded-[1.5rem] backdrop-blur-md border border-brand-steel/10 shadow-inner">
+                                <div className="bg-brand-navy/5 p-4 rounded-[1.5rem] backdrop-blur-md border border-brand-steel/10 shadow-sm">
                                     <ContactForm />
                                 </div>
                             </div>
 
                             {/* Social Footer inside Card */}
-                            <div className="mt-8 pt-6 border-t border-brand-steel/20 text-center relative z-10">
-                                <p className="text-brand-steel text-xs mb-4 font-black uppercase tracking-widest">Secure Comms Links</p>
+                            <div className="mt-8 pt-6 border-t border-brand-steel/10 text-center relative z-10">
+                                <p className="text-brand-slate text-xs mb-4 font-black uppercase tracking-widest">Secure Comms Links</p>
                                 <div className="flex justify-center gap-4">
-                                    <a href="https://facebook.com/globalsecuritysolutions" className="p-3 bg-brand-white/5 border border-brand-white/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-brand-navy transition-all duration-300 hover:scale-110 shadow-inner"><Facebook className="w-4 h-4" /><span className="sr-only">Facebook</span></a>
-                                    <a href="https://instagram.com/globalsecuritysolutions" className="p-3 bg-brand-white/5 border border-brand-white/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-brand-navy transition-all duration-300 hover:scale-110 shadow-inner"><Instagram className="w-4 h-4" /><span className="sr-only">Instagram</span></a>
-                                    <a href="https://linkedin.com/company/global-security-solutions-cape-town" className="p-3 bg-brand-white/5 border border-brand-white/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-brand-navy transition-all duration-300 hover:scale-110 shadow-inner"><Linkedin className="w-4 h-4" /><span className="sr-only">LinkedIn</span></a>
+                                    <a href="https://facebook.com/globalsecuritysolutions" className="p-3 bg-brand-navy/5 border border-brand-steel/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"><Facebook className="w-4 h-4" /><span className="sr-only">Facebook</span></a>
+                                    <a href="https://instagram.com/globalsecuritysolutions" className="p-3 bg-brand-navy/5 border border-brand-steel/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"><Instagram className="w-4 h-4" /><span className="sr-only">Instagram</span></a>
+                                    <a href="https://linkedin.com/company/global-security-solutions-cape-town" className="p-3 bg-brand-navy/5 border border-brand-steel/10 rounded-xl text-brand-electric hover:bg-brand-electric hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"><Linkedin className="w-4 h-4" /><span className="sr-only">LinkedIn</span></a>
                                 </div>
                             </div>
                         </motion.div>
@@ -173,10 +170,8 @@ export function ContactClient() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="mt-12 rounded-[2rem] overflow-hidden border border-brand-steel/20 shadow-[0_20px_50px_-15px_rgba(10,25,47,0.5)] h-[400px] md:h-[500px] relative z-10 w-full bg-brand-navy"
+                        className="mt-12 rounded-[2rem] overflow-hidden border border-brand-steel/10 shadow-xl h-[400px] md:h-[500px] relative z-10 w-full bg-white"
                     >
-                        {/* Interactive overlay to prevent accidental scrolling on mobile */}
-                        <div className="absolute inset-0 bg-brand-navy/10 pointer-events-none mix-blend-overlay z-10" />
                         <iframe
                             width="100%"
                             height="100%"

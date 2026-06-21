@@ -171,7 +171,9 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             {/* Hero Section */}
             <section className="relative bg-brand-navy text-white min-h-[60vh] pt-32 pb-24 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/60 to-brand-navy/10 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/70 to-transparent z-10" />
+                    {/* Subtle grid pattern overlay */}
+                    <div className="absolute inset-0 z-[11] opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
                     <Image
                         src={service.heroImage || "/hero-bg-v2.jpg"}
                         alt={service.heroAlt || service.title}
@@ -187,29 +189,29 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     </div>
 
                     <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-sm font-medium mb-6 backdrop-blur-sm">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-sm font-medium mb-6 backdrop-blur-sm shadow-[0_0_10px_rgba(0,229,255,0.3)]">
                             <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
                             Professional Installation
                         </div>
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tighter leading-tight">
                             {service.page} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-electric">in Cape Town</span>
                         </h1>
-                        <p className="text-xl text-brand-steel/60 max-w-2xl leading-relaxed">
+                        <p className="text-xl text-brand-steel/60 max-w-2xl leading-relaxed font-light">
                             {service.description}
                         </p>
                     </div>
                 </div>
             </section>
 
-            <div className="container mx-auto px-4 py-6 -mt-10 relative z-30">
+            <div className="container mx-auto px-4 py-12 -mt-16 relative z-30">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     {/* Main Content */}
                     <div className="lg:col-span-2 space-y-12">
 
                         {/* Intro Card */}
-                        <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-brand-steel/20 relative overflow-hidden">
+                        <div className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-[2rem] shadow-xl border border-brand-steel/10 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                             <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
@@ -225,8 +227,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     </div>
                                 )}
                                 <div>
-                                    <h2 className="text-2xl font-bold text-brand-navy mb-4">Secure Your Property Today</h2>
-                                    <p className="text-brand-slate text-lg leading-relaxed">
+                                    <h2 className="text-2xl font-bold text-brand-navy mb-4 tracking-tighter">Secure Your Property Today</h2>
+                                    <p className="text-brand-slate text-lg leading-relaxed font-light">
                                         {service.longDescription || `Global Security Solutions is Cape Town's premier provider of ${service.page}. We combine cutting-edge technology with expert workmanship to ensure your property is never left vulnerable.`}
                                     </p>
                                 </div>
@@ -235,7 +237,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
                         {/* Problem / Solution Split */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-red-50 p-8 rounded-3xl border border-red-100">
+                            <div className="bg-gradient-to-br from-red-50 to-white p-8 rounded-[1.5rem] border border-red-100/50 shadow-md hover:shadow-lg transition-all duration-300">
                                 <div className="flex items-center gap-3 mb-4 text-red-700">
                                     <ShieldAlert className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">The Risk</h3>
@@ -244,7 +246,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     {service.riskDescription || `Without reliable ${service.page}, your property has blind spots. Criminals target easy access points and outdated systems, putting your assets and family at risk.`}
                                 </p>
                             </div>
-                            <div className="bg-emerald-50 p-8 rounded-3xl border border-emerald-100">
+                            <div className="bg-gradient-to-br from-emerald-50 to-white p-8 rounded-[1.5rem] border border-emerald-100/50 shadow-md hover:shadow-lg transition-all duration-300">
                                 <div className="flex items-center gap-3 mb-4 text-emerald-700">
                                     <BadgeCheck className="w-6 h-6" />
                                     <h3 className="text-lg font-bold">The Solution</h3>
@@ -257,7 +259,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
                         {/* Feature Grid */}
                         <div>
-                            <h3 className="text-2xl font-bold text-brand-navy mb-8 flex items-center">
+                            <h3 className="text-2xl font-bold text-brand-navy mb-8 flex items-center tracking-tighter">
                                 <span className="bg-brand-electric w-2 h-8 rounded-full mr-4"></span>
                                 Key Features
                             </h3>
@@ -268,8 +270,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                     { title: "24/7 Monitoring", text: "Instant alerts to you and armed response." },
                                     { title: "Certified Installers", text: "Fully accredited and insured installation team." }
                                 ]).map((feature, i) => (
-                                    <div key={i} className="flex gap-4 p-6 bg-white rounded-2xl border border-brand-steel/20 shadow-sm hover:shadow-md transition-shadow">
-                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric text-xl font-black">
+                                    <div key={i} className="flex gap-4 p-6 bg-white/80 backdrop-blur-sm rounded-[1.25rem] border border-brand-steel/10 shadow-sm hover:shadow-md hover:border-brand-electric/30 transition-all duration-300">
+                                        <div className="bg-brand-electric/10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 text-brand-electric text-xl font-black border border-brand-electric/20">
                                             {i + 1}
                                         </div>
                                         <div>
@@ -282,7 +284,10 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                         </div>
 
                         {/* Brands We Use */}
-                        <div className="bg-brand-navy text-white p-8 rounded-3xl relative overflow-hidden">
+                        <div className="bg-brand-navy text-white p-8 rounded-[1.5rem] relative overflow-hidden shadow-lg shadow-brand-navy/20">
+                            {/* Subtle glow effect */}
+                            <div className="absolute -top-10 -right-10 w-48 h-48 bg-brand-electric/10 rounded-full blur-3xl pointer-events-none" />
+                            <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-brand-electric/5 rounded-full blur-3xl pointer-events-none" />
                             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div>
                                     <h3 className="text-xl font-bold mb-2">Trusted Brands Only</h3>
@@ -292,7 +297,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                 </div>
                                 <div className="flex gap-4 flex-wrap justify-center">
                                     {(service.brands || ['Hikvision', 'Paradox', 'Ajax', 'IDS']).map((brand) => (
-                                        <span key={brand} className="px-4 py-2 bg-white/10 rounded-lg text-sm font-bold backdrop-blur-sm border border-white/10">
+                                        <span key={brand} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-bold border border-white/20">
                                             {brand}
                                         </span>
                                     ))}
@@ -302,11 +307,11 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
                         {/* FAQ Section */}
                         {service.faqs && service.faqs.length > 0 && (
-                            <div className="bg-brand-white border-t border-brand-steel/40 pt-12">
-                                <h3 className="text-2xl font-bold text-brand-navy mb-8">Frequently Asked Questions</h3>
+                            <div className="pt-12">
+                                <h3 className="text-2xl font-bold text-brand-navy mb-8 tracking-tighter">Frequently Asked Questions</h3>
                                 <div className="space-y-4">
                                     {service.faqs.map((faq, i) => (
-                                        <div key={i} className="bg-white p-6 rounded-2xl border border-brand-steel/40">
+                                        <div key={i} className="bg-white/80 backdrop-blur-sm p-6 rounded-[1.25rem] border border-brand-steel/10 shadow-sm hover:border-brand-electric/20 transition-all duration-300">
                                             <h4 className="font-bold text-brand-navy mb-2">{faq.q}</h4>
                                             <p className="text-brand-slate">{faq.a}</p>
                                         </div>
@@ -320,14 +325,14 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                     {/* Sidebar */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-24 space-y-8">
-                            <div className="bg-white p-6 rounded-[2rem] border border-brand-electric/20 shadow-lg shadow-brand-electric/5">
+                            <div className="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-brand-electric/20 shadow-lg shadow-brand-electric/5">
                                 <h3 className="text-xl font-bold text-brand-navy mb-2">Get a Free Quote</h3>
                                 <p className="text-brand-steel text-sm mb-6">Fill in your details and we&apos;ll call you back shortly.</p>
                                 <ContactForm />
                             </div>
 
                             {/* Other Services Links */}
-                            <div className="bg-brand-white p-6 rounded-3xl border border-brand-steel/40">
+                            <div className="bg-white/80 backdrop-blur-md p-6 rounded-[1.5rem] border border-brand-steel/10 shadow-md">
                                 <h4 className="font-bold text-brand-navy mb-4 uppercase text-xs tracking-wider">Other Services</h4>
                                 <ul className="space-y-3">
                                     {seoData.primaryServicePages
@@ -335,8 +340,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                         .slice(0, 5)
                                         .map(s => (
                                             <li key={s.page}>
-                                                <Link href={`/services/${toSlug(s.page)}`} className="text-brand-slate hover:text-brand-electric text-sm flex items-center group transition-colors">
-                                                    <ArrowRight className="w-4 h-4 mr-2 text-brand-steel/60 group-hover:text-brand-electric transition-colors" />
+                                                <Link href={`/services/${toSlug(s.page)}`} className="text-brand-slate hover:text-brand-electric text-sm flex items-center group transition-colors duration-300">
+                                                    <ArrowRight className="w-4 h-4 mr-2 text-brand-steel/40 group-hover:text-brand-electric transition-colors duration-300" />
                                                     {s.page}
                                                 </Link>
                                             </li>

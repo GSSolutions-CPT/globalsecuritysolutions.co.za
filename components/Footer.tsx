@@ -1,84 +1,134 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, AtSign, Send, Check } from 'lucide-react'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
+    const [email, setEmail] = useState('')
+    const [subscribed, setSubscribed] = useState(false)
+
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (email.trim()) {
+            setSubscribed(true)
+            setEmail('')
+            setTimeout(() => setSubscribed(false), 3000)
+        }
+    }
 
     return (
-        <footer className="bg-brand-navy text-brand-white pt-6 pb-2 relative overflow-hidden font-sans border-t border-brand-electric/20">
-            {/* Striking Top Glow Effect */}
-            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-electric to-transparent opacity-50 z-10"></div>
+        <footer className="bg-brand-navy text-brand-white pt-16 pb-8 relative overflow-hidden font-sans border-t border-brand-electric/20">
+            {/* Striking Top Glow Line */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-electric/50 to-transparent opacity-70 z-10"></div>
+            
+            {/* Background Grid Accent */}
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
+            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-electric/5 rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
 
-            <div className="container mx-auto px-4 md:px-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            <div className="container mx-auto px-5 lg:px-8 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
 
-                    {/* Company Info & Contact */}
-                    <div className="flex flex-col lg:col-span-1">
-                        <div className="mb-4">
-                            <Image src="/nav-logo-final.png" alt="Global Security Solutions" width={200} height={60} className="h-10 w-auto object-contain drop-shadow-lg" />
+                    {/* Column 1: Brand Info */}
+                    <div className="flex flex-col space-y-4">
+                        <Link href="/" className="inline-block w-fit">
+                            <Image 
+                                src="/nav-logo-final.png" 
+                                alt="Global Security Solutions" 
+                                width={200} 
+                                height={60} 
+                                className="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" 
+                            />
+                        </Link>
+                        <p className="text-sm text-brand-slate leading-relaxed">
+                            Owner-managed security system installations for residential estates, businesses, and homes across Cape Town and the Western Cape since 2015.
+                        </p>
+                        {/* Compact Trust Credentials */}
+                        <div className="pt-2 text-xs text-brand-steel border-t border-white/5">
+                            <span className="font-bold text-brand-electric">Kyle Cass</span> • Personal Supervision • Workmanship Guarantees
                         </div>
-                        
-                        <ul className="space-y-0 text-sm text-brand-slate">
-                            <li className="flex items-center gap-2 py-2">
-                                <MapPin className="w-4 h-4 text-brand-electric shrink-0" />
-                                <span>66 Robyn Rd, Durbanville, Cape Town 7550</span>
+                    </div>
+
+                    {/* Column 2: Navigation Links */}
+                    <div>
+                        <h3 className="text-sm font-black mb-4 text-brand-white uppercase tracking-widest flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                            Quick Links
+                        </h3>
+                        <ul className="space-y-2.5 text-sm font-medium">
+                            <li><Link href="/" className="text-brand-slate hover:text-brand-electric hover:pl-1 transition-all duration-200 cursor-pointer">Home</Link></li>
+                            <li><Link href="/about" className="text-brand-slate hover:text-brand-electric hover:pl-1 transition-all duration-200 cursor-pointer">About Us</Link></li>
+                            <li><Link href="/services" className="text-brand-slate hover:text-brand-electric hover:pl-1 transition-all duration-200 cursor-pointer">All Services</Link></li>
+                            <li><Link href="/projects" className="text-brand-slate hover:text-brand-electric hover:pl-1 transition-all duration-200 cursor-pointer">Project Gallery</Link></li>
+                            <li><Link href="/blog" className="text-brand-slate hover:text-brand-electric hover:pl-1 transition-all duration-200 cursor-pointer">Security Blog</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Contact Info */}
+                    <div>
+                        <h3 className="text-sm font-black mb-4 text-brand-white uppercase tracking-widest flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                            Contact Us
+                        </h3>
+                        <ul className="space-y-3.5 text-sm">
+                            <li className="flex items-start gap-2.5">
+                                <MapPin className="w-4 h-4 text-brand-electric shrink-0 mt-0.5" />
+                                <span className="text-brand-slate">66 Robyn Rd, Langeberg Ridge, Cape Town 7550</span>
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center gap-2.5">
                                 <Phone className="w-4 h-4 text-brand-electric shrink-0" />
-                                <a href="https://wa.me/27629558559" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">062 955 8559</a>
+                                <a href="https://wa.me/27629558559" className="text-brand-slate hover:text-brand-electric transition-colors cursor-pointer">062 955 8559</a>
                             </li>
-                            <li className="flex items-center gap-2">
+                            <li className="flex items-center gap-2.5">
                                 <Mail className="w-4 h-4 text-brand-electric shrink-0" />
-                                <a href="mailto:Kyle@globalsecuritysolutions.co.za" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors truncate">Kyle@globalsecuritysolutions.co.za</a>
+                                <a href="mailto:Kyle@globalsecuritysolutions.co.za" className="text-brand-slate hover:text-brand-electric transition-colors cursor-pointer truncate">Kyle@globalsecuritysolutions.co.za</a>
                             </li>
                         </ul>
-
-                        {/* Compact Trust Signals for site-wide E-E-A-T */}
-                        <div className="mt-4 pt-3 border-t border-brand-white/10 text-[10px] leading-tight text-brand-steel">
-                            Owner-managed by Kyle Cass • Est. 2015 • Professional training &amp; handover on every project • Workmanship guarantees
-                        </div>
                     </div>
 
-                    {/* Links Column Wrapper */}
-                    <div className="grid grid-cols-2 gap-4 lg:col-span-3">
-                        {/* Quick Links */}
-                        <div>
-                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
-                                Quick Links
-                            </h3>
-                            <ul className="text-sm font-medium">
-                                <li><Link href="/" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Home</Link></li>
-                                <li><Link href="/about" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">About Us</Link></li>
-                                <li><Link href="/services" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">All Services</Link></li>
-                                <li><Link href="/projects" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Project Gallery</Link></li>
-                                <li><Link href="/blog" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Security Blog</Link></li>
-                            </ul>
-                        </div>
-
-                        {/* Services */}
-                        <div>
-                            <h3 className="text-sm font-black mb-3 text-brand-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-brand-electric"></span>
-                                Expertise
-                            </h3>
-                            <ul className="text-sm font-medium">
-                                <li><Link href="/services/alarm-system-installation" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Alarm Systems</Link></li>
-                                <li><Link href="/services/cctv-surveillance-systems" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">CCTV Surveillance</Link></li>
-                                <li><Link href="/services/access-control-solutions" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Access Control</Link></li>
-                                <li><Link href="/services/electric-fence-installations" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Electric Fencing</Link></li>
-                                <li><Link href="/load-shedding-security-solutions" className="block py-2 text-brand-slate hover:text-brand-electric transition-colors">Load Shedding Ready</Link></li>
-                            </ul>
-                        </div>
+                    {/* Column 4: Newsletter Signup */}
+                    <div className="flex flex-col space-y-4">
+                        <h3 className="text-sm font-black mb-1 text-brand-white uppercase tracking-widest flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-electric"></span>
+                            Newsletter
+                        </h3>
+                        <p className="text-sm text-brand-slate leading-relaxed">
+                            Stay up to date with load shedding security hacks, technology trends, and safety tips.
+                        </p>
+                        <form onSubmit={handleSubscribe} className="relative flex items-center w-full">
+                            <input
+                                type="email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                className="w-full bg-white/5 border border-brand-steel/30 rounded-xl px-4 py-2.5 text-sm text-brand-white placeholder-brand-slate focus:outline-none focus:border-brand-electric focus:ring-1 focus:ring-brand-electric transition-all"
+                            />
+                            <button
+                                type="submit"
+                                aria-label="Subscribe"
+                                className="absolute right-1.5 p-2 bg-brand-electric text-brand-navy rounded-lg hover:bg-brand-white hover:text-brand-navy transition-colors cursor-pointer flex items-center justify-center"
+                            >
+                                {subscribed ? <Check className="w-4 h-4" /> : <Send className="w-4 h-4" />}
+                            </button>
+                        </form>
+                        {subscribed && (
+                            <span className="text-xs text-brand-electric font-semibold animate-fade-in-up">
+                                Check your inbox soon!
+                            </span>
+                        )}
                     </div>
+
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="border-t border-brand-white/10 pt-4 flex flex-col md:flex-row justify-between items-center text-brand-slate text-xs font-medium gap-4">
-                    <p className="py-2">&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
+                {/* Bottom Legals & Socials */}
+                <div className="border-t border-white/10 pt-8 mt-4 flex flex-col md:flex-row justify-between items-center text-brand-slate text-xs font-medium gap-4">
+                    <p className="order-2 md:order-1">&copy; {currentYear} Global Security Solutions. All rights reserved.</p>
                     
-                    <div className="flex space-x-3">
+                    {/* Social links */}
+                    <div className="flex space-x-3 order-1 md:order-2">
                         {[
                             { icon: Facebook, href: "https://www.facebook.com/gssolutions.co.za/", label: "Facebook" },
                             { icon: Instagram, href: "https://www.instagram.com/globalsecuritysolutions.co.za/", label: "Instagram" },
@@ -91,17 +141,18 @@ export function Footer() {
                                 target="_blank" 
                                 aria-label={social.label}
                                 rel="noopener noreferrer" 
-                                className="block p-2 text-brand-slate hover:text-brand-electric transition-colors"
+                                className="block p-2 text-brand-slate hover:text-brand-electric transition-colors hover:scale-110 duration-200 cursor-pointer"
                             >
-                                <social.icon className="w-4 h-4" />
+                                <social.icon className="w-4.5 h-4.5" />
                             </a>
                         ))}
                     </div>
 
-                    <div className="flex space-x-2">
-                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Privacy</a>
-                        <Link href="/terms-of-service" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Terms</Link>
-                        <Link href="/sitemap.xml" className="block py-2 px-2 text-brand-slate hover:text-brand-electric transition-colors">Sitemap</Link>
+                    {/* Legal Links */}
+                    <div className="flex space-x-4 order-3">
+                        <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-brand-electric transition-colors cursor-pointer">Privacy Policy</a>
+                        <Link href="/terms-of-service" className="hover:text-brand-electric transition-colors cursor-pointer">Terms of Service</Link>
+                        <a href="/sitemap.xml" className="hover:text-brand-electric transition-colors cursor-pointer">Sitemap</a>
                     </div>
                 </div>
             </div>
