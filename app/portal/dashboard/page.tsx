@@ -39,6 +39,7 @@ export default function DashboardPage() {
     const { formatCurrency } = useCurrency()
     const { user } = useAuth()
     const [fetchError, setFetchError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [metrics, setMetrics] = useState({
         monthlyRevenue: 0,
         monthlyProfit: 0,
