@@ -17,10 +17,12 @@ import { cn } from '@/lib/portal/utils'
 import { formatMonthLabel, getMonthSortKey, sortMonthlyChartData } from '@/lib/portal/chart-utils'
 import { useCurrency } from '@/lib/portal/use-currency'
 import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 const FinancialCharts = lazy(() => import('@/components/portal/FinancialCharts'))
 
 function FinancialsContent() {
+    const { confirm, ConfirmDialog } = useConfirm()
     const { formatCurrency } = useCurrency()
     const [expenses, setExpenses] = useState<Expense[]>([])
     const [jobs, setJobs] = useState<Job[]>([])
@@ -85,14 +87,19 @@ function FinancialsContent() {
 
     const fetchInvoices = useCallback(async () => {
         try {
-            const { data, error } = await supabase
+            const { data, count: invCount, error } = await supabase
                 .from('invoices')
                 .select(`
           *,
           clients (name)
-        `)
+        `, { count: 'exact' })
                 .gte('date_created', dateRange.start)
                 .lte('date_created', dateRange.end)
+                .limit(500)
+
+            if (invCount && invCount > 500) {
+                console.warn(`Financials fetched invoice subset: ${invCount} total for selected range.`)
+            }
 
             if (error) throw error
             setInvoices((data as Invoice[]) || [])
@@ -210,7 +217,13 @@ function FinancialsContent() {
     }
 
     const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this expense?')) return
+        const ok = await confirm({
+            title: 'Delete Expense',
+            description: 'Are you sure you want to delete this expense?',
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         try {
             const { error } = await supabase
@@ -638,6 +651,7 @@ function FinancialsContent() {
                     </div>
                 </CardContent>
             </Card>
+            <ConfirmDialog />
         </div>
     )
 }

@@ -19,10 +19,12 @@ import { Product } from '@/types/crm'
 import { useSettings } from '@/lib/portal/use-settings'
 import { countLowStockProducts, getDefaultReorderLevel } from '@/lib/portal/product-stock'
 import { isLowStockProduct } from '@/lib/portal/chart-utils'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 function ProductsContent() {
     const { formatCurrency } = useCurrency()
     const { settings } = useSettings()
+    const { confirm, ConfirmDialog } = useConfirm()
     const [products, setProducts] = useState<Product[]>([])
     const [searchTerm, setSearchTerm] = useState('')
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -169,7 +171,13 @@ function ProductsContent() {
     }
 
     const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this product?')) return
+        const ok = await confirm({
+            title: 'Delete Product',
+            description: 'Are you sure you want to delete this product? This action cannot be undone.',
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         const toastId = toast.loading('Deleting product...')
 
@@ -517,6 +525,7 @@ function ProductsContent() {
                     </Card>
                 )}
             </div>
+            <ConfirmDialog />
         </div>
     )
 }

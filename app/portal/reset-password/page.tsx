@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/portal/supabase'
@@ -18,6 +18,45 @@ export default function ResetPasswordPage() {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [verifying, setVerifying] = useState(true)
+
+    useEffect(() => {
+        const verifyResetToken = async () => {
+            try {
+                const hash = window.location.hash
+                if (!hash.includes('access_token')) {
+                    setError('Invalid or expired password reset link.')
+                    setVerifying(false)
+                    return
+                }
+
+                const params = new URLSearchParams(hash.substring(1))
+                const accessToken = params.get('access_token')
+                const refreshToken = params.get('refresh_token')
+
+                if (!accessToken || !refreshToken) {
+                    setError('Invalid or expired password reset link.')
+                    setVerifying(false)
+                    return
+                }
+
+                const { error: sessionError } = await supabase.auth.setSession({
+                    access_token: accessToken,
+                    refresh_token: refreshToken,
+                })
+
+                if (sessionError) {
+                    setError('Invalid or expired password reset link.')
+                }
+            } catch (err: unknown) {
+                setError(err instanceof Error ? err.message : 'Failed to verify reset link.')
+            } finally {
+                setVerifying(false)
+            }
+        }
+
+        verifyResetToken()
+    }, [])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -45,6 +84,19 @@ export default function ResetPasswordPage() {
         } finally {
             setLoading(false)
         }
+    }
+
+    if (verifying) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-brand-white dark:bg-brand-navy p-4">
+                <Card className="w-full max-w-md">
+                    <CardContent className="py-12 flex flex-col items-center gap-3">
+                        <Loader2 className="h-8 w-8 animate-spin text-brand-electric" />
+                        <p className="text-sm text-muted-foreground">Verifying reset link...</p>
+                    </CardContent>
+                </Card>
+            </div>
+        )
     }
 
     return (

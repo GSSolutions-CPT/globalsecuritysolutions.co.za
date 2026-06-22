@@ -7,6 +7,8 @@ import { Banknote, TrendingUp, Users, AlertCircle, Activity, FileText, Receipt, 
 import { supabase } from '@/lib/portal/supabase'
 import { useCurrency } from '@/lib/portal/use-currency'
 import FinancialCharts from '@/components/portal/FinancialCharts'
+import { useAuth } from '@/context/AuthContext'
+import { toast } from 'sonner'
 import {
     calculatePercentChange,
     formatMonthLabel,
@@ -35,6 +37,8 @@ const getActivityConfig = (type: string) => {
 export default function DashboardPage() {
     const router = useRouter()
     const { formatCurrency } = useCurrency()
+    const { user } = useAuth()
+    const [fetchError, setFetchError] = useState(false)
     const [metrics, setMetrics] = useState({
         monthlyRevenue: 0,
         monthlyProfit: 0,
@@ -58,22 +62,29 @@ export default function DashboardPage() {
     const [rawExpenses, setRawExpenses] = useState<Expense[]>([])
 
     const fetchDashboardData = useCallback(async () => {
+        setIsLoading(true)
         try {
+            setFetchError(false)
             const now = new Date()
             const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
 
+            // Limit fetches to the last 6 months of data for dashboard charts and metrics
+            const sixMonthsAgoDate = new Date(now.getFullYear(), now.getMonth() - 5, 1)
+            const sixMonthsAgoISO = sixMonthsAgoDate.toISOString()
+            const sixMonthsAgoString = sixMonthsAgoISO.split('T')[0]
+
             // Fetch Data
-            const [
-                clientsRes,
-                invoicesRes,
-                expensesRes,
-                activityLogRes
-            ] = await Promise.all([
-                supabase.from('clients').select('*'),
-                supabase.from('invoices').select('*'),
-                supabase.from('expenses').select('*'),
-                supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(10)
+            const [clientsRes, invoicesRes, expensesRes, activityLogRes] = await Promise.all([
+                supabase.from('clients').select('id, created_at').gte('created_at', firstDayOfMonth),
+                supabase.from('invoices').select('id, date_created, status, total_amount, profit_estimate').gte('date_created', sixMonthsAgoString).order('date_created', { ascending: false }).limit(200),
+                supabase.from('expenses').select('id, date, amount, type').gte('date', sixMonthsAgoString).order('date', { ascending: false }).limit(200),
+                supabase.from('activity_log').select('*').order('timestamp', { ascending: false }).limit(10),
             ])
+
+            if (clientsRes.error) throw clientsRes.error
+            if (invoicesRes.error) throw invoicesRes.error
+            if (expensesRes.error) throw expensesRes.error
+            if (activityLogRes.error) throw activityLogRes.error
 
             const clients = clientsRes.data as Client[]
             const invoices = invoicesRes.data as Invoice[]
@@ -86,16 +97,15 @@ export default function DashboardPage() {
             setActivities(activityLog || [])
 
             // Calculate Non-Financial Metrics
-            const newClients = clients?.filter((c: Client) =>
-                new Date(c.created_at) >= new Date(firstDayOfMonth)
-            ).length || 0
-
+            const newClients = clients?.length || 0
             const overdueInvoices = invoices?.filter((inv: Invoice) => inv.status === 'Overdue').length || 0
 
             setMetrics(prev => ({ ...prev, newClients, overdueInvoices }))
 
         } catch (error) {
             console.error('Error fetching dashboard data:', error)
+            setFetchError(true)
+            toast.error('Failed to load dashboard data. Please try again.')
         }
     }, [])
 
@@ -210,9 +220,14 @@ export default function DashboardPage() {
         const initData = async () => { await fetchDashboardData() }
         initData()
 
-        // Real-time: re-fetch when a new activity_log row is inserted
         const channel = supabase
-            .channel('activity_log_changes')
+            .channel('dashboard_changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'invoices' }, () => {
+                fetchDashboardData()
+            })
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'expenses' }, () => {
+                fetchDashboardData()
+            })
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity_log' }, () => {
                 fetchDashboardData()
             })
@@ -229,9 +244,10 @@ export default function DashboardPage() {
                     <h2 className="text-3xl font-bold tracking-tight mb-1">
                         {(() => {
                             const hour = new Date().getHours()
-                            if (hour < 12) return 'Good Morning'
-                            if (hour < 18) return 'Good Afternoon'
-                            return 'Good Evening'
+                            const userName = user?.email ? `, ${user.email.split('@')[0]}` : ''
+                            if (hour < 12) return `Good Morning${userName} 👋`
+                            if (hour < 18) return `Good Afternoon${userName} 👋`
+                            return `Good Evening${userName} 👋`
                         })()}
                     </h2>
                     <p className="text-brand-steel/60">Here&apos;s your daily overview.</p>
@@ -282,6 +298,21 @@ export default function DashboardPage() {
                 {/* Decorative elements */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
             </div>
+
+            {fetchError && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center justify-between text-red-500 text-sm">
+                    <div className="flex items-center gap-2">
+                        <AlertCircle className="h-5 w-5" />
+                        <span>Failed to load latest dashboard statistics. Shown data might be cached or incomplete.</span>
+                    </div>
+                    <button
+                        className="px-3 py-1.5 border border-red-500/30 rounded-lg text-xs hover:bg-red-500/10 transition-colors font-medium text-red-500 bg-transparent"
+                        onClick={fetchDashboardData}
+                    >
+                        Retry
+                    </button>
+                </div>
+            )}
 
             {/* KPIs */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

@@ -24,10 +24,13 @@ import { PaginationBar } from '@/components/portal/PaginationBar'
 import { PageHeader } from '@/components/portal/PageHeader'
 import { StatCard } from '@/components/portal/StatCard'
 import { QUOTATION_STATUS_COLORS } from '@/lib/portal/portal-theme'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
+
 export default function SalesPage() {
     const router = useRouter()
     const { formatCurrency } = useCurrency()
     const { settings } = useSettings()
+    const { confirm, ConfirmDialog } = useConfirm()
     const [quotations, setQuotations] = useState<Quotation[]>([])
     const [invoices, setInvoices] = useState<Invoice[]>([])
     const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>([])
@@ -89,7 +92,13 @@ export default function SalesPage() {
     }
 
     const handleDeletePO = async (id: string) => {
-        if (!window.confirm('Are you sure you want to delete this purchase order?')) return
+        const ok = await confirm({
+            title: 'Delete Purchase Order',
+            description: 'Are you sure you want to delete this purchase order? This action cannot be undone.',
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         const toastId = toast.loading('Deleting Purchase Order...')
         try {
@@ -123,10 +132,13 @@ export default function SalesPage() {
 
     const fetchSalesStats = async () => {
         try {
-            const [{ data: quotes }, { data: invs }] = await Promise.all([
+            const [{ data: quotes }, { data: invs, count: invCount }] = await Promise.all([
                 supabase.from('quotations').select('status, total_amount'),
-                supabase.from('invoices').select('status, total_amount'),
+                supabase.from('invoices').select('status, total_amount', { count: 'exact' }),
             ])
+            if (invCount && invCount > 1000) {
+                console.warn(`Warning: Invoice count (${invCount}) exceeds 1000. Financial stats may be incomplete.`)
+            }
             setQuoteStats((quotes as Quotation[]) || [])
             setInvoiceStats((invs as Invoice[]) || [])
         } catch (error) {
@@ -300,7 +312,11 @@ export default function SalesPage() {
 
             if (insertLinesError) throw insertLinesError
 
-            await updateStatus('quotation', quotation.id, 'Converted')
+            const { error: updateQuoteError } = await supabase
+                .from('quotations')
+                .update({ status: 'Converted' })
+                .eq('id', quotation.id)
+            if (updateQuoteError) throw updateQuoteError
 
             await supabase.from('activity_log').insert([{
                 type: 'Quotation Converted',
@@ -383,7 +399,14 @@ export default function SalesPage() {
         QUOTATION_STATUS_COLORS[status] || (status === 'Rejected' ? 'bg-destructive' : 'bg-muted-foreground')
 
     const handleDelete = async (id: string, type: 'quotation' | 'invoice') => {
-        if (!confirm(`Are you sure you want to delete this ${type}? This cannot be undone.`)) return
+        const ok = await confirm({
+            title: `Delete ${type === 'quotation' ? 'Quotation' : 'Invoice'}`,
+            description: `Are you sure you want to delete this ${type}? This cannot be undone.`,
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
+
         const toastId = toast.loading(`Deleting ${type}...`)
         try {
             const table = type === 'quotation' ? 'quotations' : 'invoices'
@@ -908,6 +931,8 @@ export default function SalesPage() {
                     {selectedInvoiceId && <InstallationDetails invoiceId={selectedInvoiceId} />}
                 </DialogContent>
             </Dialog>
+
+            <ConfirmDialog />
         </div>
     )
 }

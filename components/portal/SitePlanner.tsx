@@ -9,6 +9,7 @@ import { PRIVATE_STORAGE_BUCKETS, uploadPrivateFile } from '@/lib/portal/storage
 import { toast } from 'sonner'
 import { SECURITY_ICONS } from '@/lib/portal/security-icons'
 import { SitePlan } from '@/types/crm'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 import {
     MousePointer2, Pencil, Type, ArrowUpRight,
     Save, X, Undo2, Trash2, Loader2, RotateCcw, Upload
@@ -35,6 +36,7 @@ interface SitePlannerProps {
 export default function SitePlanner({ quotationId, existingPlan, onSave, onClose }: SitePlannerProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const fabricRef = useRef<any>(null)
+    const { confirm, ConfirmDialog } = useConfirm()
     const fabricLibRef = useRef<any>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [activeTool, setActiveTool] = useState<ToolMode>(TOOL.SELECT)
@@ -371,10 +373,16 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     }, [saveHistory])
 
     // Clear all objects (keep background)
-    const handleClear = useCallback(() => {
+    const handleClear = useCallback(async () => {
         const canvas = fabricRef.current
         if (!canvas) return
-        if (!confirm('Clear all annotations? The background image will be kept.')) return
+        const ok = await confirm({
+            title: 'Clear Annotations',
+            description: 'Clear all annotations? The background image will be kept.',
+            confirmLabel: 'Clear',
+            variant: 'destructive'
+        })
+        if (!ok) return
         const bg = canvas.backgroundImage
         canvas.clear()
         if (bg) {
@@ -383,7 +391,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         canvas.backgroundColor = '#f8fafc'
         canvas.renderAll()
         saveHistory()
-    }, [saveHistory])
+    }, [saveHistory, confirm])
 
     // Save: flatten → upload → store in DB
     const handleSave = useCallback(async () => {
@@ -646,6 +654,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                     Ctrl+Z: Undo | Delete: Remove selected | Drag corners: Resize | Drag circle: Rotate
                 </span>
             </div>
+            <ConfirmDialog />
         </div>
     )
 }

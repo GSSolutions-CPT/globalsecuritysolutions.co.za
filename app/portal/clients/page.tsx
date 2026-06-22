@@ -15,9 +15,11 @@ import { getPageRange, getTotalPages } from '@/lib/portal/pagination'
 import { PaginationBar } from '@/components/portal/PaginationBar'
 import { PageHeader } from '@/components/portal/PageHeader'
 import { StatCard } from '@/components/portal/StatCard'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 export default function ClientsPage() {
     const router = useRouter()
+    const { confirm, ConfirmDialog } = useConfirm()
     const [clients, setClients] = useState<Client[]>([])
     const [searchTerm, setSearchTerm] = useState('')
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -55,16 +57,13 @@ export default function ClientsPage() {
             const { data, error, count } = await supabase
                 .from('clients')
                 .select('*', { count: 'exact' })
+                .not('metadata->>status', 'eq', 'archived')
                 .order('created_at', { ascending: false })
                 .range(from, to)
 
             if (error) throw error
 
-            const activeClients = (data || []).filter((client: Client) => {
-                const metadata = client.metadata as Record<string, unknown> | undefined
-                return metadata?.status !== 'archived'
-            })
-            setClients(activeClients as Client[])
+            setClients((data || []) as Client[])
             setClientsCount(count || 0)
         } catch (error) {
             console.error('Error fetching clients:', error)
@@ -85,7 +84,13 @@ export default function ClientsPage() {
     }
 
     const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to archive this client? Their financial history will be preserved but hidden from this list.')) return
+        const ok = await confirm({
+            title: 'Archive Client',
+            description: 'Are you sure you want to archive this client? Their financial history will be preserved but hidden from this list.',
+            confirmLabel: 'Archive',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         const toastId = toast.loading('Archiving client...')
 
@@ -275,6 +280,7 @@ export default function ClientsPage() {
                     )}
                 </div>
             )}
+            <ConfirmDialog />
         </div>
     )
 }

@@ -9,6 +9,7 @@ import { PRIVATE_STORAGE_BUCKETS, deleteStorageFile, uploadPrivateFile } from '@
 import { StorageImage } from '@/components/portal/StorageImage'
 import { toast } from 'sonner'
 import { Upload, X, Camera, Hash, Loader2, Trash2 } from 'lucide-react'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 interface InstallationDetailsProps {
     invoiceId: string;
@@ -18,6 +19,7 @@ interface InstallationDetailsProps {
 export default function InstallationDetails({ invoiceId, readonly = false }: InstallationDetailsProps) {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const { confirm, ConfirmDialog } = useConfirm()
     const [installationDetail, setInstallationDetail] = useState<InstallationDetail | null>(null)
     const [photos, setPhotos] = useState<InstallationPhoto[]>([])
     const [serialNumbers, setSerialNumbers] = useState<SerialNumberEntry[]>([])
@@ -120,7 +122,13 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
     }
 
     const handleDeletePhoto = async (photoId: string, photoUrl: string) => {
-        if (!confirm('Are you sure you want to delete this photo?')) return
+        const ok = await confirm({
+            title: 'Delete Photo',
+            description: 'Are you sure you want to delete this photo? This action cannot be undone.',
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         const toastId = toast.loading('Deleting photo...')
         try {
@@ -354,6 +362,7 @@ export default function InstallationDetails({ invoiceId, readonly = false }: Ins
                     </Button>
                 </div>
             )}
+            <ConfirmDialog />
         </div>
     )
 }

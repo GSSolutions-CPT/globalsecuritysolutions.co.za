@@ -47,17 +47,40 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
             }
             setSettings(settingsMap)
 
-            // Sync to localStorage
-            Object.keys(settingsMap).forEach(key => {
-                localStorage.setItem(key, settingsMap[key])
+            // Sync only non-sensitive display settings to localStorage.
+            // Banking details, legal terms, and VAT numbers are intentionally
+            // excluded — they must never be readable by third-party scripts.
+            const SAFE_LOCALSTORAGE_KEYS = [
+                'companyName',
+                'companyAddress',
+                'companyPhone',
+                'companyEmail',
+                'primaryColor',
+                'logoUrl',
+                'taxRate',
+                'defaultQuoteValidityDays',
+                'whatsappNumber',
+            ]
+            SAFE_LOCALSTORAGE_KEYS.forEach(key => {
+                if (settingsMap[key] !== undefined) {
+                    localStorage.setItem(key, settingsMap[key])
+                }
+            })
+
+            // Proactively clean up any legacy sensitive settings from localStorage
+            const SENSITIVE_KEYS = [
+                'companyVat', 'bankName', 'bankAccountHolder', 'bankAccountNumber',
+                'bankAccountType', 'bankBranchCode', 'bankReference', 'legalTerms'
+            ]
+            SENSITIVE_KEYS.forEach(key => {
+                localStorage.removeItem(key)
             })
 
         } catch (error) {
             console.log('Falling back to localStorage for settings')
             const localKeys = [
-                'companyName', 'companyAddress', 'companyPhone', 'companyEmail', 'companyVat',
-                'bankName', 'bankAccountHolder', 'bankAccountNumber', 'bankAccountType', 'bankBranchCode', 'bankReference',
-                'primaryColor', 'taxRate', 'logoUrl', 'whatsappNumber', 'legalTerms', 'defaultQuoteValidityDays'
+                'companyName', 'companyAddress', 'companyPhone', 'companyEmail',
+                'primaryColor', 'taxRate', 'logoUrl', 'whatsappNumber', 'defaultQuoteValidityDays'
             ]
             const localSettings: Record<string, any> = {}
             localKeys.forEach(key => {
@@ -71,10 +94,19 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     }
 
     const updateSetting = async (key: string, value: any) => {
+        const SAFE_LOCALSTORAGE_KEYS = [
+            'companyName', 'companyAddress', 'companyPhone', 'companyEmail',
+            'primaryColor', 'logoUrl', 'taxRate', 'defaultQuoteValidityDays', 'whatsappNumber',
+        ]
+
         try {
-            // Optimistic update
+            // Optimistic update in React state
             setSettings(prev => ({ ...prev, [key]: value }))
-            localStorage.setItem(key, value)
+
+            // Only cache non-sensitive keys in localStorage
+            if (SAFE_LOCALSTORAGE_KEYS.includes(key)) {
+                localStorage.setItem(key, value)
+            }
 
             // Upsert to Supabase
             const { error } = await supabase
@@ -82,7 +114,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
                 .upsert({ key, value }, { onConflict: 'key' })
 
             if (error) throw error
-            // toast.success('Setting saved') 
+            // toast.success('Setting saved')
         } catch (error) {
             console.error('Error updating setting:', error)
             toast.error('Failed to save settings')

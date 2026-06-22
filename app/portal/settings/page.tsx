@@ -20,11 +20,13 @@ import Papa from 'papaparse'
 import { toast } from 'sonner'
 import { UserProfile } from '@/types/crm'
 import { PageHeader } from '@/components/portal/PageHeader'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 export default function SettingsPage() {
     const { portalAccess } = useAuth()
     const staffRole = portalAccess?.staffRole ?? null
     const canManageUsers = canManageTeam(staffRole)
+    const { confirm, ConfirmDialog } = useConfirm()
     const canExport = canExportData(staffRole)
     const canImport = canImportData(staffRole)
 
@@ -100,7 +102,13 @@ export default function SettingsPage() {
             toast.error('Only admins can remove team members')
             return
         }
-        if (!confirm('Are you sure you want to remove this user?')) return
+        const ok = await confirm({
+            title: 'Remove User',
+            description: 'Are you sure you want to remove this user from the team?',
+            confirmLabel: 'Remove',
+            variant: 'destructive'
+        })
+        if (!ok) return
         try {
             const { data: { session } } = await supabase.auth.getSession()
             if (!session) throw new Error('Not authenticated')
@@ -740,6 +748,7 @@ export default function SettingsPage() {
                     </div>
                 </TabsContent>
             </Tabs>
+            <ConfirmDialog />
         </div>
     )
 }

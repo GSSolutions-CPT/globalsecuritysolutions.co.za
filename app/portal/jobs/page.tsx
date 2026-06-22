@@ -15,6 +15,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/portal/ui
 import { Plus, Search, Briefcase, Calendar as CalendarIcon, User, Clock, List as ListIcon, Kanban, Pencil, Trash2, Loader2, CheckCircle, Activity, Upload, FileText, Image as ImageIcon } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Client, Job, Quotation, JobAttachment } from '@/types/crm'
@@ -34,6 +35,7 @@ function JobsContent() {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
+    const { confirm, ConfirmDialog } = useConfirm()
     const [jobs, setJobs] = useState<Job[]>([])
     const [clients, setClients] = useState<Client[]>([])
     const [quotations, setQuotations] = useState<Quotation[]>([])
@@ -244,7 +246,13 @@ function JobsContent() {
     }
 
     const handleDeleteAttachment = async (attachment: JobAttachment) => {
-        if (!confirm('Are you sure you want to delete this attachment?')) return
+        const ok = await confirm({
+            title: 'Delete Attachment',
+            description: 'Are you sure you want to delete this attachment? This action cannot be undone.',
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         try {
             await deleteStorageFile(PRIVATE_STORAGE_BUCKETS.JOB_ATTACHMENTS, attachment.file_url)
@@ -367,7 +375,13 @@ function JobsContent() {
     }
 
     const handleDeleteJob = async (job: Job) => {
-        if (!confirm(`Delete this job for ${job.clients?.name || 'this client'}? This cannot be undone.`)) return
+        const ok = await confirm({
+            title: 'Delete Job',
+            description: `Delete this job for ${job.clients?.name || 'this client'}? This cannot be undone.`,
+            confirmLabel: 'Delete',
+            variant: 'destructive'
+        })
+        if (!ok) return
 
         const toastId = toast.loading('Deleting job...')
         try {
@@ -443,7 +457,14 @@ function JobsContent() {
             if (newStatus === 'Completed') {
                 const job = jobs.find(j => j.id === jobId)
                 if (job && job.quotation_id) {
-                    if (confirm('Job completed! Do you want to generate a Tax Invoice from the linked quotation?')) {
+                    const shouldInvoice = await confirm({
+                        title: 'Job Completed',
+                        description: 'Job completed! Do you want to generate a Tax Invoice from the linked quotation?',
+                        confirmLabel: 'Generate Invoice',
+                        cancelLabel: 'Later',
+                        variant: 'default'
+                    })
+                    if (shouldInvoice) {
                         const toastId = toast.loading('Generating invoice...')
                         try {
                             const { data: existingInvoice, error: existingError } = await supabase
@@ -932,6 +953,7 @@ function JobsContent() {
                     </Suspense>
                 </CardContent>
             </Card>
+            <ConfirmDialog />
         </div>
     )
 }

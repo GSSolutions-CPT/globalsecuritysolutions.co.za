@@ -23,11 +23,13 @@ import { Label } from '@/components/portal/ui/label'
 import { Textarea } from '@/components/portal/ui/textarea'
 import { Client, Quotation, Invoice } from '@/types/crm'
 import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
+import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 export default function ClientPortalPage() {
     const { formatCurrency } = useCurrency()
     const { settings } = useSettings()
     const { user, loading: authLoading } = useAuth()
+    const { confirm, ConfirmDialog } = useConfirm()
     const searchParams = useSearchParams()
     const router = useRouter()
     const urlClientId = searchParams.get('client')
@@ -121,40 +123,20 @@ export default function ClientPortalPage() {
     const fetchClientData = useCallback(async () => {
         if (!clientId) return
         try {
-            // Fetch client info
-            const { data: clientData, error: clientError } = await supabase
-                .from('clients')
-                .select('*')
-                .eq('id', clientId)
-                .single()
+            const [clientRes, quotesRes, invoicesRes] = await Promise.all([
+                supabase.from('clients').select('*').eq('id', clientId).single(),
+                supabase.from('quotations').select('*').eq('client_id', clientId).order('date_created', { ascending: false }),
+                supabase.from('invoices').select('*, quotations(payment_proof)').eq('client_id', clientId).order('date_created', { ascending: false }),
+            ])
 
-            if (clientError) throw clientError
-            setClient(clientData as Client)
+            if (clientRes.error) throw clientRes.error
+            if (quotesRes.error) throw quotesRes.error
+            if (invoicesRes.error) throw invoicesRes.error
 
-            // Fetch quotations
-            const { data: quotationsData, error: quotationsError } = await supabase
-                .from('quotations')
-                .select('*')
-                .eq('client_id', clientId)
-                .order('date_created', { ascending: false })
+            setClient(clientRes.data as Client)
+            setQuotations(quotesRes.data as Quotation[] || [])
 
-            if (quotationsError) throw quotationsError
-            setQuotations(quotationsData as Quotation[] || [])
-
-            // Fetch invoices
-            const { data: invoicesData, error: invoicesError } = await supabase
-                .from('invoices')
-                .select(`
-          *,
-          quotations (payment_proof)
-        `)
-                .eq('client_id', clientId)
-                .order('date_created', { ascending: false })
-
-            if (invoicesError) throw invoicesError
-
-            // Flatten payment_proof from quotations if needed
-            const processedInvoices = (invoicesData || []).map((inv: Invoice & { quotations?: { payment_proof: string | null } }) => ({
+            const processedInvoices = (invoicesRes.data || []).map((inv: Invoice & { quotations?: { payment_proof: string | null } }) => ({
                 ...inv,
                 payment_proof: inv.payment_proof || inv.quotations?.payment_proof || null
             }))
@@ -292,7 +274,13 @@ export default function ClientPortalPage() {
     }
 
     const handleDecline = async (quote: Quotation) => {
-        if (!confirm('Are you sure you want to decline this quotation?')) return
+        const ok = await confirm({
+            title: 'Decline Quotation',
+            description: 'Are you sure you want to decline this quotation?',
+            confirmLabel: 'Decline',
+            variant: 'destructive'
+        })
+        if (!ok) return
         try {
             await supabase.from('quotations').update({ status: 'Rejected' }).eq('id', quote.id)
             fetchClientData()
@@ -1007,6 +995,7 @@ export default function ClientPortalPage() {
             </Dialog>
 
             <InstallPrompt />
+            <ConfirmDialog />
         </div>
     )
 }
