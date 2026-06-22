@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     title: 'Frequently Asked Questions | Global Security Solutions',
     description: 'Find answers to common questions about our security installations, warranties, and services.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/faq',
+        canonical: 'https://www.globalsecuritysolutions.co.za/faq',
     },
 }
 

@@ -50,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const service = getService(params.slug)
     if (!service) return {}
 
-    const url = `https://globalsecuritysolutions.co.za/services/${params.slug}`
+    const url = `https://www.globalsecuritysolutions.co.za/services/${params.slug}`
 
     return {
         title: `${service.title} | Global Security Solutions Cape Town`,
@@ -65,7 +65,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
             siteName: 'Global Security Solutions',
             images: [
                 {
-                    url: service.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
+                    url: service.heroImage || 'https://www.globalsecuritysolutions.co.za/nav-logo-final.png',
                     width: 1200,
                     height: 630,
                     alt: service.title,
@@ -77,7 +77,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
             card: 'summary_large_image',
             title: service.title,
             description: service.description,
-            images: [service.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png']
+            images: [service.heroImage || 'https://www.globalsecuritysolutions.co.za/nav-logo-final.png']
         }
     }
 }
@@ -128,19 +128,19 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": "https://globalsecuritysolutions.co.za"
+                                "item": "https://www.globalsecuritysolutions.co.za"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 2,
                                 "name": "Services",
-                                "item": "https://globalsecuritysolutions.co.za/services"
+                                "item": "https://www.globalsecuritysolutions.co.za/services"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 3,
                                 "name": service.page,
-                                "item": `https://globalsecuritysolutions.co.za/services/${toSlug(service.page)}`
+                                "item": `https://www.globalsecuritysolutions.co.za/services/${toSlug(service.page)}`
                             }
                         ]
                     })

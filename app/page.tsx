@@ -4,7 +4,7 @@ import { HomeClient } from './HomeClient'
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: 'https://globalsecuritysolutions.co.za',
+    canonical: 'https://www.globalsecuritysolutions.co.za',
   },
 }
 

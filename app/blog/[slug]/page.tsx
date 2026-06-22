@@ -75,12 +75,12 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
                         "@context": "https://schema.org",
                         "@type": "BlogPosting",
                         "headline": post.title,
-                        "image": post.coverImage ? [post.coverImage] : ['https://globalsecuritysolutions.co.za/hero-bg.jpg'],
+                        "image": post.coverImage ? [post.coverImage] : ['https://www.globalsecuritysolutions.co.za/hero-bg.jpg'],
                         "datePublished": new Date(post.date).toISOString(),
                         "author": {
                             "@type": "Organization",
                             "name": "Global Security Solutions",
-                            "url": "https://globalsecuritysolutions.co.za/"
+                            "url": "https://www.globalsecuritysolutions.co.za/"
                         },
                         "publisher": {
                             ...masterBusinessData

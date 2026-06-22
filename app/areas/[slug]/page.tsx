@@ -36,7 +36,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
         return {
             title: seoItem.title,
             description: seoItem.description,
-            alternates: { canonical: `https://globalsecuritysolutions.co.za/areas/${params.slug}` }
+            alternates: { canonical: `https://www.globalsecuritysolutions.co.za/areas/${params.slug}` }
         }
     }
 
@@ -45,7 +45,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return {
         title: location.h1,
         description: location.description,
-        alternates: { canonical: `https://globalsecuritysolutions.co.za/areas/${params.slug}` }
+        alternates: { canonical: `https://www.globalsecuritysolutions.co.za/areas/${params.slug}` }
     }
 }
 
@@ -70,7 +70,7 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                             "@type": "City",
                             "name": location.suburb
                         },
-                        "url": `https://globalsecuritysolutions.co.za/areas/${location.slug}`,
+                        "url": `https://www.globalsecuritysolutions.co.za/areas/${location.slug}`,
                         "description": location.description
                     })
                 }}
@@ -88,19 +88,19 @@ export default async function AreaPage(props: { params: Promise<{ slug: string }
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": "https://globalsecuritysolutions.co.za"
+                                "item": "https://www.globalsecuritysolutions.co.za"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 2,
                                 "name": "Areas",
-                                "item": "https://globalsecuritysolutions.co.za/areas"
+                                "item": "https://www.globalsecuritysolutions.co.za/areas"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 3,
                                 "name": location.suburb,
-                                "item": `https://globalsecuritysolutions.co.za/areas/${location.slug}`
+                                "item": `https://www.globalsecuritysolutions.co.za/areas/${location.slug}`
                             }
                         ]
                     })

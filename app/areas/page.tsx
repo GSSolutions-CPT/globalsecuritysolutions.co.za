@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Security Installation Areas Cape Town & Western Cape | Global Security Solutions',
     description: 'Expert CCTV, electric fencing and alarm installations across Cape Town suburbs and Winelands. Find your area for local security specialists.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/areas',
+        canonical: 'https://www.globalsecuritysolutions.co.za/areas',
     },
 }
 

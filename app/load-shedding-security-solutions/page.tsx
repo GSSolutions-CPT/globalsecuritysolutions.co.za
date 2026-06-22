@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: pageData?.title || 'Load Shedding Security | Battery Backups Cape Town',
     description: pageData?.description || 'Keep your security running during power outages.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/load-shedding-security-solutions',
+        canonical: 'https://www.globalsecuritysolutions.co.za/load-shedding-security-solutions',
     },
 }
 

@@ -4,7 +4,7 @@ import locationData from '@/app/data/locationData.json'
 import blogData from '@/app/data/blogData.json'
 import { supabase } from '@/utils/supabase/client'
 
-const BASE_URL = 'https://globalsecuritysolutions.co.za'
+const BASE_URL = 'https://www.globalsecuritysolutions.co.za'
 
 const toSlug = (text: string) => {
     return text

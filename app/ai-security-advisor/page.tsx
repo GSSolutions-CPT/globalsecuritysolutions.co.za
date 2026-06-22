@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     title: 'AI Security Advisor | Personalised Security Recommendations Cape Town',
     description: 'Use our intelligent security assessment tool to get custom recommendations for alarm systems, CCTV cameras, and electric fencing in seconds.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/ai-security-advisor',
+        canonical: 'https://www.globalsecuritysolutions.co.za/ai-security-advisor',
     },
 }
 

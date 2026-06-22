@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://globalsecuritysolutions.co.za/sitemap.xml',
+    sitemap: 'https://www.globalsecuritysolutions.co.za/sitemap.xml',
   }
 }

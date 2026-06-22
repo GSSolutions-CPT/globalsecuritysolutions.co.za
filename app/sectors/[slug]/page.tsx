@@ -47,7 +47,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const sector = getSector(params.slug)
     if (!sector) return {}
 
-    const url = `https://globalsecuritysolutions.co.za/sectors/${params.slug}`
+    const url = `https://www.globalsecuritysolutions.co.za/sectors/${params.slug}`
 
     return {
         title: `${sector.title} Security | Global Security Solutions`,
@@ -61,7 +61,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
             url: url,
             images: [
                 {
-                    url: sector.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
+                    url: sector.heroImage || 'https://www.globalsecuritysolutions.co.za/nav-logo-final.png',
                     width: 1200,
                     height: 630,
                     alt: `${sector.title} Security`,
@@ -73,7 +73,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
             card: 'summary_large_image',
             title: `${sector.title} Security Solutions`,
             description: sector.description,
-            images: [sector.heroImage || 'https://globalsecuritysolutions.co.za/nav-logo-final.png']
+            images: [sector.heroImage || 'https://www.globalsecuritysolutions.co.za/nav-logo-final.png']
         }
     }
 }
@@ -125,19 +125,19 @@ export default async function SectorPage(props: { params: Promise<{ slug: string
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": "https://globalsecuritysolutions.co.za"
+                                "item": "https://www.globalsecuritysolutions.co.za"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 2,
                                 "name": "Sectors",
-                                "item": "https://globalsecuritysolutions.co.za/sectors"
+                                "item": "https://www.globalsecuritysolutions.co.za/sectors"
                             },
                             {
                                 "@type": "ListItem",
                                 "position": 3,
                                 "name": sector.page,
-                                "item": `https://globalsecuritysolutions.co.za/sectors/${toSlug(sector.page)}`
+                                "item": `https://www.globalsecuritysolutions.co.za/sectors/${toSlug(sector.page)}`
                             }
                         ]
                     })

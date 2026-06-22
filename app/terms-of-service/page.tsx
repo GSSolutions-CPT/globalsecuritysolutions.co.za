@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Terms and Conditions | Global Security Solutions',
     description: 'Terms and conditions governing the provision and installation of security systems by Global Security Solutions.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/terms-of-service',
+        canonical: 'https://www.globalsecuritysolutions.co.za/terms-of-service',
     },
 }
 
@@ -204,7 +204,7 @@ export default function TermsOfServicePage() {
                             <p className="text-brand-electric/20 text-sm opacity-90">Terms Accepted upon Quotation Approval</p>
                         </div>
                         <div className="space-y-3">
-                            <a href="https://globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="flex items-center text-white/90 hover:text-white transition-colors bg-brand-electric/50 hover:bg-brand-electric px-4 py-2 rounded-lg text-sm">
+                            <a href="https://www.globalsecuritysolutions.co.za" target="_blank" rel="noopener noreferrer" className="flex items-center text-white/90 hover:text-white transition-colors bg-brand-electric/50 hover:bg-brand-electric px-4 py-2 rounded-lg text-sm">
                                 <Globe className="w-4 h-4 mr-2" />
                                 globalsecuritysolutions.co.za
                             </a>

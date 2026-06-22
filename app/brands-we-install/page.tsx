@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Security Brands We Install | Hikvision, Paradox, Ajax & More',
     description: 'We are certified installers for world-leading security brands including Hikvision, Paradox, Ajax, Nemtek, and Centurion. Expert installation and support in Cape Town.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/brands-we-install',
+        canonical: 'https://www.globalsecuritysolutions.co.za/brands-we-install',
     },
     openGraph: {
         title: 'Certified Security Installers | Top Global Brands',

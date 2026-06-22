@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Project Gallery | Real Security Installations Cape Town | Global Security Solutions',
     description: 'Featured premium security projects: Chere Botha School, luxury estates in Hout Bay & Constantia, wine farms, commercial premises. Owner-supervised CCTV, fencing & access control.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/projects',
+        canonical: 'https://www.globalsecuritysolutions.co.za/projects',
     },
 }
 

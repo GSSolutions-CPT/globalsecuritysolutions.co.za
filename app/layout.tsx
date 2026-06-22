@@ -11,10 +11,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://globalsecuritysolutions.co.za'),
+  metadataBase: new URL('https://www.globalsecuritysolutions.co.za'),
   alternates: {
     languages: {
-      'en-ZA': 'https://globalsecuritysolutions.co.za',
+      'en-ZA': 'https://www.globalsecuritysolutions.co.za',
     },
   },
   other: {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
       template: "%s | Global Security Solutions",
     },
     description: "Expert security systems for homes, estates & businesses in the Western Cape. Owner-supervised installs by Kyle Cass. Free on-site assessment.",
-    url: 'https://globalsecuritysolutions.co.za',
+    url: 'https://www.globalsecuritysolutions.co.za',
     siteName: 'Global Security Solutions',
     images: [
       {
-        url: 'https://globalsecuritysolutions.co.za/nav-logo-final.png',
+        url: 'https://www.globalsecuritysolutions.co.za/nav-logo-final.png',
         width: 1200,
         height: 630,
         alt: 'Global Security Solutions - CCTV & Electric Fencing Installation Cape Town',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
       template: "%s | Global Security Solutions",
     },
     description: "Professional security installations across Cape Town and Western Cape. Free risk assessment.",
-    images: ['https://globalsecuritysolutions.co.za/nav-logo-final.png'],
+    images: ['https://www.globalsecuritysolutions.co.za/nav-logo-final.png'],
     creator: "@globalsecurityza",
   },
   robots: {

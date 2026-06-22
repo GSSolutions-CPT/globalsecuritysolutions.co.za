@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy | Global Security Solutions',
     description: 'How we collect, use, and protect your personal information.',
     alternates: {
-        canonical: 'https://globalsecuritysolutions.co.za/privacy-policy',
+        canonical: 'https://www.globalsecuritysolutions.co.za/privacy-policy',
     },
 }
 
