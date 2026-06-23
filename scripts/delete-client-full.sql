@@ -11,37 +11,60 @@ security definer
 set search_path = public
 as $$
 with
-  req_ids as (
-    delete from public.client_requests
-    where client_id = p_client_id
-    returning id
+  -- Collect dependent IDs before deleting anything
+  invoice_ids as (
+    select id from public.invoices where client_id = p_client_id
   ),
   job_ids as (
-    delete from public.jobs
-    where client_id = p_client_id
-    returning id
+    select id from public.jobs where client_id = p_client_id
   ),
-  inv_ids as (
-    delete from public.installation_details
-    where invoice_id in (select id from public.invoices where client_id = p_client_id)
-    returning id
+  quotation_ids as (
+    select id from public.quotations where client_id = p_client_id
   ),
-  _del_site_plans as (
-    delete from public.site_plans
-    where quotation_id in (select id from public.quotations where client_id = p_client_id)
-  ),
+  -- Delete child records first (reverse dependency order)
   _del_invoice_lines as (
     delete from public.invoice_lines
-    where invoice_id in (select ids from inv_ids)
+    where invoice_id in (select id from invoice_ids)
   ),
   _del_quotation_lines as (
     delete from public.quotation_lines
-    where quotation_id in (select id from public.quotations where client_id = p_client_id)
+    where quotation_id in (select id from quotation_ids)
   ),
-  _del_activity_log as (
+  _del_installation_details as (
+    delete from public.installation_details
+    where invoice_id in (select id from invoice_ids)
+  ),
+  _del_site_plans as (
+    delete from public.site_plans
+    where quotation_id in (select id from quotation_ids)
+  ),
+  _del_job_attachments as (
+    delete from public.job_attachments
+    where job_id in (select id from job_ids)
+  ),
+  _del_client_requests as (
+    delete from public.client_requests
+    where client_id = p_client_id
+  ),
+  _del_activity_log_client as (
     delete from public.activity_log
     where related_entity_type = 'client'
       and related_entity_id = p_client_id
+  ),
+  _del_activity_log_invoice as (
+    delete from public.activity_log
+    where related_entity_type = 'invoice'
+      and related_entity_id in (select id from invoice_ids)
+  ),
+  _del_activity_log_quotation as (
+    delete from public.activity_log
+    where related_entity_type = 'quotation'
+      and related_entity_id in (select id from quotation_ids)
+  ),
+  _del_activity_log_job as (
+    delete from public.activity_log
+    where related_entity_type = 'job'
+      and related_entity_id in (select id from job_ids)
   ),
   _del_invoices as (
     delete from public.invoices
@@ -51,9 +74,9 @@ with
     delete from public.quotations
     where client_id = p_client_id
   ),
-  _del_job_attachments as (
-    delete from public.job_attachments
-    where job_id in (select id from job_ids)
+  _del_jobs as (
+    delete from public.jobs
+    where client_id = p_client_id
   ),
   _del_client as (
     delete from public.clients
