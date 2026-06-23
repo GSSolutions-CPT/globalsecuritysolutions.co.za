@@ -43,7 +43,10 @@ export default function ClientsPage() {
 
     const fetchClientStats = useCallback(async () => {
         try {
-            const { data, error } = await supabase.from('clients').select('created_at, metadata')
+            const { data, error } = await supabase
+                .from('clients')
+                .select('created_at, metadata')
+                .or('metadata->>status.is.null,metadata->>status.neq.archived')
             if (error) throw error
             setClientStats((data as Pick<Client, 'created_at' | 'metadata'>[]) || [])
         } catch (error) {

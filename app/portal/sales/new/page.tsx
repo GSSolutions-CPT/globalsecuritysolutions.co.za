@@ -66,6 +66,7 @@ function CreateSaleContent() {
             const { data, error } = await supabase
                 .from('clients')
                 .select('id, name, company')
+                .or('metadata->>status.is.null,metadata->>status.neq.archived')
                 .order('name', { ascending: true })
 
             if (error) throw error

@@ -20,7 +20,6 @@ import {
     Inbox,
     FileSignature,
     ExternalLink,
-    ShoppingCart,
 } from 'lucide-react'
 import { useSettings } from '@/lib/portal/use-settings'
 import { staffRoleCanAccess } from '@/lib/portal/permissions'
@@ -45,7 +44,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             { name: 'Products', path: '/portal/products', icon: Package },
             { name: 'Jobs', path: '/portal/jobs', icon: Briefcase },
             { name: 'Financials', path: '/portal/financials', icon: PieChart },
-            { name: 'Purchase Orders', path: '/portal/purchase-orders', icon: ShoppingCart },
             { name: 'Settings', path: '/portal/settings', icon: Settings },
         ]
 

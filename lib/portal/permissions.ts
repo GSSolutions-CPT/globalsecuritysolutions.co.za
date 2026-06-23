@@ -20,7 +20,6 @@ const ROUTE_ROLE_REQUIREMENTS: Array<{ prefix: string; roles: StaffRole[] | 'all
     { prefix: '/portal/settings', roles: ['admin', 'manager'] },
     { prefix: '/portal/financials', roles: ['admin', 'manager', 'accountant'] },
     { prefix: '/portal/contracts', roles: ['admin', 'manager'] },
-    { prefix: '/portal/purchase-orders', roles: ['admin', 'manager', 'accountant'] },
     { prefix: '/portal/sales', roles: ['admin', 'manager', 'accountant'] },
     { prefix: '/portal/dashboard', roles: 'all_staff' },
     { prefix: '/portal/requests', roles: 'all_staff' },
