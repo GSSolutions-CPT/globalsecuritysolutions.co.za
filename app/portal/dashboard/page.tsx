@@ -246,15 +246,15 @@ export default function DashboardPage() {
         <div className="space-y-6">
             
             {/* Welcome Banner & Quick Actions */}
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 glass-panel border-white/10 hover:border-brand-electric/15 p-6 md:p-8 rounded-2xl relative overflow-hidden shadow-xl animate-fade-in-up">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 bg-white border border-slate-200 p-6 md:p-8 rounded-2xl relative overflow-hidden shadow-sm animate-fade-in-up">
                 
-                {/* Decorative glowing backgrounds */}
-                <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-electric/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-electric/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+                {/* Decorative soft blobs */}
+                <div className="absolute -top-24 -left-24 w-48 h-48 bg-sky-100/80 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-slate-100/60 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                 <div className="relative z-10 space-y-3">
                     <div>
-                        <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-sans">
+                        <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
                             {(() => {
                                 const hour = new Date().getHours()
                                 const rawName = user?.email?.split('@')[0] || ''
@@ -264,20 +264,20 @@ export default function DashboardPage() {
                                 return `Good Evening${userName} 👋`
                             })()}
                         </h2>
-                        <p className="text-sm text-brand-slate font-medium mt-1">Here&apos;s the live overview of your security systems and operations.</p>
+                        <p className="text-sm text-slate-500 font-medium mt-1">Here&apos;s the live overview of your security systems and operations.</p>
                     </div>
 
                     {/* View Mode Toggle */}
-                    <div className="flex items-center gap-1.5 bg-[#071120] p-1 rounded-xl w-fit border border-white/5">
+                    <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl w-fit border border-slate-200">
                         <button
                             onClick={() => setViewMode('cash_flow')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${viewMode === 'cash_flow' ? 'bg-brand-electric text-brand-navy shadow-md shadow-brand-electric/10' : 'text-brand-slate hover:text-white hover:bg-white/5'}`}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${viewMode === 'cash_flow' ? 'bg-sky-600 text-white shadow-md shadow-sky-500/20' : 'text-slate-500 hover:text-slate-900 hover:bg-white'}`}
                         >
                             Cash Flow
                         </button>
                         <button
                             onClick={() => setViewMode('projected')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${viewMode === 'projected' ? 'bg-brand-electric text-brand-navy shadow-md shadow-brand-electric/10' : 'text-brand-slate hover:text-white hover:bg-white/5'}`}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${viewMode === 'projected' ? 'bg-sky-600 text-white shadow-md shadow-sky-500/20' : 'text-slate-500 hover:text-slate-900 hover:bg-white'}`}
                         >
                             Projected
                         </button>
@@ -287,27 +287,27 @@ export default function DashboardPage() {
                 <div className="relative z-10 flex flex-wrap gap-2.5 w-full lg:w-auto">
                     <button
                         onClick={() => router.push('/portal/sales/new')}
-                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-brand-electric hover:bg-[#00c5dd] text-brand-navy shadow-lg shadow-brand-electric/15 px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
+                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white shadow-md shadow-sky-500/20 px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
                     >
                         <Plus className="h-4 w-4" /> Create Sale
                     </button>
                     <button
                         onClick={() => router.push('/portal/clients')}
-                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 hover:border-brand-electric/30 border border-white/5 text-white px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
+                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white hover:bg-slate-50 hover:border-sky-300 border border-slate-200 text-slate-700 px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
                     >
-                        <UserPlus className="h-4 w-4 text-brand-electric" /> Add Client
+                        <UserPlus className="h-4 w-4 text-sky-500" /> Add Client
                     </button>
                     <button
                         onClick={() => router.push('/portal/financials?action=new')}
-                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 hover:border-brand-electric/30 border border-white/5 text-white px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
+                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white hover:bg-slate-50 hover:border-sky-300 border border-slate-200 text-slate-700 px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
                     >
-                        <Receipt className="h-4 w-4 text-brand-electric" /> Add Expense
+                        <Receipt className="h-4 w-4 text-sky-500" /> Add Expense
                     </button>
                     <button
                         onClick={() => router.push('/portal/products')}
-                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 hover:border-brand-electric/30 border border-white/5 text-white px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
+                        className="flex-1 lg:flex-initial flex items-center justify-center gap-2 bg-white hover:bg-slate-50 hover:border-sky-300 border border-slate-200 text-slate-700 px-4 h-10 rounded-xl transition-all duration-200 text-xs font-bold active:scale-95 btn-tactile cursor-pointer"
                     >
-                        <Package className="h-4 w-4 text-brand-electric" /> Add Product
+                        <Package className="h-4 w-4 text-sky-500" /> Add Product
                     </button>
                 </div>
             </div>
@@ -361,17 +361,17 @@ export default function DashboardPage() {
 
             {/* Charts & Activity */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-                <div className="col-span-4 glass-panel border-white/10 p-6 rounded-2xl">
-                    <Suspense fallback={<div className="h-72 flex items-center justify-center text-xs text-brand-slate animate-pulse">Loading charts...</div>}>
+                <div className="col-span-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+                    <Suspense fallback={<div className="h-72 flex items-center justify-center text-xs text-slate-400 animate-pulse">Loading charts...</div>}>
                         <FinancialCharts monthlyData={monthlyData} expenseBreakdown={expenseBreakdown} showRevenueTrend />
                     </Suspense>
                 </div>
 
                 {/* Activity Feed */}
-                <div className="col-span-3 glass-panel border-white/10 p-6 rounded-2xl flex flex-col">
-                    <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+                <div className="col-span-3 bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col">
+                    <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
                         <div>
-                            <h3 className="text-base font-bold text-white flex items-center gap-2">
+                            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                                 Recent Activity
                                 {activities.some(a =>
                                     (a.type === 'Quote Request' || a.type === 'Site Visit Request' || a.type === 'Callback Request') &&
@@ -383,7 +383,7 @@ export default function DashboardPage() {
                                         </span>
                                     )}
                             </h3>
-                            <p className="text-xs text-brand-slate mt-0.5">Latest actions across the system</p>
+                            <p className="text-xs text-slate-500 mt-0.5">Latest actions across the system</p>
                         </div>
                     </div>
                     
@@ -395,20 +395,20 @@ export default function DashboardPage() {
                             return (
                                 <div
                                     key={activity.id || index}
-                                    className="flex items-start p-3 rounded-xl border border-white/5 hover:border-brand-electric/25 hover:bg-white/5 cursor-pointer transition-all duration-200 gap-3.5 group"
+                                    className="flex items-start p-3 rounded-xl border border-slate-100 hover:border-sky-200 hover:bg-sky-50/50 cursor-pointer transition-all duration-200 gap-3.5 group"
                                     onClick={() => router.push(config.path)}
                                 >
-                                    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-brand-electric/10 group-hover:text-brand-electric transition-colors mt-0.5">
+                                    <div className="p-2 rounded-lg bg-slate-100 group-hover:bg-sky-100 group-hover:text-sky-600 transition-colors mt-0.5">
                                         <Icon className={`h-4.5 w-4.5 ${config.color}`} />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-xs font-bold text-white truncate group-hover:text-brand-electric transition-colors">
+                                        <p className="text-xs font-bold text-slate-800 truncate group-hover:text-sky-600 transition-colors">
                                             {activity.type}
                                         </p>
-                                        <p className="text-xs text-brand-slate mt-0.5 font-medium leading-relaxed">
+                                        <p className="text-xs text-slate-500 mt-0.5 font-medium leading-relaxed">
                                             {activity.description}
                                         </p>
-                                        <p className="text-[10px] text-brand-slate/60 mt-1 font-mono">
+                                        <p className="text-[10px] text-slate-400 mt-1 font-mono">
                                             {new Date(activity.timestamp).toLocaleDateString()} at {new Date(activity.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                                         </p>
                                     </div>
@@ -417,7 +417,7 @@ export default function DashboardPage() {
                         })}
                         {activities.length === 0 && (
                             <div className="h-48 flex items-center justify-center">
-                                <p className="text-xs text-brand-slate font-medium">No recent system activity.</p>
+                                <p className="text-xs text-slate-400 font-medium">No recent system activity.</p>
                             </div>
                         )}
                     </div>

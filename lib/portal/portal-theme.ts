@@ -2,9 +2,9 @@ import type { ClientRequest } from '@/types/crm'
 
 /** Page chrome — portal uses a dark navy shell (see globals.css :root) */
 export const portalPageTitle =
-    'text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-brand-steel/80'
+    'text-3xl font-extrabold tracking-tight text-slate-900'
 
-export const portalPageSubtitle = 'text-muted-foreground mt-1'
+export const portalPageSubtitle = 'text-slate-500 mt-1 font-medium'
 
 /** Auth pages render on a light card; keep navy gradient there */
 export const authPageTitle =

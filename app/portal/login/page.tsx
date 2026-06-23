@@ -119,45 +119,45 @@ function LoginContent() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#020617] px-4 py-12">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 px-4 py-12">
             
-            {/* Tech grid scanlines background overlay */}
-            <div className="absolute inset-0 tech-grid-bg pointer-events-none opacity-40 z-0" />
+            {/* Subtle dot grid background */}
+            <div className="absolute inset-0 pointer-events-none opacity-100 z-0" style={{backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px'}} />
             
-            {/* Glowing animated background light blobs */}
-            <div className="absolute top-1/4 -right-32 w-[400px] h-[400px] bg-brand-electric/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-1/4 -left-32 w-[350px] h-[350px] bg-brand-steel/10 rounded-full blur-[100px] pointer-events-none" />
+            {/* Soft background color blobs */}
+            <div className="absolute top-1/4 -right-32 w-[400px] h-[400px] bg-sky-100/60 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-1/4 -left-32 w-[350px] h-[350px] bg-slate-200/60 rounded-full blur-[100px] pointer-events-none" />
 
             {/* Back Button */}
             <Link
                 href="/"
-                className="absolute top-6 left-6 z-50 flex items-center gap-2 text-xs font-semibold text-brand-slate hover:text-white transition-colors bg-brand-navy/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/5 hover:border-brand-electric/25 shadow-lg shadow-black/30"
+                className="absolute top-6 left-6 z-50 flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors bg-white px-4 py-2 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm"
             >
-                <ArrowLeft className="h-4 w-4 text-brand-electric" />
+                <ArrowLeft className="h-4 w-4 text-sky-500" />
                 <span>Back to Website</span>
             </Link>
 
             {/* Login Card */}
-            <div className="w-full max-w-md relative z-10 glass-panel glass-panel-hover rounded-2xl border-white/10 shadow-2xl p-6 md:p-8">
+            <div className="w-full max-w-md relative z-10 bg-white rounded-2xl border border-slate-200 shadow-xl p-6 md:p-8">
                 
-                {/* Cyber top glow line indicator */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-electric via-[#00a2ff] to-brand-electric" />
+                {/* Top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-500 via-blue-500 to-sky-500 rounded-t-2xl" />
 
                 {/* Header Section */}
                 <div className="space-y-2 text-center pb-6">
                     <div className="flex justify-center mb-5">
                         <div className="relative group">
-                            {/* Logo outer cyber rings */}
-                            <div className="absolute -inset-2 bg-brand-electric/20 rounded-2xl blur-md group-hover:bg-brand-electric/40 transition-all duration-300" />
-                            <div className="relative p-4 rounded-xl bg-brand-navy border border-white/10 shadow-xl flex items-center justify-center">
+                            {/* Logo ring */}
+                            <div className="absolute -inset-2 bg-sky-100 rounded-2xl blur-md group-hover:bg-sky-200 transition-all duration-300" />
+                            <div className="relative p-4 rounded-xl bg-white border border-slate-200 shadow-md flex items-center justify-center">
                                 <Image src="/logo.png" alt="GSS Logo" width={40} height={40} className="w-10 h-10 object-contain" />
                             </div>
                         </div>
                     </div>
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-white font-sans">
+                    <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 font-sans">
                         GSS SECURITY HUB
                     </h2>
-                    <p className="text-xs md:text-sm text-brand-slate font-medium">
+                    <p className="text-xs md:text-sm text-slate-500 font-medium">
                         Secure Gateway Portal
                     </p>
                 </div>
@@ -171,18 +171,18 @@ function LoginContent() {
 
                     {/* Email Input */}
                     <div className="space-y-1.5">
-                        <Label htmlFor="email" className="text-xs text-brand-slate font-bold uppercase tracking-wider">
+                        <Label htmlFor="email" className="text-xs text-slate-500 font-bold uppercase tracking-wider">
                             Email Address
                         </Label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <Mail className="h-4.5 w-4.5 text-brand-slate" />
+                                <Mail className="h-4.5 w-4.5 text-slate-400" />
                             </div>
                             <Input
                                 id="email"
                                 type="email"
                                 placeholder="name@company.com"
-                                className="pl-11 pr-4 h-11 rounded-xl cyber-input w-full text-white text-sm"
+                                className="pl-11 pr-4 h-11 rounded-xl cyber-input w-full text-slate-900 text-sm"
                                 value={email}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                 required
@@ -193,7 +193,7 @@ function LoginContent() {
                     {/* Password Input */}
                     <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                            <Label htmlFor="password" className="text-xs text-brand-slate font-bold uppercase tracking-wider">
+                            <Label htmlFor="password" className="text-xs text-slate-500 font-bold uppercase tracking-wider">
                                 Password
                             </Label>
                             <button
@@ -204,19 +204,19 @@ function LoginContent() {
                                     setResetMessage('')
                                     setForgotOpen(true)
                                 }}
-                                className="text-xs font-bold text-brand-electric hover:underline transition-colors"
+                                className="text-xs font-bold text-sky-600 hover:underline transition-colors"
                             >
                                 Forgot?
                             </button>
                         </div>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <Lock className="h-4.5 w-4.5 text-brand-slate" />
+                                <Lock className="h-4.5 w-4.5 text-slate-400" />
                             </div>
                             <Input
                                 id="password"
                                 type={showPassword ? "text" : "password"}
-                                className="pl-11 pr-11 h-11 rounded-xl cyber-input w-full text-white text-sm"
+                                className="pl-11 pr-11 h-11 rounded-xl cyber-input w-full text-slate-900 text-sm"
                                 value={password}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 required
@@ -224,7 +224,7 @@ function LoginContent() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-brand-slate hover:text-white transition-colors"
+                                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 transition-colors"
                                 tabIndex={-1}
                                 aria-label="Toggle password visibility"
                             >
@@ -235,7 +235,7 @@ function LoginContent() {
 
                     {/* Submit Button */}
                     <Button
-                        className="w-full h-11 rounded-xl bg-brand-electric hover:bg-[#00c5dd] text-brand-navy shadow-lg shadow-brand-electric/15 transition-all duration-300 font-bold text-sm tracking-wide mt-2 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)]"
+                        className="w-full h-11 rounded-xl bg-sky-600 hover:bg-sky-700 text-white shadow-lg shadow-sky-500/20 transition-all duration-300 font-bold text-sm tracking-wide mt-2"
                         type="submit"
                         disabled={loading}
                     >
@@ -249,13 +249,13 @@ function LoginContent() {
                     </Button>
                 </form>
 
-                {/* Cyber Divider */}
+                {/* Divider */}
                 <div className="relative w-full my-6">
                     <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-white/5" />
+                        <span className="w-full border-t border-slate-200" />
                     </div>
                     <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest">
-                        <span className="bg-brand-navy/60 px-3 text-brand-slate">Third-Party Gateway</span>
+                        <span className="bg-white px-3 text-slate-400">Third-Party Gateway</span>
                     </div>
                 </div>
 
@@ -264,7 +264,7 @@ function LoginContent() {
                     <Button
                         type="button"
                         variant="outline"
-                        className="w-full h-11 rounded-xl border-white/10 hover:border-brand-electric/30 hover:bg-white/5 text-white text-sm font-semibold transition-all duration-200"
+                        className="w-full h-11 rounded-xl border-slate-200 hover:border-sky-300 hover:bg-sky-50 text-slate-700 text-sm font-semibold transition-all duration-200"
                         onClick={() => signInWithGoogle && signInWithGoogle()}
                     >
                         <svg className="mr-2.5 h-4 w-4" viewBox="0 0 24 24">
@@ -277,60 +277,60 @@ function LoginContent() {
                     </Button>
                     
                     {/* Clear visual disclaimer explaining that OAuth is for clients only, solving Issue #13 */}
-                    <p className="text-[10px] text-center text-brand-slate font-medium px-2">
-                        💡 <span className="text-brand-electric">Note:</span> Google Login is for <span className="text-white font-bold">Clients only</span>. Staff must use their registered email and password credentials.
+                    <p className="text-[10px] text-center text-slate-400 font-medium px-2">
+                        💡 <span className="text-sky-600">Note:</span> Google Login is for <span className="text-slate-700 font-bold">Clients only</span>. Staff must use their registered email and password credentials.
                     </p>
                 </div>
 
-                <div className="w-full text-center mt-6 pt-4 border-t border-white/5">
-                    <p className="text-xs text-brand-slate font-medium">
+                <div className="w-full text-center mt-6 pt-4 border-t border-slate-200">
+                    <p className="text-xs text-slate-400 font-medium">
                         Need access? Contact your GSS manager for setup instructions.
                     </p>
                 </div>
             </div>
 
             {/* Secured Badge footer */}
-            <div className="absolute bottom-6 flex items-center gap-2 text-xs text-brand-slate font-semibold tracking-wide z-10 bg-brand-navy/60 px-4 py-2 rounded-xl border border-white/5 backdrop-blur-md">
-                <Shield className="h-4 w-4 text-brand-electric shadow-[0_0_8px_#00e5ff]" />
-                <span>Secured by <span className="text-white">GSS Systems</span></span>
+            <div className="absolute bottom-6 flex items-center gap-2 text-xs text-slate-500 font-semibold tracking-wide z-10 bg-white/80 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+                <Shield className="h-4 w-4 text-sky-500" />
+                <span>Secured by <span className="text-slate-800">GSS Systems</span></span>
             </div>
 
             {/* Forgot password dialog overlay */}
             <Dialog open={forgotOpen} onOpenChange={setForgotOpen}>
-                <DialogContent className="sm:max-w-md bg-brand-navy border border-white/10 rounded-2xl text-white">
+                <DialogContent className="sm:max-w-md bg-white border border-slate-200 rounded-2xl text-slate-900">
                     <DialogHeader>
-                        <DialogTitle className="text-lg font-bold">Reset Password</DialogTitle>
-                        <DialogDescription className="text-brand-slate text-sm font-medium">
+                        <DialogTitle className="text-lg font-bold text-slate-900">Reset Password</DialogTitle>
+                        <DialogDescription className="text-slate-500 text-sm font-medium">
                             Provide your registered email address to receive a secure password reset link.
                         </DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleForgotPassword} className="space-y-4 mt-2">
                         {resetError && (
-                            <Alert variant="destructive" className="border-red-500/20 bg-red-500/10 text-red-400 rounded-xl">
+                            <Alert variant="destructive" className="border-red-200 bg-red-50 text-red-600 rounded-xl">
                                 <AlertDescription className="text-xs">{resetError}</AlertDescription>
                             </Alert>
                         )}
                         {resetMessage && (
-                            <Alert className="border-brand-electric/20 bg-brand-electric/5 text-brand-electric rounded-xl">
+                            <Alert className="border-sky-200 bg-sky-50 text-sky-700 rounded-xl">
                                 <AlertDescription className="text-xs font-semibold">{resetMessage}</AlertDescription>
                             </Alert>
                         )}
                         <div className="space-y-2">
-                            <Label htmlFor="reset-email" className="text-xs text-brand-slate font-bold uppercase tracking-wider">Email address</Label>
+                            <Label htmlFor="reset-email" className="text-xs text-slate-500 font-bold uppercase tracking-wider">Email address</Label>
                             <Input
                                 id="reset-email"
                                 type="email"
-                                className="cyber-input h-11 rounded-xl text-white text-sm"
+                                className="cyber-input h-11 rounded-xl text-slate-900 text-sm"
                                 value={resetEmail}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setResetEmail(e.target.value)}
                                 required
                             />
                         </div>
                         <DialogFooter className="gap-2 sm:gap-0">
-                            <Button type="button" variant="ghost" className="rounded-xl border border-white/5 hover:bg-white/5 text-white" onClick={() => setForgotOpen(false)}>
+                            <Button type="button" variant="ghost" className="rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600" onClick={() => setForgotOpen(false)}>
                                 Cancel
                             </Button>
-                            <Button type="submit" disabled={resetLoading} className="rounded-xl bg-brand-electric hover:bg-[#00c5dd] text-brand-navy font-bold">
+                            <Button type="submit" disabled={resetLoading} className="rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold">
                                 {resetLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                 Send link
                             </Button>
@@ -345,8 +345,8 @@ function LoginContent() {
 export default function Login() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center bg-[#020617]">
-                <Loader2 className="w-8 h-8 animate-spin text-brand-electric" />
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <Loader2 className="w-8 h-8 animate-spin text-sky-500" />
             </div>
         }>
             <LoginContent />

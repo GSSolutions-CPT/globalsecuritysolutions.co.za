@@ -96,7 +96,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
 
     if (isAuthPage || isClientPortalPage) {
         return (
-            <div className="min-h-screen bg-[#020617] text-foreground flex flex-col font-sans selection:bg-brand-electric/20 selection:text-brand-electric">
+            <div className="portal-theme-light min-h-screen bg-slate-50 text-foreground flex flex-col font-sans">
                 <main className="flex-1 animate-fade-in text-foreground relative z-10">
                     {children}
                 </main>
@@ -107,19 +107,19 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     const currentActiveItem = navItems.find(item => pathname === item.path || pathname.startsWith(`${item.path}/`))
 
     return (
-        <div className="min-h-screen bg-[#020617] text-foreground flex font-sans selection:bg-brand-electric/20 selection:text-brand-electric">
+        <div className="portal-theme-light min-h-screen bg-slate-50 text-foreground flex font-sans">
             
-            {/* Tech grid scanlines background overlay */}
-            <div className="fixed inset-0 tech-grid-bg pointer-events-none z-0 opacity-70" />
+            {/* Subtle dot grid background */}
+            <div className="fixed inset-0 pointer-events-none z-0" style={{backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px', opacity: 0.4}} />
 
             {/* Sidebar - Desktop */}
             <aside 
-                className={`hidden md:flex flex-col fixed top-0 bottom-0 left-0 z-40 bg-brand-navy/70 border-r border-white/10 backdrop-blur-xl sidebar-transition overflow-x-hidden ${
+                className={`hidden md:flex flex-col fixed top-0 bottom-0 left-0 z-40 bg-white border-r border-slate-200 shadow-sm sidebar-transition overflow-x-hidden ${
                     !isHydrated || !isCollapsed ? 'w-64' : 'w-20'
                 }`}
             >
                 {/* Brand Logo Header */}
-                <div className="h-16 flex items-center px-5 border-b border-white/5 gap-3">
+                <div className="h-16 flex items-center px-5 border-b border-slate-100 gap-3">
                     <div className="flex-shrink-0 relative w-8 h-8 flex items-center justify-center">
                         <Image 
                             src={settings?.logoUrl || "/logo.png"} 
@@ -130,7 +130,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                         />
                     </div>
                     {(!isHydrated || !isCollapsed) && (
-                        <span className="font-extrabold text-sm tracking-widest bg-gradient-to-r from-white to-brand-steel/80 bg-clip-text text-transparent truncate font-mono uppercase">
+                        <span className="font-extrabold text-sm tracking-widest text-slate-800 truncate uppercase">
                             GSS HUB
                         </span>
                     )}
@@ -149,15 +149,15 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                                 href={item.path}
                                 className={`group flex items-center relative gap-3.5 px-3.5 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
                                     isActive
-                                        ? 'bg-brand-electric/10 text-brand-electric border border-brand-electric/20 shadow-[0_0_15px_rgba(0,229,255,0.08)]'
-                                        : 'text-brand-slate hover:text-white hover:bg-white/5'
+                                        ? 'bg-sky-50 text-sky-600 border border-sky-200'
+                                        : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                                 }`}
                                 title={!showLabel ? item.name : undefined}
                             >
-                                {/* Active Neon Dot/Line Marker */}
-                                {isActive && <div className="active-marker" />}
+                                {/* Active indicator */}
+                                {isActive && <div className="absolute left-0 top-1/4 h-1/2 w-[3px] bg-sky-500 rounded-r-full" />}
                                 
-                                <Icon className={`h-5 w-5 flex-shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-brand-electric' : 'text-brand-slate group-hover:text-white'}`} />
+                                <Icon className={`h-5 w-5 flex-shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-sky-600' : 'text-slate-400 group-hover:text-slate-700'}`} />
                                 
                                 {showLabel && (
                                     <span className="truncate transition-opacity duration-300">
@@ -170,18 +170,18 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 </nav>
 
                 {/* Sidebar Footer Account Details */}
-                <div className="p-4 border-t border-white/5 bg-black/10">
+                <div className="p-4 border-t border-slate-100 bg-slate-50">
                     <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 overflow-hidden">
-                            <div className="h-10 w-10 flex-shrink-0 rounded-xl bg-brand-electric/10 border border-brand-electric/20 flex items-center justify-center text-brand-electric">
+                            <div className="h-10 w-10 flex-shrink-0 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600">
                                 <User className="h-5 w-5" />
                             </div>
                             {(!isHydrated || !isCollapsed) && (
                                 <div className="flex flex-col overflow-hidden">
-                                    <span className="text-sm font-bold text-white truncate">
+                                    <span className="text-sm font-bold text-slate-800 truncate">
                                         {user?.email?.split('@')[0]}
                                     </span>
-                                    <span className="text-[10px] text-brand-slate font-semibold uppercase tracking-wider truncate">
+                                    <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider truncate">
                                         {isClientUser ? 'Customer' : staffRole ?? 'Staff'}
                                     </span>
                                 </div>
@@ -193,7 +193,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                                 variant="ghost"
                                 size="icon"
                                 onClick={handleSignOut}
-                                className="text-brand-slate hover:text-destructive hover:bg-destructive/10 h-8 w-8 rounded-lg"
+                                className="text-slate-400 hover:text-red-500 hover:bg-red-50 h-8 w-8 rounded-lg"
                                 title="Sign Out"
                             >
                                 <LogOut className="h-4.5 w-4.5" />
@@ -204,7 +204,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                     {/* Collapse Button */}
                     <button
                         onClick={toggleCollapse}
-                        className="hidden md:flex mt-4 w-full h-8 items-center justify-center rounded-lg border border-white/5 hover:border-brand-electric/20 hover:bg-white/5 text-brand-slate hover:text-white transition-colors"
+                        className="hidden md:flex mt-4 w-full h-8 items-center justify-center rounded-lg border border-slate-200 hover:border-sky-300 hover:bg-sky-50 text-slate-400 hover:text-sky-600 transition-colors"
                         title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
                         {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
@@ -213,7 +213,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             </aside>
 
             {/* Mobile Navigation Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-brand-navy/80 border-b border-white/10 backdrop-blur-xl flex items-center justify-between px-4">
+            <header className="md:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-white border-b border-slate-200 shadow-sm flex items-center justify-between px-4">
                 <Link href="/portal/dashboard" className="flex items-center gap-2">
                     <Image 
                         src={settings?.logoUrl || "/logo.png"} 
@@ -221,7 +221,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                         width={28} 
                         height={28} 
                     />
-                    <span className="font-extrabold text-sm tracking-widest text-white uppercase font-mono">
+                    <span className="font-extrabold text-sm tracking-widest text-slate-800 uppercase">
                         GSS HUB
                     </span>
                 </Link>
@@ -229,7 +229,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="text-white hover:bg-white/5"
+                    className="text-slate-500 hover:bg-slate-100"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -238,8 +238,8 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
 
             {/* Mobile Drawer Overlay */}
             {isMobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm animate-fade-in">
-                    <aside className="w-72 h-full bg-[#0a192f] border-r border-white/10 pt-20 px-4 flex flex-col justify-between pb-6 animate-in slide-in-from-left duration-250">
+                <div className="md:hidden fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm animate-fade-in">
+                    <aside className="w-72 h-full bg-white border-r border-slate-200 shadow-xl pt-20 px-4 flex flex-col justify-between pb-6 animate-in slide-in-from-left duration-250">
                         <nav className="space-y-1">
                             {!isClientUser && navItems.map((item) => {
                                 const Icon = item.icon
@@ -252,11 +252,11 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className={`flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-semibold transition-colors ${
                                             isActive
-                                                ? 'bg-brand-electric/10 text-brand-electric border border-brand-electric/25'
-                                                : 'text-brand-slate hover:text-white hover:bg-white/5'
+                                                ? 'bg-sky-50 text-sky-600 border border-sky-200'
+                                                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                                         }`}
                                     >
-                                        <Icon className="h-5 w-5" />
+                                        <Icon className={`h-5 w-5 ${isActive ? 'text-sky-600' : 'text-slate-400'}`} />
                                         <span>{item.name}</span>
                                     </Link>
                                 )
@@ -264,15 +264,15 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                         </nav>
 
                         <div className="space-y-4">
-                            <div className="flex items-center gap-3 p-3 bg-black/20 rounded-xl">
-                                <div className="h-10 w-10 rounded-lg bg-brand-electric/10 flex items-center justify-center text-brand-electric">
+                            <div className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                                <div className="h-10 w-10 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600">
                                     <User className="h-5 w-5" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-white">
+                                    <span className="text-sm font-bold text-slate-800">
                                         {user?.email?.split('@')[0]}
                                     </span>
-                                    <span className="text-[10px] text-brand-slate font-semibold uppercase tracking-wider">
+                                    <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
                                         {isClientUser ? 'Customer' : staffRole ?? 'Staff'}
                                     </span>
                                 </div>
@@ -282,7 +282,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                                 <Link
                                     href="/"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="flex-1 flex items-center justify-center gap-2 border border-white/5 hover:border-brand-electric/20 rounded-xl text-sm font-semibold text-brand-slate hover:text-white h-11 bg-white/5"
+                                    className="flex-1 flex items-center justify-center gap-2 border border-slate-200 hover:border-sky-300 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-900 h-11 bg-slate-50"
                                 >
                                     <ExternalLink className="h-4 w-4" /> Website
                                 </Link>
@@ -306,13 +306,13 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                 } pt-16 md:pt-0`}
             >
                 {/* Global Top Action Bar */}
-                <header className="sticky top-0 z-30 h-16 border-b border-white/5 bg-brand-navy/30 backdrop-blur-md hidden md:flex items-center justify-between px-6 md:px-8">
+                <header className="sticky top-0 z-30 h-16 border-b border-slate-200 bg-white/90 backdrop-blur-md hidden md:flex items-center justify-between px-6 md:px-8 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <span className="text-xs font-semibold text-brand-slate font-mono uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                        <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
                             GSS HUB
                         </span>
-                        <span className="text-brand-slate/40 text-sm">/</span>
-                        <span className="text-xs font-bold text-brand-electric tracking-wide font-sans">
+                        <span className="text-slate-300 text-sm">/</span>
+                        <span className="text-xs font-bold text-sky-600 tracking-wide">
                             {currentActiveItem?.name || 'CRM Portal'}
                         </span>
                     </div>
@@ -320,7 +320,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
                     <div className="flex items-center gap-4">
                         <Link
                             href="/"
-                            className="flex items-center gap-1.5 text-xs text-brand-slate hover:text-brand-electric transition-colors px-3 py-1.5 rounded-lg border border-white/5 hover:border-brand-electric/20 bg-white/5 font-semibold"
+                            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-sky-600 transition-colors px-3 py-1.5 rounded-lg border border-slate-200 hover:border-sky-300 bg-slate-50 font-semibold"
                             title="Back to public site"
                         >
                             <ExternalLink className="h-3.5 w-3.5" />
