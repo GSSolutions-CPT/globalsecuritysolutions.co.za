@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GSS Invoice / Client Tracker</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{font-family:Segoe UI,system-ui,-apple-system,sans-serif;margin:20px;background:#f7f8fa;color:#1f2937}
+  h1{font-size:18px;font-weight:600;margin-bottom:6px}
+  p.sub{color:#6b7280;font-size:12px;margin:0 0 14px}
+  table{width:100%;border-collapse:collapse;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(15,23,42,0.06)}
+  th,td{text-align:left;padding:10px 11px;font-size:13px;border-bottom:1px solid #f3f4f6}
+  th{background:#f9fafb;color:#4b5563;font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td[contenteditable="true"]{background:#ffffff;cursor:text}
+  td[contenteditable="true"]:focus{outline:2px solid #93c5fd;outline-offset:-2px;background:#ffffff}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em}
+  .Paid{background:#d1fae5;color:#065f46}
+  .Pending{background:#fee2e2;color:#7f1d1d}
+  .settings{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+  button,input,select{font:inherit}
+  button{border:1px solid #e5e7eb;background:#ffffff;color:#374151;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:12px}
+  button:hover{background:#f3f4f6}
+  input,select{padding:6px 8px;border:1px solid #d1d5db;border-radius:8px;background:#ffffff;font-size:12px}
+  input{min-width:140px}
+  .actions{display:flex;gap:6px;justify-content:flex-end;margin-top:12px}
+  summary{cursor:pointer;color:#2563eb;font-size:12px}
+</style>
+</head>
+<body>
+<h1>GSS Invoice / Client Tracker</h1>
+<p class="sub">Double-click any cell to edit. Use New Row to add entries. Use Export to save.</p>
+
+<div class="settings">
+  <select id="filterStatus"><option value="">All statuses</option><option>Paid</option><option>Pending</option></select>
+  <input id="search" placeholder="Search client / project / ref…">
+  <button id="newRow">+ New Row</button>
+  <button id="export">Export CSV</button>
+</div>
+
+<table id="tracker">
+  <thead>
+    <tr>
+      <th>Date / Service</th>
+      <th>Client / Project</th>
+      <th>Quote Ref</th>
+      <th>Proforma Ref</th>
+      <th>Invoice Ref</th>
+      <th>Amount</th>
+      <th>VAT</th>
+      <th>Status</th>
+      <th>Payment</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-status="Paid">
+      <td contenteditable="true">11 Jun 2025</td>
+      <td contenteditable="true">35 on Rose</td>
+      <td contenteditable="true">Q001</td>
+      <td contenteditable="true">PF001</td>
+      <td contenteditable="true">INV001</td>
+      <td contenteditable="true" align="right">285000.00</td>
+      <td contenteditable="true" align="right">42850.00</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true">35 on Rose service pending 02 Jul 2026 11:00 for 1.5h airbag recall VW ref 37829</td>
+    </tr>
+    <tr data-status="Paid">
+      <td contenteditable="true">Sep 2025</td>
+      <td contenteditable="true">Bergvliet Residential</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true" align="right">65000.00</td>
+      <td contenteditable="true" align="right">9750.00</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true"></td>
+    </tr>
+    <tr data-status="Paid">
+      <td contenteditable="true">Sep 2025</td>
+      <td contenteditable="true">Kenilworth Apartments</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true">—</td>
+      <td contenteditable="true" align="right">120000.00</td>
+      <td contenteditable="true" align="right">18000.00</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true">Paid</td>
+      <td contenteditable="true"></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="actions">
+  <button id="reset">Reset to sample data</button>
+</div>
+
+<script>
+  const TBODY = document.querySelector('#tracker tbody');
+  const STATUS_COL = 7;
+  const PAY_COL = 8;
+
+  function rowToData(row){
+    const cells = row.querySelectorAll('td[contenteditable]');
+    return {
+      date_service: cells[0]?.textContent.trim() || '',
+      client_project: cells[1]?.textContent.trim() || '',
+      quote_ref: cells[2]?.textContent.trim() || '',
+      proforma_ref: cells[3]?.textContent.trim() || '',
+      invoice_ref: cells[4]?.textContent.trim() || '',
+      amount: cells[5]?.textContent.trim() || '0',
+      vat: cells[6]?.textContent.trim() || '0',
+      status: cells[7]?.textContent.trim() || 'Pending',
+      payment: cells[8]?.textContent.trim() || 'Pending',
+      notes: cells[9]?.textContent.trim() || ''
+    };
+  }
+
+  function updateRow(row, data){
+    const cells = row.querySelectorAll('td[contenteditable]');
+    cells[0].textContent = data.date_service;
+    cells[1].textContent = data.client_project;
+    cells[2].textContent = data.quote_ref;
+    cells[3].textContent = data.proforma_ref;
+    cells[4].textContent = data.invoice_ref;
+    cells[5].textContent = data.amount;
+    cells[6].textContent = data.vat;
+    cells[7].textContent = data.status;
+    cells[8].textContent = data.payment;
+    cells[9].textContent = data.notes;
+    row.setAttribute('data-status', data.status);
+  }
+
+  function applyPills(){
+    document.querySelectorAll('#tracker tbody tr').forEach(row => {
+      [STATUS_COL, PAY_COL].forEach(idx => {
+        const cell = row.querySelectorAll('td[contenteditable]')[idx];
+        if(!cell) return;
+        cell.innerHTML = '';
+        const span = document.createElement('span');
+        span.className = 'pill ' + (cell.textContent.trim() || 'Unknown').replace(/\s+/g,' ');
+        span.textContent = cell.textContent.trim();
+        cell.appendChild(span);
+      });
+    });
+  }
+
+  function currentFilter(){
+    return document.getElementById('filterStatus').value;
+  }
+  function queryText(){
+    return document.getElementById('search').value.trim().toLowerCase();
+  }
+
+  function refreshRows(){
+    const q = queryText();
+    const st = currentFilter();
+    document.querySelectorAll('#tracker tbody tr').forEach(row => {
+      const txt = row.textContent.toLowerCase();
+      const status = (row.getAttribute('data-status') || '').toLowerCase();
+      const matchesStatus = !st || status === st.toLowerCase();
+      const matchesQuery = !q || txt.includes(q);
+      row.style.display = (matchesStatus && matchesQuery) ? '' : 'none';
+    });
+  }
+
+  function downloadCSV(){
+    const rows = Array.from(document.querySelectorAll('#tracker tbody tr')).filter(r => r.style.display !== 'none');
+    const lines = [['Date/Service','Client/Project','Quote Ref','Proforma Ref','Invoice Ref','Amount','VAT','Status','Payment Status','Notes'].join(',')];
+    rows.forEach(row => {
+      const d = rowToData(row);
+      const escaped = [d.date_service,d.client_project,d.quote_ref,d.proforma_ref,d.invoice_ref,d.amount,d.vat,d.status,d.payment,d.notes].map(v => '"' + String(v).replace(/"/g,'""') + '"').join(',');
+      lines.push(escaped);
+    });
+    const blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'gss_tracker_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('newRow').addEventListener('click', () => {
+    const row = document.createElement('tr');
+    row.setAttribute('data-status', 'Pending');
+    row.innerHTML = `
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true" align="right">0.00</td>
+      <td contenteditable="true" align="right">0.00</td>
+      <td contenteditable="true">Pending</td>
+      <td contenteditable="true">Pending</td>
+      <td contenteditable="true"></td>
+    `;
+    TBODY.appendChild(row);
+  });
+
+  document.getElementById('export').addEventListener('click', downloadCSV);
+  document.getElementById('filterStatus').addEventListener('change', refreshRows);
+  document.getElementById('search').addEventListener('input', refreshRows);
+  document.getElementById('reset').addEventListener('click', () => location.reload());
+
+  document.querySelectorAll('#tracker tbody td[contenteditable]').forEach(cell => {
+    cell.addEventListener('blur', () => {
+      const row = cell.parentElement;
+      row.setAttribute('data-status', row.querySelectorAll('td[contenteditable]')[STATUS_COL].textContent.trim() || 'Pending');
+    });
+  });
+
+  applyPills();
+  refreshRows();
+</script>
+</body>
+</html>

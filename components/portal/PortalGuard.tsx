@@ -65,7 +65,9 @@ export default function PortalGuard({ children }: PortalGuardProps) {
         router,
     ])
 
-    if (loading || accessLoading) {
+    const isChecking = loading || (accessLoading && !portalAccess)
+
+    if (isChecking) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background">
                 <p className="text-muted-foreground animate-pulse">Checking access...</p>

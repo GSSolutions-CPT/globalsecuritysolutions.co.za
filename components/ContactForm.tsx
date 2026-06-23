@@ -116,7 +116,15 @@ export function ContactForm() {
                     <div><h4 className="font-semibold mb-0.5">There was a problem submitting your request</h4><p className="text-sm">{error}</p></div>
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+                onSubmit={handleSubmit}
+                className="space-y-4"
+                data-mcp-name="Security Contact Form"
+                data-mcp-description="Customer request form for security quotes, CCTV, alarms, maintenance and site visits."
+                data-mcp-capabilities="quote,maintain,audit,contact"
+                data-mcp-intents="request_quote,request_maintenance,general_inquiry"
+                data-mcp-submit="ContactForm.handleSubmit"
+            >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-xs font-bold text-brand-slate uppercase tracking-wider mb-1.5">Name</label>

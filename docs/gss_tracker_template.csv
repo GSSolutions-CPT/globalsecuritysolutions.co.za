@@ -1,0 +1,4 @@
+client,project,service_type,quote_date,quote_ref,proforma_date,proforma_ref,invoice_date,invoice_ref,amount,vat,status,payment_status,notes
+Example Body Corporate,35 on Rose,CCTV / Access Control / Intercom / Guards PC,11 Jun 2025,Q001,2025-06-12,PF001,2025-06-14,INV001,285000.00,42850.00,Paid,Paid,Airbag recall recall recall VW service 02 Jul 2026 ref 37829 — not invoice related
+Example Residential,Bergvliet ACS,Access Control,Sep 2025,RF001,2025-09-15,PF002,2025-09-20,INV002,65000.00,9750.00,Paid,Paid,
+Example Commercial,Kenilworth Apartments,CCTV,Sep 2025,RF002,2025-09-18,PF003,2025-09-25,INV003,120000.00,18000.00,Paid,Paid,

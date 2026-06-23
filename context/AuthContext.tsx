@@ -15,7 +15,7 @@ type AuthContextType = {
     signUp: (data: SignUpWithPasswordCredentials) => Promise<{ data: { user: User | null, session: Session | null }, error: AuthError | null }>
     signInWithGoogle: () => Promise<{ data: { provider: string; url: string | null }; error: AuthError | null }>
     signOut: () => Promise<{ error: AuthError | null }>
-    refreshPortalAccess: () => Promise<void>
+    refreshPortalAccess: (nextUser?: User | null) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -105,7 +105,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setPortalAccess(null)
             return result
         },
-        refreshPortalAccess: () => refreshPortalAccess(),
+        refreshPortalAccess: (nextUser?: User | null) => refreshPortalAccess(nextUser),
     }
 
     return (
