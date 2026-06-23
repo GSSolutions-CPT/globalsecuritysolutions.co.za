@@ -2,12 +2,15 @@
 
 import { useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useAuth } from "@/context/AuthContext"
 import { supabase } from "@/lib/portal/supabase"
+import { isPublicPortalRoute } from "@/lib/portal/permissions"
 
 function PortalContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
+    const pathname = usePathname()
     const clientId = searchParams.get('client')
     const { user, loading: authLoading, portalAccess } = useAuth()
 
@@ -16,7 +19,10 @@ function PortalContent() {
             if (authLoading) return
 
             if (!user) {
-                router.replace('/portal/login')
+                if (isPublicPortalRoute(pathname)) {
+                    return
+                }
+                router.replace(`/portal/login?from=${encodeURIComponent(pathname)}`)
                 return
             }
 
@@ -65,7 +71,7 @@ function PortalContent() {
         }
 
         routeUser()
-    }, [clientId, user, authLoading, portalAccess, router])
+    }, [clientId, user, authLoading, portalAccess, pathname, router])
 
     return (
         <div className="min-h-screen flex items-center justify-center">
