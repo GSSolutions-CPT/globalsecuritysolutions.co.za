@@ -31,7 +31,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: inviteError.message }, { status: 400 })
         }
 
-        const inviteLink = inviteData?.invite_link || `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/portal/auth/callback`
+        const inviteLink = inviteData
+            ? typeof inviteData === 'object' && inviteData !== null && 'invite_link' in inviteData
+                ? (inviteData as { invite_link?: string }).invite_link ?? `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/portal/auth/callback`
+                : `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/portal/auth/callback`
+            : `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/portal/auth/callback`
 
         return NextResponse.json({ inviteLink })
     } catch (error) {
