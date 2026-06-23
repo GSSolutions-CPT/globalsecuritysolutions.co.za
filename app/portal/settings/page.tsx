@@ -64,23 +64,16 @@ export default function SettingsPage() {
         }
         setIsLoading(true)
         try {
-            const { data: { session } } = await supabase.auth.getSession()
-            if (!session) throw new Error('Not authenticated')
-
-            const res = await fetch(
-                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/create-team-user`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${session.access_token}`,
-                    },
-                    body: JSON.stringify({
-                        email: newUser.email,
-                        role: newUser.role,
-                    }),
-                }
-            )
+            const res = await fetch('/api/portal/team/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: newUser.email,
+                    role: newUser.role,
+                }),
+            })
 
             const result = await res.json()
             if (!res.ok) throw new Error(result.error || 'Failed to create user')
@@ -110,14 +103,10 @@ export default function SettingsPage() {
         })
         if (!ok) return
         try {
-            const { data: { session } } = await supabase.auth.getSession()
-            if (!session) throw new Error('Not authenticated')
-
-            const res = await fetch('/api/portal/delete-team-user', {
+            const res = await fetch('/api/portal/team/delete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${session.access_token}`,
                 },
                 body: JSON.stringify({ userId: id }),
             })
