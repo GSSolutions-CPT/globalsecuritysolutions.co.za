@@ -235,8 +235,8 @@ export default function ClientsPage() {
                                         className="w-full border-brand-steel/40 dark:border-brand-navy hover:bg-brand-white dark:hover:bg-brand-navy group-hover:border-brand-electric/40 dark:group-hover:border-brand-navy/50 transition-colors"
                                         onClick={(e: React.MouseEvent) => {
                                             e.stopPropagation()
-                                            const portalLink = `${window.location.origin}/portal?client=${client.id}`
-                                            shareLink('GSS Client Portal', 'Access your client portal here:', portalLink)
+                                            const portalLink = `${window.location.origin}/portal/profile-setup/${client.id}`
+                                            shareLink('GSS Client Portal', 'Set up your portal access here:', portalLink)
                                         }}
                                     >
                                         <ExternalLink className="mr-2 h-4 w-4 text-brand-electric" />

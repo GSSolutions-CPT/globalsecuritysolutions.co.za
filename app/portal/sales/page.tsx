@@ -483,8 +483,8 @@ export default function SalesPage() {
                             title="Copy Client Portal Link"
                             onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation()
-                                const link = `${window.location.origin}/portal?client=${sale.client_id}`
-                                shareLink('GSS Client Portal', 'Access your client portal here:', link)
+                                const link = `${window.location.origin}/portal/profile-setup/${sale.client_id}`
+                                shareLink('GSS Client Portal', 'Set up your portal access here:', link)
                             }}
                         >
                             <Share2 className="h-4 w-4" />
