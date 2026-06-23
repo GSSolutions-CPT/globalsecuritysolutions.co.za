@@ -57,7 +57,7 @@ export default function ClientsPage() {
             const { data, error, count } = await supabase
                 .from('clients')
                 .select('*', { count: 'exact' })
-                .not('metadata->>status', 'eq', 'archived')
+                .or('metadata->>status.is.null,metadata->>status.neq.archived')
                 .order('created_at', { ascending: false })
                 .range(from, to)
 

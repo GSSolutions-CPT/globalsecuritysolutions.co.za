@@ -93,7 +93,7 @@ export function ClientDialog({
                 // Create new client
                 const { data, error } = await supabase
                     .from('clients')
-                    .insert([formData])
+                    .insert([{ ...formData, metadata: {} }])
                     .select()
                     .single()
 

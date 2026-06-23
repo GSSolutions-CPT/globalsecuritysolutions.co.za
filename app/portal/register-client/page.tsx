@@ -79,6 +79,7 @@ export default function RegisterClientPage() {
                     phone: phone.trim(),
                     address: address.trim() || null,
                     auth_user_id: user!.id,
+                    metadata: {},
                 })
                 .select('id')
                 .single()
