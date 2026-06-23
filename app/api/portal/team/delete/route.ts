@@ -11,16 +11,16 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json()
-        const userId = body?.userId as string | undefined
+        const userId = (body?.userId as string | undefined)?.trim()
 
         if (!userId) {
             return NextResponse.json({ error: 'Missing userId' }, { status: 400 })
         }
 
-        const { error: deleteError } = await supabase.auth.admin.deleteUser(userId)
+        const { error } = await supabase.auth.admin.deleteUser(userId)
 
-        if (deleteError) {
-            return NextResponse.json({ error: deleteError.message }, { status: 400 })
+        if (error) {
+            return NextResponse.json({ error: error.message }, { status: 400 })
         }
 
         return NextResponse.json({ success: true })
