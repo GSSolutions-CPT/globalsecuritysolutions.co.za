@@ -85,39 +85,31 @@ export default function ClientsPage() {
 
     const handleDelete = async (id: string) => {
         const ok = await confirm({
-            title: 'Archive Client',
-            description: 'Are you sure you want to archive this client? Their financial history will be preserved but hidden from this list.',
-            confirmLabel: 'Archive',
+            title: 'Delete Client',
+            description: 'This will permanently delete this client and all related CRM data. This action cannot be undone.',
+            confirmLabel: 'Delete',
             variant: 'destructive'
         })
         if (!ok) return
 
-        const toastId = toast.loading('Archiving client...')
+        const toastId = toast.loading('Deleting client...')
 
         try {
-            const clientToArchive = clients.find(c => c.id === id)
-            if (!clientToArchive) return
+            const res = await fetch(`/api/portal/client/delete?clientId=${encodeURIComponent(id)}`, {
+                method: 'DELETE',
+            })
 
-            const currentMetadata = (clientToArchive.metadata as Record<string, unknown>) || {}
-            const newMetadata = {
-                ...currentMetadata,
-                status: 'archived',
-                archived_at: new Date().toISOString()
+            const payload = await res.json()
+            if (!res.ok) {
+                throw new Error(payload?.error || 'Delete failed')
             }
 
-            const { error } = await supabase
-                .from('clients')
-                .update({ metadata: newMetadata })
-                .eq('id', id)
-
-            if (error) throw error
-
-            toast.success('Client archived successfully', { id: toastId })
+            toast.success('Client deleted', { id: toastId })
             fetchClients(clientsPage)
             fetchClientStats()
         } catch (error) {
-            console.error('Error archiving client:', error)
-            toast.error('Error archiving client.', { id: toastId })
+            console.error('Error deleting client:', error)
+            toast.error(error instanceof Error ? error.message : 'Error deleting client.', { id: toastId })
         }
     }
 
