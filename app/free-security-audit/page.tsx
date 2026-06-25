@@ -28,13 +28,47 @@ export const auditFormJsonLd = {
   "url": "/free-security-audit",
   "capabilities": ["quote", "maintain", "audit", "contact"],
   "intents": ["request_quote", "request_maintenance", "general_inquiry"],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "url": "https://www.globalsecuritysolutions.co.za/free-security-audit#book-form",
+      "availableLanguage": ["English"]
+    }
+  ],
   "fields": [
     { "name": "name", "label": "Name", "required": true },
     { "name": "phone", "label": "Phone", "required": true, "type": "tel" },
     { "name": "email", "label": "Email", "required": true, "type": "email" },
     { "name": "suburb", "label": "Suburb / Area", "required": false },
-    { "name": "service", "label": "Service Interested In", "required": true }
-  ]
+    {
+      "name": "service",
+      "label": "Service Interested In",
+      "required": true,
+      "type": "select",
+      "options": [
+        "General Inquiry",
+        "Smart Alarm System",
+        "Home CCTV & Remote View",
+        "Perimeter Beams (Garden)",
+        "Video Intercom & Gate",
+        "Biometric Access Control",
+        "IP Camera Network (AI)",
+        "Fire Detection Integration",
+        "Time & Attendance",
+        "Solar Perimeter Beams",
+        "LPR (License Plate Recognition)",
+        "Off-Site Monitoring Setup",
+        "Electric Fencing",
+        "Maintenance & Repairs"
+      ]
+    },
+    { "name": "request_type", "label": "Request Type", "required": true, "enum": ["quote", "maintenance", "audit", "contact"] }
+  ],
+  "registration": {
+    "submitEndpoint": "https://www.globalsecuritysolutions.co.za/free-security-audit#book-form",
+    "submitHandler": "ContactForm.handleSubmit"
+  }
 }
 
 export default function FreeAuditPage() {
