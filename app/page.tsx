@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { MarketingBanner } from '@/components/MarketingBanner'
 import { HomeClient } from './HomeClient'
+import { LandingPopup } from '@/components/LandingPopup'
 
 export const metadata: Metadata = {
   alternates: {
@@ -16,6 +17,8 @@ export default function Home() {
 
       {/* SECTION 2-7: Client Hydrated Interactive Layers */}
       <HomeClient />
+
+      <LandingPopup />
     </div>
   )
 }
