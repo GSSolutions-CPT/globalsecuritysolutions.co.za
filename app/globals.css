@@ -237,7 +237,7 @@
     --card: 0 0% 100%; /* white */
     --card-foreground: 222.2 47.4% 11.2%;
 
-    --popover: 0 0% 100%;
+    --popover: 0 0% 100%; /* white */
     --popover-foreground: 222.2 47.4% 11.2%;
 
     --primary: 221.2 83.2% 53.3%; /* primary blue */
@@ -257,6 +257,33 @@
     --ring: 221.2 83.2% 53.3%;
   }
 
+  .portal-theme-light [class*="bg-brand-navy"],
+  .portal-theme-light .glass-panel,
+  .portal-theme-light .glass-card-dark,
+  .portal-theme-light .bg-brand-navy {
+    background-color: #ffffff !important;
+    --tw-bg-opacity: 1;
+  }
+
+  .portal-theme-light [class*="text-brand-navy"] {
+    color: #0a192f !important;
+  }
+
+  .portal-theme-light .text-brand-white,
+  .portal-theme-light [class*="text-brand-white"] {
+    color: #0a192f !important;
+  }
+
+  .portal-theme-light .text-brand-steel,
+  .portal-theme-light [class*="text-brand-steel"] {
+    color: #334155 !important;
+  }
+
+  .portal-theme-light .text-brand-electric,
+  .portal-theme-light [class*="text-brand-electric"] {
+    color: #0ea5e9 !important;
+  }
+
   .portal-theme-light .glass-panel {
     @apply bg-white border border-slate-200/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] backdrop-blur-none;
   }
@@ -274,4 +301,4 @@
   .portal-theme-light .cyber-input {
     @apply bg-white border border-slate-200 text-slate-900 focus:border-sky-500 focus:ring-1 focus:ring-sky-500/30 transition-all duration-200 outline-none;
   }
-}
+}
