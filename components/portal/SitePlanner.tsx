@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'

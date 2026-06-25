@@ -417,7 +417,7 @@ export default function DashboardPage() {
                         })}
                         {activities.length === 0 && (
                             <div className="h-48 flex items-center justify-center">
-                                <p className="text-xs text-slate-400 font-medium">No recent system activity.</p>
+                                <p className="text-xs text-slate-500 font-medium">No recent system activity.</p>
                             </div>
                         )}
                     </div>

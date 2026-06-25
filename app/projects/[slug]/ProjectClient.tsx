@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, Variants } from 'framer-motion'
-import { ArrowLeft, Calendar, Tag, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Calendar, Tag } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PageHero } from '@/components/PageHero'

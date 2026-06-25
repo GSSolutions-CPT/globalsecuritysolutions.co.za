@@ -76,7 +76,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
                 localStorage.removeItem(key)
             })
 
-        } catch (error) {
+        } catch {
             console.log('Falling back to localStorage for settings')
             const localKeys = [
                 'companyName', 'companyAddress', 'companyPhone', 'companyEmail',
