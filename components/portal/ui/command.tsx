@@ -11,16 +11,14 @@ const Command: any = React.forwardRef(({ className, ...props }, ref) => (
         ref={ref}
         className={cn(
             "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
-            className
+            className,
+            "bg-brand-white dark:bg-brand-navy text-slate-900 dark:text-slate-100",
         )}
         {...props} />
 ))
 Command.displayName = CommandPrimitive.displayName
 
-const CommandDialog = ({
-    children,
-    ...props
-}) => {
+const CommandDialog = ({ children, ...props }) => {
     return (
         (<Dialog {...props}>
             <DialogContent className="overflow-hidden p-0 shadow-lg">
@@ -78,6 +76,7 @@ CommandGroup.displayName = CommandPrimitive.Group.displayName
 const CommandSeparator: any = React.forwardRef(({ className, ...props }, ref) => (
     <CommandPrimitive.Separator ref={ref} className={cn("-mx-1 h-px bg-border", className)} {...props} />
 ))
+
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 
 const CommandItem: any = React.forwardRef(({ className, ...props }, ref) => (
@@ -92,10 +91,7 @@ const CommandItem: any = React.forwardRef(({ className, ...props }, ref) => (
 
 CommandItem.displayName = CommandPrimitive.Item.displayName
 
-const CommandShortcut = ({
-    className,
-    ...props
-}) => {
+const CommandShortcut = ({ className, ...props }) => {
     return (
         (<span
             className={cn("ml-auto text-xs tracking-widest text-muted-foreground", className)}
@@ -115,5 +111,4 @@ export {
     CommandShortcut,
     CommandSeparator,
 }
-
 

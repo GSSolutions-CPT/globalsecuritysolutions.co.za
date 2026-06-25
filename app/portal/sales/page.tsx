@@ -673,7 +673,7 @@ export default function SalesPage() {
                         placeholder="Search by client..."
                         value={searchTerm}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-                        className="pl-10 w-full"
+                        className="pl-10 w-full bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy text-slate-900 dark:text-slate-100"
                     />
                 </div>
 

@@ -588,7 +588,7 @@ function JobsContent() {
                             placeholder="Search jobs..."
                             value={searchTerm}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-                            className="pl-10"
+                            className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy text-slate-900 dark:text-slate-100"
                         />
                     </div>
 

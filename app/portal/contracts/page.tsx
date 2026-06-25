@@ -286,7 +286,7 @@ export default function ContractsPage() {
             placeholder="Search contracts or clients..."
             value={searchTerm}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy"
+            className="pl-10 bg-brand-white dark:bg-brand-navy border-brand-steel/40 dark:border-brand-navy text-slate-900 dark:text-slate-100"
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
