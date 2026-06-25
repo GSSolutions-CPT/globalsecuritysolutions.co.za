@@ -109,7 +109,7 @@ export default function Register() {
                     <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60 bg-clip-text text-transparent">
                         Create an Account
                     </CardTitle>
-                    <CardDescription className="text-brand-steel dark:text-brand-steel">
+                    <CardDescription className="text-brand-steel">
                         Register to access the GSS Client Portal
                     </CardDescription>
                 </CardHeader>
@@ -252,7 +252,7 @@ export default function Register() {
                         </Button>
 
                         <div className="w-full text-center mt-4">
-                            <p className="text-sm text-brand-steel dark:text-brand-steel">
+                            <p className="text-sm text-brand-steel">
                                 Already have an account?{' '}
                                 <Link href="/portal/login" className="font-semibold text-brand-electric hover:text-brand-electric hover:underline transition-colors">
                                     Sign In

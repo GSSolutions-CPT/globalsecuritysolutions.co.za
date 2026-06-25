@@ -721,7 +721,9 @@ export default function SalesPage() {
                             <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
                                 <FileText className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No active quotations</h3>
+                            <h3 className="text-lg font-medium text-brand-navy">
+                                No active quotations
+                            </h3>
                             <p className="mb-6 max-w-sm text-center">Create a new quote to get started with your sales pipeline.</p>
                             <Button onClick={() => router.push('/portal/sales/new')}>Create Quote</Button>
                         </div>
@@ -806,7 +808,9 @@ export default function SalesPage() {
                             <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full mb-4">
                                 <CheckCircle className="h-8 w-8 text-green-500" />
                             </div>
-                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">All clear!</h3>
+                            <h3 className="text-lg font-medium text-brand-navy">
+                                All clear!
+                            </h3>
                             <p className="text-center">No quotations are currently pending review.</p>
                         </div>
                     )}
@@ -821,7 +825,9 @@ export default function SalesPage() {
                             <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
                                 <FileText className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No proforma invoices</h3>
+                            <h3 className="text-lg font-medium text-brand-navy">
+                                No proforma invoices
+                            </h3>
                             <p className="text-center">Accepted/Approved quotes will appear here as proforma invoices.</p>
                         </div>
                     )}
@@ -835,7 +841,9 @@ export default function SalesPage() {
                             <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
                                 <Receipt className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No invoices yet</h3>
+                            <h3 className="text-lg font-medium text-brand-navy">
+                                No invoices yet
+                            </h3>
                             <p className="text-center">Convert a quotation or create a direct invoice to see it here.</p>
                         </div>
                     )}
@@ -916,7 +924,9 @@ export default function SalesPage() {
                             <div className="bg-brand-steel/20 dark:bg-brand-navy p-4 rounded-full mb-4">
                                 <Package className="h-8 w-8 text-brand-steel" />
                             </div>
-                            <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">No purchase orders</h3>
+                            <h3 className="text-lg font-medium text-brand-navy">
+                                No purchase orders
+                            </h3>
                             <p className="text-center">Create a PO to track orders from your suppliers.</p>
                         </div>
                     )}

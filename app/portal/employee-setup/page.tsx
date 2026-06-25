@@ -113,7 +113,7 @@ export default function EmployeeSetupPage() {
                             <CheckCircle2 className="h-16 w-16 text-emerald-500 animate-bounce" />
                             <div>
                                 <h3 className="text-xl font-bold text-brand-navy dark:text-white">Profile Secured!</h3>
-                                <p className="text-brand-steel dark:text-brand-steel">Redirecting to sign-in...</p>
+                                <p className="text-brand-steel">Redirecting to sign-in...</p>
                             </div>
                         </div>
                     ) : !error ? (

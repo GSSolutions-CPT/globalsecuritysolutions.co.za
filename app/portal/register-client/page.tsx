@@ -135,7 +135,7 @@ export default function RegisterClientPage() {
                     <CardTitle className="text-2xl font-bold tracking-tight bg-gradient-to-r from-brand-navy to-brand-slate dark:from-white dark:to-brand-steel/60 bg-clip-text text-transparent">
                         Complete Your Profile
                     </CardTitle>
-                    <CardDescription className="text-brand-steel dark:text-brand-steel mt-1">
+                    <CardDescription className="text-brand-steel mt-1">
                         Just a few details to set up your client portal.
                     </CardDescription>
                 </CardHeader>

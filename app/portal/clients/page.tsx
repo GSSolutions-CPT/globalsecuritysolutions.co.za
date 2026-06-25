@@ -262,7 +262,7 @@ export default function ClientsPage() {
                     <div className="bg-brand-electric/20 dark:bg-brand-navy/30 p-4 rounded-full mb-4">
                         <Users className="h-8 w-8 text-brand-electric" />
                     </div>
-                    <h3 className="text-lg font-medium text-brand-navy dark:text-brand-steel/40">
+                    <h3 className="text-lg font-medium text-brand-navy">
                         {searchTerm ? 'No matching clients' : 'No clients yet'}
                     </h3>
                     <p className="mb-6 max-w-sm text-center">

@@ -84,7 +84,7 @@ const CustomToolbar = (toolbar: ToolbarProps<CalendarEvent>) => {
                         className={cn(
                             "px-3 py-1.5 text-xs font-medium rounded-md transition-all",
                             toolbar.view === view
-                                ? "bg-white dark:bg-brand-navy text-brand-navy dark:text-brand-steel/20 shadow-sm"
+                                ? "bg-white dark:bg-brand-navy text-slate-900 dark:text-white shadow-sm"
                                 : "text-brand-steel hover:text-brand-navy dark:hover:text-brand-steel/60"
                         )}
                     >

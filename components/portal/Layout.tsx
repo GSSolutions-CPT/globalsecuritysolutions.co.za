@@ -22,7 +22,6 @@ import {
     ExternalLink,
     ChevronLeft,
     ChevronRight,
-    ShoppingCart,
     User,
 } from 'lucide-react'
 import { useSettings } from '@/lib/portal/use-settings'
@@ -63,7 +62,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             { name: 'Clients', path: '/portal/clients', icon: Users },
             { name: 'Requests', path: '/portal/requests', icon: Inbox },
             { name: 'Products', path: '/portal/products', icon: Package },
-            { name: 'Purchase Orders', path: '/portal/purchase-orders', icon: ShoppingCart },
             { name: 'Jobs', path: '/portal/jobs', icon: Briefcase },
             { name: 'Financials', path: '/portal/financials', icon: PieChart },
             { name: 'Settings', path: '/portal/settings', icon: Settings },

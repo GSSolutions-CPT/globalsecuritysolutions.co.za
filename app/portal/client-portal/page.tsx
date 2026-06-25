@@ -477,7 +477,7 @@ export default function ClientPortalPage() {
                                 <div key={q.id} className="relative overflow-hidden bg-white/60 dark:bg-brand-navy/40 backdrop-blur-md border border-green-200/50 dark:border-green-900/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all flex justify-between items-center group">
                                     <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-green-500"></div>
                                     <div>
-                                        <p className="font-semibold text-brand-navy dark:text-brand-steel/40 flex items-center gap-2">
+                                        <p className="font-semibold text-brand-navy dark:text-brand-steel flex items-center gap-2">
                                             <CheckCircle className="h-5 w-5 text-green-500" /> Payment Verified
                                         </p>
                                         <p className="text-sm text-brand-steel dark:text-brand-steel mt-1">
@@ -503,25 +503,25 @@ export default function ClientPortalPage() {
                             <div className="p-3 bg-brand-electric/20 dark:bg-brand-navy/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <HelpCircle className="h-6 w-6 text-brand-electric dark:text-brand-electric" />
                             </div>
-                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Support Center</span>
+                            <span className="font-medium text-brand-slate dark:text-brand-steel">Support Center</span>
                         </Button>
                         <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-green-500/50 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all group" disabled={!whatsappUrl} onClick={() => whatsappUrl && window.open(whatsappUrl, '_blank')}>
                             <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <MessageCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                             </div>
-                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">WhatsApp Us</span>
+                            <span className="font-medium text-brand-slate text-brand-slate">WhatsApp Us</span>
                         </Button>
                         <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-brand-electric/50 hover:bg-brand-electric/10 dark:hover:bg-brand-electric/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: '', preferredDate: '' }); setRequestQuoteOpen(true) }}>
                             <div className="p-3 bg-brand-electric/15 dark:bg-brand-electric/20 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <FileText className="h-6 w-6 text-brand-electric" />
                             </div>
-                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Request a Quote</span>
+                            <span className="font-medium text-brand-slate text-brand-slate">Request a Quote</span>
                         </Button>
                         <Button variant="outline" className="h-32 flex-col justify-center gap-3 bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm border-brand-steel/40 dark:border-brand-navy hover:border-amber-500/50 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-all group" onClick={() => { setRequestForm({ description: '', address: client?.address || '', preferredDate: '' }); setRequestVisitOpen(true) }}>
                             <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-full group-hover:scale-110 transition-transform duration-300">
                                 <MapPin className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                             </div>
-                            <span className="font-medium text-brand-slate dark:text-brand-steel/60">Request Site Visit</span>
+                            <span className="font-medium text-brand-slate text-brand-slate">Request Site Visit</span>
                         </Button>
                     </div>
                 </div>
@@ -663,7 +663,7 @@ export default function ClientPortalPage() {
                                         <div className={cn(
                                             "p-4 rounded-xl text-sm text-center border font-medium relative overflow-hidden",
                                             (quotation.status === 'Approved' || quotation.admin_approved)
-                                                ? "bg-brand-white text-brand-slate border-brand-steel/40 dark:bg-brand-navy/50 dark:text-brand-steel/60 dark:border-brand-slate"
+                                                ? "bg-brand-white text-brand-slate border-brand-steel/40 dark:bg-brand-navy/50 text-brand-slate dark:border-brand-slate"
                                                 : "bg-amber-50 text-amber-800 border-amber-100 dark:bg-amber-900/10 dark:text-amber-400 dark:border-amber-900/20"
                                         )}>
                                             {(quotation.status === 'Approved' || quotation.admin_approved) ? (
@@ -797,12 +797,12 @@ export default function ClientPortalPage() {
                                     <p className="font-bold text-lg text-brand-navy dark:text-white">Banking Details</p>
                                 </div>
                                 {hasBankingDetails ? (
-                                <div className="grid grid-cols-[80px_1fr] gap-y-2 gap-x-4 pl-3 text-brand-slate dark:text-brand-steel/60">
+                                <div className="grid grid-cols-[80px_1fr] gap-y-2 gap-x-4 pl-3 text-brand-slate text-brand-slate">
                                     <span className="text-muted-foreground font-medium text-right">Bank:</span> <span className="font-semibold text-brand-navy dark:text-white">{settings.bankName}</span>
                                     <span className="text-muted-foreground font-medium text-right">Account:</span> <span className="font-semibold text-brand-navy dark:text-white font-mono">{settings.bankAccountNumber}</span>
                                     <span className="text-muted-foreground font-medium text-right">Branch:</span> <span className="text-brand-navy dark:text-white">{settings.bankBranchCode}</span>
                                     <span className="text-muted-foreground font-medium text-right pt-1">Ref:</span>
-                                    <span className="font-mono bg-white dark:bg-black px-2 py-1 rounded border border-brand-steel/40 dark:border-brand-slate text-brand-navy dark:text-brand-steel/40 select-all font-bold tracking-wide w-fit">{settings.bankReference || acceptingQuote?.id.substring(0, 6)}</span>
+                                    <span className="font-mono bg-white dark:bg-black px-2 py-1 rounded border border-brand-steel/40 dark:border-brand-slate text-brand-navy dark:text-brand-steel select-all font-bold tracking-wide w-fit">{settings.bankReference || acceptingQuote?.id.substring(0, 6)}</span>
                                 </div>
                                 ) : (
                                     <p className="text-sm text-amber-700 dark:text-amber-400 pl-3">
@@ -813,7 +813,7 @@ export default function ClientPortalPage() {
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2">
                                     <div className="h-8 w-8 bg-brand-electric/20 rounded-full flex items-center justify-center text-brand-electric"><span className="font-bold">2</span></div>
-                                    <p className="font-semibold text-brand-navy dark:text-brand-steel/40">Upload Proof of Payment</p>
+                                    <p className="font-semibold text-brand-navy dark:text-brand-steel">Upload Proof of Payment</p>
                                 </div>
                                 <div className="pl-10">
                                     <p className="text-sm text-brand-steel mb-3">Please make a <strong>{acceptingQuote?.payment_type === 'full' ? 'Full Payment' : `${acceptingQuote?.deposit_percentage || 75}% deposit`} ({formatCurrency((acceptingQuote?.total_amount || 0) * ((acceptingQuote?.payment_type === 'full' ? 100 : (acceptingQuote?.deposit_percentage || 75)) / 100))})</strong> to secure your booking.</p>
@@ -834,7 +834,7 @@ export default function ClientPortalPage() {
                             <div className="space-y-4">
                                 <div className="flex items-center gap-2">
                                     <div className="h-8 w-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-600"><Upload className="h-4 w-4" /></div>
-                                    <p className="font-semibold text-brand-navy dark:text-brand-steel/40">Upload Final Proof of Payment</p>
+                                    <p className="font-semibold text-brand-navy text-brand-slate">Upload Final Proof of Payment</p>
                                 </div>
                                 <div className="pl-10">
                                     <p className="text-sm text-brand-steel mb-3">Please upload the proof for your <strong>Outstanding Balance</strong>.</p>

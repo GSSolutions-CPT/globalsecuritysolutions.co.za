@@ -297,7 +297,7 @@ function CreatePurchaseOrderContent() {
                                         )}
                                     </div>
                                     <div className="space-y-1">
-                                        <p className="text-sm font-medium text-brand-slate dark:text-brand-steel/40">
+                                        <p className="text-sm font-medium text-brand-navy">
                                             {file ? file.name : "Drop PDF or Click to Upload"}
                                         </p>
                                         <p className="text-xs text-brand-steel">
@@ -519,11 +519,11 @@ function CreatePurchaseOrderContent() {
                                     <tbody className="divide-y divide-brand-steel/20 dark:divide-brand-navy/50">
                                         {lines.map((line, i) => (
                                             <tr key={i} className="group">
-                                                <td className="py-3 text-brand-slate dark:text-brand-steel/60">
+                                                <td className="py-3 text-brand-slate">
                                                     {line.description || <span className="text-muted-foreground italic">Item description...</span>}
                                                 </td>
                                                 <td className="py-3 text-center text-brand-slate dark:text-brand-steel">{line.quantity}</td>
-                                                <td className="py-3 text-right font-medium text-brand-navy dark:text-brand-steel/40">
+                                                <td className="py-3 text-right font-medium text-brand-navy">
                                                     {formatCurrency(line.quantity * line.unit_price)}
                                                 </td>
                                             </tr>
@@ -535,7 +535,7 @@ function CreatePurchaseOrderContent() {
                             <div className="bg-brand-white dark:bg-brand-navy/50 p-6 space-y-3">
                                 <div className="flex justify-between text-sm">
                                     <span className="text-muted-foreground">Subtotal</span>
-                                    <span className="font-medium text-brand-navy dark:text-brand-steel/40">{formatCurrency(calculateSubTotal())}</span>
+                                    <span className="font-medium text-brand-navy">{formatCurrency(calculateSubTotal())}</span>
                                 </div>
                                 <div className="flex justify-between text-sm items-center">
                                     <span className="text-muted-foreground flex items-center gap-2">
@@ -569,7 +569,7 @@ function CreatePurchaseOrderContent() {
                                 <CreditCard className="h-4 w-4" />
                             </div>
                             <div>
-                                <h4 className="font-semibold text-sm text-brand-navy dark:text-brand-electric/40">Payment Terms</h4>
+                                <h4 className="font-semibold text-sm text-brand-navy">Payment Terms</h4>
                                 <p className="text-xs text-brand-electric dark:text-brand-electric/60 mt-1">
                                     Ensure suppliers include your Order Reference ({poDetails.reference || '...'}) on their invoices.
                                 </p>

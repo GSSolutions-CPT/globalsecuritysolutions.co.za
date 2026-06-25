@@ -123,7 +123,7 @@ function JobCard({ job, isOverlay }: JobCardProps) {
             <CardContent className="p-3 space-y-3">
                 <div className="flex justify-between items-start gap-2">
                     <div className="space-y-1">
-                        <h4 className="font-semibold text-sm leading-tight text-brand-navy dark:text-brand-steel/40 line-clamp-2">
+                        <h4 className="font-semibold text-sm leading-tight text-brand-navy line-clamp-2">
                             {job.clients?.name || 'Unknown Client'}
                         </h4>
                         <p className="text-[11px] font-medium text-brand-steel uppercase tracking-wide line-clamp-1">
@@ -134,7 +134,7 @@ function JobCard({ job, isOverlay }: JobCardProps) {
                 </div>
 
                 {job.notes && (
-                    <div className="relative text-xs text-brand-slate dark:text-brand-steel bg-brand-white dark:bg-brand-navy/50 p-2 rounded-md border border-brand-steel/20 dark:border-brand-navy/50 italic">
+                    <div className="relative text-xs text-brand-slate bg-brand-white/80 p-2 rounded-md border border-brand-steel/20 italic">
                         <span className="line-clamp-2">{job.notes}</span>
                     </div>
                 )}
