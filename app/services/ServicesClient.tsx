@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, Variants } from 'framer-motion'
 import seoData from '@/app/data/seoData.json'
-import { ArrowRight, CheckCircle2, Search, FileText, Wrench, HeadphonesIcon } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Search, FileText, Wrench, HeadphonesIcon, ShieldCheck } from 'lucide-react'
 import { PageHero } from '@/components/PageHero'
 
 const toSlug = (text: string) => {
