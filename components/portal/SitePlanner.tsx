@@ -1882,7 +1882,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={thumbnails.get(idx)} alt={page.name} className="w-full h-full object-contain" />
                   ) : (
-                    <div className="text-brand-slate/40 text-[10px] text-center px-1">
+                    <div className="text-brand-slate/70 text-[10px] text-center px-1">
                       {page.background_url ? 'Preview' : 'Empty'}
                     </div>
                   )}
@@ -1917,9 +1917,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             <canvas ref={canvasRef} />
             {!hasBackground && canvasReady && (
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none bg-[#e8ecf2]">
-                <Upload className="h-10 w-10 text-brand-slate/60 mb-3" />
-                <p className="text-sm text-[#475569] font-medium">Drop a floor plan image here</p>
-                <p className="text-xs text-[#64748b] mt-1">or use the Upload button in the sidebar</p>
+                <Upload className="h-10 w-10 text-brand-slate/80 mb-3" />
+                <p className="text-sm text-brand-slate font-medium">Drop a floor plan image here</p>
+                <p className="text-xs text-brand-slate/70 mt-1">or use the Upload button in the sidebar</p>
               </div>
             )}
           </div>

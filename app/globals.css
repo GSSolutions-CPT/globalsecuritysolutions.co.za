@@ -4,7 +4,7 @@
 @theme {
   --color-brand-electric: #00e5ff; /* Vibrant Electric Blue */
   --color-brand-navy: #0a192f;     /* Deep Navy Blue */
-  --color-brand-slate: #94a3b8;    /* Slate Grey — brighter for dark BG readability */
+  --color-brand-slate: #cbd5e1;    /* Slate 300 — high contrast on dark navy */
   --color-brand-steel: #4682b4;    /* Steel Blue */
   --color-brand-white: #ffffff;    /* White */
 
@@ -102,7 +102,7 @@
     --secondary-foreground: 0 0% 100%;
 
     --muted: 215.7 44% 20%;
-    --muted-foreground: 210 20% 78%; /* bright enough for dark BG readability WCAG AA */
+    --muted-foreground: 210 20% 88%; /* strong contrast for dark BG readability */
 
     --accent: 186.1 100% 50%; /* brand-electric hover states */
     --accent-foreground: 215.7 64.9% 11.2%;
