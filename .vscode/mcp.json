@@ -1,13 +1,23 @@
 {
-  "mcpServers": {
-    "@21st-dev/magic": {
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "apiKey",
+      "description": "21st.dev Magic API Key",
+      "password": true
+    }
+  ],
+  "servers": {
+    "magic": {
+      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",
-        "@21st-dev/magic@latest",
-        "API_KEY=sk_fe27f1c9b4165193c0541b1e7b03948933ead506c3dfb594c24e64e9cd4434e1"
+        "@21st-dev/magic@latest"
       ],
-      "env": {}
+      "env": {
+        "API_KEY": "7acb6f8c51aa1c4f07d56116d0d1666360158d9a76e43128beb97688b8411744"
+      }
     }
   }
 }
