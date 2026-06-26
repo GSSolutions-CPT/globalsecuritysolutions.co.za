@@ -67,8 +67,8 @@ export function AboutClient() {
                             We set out to change the narrative by building a company rooted in accountability and long-term relationships.
                         </motion.p>
                         <motion.div variants={fadeInUp} className="not-prose">
-                            <Link href="/contact" className="inline-flex items-center text-brand-navy bg-brand-electric px-8 py-3 rounded-full font-bold text-sm hover:bg-brand-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:scale-105 active:scale-95 transition-all w-fit">
-                                Get Protected
+                            <Link href="https://wa.me/27629558559" className="inline-flex items-center text-white bg-emerald-500 px-8 py-3 rounded-full font-bold text-sm hover:bg-emerald-600 hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:scale-105 active:scale-95 transition-all w-fit ring-2 ring-white/10">
+                                Call or WhatsApp Us
                                 <ArrowRight className="ml-2 w-4 h-4" />
                             </Link>
                         </motion.div>

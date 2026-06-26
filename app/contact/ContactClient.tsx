@@ -37,13 +37,13 @@ export function ContactClient() {
                 badgeText="We're Ready To Help"
                 title={
                     <>
-                        Get in Touch with <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">The Experts</span>
+                        Security Services <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Cape Town</span>
                     </>
                 }
-                subtitle="Whether you need a rapid deployment quote or a comprehensive security audit, our specialized tactical team is standing by to assist you."
+                subtitle="Quick contact for quotes, site visits and maintenance. We respond promptly during business hours."
                 bgImage="/page-heroes/contact-hero.jpg"
-                pbClass="pb-48"
+                pbClass="pb-32"
             />
 
             {/* Main Content Area */}

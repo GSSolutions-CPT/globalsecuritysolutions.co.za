@@ -7,14 +7,14 @@ import { motion } from 'framer-motion';
 
 export const MarketingBanner = () => {
     // Generate simple particle coordinates for drifting tech particles
-    const particles = Array.from({ length: 15 }).map((_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 2,
-        delay: Math.random() * 5,
-        duration: Math.random() * 10 + 10,
-    }));
+    const particles = Array.from({ length: 15 }).map((_, i) => {
+        const x = ((i * 37 + 17) % 100);
+        const y = ((i * 73 + 31) % 100);
+        const size = ((i * 41 + 19) % 3) + 2;
+        const delay = ((i * 23 + 11) % 50) / 10;
+        const duration = ((i * 29 + 13) % 100) / 10 + 10;
+        return { id: i, x, y, size, delay, duration };
+    });
 
     return (
         <div className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-28 flex items-center overflow-hidden bg-brand-navy min-h-[85vh]">
@@ -124,16 +124,16 @@ export const MarketingBanner = () => {
                         className="flex flex-col sm:flex-row gap-4"
                     >
                         <Link
-                            href="/free-security-audit"
-                            className="inline-flex h-13 items-center justify-center rounded-full bg-brand-electric px-8 text-sm font-black text-brand-navy shadow-lg shadow-brand-electric/20 hover:shadow-brand-electric/30 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                            href="https://wa.me/27629558559"
+                            className="inline-flex h-13 items-center justify-center rounded-full bg-emerald-500 px-8 text-sm font-black text-white shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
                         >
-                            Get Free Audit
+                            Call or WhatsApp Now
                         </Link>
                         <Link
-                            href="/services"
+                            href="/free-security-audit"
                             className="inline-flex h-13 items-center justify-center rounded-full border border-brand-steel/40 bg-white/5 px-8 text-sm font-bold text-brand-white hover:bg-white/10 hover:border-brand-electric/50 active:scale-95 transition-all duration-200 cursor-pointer"
                         >
-                            View Services
+                            Get Free Audit
                         </Link>
                     </motion.div>
                 </div>

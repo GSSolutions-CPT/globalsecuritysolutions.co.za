@@ -124,20 +124,18 @@ export function HomeClient() {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             variants={fadeInUp}
             className="text-center md:mb-8 mb-6"
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-navy text-brand-electric font-bold text-xs lg:text-sm tracking-[0.2em] uppercase mb-8 shadow-xl shadow-brand-navy/10 border border-brand-electric/20 backdrop-blur-md">
-              <Command className="w-4 h-4" />
-              Our Expertise
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-electric/10 border border-brand-electric/20 text-brand-electric text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-5 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+              <Zap className="w-3 h-3" /> High-Trust, High-Conversion Service
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-4 tracking-tighter leading-tight drop-shadow-sm">
-              Comprehensive <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-steel">Security Solutions</span>
+              Security Systems Built for Cape Town
             </h2>
             <p className="text-brand-slate max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-medium">
-              Equipping your premises with state-of-the-art defenses. From perimeter fencing to intelligent alarm integration, we secure your peace of mind.
+              Every installation is personally supervised, uses premium SABS-approved cabling, and includes complete client training—so it delivers when it matters.
             </p>
           </motion.div>
 

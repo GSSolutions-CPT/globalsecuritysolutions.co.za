@@ -32,6 +32,7 @@ export function ServicesClient() {
 
             {/* Hero Section */}
             <PageHero
+                badgeIcon={<ShieldCheck className="w-3.5 h-3.5 text-brand-electric" />}
                 badgeText="Complete Protection"
                 title={
                     <>

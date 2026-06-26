@@ -151,8 +151,8 @@ export default function FAQClient() {
                                     <p className="text-brand-steel">Can&apos;t find the answer you&apos;re looking for? Chat to our team.</p>
                                 </div>
                             </div>
-                            <Link href="/contact" className="bg-white text-brand-navy px-6 py-3 rounded-full font-bold hover:bg-brand-electric/10 transition-colors whitespace-nowrap">
-                                Contact Support
+                            <Link href="/contact" className="inline-flex items-center bg-white text-brand-navy px-6 py-3 rounded-full font-bold hover:bg-brand-electric hover:text-white transition-colors whitespace-nowrap">
+                                Request Callback
                             </Link>
                         </div>
                     </div>
