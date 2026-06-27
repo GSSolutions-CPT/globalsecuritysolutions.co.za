@@ -64,6 +64,7 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes fadeInLeft {
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
@@ -85,26 +86,59 @@
 }
 
 @layer base {
-  :root, .dark {
-    --background: 215.7 64.9% 11.2%; /* brand-navy */
-    --foreground: 0 0% 100%; /* brand-white */
+  /* ─── Light mode (default) ─── */
+  :root {
+    --background: 210 40% 98%;           /* slate-50 */
+    --foreground: 222.2 47.4% 11.2%;    /* slate-900 — readable on white */
 
-    --card: 215.7 64.9% 14%; /* slightly lighter navy for contrast */
+    --card: 0 0% 100%;                   /* white */
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  /* ─── Dark mode ─── */
+  .dark {
+    --background: 215.7 64.9% 11.2%;    /* brand-navy */
+    --foreground: 0 0% 100%;             /* brand-white */
+
+    --card: 215.7 64.9% 14%;
     --card-foreground: 0 0% 100%;
 
     --popover: 215.7 64.9% 14%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 186.1 100% 50%; /* brand-electric */
-    --primary-foreground: 215.7 64.9% 11.2%; /* brand-navy text on electric buttons */
+    --primary: 186.1 100% 50%;
+    --primary-foreground: 215.7 64.9% 11.2%;
 
-    --secondary: 215.7 44% 20%; 
+    --secondary: 215.7 44% 20%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 215.7 44% 20%;
-    --muted-foreground: 210 20% 88%; /* strong contrast for dark BG readability */
+    --muted-foreground: 210 20% 88%;
 
-    --accent: 186.1 100% 50%; /* brand-electric hover states */
+    --accent: 186.1 100% 50%;
     --accent-foreground: 215.7 64.9% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -112,25 +146,11 @@
 
     --border: 215.7 44% 20%;
     --input: 215.7 44% 20%;
-    --ring: 186.1 100% 50%; /* brand-electric focus rings */
-
-    --radius: 0.75rem; /* softer, more premium radius */
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+    --ring: 186.1 100% 50%;
+    --radius: 0.75rem;
   }
 
-  .animate-bounce-slow {
-    animation: bounce 3s infinite;
-  }
-}
-
-
-
-@layer base {
+  /* ─── Base element defaults ─── */
   * {
     @apply border-border;
   }
@@ -138,9 +158,10 @@
   body {
     @apply bg-background text-foreground caret-brand-electric;
   }
-  /* Premium Text Selection */
+
+  /* Text selection: cyan highlight + navy text — never unreadable */
   ::selection {
-    @apply bg-brand-electric text-brand-navy;
+    @apply bg-brand-electric/80 text-brand-navy;
   }
 
   /* Custom Scrollbar */
@@ -165,7 +186,7 @@
   .btn-tactile {
     @apply active:scale-95 transition-all duration-150;
   }
-  
+
   .prose-apex blockquote {
     @apply border-l-4 border-blue-600 bg-blue-50 py-4 px-6 rounded-r-lg italic text-slate-800 my-8 shadow-sm not-italic;
   }
@@ -192,7 +213,7 @@
   /* Cyberpunk Tech Scanlines */
   .tech-grid-bg {
     background-size: 40px 40px;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
   }
@@ -229,34 +250,7 @@
     transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1), padding 300ms cubic-bezier(0.4, 0, 0.2, 1), margin 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Corporate Light Mode Overrides for Portal */
-  .portal-theme-light {
-    --background: 210 40% 98%; /* slate-50 */
-    --foreground: 222.2 47.4% 11.2%; /* slate-900 */
-
-    --card: 0 0% 100%; /* white */
-    --card-foreground: 222.2 47.4% 11.2%;
-
-    --popover: 0 0% 100%; /* white */
-    --popover-foreground: 222.2 47.4% 11.2%;
-
-    --primary: 221.2 83.2% 53.3%; /* primary blue */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --border: 214.3 31.8% 91.4%; /* slate-200 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-  }
-
+  /* Portal-specific light-mode overrides (cards, brand colors) */
   .portal-theme-light [class*="bg-brand-navy"],
   .portal-theme-light .glass-panel,
   .portal-theme-light .glass-card-dark,
@@ -293,7 +287,7 @@
   }
 
   .portal-theme-light .tech-grid-bg {
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
   }
