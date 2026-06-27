@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { ArrowRight, ShieldCheck, Zap, Settings, Command, Check, Award } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Zap, Settings, Check, Award } from 'lucide-react'
 import { motion, Variants } from 'framer-motion'
 import { ServiceCarousel } from '@/components/ServiceCarousel'
 import { SectorCarousel } from '@/components/SectorCarousel'

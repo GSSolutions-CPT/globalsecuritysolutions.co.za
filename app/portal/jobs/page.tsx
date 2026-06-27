@@ -3,7 +3,7 @@
 import { cn } from '@/lib/portal/utils'
 
 import { useState, useEffect, Suspense, lazy, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/portal/ui/card'
+import { Card, CardContent } from '@/components/portal/ui/card'
 import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/portal/ui/dialog'
 import { Badge } from '@/components/portal/ui/badge'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/portal/ui/tabs'
-import { Plus, Search, Briefcase, Calendar as CalendarIcon, User, Clock, List as ListIcon, Kanban, Pencil, Trash2, Loader2, CheckCircle, Activity, Upload, FileText, Image as ImageIcon } from 'lucide-react'
+import { Plus, Search, Calendar as CalendarIcon, Clock, List as ListIcon, Kanban, Pencil, Trash2, Loader2, CheckCircle, Activity, Upload, FileText, Image as ImageIcon } from 'lucide-react'
 import { supabase } from '@/lib/portal/supabase'
 import { toast } from 'sonner'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'

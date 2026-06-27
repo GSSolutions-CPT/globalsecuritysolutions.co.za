@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/lib/portal/supabase'
 import { resolvePortalAccess, type PortalAccess } from '@/lib/portal/resolve-portal-access'
 import { Session, User, AuthError, SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js'
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [accessLoading, setAccessLoading] = useState(false)
     const [portalAccess, setPortalAccess] = useState<PortalAccess | null>(null)
 
-    const refreshPortalAccess = async (nextUser: User | null = user) => {
+    const refreshPortalAccess = useCallback(async (nextUser: User | null = user) => {
         if (!nextUser) {
             setPortalAccess(null)
             setAccessLoading(false)
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } finally {
             setAccessLoading(false)
         }
-    }
+    }, [user])
 
     useEffect(() => {
         const initSession = async () => {

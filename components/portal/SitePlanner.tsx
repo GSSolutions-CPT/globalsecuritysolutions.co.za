@@ -385,8 +385,8 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   const [fillColor, setFillColor] = useState('#3b82f6')
   const [strokeColor, setStrokeColor] = useState('#1e40af')
   const [strokeWidth, setStrokeWidth] = useState(2)
+  const drawWidth = 3
   const [selectedIcon, setSelectedIcon] = useState<any>(null)
-
   // ── Zoom & Pan ──
   const [zoom, setZoom] = useState(100)
   const panRef = useRef(false)
@@ -396,7 +396,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   // ── Grid & Snap ──
   const [showGrid, setShowGrid] = useState(false)
   const [snapToGrid, setSnapToGrid] = useState(true)
-  const [gridSize, setGridSize] = useState(DEFAULT_GRID_SIZE)
+  const gridSize = DEFAULT_GRID_SIZE
 
   // ── Undo/Redo (per-page) ──
   const pageHistoriesRef = useRef<Map<number, { stack: any[]; idx: number }>>(new Map())

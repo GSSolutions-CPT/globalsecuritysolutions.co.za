@@ -146,7 +146,7 @@ export default function SalesPage() {
         }
     }
 
-    const fetchQuotations = async (page = quotesPage) => {
+    const fetchQuotations = useCallback(async (page = quotesPage) => {
         try {
             const { from, to } = getPageRange(page)
             const { data, error, count } = await supabase
@@ -164,9 +164,9 @@ export default function SalesPage() {
         } catch (error) {
             console.error('Error fetching quotations:', error)
         }
-    }
+    }, [])
 
-    const fetchInvoices = async (page = invoicesPage) => {
+    const fetchInvoices = useCallback(async (page = invoicesPage) => {
         try {
             const { from, to } = getPageRange(page)
             const { data, error, count } = await supabase
@@ -191,7 +191,7 @@ export default function SalesPage() {
         } catch (error) {
             console.error('Error fetching invoices:', error)
         }
-    }
+    }, [])
 
     const refreshQuotations = () => {
         fetchQuotations(quotesPage)
