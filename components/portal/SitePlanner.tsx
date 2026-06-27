@@ -384,7 +384,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   const [fillColor, setFillColor] = useState('#3b82f6')
   const [strokeColor, setStrokeColor] = useState('#1e40af')
   const [strokeWidth, setStrokeWidth] = useState(2)
-  const drawWidth = 3
   const [selectedIcon] = useState<any>(null)
   // ── Zoom & Pan ──
   const [zoom, setZoom] = useState(100)
