@@ -487,6 +487,49 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     } catch { /* ignore */ }
   }, [activePageIndex, pages])
 
+  // ── Grid overlay function ──
+  const attachGridOverlayFn = useCallback((canvas: any) => {
+    if (!canvas) return
+    canvas.off('before:render')
+    canvas.on('before:render', () => {
+      const ctx = canvas.contextContainer
+      if (!ctx) return
+      const w = canvas.width || 900
+      const h = canvas.height || 600
+      const gs = gridSize
+      const vpt = canvas.viewportTransform
+      if (!vpt) return
+
+      const z = canvas.getZoom()
+      const panX = vpt[4]
+      const panY = vpt[5]
+
+      ctx.save()
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
+      ctx.strokeStyle = 'rgba(148,163,184,0.12)'
+      ctx.lineWidth = 0.5
+
+      const step = gs * z
+      const offsetX = panX % step
+      const offsetY = panY % step
+
+      for (let x = offsetX; x < w; x += step) {
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, h)
+        ctx.stroke()
+      }
+      for (let y = offsetY; y < h; y += step) {
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(w, y)
+        ctx.stroke()
+      }
+      ctx.restore()
+    })
+    canvas.renderAll()
+  }, [gridSize])
+
   // ── Load page into canvas ──
   const loadPage = useCallback(async (pageIndex: number, canvas: any) => {
     const page = pages[pageIndex]
@@ -533,49 +576,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
     canvas.renderAll()
   }, [pages, showGrid, updateUndoRedoState, attachGridOverlayFn])
-
-  // ── Grid overlay function ──
-  const attachGridOverlayFn = useCallback((canvas: any) => {
-    if (!canvas) return
-    canvas.off('before:render')
-    canvas.on('before:render', () => {
-      const ctx = canvas.contextContainer
-      if (!ctx) return
-      const w = canvas.width || 900
-      const h = canvas.height || 600
-      const gs = gridSize
-      const vpt = canvas.viewportTransform
-      if (!vpt) return
-
-      const z = canvas.getZoom()
-      const panX = vpt[4]
-      const panY = vpt[5]
-
-      ctx.save()
-      ctx.setTransform(1, 0, 0, 1, 0, 0)
-      ctx.strokeStyle = 'rgba(148,163,184,0.12)'
-      ctx.lineWidth = 0.5
-
-      const step = gs * z
-      const offsetX = panX % step
-      const offsetY = panY % step
-
-      for (let x = offsetX; x < w; x += step) {
-        ctx.beginPath()
-        ctx.moveTo(x, 0)
-        ctx.lineTo(x, h)
-        ctx.stroke()
-      }
-      for (let y = offsetY; y < h; y += step) {
-        ctx.beginPath()
-        ctx.moveTo(0, y)
-        ctx.lineTo(w, y)
-        ctx.stroke()
-      }
-      ctx.restore()
-    })
-    canvas.renderAll()
-  }, [gridSize])
 
   // ── Grid toggle effect ──
   useEffect(() => {
