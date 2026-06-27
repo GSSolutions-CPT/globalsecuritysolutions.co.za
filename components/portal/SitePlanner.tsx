@@ -8,7 +8,6 @@ import { Badge } from '@/components/portal/ui/badge'
 import { supabase } from '@/lib/portal/supabase'
 import { PRIVATE_STORAGE_BUCKETS, uploadPrivateFile } from '@/lib/portal/storage'
 import { toast } from 'sonner'
-import { SECURITY_ICONS } from '@/lib/portal/security-icons'
 import { SitePlan } from '@/types/crm'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'
 import {
@@ -16,12 +15,12 @@ import {
   Save, X, Undo2, Redo2, Trash2, Loader2, RotateCcw, Upload,
   Plus, Copy, Square, Circle, Triangle, Minus,
   ZoomIn, ZoomOut, Maximize, Grid3X3, Magnet,
-  ArrowUpToLine, ArrowDownToLine, ArrowLeftToLine, ArrowRightToLine,
+  ArrowUpToLine, ArrowLeftToLine,
   AlignStartVertical, AlignCenterVertical, AlignEndVertical,
   AlignStartHorizontal, AlignCenterHorizontal, AlignEndHorizontal,
   Layers3, ArrowBigUp, ArrowBigDown,
-  GripVertical, HelpCircle, Download, FileImage, FileType,
-  Lock, Unlock, Eye, EyeOff, ChevronUp, ChevronDown
+  HelpCircle, Download, FileImage, FileType,
+  Eye, EyeOff, ChevronUp, ChevronDown
 } from 'lucide-react'
 
 // ─── Types ───────────────────────────────────────────────
@@ -381,12 +380,12 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   // ── Tool state ──
   const [activeTool, setActiveTool] = useState<ToolMode>('select')
   const [drawColor, setDrawColor] = useState('#ef4444')
-  const [drawWidth, setDrawWidth] = useState(3)
+  const drawWidth = 3
   const [fillColor, setFillColor] = useState('#3b82f6')
   const [strokeColor, setStrokeColor] = useState('#1e40af')
   const [strokeWidth, setStrokeWidth] = useState(2)
   const drawWidth = 3
-  const [selectedIcon, setSelectedIcon] = useState<any>(null)
+  const [selectedIcon] = useState<any>(null)
   // ── Zoom & Pan ──
   const [zoom, setZoom] = useState(100)
   const panRef = useRef(false)
@@ -534,7 +533,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     }
 
     canvas.renderAll()
-  }, [pages, showGrid, updateUndoRedoState])
+  }, [pages, showGrid, updateUndoRedoState, attachGridOverlayFn])
 
   // ── Grid overlay function ──
   const attachGridOverlayFn = useCallback((canvas: any) => {
@@ -1107,14 +1106,14 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         const bgFilename = `${quotationId}/backgrounds/${Date.now()}-${file.name}`
         const bgUrl = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, bgFilename, blob)
 
-        applyBackgroundImage(canvas, bgUrl, fabric)
+        applyBackgroundImageRef.current(canvas, bgUrl, fabric)
       } catch {
         // Fallback to data URL
-        applyBackgroundImage(canvas, e.target?.result as string)
+        applyBackgroundImageRef.current(canvas, e.target?.result as string)
       }
     }
     reader.readAsDataURL(file)
-  }, [quotationId, backgroundOpacity, saveHistory, activePageIndex])
+  }, [quotationId])
 
   const applyBackgroundImage = useCallback((canvas: any, src: string, fabricLib?: any) => {
     const imgEl = new Image()
@@ -1145,6 +1144,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       saveHistory()
     }
   }, [activePageIndex, backgroundOpacity, saveHistory])
+
+  const applyBackgroundImageRef = useRef(applyBackgroundImage)
+  applyBackgroundImageRef.current = applyBackgroundImage
 
   // ── Remove background ──
   const handleRemoveBackground = useCallback(async () => {
@@ -1703,8 +1705,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   }, [handleBackgroundUpload])
 
   const handleDragOverCapture = useCallback((e: React.DragEvent) => { e.preventDefault(); e.stopPropagation() }, [])
-
-  const selectIcon = useCallback((icon: any) => { setSelectedIcon(icon); setActiveTool('icon') }, [])
 
   // ── Layer list ──
   interface LayerItem { key: number; obj: any; name: string; visible: boolean; displayIndex: number }

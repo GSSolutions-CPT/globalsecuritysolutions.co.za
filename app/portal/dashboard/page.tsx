@@ -37,7 +37,6 @@ export default function DashboardPage() {
     const { formatCurrency } = useCurrency()
     const { user } = useAuth()
     const [fetchError, setFetchError] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
     const [metrics, setMetrics] = useState({
         monthlyRevenue: 0,
         monthlyProfit: 0,
@@ -60,7 +59,6 @@ export default function DashboardPage() {
     const [rawExpenses, setRawExpenses] = useState<Expense[]>([])
 
     const fetchDashboardData = useCallback(async () => {
-        setIsLoading(true)
         try {
             setFetchError(false)
             const now = new Date()
@@ -104,8 +102,6 @@ export default function DashboardPage() {
             console.error('Error fetching dashboard data:', error)
             setFetchError(true)
             toast.error('Failed to load dashboard data. Please try again.')
-        } finally {
-            setIsLoading(false)
         }
     }, [])
 

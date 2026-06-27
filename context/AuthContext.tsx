@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '@/lib/portal/supabase'
 import { resolvePortalAccess, type PortalAccess } from '@/lib/portal/resolve-portal-access'
 import { Session, User, AuthError, SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js'
@@ -69,6 +69,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [user])
 
+    const refreshPortalAccessRef = useRef(refreshPortalAccess)
+    refreshPortalAccessRef.current = refreshPortalAccess
+
     useEffect(() => {
         const initSession = async () => {
             try {
@@ -76,7 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (error) throw error
                 setSession(session)
                 setUser(session?.user ?? null)
-                await refreshPortalAccess(session?.user ?? null)
+                await refreshPortalAccessRef.current(session?.user ?? null)
             } catch (error) {
                 console.error("AuthContext: Error checking session:", error)
             } finally {

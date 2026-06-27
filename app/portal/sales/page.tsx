@@ -56,10 +56,12 @@ export default function SalesPage() {
 
     useEffect(() => {
         fetchQuotations(quotesPage)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quotesPage])
 
     useEffect(() => {
         fetchInvoices(invoicesPage)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invoicesPage])
 
     useEffect(() => {
@@ -164,7 +166,7 @@ export default function SalesPage() {
         } catch (error) {
             console.error('Error fetching quotations:', error)
         }
-    }, [])
+    }, [quotesPage])
 
     const fetchInvoices = useCallback(async (page = invoicesPage) => {
         try {
@@ -191,7 +193,7 @@ export default function SalesPage() {
         } catch (error) {
             console.error('Error fetching invoices:', error)
         }
-    }, [])
+    }, [invoicesPage])
 
     const refreshQuotations = () => {
         fetchQuotations(quotesPage)
