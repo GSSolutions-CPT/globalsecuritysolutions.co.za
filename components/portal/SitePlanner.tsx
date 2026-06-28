@@ -6,7 +6,7 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Badge } from '@/components/portal/ui/badge'
 import { supabase } from '@/lib/portal/supabase'
-import { PRIVATE_STORAGE_BUCKETS, uploadPrivateFile } from '@/lib/portal/storage'
+import { PRIVATE_STORAGE_BUCKETS, uploadPrivateFile, resolveStorageUrl } from '@/lib/portal/storage'
 import { toast } from 'sonner'
 import { SitePlan } from '@/types/crm'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'
@@ -357,6 +357,124 @@ function ShortcutsModal({ open, onClose }: { open: boolean; onClose: () => void 
   )
 }
 
+const SECURITY_DEVICES = [
+  {
+    id: 'dome-camera',
+    name: 'Dome Camera',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <path d="M14 20h20v2c0 5.52-4.48 10-10 10s-10-4.48-10-10v-2z" fill="#ffffff"/>
+        <circle cx="24" cy="22" r="4" fill="#1e3a8a"/>
+        <path d="M18 20v-4c0-3.31 2.69-6 6-6s6 2.69 6 6v4" stroke="#ffffff" stroke-width="2" fill="none"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'bullet-camera',
+    name: 'Bullet Camera',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#3b82f6" stroke="#ffffff" stroke-width="2"/>
+        <rect x="14" y="16" width="16" height="10" rx="2" fill="#ffffff"/>
+        <path d="M30 18l6-3v10l-6-3" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="18" y="26" width="4" height="8" fill="#ffffff"/>
+        <path d="M14 34h12" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'pir-motion',
+    name: 'Motion Detector (PIR)',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+        <path d="M16 16h16v16H16z" fill="#ffffff" rx="2"/>
+        <path d="M20 20c2 1 2 3 0 4M28 20c-2 1-2 3 0 4M24 16v16" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'door-contact',
+    name: 'Door Contact',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#22c55e" stroke="#ffffff" stroke-width="2"/>
+        <rect x="16" y="14" width="6" height="20" rx="1" fill="#ffffff"/>
+        <rect x="26" y="14" width="6" height="20" rx="1" fill="#ffffff"/>
+        <path d="M22 24h4" stroke="#ffffff" stroke-width="2" stroke-dasharray="2 2"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'alarm-keypad',
+    name: 'Alarm Keypad',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#f97316" stroke="#ffffff" stroke-width="2"/>
+        <rect x="15" y="13" width="18" height="22" rx="2" fill="#ffffff"/>
+        <rect x="18" y="16" width="12" height="6" fill="#cbd5e1"/>
+        <circle cx="19" cy="26" r="1.5" fill="#f97316"/>
+        <circle cx="24" cy="26" r="1.5" fill="#f97316"/>
+        <circle cx="29" cy="26" r="1.5" fill="#f97316"/>
+        <circle cx="19" cy="30" r="1.5" fill="#f97316"/>
+        <circle cx="24" cy="30" r="1.5" fill="#f97316"/>
+        <circle cx="29" cy="30" r="1.5" fill="#f97316"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'siren',
+    name: 'Siren / Strobe',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#ec4899" stroke="#ffffff" stroke-width="2"/>
+        <path d="M16 20l12-6v20l-12-6z" fill="#ffffff"/>
+        <path d="M30 18c2 2 2 6 0 8" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M33 15c4 3 4 11 0 14" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <rect x="14" y="21" width="3" height="6" fill="#ffffff"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'energizer',
+    name: 'Fence Energizer',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#8b5cf6" stroke="#ffffff" stroke-width="2"/>
+        <rect x="16" y="14" width="16" height="20" rx="2" fill="#ffffff"/>
+        <path d="M25 18l-4 6h5l-3 6" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'gate-motor',
+    name: 'Gate Motor',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#14b8a6" stroke="#ffffff" stroke-width="2"/>
+        <rect x="15" y="18" width="18" height="16" rx="2" fill="#ffffff"/>
+        <circle cx="24" cy="26" r="4" fill="#14b8a6"/>
+        <path d="M24 22v8M20 26h8" stroke="#ffffff" stroke-width="1.5"/>
+        <path d="M19 14h10" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    `)
+  },
+  {
+    id: 'access-reader',
+    name: 'Access Reader',
+    svg: 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#0ea5e9" stroke="#ffffff" stroke-width="2"/>
+        <rect x="17" y="13" width="14" height="22" rx="2" fill="#ffffff"/>
+        <rect x="20" y="16" width="8" height="6" fill="#0ea5e9"/>
+        <path d="M21 27c0-2 3-2 3-2s3 0 3 2v4h-6v-4z" fill="#0ea5e9"/>
+        <circle cx="24" cy="25" r="1.5" fill="#0ea5e9"/>
+      </svg>
+    `)
+  }
+]
+
 // ─── Main Component ─────────────────────────────────────
 
 export default function SitePlanner({ quotationId, existingPlan, onSave, onClose }: SitePlannerProps) {
@@ -384,7 +502,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   const [fillColor, setFillColor] = useState('#3b82f6')
   const [strokeColor, setStrokeColor] = useState('#1e40af')
   const [strokeWidth, setStrokeWidth] = useState(2)
-  const [selectedIcon] = useState<any>(null)
+  const [selectedIcon, setSelectedIcon] = useState<any>(null)
   // ── Zoom & Pan ──
   const [zoom, setZoom] = useState(100)
   const panRef = useRef(false)
@@ -417,7 +535,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   const [statusText, setStatusText] = useState('Ready')
   const [selectedObj, setSelectedObj] = useState<any>(null)
   const [showShortcuts, setShowShortcuts] = useState(false)
-  const [showRightPanel, setShowRightPanel] = useState(true)
+  const [rightPanelTab, setRightPanelTab] = useState<'properties' | 'layers' | 'devices'>('devices')
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number; pageIndex: number } | null>(null)
 
   // ── Drawing shape state ──
@@ -429,7 +547,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     const canvas = fabricRef.current
     if (!canvas) return
     try {
-      const json = canvas.toJSON()
+      const json = canvas.toJSON(['deviceType', 'deviceName'])
       const hist = pageHistoriesRef.current.get(activePageIndex) || { stack: [], idx: -1 }
       const existing = hist.stack[hist.idx]
       if (existing && JSON.stringify(existing) === JSON.stringify(json)) return
@@ -460,7 +578,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     const canvas = fabricRef.current
     if (!canvas) return
     try {
-      const json = canvas.toJSON()
+      const json = canvas.toJSON(['deviceType', 'deviceName'])
       const bgUrl = canvas.backgroundImage ? ((canvas.backgroundImage as any)._element?.src || '') : null
       const effectiveBgUrl = bgUrl || pages[activePageIndex]?.background_url || null
 
@@ -545,11 +663,22 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         await new Promise<void>((resolve) => {
           canvas.loadFromJSON(page.canvas_json, () => {
             if (page.background_url) {
-              canvas.setBackgroundImage(
-                page.background_url,
-                canvas.renderAll.bind(canvas),
-                { opacity: page.background_opacity ?? 1 }
-              )
+              const resolveAndSetBg = async () => {
+                let displayBg = page.background_url
+                if (page.background_url && !page.background_url.startsWith('data:') && !page.background_url.startsWith('blob:') && !page.background_url.startsWith('http')) {
+                  try {
+                    displayBg = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, page.background_url)
+                  } catch (e) {
+                    console.error('Error resolving background URL:', e)
+                  }
+                }
+                canvas.setBackgroundImage(
+                  displayBg,
+                  canvas.renderAll.bind(canvas),
+                  { opacity: page.background_opacity ?? 1 }
+                )
+              }
+              resolveAndSetBg()
             }
             resolve()
           })
@@ -762,8 +891,22 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
           setPages([{ name: 'Page 1', canvas_json: data, background_url: bgUrl, background_opacity: 1, order: 0 }])
           setHasBackground(!!bgUrl)
           canvas.loadFromJSON(data, () => {
-            if (bgUrl) canvas.setBackgroundImage(bgUrl, canvas.renderAll.bind(canvas), { opacity: 1 })
-            canvas.renderAll()
+            if (bgUrl) {
+              const resolveAndSetBg = async () => {
+                let displayBg = bgUrl
+                if (bgUrl && !bgUrl.startsWith('data:') && !bgUrl.startsWith('blob:') && !bgUrl.startsWith('http')) {
+                  try {
+                    displayBg = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, bgUrl)
+                  } catch (e) {
+                    console.error('Error resolving background URL:', e)
+                  }
+                }
+                canvas.setBackgroundImage(displayBg, canvas.renderAll.bind(canvas), { opacity: 1 })
+              }
+              resolveAndSetBg()
+            } else {
+              canvas.renderAll()
+            }
             setStatusText('Plan loaded — ready to edit')
             saveHistory()
           })
@@ -782,7 +925,18 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         await new Promise<void>((resolve) => {
           c.loadFromJSON(page.canvas_json, () => {
             if (page.background_url) {
-              c.setBackgroundImage(page.background_url, c.renderAll.bind(c), { opacity: page.background_opacity ?? 1 })
+              const resolveAndSetBg = async () => {
+                let displayBg = page.background_url
+                if (page.background_url && !page.background_url.startsWith('data:') && !page.background_url.startsWith('blob:') && !page.background_url.startsWith('http')) {
+                  try {
+                    displayBg = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, page.background_url)
+                  } catch (e) {
+                    console.error('Error resolving background URL:', e)
+                  }
+                }
+                c.setBackgroundImage(displayBg, c.renderAll.bind(c), { opacity: page.background_opacity ?? 1 })
+              }
+              resolveAndSetBg()
             }
             resolve()
           })
@@ -959,24 +1113,26 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
             imgEl.src = selectedIcon.svg
             imgEl.onload = () => {
               const img = new fabric.Image(imgEl, {
-                left: pointer.x - 32, top: pointer.y - 32,
+                left: pointer.x - 24, top: pointer.y - 24,
                 scaleX: 1, scaleY: 1,
                 hasRotatingPoint: true, cornerSize: 10,
                 transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
               })
 
               const label = new fabric.Text(selectedIcon.name, {
-                left: pointer.x, top: pointer.y + 36,
+                left: pointer.x, top: pointer.y + 28,
                 fontSize: 11, fontFamily: 'Arial', fill: '#475569',
                 textAlign: 'center', originX: 'center',
                 backgroundColor: 'rgba(255,255,255,0.8)', padding: 2,
               })
 
               const group = new fabric.Group([img, label], {
-                left: pointer.x - 32, top: pointer.y - 32,
+                left: pointer.x - 24, top: pointer.y - 24,
                 hasRotatingPoint: true, cornerSize: 10,
                 transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
-              })
+                deviceType: selectedIcon.id,
+                deviceName: selectedIcon.name
+              } as any)
 
               canvas.add(group)
               canvas.renderAll()
@@ -1520,7 +1676,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       const allPages = [...pages]
       allPages[activePageIndex] = {
         ...allPages[activePageIndex],
-        canvas_json: canvas.toJSON(),
+        canvas_json: canvas.toJSON(['deviceType', 'deviceName']),
       }
 
       const w = canvas.width || 900
@@ -1580,7 +1736,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       const currentPages = [...pages]
       currentPages[activePageIndex] = {
         ...currentPages[activePageIndex],
-        canvas_json: canvas.toJSON(),
+        canvas_json: canvas.toJSON(['deviceType', 'deviceName']),
         background_url: currentPages[activePageIndex].background_url,
       }
 
@@ -1738,6 +1894,19 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     const canvas = fabricRef.current
     if (!canvas) return []
     return canvas.getObjects().filter((o: any) => o.type !== 'guide-line')
+  }
+
+  const getDeviceCounts = () => {
+    const canvas = fabricRef.current
+    if (!canvas) return {}
+    const objects = canvas.getObjects()
+    const counts: Record<string, number> = {}
+    objects.forEach((obj: any) => {
+      if (obj.deviceType) {
+        counts[obj.deviceType] = (counts[obj.deviceType] || 0) + 1
+      }
+    })
+    return counts
   }
 
   // ── Render ──
@@ -1927,20 +2096,96 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         {/* Right Panel */}
         <div className="w-60 min-w-[15rem] bg-brand-navy border-l border-brand-steel/20 flex flex-col overflow-hidden">
           <div className="flex border-b border-brand-steel/20">
-            <button onClick={() => setShowRightPanel(true)}
-              className={`flex-1 py-1.5 text-xs font-medium ${showRightPanel ? 'text-brand-electric border-b-2 border-brand-electric' : 'text-brand-slate'}`}>
+            <button onClick={() => setRightPanelTab('devices')}
+              className={`flex-1 py-1.5 text-xs font-medium ${rightPanelTab === 'devices' ? 'text-brand-electric border-b-2 border-brand-electric' : 'text-brand-slate'}`}>
+              Devices
+            </button>
+            <button onClick={() => setRightPanelTab('properties')}
+              className={`flex-1 py-1.5 text-xs font-medium ${rightPanelTab === 'properties' ? 'text-brand-electric border-b-2 border-brand-electric' : 'text-brand-slate'}`}>
               Properties
             </button>
-            <button onClick={() => setShowRightPanel(false)}
-              className={`flex-1 py-1.5 text-xs font-medium ${!showRightPanel ? 'text-brand-electric border-b-2 border-brand-electric' : 'text-brand-slate'}`}>
-              <Layers3 className="h-3.5 w-3.5 inline mr-1" /> Layers
+            <button onClick={() => setRightPanelTab('layers')}
+              className={`flex-1 py-1.5 text-xs font-medium ${rightPanelTab === 'layers' ? 'text-brand-electric border-b-2 border-brand-electric' : 'text-brand-slate'}`}>
+              Layers
             </button>
           </div>
 
           <div className="flex-1 overflow-y-auto">
-            {showRightPanel ? (
+            {rightPanelTab === 'devices' && (
+              <div className="p-3 space-y-4">
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-electric mb-2">
+                    Security Devices
+                  </h3>
+                  <p className="text-[10px] text-brand-slate leading-relaxed">
+                    Select a device, then click on the canvas to place it.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  {SECURITY_DEVICES.map((device) => {
+                    const count = getDeviceCounts()[device.id] || 0
+                    const isSelected = selectedIcon?.id === device.id && activeTool === 'icon'
+                    return (
+                      <button
+                        key={device.id}
+                        onClick={() => {
+                          setSelectedIcon(device)
+                          setActiveTool('icon')
+                        }}
+                        className={`p-2 rounded-xl border flex flex-col items-center text-center transition-all relative group
+                          ${isSelected
+                            ? 'border-brand-electric bg-brand-electric/10 text-white shadow-lg'
+                            : 'border-brand-steel/30 hover:border-brand-steel/60 text-brand-slate hover:text-white bg-brand-navy/40'
+                          }`}
+                      >
+                        <div className="w-10 h-10 mb-1 flex items-center justify-center bg-white/5 rounded-lg p-1 group-hover:scale-105 transition-transform">
+                          <img src={device.svg} alt={device.name} className="w-full h-full object-contain" />
+                        </div>
+                        <span className="text-[10px] font-medium leading-tight truncate w-full">{device.name}</span>
+                        
+                        {count > 0 && (
+                          <Badge className="absolute -top-1.5 -right-1.5 h-4 min-w-[1rem] px-1 bg-brand-electric text-brand-navy font-bold text-[9px] flex items-center justify-center rounded-full">
+                            {count}
+                          </Badge>
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* Legend summary */}
+                <div className="border-t border-brand-steel/20 pt-3">
+                  <h4 className="text-[10px] font-semibold uppercase tracking-wider text-brand-slate mb-2">
+                    Active Legend
+                  </h4>
+                  <div className="space-y-1 bg-brand-navy/30 rounded-lg p-2 border border-brand-steel/10">
+                    {SECURITY_DEVICES.map((device) => {
+                      const count = getDeviceCounts()[device.id] || 0
+                      if (count === 0) return null
+                      return (
+                        <div key={device.id} className="flex justify-between items-center text-xs">
+                          <span className="text-brand-slate flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: device.id.includes('camera') ? '#2563eb' : device.id.includes('motion') ? '#ef4444' : '#f97316' }} />
+                            {device.name}
+                          </span>
+                          <span className="font-bold text-brand-electric">{count}</span>
+                        </div>
+                      )
+                    })}
+                    {Object.values(getDeviceCounts()).reduce((a, b) => a + b, 0) === 0 && (
+                      <p className="text-[10px] text-brand-slate italic text-center">No devices placed yet</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {rightPanelTab === 'properties' && (
               <PropertiesPanel selectedObject={selectedObj} onChange={handlePropertiesChange} onTextChange={handleTextChange} />
-            ) : (
+            )}
+
+            {rightPanelTab === 'layers' && (
               <div className="p-3 space-y-1">
                 {layerList.length === 0 ? (
                   <p className="text-brand-slate text-xs text-center py-4">No objects on this page</p>

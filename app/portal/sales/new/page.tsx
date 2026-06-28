@@ -472,17 +472,40 @@ function CreateSaleContent() {
                                             <Label>Payment Terms</Label>
                                             <Select
                                                 value={formData.payment_type}
-                                                onValueChange={(value: string) => setFormData({ ...formData, payment_type: value })}
+                                                onValueChange={(value: string) => {
+                                                    setFormData(prev => ({
+                                                        ...prev,
+                                                        payment_type: value,
+                                                        deposit_percentage: value === 'full' ? 100 : (prev.deposit_percentage === 100 ? 75 : prev.deposit_percentage)
+                                                    }))
+                                                }}
                                             >
                                                 <SelectTrigger>
                                                     <SelectValue />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="deposit">Deposit (75%)</SelectItem>
+                                                    <SelectItem value="deposit">Deposit</SelectItem>
                                                     <SelectItem value="full">Full Upfront</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </div>
+                                        {formData.payment_type === 'deposit' && (
+                                            <div className="space-y-2">
+                                                <Label>Deposit Percentage</Label>
+                                                <Select
+                                                    value={String(formData.deposit_percentage || 75)}
+                                                    onValueChange={(value: string) => setFormData(prev => ({ ...prev, deposit_percentage: parseInt(value) }))}
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="25">25% Deposit</SelectItem>
+                                                        <SelectItem value="75">75% Deposit</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                        )}
                                     </>
                                 ) : (
                                     <div className="space-y-2">

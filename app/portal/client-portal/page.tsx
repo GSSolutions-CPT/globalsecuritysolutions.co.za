@@ -22,7 +22,7 @@ import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Textarea } from '@/components/portal/ui/textarea'
 import { Client, Quotation, Invoice } from '@/types/crm'
-import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile } from '@/lib/portal/storage'
+import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile, resolveStorageUrl } from '@/lib/portal/storage'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 export default function ClientPortalPage() {
@@ -58,6 +58,11 @@ export default function ClientPortalPage() {
     const [requestVisitOpen, setRequestVisitOpen] = useState(false)
     const [requestLoading, setRequestLoading] = useState(false)
     const [requestForm, setRequestForm] = useState({ description: '', address: '', preferredDate: '' })
+
+    // Google Review Block States
+    const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false)
+    const [reviewPendingInvoice, setReviewPendingInvoice] = useState<Invoice | null>(null)
+    const [hasClickedReviewLink, setHasClickedReviewLink] = useState(false)
 
     /**
      * SECURITY: resolveClient — IDOR Prevention
@@ -270,6 +275,133 @@ export default function ClientPortalPage() {
             console.error('Error uploading final proof:', error)
             const message = error instanceof Error ? error.message : 'An unknown error occurred'
             toast.error(`Failed to upload: ${message}`, { id: toastId })
+        }
+    }
+
+    const handleDownloadQuotePDF = async (quotation: Quotation) => {
+        const toastId = toast.loading('Generating PDF...')
+        try {
+            // 1. Fetch site plan if it exists
+            const { data: sitePlan } = await supabase
+                .from('site_plans')
+                .select('flattened_url')
+                .eq('quotation_id', quotation.id)
+                .maybeSingle()
+
+            let resolvedPlanUrl = ''
+            if (sitePlan?.flattened_url) {
+                resolvedPlanUrl = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, sitePlan.flattened_url)
+            }
+
+            // 2. Resolve client signature if it exists
+            let resolvedSigUrl = ''
+            if (quotation.client_signature) {
+                resolvedSigUrl = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, quotation.client_signature)
+            }
+
+            // 3. Generate PDF
+            const fullData = {
+                ...quotation,
+                clients: client,
+                client_signature: resolvedSigUrl,
+                site_plan_url: resolvedPlanUrl
+            }
+            await generateQuotePDF(fullData, settings)
+            toast.success('PDF Downloaded', { id: toastId })
+        } catch (error) {
+            console.error('Error generating PDF:', error)
+            toast.error('Failed to generate PDF', { id: toastId })
+        }
+    }
+
+    const handleDownloadInvoicePDF = async (invoice: Invoice) => {
+        const toastId = toast.loading('Generating PDF...')
+        try {
+            // 1. Fetch linked quotation signature and acceptance date
+            let resolvedSigUrl = ''
+            let acceptedAt = ''
+            if (invoice.quotation_id) {
+                const { data: quote } = await supabase
+                    .from('quotations')
+                    .select('client_signature, accepted_at')
+                    .eq('id', invoice.quotation_id)
+                    .maybeSingle()
+
+                if (quote?.client_signature) {
+                    resolvedSigUrl = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, quote.client_signature)
+                }
+                if (quote?.accepted_at) {
+                    acceptedAt = quote.accepted_at
+                }
+            }
+
+            // 2. Fetch site plan if it exists
+            let resolvedPlanUrl = ''
+            if (invoice.quotation_id) {
+                const { data: sitePlan } = await supabase
+                    .from('site_plans')
+                    .select('flattened_url')
+                    .eq('quotation_id', invoice.quotation_id)
+                    .maybeSingle()
+
+                if (sitePlan?.flattened_url) {
+                    resolvedPlanUrl = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, sitePlan.flattened_url)
+                }
+            }
+
+            // 3. Generate PDF
+            const fullData = {
+                ...invoice,
+                clients: client,
+                client_signature: resolvedSigUrl,
+                site_plan_url: resolvedPlanUrl,
+                accepted_at: acceptedAt
+            }
+            await generateInvoicePDF(fullData, settings)
+            toast.success('PDF Downloaded', { id: toastId })
+        } catch (error) {
+            console.error('Error generating PDF:', error)
+            toast.error('Failed to generate PDF', { id: toastId })
+        }
+    }
+
+    const triggerInvoiceDownloadFlow = (invoice: Invoice) => {
+        const metadata = (client?.metadata as Record<string, unknown>) || {}
+        if (metadata.google_review_completed) {
+            handleDownloadInvoicePDF(invoice)
+        } else {
+            setReviewPendingInvoice(invoice)
+            setHasClickedReviewLink(false)
+            setIsReviewDialogOpen(true)
+        }
+    }
+
+    const handleCompleteGoogleReview = async () => {
+        if (!client || !reviewPendingInvoice) return
+        const toastId = toast.loading('Updating your profile...')
+        try {
+            const currentMetadata = (client.metadata as Record<string, unknown>) || {}
+            const updatedMetadata = { ...currentMetadata, google_review_completed: true }
+
+            const { error } = await supabase
+                .from('clients')
+                .update({ metadata: updatedMetadata })
+                .eq('id', client.id)
+
+            if (error) throw error
+
+            toast.success('Thank you for your review! Loading invoice...', { id: toastId })
+            setIsReviewDialogOpen(false)
+            
+            // Re-fetch client data so UI reflects updated metadata
+            await fetchClientData()
+
+            // Download the invoice PDF
+            handleDownloadInvoicePDF(reviewPendingInvoice)
+            setReviewPendingInvoice(null)
+        } catch (error) {
+            console.error('Error updating review status:', error)
+            toast.error('Failed to update review status', { id: toastId })
         }
     }
 
@@ -604,7 +736,7 @@ export default function ClientPortalPage() {
                                             <span className="text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
                                         </div>
                                         <div className="grid grid-cols-2 gap-3">
-                                            <Button variant="outline" className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
+                                            <Button variant="outline" className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" onClick={() => handleDownloadQuotePDF(quotation)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download PDF
                                             </Button>
                                             {quotation.status === 'Sent' && (
@@ -687,7 +819,7 @@ export default function ClientPortalPage() {
                                         </div>
 
                                         <div className="flex flex-col gap-3 pt-2">
-                                            <Button className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" variant="outline" onClick={() => generateQuotePDF({ ...quotation, clients: client }, settings)}>
+                                            <Button className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" variant="outline" onClick={() => handleDownloadQuotePDF(quotation)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download Proforma
                                             </Button>
                                             {quotation.payment_proof && !quotation.final_payment_proof && (
@@ -740,7 +872,7 @@ export default function ClientPortalPage() {
                                             <span className="text-brand-steel font-medium">Amount Due</span>
                                             <span className="text-2xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(invoice.total_amount)}</span>
                                         </div>
-                                        <Button className="w-full h-11 bg-brand-navy hover:bg-brand-navy text-white shadow-lg transition-transform" onClick={() => generateInvoicePDF({ ...invoice, clients: client }, settings)}>
+                                        <Button className="w-full h-11 bg-brand-navy hover:bg-brand-navy text-white shadow-lg transition-transform" onClick={() => triggerInvoiceDownloadFlow(invoice)}>
                                             <Download className="mr-2 h-4 w-4" /> Download Tax Invoice
                                         </Button>
                                     </CardContent>
@@ -755,6 +887,50 @@ export default function ClientPortalPage() {
                 <MessageCircle className="h-7 w-7 fill-current" />
             </a>
             )}
+
+            <Dialog open={isReviewDialogOpen} onOpenChange={setIsReviewDialogOpen}>
+                <DialogContent className="sm:max-w-md bg-white/95 dark:bg-brand-navy/95 backdrop-blur-xl border-brand-steel/40 dark:border-brand-navy shadow-2xl rounded-3xl overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-electric to-brand-steel"></div>
+                    <DialogHeader className="pt-6">
+                        <DialogTitle className="text-xl font-bold text-brand-navy dark:text-white flex items-center gap-3">
+                            <span className="p-2 bg-brand-electric/20 rounded-full text-brand-electric">⭐</span>
+                            Your Feedback Matters!
+                        </DialogTitle>
+                        <DialogDescription className="text-brand-steel dark:text-brand-steel text-sm mt-2">
+                            To help us continue delivering premium security services, please take 30 seconds to review Global Security Solutions on Google before downloading your Tax Invoice.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 py-4 text-center">
+                        <Button
+                            className="w-full h-12 bg-gradient-to-r from-brand-electric to-blue-600 hover:from-brand-electric hover:to-blue-700 text-white font-semibold text-base shadow-lg transition-transform hover:scale-[1.02]"
+                            onClick={() => {
+                                window.open('https://g.page/r/CekZuIweXZuaEBM/review', '_blank')
+                                setHasClickedReviewLink(true)
+                            }}
+                        >
+                            Review GSS on Google
+                        </Button>
+                        
+                        {hasClickedReviewLink && (
+                            <p className="text-xs text-muted-foreground animate-pulse">
+                                Thank you for your review! Now you can click the button below to unlock your invoice.
+                            </p>
+                        )}
+                    </div>
+
+                    <DialogFooter className="gap-2 sm:gap-0 border-t border-brand-steel/20 dark:border-brand-navy/50 pt-4 mt-2">
+                        <Button variant="outline" onClick={() => setIsReviewDialogOpen(false)}>Cancel</Button>
+                        <Button 
+                            onClick={handleCompleteGoogleReview}
+                            disabled={!hasClickedReviewLink}
+                            className="bg-brand-navy hover:bg-brand-navy text-white shadow-md"
+                        >
+                            I have completed the review
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
             <Dialog open={step > 0} onOpenChange={(open: boolean) => !open && setStep(0)}>
                 <DialogContent className="sm:max-w-md bg-white/95 dark:bg-brand-navy/95 backdrop-blur-xl border-brand-steel/40 dark:border-brand-navy shadow-2xl rounded-3xl overflow-hidden">

@@ -7,7 +7,9 @@ import { Button } from '@/components/portal/ui/button'
 import { Input } from '@/components/portal/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/portal/ui/tabs'
 import { Badge } from '@/components/portal/ui/badge'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/portal/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/portal/ui/dialog'
+import { Label } from '@/components/portal/ui/label'
+import { Textarea } from '@/components/portal/ui/textarea'
 import { Search, FileText, Receipt, Banknote, Calendar, Download, Trash2, CheckCircle, Package, FileSignature, AlertCircle, Share2, Wrench, ExternalLink } from 'lucide-react'
 import InstallationDetails from '@/components/portal/InstallationDetails'
 import { supabase } from '@/lib/portal/supabase'
@@ -43,6 +45,16 @@ export default function SalesPage() {
     const [invoicesCount, setInvoicesCount] = useState(0)
     const [quoteStats, setQuoteStats] = useState<Quotation[]>([])
     const [invoiceStats, setInvoiceStats] = useState<Invoice[]>([])
+
+    // Booking Installation States
+    const [bookingQuotation, setBookingQuotation] = useState<Quotation | null>(null)
+    const [isBookingDialogOpen, setIsBookingDialogOpen] = useState(false)
+    const [bookingFormData, setBookingFormData] = useState({
+        assigned_technicians: '',
+        scheduled_datetime: '',
+        scheduled_end_datetime: '',
+        notes: ''
+    })
 
     // Calculate Summary Stats
     const activeQuotes = quoteStats.filter(q => ['Draft', 'Sent', 'Pending Review'].includes(q.status))
@@ -236,29 +248,84 @@ export default function SalesPage() {
         }
     }
 
-    const handleConfirmPayment = async (quotation: Quotation) => {
-        const toastId = toast.loading('Confirming payment...')
+    const startConfirmPaymentAndBook = (quotation: Quotation) => {
+        setBookingQuotation(quotation)
+        setBookingFormData({
+            assigned_technicians: '',
+            scheduled_datetime: '',
+            scheduled_end_datetime: '',
+            notes: `Installation for Quotation #${quotation.id.substring(0, 8)}`
+        })
+        setIsBookingDialogOpen(true)
+    }
+
+    const handleConfirmPaymentAndBook = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!bookingQuotation) return
+        if (!bookingFormData.scheduled_datetime) {
+            toast.error('Please specify a scheduled start date and time')
+            return
+        }
+
+        const toastId = toast.loading('Confirming payment and scheduling installation...')
         try {
-            const { error } = await supabase
+            // 1. Update quotation status to Accepted/Approved
+            const { error: quoteError } = await supabase
                 .from('quotations')
                 .update({ status: 'Accepted', admin_approved: true })
-                .eq('id', quotation.id)
+                .eq('id', bookingQuotation.id)
 
-            if (error) throw error
+            if (quoteError) throw quoteError
 
+            // 2. Create the Job
+            const technicians = bookingFormData.assigned_technicians
+                ? bookingFormData.assigned_technicians.split(',').map(t => t.trim())
+                : []
+
+            const { data: newJob, error: jobError } = await supabase
+                .from('jobs')
+                .insert([{
+                    client_id: bookingQuotation.client_id,
+                    quotation_id: bookingQuotation.id,
+                    assigned_technicians: technicians,
+                    scheduled_datetime: bookingFormData.scheduled_datetime,
+                    notes: bookingFormData.notes,
+                    status: 'Pending'
+                }])
+                .select()
+                .single()
+
+            if (jobError) throw jobError
+
+            // 3. Create the Calendar Event
+            const { error: eventError } = await supabase
+                .from('calendar_events')
+                .insert([{
+                    event_type: 'Job',
+                    title: `Job scheduled - ${bookingQuotation.clients?.name || 'Client'}`,
+                    datetime: bookingFormData.scheduled_datetime,
+                    end_datetime: bookingFormData.scheduled_end_datetime || null,
+                    related_entity_id: newJob?.id,
+                    related_entity_type: 'job'
+                }])
+
+            if (eventError) throw eventError
+
+            // 4. Log Activity
             await supabase.from('activity_log').insert([{
-                type: 'Payment Accepted',
-                description: `Admin approved payment for quotation #${quotation.id.substring(0, 6)}`,
-                related_entity_id: quotation.id,
+                type: 'Payment Accepted & Scheduled',
+                description: `Approved payment for Quote #${bookingQuotation.id.substring(0, 6)} and scheduled install`,
+                related_entity_id: bookingQuotation.id,
                 related_entity_type: 'quotation'
             }])
 
+            toast.success('Payment approved and installation booked successfully!', { id: toastId })
+            setIsBookingDialogOpen(false)
+            setBookingQuotation(null)
             refreshQuotations()
-            toast.success('Payment accepted! Redirecting to jobs...', { id: toastId })
-            router.push(`/portal/jobs?fromQuote=${quotation.id}`)
         } catch (error) {
-            console.error('Error confirming payment:', error)
-            toast.error('Failed to confirm payment', { id: toastId })
+            console.error('Error confirming payment and booking:', error)
+            toast.error('Failed to complete booking. Please check database permissions.', { id: toastId })
         }
     }
 
@@ -431,15 +498,50 @@ export default function SalesPage() {
             const { data: lines, error } = await supabase.from(table).select('*').eq(idColumn, sale.id)
             if (error) throw error
 
-            const fullData = { ...sale, lines: lines || [] } as (Quotation | Invoice | PurchaseOrder) & { lines: unknown[]; site_plan_url?: string; invoice_id?: string }
+            const { resolveStorageUrl, PRIVATE_STORAGE_BUCKETS } = await import('@/lib/portal/storage')
+
+            const fullData = { ...sale, lines: lines || [] } as any
+
             if (type === 'quotation') {
-                const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', sale.id).single()
+                const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', sale.id).maybeSingle()
                 if (sitePlanData?.flattened_url) {
-                    const { resolveStorageUrl, PRIVATE_STORAGE_BUCKETS } = await import('@/lib/portal/storage')
                     fullData.site_plan_url = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, sitePlanData.flattened_url)
                 }
+
+                if ((sale as Quotation).client_signature) {
+                    fullData.client_signature = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, (sale as Quotation).client_signature)
+                }
+
                 generateQuotePDF(fullData, settings)
             } else {
+                // It is an Invoice:
+                // 1. Fetch linked quotation details if quotation_id exists
+                if ((sale as Invoice).quotation_id) {
+                    const { data: quote } = await supabase
+                        .from('quotations')
+                        .select('payment_type, deposit_percentage, client_signature, accepted_at, admin_approved, final_payment_approved')
+                        .eq('id', (sale as Invoice).quotation_id)
+                        .maybeSingle()
+
+                    if (quote) {
+                        fullData.payment_type = quote.payment_type
+                        fullData.deposit_percentage = quote.deposit_percentage
+                        fullData.accepted_at = quote.accepted_at
+                        fullData.admin_approved = quote.admin_approved
+                        fullData.final_payment_approved = quote.final_payment_approved
+
+                        if (quote.client_signature) {
+                            fullData.client_signature = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.PAYMENT_PROOFS, quote.client_signature)
+                        }
+                    }
+
+                    // 2. Fetch site plan if it exists
+                    const { data: sitePlanData } = await supabase.from('site_plans').select('flattened_url').eq('quotation_id', (sale as Invoice).quotation_id).maybeSingle()
+                    if (sitePlanData?.flattened_url) {
+                        fullData.site_plan_url = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, sitePlanData.flattened_url)
+                    }
+                }
+
                 generateInvoicePDF(fullData, settings)
             }
             toast.success('PDF Downloaded', { id: toastId })
@@ -795,7 +897,7 @@ export default function SalesPage() {
                                     )}
 
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Button size="sm" onClick={() => handleConfirmPayment(quotation)}>
+                                        <Button size="sm" onClick={() => startConfirmPaymentAndBook(quotation)}>
                                             <CheckCircle className="mr-2 h-4 w-4" /> Approve & Book
                                         </Button>
                                         <Button size="sm" variant="destructive" onClick={() => updateStatus('quotation', quotation.id, 'Rejected')}>
@@ -941,6 +1043,73 @@ export default function SalesPage() {
                         <DialogTitle>Installation Details</DialogTitle>
                     </DialogHeader>
                     {selectedInvoiceId && <InstallationDetails invoiceId={selectedInvoiceId} />}
+                </DialogContent>
+            </Dialog>
+
+            <Dialog open={isBookingDialogOpen} onOpenChange={(open: boolean) => {
+                setIsBookingDialogOpen(open)
+                if (!open) setBookingQuotation(null)
+            }}>
+                <DialogContent className="sm:max-w-[600px]">
+                    <DialogHeader>
+                        <DialogTitle>Approve Payment & Schedule Installation</DialogTitle>
+                        <DialogDescription>
+                            Please book the installation on the calendar to approve the payment and activate the proforma invoice.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={handleConfirmPaymentAndBook} className="space-y-4 pt-2">
+                        <div className="grid gap-2">
+                            <Label htmlFor="assigned_technicians">Assigned Technicians</Label>
+                            <Input
+                                id="assigned_technicians"
+                                placeholder="Enter names separated by commas (e.g. John Doe, Jane Smith)"
+                                value={bookingFormData.assigned_technicians}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookingFormData(prev => ({ ...prev, assigned_technicians: e.target.value }))}
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="scheduled_datetime">Scheduled Date & Time Start *</Label>
+                                <Input
+                                    id="scheduled_datetime"
+                                    type="datetime-local"
+                                    required
+                                    value={bookingFormData.scheduled_datetime}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookingFormData(prev => ({ ...prev, scheduled_datetime: e.target.value }))}
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="scheduled_end_datetime">Scheduled Date & Time End (Optional)</Label>
+                                <Input
+                                    id="scheduled_end_datetime"
+                                    type="datetime-local"
+                                    value={bookingFormData.scheduled_end_datetime}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookingFormData(prev => ({ ...prev, scheduled_end_datetime: e.target.value }))}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label htmlFor="notes">Notes</Label>
+                            <Textarea
+                                id="notes"
+                                placeholder="Job description, client requests, serials to prepare..."
+                                value={bookingFormData.notes}
+                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBookingFormData(prev => ({ ...prev, notes: e.target.value }))}
+                                rows={3}
+                            />
+                        </div>
+
+                        <DialogFooter className="pt-4">
+                            <Button type="button" variant="outline" onClick={() => setIsBookingDialogOpen(false)}>
+                                Cancel
+                            </Button>
+                            <Button type="submit">
+                                Confirm & Book Installation
+                            </Button>
+                        </DialogFooter>
+                    </form>
                 </DialogContent>
             </Dialog>
 
