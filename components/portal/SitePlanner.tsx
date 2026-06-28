@@ -538,6 +538,30 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
   const [rightPanelTab, setRightPanelTab] = useState<'properties' | 'layers' | 'devices'>('devices')
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number; pageIndex: number } | null>(null)
 
+  const activeToolRef = useRef(activeTool)
+  activeToolRef.current = activeTool
+
+  const selectedIconRef = useRef(selectedIcon)
+  selectedIconRef.current = selectedIcon
+
+  const fillColorRef = useRef(fillColor)
+  fillColorRef.current = fillColor
+
+  const strokeColorRef = useRef(strokeColor)
+  strokeColorRef.current = strokeColor
+
+  const strokeWidthRef = useRef(strokeWidth)
+  strokeWidthRef.current = strokeWidth
+
+  const drawColorRef = useRef(drawColor)
+  drawColorRef.current = drawColor
+
+  const snapToGridRef = useRef(snapToGrid)
+  snapToGridRef.current = snapToGrid
+
+  const gridSizeRef = useRef(gridSize)
+  gridSizeRef.current = gridSize
+
   // ── Drawing shape state ──
   const shapeDrawingRef = useRef<{ startX: number; startY: number; shape: any } | null>(null)
   const lineStartRef = useRef<{ x: number; y: number } | null>(null)
@@ -579,8 +603,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     if (!canvas) return
     try {
       const json = canvas.toJSON(['deviceType', 'deviceName'])
-      const bgUrl = canvas.backgroundImage ? ((canvas.backgroundImage as any)._element?.src || '') : null
-      const effectiveBgUrl = bgUrl || pages[activePageIndex]?.background_url || null
+      const rawBgUrl = pages[activePageIndex]?.background_url || null
 
       setPages(prev => {
         const next = [...prev]
@@ -588,7 +611,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
           next[activePageIndex] = {
             ...next[activePageIndex],
             canvas_json: json,
-            background_url: effectiveBgUrl,
+            background_url: rawBgUrl,
           }
         }
         return next
@@ -718,88 +741,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     }
   }, [showGrid, attachGridOverlayFn])
 
-  // ── Snap to grid ──
-  useEffect(() => {
-    const canvas = fabricRef.current
-    if (!canvas) return
-    canvas.off('object:modified')
-    canvas.on('object:modified', (opt: any) => {
-      if (!snapToGrid) return
-      const obj = opt.target
-      if (!obj || obj.isEditing) return
-      const gs = gridSize
-      if (obj.left !== undefined) obj.left = Math.round(obj.left / gs) * gs
-      if (obj.top !== undefined) obj.top = Math.round(obj.top / gs) * gs
-    })
-  }, [snapToGrid, gridSize])
-
-  // ── Smart guides ──
-  useEffect(() => {
-    const canvas = fabricRef.current
-    if (!canvas) return
-    canvas.off('object:moving')
-    canvas.off('mouse:up')
-
-    const removeGuides = () => {
-      const oldGuides = canvas.getObjects().filter((o: any) => o.type === 'guide-line')
-      oldGuides.forEach((g: any) => canvas.remove(g))
-    }
-
-    canvas.on('object:moving', (opt: any) => {
-      const obj = opt.target
-      if (!obj) return
-
-      const fabric = fabricLibRef.current
-      if (!fabric) return
-      const objects = canvas.getObjects().filter((o: any) => o !== obj && o.type !== 'guide-line')
-      const objCenter = obj.getCenterPoint()
-      const objL = obj.left ?? 0
-      const objR = objL + (obj.width ?? 0) * (obj.scaleX ?? 1)
-      const objT = obj.top ?? 0
-      const objB = objT + (obj.height ?? 0) * (obj.scaleY ?? 1)
-
-      removeGuides()
-      const threshold = 6
-      const guides: any[] = []
-
-      const addG = (x1: number, y1: number, x2: number, y2: number) => {
-        const line = new fabric.Line([x1, y1, x2, y2], {
-          stroke: '#00e5ff', strokeWidth: 1, strokeDashArray: [5, 3],
-          selectable: false, evented: false, excludeFromExport: true,
-        })
-        line.type = 'guide-line'
-        guides.push(line)
-      }
-
-      for (const other of objects) {
-        const oc = other.getCenterPoint()
-        const ol = other.left ?? 0
-        const or = ol + (other.width ?? 0) * (other.scaleX ?? 1)
-        const ot = other.top ?? 0
-        const ob = ot + (other.height ?? 0) * (other.scaleY ?? 1)
-
-        if (Math.abs(objCenter.x - oc.x) < threshold) addG(oc.x, 0, oc.x, canvas.height || 600)
-        if (Math.abs(objCenter.y - oc.y) < threshold) addG(0, oc.y, canvas.width || 900, oc.y)
-        if (Math.abs(objL - ol) < threshold) addG(ol, 0, ol, canvas.height || 600)
-        if (Math.abs(objL - or) < threshold) addG(or, 0, or, canvas.height || 600)
-        if (Math.abs(objR - ol) < threshold) addG(ol, 0, ol, canvas.height || 600)
-        if (Math.abs(objR - or) < threshold) addG(or, 0, or, canvas.height || 600)
-        if (Math.abs(objT - ot) < threshold) addG(0, ot, canvas.width || 900, ot)
-        if (Math.abs(objT - ob) < threshold) addG(0, ob, canvas.width || 900, ob)
-        if (Math.abs(objB - ot) < threshold) addG(0, ot, canvas.width || 900, ot)
-        if (Math.abs(objB - ob) < threshold) addG(0, ob, canvas.width || 900, ob)
-      }
-
-      for (const g of guides) canvas.add(g)
-      canvas.renderAll()
-    })
-
-    canvas.on('mouse:up', () => {
-      removeGuides()
-      canvas.renderAll()
-    })
-  }, [])
-
   // ── Init canvas ──
   useEffect(() => {
     let canvas: any = null
@@ -824,14 +765,81 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       fabricRef.current = canvas
       setCanvasReady(true)
 
-      canvas.on('object:modified', () => { saveHistory(); saveCurrentPageState() })
+      // 1. Selection & Object bindings
       canvas.on('object:added', () => saveHistory())
       canvas.on('selection:created', (opt: any) => setSelectedObj(opt.selected?.[0] || null))
       canvas.on('selection:updated', (opt: any) => setSelectedObj(opt.selected?.[0] || null))
       canvas.on('selection:cleared', () => setSelectedObj(null))
-      canvas.on('mouse:up', () => saveCurrentPageState())
 
-      // Mouse wheel zoom
+      // 2. Snap to grid & modification saving
+      canvas.on('object:modified', (opt: any) => {
+        if (snapToGridRef.current) {
+          const obj = opt.target
+          if (obj && !obj.isEditing) {
+            const gs = gridSizeRef.current
+            if (obj.left !== undefined) obj.left = Math.round(obj.left / gs) * gs
+            if (obj.top !== undefined) obj.top = Math.round(obj.top / gs) * gs
+          }
+        }
+        saveHistory()
+        saveCurrentPageState()
+      })
+
+      // Helper function to remove guides
+      const removeGuides = () => {
+        const oldGuides = canvas.getObjects().filter((o: any) => o.type === 'guide-line')
+        oldGuides.forEach((g: any) => canvas.remove(g))
+      }
+
+      // 3. Smart guides during movement
+      canvas.on('object:moving', (opt: any) => {
+        const obj = opt.target
+        if (!obj) return
+
+        const objects = canvas.getObjects().filter((o: any) => o !== obj && o.type !== 'guide-line')
+        const objCenter = obj.getCenterPoint()
+        const objL = obj.left ?? 0
+        const objR = objL + (obj.width ?? 0) * (obj.scaleX ?? 1)
+        const objT = obj.top ?? 0
+        const objB = objT + (obj.height ?? 0) * (obj.scaleY ?? 1)
+
+        removeGuides()
+        const threshold = 6
+        const guides: any[] = []
+
+        const addG = (x1: number, y1: number, x2: number, y2: number) => {
+          const line = new fabric.Line([x1, y1, x2, y2], {
+            stroke: '#00e5ff', strokeWidth: 1, strokeDashArray: [5, 3],
+            selectable: false, evented: false, excludeFromExport: true,
+          })
+          line.type = 'guide-line'
+          guides.push(line)
+        }
+
+        for (const other of objects) {
+          const oc = other.getCenterPoint()
+          const ol = other.left ?? 0
+          const or = ol + (other.width ?? 0) * (other.scaleX ?? 1)
+          const ot = other.top ?? 0
+          const ob = ot + (other.height ?? 0) * (other.scaleY ?? 1)
+
+          if (Math.abs(objCenter.x - oc.x) < threshold) addG(oc.x, 0, oc.x, canvas.height || 600)
+          if (Math.abs(objCenter.y - oc.y) < threshold) addG(0, oc.y, canvas.width || 900, oc.y)
+          if (Math.abs(objL - ol) < threshold) addG(ol, 0, ol, canvas.height || 600)
+          if (Math.abs(objL - or) < threshold) addG(or, 0, or, canvas.height || 600)
+          if (Math.abs(objR - ol) < threshold) addG(ol, 0, ol, canvas.height || 600)
+          if (Math.abs(objR - or) < threshold) addG(or, 0, or, canvas.height || 600)
+          if (Math.abs(objT - ot) < threshold) addG(0, ot, canvas.width || 900, ot)
+          if (Math.abs(objT - ob) < threshold) addG(0, ob, canvas.width || 900, ob)
+          if (Math.abs(objB - ot) < threshold) addG(0, ot, canvas.width || 900, ot)
+          if (Math.abs(objB - ob) < threshold) addG(0, ob, canvas.width || 900, ob)
+        }
+
+        for (const g of guides) canvas.add(g)
+        canvas.renderAll()
+      })
+
+      // 4. Mouse wheel zoom
       canvas.on('mouse:wheel', (opt: any) => {
         if (spaceHeldRef.current) return
         const delta = opt.e.deltaY
@@ -845,7 +853,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         opt.e.stopPropagation()
       })
 
-      // Pan via space+drag
+      // 5. Mouse Down: Pan & Tool routing
       canvas.on('mouse:down', (opt: any) => {
         if (spaceHeldRef.current && opt.e.button === 0) {
           panRef.current = true
@@ -854,18 +862,130 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
           canvas.hoverCursor = 'grabbing'
           canvas.selection = false
           opt.e.preventDefault()
+          return
+        }
+
+        const tool = activeToolRef.current
+        if (tool === 'select' || tool === 'draw') return
+
+        const pointer = canvas.getPointer(opt.e)
+
+        if (tool === 'line') {
+          if (!lineStartRef.current) {
+            lineStartRef.current = { x: pointer.x, y: pointer.y }
+            setStatusText('Click to set line end point')
+          } else {
+            const line = new fabric.Line(
+              [lineStartRef.current.x, lineStartRef.current.y, pointer.x, pointer.y],
+              { stroke: strokeColorRef.current, strokeWidth: strokeWidthRef.current, fill: 'transparent', selectable: true, evented: true }
+            )
+            canvas.add(line)
+            canvas.renderAll()
+            lineStartRef.current = null
+            setStatusText('Click to set line start point')
+            saveHistory()
+            saveCurrentPageState()
+          }
+        } else if (tool === 'text') {
+          const labelText = prompt('Enter label text:', 'Label')
+          if (!labelText) return
+
+          const text = new fabric.IText(labelText, {
+            left: pointer.x, top: pointer.y,
+            fontSize: 18, fontFamily: 'Arial', fill: '#1e293b', fontWeight: 'bold',
+            backgroundColor: 'rgba(255, 255, 255, 0.85)', padding: 6,
+            borderColor: '#3b82f6', cornerColor: '#3b82f6', cornerSize: 8,
+            transparentCorners: false, editable: true,
+          })
+
+          canvas.add(text)
+          canvas.setActiveObject(text)
+          canvas.renderAll()
+          saveHistory()
+          saveCurrentPageState()
+        } else if (tool === 'icon') {
+          const icon = selectedIconRef.current
+          if (!icon) return
+          const imgEl = new Image()
+          imgEl.src = icon.svg
+          imgEl.onload = () => {
+            const img = new fabric.Image(imgEl, {
+              left: pointer.x - 24, top: pointer.y - 24,
+              scaleX: 1, scaleY: 1,
+              hasRotatingPoint: true, cornerSize: 10,
+              transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
+            })
+
+            const label = new fabric.Text(icon.name, {
+              left: pointer.x, top: pointer.y + 28,
+              fontSize: 11, fontFamily: 'Arial', fill: '#475569',
+              textAlign: 'center', originX: 'center',
+              backgroundColor: 'rgba(255,255,255,0.8)', padding: 2,
+            })
+
+            const group = new fabric.Group([img, label], {
+              left: pointer.x - 24, top: pointer.y - 24,
+              hasRotatingPoint: true, cornerSize: 10,
+              transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
+              deviceType: icon.id,
+              deviceName: icon.name
+            } as any)
+
+            canvas.add(group)
+            canvas.renderAll()
+            saveHistory()
+            saveCurrentPageState()
+          }
+        } else if (['rect', 'circle', 'triangle'].includes(tool)) {
+          shapeDrawingRef.current = { startX: pointer.x, startY: pointer.y, shape: null }
         }
       })
 
+      // 6. Mouse Move: Pan & Shape Drawing dimensions
       canvas.on('mouse:move', (opt: any) => {
         if (panRef.current && panStartRef.current && spaceHeldRef.current) {
           const dx = opt.e.clientX - panStartRef.current.x
           const dy = opt.e.clientY - panStartRef.current.y
           canvas.relativePan({ x: dx, y: dy })
           panStartRef.current = { x: opt.e.clientX, y: opt.e.clientY }
+          return
+        }
+
+        const tool = activeToolRef.current
+        if (!['rect', 'circle', 'triangle'].includes(tool)) return
+        const sd = shapeDrawingRef.current
+        if (!sd) return
+
+        const pointer = canvas.getPointer(opt.e)
+
+        const w = Math.abs(pointer.x - sd.startX)
+        const h = Math.abs(pointer.y - sd.startY)
+        const left = Math.min(pointer.x, sd.startX)
+        const top = Math.min(pointer.y, sd.startY)
+
+        if (sd.shape) canvas.remove(sd.shape)
+
+        let shape: any
+        switch (tool) {
+          case 'rect':
+            shape = new fabric.Rect({ left, top, width: w, height: h, fill: fillColorRef.current, stroke: strokeColorRef.current, strokeWidth: strokeWidthRef.current, selectable: false, evented: false })
+            break
+          case 'circle':
+            shape = new fabric.Ellipse({ left, top, rx: w / 2, ry: h / 2, fill: fillColorRef.current, stroke: strokeColorRef.current, strokeWidth: strokeWidthRef.current, selectable: false, evented: false })
+            break
+          case 'triangle':
+            shape = new fabric.Triangle({ left: sd.startX, top: sd.startY, width: pointer.x - sd.startX, height: pointer.y - sd.startY, fill: fillColorRef.current, stroke: strokeColorRef.current, strokeWidth: strokeWidthRef.current, selectable: false, evented: false })
+            break
+        }
+
+        if (shape) {
+          sd.shape = shape
+          canvas.add(shape)
+          canvas.renderAll()
         }
       })
 
+      // 7. Mouse Up: Finish pan or shape creation
       canvas.on('mouse:up', () => {
         if (panRef.current) {
           panRef.current = false
@@ -874,6 +994,21 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
           canvas.hoverCursor = 'move'
           canvas.selection = true
         }
+
+        const tool = activeToolRef.current
+        if (['rect', 'circle', 'triangle'].includes(tool)) {
+          const sd = shapeDrawingRef.current
+          if (sd && sd.shape) {
+            sd.shape.set({ selectable: true, evented: true })
+            canvas.requestRenderAll()
+            saveHistory()
+            saveCurrentPageState()
+          }
+          shapeDrawingRef.current = null
+        }
+
+        removeGuides()
+        canvas.renderAll()
       })
 
       // Load existing plan
@@ -967,8 +1102,6 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     canvas.selection = true
     canvas.defaultCursor = spaceHeldRef.current ? 'grab' : 'default'
     canvas.hoverCursor = spaceHeldRef.current ? 'grab' : 'move'
-    canvas.off('mouse:down')
-    canvas.off('mouse:move')
     shapeDrawingRef.current = null
     lineStartRef.current = null
 
@@ -988,162 +1121,25 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       case 'rect':
       case 'circle':
       case 'triangle':
-      case 'line': {
+      case 'line':
         canvas.selection = false
         canvas.defaultCursor = 'crosshair'
         setStatusText(`Click-drag to draw a ${activeTool}`)
-
-        canvas.on('mouse:down', (opt: any) => {
-          if (spaceHeldRef.current) return
-          const fabric = fabricLibRef.current
-          if (!fabric) return
-          const pointer = canvas.getPointer(opt.e)
-
-          if (activeTool === 'line') {
-            if (!lineStartRef.current) {
-              lineStartRef.current = { x: pointer.x, y: pointer.y }
-              setStatusText('Click to set line end point')
-            } else {
-              const line = new fabric.Line(
-                [lineStartRef.current.x, lineStartRef.current.y, pointer.x, pointer.y],
-                { stroke: strokeColor, strokeWidth, fill: 'transparent', selectable: true, evented: true }
-              )
-              canvas.add(line)
-              canvas.renderAll()
-              lineStartRef.current = null
-              setStatusText('Click to set line start point')
-              saveHistory()
-            }
-          } else {
-            shapeDrawingRef.current = { startX: pointer.x, startY: pointer.y, shape: null }
-          }
-        })
-
-        canvas.on('mouse:move', (opt: any) => {
-          if (activeTool === 'line') return
-          const sd = shapeDrawingRef.current
-          if (!sd) return
-          const pointer = canvas.getPointer(opt.e)
-          const fabric = fabricLibRef.current
-          if (!fabric) return
-
-          const w = Math.abs(pointer.x - sd.startX)
-          const h = Math.abs(pointer.y - sd.startY)
-          const left = Math.min(pointer.x, sd.startX)
-          const top = Math.min(pointer.y, sd.startY)
-
-          if (sd.shape) canvas.remove(sd.shape)
-
-          let shape: any
-          switch (activeTool) {
-            case 'rect':
-              shape = new fabric.Rect({ left, top, width: w, height: h, fill: fillColor, stroke: strokeColor, strokeWidth, selectable: false, evented: false })
-              break
-            case 'circle':
-              shape = new fabric.Ellipse({ left, top, rx: w / 2, ry: h / 2, fill: fillColor, stroke: strokeColor, strokeWidth, selectable: false, evented: false })
-              break
-            case 'triangle':
-              shape = new fabric.Triangle({ left: sd.startX, top: sd.startY, width: pointer.x - sd.startX, height: pointer.y - sd.startY, fill: fillColor, stroke: strokeColor, strokeWidth, selectable: false, evented: false })
-              break
-          }
-
-          if (shape) {
-            sd.shape = shape
-            canvas.add(shape)
-            canvas.renderAll()
-          }
-        })
-
-        canvas.on('mouse:up', () => {
-          if (activeTool === 'line') return
-          const sd = shapeDrawingRef.current
-          if (!sd) return
-          if (sd.shape) {
-            sd.shape.set({ selectable: true, evented: true })
-            canvas.requestRenderAll()
-            saveHistory()
-          }
-          shapeDrawingRef.current = null
-        })
         break
-      }
 
-      case 'text': {
+      case 'text':
         canvas.selection = false
         canvas.defaultCursor = 'text'
         setStatusText('Click anywhere to add a text label')
-
-        canvas.on('mouse:down', (opt: any) => {
-          if (spaceHeldRef.current) return
-          const fabric = fabricLibRef.current
-          if (!fabric) return
-          const pointer = canvas.getPointer(opt.e)
-          const labelText = prompt('Enter label text:', 'Label')
-          if (!labelText) return
-
-          const text = new fabric.IText(labelText, {
-            left: pointer.x, top: pointer.y,
-            fontSize: 18, fontFamily: 'Arial', fill: '#1e293b', fontWeight: 'bold',
-            backgroundColor: 'rgba(255, 255, 255, 0.85)', padding: 6,
-            borderColor: '#3b82f6', cornerColor: '#3b82f6', cornerSize: 8,
-            transparentCorners: false, editable: true,
-          })
-
-          canvas.add(text)
-          canvas.setActiveObject(text)
-          canvas.renderAll()
-          saveHistory()
-        })
         break
-      }
 
-      case 'icon': {
+      case 'icon':
         canvas.selection = false
         canvas.defaultCursor = 'copy'
         setStatusText(selectedIcon ? `Click to place: ${selectedIcon.name}` : 'Select an icon first')
-
-        if (selectedIcon) {
-          canvas.on('mouse:down', (opt: any) => {
-            if (spaceHeldRef.current) return
-            const fabric = fabricLibRef.current
-            if (!fabric) return
-            const pointer = canvas.getPointer(opt.e)
-
-            const imgEl = new Image()
-            imgEl.src = selectedIcon.svg
-            imgEl.onload = () => {
-              const img = new fabric.Image(imgEl, {
-                left: pointer.x - 24, top: pointer.y - 24,
-                scaleX: 1, scaleY: 1,
-                hasRotatingPoint: true, cornerSize: 10,
-                transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
-              })
-
-              const label = new fabric.Text(selectedIcon.name, {
-                left: pointer.x, top: pointer.y + 28,
-                fontSize: 11, fontFamily: 'Arial', fill: '#475569',
-                textAlign: 'center', originX: 'center',
-                backgroundColor: 'rgba(255,255,255,0.8)', padding: 2,
-              })
-
-              const group = new fabric.Group([img, label], {
-                left: pointer.x - 24, top: pointer.y - 24,
-                hasRotatingPoint: true, cornerSize: 10,
-                transparentCorners: false, borderColor: '#3b82f6', cornerColor: '#3b82f6',
-                deviceType: selectedIcon.id,
-                deviceName: selectedIcon.name
-              } as any)
-
-              canvas.add(group)
-              canvas.renderAll()
-              saveHistory()
-            }
-          })
-        }
         break
-      }
     }
-  }, [activeTool, drawColor, drawWidth, fillColor, strokeColor, strokeWidth, selectedIcon, saveHistory])
+  }, [activeTool, drawColor, drawWidth, selectedIcon])
 
   // ── Update brush ──
   useEffect(() => {
@@ -1908,9 +1904,9 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
     return canvas.getObjects().filter((o: any) => o.type !== 'guide-line')
   }
 
-  const getDeviceCounts = () => {
+  const deviceCounts = useMemo(() => {
     const canvas = fabricRef.current
-    if (!canvas) return {}
+    if (!canvas || !canvasReady) return {}
     const objects = canvas.getObjects()
     const counts: Record<string, number> = {}
     objects.forEach((obj: any) => {
@@ -1919,7 +1915,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       }
     })
     return counts
-  }
+  }, [selectedObj, activePageIndex, canvasReady, pages])
 
   // ── Render ──
   return (
@@ -2136,7 +2132,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
 
                 <div className="grid grid-cols-2 gap-2">
                   {SECURITY_DEVICES.map((device) => {
-                    const count = getDeviceCounts()[device.id] || 0
+                    const count = deviceCounts[device.id] || 0
                     const isSelected = selectedIcon?.id === device.id && activeTool === 'icon'
                     return (
                       <button
@@ -2173,7 +2169,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                   </h4>
                   <div className="space-y-1 bg-brand-navy/30 rounded-lg p-2 border border-brand-steel/10">
                     {SECURITY_DEVICES.map((device) => {
-                      const count = getDeviceCounts()[device.id] || 0
+                      const count = deviceCounts[device.id] || 0
                       if (count === 0) return null
                       return (
                         <div key={device.id} className="flex justify-between items-center text-xs">
@@ -2185,7 +2181,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         </div>
                       )
                     })}
-                    {Object.values(getDeviceCounts()).reduce((a, b) => a + b, 0) === 0 && (
+                    {Object.values(deviceCounts).reduce((a, b) => a + b, 0) === 0 && (
                       <p className="text-[10px] text-brand-slate italic text-center">No devices placed yet</p>
                     )}
                   </div>
@@ -2210,7 +2206,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
                         const c = fabricRef.current
                         if (c) { c.setActiveObject(layer.obj); c.renderAll(); setSelectedObj(layer.obj) }
                       }}
-                      onDoubleClick={() => { layer.obj.set('visible', !layer.visible); fabricRef.current?.renderAll() }}
+                      onDoubleClick={() => { layer.obj.set('visible', !layer.visible); fabricRef.current?.renderAll(); saveHistory(); saveCurrentPageState() }}
                     >
                       <div className="flex items-center gap-1.5 flex-1 min-w-0">
                         {layer.visible ? <Eye className="h-3 w-3 text-brand-slate shrink-0" /> : <EyeOff className="h-3 w-3 text-red-400 shrink-0" />}
