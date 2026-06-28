@@ -69,7 +69,25 @@ export function ContactForm() {
                 clientId = newClient.id
             }
 
-            // 3. Log Activity (CRITICAL for Dashboard Visibility)
+            // 3. Create Client Request (so it appears on /portal/requests page)
+            const { error: requestError } = await supabase
+                .from('client_requests')
+                .insert([
+                    {
+                        client_id: clientId,
+                        type: 'quote',
+                        description: `Website Contact Form inquiry for: ${service || 'General Inquiry'}. Preferred service area: ${suburb || 'Not specified'}.`,
+                        address: suburb || null,
+                        status: 'pending'
+                    }
+                ])
+
+            if (requestError) {
+                console.error('Failed to create client request:', requestError)
+                // We don't throw here to avoid failing the user submission if just requests log fails
+            }
+
+            // 4. Log Activity (CRITICAL for Dashboard Visibility)
             const { error: logError } = await supabase
                 .from('activity_log')
                 .insert([
