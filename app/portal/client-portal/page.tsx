@@ -21,8 +21,9 @@ import { useAuth } from '@/context/AuthContext'
 import { Input } from '@/components/portal/ui/input'
 import { Label } from '@/components/portal/ui/label'
 import { Textarea } from '@/components/portal/ui/textarea'
-import { Client, Quotation, Invoice } from '@/types/crm'
+import { Client, Quotation, Invoice, SitePlan } from '@/types/crm'
 import { PRIVATE_STORAGE_BUCKETS, openStorageFile, uploadPrivateFile, resolveStorageUrl } from '@/lib/portal/storage'
+import { StorageImage } from '@/components/portal/StorageImage'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'
 
 export default function ClientPortalPage() {
@@ -44,7 +45,7 @@ export default function ClientPortalPage() {
     const [client, setClient] = useState<Client | null>(null)
     const [quotations, setQuotations] = useState<Quotation[]>([])
     const [invoices, setInvoices] = useState<Invoice[]>([])
-
+    const [sitePlans, setSitePlans] = useState<SitePlan[]>([])
     const [loading, setLoading] = useState(true)
 
     // Acceptance Workflow State
@@ -140,6 +141,17 @@ export default function ClientPortalPage() {
 
             setClient(clientRes.data as Client)
             setQuotations(quotesRes.data as Quotation[] || [])
+
+            const quoteIds = (quotesRes.data || []).map((q: Quotation) => q.id)
+            if (quoteIds.length > 0) {
+                const { data: plans, error: plansError } = await supabase
+                    .from('site_plans')
+                    .select('*')
+                    .in('quotation_id', quoteIds)
+                if (!plansError && plans) {
+                    setSitePlans(plans as SitePlan[])
+                }
+            }
 
             const processedInvoices = (invoicesRes.data || []).map((inv: Invoice & { quotations?: { payment_proof: string | null } }) => ({
                 ...inv,
@@ -735,6 +747,23 @@ export default function ClientPortalPage() {
                                             <span className="text-brand-steel dark:text-brand-steel text-sm font-medium">Estimated Total</span>
                                             <span className="text-3xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(quotation.total_amount)}</span>
                                         </div>
+                                        {(() => {
+                                            const plan = sitePlans.find(p => p.quotation_id === quotation.id)
+                                            if (!plan?.flattened_url) return null
+                                            return (
+                                                <div className="space-y-1.5 pt-2">
+                                                    <span className="text-[10px] text-brand-steel font-bold uppercase tracking-wider">Visual Site Plan Layout</span>
+                                                    <div className="relative aspect-video rounded-xl overflow-hidden border border-brand-steel/20 dark:border-brand-navy/60 bg-brand-white dark:bg-brand-navy/80 p-1">
+                                                        <StorageImage
+                                                            bucket={PRIVATE_STORAGE_BUCKETS.SITE_PLANS}
+                                                            storedValue={plan.flattened_url}
+                                                            alt="Site Plan Layout"
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })()}
                                         <div className="grid grid-cols-2 gap-3">
                                             <Button variant="outline" className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" onClick={() => handleDownloadQuotePDF(quotation)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download PDF
@@ -818,6 +847,24 @@ export default function ClientPortalPage() {
                                             )}
                                         </div>
 
+                                        {(() => {
+                                            const plan = sitePlans.find(p => p.quotation_id === quotation.id)
+                                            if (!plan?.flattened_url) return null
+                                            return (
+                                                <div className="space-y-1.5 pt-2">
+                                                    <span className="text-[10px] text-brand-steel font-bold uppercase tracking-wider">Visual Site Plan Layout</span>
+                                                    <div className="relative aspect-video rounded-xl overflow-hidden border border-brand-steel/20 dark:border-brand-navy/60 bg-brand-white dark:bg-brand-navy/80 p-1">
+                                                        <StorageImage
+                                                            bucket={PRIVATE_STORAGE_BUCKETS.SITE_PLANS}
+                                                            storedValue={plan.flattened_url}
+                                                            alt="Site Plan Layout"
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })()}
+
                                         <div className="flex flex-col gap-3 pt-2">
                                             <Button className="w-full h-11 border-brand-steel/40 hover:bg-brand-white dark:border-brand-slate dark:hover:bg-brand-navy transition-all" variant="outline" onClick={() => handleDownloadQuotePDF(quotation)}>
                                                 <Download className="mr-2 h-4 w-4" /> Download Proforma
@@ -872,6 +919,24 @@ export default function ClientPortalPage() {
                                             <span className="text-brand-steel font-medium">Amount Due</span>
                                             <span className="text-2xl font-extrabold text-brand-navy dark:text-white tracking-tight">{formatCurrency(invoice.total_amount)}</span>
                                         </div>
+                                        {(() => {
+                                            if (!invoice.quotation_id) return null
+                                            const plan = sitePlans.find(p => p.quotation_id === invoice.quotation_id)
+                                            if (!plan?.flattened_url) return null
+                                            return (
+                                                <div className="space-y-1.5 pt-2">
+                                                    <span className="text-[10px] text-brand-steel font-bold uppercase tracking-wider">Visual Site Plan Layout</span>
+                                                    <div className="relative aspect-video rounded-xl overflow-hidden border border-brand-steel/20 dark:border-brand-navy/60 bg-brand-white dark:bg-brand-navy/80 p-1">
+                                                        <StorageImage
+                                                            bucket={PRIVATE_STORAGE_BUCKETS.SITE_PLANS}
+                                                            storedValue={plan.flattened_url}
+                                                            alt="Site Plan Layout"
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })()}
                                         <Button className="w-full h-11 bg-brand-navy hover:bg-brand-navy text-white shadow-lg transition-transform" onClick={() => triggerInvoiceDownloadFlow(invoice)}>
                                             <Download className="mr-2 h-4 w-4" /> Download Tax Invoice
                                         </Button>

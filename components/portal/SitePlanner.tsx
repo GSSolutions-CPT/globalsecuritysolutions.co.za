@@ -18,7 +18,7 @@ import {
   ArrowUpToLine, ArrowLeftToLine,
   AlignStartVertical, AlignCenterVertical, AlignEndVertical,
   AlignStartHorizontal, AlignCenterHorizontal, AlignEndHorizontal,
-  Layers3, ArrowBigUp, ArrowBigDown,
+  ArrowBigUp, ArrowBigDown,
   HelpCircle, Download, FileImage, FileType,
   Eye, EyeOff, ChevronUp, ChevronDown
 } from 'lucide-react'
@@ -1260,19 +1260,21 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
         const blob = await res.blob()
         const bgFilename = `${quotationId}/backgrounds/${Date.now()}-${file.name}`
         const bgUrl = await uploadPrivateFile(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, bgFilename, blob)
+        const displayUrl = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, bgUrl)
 
-        applyBackgroundImageRef.current(canvas, bgUrl, fabric)
-      } catch {
+        applyBackgroundImageRef.current(canvas, bgUrl, displayUrl, fabric)
+      } catch (err) {
+        console.error('Error uploading background:', err)
         // Fallback to data URL
-        applyBackgroundImageRef.current(canvas, e.target?.result as string)
+        applyBackgroundImageRef.current(canvas, e.target?.result as string, undefined, fabric)
       }
     }
     reader.readAsDataURL(file)
   }, [quotationId])
 
-  const applyBackgroundImage = useCallback((canvas: any, src: string, fabricLib?: any) => {
+  const applyBackgroundImage = useCallback((canvas: any, src: string, displayUrl?: string, fabricLib?: any) => {
     const imgEl = new Image()
-    imgEl.src = src
+    imgEl.src = displayUrl || src
     imgEl.onload = () => {
       const fabric = fabricLib || fabricLibRef.current
       if (!fabric) return
@@ -1693,9 +1695,19 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
           const offscreen = document.createElement('canvas')
           offscreen.width = w; offscreen.height = h
           const tmpCanvas = new fabric.StaticCanvas(offscreen)
-          await new Promise<void>((resolve) => {
-            tmpCanvas.loadFromJSON(page.canvas_json, () => {
-              if (page.background_url) tmpCanvas.setBackgroundImage(page.background_url, () => {}, { opacity: page.background_opacity ?? 1 })
+          await new Promise<void>(async (resolve) => {
+            tmpCanvas.loadFromJSON(page.canvas_json, async () => {
+              if (page.background_url) {
+                let displayBg = page.background_url
+                if (!page.background_url.startsWith('data:') && !page.background_url.startsWith('blob:') && !page.background_url.startsWith('http')) {
+                  try {
+                    displayBg = await resolveStorageUrl(PRIVATE_STORAGE_BUCKETS.SITE_PLANS, page.background_url)
+                  } catch (e) {
+                    console.error('Error resolving background URL for PDF:', e)
+                  }
+                }
+                tmpCanvas.setBackgroundImage(displayBg, () => {}, { opacity: page.background_opacity ?? 1 })
+              }
               tmpCanvas.renderAll()
               resolve()
             })
