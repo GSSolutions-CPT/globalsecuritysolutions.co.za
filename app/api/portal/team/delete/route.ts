@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/portal/supabase/server'
+import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/portal/supabase/server'
 import { canManageTeam, type StaffRole } from '@/lib/portal/permissions'
 
 export async function POST(request: NextRequest) {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
         }
 
         if (!canManageTeam((staffProfile.role as StaffRole) || null)) {
-            return NextResponse.json({ error: 'Insufficient permissions. Admin access required.' }, { status: 403 })
+            return NextResponse.json({ error: 'Insufficient permissions. Admin or Manager access required.' }, { status: 403 })
         }
 
         const body = await request.json()
@@ -32,10 +32,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Missing userId' }, { status: 400 })
         }
 
-        const { error } = await supabase.auth.admin.deleteUser(userId)
+        const serviceClient = createServiceRoleClient()
+        const { error } = await serviceClient.auth.admin.deleteUser(userId)
 
         if (error) {
-            return NextResponse.json({ error: error.message }, { status: 400 })
+            return NextResponse.json({ error: 'Failed to delete team user' }, { status: 400 })
         }
 
         return NextResponse.json({ success: true })

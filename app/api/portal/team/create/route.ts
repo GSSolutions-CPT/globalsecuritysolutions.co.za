@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
         }
 
         if (!canManageTeam((staffProfile.role as StaffRole) || null)) {
-            return NextResponse.json({ error: 'Insufficient permissions. Admin access required.' }, { status: 403 })
+            return NextResponse.json({ error: 'Insufficient permissions. Admin or Manager access required.' }, { status: 403 })
         }
 
         const body = await request.json()

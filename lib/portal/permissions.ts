@@ -65,7 +65,7 @@ export function staffRoleCanAccess(pathname: string, role: StaffRole): boolean {
 }
 
 export function canManageTeam(role: StaffRole | null): boolean {
-    return role === 'admin'
+    return role === 'admin' || role === 'manager'
 }
 
 export function canExportData(role: StaffRole | null): boolean {
