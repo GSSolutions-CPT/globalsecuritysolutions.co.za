@@ -21,7 +21,7 @@ import { toast } from 'sonner'
 import { useSettings } from '@/lib/portal/use-settings'
 import { Quotation, Invoice, PurchaseOrder } from '@/types/crm'
 import { PRIVATE_STORAGE_BUCKETS, openStorageFile } from '@/lib/portal/storage'
-import { getPageRange, getTotalPages, fetchAllBatched } from '@/lib/portal/pagination'
+import { getPageRange, getTotalPages } from '@/lib/portal/pagination'
 import { PaginationBar } from '@/components/portal/PaginationBar'
 import { PageHeader } from '@/components/portal/PageHeader'
 import { StatCard } from '@/components/portal/StatCard'
@@ -146,19 +146,17 @@ export default function SalesPage() {
 
     const fetchSalesStats = async () => {
         try {
-            const [quotes, invs] = await Promise.all([
-                fetchAllBatched<Pick<Quotation, 'status' | 'total_amount'>>((from, to) =>
-                    Promise.resolve(supabase.from('quotations').select('status, total_amount').range(from, to))
-                ),
-                fetchAllBatched<Pick<Invoice, 'status' | 'total_amount'>>((from, to) =>
-                    Promise.resolve(supabase.from('invoices').select('status, total_amount').range(from, to))
-                ),
+            const [{ data: quotes }, { data: invs, count: invCount }] = await Promise.all([
+                supabase.from('quotations').select('status, total_amount'),
+                supabase.from('invoices').select('status, total_amount', { count: 'exact' }),
             ])
-            setQuoteStats(quotes as Quotation[])
-            setInvoiceStats(invs as Invoice[])
+            if (invCount && invCount > 1000) {
+                console.warn(`Warning: Invoice count (${invCount}) exceeds 1000. Financial stats may be incomplete.`)
+            }
+            setQuoteStats((quotes as Quotation[]) || [])
+            setInvoiceStats((invs as Invoice[]) || [])
         } catch (error) {
             console.error('Error fetching sales stats:', error)
-            toast.error('Failed to load sales summary stats')
         }
     }
 
