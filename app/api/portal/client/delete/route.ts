@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/portal/supabase/server'
+import { createServerSupabaseClient } from '@/lib/portal/supabase/server'
+import { canManageTeam, type StaffRole } from '@/lib/portal/permissions'
+import { createServiceRoleClient } from '@/lib/portal/supabase/server'
 
 export async function DELETE(request: NextRequest) {
     try {
@@ -20,10 +22,11 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
 
-        // Simple staff-only guard; tighten later if needed
-        const role = staffProfile.role as string
-        if (!role || role === 'client') {
-            return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+        if (!canManageTeam((staffProfile.role as StaffRole) || null)) {
+            return NextResponse.json(
+                { error: 'Insufficient permissions. Admin or Manager access required.' },
+                { status: 403 }
+            )
         }
 
         const url = new URL(request.url)
@@ -34,14 +37,12 @@ export async function DELETE(request: NextRequest) {
         }
 
         const serviceClient = createServiceRoleClient()
-
-        // Requires a SQL function like public.delete_client_full(uuid)
         const { error: deleteError } = await serviceClient.rpc('delete_client_full', {
             p_client_id: clientId,
         })
 
         if (deleteError) {
-            return NextResponse.json({ error: deleteError.message }, { status: 500 })
+            return NextResponse.json({ error: 'Failed to delete client' }, { status: 500 })
         }
 
         return NextResponse.json({ success: true })

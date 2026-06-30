@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/portal/supabase/server'
+import { createServerSupabaseClient, createServiceRoleClient } from '@/lib/portal/supabase/server'
+import { canManageTeam, type StaffRole } from '@/lib/portal/permissions'
 
 export async function POST(request: NextRequest) {
     try {
@@ -8,6 +9,20 @@ export async function POST(request: NextRequest) {
 
         if (authError || !user) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        }
+
+        const { data: staffProfile, error: profileError } = await supabase
+            .from('users')
+            .select('role')
+            .eq('id', user.id)
+            .maybeSingle()
+
+        if (profileError || !staffProfile) {
+            return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+        }
+
+        if (!canManageTeam((staffProfile.role as StaffRole) || null)) {
+            return NextResponse.json({ error: 'Insufficient permissions. Admin access required.' }, { status: 403 })
         }
 
         const body = await request.json()
@@ -23,7 +38,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Invalid role' }, { status: 400 })
         }
 
-        const { data: inviteData, error: inviteError } = await supabase.auth.admin.inviteUserByEmail(email, {
+        const serviceClient = createServiceRoleClient()
+        const { data: inviteData, error: inviteError } = await serviceClient.auth.admin.inviteUserByEmail(email, {
             data: { role },
         })
 

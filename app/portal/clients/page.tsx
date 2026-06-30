@@ -16,6 +16,8 @@ import { PaginationBar } from '@/components/portal/PaginationBar'
 import { PageHeader } from '@/components/portal/PageHeader'
 import { StatCard } from '@/components/portal/StatCard'
 import { useConfirm } from '@/components/portal/ui/alert-dialog'
+import { useAuth } from '@/context/AuthContext'
+import { canManageTeam } from '@/lib/portal/permissions'
 
 export default function ClientsPage() {
     const router = useRouter()
@@ -27,6 +29,7 @@ export default function ClientsPage() {
     const [clientsPage, setClientsPage] = useState(0)
     const [clientsCount, setClientsCount] = useState(0)
     const [clientStats, setClientStats] = useState<Pick<Client, 'created_at' | 'metadata'>[]>([])
+    const { portalAccess } = useAuth()
 
     // Calculate Stats
     const activeStats = clientStats.filter(c => {
@@ -192,12 +195,14 @@ export default function ClientsPage() {
                                     }}>
                                         <Pencil className="h-4 w-4" />
                                     </Button>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50" onClick={(e: React.MouseEvent) => {
-                                        e.stopPropagation()
-                                        handleDelete(client.id)
-                                    }}>
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
+                                    {(portalAccess?.staffRole && canManageTeam(portalAccess.staffRole)) && (
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-red-500 hover:bg-red-50" onClick={(e: React.MouseEvent) => {
+                                            e.stopPropagation()
+                                            handleDelete(client.id)
+                                        }}>
+                                            <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </CardHeader>
