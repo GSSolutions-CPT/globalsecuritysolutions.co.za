@@ -6,20 +6,20 @@ primary region: Cape Town, South Africa
 primary language: English
 
 # Pages
-/                    Home, services overview, trust signals
-/services            Security installation services
-/areas               Service areas
-/sectors             Industry solutions
-/projects            Case studies and installation galleries
-/free-security-audit  Audit request and consultation
-/contact             Contact and booking
-/faq                 Frequently asked questions
-/terms-of-service    Legal terms
-/privacy-policy      Privacy policy
-/warranty-and-support Warranty and support
-/links               Useful links
-/robots.txt          Crawler rules
-/sitemap.xml         SEO sitemap
+- [Home](/) — services overview and trust signals
+- [Services](/services) — security installation services
+- [Areas](/areas) — service areas
+- [Sectors](/sectors) — industry solutions
+- [Projects](/projects) — case studies and installation galleries
+- [Free Security Audit](/free-security-audit) — audit request and consultation
+- [Contact](/contact) — contact and booking
+- [FAQ](/faq) — frequently asked questions
+- [Terms of Service](/terms-of-service) — legal terms
+- [Privacy Policy](/privacy-policy) — privacy policy
+- [Warranty and Support](/warranty-and-support) — warranty and support
+- [Useful Links](/links) — useful links
+- [robots.txt](/robots.txt) — crawler rules
+- [sitemap.xml](/sitemap.xml) — SEO sitemap
 
 # Key content
 - Security installation services: CCTV, biometric access control, alarm systems, electric fencing, intercoms, guard house equipment.
