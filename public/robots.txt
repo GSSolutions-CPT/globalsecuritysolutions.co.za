@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /admin
+Disallow: /api/
+Disallow: /_next/
+Host: https://www.globalsecuritysolutions.co.za
