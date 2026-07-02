@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'date-fns', 'clsx', 'tailwind-merge'],
   },
+  browserslist: {
+    modern: ['last 2 Chrome versions', 'last 2 Edge versions', 'last 2 Firefox versions', 'last 2 Safari versions'],
+    legacy: [],
+  },
+  webpack: (cfg) => {
+    cfg.module?.rules?.forEach((rule) => {
+      if (rule?.loader && typeof rule.loader === 'string' && rule.loader.includes('next-dist-compiler')) {
+        rule.exclude = /node_modules/;
+      }
+    });
+    return cfg;
+  },
   async redirects() {
     return [
       // --- New Localized Hub Migration Redirects ---

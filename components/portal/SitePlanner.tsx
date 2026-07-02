@@ -1915,7 +1915,7 @@ export default function SitePlanner({ quotationId, existingPlan, onSave, onClose
       }
     })
     return counts
-  }, [selectedObj, activePageIndex, canvasReady, pages])
+  }, [selectedObj, activePageIndex, canvasReady, pages]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Render ──
   return (

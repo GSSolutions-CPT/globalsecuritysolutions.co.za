@@ -74,6 +74,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="preload" href="/nav-logo-final.png" as="image" type="image/png" fetchpriority="high" />
+        <script
+          type="text/partytown"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){
+                w[l]=w[l]||[];
+                w[l].push({'gtm_start':new Date().getTime(),event:'gtm.js'});
+                var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+                j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-XXXXXXX');
+            `,
+          }}
+        />
+      </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
         <GoogleAnalytics gaId="G-LM5YX7EWWH" />
         <StructuredData />
