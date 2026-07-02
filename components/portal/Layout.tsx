@@ -18,7 +18,6 @@ import {
     X,
     Package,
     Inbox,
-    FileSignature,
     ExternalLink,
     ChevronLeft,
     ChevronRight,
@@ -58,7 +57,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         const items = [
             { name: 'Dashboard', path: '/portal/dashboard', icon: LayoutDashboard },
             { name: 'Sales', path: '/portal/sales', icon: Banknote },
-            { name: 'Contracts', path: '/portal/contracts', icon: FileSignature },
             { name: 'Clients', path: '/portal/clients', icon: Users },
             { name: 'Requests', path: '/portal/requests', icon: Inbox },
             { name: 'Products', path: '/portal/products', icon: Package },
