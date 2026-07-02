@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   compress: true,
@@ -9,12 +10,11 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'date-fns', 'clsx', 'tailwind-merge'],
   },
-  browserslist: {
-    modern: ['last 2 Chrome versions', 'last 2 Edge versions', 'last 2 Firefox versions', 'last 2 Safari versions'],
-    legacy: [],
+  turbopack: {
+    root: path.resolve(__dirname),
   },
   webpack: (cfg) => {
-    cfg.module?.rules?.forEach((rule) => {
+    cfg.module?.rules?.forEach((rule: any) => {
       if (rule?.loader && typeof rule.loader === 'string' && rule.loader.includes('next-dist-compiler')) {
         rule.exclude = /node_modules/;
       }

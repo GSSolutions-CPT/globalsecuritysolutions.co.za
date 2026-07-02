@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="preload" href="/nav-logo-final.png" as="image" type="image/png" fetchpriority="high" />
+        <link rel="preload" href="/nav-logo-final.png" as="image" type="image/png" fetchPriority="high" />
         <script
           type="text/partytown"
           dangerouslySetInnerHTML={{

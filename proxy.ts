@@ -11,7 +11,7 @@ import {
 
 const DISABLED_REGISTRATION_ROUTES = ['/portal/register', '/portal/register-client']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     if (!pathname.startsWith('/portal')) {
